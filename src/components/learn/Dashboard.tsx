@@ -44,22 +44,20 @@ export default function Dashboard({ data }: { data: SiteData }) {
 
   const flat = flatten(data);
 
-  // 方向进度
+  const flatStatus = (id: string) => snapshot[id] ?? 0;
+
+  // 方向维度统计：仅用于"继续上次学习"卡片顶部的进度条（该方向已完成占比）
   const directionStats = data.directions.map((direction) => {
     let total = 0;
     let mastered = 0;
-    let currentLevel: string | null = null;
     for (const level of direction.levels)
       for (const category of level.categories)
         for (const note of category.notes) {
           total++;
           if (snapshot[note.id] === 2) mastered++;
-          else if (!currentLevel) currentLevel = level.label;
         }
-    return { direction, total, mastered, currentLevel };
+    return { direction, total, mastered };
   });
-
-  const flatStatus = (id: string) => snapshot[id] ?? 0;
 
   // 推荐逻辑：优先正在学习的笔记，其次路线顺序中第一个未学知识点
   let recommended: FlatNote | null = null;
@@ -132,32 +130,7 @@ export default function Dashboard({ data }: { data: SiteData }) {
         <div className="learn-empty">知识点整理中，先逛逛各方向的学习路线吧。</div>
       )}
 
-      {/* ② 方向进度 */}
-      <h2>方向进度</h2>
-      <ul className="learn-dir-list">
-        {directionStats.map(({ direction, total, mastered, currentLevel }) => {
-          const pct = total > 0 ? Math.round((mastered / total) * 100) : 0;
-          const stage =
-            total === 0 ? '未开始' : mastered >= total ? '已全部完成' : `${currentLevel} · ${pct}%`;
-          return (
-            <li key={direction.id}>
-              <a
-                className="learn-dir-name"
-                href={withBase(direction.href)}
-                style={{ textDecoration: 'none' }}
-              >
-                {direction.title}
-              </a>
-              <div className="learn-progress-track" style={{ margin: 0 }}>
-                <div className="learn-progress-fill" style={{ width: `${pct}%` }} />
-              </div>
-              <span className="learn-dir-stage">{stage}</span>
-            </li>
-          );
-        })}
-      </ul>
-
-      {/* ③ 下一步推荐 */}
+      {/* ② 下一步推荐 */}
       <h2>下一步推荐</h2>
       {recommended ? (
         <div className="learn-next">

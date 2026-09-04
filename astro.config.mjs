@@ -132,8 +132,14 @@ export default defineConfig({
               label: '基础',
               collapsed: false,
               items: [
-                { label: '基础命令', link: '/linux/basic/commands/', badge: '分类' },
-                { label: '文件与目录操作', link: '/linux/basic/commands/file-ops/' },
+                {
+                  label: '基础命令',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/linux/basic/commands/' },
+                    { label: '文件与目录操作', link: '/linux/basic/commands/file-ops/' },
+                  ],
+                },
               ],
             },
           ],
@@ -147,8 +153,14 @@ export default defineConfig({
               label: '高级',
               collapsed: false,
               items: [
-                { label: 'JVM', link: '/java/advanced/jvm/', badge: '分类' },
-                { label: 'JVM 运行时数据区', link: '/java/advanced/jvm/memory/' },
+                {
+                  label: 'JVM',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/java/advanced/jvm/' },
+                    { label: '运行时数据区', link: '/java/advanced/jvm/memory/' },
+                  ],
+                },
               ],
             },
           ],
