@@ -1,0 +1,58 @@
+astro.config.mjs
+  h_9324126a55eff3 211-223,391-447
+src/content/docs/java/advanced/springcloud/01-microservices-overview.md
+  h_9324126a55eff3 100
+src/content/docs/java/intermediate/design-pattern/01-principles.md
+  h_9324126a55eff3 1-139
+src/content/docs/java/intermediate/design-pattern/02-creational.md
+  h_9324126a55eff3 1-132
+src/content/docs/java/intermediate/design-pattern/03-structural.md
+  h_9324126a55eff3 1-136
+src/content/docs/java/intermediate/design-pattern/04-behavioral.md
+  h_9324126a55eff3 1-150
+src/content/docs/java/intermediate/design-pattern/05-patterns-in-frameworks.md
+  h_9324126a55eff3 1-101
+src/content/docs/java/intermediate/design-pattern/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/middleware/advanced/mq/01-order-performance.md
+  h_9324126a55eff3 1-114
+src/content/docs/middleware/advanced/mq/02-rocketmq-features.md
+  h_9324126a55eff3 1-141
+src/content/docs/middleware/advanced/mq/03-backlog.md
+  h_9324126a55eff3 1-114
+src/content/docs/middleware/advanced/mq/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/middleware/basic/mq/01-why-mq.md
+  h_9324126a55eff3 1-102
+src/content/docs/middleware/basic/mq/02-mq-comparison.md
+  h_9324126a55eff3 1-104
+src/content/docs/middleware/basic/mq/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/middleware/index.mdx
+  h_9324126a55eff3 1-28
+src/content/docs/middleware/intermediate/kafka/01-kafka-architecture.md
+  h_9324126a55eff3 1-124
+src/content/docs/middleware/intermediate/kafka/02-replica-isr.md
+  h_9324126a55eff3 1-102
+src/content/docs/middleware/intermediate/kafka/03-reliability-idempotent.md
+  h_9324126a55eff3 1-133
+src/content/docs/middleware/intermediate/kafka/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/java.json
+  h_9324126a55eff3 35-41,80-89
+src/data/graphs/middleware.json
+  h_9324126a55eff3 1-28
+src/lib/notes.ts
+  h_9324126a55eff3 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "05e2dbc7a8e6ea0b4e3e679125fdc6f0568bbe51",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
