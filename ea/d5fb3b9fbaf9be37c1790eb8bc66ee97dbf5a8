@@ -1,0 +1,20 @@
+docs/superpowers/specs/site-theme-restyle/after/widget.html
+  h_9324126a55eff3 1-330
+docs/superpowers/specs/site-theme-restyle/manifest.json
+  h_9324126a55eff3 1-16
+docs/superpowers/specs/site-theme-restyle/matrix.md
+  h_9324126a55eff3 1-18
+docs/superpowers/specs/site-theme-restyle/spec.md
+  h_9324126a55eff3 1-75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "ead5fb3b9fbaf9be37c1790eb8bc66ee97dbf5a8",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
