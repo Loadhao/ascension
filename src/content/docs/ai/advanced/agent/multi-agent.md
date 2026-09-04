@@ -1,9 +1,10 @@
----
-title: 子智能体与多 Agent 协作
-description: 从 Subagent 到 Agent Teams：并行、隔离、协议与自主性
+***
+
+title: 多 Agent 协作总览
+description: 从 Subagent 到综合 Harness：并行、隔离、调度、协议与自主性的演进路线
 level: advanced
 core: true
----
+----------
 
 ## 为什么需要多个 Agent
 
@@ -23,47 +24,27 @@ core: true
 flowchart LR
     A[单一主循环<br/>所有工作共享一个上下文] --> B[Subagent<br/>子任务独立历史]
     B --> C[Task System<br/>任务图：目标变有序工作]
-    C --> D[Agent Teams<br/>常驻队友并行推进]
-    D --> E[Team Protocols<br/>显式消息契约]
-    E --> F[Autonomous Agents<br/>自主发现并认领工作]
-    F --> G[Worktree Isolation<br/>文件系统级隔离]
+    C --> D[Background / Cron<br/>异步与定时触发]
+    D --> E[Agent Teams<br/>常驻队友并行推进]
+    E --> F[Team Protocols<br/>显式消息契约]
+    F --> G[Autonomous Agents<br/>自主发现并认领工作]
+    G --> H[Worktree Isolation<br/>文件系统级隔离]
+    H --> I[Comprehensive Agent<br/>机制归位，循环不变]
 ```
 
-## Subagent：干净的消息历史
+每个阶段解决一个确定的问题，逐步把"一个循环"长成"一个平台"：
 
-主线程把子任务委托给子代理：子代理**只携带必要上下文**启动，独立执行，
-返回**结果摘要**而不是完整过程。
-
-```mermaid
-flowchart TD
-    M[主线程 主任务] --> P{子任务需要<br/>独立上下文?}
-    P -- 是 --> S[启动 Subagent<br/>独立消息历史]
-    S --> R[子代理执行<br/>只带必要上下文]
-    R --> T[返回结果摘要]
-    T --> M
-    P -- 否 --> M
-```
-
-价值：探索性工作（读大量文件、试错）的中间细节不污染主线程；主线程的上下文
-预算留给真正重要的信息。
-
-## Task System：把目标变成有序工作
-
-s12 的任务图（task graph）把模糊目标拆成**有序、可观察**的工作单元——每项任务
-有状态（待办/进行中/完成）、有依赖关系、可被分配。这是团队协作的地基：
-没有可观察的任务清单，多个 Agent 就无法分工。
-
-## Agent Teams 与协议
-
-| 机制 | 解决的问题 | 核心一句话 |
-|---|---|---|
-| Agent Teams（s15） | 并行推进 | 常驻队友各守一摊，工作不挤一个上下文 |
-| Team Protocols（s16） | 协作失控 | 多 Agent 系统需要**显式消息契约**，不是"凭感觉"（not vibes） |
-| Autonomous Agents（s17） | 调度瓶颈 | 队友能**自己发现并认领**工作，不等人派单 |
-| Worktree Isolation（s18） | 文件冲突 | 并行 Agent 需要隔离的文件系统，如同隔离的对话 |
-
-Worktree 隔离在实践中通常用 Git worktree 实现：每个并行 Agent 在独立工作树里
-改代码，互不踩踏，完成后合流。
+| 机制                                                    | 解决的问题         | 核心一句话                      |
+| ----------------------------------------------------- | ------------- | -------------------------- |
+| [子智能体](/ai/intermediate/agent/subagent/)              | 上下文污染         | 大任务拆小，每个子任务干净的消息历史         |
+| [任务系统](/ai/advanced/agent/task-system/)               | 计划不持久         | 文件持久化的任务图，可依赖、可认领、跨会话恢复    |
+| [后台任务](/ai/advanced/agent/background-tasks/)          | 慢操作阻塞         | 慢操作丢后台线程，主循环继续推理           |
+| [定时调度](/ai/advanced/agent/cron-scheduler/)            | 周期性靠人推        | 按时间表生产工作，调度与执行解耦           |
+| [Agent 团队](/ai/advanced/agent/agent-teams/)           | 单 Agent 注意力不够 | 文件收件箱 + 常驻队友线程，并行推进        |
+| [团队协议](/ai/advanced/agent/team-protocols/)            | 协作失控          | 显式消息契约：request\_id 关联请求与响应 |
+| [自主智能体](/ai/advanced/agent/autonomous-agents/)        | 调度瓶颈          | 队友自己看板、自己认领，不等 Lead 派单     |
+| [Worktree 隔离](/ai/advanced/agent/worktree-isolation/) | 文件冲突          | 并行 Agent 需要隔离的文件系统，如同隔离的对话 |
+| [综合 Harness](/ai/advanced/agent/comprehensive-agent/) | 机制归位          | 机制很多，循环一个                  |
 
 ## 协作架构与失败模式
 
@@ -74,13 +55,19 @@ Worktree 隔离在实践中通常用 Git worktree 实现：每个并行 Agent �
 ## 要点备忘
 
 - 多 Agent 的第一动机是**上下文管理**（隔离与并行），其次才是"更多算力"
+
 - Subagent 返回摘要而非过程，主线程视野不被稀释
-- 团队协作的三个地基：任务图（可观察）、消息契约（可预期）、文件隔离（不冲突）
+
+- 团队协作的三个地基：任务图（可观察）、消息契约（可预期）、文件隔离
+  （不冲突）
+
 - 自主认领工作前，先把任务系统和协议做扎实——顺序不能反
+
 - 最终形态（s20）仍是**一个循环**，只是周围长满了让它"生产可用"的系统
 
 ## 延伸阅读
 
-- [Learn Claude Code s06: Subagent](https://learn.shareai.run/zh/s06/)
-- [Learn Claude Code s12-s18](https://learn.shareai.run/zh/)（任务系统、团队、协议、自主代理、工作树隔离）
+- [Learn Claude Code 课程首页](https://learn.shareai.run/zh/)（s01-s20 全 20 章渐进式课程）
+
 - [深入理解 AI Agent · 第 10 章 多 Agent 协作](https://bojieli.github.io/ai-agent-book/book/chapter10/)
+

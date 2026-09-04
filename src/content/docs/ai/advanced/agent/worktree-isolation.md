@@ -1,0 +1,215 @@
+---
+title: Worktree 隔离
+description: 并行 Agent 需要隔离的文件系统——任务绑定工作树，互不踩踏
+level: advanced
+core: true
+---
+
+## 核心一句话
+
+> Parallel agents need isolated filesystems as much as isolated conversations.
+> （并行 Agent 需要隔离的文件系统，如同需要隔离的对话。）
+
+## 问题
+
+[自主智能体](/ai/advanced/agent/autonomous-agents/)中，Alice 和 Bob 都在
+同一个目录下工作。Alice 的任务是"重构认证模块"，Bob 的任务是"重构 UI
+登录页"。
+
+Alice `write_file("config.py", ...)`。Bob 也 `write_file("config.py", ...)`。
+两个人改同一个文件，**互相覆盖**。而且无法干净地回滚——分不清哪些改动是
+谁的。
+
+s15-s17 解决了"谁干什么"（任务系统）和"怎么通信"（消息总线），但没解决
+**"在哪干"**。
+
+## 解决方案
+
+Git worktree 让你在同一仓库中创建多个独立的工作目录，每个有自己的分支。
+Alice 在 `.worktrees/auth-refactor/` 下工作，Bob 在 `.worktrees/ui-login/`
+下工作——互不干扰。
+
+| 能力                    | 作用                          |
+| --------------------- | --------------------------- |
+| create\_worktree      | 为任务创建独立目录 + 独立分支      |
+| bind\_task\_to\_worktree | 把任务和工作目录绑定（不改状态）   |
+| remove\_worktree / keep\_worktree | 完成后清理或保留 |
+| validate\_worktree\_name | 拒绝路径穿越和非法字符         |
+
+```mermaid
+flowchart LR
+    subgraph 主工作区
+        T1[T1 重构认证<br/>in_progress] --- T2[T2 登录页打磨<br/>in_progress]
+    end
+    T1 -.绑定.-> WA[wt/auth-refactor<br/>独立分支]
+    T2 -.绑定.-> WB[wt/ui-login<br/>独立分支]
+```
+
+## 工作原理
+
+### 创建：任务-Worktree 绑定
+
+```python
+def create_worktree(name: str, task_id: str = "") -> str:
+    validate_worktree_name(name)  # 只允许 [A-Za-z0-9._-]{1,64}
+    path = WORKTREES_DIR / name
+    ok, result = run_git(["worktree", "add", str(path),
+                          "-b", f"wt/{name}", "HEAD"])
+    if not ok:
+        return f"Git error: {result}"
+    if task_id:
+        bind_task_to_worktree(task_id, name)
+    log_event("create", name, task_id)
+    return f"Worktree '{name}' created at {path}"
+
+def bind_task_to_worktree(task_id: str, worktree_name: str):
+    task = load_task(task_id)
+    task.worktree = worktree_name  # 只写 worktree 字段
+    save_task(task)  # 状态保持 pending，等队友 claim
+```
+
+绑定规则：一个任务绑定一个 worktree。**绑定不改任务状态**——任务仍是
+`pending`，队友自动认领时才推进到 `in_progress`。这样 Lead 可以提前创建
+任务和 worktree，队友 idle 时自然认领带 worktree 的任务。
+
+### 队友工具的 cwd 切换
+
+教学版给每个队友维护一个 `wt_ctx` 字典，记录当前 worktree 路径。队友认领
+带 worktree 的任务时，`wt_ctx` 自动设置为 worktree 路径；队友的 `bash`、
+`read_file`、`write_file` 在 worktree 目录下执行：
+
+```python
+# 队友线程内部
+wt_ctx = {"path": None}
+
+def _run_claim_task(task_id):
+    result = claim_task(task_id, owner=name)
+    if "Claimed" in result:
+        task = load_task(task_id)
+        if task.worktree:
+            wt_ctx["path"] = str(WORKTREES_DIR / task.worktree)
+    return result
+
+def _run_bash(command):
+    return run_bash(command, cwd=wt_ctx["path"])  # 在 worktree 下执行
+```
+
+这是教学简化。真实 CC 的 EnterWorktree 用 `process.chdir()` 切换整个进程
+目录，AgentTool isolation 用 `cwdOverride` 包住子 agent 执行。
+
+### 收尾：Keep 还是 Remove
+
+任务完成后，两个选择：
+
+```python
+def remove_worktree(name: str, discard_changes: bool = False) -> str:
+    # 安全检查：有改动时默认拒绝
+    if not discard_changes:
+        files, commits = _count_worktree_changes(path)
+        if files > 0 or commits > 0:
+            return ("有未提交改动，使用 discard_changes=true 强制删除，"
+                    "或 keep_worktree 保留")
+    ok, _ = run_git(["worktree", "remove", str(path), "--force"])
+    if not ok:
+        return "删除失败"
+    run_git(["branch", "-D", f"wt/{name}"])
+    log_event("remove", name)
+
+def keep_worktree(name: str) -> str:
+    log_event("keep", name)
+    return f"Worktree '{name}' kept for review (branch: wt/{name})"
+```
+
+**Keep** = 留着分支，等人工 review 后合并到主分支。**Remove** = 有改动时
+默认拒绝，需要 `discard_changes=true` 确认。不自动 complete task——任务
+完成由队友的 `complete_task` 显式触发。
+
+### 事件流：可审计
+
+每次生命周期操作写入日志，方便排查：
+
+```python
+def log_event(event_type: str, worktree_name: str, task_id: str = ""):
+    event = {"type": event_type, "worktree": worktree_name,
+             "task_id": task_id, "ts": time.time()}
+    # append to .worktrees/events.jsonl
+```
+
+事件类型：`create`（创建）、`remove`（删除）、`keep`（保留）。教学版只记录
+事件用于人工排查；完整恢复还需要 index 或 `git worktree list` 扫描。
+
+### run\_git：返回成功/失败
+
+```python
+def run_git(args: list[str]) -> tuple[bool, str]:
+    r = subprocess.run(["git"] + args, cwd=WORKDIR, ...)
+    return r.returncode == 0, output
+```
+
+`create_worktree` 和 `remove_worktree` 只在 git 命令成功后才写事件日志，
+保证日志反映真实状态。
+
+## 深入 CC 源码
+
+CC 的 worktree 系统有两条路径：**EnterWorktree**（当前会话切入）和
+**AgentTool isolation**（子 agent 隔离）。
+
+### EnterWorktree：当前会话切换
+
+`EnterWorktreeTool` 创建 worktree 后立即 `process.chdir(worktreePath)`、
+`setCwd()`、`setOriginalCwd()`、`saveWorktreeState()`。当前会话的工作目录
+直接切换到 worktree——**不是 prompt 提醒，而是进程级目录变更**。
+
+`ExitWorktreeTool` 的 keep/remove 都会 `restoreSessionToOriginalCwd()`
+恢复原目录。Remove 时检查未提交改动，没有 `discard_changes: true` 就拒绝
+删除。
+
+### AgentTool isolation：子 agent 隔离
+
+`AgentTool` 在 `isolation: "worktree"` 时调用 `createAgentWorktree()` 创建
+worktree，用 `cwdOverridePath` 包住子 agent 执行。子 agent 的所有操作自动
+在 worktree 目录下进行。prompt 里告诉模型：这是临时 worktree，无改动自动
+清理，有改动返回路径和分支。
+
+### name 校验与路径命名
+
+校验 slug：拒绝 `.`/`..`，允许 `[a-zA-Z0-9._-]`。真实路径是
+`.claude/worktrees/`，分支名 `worktree-{slug}`（斜杠用 `+` 替代）。创建时
+用 `git worktree add -B`，优先基于 `origin/<defaultBranch>` 而非当前 HEAD。
+教学版用 `.worktrees/` 和 `wt/{name}` 简化。
+
+### 状态管理
+
+CC 没有 task-worktree 绑定。Worktree 状态通过 `PersistedWorktreeSession`
+管理，字段包括 `originalCwd`、`worktreePath`、`worktreeName`、
+`worktreeBranch`、`originalBranch`、`originalHeadCommit`、`sessionId`
+等——没有 taskId。教学版用 task 的 `worktree` 字段做绑定，是教学简化。
+CC 把 worktree 和 task 作为两个独立系统，通过 Agent 理解上下文来关联。
+
+## 试一下
+
+```bash
+cd learn-claude-code
+python s18_worktree_isolation/code.py
+```
+
+Prompt：`Create two tasks, then create worktrees for each (bind with task_id). Spawn alice and bob. Watch them auto-claim and work in isolated directories.`
+
+观察重点：两个 worktree 的 `git status` 输出是否显示不同的分支？队友认领带
+worktree 的任务后，bash 命令是否在 worktree 目录下执行？`remove_worktree`
+对有改动的 worktree 是否拒绝？`.tasks/` 中的任务在绑定后状态是否仍为
+`pending`？
+
+## 要点备忘
+
+- 隔离的三层递进：对话隔离（Subagent）→ 任务隔离（Task System）→ **目录
+  隔离**（Worktree）——"在哪干"是并行的最后一公里
+- 绑定不改状态：worktree 字段只是元数据，认领仍走 claim 流程
+- 默认安全：有未提交改动时拒绝删除，keep 留给人工 review
+- 生命周期事件写 JSONL：创建/删除/保留全部可审计
+
+## 延伸阅读
+
+- [Learn Claude Code s18: Worktree Isolation](https://learn.shareai.run/zh/s18/)（含 EnterWorktree 与 AgentTool isolation 源码核查）
+- 上游概念：[自主智能体](/ai/advanced/agent/autonomous-agents/)
+- 终章：所有机制归位，见[综合 Harness](/ai/advanced/agent/comprehensive-agent/)

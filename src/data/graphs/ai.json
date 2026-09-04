@@ -19,6 +19,14 @@
     { "id": "recovery", "label": "错误恢复", "href": "/ai/intermediate/agent/error-recovery/", "group": "应用" },
     { "id": "mcp", "label": "MCP 协议", "href": "/ai/intermediate/agent/mcp/", "group": "应用" },
     { "id": "multiagent", "label": "多 Agent 协作", "href": "/ai/advanced/agent/multi-agent/", "group": "应用" },
+    { "id": "tasksystem", "label": "任务系统", "href": "/ai/advanced/agent/task-system/", "group": "应用" },
+    { "id": "background", "label": "后台任务", "href": "/ai/advanced/agent/background-tasks/", "group": "应用" },
+    { "id": "cron", "label": "定时调度", "href": "/ai/advanced/agent/cron-scheduler/", "group": "应用" },
+    { "id": "teams", "label": "Agent 团队", "href": "/ai/advanced/agent/agent-teams/", "group": "应用" },
+    { "id": "protocols", "label": "团队协议", "href": "/ai/advanced/agent/team-protocols/", "group": "应用" },
+    { "id": "autonomous", "label": "自主智能体", "href": "/ai/advanced/agent/autonomous-agents/", "group": "应用" },
+    { "id": "worktree", "label": "Worktree 隔离", "href": "/ai/advanced/agent/worktree-isolation/", "group": "应用" },
+    { "id": "comprehensive", "label": "综合 Harness", "href": "/ai/advanced/agent/comprehensive-agent/", "group": "应用" },
     { "id": "eval", "label": "评测与对齐", "group": "应用" }
   ],
   "edges": [
@@ -44,6 +52,16 @@
     { "source": "agentloop", "target": "recovery", "label": "错误分类重试" },
     { "source": "planning", "target": "multiagent", "label": "任务图" },
     { "source": "agent", "target": "multiagent", "label": "规模化" },
+    { "source": "planning", "target": "subagent", "label": "大任务拆小" },
+    { "source": "subagent", "target": "tasksystem", "label": "目标变任务图" },
+    { "source": "tasksystem", "target": "background", "label": "慢操作异步" },
+    { "source": "background", "target": "cron", "label": "定时触发" },
+    { "source": "cron", "target": "teams", "label": "一个不够组队" },
+    { "source": "teams", "target": "protocols", "label": "消息契约" },
+    { "source": "protocols", "target": "autonomous", "label": "自主认领" },
+    { "source": "autonomous", "target": "worktree", "label": "目录隔离" },
+    { "source": "worktree", "target": "comprehensive", "label": "全部归位" },
+    { "source": "mcp", "target": "comprehensive", "label": "外部工具池" },
     { "source": "llm", "target": "eval" }
   ]
 }
