@@ -1,0 +1,26 @@
+AGENTS.md
+  h_9324126a55eff3 1-47
+README.md
+  h_9324126a55eff3 1-51
+docs/api/README.md
+  h_9324126a55eff3 1-13
+docs/api/example-接口文档.md
+  h_9324126a55eff3 1-68
+docs/superpowers/plans/2026-09-04-example-知识图谱节点导航增强.md
+  h_9324126a55eff3 1-48
+docs/superpowers/specs/2026-09-04-ascension-design.md
+  h_9324126a55eff3 4,6,23-30,35,37,66,68,70,72,77-80,92,94,100,107,110,113,119,121,123,125
+docs/superpowers/specs/2026-09-04-example-知识图谱节点导航增强.md
+  h_9324126a55eff3 1-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "e25e8e1fa3d99e39ef1ff4df863069663f152d30",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
