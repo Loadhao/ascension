@@ -1,0 +1,11 @@
+---
+import CategoryNotes from './CategoryNotes';
+import { getCategory } from '../../lib/notes';
+
+const { categoryId } = Astro.props as { categoryId: string };
+const category = await getCategory(categoryId);
+---
+
+{
+	category && <CategoryNotes client:load category={category} />
+}

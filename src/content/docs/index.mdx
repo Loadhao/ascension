@@ -1,52 +1,8 @@
 ---
-title: Ascension
-description: 个人学习知识库
-template: splash
-hero:
-  tagline: 沉淀技术学习的每一步
-  actions:
-    - text: 图表写作指南
-      link: guide/diagrams/
-      icon: right-arrow
-    - text: GitHub
-      link: https://github.com/Loadhao/ascension
-      icon: external
+title: 今天学点什么
+description: 学习仪表盘：继续上次学习、各方向进度与下一步推荐
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import DashboardIsland from '../../components/learn/DashboardIsland.astro';
 
-按方向沉淀知识要点：正文直接用 Mermaid 语法画思维导图、架构图、流程图、时序图，
-每个方向配一张可交互的知识图谱。手机、电脑随时访问，打印即可存为 PDF。
-
-<CardGrid>
-  <Card title="Linux">
-    命令行基础、文件系统、Shell 脚本、进程与服务管理、网络。
-
-    [进入 Linux →](linux/)
-  </Card>
-  <Card title="Java">
-    语法与集合、并发编程、JVM 内存与垃圾回收、Spring 生态。
-
-    [进入 Java →](java/)
-  </Card>
-  <Card title="Python">
-    语法基础、函数与装饰器、面向对象、常用标准库与工程化。
-
-    [进入 Python →](python/)
-  </Card>
-  <Card title="AI">
-    机器学习基础、深度学习、大模型、提示工程、RAG 与 Agent。
-
-    [进入 AI →](ai/)
-  </Card>
-  <Card title="工具">
-    Git、Docker、编辑器、终端效率、正则与网络调试。
-
-    [进入工具 →](tools/)
-  </Card>
-  <Card title="图表写作指南">
-    Mermaid 各类图表的语法模板，以及知识图谱数据的维护方式。
-
-    [查看指南 →](guide/diagrams/)
-  </Card>
-</CardGrid>
+<DashboardIsland />

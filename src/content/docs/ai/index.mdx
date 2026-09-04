@@ -1,10 +1,20 @@
 ---
 title: AI
-description: AI 方向知识地图与学习路线
+description: AI 方向学习路线与知识地图
 ---
 
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
 import KnowledgeGraph from '../../../components/KnowledgeGraph';
 import graph from '../../../data/graphs/ai.json';
+
+## 学习路线
+
+按等级推进，每级下按主题分类。点击分类进入该主题的知识点目录；点击圆点标记学习状态：
+○ 未学 → ◐ 学习中 → ● 已掌握。
+
+<RoadmapIsland directionId="ai" />
+
+## 知识图谱
 
 <KnowledgeGraph client:visible data={graph} />
 
@@ -12,13 +22,3 @@ import graph from '../../../data/graphs/ai.json';
 节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
 图谱数据维护在 `src/data/graphs/ai.json`。
 :::
-
-## 学习路线
-
-1. **机器学习基础** —— 监督/无监督、过拟合、评估指标（待整理）
-2. **深度学习** —— 反向传播、Transformer 架构（待整理）
-3. **大模型 LLM** —— 预训练 / SFT / RLHF 流程（待整理）
-4. **提示工程** —— 结构化提示词、思维链（待整理）
-5. **RAG** —— 切分、Embedding、召回重排（待整理）
-6. **Agent** —— 工具调用、规划、多智能体（待整理）
-7. **评测与对齐** —— Benchmark、幻觉治理（待整理）

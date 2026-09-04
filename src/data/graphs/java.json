@@ -4,7 +4,7 @@
     { "id": "syntax", "label": "语法基础", "group": "语言" },
     { "id": "collections", "label": "集合框架", "group": "语言" },
     { "id": "concurrent", "label": "并发编程", "group": "语言" },
-    { "id": "jvm", "label": "JVM 内存", "href": "/java/jvm/memory/", "group": "JVM" },
+    { "id": "jvm", "label": "JVM 内存", "href": "/java/advanced/jvm/memory/", "group": "JVM" },
     { "id": "gc", "label": "垃圾回收", "group": "JVM" },
     { "id": "spring", "label": "Spring 生态", "group": "框架" }
   ],

@@ -1,0 +1,16 @@
+---
+/**
+ * Starlight Footer 覆盖：笔记页（frontmatter 含 level）在页脚前注入学习状态标记，
+ * 其余页面保持默认页脚。
+ */
+import DefaultFooter from '@astrojs/starlight/components/Footer.astro';
+import ProgressMark from '../learn/ProgressMark';
+
+const entry = Astro.locals.starlightRoute?.entry as
+  | { id: string; data: { level?: string } }
+  | undefined;
+const noteId = entry?.data?.level !== undefined ? entry.id : null;
+---
+
+{noteId && <ProgressMark client:load noteId={noteId} />}
+<DefaultFooter />

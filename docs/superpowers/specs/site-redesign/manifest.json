@@ -3,8 +3,8 @@
   "title": "全站重设计：黑白主题 + 进阶信息架构（v2）",
   "uiLevel": "L3",
   "revision": 2,
-  "confirmed": false,
-  "confirmedAt": null,
+  "confirmed": true,
+  "confirmedAt": "2026-09-04",
   "widgets": [
     {
       "id": "widget",

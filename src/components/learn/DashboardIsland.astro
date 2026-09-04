@@ -1,0 +1,8 @@
+---
+import Dashboard from './Dashboard';
+import { getSiteData } from '../../lib/notes';
+
+const site = await getSiteData();
+---
+
+<Dashboard client:load data={site} />

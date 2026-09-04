@@ -1,6 +1,8 @@
 ---
 title: JVM 运行时数据区
 description: 线程私有区与共享区的划分、OOM 高发区与排查要点
+level: advanced
+core: true
 ---
 
 ## 总体结构

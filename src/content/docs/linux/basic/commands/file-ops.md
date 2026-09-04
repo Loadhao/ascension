@@ -1,6 +1,8 @@
 ---
 title: 文件与目录操作
 description: Linux 常用文件操作命令、权限模型与排查流程
+level: basic
+core: true
 ---
 
 ## 常用命令速查

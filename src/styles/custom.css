@@ -5,9 +5,838 @@
   background: var(--sl-color-bg);
 }
 
-/* 打印：隐藏交互图谱（画布内容无法打印），Mermaid 图表为 SVG 不受影响 */
+/* ===== 黑白主题令牌（site-redesign spec 第 4 节） =====
+   亮色 = 纯白底 + 近黑文字；暗色 = 纯黑底 + 近白文字。
+   与 Starlight props.css 同构：:root 为暗色基准，[data-theme='light'] 切换亮色。 */
+
+:root,
+::backdrop {
+  --sl-color-white: #f5f5f5;
+  --sl-color-gray-1: #ededed;
+  --sl-color-gray-2: #d4d4d4;
+  --sl-color-gray-3: #8c8c8c;
+  --sl-color-gray-4: #737373;
+  --sl-color-gray-5: #262626;
+  --sl-color-gray-6: #0d0d0d;
+  --sl-color-gray-7: #0a0a0a;
+  --sl-color-black: #000000;
+
+  --sl-color-accent-high: #ffffff;
+  --sl-color-accent: #f5f5f5;
+  --sl-color-accent-low: #0d0d0d;
+}
+
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
+  --sl-color-white: #111111;
+  --sl-color-gray-1: #1a1a1a;
+  --sl-color-gray-2: #333333;
+  --sl-color-gray-3: #767676;
+  --sl-color-gray-4: #8a8a8a;
+  --sl-color-gray-5: #e5e5e5;
+  --sl-color-gray-6: #f7f7f7;
+  --sl-color-gray-7: #fafafa;
+  --sl-color-black: #ffffff;
+
+  --sl-color-accent-high: #000000;
+  --sl-color-accent: #111111;
+  --sl-color-accent-low: #f2f2f2;
+}
+
+/* ===== 字重调轻（F4）：H1 600 / H2–H6 500 / 正文 400 ===== */
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: 500;
+}
+.sl-markdown-content h1 {
+  font-weight: 600;
+}
+
+/* ===== 链接 = 文字色 + 下划线（F3 灰阶无彩色） ===== */
+.sl-markdown-content a {
+  color: var(--sl-color-accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--sl-color-accent) 40%, transparent);
+  text-underline-offset: 3px;
+  transition: color 150ms ease;
+}
+.sl-markdown-content a:hover {
+  color: var(--sl-color-accent-high);
+  text-decoration-color: currentColor;
+}
+
+/* ===== 代码块双主题（Astro shiki defaultColor:false，github-light / github-dark） ===== */
+.astro-code {
+  background-color: var(--shiki-light-bg);
+  color: var(--shiki-light);
+}
+.astro-code span {
+  color: var(--shiki-light);
+  font-style: var(--shiki-light-font-style, inherit);
+  font-weight: var(--shiki-light-font-weight, inherit);
+  text-decoration: var(--shiki-light-text-decoration, inherit);
+}
+:root[data-theme='dark'] .astro-code {
+  background-color: var(--shiki-dark-bg);
+  color: var(--shiki-dark);
+}
+:root[data-theme='dark'] .astro-code span {
+  color: var(--shiki-dark);
+  font-style: var(--shiki-dark-font-style, inherit);
+  font-weight: var(--shiki-dark-font-weight, inherit);
+  text-decoration: var(--shiki-dark-text-decoration, inherit);
+}
+
+/* ===== 学习组件（Dashboard / Roadmap / CategoryNotes / ProgressMark） ===== */
+
+/* 状态圆点（F3/F7）：纯 SVG 图形三态，不依赖颜色 */
+.learn-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  margin: -8px;
+  border: none;
+  background: none;
+  padding: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.learn-dot:hover {
+  background: var(--sl-color-gray-6);
+}
+.learn-dot:focus-visible {
+  outline: 2px solid var(--sl-color-gray-4);
+  outline-offset: -2px;
+}
+.learn-dot .dot-ring {
+  fill: none;
+  stroke: var(--sl-color-gray-3);
+  stroke-width: 1.5;
+}
+.learn-dot--1 .dot-half {
+  fill: var(--sl-color-white);
+}
+.learn-dot--2 .dot-full {
+  fill: var(--sl-color-white);
+}
+
+/* 路线图（F6）：等级分段 + 分类入口 */
+.learn-level {
+  margin: 26px 0 8px;
+}
+.learn-level-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sl-color-white);
+  font-size: 15px;
+  font-weight: 500;
+}
+.learn-level-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--sl-color-gray-5);
+}
+.learn-level-cnt {
+  color: var(--sl-color-gray-3);
+  font-size: 12px;
+  font-weight: 400;
+}
+.learn-cat {
+  margin: 12px 0 4px;
+  padding-left: 22px;
+}
+.learn-cat-link {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 8px 6px 0;
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-white);
+  font-size: 14.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.learn-cat-link:hover {
+  color: var(--sl-color-accent-high);
+}
+.learn-cat-link:hover .learn-cat-go {
+  transform: translateX(2px);
+}
+.learn-cat-n {
+  color: var(--sl-color-gray-3);
+  font-size: 12px;
+  font-weight: 400;
+}
+.learn-cat-go {
+  margin-left: auto;
+  color: var(--sl-color-gray-3);
+  transition: transform 150ms ease;
+}
+.learn-item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.learn-item-list li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--sl-color-gray-5);
+}
+.learn-item-list li:last-child {
+  border-bottom: none;
+}
+.learn-item-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 8px 9px 0;
+  color: var(--sl-color-text);
+  font-size: 14.5px;
+  text-decoration: none;
+}
+.learn-item-link:hover {
+  color: var(--sl-color-accent-high);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.learn-item-list .learn-dot {
+  margin: 0 0 0 auto;
+}
+.learn-empty {
+  margin: 18px 0;
+  padding: 16px 20px;
+  border: 1px dashed var(--sl-color-gray-5);
+  border-radius: 12px;
+  color: var(--sl-color-gray-3);
+  font-size: 14px;
+}
+
+/* 分类目录页（F6a）：知识点有序列表 */
+.learn-kp-list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+}
+.learn-kp-list li {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--sl-color-gray-5);
+}
+.learn-kp-list li:first-child {
+  border-top: 1px solid var(--sl-color-gray-5);
+}
+.learn-kp-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 13px 10px 13px 4px;
+  color: inherit;
+  text-decoration: none;
+}
+.learn-kp-link:hover .learn-kp-title {
+  color: var(--sl-color-accent-high);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.learn-kp-idx {
+  flex: none;
+  width: 30px;
+  color: var(--sl-color-gray-3);
+  font-family: var(--sl-font-system-mono);
+  font-size: 12px;
+  line-height: 1;
+  text-align: right;
+}
+.learn-kp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.learn-kp-title {
+  color: var(--sl-color-white);
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 150ms ease;
+}
+.learn-kp-core {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border: 1px solid var(--sl-color-gray-3);
+  border-radius: 999px;
+  color: var(--sl-color-gray-3);
+  font-size: 10.5px;
+  font-weight: 400;
+  vertical-align: 1px;
+}
+.learn-kp-desc {
+  color: var(--sl-color-gray-3);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.learn-kp-list .learn-dot {
+  margin: 0;
+}
+
+/* 仪表盘（F5） */
+.learn-hero {
+  margin: 18px 0 14px;
+  padding: 20px 24px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 12px;
+  background: var(--sl-color-gray-7);
+}
+.learn-hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sl-color-gray-3);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.learn-hero-title {
+  margin: 8px 0 4px;
+  color: var(--sl-color-white);
+  font-size: 20px;
+  font-weight: 500;
+}
+.learn-hero-title a {
+  color: var(--sl-color-white);
+  text-decoration: none;
+}
+.learn-hero-title a:hover {
+  text-decoration: underline;
+}
+.learn-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--sl-color-gray-3);
+  font-size: 13px;
+}
+.learn-progress-track {
+  height: 6px;
+  margin: 14px 0 8px;
+  border-radius: 999px;
+  background: var(--sl-color-gray-5);
+  overflow: hidden;
+}
+.learn-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--sl-color-white);
+  transition: width 300ms ease;
+}
+.learn-btn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  background: var(--sl-color-white);
+  color: var(--sl-color-black);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 150ms ease;
+}
+.learn-btn:hover {
+  opacity: 0.85;
+}
+.learn-dir-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.learn-dir-list li {
+  display: grid;
+  grid-template-columns: 86px 1fr 150px;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--sl-color-gray-5);
+}
+.learn-dir-list li:last-child {
+  border-bottom: none;
+}
+.learn-dir-name {
+  color: var(--sl-color-white);
+  font-weight: 500;
+  font-size: 14.5px;
+}
+.learn-dir-stage {
+  color: var(--sl-color-gray-3);
+  font-size: 12.5px;
+  text-align: right;
+}
+.learn-next {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px dashed var(--sl-color-gray-5);
+  border-radius: 12px;
+}
+.learn-next-title {
+  color: var(--sl-color-white);
+  font-weight: 500;
+}
+.learn-next-title a {
+  color: var(--sl-color-white);
+}
+.learn-next-why {
+  margin-top: 2px;
+  color: var(--sl-color-gray-3);
+  font-size: 13px;
+}
+.learn-go {
+  margin-left: auto;
+  flex: none;
+  display: inline-flex;
+  padding: 7px 16px;
+  border: 1px solid var(--sl-color-white);
+  border-radius: 8px;
+  color: var(--sl-color-white);
+  font-size: 13.5px;
+  text-decoration: none;
+}
+.learn-go:hover {
+  background: var(--sl-color-white);
+  color: var(--sl-color-black);
+}
+
+/* 笔记页底部标记（F7 第二入口） */
+.learn-page-mark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 40px;
+  padding: 14px 18px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 12px;
+  color: var(--sl-color-gray-3);
+  font-size: 14px;
+}
+.learn-page-mark .learn-dot {
+  margin: 0;
+}
+
+@media (max-width: 50em) {
+  .learn-dir-list li {
+    grid-template-columns: 70px 1fr 110px;
+  }
+  .learn-next {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .learn-go {
+    margin-left: 0;
+  }
+  .learn-hero-meta {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learn-progress-fill,
+  .learn-cat-go,
+  .learn-item-link,
+  .learn-kp-link,
+  .learn-cat-link,
+  .sl-markdown-content a {
+    transition: none;
+  }
+}
+
+/* 打印：隐藏交互控件，代码块回亮色 */
+@media print {
+  .learn-dot,
+  .learn-btn,
+  .learn-go {
+    display: none !important;
+  }
+  :root[data-theme='dark'] .astro-code,
+  :root[data-theme='dark'] .astro-code span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+  }
+}
+
+/* ===== Mermaid 图表：暖琥珀主题 =====
+   构建时 SVG 内烘焙的是亮色基准值，运行时由以下 CSS 变量接管配色。
+   Starlight 默认 :root 为暗色、亮色经 [data-theme='light'] 切换，此处保持同构。 */
+
+.sl-markdown-content {
+  /* 暗色（暖黑棕 + 琥珀） */
+  --mmd-node-fill: #272019;
+  --mmd-node-border: #8a6a45;
+  --mmd-node-text: #e8ddcb;
+  --mmd-line: #7d6c58;
+  --mmd-text: #e8ddcb;
+  --mmd-cluster-fill: #1e1915;
+  --mmd-cluster-border: #4a3c2d;
+  --mmd-cluster-text: #c9ae87;
+  --mmd-label-bg: #1b1712;
+  --mmd-note-fill: #2b2216;
+  --mmd-note-border: #5c4a33;
+  --mmd-note-text: #ddcfb8;
+  --mmd-signal: #a08c72;
+  --mmd-activation: #241d13;
+  --mmd-shadow: drop-shadow(0 1px 3px rgb(0 0 0 / 0.45));
+  --mmd-glow: rgb(217 160 102 / 0.45);
+}
+
+:root[data-theme='light'] .sl-markdown-content {
+  /* 亮色（暖米白 + 琥珀） */
+  --mmd-node-fill: #f6efe3;
+  --mmd-node-border: #c9a26b;
+  --mmd-node-text: #3f3428;
+  --mmd-line: #b09a7e;
+  --mmd-text: #3f3428;
+  --mmd-cluster-fill: #f4ecdd;
+  --mmd-cluster-border: #d8c5a5;
+  --mmd-cluster-text: #6d5a42;
+  --mmd-label-bg: #faf8f5;
+  --mmd-note-fill: #f3e8d3;
+  --mmd-note-border: #d9bf94;
+  --mmd-note-text: #51422e;
+  --mmd-signal: #6b5b45;
+  --mmd-activation: #f0e4d0;
+  --mmd-shadow: drop-shadow(0 1px 2px rgb(63 52 40 / 0.1));
+  --mmd-glow: rgb(180 83 9 / 0.32);
+}
+
+/* 版面：居中 + 上下留白 */
+.sl-markdown-content svg[id^='mermaid-'] {
+  display: block;
+  height: auto;
+  margin: 0.75rem auto 1.75rem;
+  fill: var(--mmd-text);
+}
+
+/* —— 节点形状（流程图 / 类图 / 状态图；脑图分支色在构建时烘焙，排除在外） —— */
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node rect,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node circle,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node ellipse,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node polygon,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node path,
+.sl-markdown-content svg[id^='mermaid-'] g.classGroup rect,
+.sl-markdown-content svg[id^='mermaid-'] g.stateGroup rect {
+  fill: var(--mmd-node-fill) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+/* 静态投影单列：呼吸节点（.pulse）排除——!important 会压过动画帧中的辉光 */
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node:not(.pulse) rect,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node:not(.pulse) circle,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node:not(.pulse) ellipse,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node:not(.pulse) polygon,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .node:not(.pulse) path,
+.sl-markdown-content svg[id^='mermaid-'] g.classGroup rect,
+.sl-markdown-content svg[id^='mermaid-'] g.stateGroup rect {
+  filter: var(--mmd-shadow) !important;
+}
+
+/* 状态图起止点等特殊形状 */
+.sl-markdown-content svg[id^='mermaid-'] .node circle.state-start,
+.sl-markdown-content svg[id^='mermaid-'] .node .fork-join {
+  fill: var(--mmd-line) !important;
+  stroke: var(--mmd-line) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .node circle.state-end {
+  fill: var(--mmd-node-border) !important;
+  stroke: var(--mmd-label-bg) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .end-state-inner {
+  fill: var(--mmd-label-bg) !important;
+}
+
+/* —— 子图 / 复合状态 —— */
+.sl-markdown-content svg[id^='mermaid-'] .cluster rect {
+  fill: var(--mmd-cluster-fill) !important;
+  stroke: var(--mmd-cluster-border) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .statediagram-cluster .inner,
+.sl-markdown-content svg[id^='mermaid-'] .stateGroup .composit {
+  fill: var(--mmd-label-bg) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .stateGroup .alt-composit,
+.sl-markdown-content svg[id^='mermaid-'] .statediagram-state rect.divider {
+  fill: var(--mmd-activation) !important;
+}
+
+/* —— 文字 —— */
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .label,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) span.nodeLabel {
+  color: var(--mmd-node-text) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) .label text,
+.sl-markdown-content svg[id^='mermaid-']:not(.mindmapDiagram) [class$='TitleText'],
+.sl-markdown-content svg[id^='mermaid-'] g.classGroup text,
+.sl-markdown-content svg[id^='mermaid-'] g.stateGroup text,
+.sl-markdown-content svg[id^='mermaid-'] .stateGroup .state-title {
+  fill: var(--mmd-node-text) !important;
+}
+
+/* 子图标题（默认派生为冷黑，改为暖棕；加 .nodeLabel 变体以压过上方通用文字规则） */
+.sl-markdown-content svg[id^='mermaid-'] .cluster-label text,
+.sl-markdown-content svg[id^='mermaid-'] .cluster text {
+  fill: var(--mmd-cluster-text) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .cluster-label span.nodeLabel,
+.sl-markdown-content svg[id^='mermaid-'] .cluster-label span,
+.sl-markdown-content svg[id^='mermaid-'] .cluster span {
+  color: var(--mmd-cluster-text) !important;
+}
+
+/* —— 连线与箭头 —— */
+.sl-markdown-content svg[id^='mermaid-'] .flowchart-link,
+.sl-markdown-content svg[id^='mermaid-'] .edgePaths .path,
+.sl-markdown-content svg[id^='mermaid-'] .relation,
+.sl-markdown-content svg[id^='mermaid-'] .transition,
+.sl-markdown-content svg[id^='mermaid-'] g.classGroup line,
+.sl-markdown-content svg[id^='mermaid-'] g.stateGroup line {
+  stroke: var(--mmd-line) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .marker,
+.sl-markdown-content svg[id^='mermaid-'] defs [id$='-barbEnd'] {
+  fill: var(--mmd-line) !important;
+  stroke: var(--mmd-line) !important;
+}
+
+/* —— 连线标签 —— */
+.sl-markdown-content svg[id^='mermaid-'] .edgeLabel,
+.sl-markdown-content svg[id^='mermaid-'] .edgeLabel p {
+  background-color: var(--mmd-label-bg) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .edgeLabel rect,
+.sl-markdown-content svg[id^='mermaid-'] .edgeLabel .label rect {
+  fill: var(--mmd-label-bg) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .labelBkg {
+  background-color: var(--mmd-label-bg) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .edgeLabel .label,
+.sl-markdown-content svg[id^='mermaid-'] .edgeLabel span {
+  color: var(--mmd-text) !important;
+}
+
+/* —— 时序图 —— */
+.sl-markdown-content svg[id^='mermaid-'] .actor {
+  fill: var(--mmd-node-fill) !important;
+  stroke: var(--mmd-node-border) !important;
+  filter: var(--mmd-shadow) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] text.actor > tspan {
+  fill: var(--mmd-node-text) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .actor-line {
+  stroke: var(--mmd-line) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .messageLine0,
+.sl-markdown-content svg[id^='mermaid-'] .messageLine1 {
+  stroke: var(--mmd-signal) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] [id$='-arrowhead'] path {
+  fill: var(--mmd-signal) !important;
+  stroke: var(--mmd-signal) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .sequenceNumber {
+  fill: var(--mmd-label-bg) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] [id$='-sequencenumber'] {
+  fill: var(--mmd-signal) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .messageText {
+  fill: var(--mmd-text) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .note {
+  fill: var(--mmd-note-fill) !important;
+  stroke: var(--mmd-note-border) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .noteText,
+.sl-markdown-content svg[id^='mermaid-'] .noteText > tspan {
+  fill: var(--mmd-note-text) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .labelBox {
+  fill: var(--mmd-node-fill) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .labelText {
+  fill: var(--mmd-text) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .loopText {
+  fill: var(--mmd-cluster-text) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .loopLine {
+  stroke: var(--mmd-cluster-border) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .activation0,
+.sl-markdown-content svg[id^='mermaid-'] .activation1,
+.sl-markdown-content svg[id^='mermaid-'] .activation2 {
+  fill: var(--mmd-activation) !important;
+  stroke: var(--mmd-cluster-border) !important;
+}
+
+/* —— 动画连线（linkStyle animate）——
+   Mermaid 烘焙的默认节奏过慢（fast 20s / slow 50s 一轮），收紧到肉眼可感的流速 */
+.sl-markdown-content svg[id^='mermaid-'] .edge-animation-fast {
+  animation: dash 5s linear infinite !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .edge-animation-slow {
+  animation: dash 10s linear infinite !important;
+}
+
+/* 无障碍：用户系统开启“减弱动态效果”时停止流动 */
+@media (prefers-reduced-motion: reduce) {
+  .sl-markdown-content svg[id^='mermaid-'] .edge-animation-fast,
+  .sl-markdown-content svg[id^='mermaid-'] .edge-animation-slow {
+    animation: none !important;
+  }
+}
+
+/* —— 呼吸灯节点（:::pulse 打标）——
+   琥珀辉光缓慢呼吸；略粗的边框基线由 classDef 声明（Mermaid 将其烘焙为
+   ID 级 !important，会压过动画帧，故动画只驱动 filter，避免与级联冲突）。
+   辉光色随亮/暗主题切换 */
+@keyframes mmd-node-breathe {
+  0%,
+  100% {
+    filter: var(--mmd-shadow);
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 0 4px var(--mmd-glow))
+      drop-shadow(0 0 11px var(--mmd-glow));
+  }
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .node.pulse rect,
+.sl-markdown-content svg[id^='mermaid-'] .node.pulse circle,
+.sl-markdown-content svg[id^='mermaid-'] .node.pulse ellipse,
+.sl-markdown-content svg[id^='mermaid-'] .node.pulse polygon {
+  animation: mmd-node-breathe 2.4s ease-in-out infinite;
+}
+
+/* 无障碍：呼吸静止，保留投影与 classDef 的粗边框作区分 */
+@media (prefers-reduced-motion: reduce) {
+  .sl-markdown-content svg[id^='mermaid-'] .node.pulse rect,
+  .sl-markdown-content svg[id^='mermaid-'] .node.pulse circle,
+  .sl-markdown-content svg[id^='mermaid-'] .node.pulse ellipse,
+  .sl-markdown-content svg[id^='mermaid-'] .node.pulse polygon {
+    animation: none !important;
+    filter: var(--mmd-shadow) !important;
+  }
+}
+
+/* —— 悬停交互（配套 public/scripts/mermaid-interact.js）——
+   hover 节点 / 子图 / 连线：关联链路高亮（.mmd-on），其余淡出；点击固定 */
+.sl-markdown-content svg[id^='mermaid-'] :is(.node, .edgePaths path, .edgeLabel) {
+  transition: opacity 0.18s ease;
+}
+
+.sl-markdown-content svg.mmd-focus .node:not(.mmd-on) {
+  opacity: 0.22;
+}
+
+.sl-markdown-content svg.mmd-focus .edgePaths path:not(.mmd-on) {
+  opacity: 0.1;
+}
+
+.sl-markdown-content svg.mmd-focus .edgeLabel:not(.mmd-on) {
+  opacity: 0.25;
+}
+
+/* 高亮态：节点琥珀辉光、连线提亮加粗 */
+.sl-markdown-content svg.mmd-focus .node.mmd-on {
+  filter: drop-shadow(0 0 5px var(--mmd-glow));
+}
+
+.sl-markdown-content svg.mmd-focus path.flowchart-link.mmd-on {
+  stroke: var(--mmd-node-border) !important;
+  stroke-width: 2px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sl-markdown-content svg[id^='mermaid-'] :is(.node, .edgePaths path, .edgeLabel) {
+    transition: none;
+  }
+}
+
+/* —— 类图补充 —— */
+.sl-markdown-content svg[id^='mermaid-'] .divider {
+  stroke: var(--mmd-node-border) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .classLabel .box {
+  fill: var(--mmd-activation) !important;
+}
+
+.sl-markdown-content svg[id^='mermaid-'] .classLabel .label {
+  fill: var(--mmd-cluster-text) !important;
+}
+
+/* 打印：隐藏交互图谱（画布内容无法打印），图表为 SVG 不受影响；
+   暗色模式下打印时强制回到亮色变量，避免浅色纸面上出现浅色文字 */
 @media print {
   .knowledge-graph {
     display: none;
+  }
+
+  /* 悬停/固定的淡出态不带入打印，保证完整输出 */
+  .sl-markdown-content svg.mmd-focus :is(.node, .edgePaths path, .edgeLabel) {
+    opacity: 1 !important;
+  }
+
+  .sl-markdown-content {
+    --mmd-node-fill: #f6efe3;
+    --mmd-node-border: #c9a26b;
+    --mmd-node-text: #3f3428;
+    --mmd-line: #b09a7e;
+    --mmd-text: #3f3428;
+    --mmd-cluster-fill: #f4ecdd;
+    --mmd-cluster-border: #d8c5a5;
+    --mmd-cluster-text: #6d5a42;
+    --mmd-label-bg: #faf8f5;
+    --mmd-note-fill: #f3e8d3;
+    --mmd-note-border: #d9bf94;
+    --mmd-note-text: #51422e;
+    --mmd-signal: #6b5b45;
+    --mmd-activation: #f0e4d0;
+    --mmd-shadow: none;
   }
 }

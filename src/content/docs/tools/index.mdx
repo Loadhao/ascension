@@ -1,10 +1,20 @@
 ---
 title: 工具
-description: 通用工具技能知识地图与学习路线
+description: 通用工具技能学习路线与知识地图
 ---
 
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
 import KnowledgeGraph from '../../../components/KnowledgeGraph';
 import graph from '../../../data/graphs/tools.json';
+
+## 学习路线
+
+按等级推进，每级下按主题分类。点击分类进入该主题的知识点目录；点击圆点标记学习状态：
+○ 未学 → ◐ 学习中 → ● 已掌握。
+
+<RoadmapIsland directionId="tools" />
+
+## 知识图谱
 
 <KnowledgeGraph client:visible data={graph} />
 
@@ -12,12 +22,3 @@ import graph from '../../../data/graphs/tools.json';
 节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
 图谱数据维护在 `src/data/graphs/tools.json`。
 :::
-
-## 学习路线
-
-1. **Git** —— 分支模型、rebase 工作流、疑难恢复（待整理）
-2. **Docker** —— 镜像分层、compose、体积优化（待整理）
-3. **编辑器与 IDE** —— 快捷键、代码片段、AI 辅助（待整理）
-4. **终端效率** —— zsh / fzf / tmux（待整理）
-5. **正则表达式** —— 常用模式与练习（待整理）
-6. **网络调试** —— curl / 抓包 / DNS 排查（待整理）

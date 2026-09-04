@@ -35,6 +35,107 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
   </TabItem>
 </Tabs>
 
+## 动画流程（edge animate）
+
+给连线加 `id@` 前缀和 `@{ animate: true }` 元数据，连线会有流动效果（纯 CSS，
+构建时烘焙进 SVG，零运行时开销）。适合表达请求链路、数据流向等有方向性的流程；
+静态知识笔记不建议滥用。
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    flowchart LR
+        U[用户] r@--> N[网关]
+        N s@--> A[应用服务]
+        A q@--> D[(数据库)]
+        r@{ animate: true }
+        s@{ animate: true }
+        q@{ animate: true, animation: slow }
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    flowchart LR
+        U[用户] r@--> N[网关]
+        N s@--> A[应用服务]
+        A q@--> D[(数据库)]
+        r@{ animate: true }
+        s@{ animate: true }
+        q@{ animate: true, animation: slow }
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+要点：边 id（如 `r@`）紧跟在起点之后、箭头之前；`@{...}` 元数据行写在图末尾。
+`animate: true` 为常规流速，加 `animation: slow` 为慢速（适合次要链路）。
+
+## 呼吸节点（node pulse）
+
+给关键节点（链路入口、核心服务）加 `:::pulse` 标记，节点保持略粗的边框，
+琥珀辉光渐亮渐暗地呼吸（纯 CSS 动画，构建时烘焙；辉光色自动适配亮/暗主题，
+系统开启「减弱动态效果」时自动静止）。
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    flowchart LR
+        U[用户] --> N[网关]:::pulse --> A[应用服务]:::pulse
+        A --> D[(数据库)]
+        classDef pulse stroke-width:2px
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    flowchart LR
+        U[用户] --> N[网关]:::pulse --> A[应用服务]:::pulse
+        A --> D[(数据库)]
+        classDef pulse stroke-width:2px
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+要点：`:::pulse` 跟在节点文本之后；`classDef pulse` 行必须存在（内容任意，
+仅作打标，配色由站点主题统一接管）。也可用 `class 节点ID pulse` 语法
+给已有节点补标。可与连线动画组合使用。
+
+## 悬停交互（hover focus）
+
+全站流程图默认开启：**悬停**节点、子图或连线，高亮关联链路并淡出其余部分；
+**点击**可固定当前焦点（再点一次或点空白处取消）。在复杂架构图里追踪某条
+链路时很好用——试试把鼠标放到下面任意节点上。
+
+节点还可以挂链接，点击直接跳转相关笔记或外部文档（构建时渲染为 SVG 内
+锚点，链接经安全过滤）：
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    flowchart LR
+        M[Mermaid 官方文档] --> G[语法总览]
+        G --> D[流程图详解]
+        click M "https://mermaid.js.org/" "打开 Mermaid 官网"
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    flowchart LR
+        M[Mermaid 官方文档] --> G[语法总览]
+        G --> D[流程图详解]
+        click M "https://mermaid.js.org/" "打开 Mermaid 官网"
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+要点：`click 节点ID "链接" "悬停提示"`；站内跳转需带 base 前缀
+（如 `/ascension/java/jvm/`）。交互为渐进增强，脚本加载失败时图表仍正常
+静态展示。
+
 ## 时序图（sequenceDiagram）
 
 <Tabs>

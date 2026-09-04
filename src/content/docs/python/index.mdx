@@ -1,10 +1,20 @@
 ---
 title: Python
-description: Python 方向知识地图与学习路线
+description: Python 方向学习路线与知识地图
 ---
 
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
 import KnowledgeGraph from '../../../components/KnowledgeGraph';
 import graph from '../../../data/graphs/python.json';
+
+## 学习路线
+
+按等级推进，每级下按主题分类。点击分类进入该主题的知识点目录；点击圆点标记学习状态：
+○ 未学 → ◐ 学习中 → ● 已掌握。
+
+<RoadmapIsland directionId="python" />
+
+## 知识图谱
 
 <KnowledgeGraph client:visible data={graph} />
 
@@ -12,12 +22,3 @@ import graph from '../../../data/graphs/python.json';
 节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
 图谱数据维护在 `src/data/graphs/python.json`。
 :::
-
-## 学习路线
-
-1. **语法基础** —— 数据类型、推导式、切片（待整理）
-2. **函数与装饰器** —— 闭包、functools、装饰器模式（待整理）
-3. **面向对象** —— 魔术方法、元类、dataclass（待整理）
-4. **常用标准库** —— collections / itertools / pathlib（待整理）
-5. **第三方生态** —— requests / pydantic / fastapi（待整理）
-6. **工程化** —— venv / uv / ruff / pytest（待整理）
