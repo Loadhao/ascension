@@ -1,0 +1,26 @@
+astro.config.mjs
+  h_9324126a55eff3 135-142,156-163
+public/scripts/mermaid-interact.js
+  h_9324126a55eff3 1-4,10-26,33-37,196-461
+scripts/btn-style-shots.mjs
+  h_9324126a55eff3 1-56
+scripts/zoom-verify.mjs
+  h_9324126a55eff3 1-164
+src/components/learn/Dashboard.tsx
+  h_9324126a55eff3 47-49,59,133
+src/content/docs/guide/diagrams.mdx
+  h_9324126a55eff3 139-143
+src/styles/custom.css
+  h_9324126a55eff3 475-477,479,499,520,528-534,540-546,551-552,557,562,567,572-573,577-578,583-584,588-592,597-598,602-604,609-614,618-619,625-626,630-631,635,639-640,645,651,655,659-660,664,669,673,677,681,686-687,691,696,700,704,708-710,717,721,727-728,750-753,759-762,770,774,778,782,787,791,797,803,807,811,815-992,996-997,1002
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "5f077e7cbd6ecf3163959c7532b1272d91e814c9",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
