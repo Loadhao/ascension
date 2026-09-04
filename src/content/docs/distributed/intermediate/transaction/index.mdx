@@ -1,0 +1,14 @@
+---
+title: 分布式事务
+description: 2PC/3PC、TCC、本地消息表、MQ 事务消息与 Seata——跨服务一致性的五种武器
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+库随服务拆分后，"订单库扣一笔、库存库减一件"再也无法靠一个本地事务
+兜底。这一分类梳理从 2PC 到 Seata 的**五条技术路线**，以及配套的
+分布式 ID 方案。核心判断标准始终是：**你的业务，要强一致、最终一致、
+还是根本不一致也行**。点击右侧圆点可标记学习状态（未学 → 学习中 →
+已掌握）。
+
+<CategoryNotesIsland categoryId="distributed/intermediate/transaction" />

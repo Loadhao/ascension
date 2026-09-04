@@ -1,0 +1,14 @@
+---
+title: 共识算法
+description: Paxos 与 Raft——多数派如何对同一个值达成一致
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+分布式系统最核心的难题：**一堆地位平等的节点，怎么对一个值（谁是主、
+日志写到哪条）达成一致**——即使有节点宕机、网络乱序、消息重复。共识
+算法是这个问题的答案，也是 ZooKeeper、etcd、Nacos（CP 模式）、Kafka
+（新 KRaft）的发动机。点击右侧圆点可标记学习状态（未学 → 学习中 →
+已掌握）。
+
+<CategoryNotesIsland categoryId="distributed/intermediate/consensus" />

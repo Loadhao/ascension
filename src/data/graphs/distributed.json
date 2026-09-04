@@ -1,0 +1,26 @@
+{
+  "nodes": [
+    { "id": "root", "label": "分布式", "group": "核心" },
+    { "id": "cap", "label": "CAP 与 BASE", "href": "/distributed/basic/theory/01-cap-base/", "group": "理论" },
+    { "id": "chash", "label": "一致性哈希", "href": "/distributed/basic/theory/02-consistent-hashing/", "group": "理论" },
+    { "id": "paxos", "label": "Paxos 与 Raft", "href": "/distributed/intermediate/consensus/01-paxos-raft/", "group": "共识" },
+    { "id": "disttx", "label": "分布式事务", "href": "/distributed/intermediate/transaction/01-distributed-transaction/", "group": "事务" },
+    { "id": "distid", "label": "分布式 ID", "href": "/distributed/intermediate/transaction/02-distributed-id/", "group": "事务" },
+    { "id": "zk", "label": "ZooKeeper", "group": "落地" },
+    { "id": "etcd", "label": "etcd", "group": "落地" },
+    { "id": "seata", "label": "Seata", "group": "落地" },
+    { "id": "kafka", "label": "Kafka", "group": "落地" }
+  ],
+  "edges": [
+    { "source": "root", "target": "cap" },
+    { "source": "root", "target": "chash", "label": "数据分布" },
+    { "source": "cap", "target": "paxos", "label": "CP 的实现路径" },
+    { "source": "cap", "target": "disttx", "label": "AP 的补偿路径" },
+    { "source": "paxos", "target": "zk", "label": "ZAB 同族" },
+    { "source": "paxos", "target": "etcd", "label": "Raft 实现" },
+    { "source": "paxos", "target": "kafka", "label": "KRaft" },
+    { "source": "disttx", "target": "seata", "label": "AT 模式" },
+    { "source": "disttx", "target": "distid", "label": "分库后的配套" },
+    { "source": "chash", "target": "kafka", "label": "分区分配的思想近亲" }
+  ]
+}

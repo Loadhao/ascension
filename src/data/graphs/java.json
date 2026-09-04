@@ -27,7 +27,12 @@
     { "id": "aop", "label": "AOP 与代理", "href": "/java/intermediate/spring/02-aop/", "group": "框架" },
     { "id": "circular", "label": "循环依赖", "href": "/java/intermediate/spring/03-circular-dependency/", "group": "框架" },
     { "id": "springtx", "label": "事务传播", "href": "/java/intermediate/spring/04-transaction/", "group": "框架" },
-    { "id": "boot", "label": "Boot 自动配置", "href": "/java/intermediate/spring/05-springboot-autoconfig/", "group": "框架" }
+    { "id": "boot", "label": "Boot 自动配置", "href": "/java/intermediate/spring/05-springboot-autoconfig/", "group": "框架" },
+    { "id": "springcloud", "label": "Spring Cloud", "href": "/java/advanced/springcloud/", "group": "框架" },
+    { "id": "scgateway", "label": "网关 Gateway", "href": "/java/advanced/springcloud/03-gateway/", "group": "框架" },
+    { "id": "scregistry", "label": "注册中心", "href": "/java/advanced/springcloud/02-registry/", "group": "框架" },
+    { "id": "scfeign", "label": "OpenFeign", "href": "/java/advanced/springcloud/04-openfeign-loadbalancer/", "group": "框架" },
+    { "id": "sentinel", "label": "熔断限流", "href": "/java/advanced/springcloud/05-sentinel/", "group": "框架" }
   ],
   "edges": [
     { "source": "root", "target": "syntax" },
@@ -60,6 +65,12 @@
     { "source": "aop", "target": "circular", "label": "三级缓存与代理" },
     { "source": "aop", "target": "springtx", "label": "@Transactional 本质" },
     { "source": "ioc", "target": "boot", "label": "SPI 装配 BeanDefinition" },
-    { "source": "synchronized", "target": "springtx", "label": "隔离级别联动" }
+    { "source": "synchronized", "target": "springtx", "label": "隔离级别联动" },
+    { "source": "boot", "target": "springcloud", "label": "微服务底座" },
+    { "source": "springcloud", "target": "scregistry", "label": "服务发现" },
+    { "source": "springcloud", "target": "scgateway", "label": "流量入口" },
+    { "source": "springcloud", "target": "scfeign", "label": "声明式调用" },
+    { "source": "springcloud", "target": "sentinel", "label": "雪崩防护" },
+    { "source": "reflection", "target": "scfeign", "label": "动态代理" }
   ]
 }

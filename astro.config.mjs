@@ -224,6 +224,19 @@ export default defineConfig({
                     { label: '垃圾回收算法与收集器', link: '/java/advanced/jvm/garbage-collection/' },
                   ],
                 },
+                {
+                  label: 'Spring Cloud 微服务',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/java/advanced/springcloud/' },
+                    { label: '微服务与 Spring Cloud 总览', link: '/java/advanced/springcloud/01-microservices-overview/' },
+                    { label: '注册中心：服务注册与发现', link: '/java/advanced/springcloud/02-registry/' },
+                    { label: '服务网关 Spring Cloud Gateway', link: '/java/advanced/springcloud/03-gateway/' },
+                    { label: '服务通信：OpenFeign 与负载均衡', link: '/java/advanced/springcloud/04-openfeign-loadbalancer/' },
+                    { label: '熔断限流：Sentinel', link: '/java/advanced/springcloud/05-sentinel/' },
+                  ],
+                },
               ],
             },
           ],
@@ -308,6 +321,54 @@ export default defineConfig({
                   items: [
                     { label: '概览', link: '/database/advanced/redis/' },
                     { label: '高可用：主从、哨兵与集群', link: '/database/advanced/redis/01-replication-sentinel-cluster/' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: '分布式',
+          collapsed: true,
+          items: [
+            { label: '学习路线', link: '/distributed/' },
+            {
+              label: '基础',
+              collapsed: false,
+              items: [
+                {
+                  label: '理论基石',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/distributed/basic/theory/' },
+                    { label: 'CAP 与 BASE', link: '/distributed/basic/theory/01-cap-base/' },
+                    { label: '一致性哈希', link: '/distributed/basic/theory/02-consistent-hashing/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '中级',
+              collapsed: false,
+              items: [
+                {
+                  label: '共识算法',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/distributed/intermediate/consensus/' },
+                    { label: 'Paxos 与 Raft', link: '/distributed/intermediate/consensus/01-paxos-raft/' },
+                  ],
+                },
+                {
+                  label: '分布式事务',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/distributed/intermediate/transaction/' },
+                    { label: '分布式事务五种方案', link: '/distributed/intermediate/transaction/01-distributed-transaction/' },
+                    { label: '分布式 ID', link: '/distributed/intermediate/transaction/02-distributed-id/' },
                   ],
                 },
               ],
