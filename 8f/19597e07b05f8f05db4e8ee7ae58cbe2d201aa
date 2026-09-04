@@ -1,0 +1,218 @@
+.workbuddy/memory/2026-09-04.md
+  h_9324126a55eff3 1-31
+astro.config.mjs
+  h_9324126a55eff3 156-168,174,176,192-208,222,224-310,320-418,487-576
+src/content/docs/ai/advanced/agent/multi-agent.md
+  h_9324126a55eff3 1,6
+src/content/docs/ai/intermediate/agent/subagent.md
+  h_9324126a55eff3 1,6
+src/content/docs/database/advanced/mysql/01-optimization.md
+  h_9324126a55eff3 1-96
+src/content/docs/database/advanced/mysql/02-replication-sharding.md
+  h_9324126a55eff3 1-107
+src/content/docs/database/advanced/mysql/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/database/advanced/redis/01-replication-sentinel-cluster.md
+  h_9324126a55eff3 1-116
+src/content/docs/database/advanced/redis/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/database/basic/mysql/01-sql-execution.md
+  h_9324126a55eff3 1-104
+src/content/docs/database/basic/mysql/02-index-btree.md
+  h_9324126a55eff3 1-122
+src/content/docs/database/basic/mysql/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/database/basic/redis/01-data-structures.md
+  h_9324126a55eff3 1-109
+src/content/docs/database/basic/redis/02-persistence.md
+  h_9324126a55eff3 1-98
+src/content/docs/database/basic/redis/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/database/index.mdx
+  h_9324126a55eff3 1-28
+src/content/docs/database/intermediate/mysql/01-transaction-mvcc.md
+  h_9324126a55eff3 1-127
+src/content/docs/database/intermediate/mysql/02-locks.md
+  h_9324126a55eff3 1-100
+src/content/docs/database/intermediate/mysql/03-redo-undo-binlog.md
+  h_9324126a55eff3 1-88
+src/content/docs/database/intermediate/mysql/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/database/intermediate/redis/01-expiration-eviction.md
+  h_9324126a55eff3 1-89
+src/content/docs/database/intermediate/redis/02-cache-problems.md
+  h_9324126a55eff3 1-116
+src/content/docs/database/intermediate/redis/03-distributed-lock.md
+  h_9324126a55eff3 1-106
+src/content/docs/database/intermediate/redis/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/java/advanced/jvm/class-loading.md
+  h_9324126a55eff3 1-162
+src/content/docs/java/advanced/jvm/garbage-collection.md
+  h_9324126a55eff3 1-153
+src/content/docs/java/basic/collection/arraylist.md
+  h_9324126a55eff3 1-135
+src/content/docs/java/basic/collection/concurrenthashmap.md
+  h_9324126a55eff3 1-165
+src/content/docs/java/basic/collection/hashmap.md
+  h_9324126a55eff3 1,6
+src/content/docs/java/basic/syntax/01-oop.md
+  h_9324126a55eff3 1-134
+src/content/docs/java/basic/syntax/02-string.md
+  h_9324126a55eff3 1-105
+src/content/docs/java/basic/syntax/03-equals-hashcode.md
+  h_9324126a55eff3 1-125
+src/content/docs/java/basic/syntax/04-generics.md
+  h_9324126a55eff3 1-116
+src/content/docs/java/basic/syntax/05-exception.md
+  h_9324126a55eff3 1-105
+src/content/docs/java/basic/syntax/06-reflection-annotation.md
+  h_9324126a55eff3 1-147
+src/content/docs/java/basic/syntax/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/java/intermediate/concurrent/aqs.md
+  h_9324126a55eff3 1-176
+src/content/docs/java/intermediate/concurrent/synchronized.md
+  h_9324126a55eff3 1-158
+src/content/docs/java/intermediate/concurrent/threadlocal.md
+  h_9324126a55eff3 1-126
+src/content/docs/java/intermediate/concurrent/volatile.md
+  h_9324126a55eff3 1-138
+src/content/docs/java/intermediate/spring/01-ioc-bean-lifecycle.md
+  h_9324126a55eff3 1-131
+src/content/docs/java/intermediate/spring/02-aop.md
+  h_9324126a55eff3 1-129
+src/content/docs/java/intermediate/spring/03-circular-dependency.md
+  h_9324126a55eff3 1-104
+src/content/docs/java/intermediate/spring/04-transaction.md
+  h_9324126a55eff3 1-131
+src/content/docs/java/intermediate/spring/05-springboot-autoconfig.md
+  h_9324126a55eff3 1-135
+src/content/docs/java/intermediate/spring/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/python/advanced/eng/01-venv-uv.md
+  h_9324126a55eff3 1-89
+src/content/docs/python/advanced/eng/02-pytest.md
+  h_9324126a55eff3 1-102
+src/content/docs/python/advanced/eng/03-ruff-mypy.md
+  h_9324126a55eff3 1-99
+src/content/docs/python/advanced/eng/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/python/basic/data/01-list-tuple.md
+  h_9324126a55eff3 1-66
+src/content/docs/python/basic/data/02-dict-set.md
+  h_9324126a55eff3 1-81
+src/content/docs/python/basic/data/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/python/basic/func/01-functions-closures.md
+  h_9324126a55eff3 1-104
+src/content/docs/python/basic/func/02-iterators-generators.md
+  h_9324126a55eff3 1-102
+src/content/docs/python/basic/func/03-decorators.md
+  h_9324126a55eff3 1-101
+src/content/docs/python/basic/func/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/python/basic/oop/01-class-basics.md
+  h_9324126a55eff3 1-120
+src/content/docs/python/basic/oop/02-inheritance-mro.md
+  h_9324126a55eff3 1-81
+src/content/docs/python/basic/oop/03-dataclass-slots.md
+  h_9324126a55eff3 1-94
+src/content/docs/python/basic/oop/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/python/basic/syntax/01-objects.md
+  h_9324126a55eff3 1-98
+src/content/docs/python/basic/syntax/02-control-flow.md
+  h_9324126a55eff3 1-85
+src/content/docs/python/basic/syntax/03-strings.md
+  h_9324126a55eff3 1-77
+src/content/docs/python/basic/syntax/04-exceptions.md
+  h_9324126a55eff3 1-89
+src/content/docs/python/basic/syntax/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/python/intermediate/libs/01-requests-httpx.md
+  h_9324126a55eff3 1-77
+src/content/docs/python/intermediate/libs/02-pydantic.md
+  h_9324126a55eff3 1-84
+src/content/docs/python/intermediate/libs/03-fastapi.md
+  h_9324126a55eff3 1-97
+src/content/docs/python/intermediate/libs/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/python/intermediate/stdlib/01-collections.md
+  h_9324126a55eff3 1-92
+src/content/docs/python/intermediate/stdlib/02-functools-itertools.md
+  h_9324126a55eff3 1-90
+src/content/docs/python/intermediate/stdlib/03-pathlib-io.md
+  h_9324126a55eff3 1-83
+src/content/docs/python/intermediate/stdlib/04-typing.md
+  h_9324126a55eff3 1-93
+src/content/docs/python/intermediate/stdlib/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/tools/advanced/docker/01-compose.md
+  h_9324126a55eff3 1-75
+src/content/docs/tools/advanced/docker/02-principles.md
+  h_9324126a55eff3 1-74
+src/content/docs/tools/advanced/docker/03-image-optimization.md
+  h_9324126a55eff3 1-68
+src/content/docs/tools/advanced/docker/index.mdx
+  h_9324126a55eff3 1-11
+src/content/docs/tools/advanced/git/01-history-rewrite.md
+  h_9324126a55eff3 1-67
+src/content/docs/tools/advanced/git/02-advanced-tools.md
+  h_9324126a55eff3 1-76
+src/content/docs/tools/advanced/git/03-team-standards.md
+  h_9324126a55eff3 1-72
+src/content/docs/tools/advanced/git/index.mdx
+  h_9324126a55eff3 1-11
+src/content/docs/tools/basic/docker/01-concepts.md
+  h_9324126a55eff3 1-64
+src/content/docs/tools/basic/docker/02-commands.md
+  h_9324126a55eff3 1-71
+src/content/docs/tools/basic/docker/03-lifecycle.md
+  h_9324126a55eff3 1-78
+src/content/docs/tools/basic/docker/index.mdx
+  h_9324126a55eff3 1-11
+src/content/docs/tools/basic/git/01-core-model.md
+  h_9324126a55eff3 1-67
+src/content/docs/tools/basic/git/02-daily-commands.md
+  h_9324126a55eff3 1-59
+src/content/docs/tools/basic/git/index.mdx
+  h_9324126a55eff3 1-11
+src/content/docs/tools/intermediate/docker/01-dockerfile.md
+  h_9324126a55eff3 1-78
+src/content/docs/tools/intermediate/docker/02-volume.md
+  h_9324126a55eff3 1-62
+src/content/docs/tools/intermediate/docker/03-network.md
+  h_9324126a55eff3 1-65
+src/content/docs/tools/intermediate/docker/index.mdx
+  h_9324126a55eff3 1-11
+src/content/docs/tools/intermediate/git/01-branch-merge.md
+  h_9324126a55eff3 1-72
+src/content/docs/tools/intermediate/git/02-remote-collab.md
+  h_9324126a55eff3 1-66
+src/content/docs/tools/intermediate/git/03-undo-recovery.md
+  h_9324126a55eff3 1-63
+src/content/docs/tools/intermediate/git/index.mdx
+  h_9324126a55eff3 1-11
+src/data/graphs/database.json
+  h_9324126a55eff3 1-40
+src/data/graphs/java.json
+  h_9324126a55eff3 4-10,12,14-21,23-30,34-39,41,43,46-51,54,56-63
+src/data/graphs/python.json
+  h_9324126a55eff3 4-32,36-40,42-45,47-50,52-54,56-60,62-72
+src/data/graphs/tools.json
+  h_9324126a55eff3 5-12,14-22,30-37,39-47
+src/lib/notes.ts
+  h_9324126a55eff3 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "8f19597e07b05f8f05db4e8ee7ae58cbe2d201aa",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
