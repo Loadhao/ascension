@@ -208,6 +208,19 @@ export default defineConfig({
                     { label: 'Spring Boot 自动配置原理', link: '/java/intermediate/spring/05-springboot-autoconfig/' },
                   ],
                 },
+                {
+                  label: '设计模式',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/java/intermediate/design-pattern/' },
+                    { label: 'SOLID 设计原则', link: '/java/intermediate/design-pattern/01-principles/' },
+                    { label: '创建型模式', link: '/java/intermediate/design-pattern/02-creational/' },
+                    { label: '结构型模式', link: '/java/intermediate/design-pattern/03-structural/' },
+                    { label: '行为型模式', link: '/java/intermediate/design-pattern/04-behavioral/' },
+                    { label: '框架源码中的模式地图', link: '/java/intermediate/design-pattern/05-patterns-in-frameworks/' },
+                  ],
+                },
               ],
             },
             {
@@ -369,6 +382,63 @@ export default defineConfig({
                     { label: '概览', link: '/distributed/intermediate/transaction/' },
                     { label: '分布式事务五种方案', link: '/distributed/intermediate/transaction/01-distributed-transaction/' },
                     { label: '分布式 ID', link: '/distributed/intermediate/transaction/02-distributed-id/' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: '中间件',
+          collapsed: true,
+          items: [
+            { label: '学习路线', link: '/middleware/' },
+            {
+              label: '基础',
+              collapsed: false,
+              items: [
+                {
+                  label: '消息队列基础',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/middleware/basic/mq/' },
+                    { label: '为什么需要消息队列', link: '/middleware/basic/mq/01-why-mq/' },
+                    { label: 'Kafka、RocketMQ 与 RabbitMQ 选型', link: '/middleware/basic/mq/02-mq-comparison/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '中级',
+              collapsed: false,
+              items: [
+                {
+                  label: 'Kafka 核心',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/middleware/intermediate/kafka/' },
+                    { label: 'Kafka 架构与存储模型', link: '/middleware/intermediate/kafka/01-kafka-architecture/' },
+                    { label: '副本与 ISR 机制', link: '/middleware/intermediate/kafka/02-replica-isr/' },
+                    { label: '不丢消息与幂等消费', link: '/middleware/intermediate/kafka/03-reliability-idempotent/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '高级',
+              collapsed: false,
+              items: [
+                {
+                  label: '消息队列高级',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/middleware/advanced/mq/' },
+                    { label: '顺序性与高性能原理', link: '/middleware/advanced/mq/01-order-performance/' },
+                    { label: 'RocketMQ 核心特性', link: '/middleware/advanced/mq/02-rocketmq-features/' },
+                    { label: '消息积压治理', link: '/middleware/advanced/mq/03-backlog/' },
                   ],
                 },
               ],

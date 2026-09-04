@@ -32,7 +32,13 @@
     { "id": "scgateway", "label": "网关 Gateway", "href": "/java/advanced/springcloud/03-gateway/", "group": "框架" },
     { "id": "scregistry", "label": "注册中心", "href": "/java/advanced/springcloud/02-registry/", "group": "框架" },
     { "id": "scfeign", "label": "OpenFeign", "href": "/java/advanced/springcloud/04-openfeign-loadbalancer/", "group": "框架" },
-    { "id": "sentinel", "label": "熔断限流", "href": "/java/advanced/springcloud/05-sentinel/", "group": "框架" }
+    { "id": "sentinel", "label": "熔断限流", "href": "/java/advanced/springcloud/05-sentinel/", "group": "框架" },
+    { "id": "patterns", "label": "设计模式", "href": "/java/intermediate/design-pattern/", "group": "设计" },
+    { "id": "solid", "label": "SOLID 原则", "href": "/java/intermediate/design-pattern/01-principles/", "group": "设计" },
+    { "id": "creational", "label": "创建型模式", "href": "/java/intermediate/design-pattern/02-creational/", "group": "设计" },
+    { "id": "structural", "label": "结构型模式", "href": "/java/intermediate/design-pattern/03-structural/", "group": "设计" },
+    { "id": "behavioral", "label": "行为型模式", "href": "/java/intermediate/design-pattern/04-behavioral/", "group": "设计" },
+    { "id": "fwmap", "label": "框架模式地图", "href": "/java/intermediate/design-pattern/05-patterns-in-frameworks/", "group": "设计" }
   ],
   "edges": [
     { "source": "root", "target": "syntax" },
@@ -71,6 +77,15 @@
     { "source": "springcloud", "target": "scgateway", "label": "流量入口" },
     { "source": "springcloud", "target": "scfeign", "label": "声明式调用" },
     { "source": "springcloud", "target": "sentinel", "label": "雪崩防护" },
-    { "source": "reflection", "target": "scfeign", "label": "动态代理" }
+    { "source": "reflection", "target": "scfeign", "label": "动态代理" },
+    { "source": "oop", "target": "patterns", "label": "原则落地" },
+    { "source": "patterns", "target": "solid" },
+    { "source": "patterns", "target": "creational" },
+    { "source": "patterns", "target": "structural" },
+    { "source": "patterns", "target": "behavioral" },
+    { "source": "structural", "target": "fwmap", "label": "AOP 即代理" },
+    { "source": "behavioral", "target": "fwmap", "label": "AQS 即模板" },
+    { "source": "creational", "target": "ioc", "label": "容器即工厂" },
+    { "source": "scgateway", "target": "behavioral", "label": "过滤器链" }
   ]
 }
