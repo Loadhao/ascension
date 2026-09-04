@@ -1,0 +1,16 @@
+{
+  "featureId": "site-redesign",
+  "title": "全站重设计：黑白主题 + 进阶信息架构（v2）",
+  "uiLevel": "L3",
+  "revision": 1,
+  "confirmed": false,
+  "confirmedAt": null,
+  "widgets": [
+    {
+      "id": "widget",
+      "path": "after/widget.html",
+      "states": ["light", "dark", "roadmap", "tree", "mark", "mobile"]
+    }
+  ],
+  "notes": "取代 site-theme-restyle v1（暖调方案已被用户否决：亮=纯白、暗=纯黑）。合并范围：黑白双主题 + 双轴信息架构（内容按方向/等级/分类四级，进阶做导航层）+ 首页学习仪表盘 + 路线图 + 学习状态标记。全部决策经 batch-grill-me 两轮拷问锁定。"
+}

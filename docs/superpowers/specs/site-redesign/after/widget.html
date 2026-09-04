@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全站重设计 v2 · 黑白主题 + 进阶架构</title>
+<style>
+  /* ===== 灰阶令牌（spec.md 第 4 节） ===== */
+  :root {
+    --bg: #ffffff;
+    --text-heading: #111111;
+    --text-body: #333333;
+    --text-muted: #767676;
+    --border: #e5e5e5;
+    --surface-2: #f7f7f7;
+    --surface-nav: #fafafa;
+    --link: #111111;
+    --link-hover: #000000;
+    --code-bg: #f7f7f7;
+    --ring-outer: #b3b3b3;
+    --ring-inner: #111111;
+    --bar-track: #e5e5e5;
+    --bar-fill: #111111;
+  }
+  [data-theme='dark'] {
+    --bg: #000000;
+    --text-heading: #f5f5f5;
+    --text-body: #d4d4d4;
+    --text-muted: #8c8c8c;
+    --border: #262626;
+    --surface-2: #0d0d0d;
+    --surface-nav: #0a0a0a;
+    --link: #f5f5f5;
+    --link-hover: #ffffff;
+    --code-bg: #0d0d0d;
+    --ring-outer: #595959;
+    --ring-inner: #f5f5f5;
+    --bar-track: #1f1f1f;
+    --bar-fill: #f5f5f5;
+  }
+
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-body);
+    font: 400 16px/1.7 system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    transition: background-color .2s ease, color .2s ease;
+  }
+
+  /* ===== 评审工具条 ===== */
+  .review-bar {
+    position: sticky; top: 0; z-index: 30;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    background: var(--surface-nav);
+    border-bottom: 1px solid var(--border);
+  }
+  .review-bar strong { font-size: 13px; color: var(--text-heading); font-weight: 500; }
+  .review-bar .states { display: flex; flex-wrap: wrap; gap: 6px; margin-right: auto; }
+  .review-bar .states a {
+    padding: 3px 12px; border: 1px solid var(--border); border-radius: 999px;
+    color: var(--text-muted); text-decoration: none; font-size: 12px;
+  }
+  .review-bar .states a[aria-current='true'] { background: var(--surface-2); border-color: var(--text-heading); color: var(--text-heading); }
+  .review-bar button {
+    padding: 3px 12px; border: 1px solid var(--border); border-radius: 999px;
+    background: transparent; color: var(--text-muted); font-size: 12px; cursor: pointer;
+  }
+  .review-bar button:hover { color: var(--link-hover); }
+
+  /* ===== 站点骨架 ===== */
+  .site-header {
+    position: sticky; top: 41px; z-index: 20;
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 24px;
+    background: var(--surface-nav);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { display: flex; align-items: center; gap: 8px; color: var(--text-heading); font-weight: 600; font-size: 17px; }
+  .logo svg { display: block; }
+  .search-mock {
+    margin-left: auto; display: flex; align-items: center; gap: 8px;
+    padding: 5px 14px; min-width: 180px;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text-muted); font-size: 13px;
+  }
+  .search-mock kbd {
+    margin-left: auto; padding: 0 6px;
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px;
+    font: 11px/1.6 ui-monospace, monospace; color: var(--text-muted);
+  }
+  .theme-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--bg);
+    color: var(--text-body); cursor: pointer; font-size: 15px;
+  }
+  .theme-btn:hover { border-color: var(--text-muted); }
+  .hamburger { display: none; }
+
+  .layout { display: grid; grid-template-columns: 250px 1fr; }
+
+  /* ===== F8 侧边栏四级树 ===== */
+  .sidebar { padding: 20px 12px 48px; border-right: 1px solid var(--border); background: var(--surface-nav); font-size: 14px; }
+  .dir-link {
+    display: flex; align-items: center; gap: 6px;
+    padding: 7px 10px; border-radius: 6px;
+    color: var(--text-heading); text-decoration: none; font-weight: 500;
+  }
+  .dir-link:hover { background: var(--surface-2); }
+  .dir-link .caret { color: var(--text-muted); font-size: 10px; }
+  .dir-item.collapsed .dir-children { display: none; }
+
+  .lv-group { margin: 4px 0 0; padding-left: 14px; }
+  .lv-label {
+    padding: 8px 10px 3px;
+    color: var(--text-muted); font-size: 11px; font-weight: 500;
+    letter-spacing: .1em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .lv-label svg { flex: none; }
+  .cat-label { padding: 4px 10px 2px; color: var(--text-muted); font-size: 12.5px; }
+  .note-link {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 10px; border-radius: 6px;
+    color: var(--text-body); text-decoration: none; font-size: 13.5px;
+  }
+  .note-link:hover { background: var(--surface-2); color: var(--link-hover); }
+  .note-link.active { background: var(--surface-2); color: var(--text-heading); font-weight: 500; }
+  .note-link.is-focus { outline: 2px solid var(--ring-outer); outline-offset: -2px; }
+  .note-link .status-dot { margin-left: auto; }
+
+  /* 状态圆点（F3/F7）：纯 SVG 图形，不依赖颜色 */
+  .status-dot {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; margin: -8px -8px -8px 0;
+    border: none; background: none; padding: 0; cursor: pointer; border-radius: 6px;
+  }
+  .status-dot:hover { background: var(--surface-2); }
+  .status-dot:focus-visible { outline: 2px solid var(--ring-outer); }
+  .status-dot svg { display: block; }
+  .sd-0 circle { fill: none; stroke: var(--text-muted); stroke-width: 1.5; }
+  .sd-1 circle { fill: none; stroke: var(--text-muted); stroke-width: 1.5; }
+  .sd-1 path { fill: var(--text-heading); }
+  .sd-2 circle { fill: var(--text-heading); stroke: none; }
+
+  /* ===== 内容区 ===== */
+  .content { padding: 36px 44px 90px; min-width: 0; max-width: 860px; }
+  .content h1 { margin: 0 0 6px; color: var(--text-heading); font-size: 30px; font-weight: 600; line-height: 1.3; }
+  .content h2 { margin: 34px 0 14px; color: var(--text-heading); font-size: 21px; font-weight: 500; }
+  .content p { margin: 0 0 14px; }
+  .content a { color: var(--link); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent); text-underline-offset: 3px; transition: color 150ms ease; }
+  .content a:hover { color: var(--link-hover); text-decoration-color: currentColor; }
+  .content code { padding: 2px 6px; border-radius: 5px; background: var(--code-bg); font: 400 .875em ui-monospace, Menlo, monospace; color: var(--text-heading); }
+
+  .crumbs { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; color: var(--text-muted); font-size: 13px; }
+  .crumbs a { color: var(--text-muted); text-decoration: none; }
+  .crumbs a:hover { color: var(--link-hover); text-decoration: underline; }
+
+  /* ===== F5 学习仪表盘 ===== */
+  .dash-hero {
+    margin: 18px 0 14px; padding: 20px 24px;
+    border: 1px solid var(--border); border-radius: 12px;
+    background: var(--surface-nav);
+  }
+  .dash-hero .kicker { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 12px; letter-spacing: .08em; }
+  .dash-hero h2 { margin: 8px 0 4px; font-size: 20px; font-weight: 500; }
+  .dash-hero h2 a { color: var(--text-heading); text-decoration: none; }
+  .dash-hero h2 a:hover { text-decoration: underline; }
+  .progress-track { height: 6px; border-radius: 999px; background: var(--bar-track); margin: 14px 0 8px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 999px; background: var(--bar-fill); }
+  .dash-hero .meta { display: flex; align-items: center; gap: 12px; color: var(--text-muted); font-size: 13px; }
+  .btn-primary {
+    margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: 8px;
+    background: var(--bar-fill); color: var(--bg);
+    font-size: 14px; font-weight: 500; text-decoration: none;
+    transition: opacity 150ms ease;
+  }
+  .btn-primary:hover { opacity: .85; }
+
+  .dir-progress { list-style: none; margin: 0; padding: 0; }
+  .dir-progress li {
+    display: grid; grid-template-columns: 86px 1fr 150px; gap: 12px; align-items: center;
+    padding: 11px 0; border-bottom: 1px solid var(--border);
+  }
+  .dir-progress li:last-child { border-bottom: none; }
+  .dir-progress .name { color: var(--text-heading); font-weight: 500; font-size: 14.5px; }
+  .dir-progress .stage { color: var(--text-muted); font-size: 12.5px; text-align: right; }
+
+  .next-card {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border: 1px dashed var(--border); border-radius: 12px;
+  }
+  .next-card .why { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+  .next-card .go { margin-left: auto; flex: none; }
+  .go-link { display: inline-flex; padding: 7px 16px; border: 1px solid var(--text-heading); border-radius: 8px; color: var(--text-heading); text-decoration: none; font-size: 13.5px; }
+  .go-link:hover { background: var(--bar-fill); color: var(--bg); }
+
+  /* ===== F6 路线图 ===== */
+  .level-seg { margin: 26px 0 8px; }
+  .level-seg-head {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text-heading); font-size: 15px; font-weight: 500;
+  }
+  .level-seg-head .rule { flex: 1; height: 1px; background: var(--border); }
+  .level-seg-head svg { flex: none; }
+  .level-seg-head .cnt { color: var(--text-muted); font-size: 12px; font-weight: 400; }
+  .cat-block { margin: 12px 0 4px; padding-left: 22px; }
+  .cat-block > .cat-title { color: var(--text-muted); font-size: 13px; margin-bottom: 4px; }
+  .cat-block > .cat-title b { color: var(--text-body); font-weight: 500; }
+  .roadmap-item { list-style: none; margin: 0; padding: 0; }
+  .roadmap-item li { display: flex; align-items: center; border-bottom: 1px solid var(--border); }
+  .roadmap-item li:last-child { border-bottom: none; }
+  .roadmap-item a.item-link {
+    flex: 1; display: flex; align-items: center; gap: 10px;
+    padding: 9px 8px 9px 0; color: var(--text-body); text-decoration: none; font-size: 14.5px;
+  }
+  .roadmap-item a.item-link:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+  .roadmap-item .status-dot { margin: 0 0 0 auto; }
+
+  /* 笔记页底部标记（F7 第二入口） */
+  .page-mark {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 40px; padding: 14px 18px;
+    border: 1px solid var(--border); border-radius: 12px;
+    color: var(--text-muted); font-size: 14px;
+  }
+  .page-mark .status-dot { margin: 0; }
+
+  /* ===== 移动端 ===== */
+  .site.narrow .layout { grid-template-columns: 1fr; }
+  .site.narrow .sidebar { display: none; }
+  .site.narrow .site-header { padding: 10px 16px; }
+  .site.narrow .search-mock { min-width: 0; flex: 1; }
+  .site.narrow .hamburger { display: flex; align-items: center; }
+  .site.narrow .content { padding: 22px 16px 70px; }
+  .site.narrow .dir-progress li { grid-template-columns: 70px 1fr 110px; }
+
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .hamburger { display: flex; align-items: center; }
+    .content { padding: 22px 16px 70px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+  @media print {
+    .review-bar, .sidebar, .theme-btn, .btn-primary, .status-dot { display: none !important; }
+    .layout { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="review-bar">
+  <strong>全站重设计 v2</strong>
+  <nav class="states" aria-label="状态切换">
+    <a href="#light">首页·浅</a>
+    <a href="#dark">首页·深</a>
+    <a href="#roadmap">路线图</a>
+    <a href="#tree">侧边栏层级</a>
+    <a href="#mark">标记交互</a>
+    <a href="#mobile">移动端</a>
+  </nav>
+  <button id="theme-toggle" type="button">切主题</button>
+</header>
+
+<div class="site" id="site">
+  <header class="site-header">
+    <button class="hamburger" aria-label="打开菜单" style="border:none;background:none;color:var(--text-muted);font-size:16px;cursor:pointer;">☰</button>
+    <span class="logo">
+      <svg width="22" height="22" viewBox="0 0 128 128" aria-hidden="true"><rect width="128" height="128" rx="28" fill="var(--bar-fill)"/><path d="M24 96 L64 30 L104 96" fill="none" stroke="var(--bg)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Ascension
+    </span>
+    <span class="search-mock">搜索文档…<kbd>⌘K</kbd></span>
+    <button class="theme-btn" id="theme-btn" type="button" aria-label="切换深浅主题" title="切换深浅主题">◐</button>
+  </header>
+
+  <div class="layout">
+
+    <!-- ===== F8 侧边栏四级树：方向 → 等级 → 分类 → 笔记 ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="dir-item">
+        <a class="dir-link" href="#"><span class="caret">▾</span>Java</a>
+        <div class="dir-children">
+          <div class="lv-group">
+            <div class="lv-label"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 6 L6 11 L1 6 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>基础</div>
+            <div class="cat-label">语法核心</div>
+            <a class="note-link" href="#"><span>变量与类型</span><span class="status-dot" data-note="jv-var" role="button" tabindex="0" aria-label="标记学习状态"></span></a>
+            <a class="note-link" href="#"><span>流程控制</span><span class="status-dot" data-note="jv-flow" role="button" tabindex="0" aria-label="标记学习状态"></span></a>
+            <div class="cat-label">集合框架</div>
+            <a class="note-link" href="#"><span>List / Set / Map</span><span class="status-dot" data-note="jv-coll" role="button" tabindex="0" aria-label="标记学习状态"></span></a>
+
+            <div class="lv-label" style="margin-top:10px;"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 6 L6 11 L1 6 Z M6 1 L6 11 M1 6 L11 6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>中级</div>
+            <div class="cat-label">并发入门</div>
+            <a class="note-link" href="#"><span>线程基础</span><span class="status-dot" data-note="jv-thread" role="button" tabindex="0" aria-label="标记学习状态"></span></a>
+
+            <div class="lv-label" style="margin-top:10px;"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L7.3 4.4 L11 4.4 L8 6.6 L9.2 10 L6 8 L2.8 10 L4 6.6 L1 4.4 L4.7 4.4 Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>高级</div>
+            <div class="cat-label">JVM</div>
+            <a class="note-link active is-focus" href="#" id="nav-current"><span>内存结构</span><span class="status-dot" data-note="jv-jvm-mem" role="button" tabindex="0" aria-label="标记学习状态"></span></a>
+            <div class="cat-label">多线程并发</div>
+            <a class="note-link" href="#"><span>锁与 AQS</span><span class="status-dot" data-note="jv-aqs" role="button" tabindex="0" aria-label="标记学习状态"></span></a>
+            <div class="cat-label">内存池与调优</div>
+            <a class="note-link" href="#"><span>堆外内存</span><span class="status-dot" data-note="jv-offheap" role="button" tabindex="0" aria-label="标记学习状态"></span></a>
+          </div>
+        </div>
+      </div>
+      <div class="dir-item collapsed">
+        <a class="dir-link" href="#"><span class="caret">▸</span>Linux</a>
+      </div>
+      <div class="dir-item collapsed">
+        <a class="dir-link" href="#"><span class="caret">▸</span>Python</a>
+      </div>
+      <div class="dir-item collapsed">
+        <a class="dir-link" href="#"><span class="caret">▸</span>AI</a>
+      </div>
+      <div class="dir-item collapsed">
+        <a class="dir-link" href="#"><span class="caret">▸</span>工具</a>
+      </div>
+    </aside>
+
+    <!-- ===== 内容区：两个页面（仪表盘 / Java 路线图+笔记页片段）由状态切换 ===== -->
+    <main class="content">
+
+      <!-- 页面 A：首页仪表盘 -->
+      <section id="page-dash">
+        <h1>今天学点什么</h1>
+        <div class="crumbs"><span>学习仪表盘</span></div>
+
+        <div class="dash-hero">
+          <div class="kicker"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5 L6 6 L8 7" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>继续上次学习</div>
+          <h2><a href="#">Linux · 文件与目录操作</a></h2>
+          <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
+          <div class="meta">
+            <span>65%</span><span>·</span><span>上次 2026-09-03</span>
+            <a class="btn-primary" href="#">继续学习 →</a>
+          </div>
+        </div>
+
+        <h2>方向进度</h2>
+        <ul class="dir-progress">
+          <li><span class="name">Linux</span><div class="progress-track" style="margin:0"><div class="progress-fill" style="width:60%"></div></div><span class="stage">基础 · 60%</span></li>
+          <li><span class="name">Java</span><div class="progress-track" style="margin:0"><div class="progress-fill" style="width:15%"></div></div><span class="stage">高级 · 15%</span></li>
+          <li><span class="name">Python</span><div class="progress-track" style="margin:0"><div class="progress-fill" style="width:0%"></div></div><span class="stage">未开始</span></li>
+          <li><span class="name">AI</span><div class="progress-track" style="margin:0"><div class="progress-fill" style="width:0%"></div></div><span class="stage">未开始</span></li>
+          <li><span class="name">工具</span><div class="progress-track" style="margin:0"><div class="progress-fill" style="width:8%"></div></div><span class="stage">基础 · 8%</span></li>
+        </ul>
+
+        <h2>下一步推荐</h2>
+        <div class="next-card">
+          <div>
+            <div style="color:var(--text-heading);font-weight:500;">Java 高级 · JVM · <a href="#">内存结构</a></div>
+            <div class="why">衔接你已完成的「集合框架」——先看运行时数据区，再进入垃圾回收。</div>
+          </div>
+          <a class="go" href="#" style="text-decoration:none"><span class="go-link">开始学习 →</span></a>
+        </div>
+      </section>
+
+      <!-- 页面 B：Java 方向首页（路线图 + 当前笔记片段） -->
+      <section id="page-road" style="display:none">
+        <h1>Java</h1>
+        <div class="crumbs"><a href="#">首页</a><span>/</span><span>Java</span></div>
+        <p>按等级推进，每级内按主题分类。点击右侧圆点标记学习状态：<span style="white-space:nowrap">○ 未学</span> → <span style="white-space:nowrap">◐ 学习中</span> → <span style="white-space:nowrap">● 已掌握</span>。</p>
+
+        <div class="level-seg">
+          <div class="level-seg-head">
+            <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 6 L6 11 L1 6 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+            基础 <span class="rule"></span> <span class="cnt">2 / 3</span>
+          </div>
+          <div class="cat-block">
+            <div class="cat-title"><b>语法核心</b></div>
+            <ul class="roadmap-item">
+              <li><a class="item-link" href="#"><span>变量与类型</span></a><span class="status-dot" data-note="jv-var" role="button" tabindex="0" aria-label="标记学习状态"></span></li>
+              <li><a class="item-link" href="#"><span>流程控制</span></a><span class="status-dot" data-note="jv-flow" role="button" tabindex="0" aria-label="标记学习状态"></span></li>
+            </ul>
+          </div>
+          <div class="cat-block">
+            <div class="cat-title"><b>集合框架</b></div>
+            <ul class="roadmap-item">
+              <li><a class="item-link" href="#"><span>List / Set / Map</span></a><span class="status-dot" data-note="jv-coll" role="button" tabindex="0" aria-label="标记学习状态"></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="level-seg">
+          <div class="level-seg-head">
+            <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 6 L6 11 L1 6 Z M6 1 L6 11 M1 6 L11 6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+            中级 <span class="rule"></span> <span class="cnt">0 / 1</span>
+          </div>
+          <div class="cat-block">
+            <div class="cat-title"><b>并发入门</b></div>
+            <ul class="roadmap-item">
+              <li><a class="item-link" href="#"><span>线程基础</span></a><span class="status-dot" data-note="jv-thread" role="button" tabindex="0" aria-label="标记学习状态"></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="level-seg">
+          <div class="level-seg-head">
+            <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L7.3 4.4 L11 4.4 L8 6.6 L9.2 10 L6 8 L2.8 10 L4 6.6 L1 4.4 L4.7 4.4 Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+            高级 <span class="rule"></span> <span class="cnt">1 / 3</span>
+          </div>
+          <div class="cat-block">
+            <div class="cat-title"><b>JVM</b></div>
+            <ul class="roadmap-item">
+              <li><a class="item-link" href="#"><span>内存结构</span></a><span class="status-dot" data-note="jv-jvm-mem" role="button" tabindex="0" aria-label="标记学习状态"></span></li>
+            </ul>
+          </div>
+          <div class="cat-block">
+            <div class="cat-title"><b>多线程并发</b></div>
+            <ul class="roadmap-item">
+              <li><a class="item-link" href="#"><span>锁与 AQS</span></a><span class="status-dot" data-note="jv-aqs" role="button" tabindex="0" aria-label="标记学习状态"></span></li>
+            </ul>
+          </div>
+          <div class="cat-block">
+            <div class="cat-title"><b>内存池与调优</b></div>
+            <ul class="roadmap-item">
+              <li><a class="item-link" href="#"><span>堆外内存</span></a><span class="status-dot" data-note="jv-offheap" role="button" tabindex="0" aria-label="标记学习状态"></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- F7 第二入口：笔记页底部标记 -->
+        <div class="page-mark">
+          <span class="status-dot" data-note="jv-jvm-mem" role="button" tabindex="0" aria-label="标记学习状态"></span>
+          <span>这篇笔记你掌握了吗？点击左侧圆点标记（未学 → 学习中 → 已掌握）。</span>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // ===== 状态路由 =====
+  var HINTS = {
+    light:   '首页仪表盘（浅色·纯白）：继续学习 / 方向进度 / 下一步推荐。',
+    dark:    '首页仪表盘（深色·纯黑，默认）：近白文字，对比度 ~15:1。',
+    roadmap: 'Java 方向路线图：基础/中级/高级分段，段内按 JVM、多线程并发、内存池分类。',
+    tree:    '侧边栏四级：方向 → 等级 → 分类 → 笔记；当前页高亮 + 焦点环。',
+    mark:    '点击任意圆点循环 ○ 未学 → ◐ 学习中 → ● 已掌握（此处试：JVM 内存结构）。',
+    mobile:  '375px 窄屏：侧边栏收为抽屉，仪表盘纵向排布。'
+  };
+  var DEFAULT_STATUS = { 'jv-var': 2, 'jv-flow': 2, 'jv-coll': 2, 'jv-thread': 0, 'jv-jvm-mem': 1, 'jv-aqs': 0, 'jv-offheap': 0 };
+  var learnStatus = Object.assign({}, DEFAULT_STATUS);
+  var site = document.getElementById('site');
+  var root = document.documentElement;
+
+  // 状态圆点渲染（SVG 图形，三态）
+  function dotSVG(s) {
+    if (s === 2) return '<svg class="sd-2" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5"/></svg>';
+    if (s === 1) return '<svg class="sd-1" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5"/><path d="M6 1 A5 5 0 0 1 6 11 Z"/></svg>';
+    return '<svg class="sd-0" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5"/></svg>';
+  }
+  var LABELS = ['未学', '学习中', '已掌握'];
+  function renderDots() {
+    document.querySelectorAll('.status-dot').forEach(function (d) {
+      var n = d.getAttribute('data-note');
+      d.innerHTML = dotSVG(learnStatus[n]);
+      d.setAttribute('aria-label', '标记学习状态（当前：' + LABELS[learnStatus[n]] + '）');
+      d.title = LABELS[learnStatus[n]];
+    });
+  }
+  function cycle(el) {
+    var n = el.getAttribute('data-note');
+    learnStatus[n] = (learnStatus[n] + 1) % 3;
+    renderDots();
+  }
+  document.addEventListener('click', function (e) {
+    var d = e.target.closest('.status-dot');
+    if (d) { e.preventDefault(); cycle(d); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('status-dot')) { e.preventDefault(); cycle(e.target); }
+  });
+
+  function applyState(state) {
+    if (!HINTS[state]) state = 'dark';
+    // 主题
+    if (state === 'dark') root.setAttribute('data-theme', 'dark');
+    if (state === 'light') root.removeAttribute('data-theme');
+    // 页面切换
+    var dash = state === 'light' || state === 'dark' || state === 'mobile';
+    document.getElementById('page-dash').style.display = dash ? '' : 'none';
+    document.getElementById('page-road').style.display = dash ? 'none' : '';
+    // 窄屏
+    site.classList.toggle('narrow', state === 'mobile');
+    // 标记交互演示：预置一遍循环
+    if (state === 'mark') { learnStatus['jv-jvm-mem'] = (learnStatus['jv-jvm-mem'] + 1) % 3; }
+    if (state === 'tree') { document.getElementById('sidebar').style.display = ''; }
+    // 高亮当前
+    var links = document.querySelectorAll('.states a');
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute('aria-current', links[i].getAttribute('href') === '#' + state ? 'true' : 'false');
+    }
+    renderDots();
+    document.title = '全站重设计 v2 · ' + state;
+  }
+
+  function toggleTheme() {
+    root.getAttribute('data-theme') === 'dark' ? root.removeAttribute('data-theme') : root.setAttribute('data-theme', 'dark');
+  }
+  document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+  document.getElementById('theme-btn').addEventListener('click', toggleTheme);
+  window.addEventListener('hashchange', function () { applyState(location.hash.slice(1)); });
+
+  // 默认深色（F2）
+  root.setAttribute('data-theme', 'dark');
+  applyState(location.hash.slice(1) || 'dark');
+</script>
+
+</body>
+</html>
