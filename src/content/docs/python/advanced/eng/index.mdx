@@ -1,0 +1,13 @@
+---
+title: 工程化
+description: uv 环境管理、pytest 测试、ruff/mypy 静态质量——项目基建三件套
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+写 Python 和"工程化地写 Python"是两回事：依赖装在哪个环境、改完怎么
+知道没改坏、风格和类型谁来把关。现代答案是三件套——uv 管"装"，
+pytest 管"对不对"，ruff + mypy 管"好不好"。三者都是声明式配置
+（pyproject.toml 单一事实源），CI 里串成一条质量流水线。
+
+<CategoryNotesIsland categoryId="python/advanced/eng" />

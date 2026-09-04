@@ -1,10 +1,9 @@
-***
-
+---
 title: 子智能体 Subagent
 description: 大任务拆小，每个子任务干净的上下文——独立 messages，只回传结论
 level: intermediate
 core: true
-----------
+---
 
 ## 核心一句话
 

@@ -1,10 +1,9 @@
-***
-
+---
 title: 多 Agent 协作总览
 description: 从 Subagent 到综合 Harness：并行、隔离、调度、协议与自主性的演进路线
 level: advanced
 core: true
-----------
+---
 
 ## 为什么需要多个 Agent
 

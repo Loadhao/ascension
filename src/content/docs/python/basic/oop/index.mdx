@@ -1,0 +1,13 @@
+---
+title: 面向对象
+description: 魔术方法协议、MRO 与协作式 super、dataclass 与 __slots__
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+Python 的 OOP 和 Java 不是同一门功夫：没有接口，靠**鸭子协议**（实现
+`__len__` 就算支持 len）；没有重载，靠**默认参数与可变签名**；多继承
+直接合法，靠 **MRO** 定序。现代 Python 日常写类的最佳方式是
+dataclass——把样板代码交给装饰器生成。
+
+<CategoryNotesIsland categoryId="python/basic/oop" />

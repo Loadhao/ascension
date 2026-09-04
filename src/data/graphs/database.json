@@ -1,0 +1,40 @@
+{
+  "nodes": [
+    { "id": "root", "label": "数据库", "group": "核心" },
+    { "id": "mysql", "label": "MySQL", "href": "/database/basic/mysql/", "group": "MySQL" },
+    { "id": "sqlexec", "label": "SQL 执行流程", "href": "/database/basic/mysql/01-sql-execution/", "group": "MySQL" },
+    { "id": "index", "label": "索引与 B+ 树", "href": "/database/basic/mysql/02-index-btree/", "group": "MySQL" },
+    { "id": "mvcc", "label": "事务与 MVCC", "href": "/database/intermediate/mysql/01-transaction-mvcc/", "group": "MySQL" },
+    { "id": "locks", "label": "锁机制", "href": "/database/intermediate/mysql/02-locks/", "group": "MySQL" },
+    { "id": "logs", "label": "三大日志", "href": "/database/intermediate/mysql/03-redo-undo-binlog/", "group": "MySQL" },
+    { "id": "optimization", "label": "SQL 优化", "href": "/database/advanced/mysql/01-optimization/", "group": "MySQL" },
+    { "id": "replication", "label": "复制与分片", "href": "/database/advanced/mysql/02-replication-sharding/", "group": "MySQL" },
+    { "id": "redis", "label": "Redis", "href": "/database/basic/redis/", "group": "Redis" },
+    { "id": "redisdata", "label": "数据结构与编码", "href": "/database/basic/redis/01-data-structures/", "group": "Redis" },
+    { "id": "persistence", "label": "持久化", "href": "/database/basic/redis/02-persistence/", "group": "Redis" },
+    { "id": "eviction", "label": "过期与淘汰", "href": "/database/intermediate/redis/01-expiration-eviction/", "group": "Redis" },
+    { "id": "cacheproblems", "label": "缓存三兄弟", "href": "/database/intermediate/redis/02-cache-problems/", "group": "Redis" },
+    { "id": "distlock", "label": "分布式锁", "href": "/database/intermediate/redis/03-distributed-lock/", "group": "Redis" },
+    { "id": "ha", "label": "哨兵与集群", "href": "/database/advanced/redis/01-replication-sentinel-cluster/", "group": "Redis" }
+  ],
+  "edges": [
+    { "source": "root", "target": "mysql" },
+    { "source": "mysql", "target": "sqlexec", "label": "先懂一条语句怎么跑" },
+    { "source": "sqlexec", "target": "index", "label": "数据怎么组织" },
+    { "source": "index", "target": "mvcc", "label": "并发读写" },
+    { "source": "mvcc", "target": "locks", "label": "写写冲突" },
+    { "source": "mvcc", "target": "logs", "label": "undo 版本链" },
+    { "source": "logs", "target": "replication", "label": "binlog 复制" },
+    { "source": "index", "target": "optimization", "label": "explain 排查" },
+    { "source": "optimization", "target": "replication", "label": "优化到头再分片" },
+    { "source": "root", "target": "redis" },
+    { "source": "redis", "target": "redisdata", "label": "五种类型的底座" },
+    { "source": "redisdata", "target": "persistence", "label": "内存数据落盘" },
+    { "source": "persistence", "target": "ha", "label": "RDB 也用于全量同步" },
+    { "source": "redis", "target": "eviction", "label": "内存管理" },
+    { "source": "eviction", "target": "cacheproblems", "label": "缓存使用姿势" },
+    { "source": "cacheproblems", "target": "distlock", "label": "互斥重建进阶" },
+    { "source": "distlock", "target": "ha", "label": "主从切换丢锁" },
+    { "source": "cacheproblems", "target": "replication", "label": "读写分离联动" }
+  ]
+}

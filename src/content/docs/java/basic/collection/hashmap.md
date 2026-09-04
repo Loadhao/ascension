@@ -1,10 +1,9 @@
-***
-
+---
 title: HashMap 源码分析
 description: 数组+链表+红黑树的演进、扰动函数、put/get/resize 全流程
 level: basic
 core: true
-----------
+---
 
 ## 简介
 
