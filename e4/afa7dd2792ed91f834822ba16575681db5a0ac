@@ -1,0 +1,21 @@
+src/content/docs/distributed/basic/theory/01-cap-base.md
+  s_a0704595e8baa0::t_09e3e5e34c8762 1-106
+src/content/docs/java/advanced/springcloud/05-sentinel.md
+  s_a0704595e8baa0::t_c393e6677ebd1d 1-136
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "e4afa7dd2792ed91f834822ba16575681db5a0ac",
+  "prompts": {},
+  "sessions": {
+    "s_a0704595e8baa0": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "7a6b9d42-1762-449e-8965-f788ec59113b",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
