@@ -616,33 +616,23 @@ export default defineConfig({
           ],
         },
         {
-          label: '工具',
+          label: 'Docker',
           collapsed: true,
           items: [
-            { label: '学习路线', link: '/tools/' },
+            { label: '学习路线', link: '/docker/' },
             {
               label: '基础',
               collapsed: false,
               items: [
                 {
-                  label: 'Docker 容器',
+                  label: '基础概念与命令',
                   badge: '分类',
                   collapsed: false,
                   items: [
-                    { label: '概览', link: '/tools/basic/docker/' },
-                    { label: '容器与镜像核心概念', link: '/tools/basic/docker/01-concepts/' },
-                    { label: '镜像与容器常用命令', link: '/tools/basic/docker/02-commands/' },
-                    { label: '容器生命周期与调试', link: '/tools/basic/docker/03-lifecycle/' },
-                  ],
-                },
-                {
-                  label: 'Git 版本控制',
-                  badge: '分类',
-                  collapsed: false,
-                  items: [
-                    { label: '概览', link: '/tools/basic/git/' },
-                    { label: '核心心智模型与对象存储', link: '/tools/basic/git/01-core-model/' },
-                    { label: '日常高频命令', link: '/tools/basic/git/02-daily-commands/' },
+                    { label: '概览', link: '/docker/basic/fundamentals/' },
+                    { label: '容器与镜像核心概念', link: '/docker/basic/fundamentals/01-concepts/' },
+                    { label: '镜像与容器常用命令', link: '/docker/basic/fundamentals/02-commands/' },
+                    { label: '容器生命周期与调试', link: '/docker/basic/fundamentals/03-lifecycle/' },
                   ],
                 },
               ],
@@ -652,25 +642,14 @@ export default defineConfig({
               collapsed: false,
               items: [
                 {
-                  label: 'Docker 容器',
+                  label: '实战进阶',
                   badge: '分类',
                   collapsed: false,
                   items: [
-                    { label: '概览', link: '/tools/intermediate/docker/' },
-                    { label: 'Dockerfile 编写指南', link: '/tools/intermediate/docker/01-dockerfile/' },
-                    { label: '数据卷与持久化', link: '/tools/intermediate/docker/02-volume/' },
-                    { label: '容器网络', link: '/tools/intermediate/docker/03-network/' },
-                  ],
-                },
-                {
-                  label: 'Git 版本控制',
-                  badge: '分类',
-                  collapsed: false,
-                  items: [
-                    { label: '概览', link: '/tools/intermediate/git/' },
-                    { label: '分支与合并', link: '/tools/intermediate/git/01-branch-merge/' },
-                    { label: '远程协作', link: '/tools/intermediate/git/02-remote-collab/' },
-                    { label: '撤销与找回', link: '/tools/intermediate/git/03-undo-recovery/' },
+                    { label: '概览', link: '/docker/intermediate/practice/' },
+                    { label: 'Dockerfile 编写指南', link: '/docker/intermediate/practice/01-dockerfile/' },
+                    { label: '数据卷与持久化', link: '/docker/intermediate/practice/02-volume/' },
+                    { label: '容器网络', link: '/docker/intermediate/practice/03-network/' },
                   ],
                 },
               ],
@@ -680,29 +659,82 @@ export default defineConfig({
               collapsed: false,
               items: [
                 {
-                  label: 'Docker 容器',
+                  label: '编排与原理',
                   badge: '分类',
                   collapsed: false,
                   items: [
-                    { label: '概览', link: '/tools/advanced/docker/' },
-                    { label: 'Docker Compose 编排', link: '/tools/advanced/docker/01-compose/' },
-                    { label: '容器底层原理', link: '/tools/advanced/docker/02-principles/' },
-                    { label: '镜像优化与安全实践', link: '/tools/advanced/docker/03-image-optimization/' },
-                  ],
-                },
-                {
-                  label: 'Git 版本控制',
-                  badge: '分类',
-                  collapsed: false,
-                  items: [
-                    { label: '概览', link: '/tools/advanced/git/' },
-                    { label: '历史改写', link: '/tools/advanced/git/01-history-rewrite/' },
-                    { label: '进阶工具箱', link: '/tools/advanced/git/02-advanced-tools/' },
-                    { label: '团队规范与常见坑', link: '/tools/advanced/git/03-team-standards/' },
+                    { label: '概览', link: '/docker/advanced/orchestration/' },
+                    { label: 'Docker Compose 编排', link: '/docker/advanced/orchestration/01-compose/' },
+                    { label: '容器底层原理', link: '/docker/advanced/orchestration/02-principles/' },
+                    { label: '镜像优化与安全实践', link: '/docker/advanced/orchestration/03-image-optimization/' },
                   ],
                 },
               ],
             },
+          ],
+        },
+        {
+          label: 'Git',
+          collapsed: true,
+          items: [
+            { label: '学习路线', link: '/git/' },
+            {
+              label: '基础',
+              collapsed: false,
+              items: [
+                {
+                  label: '基础入门',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/git/basic/foundations/' },
+                    { label: '核心心智模型与对象存储', link: '/git/basic/foundations/01-core-model/' },
+                    { label: '日常高频命令', link: '/git/basic/foundations/02-daily-commands/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '中级',
+              collapsed: false,
+              items: [
+                {
+                  label: '协作开发',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/git/intermediate/collaboration/' },
+                    { label: '分支与合并', link: '/git/intermediate/collaboration/01-branch-merge/' },
+                    { label: '远程协作', link: '/git/intermediate/collaboration/02-remote-collab/' },
+                    { label: '撤销与找回', link: '/git/intermediate/collaboration/03-undo-recovery/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '高级',
+              collapsed: false,
+              items: [
+                {
+                  label: '高级工作流',
+                  badge: '分类',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/git/advanced/workflow/' },
+                    { label: '历史改写', link: '/git/advanced/workflow/01-history-rewrite/' },
+                    { label: '进阶工具箱', link: '/git/advanced/workflow/02-advanced-tools/' },
+                    { label: '团队规范与常见坑', link: '/git/advanced/workflow/03-team-standards/' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: '工具',
+          collapsed: true,
+          items: [
+            { label: '学习路线', link: '/tools/' },
           ],
         },
       ],

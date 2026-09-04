@@ -1,0 +1,23 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Git", "group": "核心" },
+    { "id": "core-model", "label": "核心模型与对象", "href": "/git/basic/foundations/01-core-model/", "group": "基础" },
+    { "id": "daily", "label": "日常命令", "href": "/git/basic/foundations/02-daily-commands/", "group": "基础" },
+    { "id": "branch", "label": "分支与合并", "href": "/git/intermediate/collaboration/01-branch-merge/", "group": "中级" },
+    { "id": "remote", "label": "远程协作", "href": "/git/intermediate/collaboration/02-remote-collab/", "group": "中级" },
+    { "id": "undo", "label": "撤销与找回", "href": "/git/intermediate/collaboration/03-undo-recovery/", "group": "中级" },
+    { "id": "rewrite", "label": "历史改写", "href": "/git/advanced/workflow/01-history-rewrite/", "group": "高级" },
+    { "id": "tools", "label": "进阶工具箱", "href": "/git/advanced/workflow/02-advanced-tools/", "group": "高级" },
+    { "id": "standards", "label": "团队规范与坑", "href": "/git/advanced/workflow/03-team-standards/", "group": "高级" }
+  ],
+  "edges": [
+    { "source": "root", "target": "core-model" },
+    { "source": "core-model", "target": "daily", "label": "上手" },
+    { "source": "daily", "target": "branch", "label": "协作" },
+    { "source": "branch", "target": "remote" },
+    { "source": "remote", "target": "undo", "label": "纠错" },
+    { "source": "branch", "target": "rewrite", "label": "深入" },
+    { "source": "undo", "target": "tools" },
+    { "source": "rewrite", "target": "standards" }
+  ]
+}

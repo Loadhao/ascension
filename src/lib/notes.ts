@@ -12,7 +12,7 @@ export const LEVEL_LABELS: Record<Level, string> = {
 };
 
 /** 仪表盘方向展示顺序（未知方向按字典序追加） */
-const DIRECTION_ORDER = ['linux', 'java', 'database', 'distributed', 'middleware', 'python', 'ai', 'tools'];
+const DIRECTION_ORDER = ['linux', 'java', 'database', 'distributed', 'middleware', 'python', 'ai', 'docker', 'git', 'tools'];
 
 function isLevel(seg: string): seg is Level {
   return (LEVEL_KEYS as readonly string[]).includes(seg);

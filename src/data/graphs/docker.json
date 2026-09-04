@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Docker", "group": "核心" },
+    { "id": "concepts", "label": "镜像与容器", "href": "/docker/basic/fundamentals/01-concepts/", "group": "基础" },
+    { "id": "commands", "label": "常用命令", "href": "/docker/basic/fundamentals/02-commands/", "group": "基础" },
+    { "id": "lifecycle", "label": "生命周期与调试", "href": "/docker/basic/fundamentals/03-lifecycle/", "group": "基础" },
+    { "id": "dockerfile", "label": "Dockerfile", "href": "/docker/intermediate/practice/01-dockerfile/", "group": "中级" },
+    { "id": "volume", "label": "数据卷", "href": "/docker/intermediate/practice/02-volume/", "group": "中级" },
+    { "id": "network", "label": "容器网络", "href": "/docker/intermediate/practice/03-network/", "group": "中级" },
+    { "id": "compose", "label": "Compose 编排", "href": "/docker/advanced/orchestration/01-compose/", "group": "高级" },
+    { "id": "principles", "label": "底层原理", "href": "/docker/advanced/orchestration/02-principles/", "group": "高级" },
+    { "id": "optimization", "label": "镜像优化与安全", "href": "/docker/advanced/orchestration/03-image-optimization/", "group": "高级" }
+  ],
+  "edges": [
+    { "source": "root", "target": "concepts" },
+    { "source": "concepts", "target": "commands", "label": "上手" },
+    { "source": "commands", "target": "lifecycle" },
+    { "source": "concepts", "target": "dockerfile", "label": "打包" },
+    { "source": "lifecycle", "target": "volume", "label": "持久化" },
+    { "source": "volume", "target": "network" },
+    { "source": "dockerfile", "target": "compose", "label": "编排" },
+    { "source": "concepts", "target": "principles", "label": "深入" },
+    { "source": "dockerfile", "target": "optimization", "label": "瘦身与安全" }
+  ]
+}
