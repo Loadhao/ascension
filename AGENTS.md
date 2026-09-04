@@ -1,0 +1,47 @@
+# Agent 开发规范
+
+## 基本原则
+
+- 遵循仓库现有结构、命名和工具链；作用域内有更近层级的 `AGENTS.md` 时，以其规则为准。
+- 保留现有文件、用户改动和历史约定；除非任务明确要求，不删除、覆盖或大范围重排。
+- 只创建当前任务必需的文件和目录，优先沿用已有位置，不生成空骨架或重复规范。
+- 新增顶层目录或源码根前，先确认是否已被现有结构覆盖；未覆盖时先在本文补充说明。
+- 行为变化时同步相关测试和已有文档；使用仓库已有方式完成最小充分验证。
+
+## 项目结构约定
+
+| 内容 | 路径 | 说明 |
+|---|---|---|
+| 知识内容 | `src/content/docs/<方向>/` | 每个方向一个目录，`index.mdx` 为方向首页 |
+| 交互组件 | `src/components/` | React 岛屿组件（如 KnowledgeGraph.tsx） |
+| 图谱数据 | `src/data/graphs/<方向>.json` | 与方向目录一一对应 |
+| 全局样式 | `src/styles/custom.css` | 图谱容器样式与打印样式 |
+| 站点配置 | `astro.config.mjs` | 侧边栏方向列表、Mermaid 插件、base 路径 |
+| 部署流水线 | `.github/workflows/deploy.yml` | push main 自动构建发布 GitHub Pages |
+
+## 内容写作约束
+
+- 新笔记使用 Markdown（`.md`），需嵌入 React 组件时才用 `.mdx`。
+- frontmatter 必填 `title` 与 `description`；文件名用小写中划线（kebab-case）。
+- 图表直接在正文写 ` ```mermaid ` 代码块，构建时渲染为 SVG，禁止引入客户端图表脚本。
+- 新增方向时三处同步：建目录 + `astro.config.mjs` 侧边栏注册 + `src/data/graphs/` 建图谱数据。
+- 新笔记关联图谱：在对应方向 JSON 补节点（`href` 填笔记路径）与关联边。
+
+## 构建与验证
+
+- 包管理器为 pnpm；禁止提交 lockfile 之外的依赖变更说明。
+- 本地验证：`pnpm build` 必须通过；涉及组件改动时用 `pnpm preview` 实测交互。
+- Mermaid 构建时渲染依赖 chromium，本地首次需 `pnpm exec playwright install chromium`。
+- 部署在 push 后由 GitHub Actions 完成，不在本地执行部署命令。
+
+## 文档与落点
+
+| 内容 | 路径 | 约定 |
+|---|---|---|
+| 内部文档 | `docs/` | 沿用现有分类，没有实际内容时不创建占位文件 |
+| 接口文档 | `docs/api/` | 一个稳定对外入口一份文档，索引只做导航 |
+| 接口案例 | `docs/api/example-接口文档.md` | 新接口文档参考其结构，不改写 example |
+| 设计规格 | `docs/superpowers/specs/` | 参考 `YYYY-MM-DD-example-<slug>.md` 案例；真实设计用 `YYYY-MM-DD-<slug>.md` |
+| 实现计划 | `docs/superpowers/plans/` | 参考成对 `YYYY-MM-DD-example-<slug>.md` 案例；真实计划用 `YYYY-MM-DD-<slug>.md` |
+
+真实设计与计划文件不得覆盖 example；同一路径已存在文件时不得覆盖。
