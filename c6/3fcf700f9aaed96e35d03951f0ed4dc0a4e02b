@@ -1,0 +1,64 @@
+src/content/docs/ai/intermediate/agent/system-prompt.md
+  s_f4db01d3b5f2b4::t_9a33a7c31f28e8 236-237
+  s_f4db01d3b5f2b4::t_dae904f3903014 233-235
+  s_f4db01d3b5f2b4::t_f70c1fd077cedb 238-240
+src/content/docs/guide/diagrams.mdx
+  s_f4db01d3b5f2b4::t_784c186a4ad9ca 136
+scripts/dev.sh
+  s_c89954ef541009::t_268fdc9f14b8af 107
+  s_c89954ef541009::t_d7b459a0d46c4a 65,67
+  s_c89954ef541009::t_e936b13ef9d8d6 3,12,18,24,28,56-58,60-64,66,68-93,104-105,110
+src/content/docs/ai/intermediate/agent/memory.md
+  s_f4db01d3b5f2b4::t_e48e9afd27118e 260
+  s_f4db01d3b5f2b4::t_179e7cc0e5698d 255
+  s_f4db01d3b5f2b4::t_611b080c9bde69 252-254
+  s_f4db01d3b5f2b4::t_cc8370d3bad114 256-259
+  s_f4db01d3b5f2b4::t_ffa6495c3ad6e4 261-263
+src/content/docs/ai/intermediate/agent/index.mdx
+  s_f4db01d3b5f2b4::t_f06470f522f5d6 37
+  s_f4db01d3b5f2b4::t_d2ce5a5b7fe4d4 34-36
+src/content/docs/ai/intermediate/agent/error-recovery.md
+  s_f4db01d3b5f2b4::t_bbf12bb878eda0 246
+  s_f4db01d3b5f2b4::t_043e432b183c92 243-245
+  s_f4db01d3b5f2b4::t_f16c59cd02fd19 247-249
+src/content/docs/ai/basic/agent/permission.md
+  s_c89954ef541009::t_5b39a1156efd90 191-206
+  s_f4db01d3b5f2b4::t_b3ae662d9460d6 242
+  s_f4db01d3b5f2b4::t_fcfa049500c511 1-6
+  s_f4db01d3b5f2b4::t_0f4f52f912cdae 7-190,207-241,243-250
+src/content/docs/ai/intermediate/agent/todo-planning.md
+  s_f4db01d3b5f2b4::t_46a42ba8ee02d5 168
+  s_f4db01d3b5f2b4::t_da96f88a960b5f 1-6
+  s_f4db01d3b5f2b4::t_f2492516d5e8ad 7-167,169-175
+src/content/docs/ai/basic/agent/index.mdx
+  s_f4db01d3b5f2b4::t_36a11cc7b8fdf0 30
+  s_f4db01d3b5f2b4::t_59edbd0f702396 27-29
+src/content/docs/ai/basic/agent/hooks.md
+  s_f4db01d3b5f2b4::t_e551936afe4e56 256
+  s_f4db01d3b5f2b4::t_96a828420b5745 253-255
+  s_f4db01d3b5f2b4::t_9e0cb08fa85e6b 257-259
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c63fcf700f9aaed96e35d03951f0ed4dc0a4e02b",
+  "prompts": {},
+  "sessions": {
+    "s_c89954ef541009": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "64d1a661-f793-4d30-a733-0c2ffb603ff5",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_f4db01d3b5f2b4": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "62f76c4b-8ca6-435b-88a7-e14d59e544c3",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
