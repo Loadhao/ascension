@@ -1,0 +1,26 @@
+astro.config.mjs
+  h_9324126a55eff3 152-180
+src/content/docs/java/basic/collection/hashmap.md
+  h_9324126a55eff3 1-170
+src/content/docs/java/basic/collection/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/java/intermediate/concurrent/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/java/intermediate/concurrent/thread-basics.md
+  h_9324126a55eff3 1-138
+src/content/docs/java/intermediate/concurrent/thread-pool.md
+  h_9324126a55eff3 1-164
+src/data/graphs/java.json
+  h_9324126a55eff3 5-9,17-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "1439745d227e2e6e7f21c596cde6db2dd9548e16",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
