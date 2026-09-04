@@ -1,0 +1,72 @@
+AGENTS.md
+  h_9324126a55eff3 17-26,30,32-36,40-42,44
+astro.config.mjs
+  h_9324126a55eff3 8-92,106-123,126-162,167-174
+docs/superpowers/specs/site-redesign/manifest.json
+  h_9324126a55eff3 6-7
+docs/superpowers/specs/site-theme-restyle/spec.md
+  h_9324126a55eff3 6,8,10,12,14,19-20,22-23,25-26,38-54,57,59,61,67,69,71,77,79,81,87,89,91,93
+src/components/learn/CategoryNotes.tsx
+  h_9324126a55eff3 1-30
+src/components/learn/CategoryNotesIsland.astro
+  h_9324126a55eff3 1-11
+src/components/learn/Dashboard.tsx
+  h_9324126a55eff3 1-195
+src/components/learn/DashboardIsland.astro
+  h_9324126a55eff3 1-8
+src/components/learn/LearnDot.tsx
+  h_9324126a55eff3 1-73
+src/components/learn/ProgressMark.tsx
+  h_9324126a55eff3 1-17
+src/components/learn/Roadmap.tsx
+  h_9324126a55eff3 1-119
+src/components/learn/RoadmapIsland.astro
+  h_9324126a55eff3 1-14
+src/components/starlight/Footer.astro
+  h_9324126a55eff3 1-16
+src/content.config.ts
+  h_9324126a55eff3 1,6-18
+src/content/docs/ai/index.mdx
+  h_9324126a55eff3 3,6,10-18
+src/content/docs/guide/diagrams.mdx
+  h_9324126a55eff3 38-138
+src/content/docs/index.mdx
+  h_9324126a55eff3 2-3,6,8
+src/content/docs/java/advanced/jvm/index.mdx
+  h_9324126a55eff3 1-11
+src/content/docs/java/advanced/jvm/memory.md
+  h_9324126a55eff3 4-5
+src/content/docs/java/index.mdx
+  h_9324126a55eff3 3,6,10-18
+src/content/docs/linux/basic/commands/file-ops.md
+  h_9324126a55eff3 4-5
+src/content/docs/linux/basic/commands/index.mdx
+  h_9324126a55eff3 1-11
+src/content/docs/linux/index.mdx
+  h_9324126a55eff3 3,6,10-18,23
+src/content/docs/python/index.mdx
+  h_9324126a55eff3 3,6,10-18
+src/content/docs/tools/index.mdx
+  h_9324126a55eff3 3,6,10-18
+src/data/graphs/java.json
+  h_9324126a55eff3 7
+src/data/graphs/linux.json
+  h_9324126a55eff3 4
+src/lib/learn.ts
+  h_9324126a55eff3 1-93
+src/lib/notes.ts
+  h_9324126a55eff3 1-197
+src/styles/custom.css
+  h_9324126a55eff3 8-814,819-841
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "d9298c44442924fb2f211cac8634658e0efe472c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
