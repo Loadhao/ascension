@@ -1,0 +1,36 @@
+astro.config.mjs
+  h_9324126a55eff3 254-262
+src/content/docs/ai/advanced/agent/agent-teams.md
+  h_9324126a55eff3 1-217
+src/content/docs/ai/advanced/agent/autonomous-agents.md
+  h_9324126a55eff3 1-270
+src/content/docs/ai/advanced/agent/background-tasks.md
+  h_9324126a55eff3 1-265
+src/content/docs/ai/advanced/agent/comprehensive-agent.md
+  h_9324126a55eff3 1-219
+src/content/docs/ai/advanced/agent/cron-scheduler.md
+  h_9324126a55eff3 1-272
+src/content/docs/ai/advanced/agent/multi-agent.md
+  h_9324126a55eff3 1-4,7,27-32,35,37-47,58,60-63,65,70-71,73
+src/content/docs/ai/advanced/agent/task-system.md
+  h_9324126a55eff3 1-264
+src/content/docs/ai/advanced/agent/team-protocols.md
+  h_9324126a55eff3 1-230
+src/content/docs/ai/advanced/agent/worktree-isolation.md
+  h_9324126a55eff3 1-215
+src/content/docs/ai/intermediate/agent/subagent.md
+  h_9324126a55eff3 1-206
+src/data/graphs/ai.json
+  h_9324126a55eff3 22-29,55-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "bd51699a257455afa870a08a66a959b13d4bbc5c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
