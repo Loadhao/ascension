@@ -1,0 +1,22 @@
+AGENTS.md
+  h_9324126a55eff3 6,8,10,12,17-24,29,31,33,35,41,43,45,50-57,59
+docs/superpowers/specs/example-direction-cards/after/widget.html
+  h_9324126a55eff3 1-334
+docs/superpowers/specs/example-direction-cards/manifest.json
+  h_9324126a55eff3 1-16
+docs/superpowers/specs/example-direction-cards/matrix.md
+  h_9324126a55eff3 1-19
+docs/superpowers/specs/example-direction-cards/spec.md
+  h_9324126a55eff3 1-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "a0c8c8302deae695b0285574fe77c283224ada70",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
