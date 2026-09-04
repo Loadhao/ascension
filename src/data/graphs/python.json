@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Python", "group": "核心" },
+    { "id": "syntax", "label": "语法基础", "group": "语言" },
+    { "id": "data", "label": "数据结构", "group": "语言" },
+    { "id": "func", "label": "函数与装饰器", "group": "语言" },
+    { "id": "oop", "label": "面向对象", "group": "语言" },
+    { "id": "stdlib", "label": "常用标准库", "group": "生态" },
+    { "id": "libs", "label": "第三方生态", "group": "生态" },
+    { "id": "eng", "label": "工程化", "group": "生态" }
+  ],
+  "edges": [
+    { "source": "root", "target": "syntax" },
+    { "source": "syntax", "target": "data" },
+    { "source": "syntax", "target": "func" },
+    { "source": "syntax", "target": "oop" },
+    { "source": "root", "target": "stdlib" },
+    { "source": "root", "target": "libs" },
+    { "source": "root", "target": "eng", "label": "venv/uv" }
+  ]
+}

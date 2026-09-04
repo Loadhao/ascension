@@ -1,0 +1,30 @@
+{
+  "name": "ascension",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.0",
+    "@astrojs/react": "^6.0.5",
+    "@astrojs/starlight": "^0.42.0",
+    "astro": "^7.2.10",
+    "cytoscape": "^3.34.2",
+    "cytoscape-fcose": "^2.2.0",
+    "mermaid": "^11.17.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "rehype-mermaid": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "playwright": "^1.62.1",
+    "typescript": "^7.0.2"
+  }
+}

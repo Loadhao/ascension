@@ -1,0 +1,22 @@
+{
+  "nodes": [
+    { "id": "root", "label": "AI", "group": "核心" },
+    { "id": "ml", "label": "机器学习基础", "group": "基础" },
+    { "id": "dl", "label": "深度学习", "group": "基础" },
+    { "id": "llm", "label": "大模型 LLM", "group": "应用" },
+    { "id": "prompt", "label": "提示工程", "group": "应用" },
+    { "id": "rag", "label": "RAG 检索增强", "group": "应用" },
+    { "id": "agent", "label": "Agent 智能体", "group": "应用" },
+    { "id": "eval", "label": "评测与对齐", "group": "应用" }
+  ],
+  "edges": [
+    { "source": "root", "target": "ml" },
+    { "source": "ml", "target": "dl" },
+    { "source": "dl", "target": "llm" },
+    { "source": "llm", "target": "prompt" },
+    { "source": "llm", "target": "rag" },
+    { "source": "llm", "target": "agent" },
+    { "source": "rag", "target": "agent", "label": "工具组合" },
+    { "source": "llm", "target": "eval" }
+  ]
+}

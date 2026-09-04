@@ -1,0 +1,22 @@
+---
+title: Java
+description: Java 方向知识地图与学习路线
+---
+
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/java.json';
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
+图谱数据维护在 `src/data/graphs/java.json`。
+:::
+
+## 学习路线
+
+1. **语法基础** —— 泛型、反射、注解、Stream API（待整理）
+2. **集合框架** —— HashMap 原理、并发容器（待整理）
+3. **并发编程** —— JMM、synchronized、AQS、线程池（待整理）
+4. **JVM** —— [运行时数据区](./jvm/memory/)（进行中）、垃圾回收、类加载（待整理）
+5. **Spring 生态** —— IoC、AOP、Boot、事务（待整理）

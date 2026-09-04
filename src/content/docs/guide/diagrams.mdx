@@ -1,0 +1,238 @@
+---
+title: 图表写作指南
+description: Mermaid 各类图表语法模板与知识图谱数据维护方式
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+写笔记时直接在正文用 ` ```mermaid ` 代码块即可，构建时自动渲染为 SVG，
+手机端零额外加载。常用图表类型的模板如下，复制改就行。
+
+## 流程图（flowchart）
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    flowchart TD
+        A[学习新知识] --> B{已经理解?}
+        B -- 否 --> C[记笔记 + 画图]
+        C --> A
+        B -- 是 --> D[输出总结]
+        D --> E[定期回顾]
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    flowchart TD
+        A[学习新知识] --> B{已经理解?}
+        B -- 否 --> C[记笔记 + 画图]
+        C --> A
+        B -- 是 --> D[输出总结]
+        D --> E[定期回顾]
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+## 时序图（sequenceDiagram）
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    sequenceDiagram
+        autonumber
+        participant U as 用户
+        participant A as 应用
+        participant D as 数据库
+        U->>A: 发起请求
+        A->>D: 查询数据
+        D-->>A: 返回结果
+        A-->>U: 响应渲染
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    sequenceDiagram
+        autonumber
+        participant U as 用户
+        participant A as 应用
+        participant D as 数据库
+        U->>A: 发起请求
+        A->>D: 查询数据
+        D-->>A: 返回结果
+        A-->>U: 响应渲染
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+## 思维导图（mindmap）
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    mindmap
+      root((Linux))
+        基础
+          文件操作
+          用户与权限
+          文本处理
+        进阶
+          Shell 脚本
+          进程管理
+          系统服务
+          网络
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    mindmap
+      root((Linux))
+        基础
+          文件操作
+          用户与权限
+          文本处理
+        进阶
+          Shell 脚本
+          进程管理
+          系统服务
+          网络
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+## 架构图（flowchart + subgraph）
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    flowchart LR
+        subgraph Client[客户端]
+            B[浏览器]
+        end
+        subgraph Server[服务端]
+            N[Nginx 反向代理]
+            A[应用服务]
+            D[(数据库)]
+        end
+        B -->|HTTPS| N
+        N --> A
+        A --> D
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    flowchart LR
+        subgraph Client[客户端]
+            B[浏览器]
+        end
+        subgraph Server[服务端]
+            N[Nginx 反向代理]
+            A[应用服务]
+            D[(数据库)]
+        end
+        B -->|HTTPS| N
+        N --> A
+        A --> D
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+## 类图（classDiagram）
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    classDiagram
+        class KnowledgeBase {
+            +String title
+            +String[] tags
+            +addNote() void
+            +search(keyword) Result
+        }
+        class Note {
+            +String title
+            +render() void
+        }
+        KnowledgeBase "1" o-- "0..*" Note : 包含
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    classDiagram
+        class KnowledgeBase {
+            +String title
+            +String[] tags
+            +addNote() void
+            +search(keyword) Result
+        }
+        class Note {
+            +String title
+            +render() void
+        }
+        KnowledgeBase "1" o-- "0..*" Note : 包含
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+## 状态图（stateDiagram）
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    stateDiagram-v2
+        [*] --> 草稿
+        草稿 --> 复习中: 开始复习
+        复习中 --> 已掌握: 连续答对
+        复习中 --> 草稿: 遗忘
+        已掌握 --> [*]
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    stateDiagram-v2
+        [*] --> 草稿
+        草稿 --> 复习中: 开始复习
+        复习中 --> 已掌握: 连续答对
+        复习中 --> 草稿: 遗忘
+        已掌握 --> [*]
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+## 交互式知识图谱
+
+各方向首页的力导图由 `src/data/graphs/<方向>.json` 驱动，格式：
+
+```json
+{
+  "nodes": [
+    { "id": "jvm", "label": "JVM 内存", "href": "/java/jvm/memory/", "group": "JVM" }
+  ],
+  "edges": [
+    { "source": "jvm", "target": "gc", "label": "依赖" }
+  ]
+}
+```
+
+| 字段 | 说明 |
+|---|---|
+| `id` | 节点唯一标识，边通过它引用 |
+| `label` | 节点显示文本 |
+| `href` | 可选；填写后节点带金色描边、点击跳转到对应笔记 |
+| `group` | 可选；分组决定节点颜色，同组同色 |
+| `source` / `target` | 边的两端节点 `id` |
+| `label`（边） | 可选；边上的关系说明 |
+
+维护流程：新增笔记后，在对应方向的 JSON 里加一个节点，`href` 填笔记路径，
+再补上与已有知识点的关联边即可。

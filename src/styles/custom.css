@@ -1,0 +1,13 @@
+/* 交互式知识图谱容器（React + Cytoscape） */
+.knowledge-graph {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 12px;
+  background: var(--sl-color-bg);
+}
+
+/* 打印：隐藏交互图谱（画布内容无法打印），Mermaid 图表为 SVG 不受影响 */
+@media print {
+  .knowledge-graph {
+    display: none;
+  }
+}

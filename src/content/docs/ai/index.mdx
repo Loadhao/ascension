@@ -1,0 +1,24 @@
+---
+title: AI
+description: AI 方向知识地图与学习路线
+---
+
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/ai.json';
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
+图谱数据维护在 `src/data/graphs/ai.json`。
+:::
+
+## 学习路线
+
+1. **机器学习基础** —— 监督/无监督、过拟合、评估指标（待整理）
+2. **深度学习** —— 反向传播、Transformer 架构（待整理）
+3. **大模型 LLM** —— 预训练 / SFT / RLHF 流程（待整理）
+4. **提示工程** —— 结构化提示词、思维链（待整理）
+5. **RAG** —— 切分、Embedding、召回重排（待整理）
+6. **Agent** —— 工具调用、规划、多智能体（待整理）
+7. **评测与对齐** —— Benchmark、幻觉治理（待整理）

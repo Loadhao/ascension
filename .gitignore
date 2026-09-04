@@ -1,0 +1,24 @@
+# 构建产物
+dist/
+
+# 生成类型
+.astro/
+
+# 依赖
+node_modules/
+
+# 日志
+*.log
+pnpm-debug.log*
+
+# 环境变量
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
