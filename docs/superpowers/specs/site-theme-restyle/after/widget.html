@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全站暖调主题 · 设计 Widget v1</title>
+<style>
+  /* ===== 设计令牌（spec.md 第 4 节，与 --sl-* 一一对应） ===== */
+  :root {
+    --bg-page: #faf8f5;      /* --sl-color-black */
+    --text-heading: #2b2622; /* --sl-color-white / gray-1 */
+    --text-body: #55504a;    /* gray-2 */
+    --text-muted: #6f665c;   /* gray-3 */
+    --text-faint: #8a8177;   /* gray-4 */
+    --border: #ded7cd;       /* gray-5 */
+    --surface-2: #efeae2;    /* gray-6 */
+    --surface-nav: #f6f2ec; /* gray-7 / bg-nav / bg-sidebar */
+    --hairline: #e5ded4;
+    --accent: #b45309;       /* 链接/强调 */
+    --accent-high: #92400e;  /* 悬停加深 */
+    --accent-soft: #f0d9b8;
+    --code-bg: #f4f0e9;
+    --code-inline-bg: #f0ebe3;
+    --code-comment: #9a9186;
+    --code-keyword: #a15c20;
+    --code-string: #5d7a2e;
+    --code-func: #8a5a28;
+    --code-var: #55504a;
+    --ring-outer: #e8bd85;
+    --ring-inner: #b45309;
+    --note-bg: #f6efe3;
+    --note-border: #dcc9a8;
+    --shadow: none;
+  }
+  [data-theme='dark'] {
+    --bg-page: #171412;
+    --text-heading: #ece7e0;
+    --text-body: #c9c1b6;
+    --text-muted: #a49a8d;
+    --text-faint: #857b6f;
+    --border: #3a352f;
+    --surface-2: #2a2622;
+    --surface-nav: #1d1a17;
+    --hairline: #322d28;
+    --accent: #d9a066;
+    --accent-high: #e8bd85;
+    --accent-soft: #4a3a26;
+    --code-bg: #211d1a;
+    --code-inline-bg: #262220;
+    --code-comment: #7f7767;
+    --code-keyword: #c98a5e;
+    --code-string: #a3b37e;
+    --code-func: #d9b48a;
+    --code-var: #c9c1b6;
+    --ring-outer: #8a5a28;
+    --ring-inner: #d9a066;
+    --note-bg: #26211b;
+    --note-border: #4a3f30;
+    --shadow: 0 1px 3px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { background: var(--bg-page); }
+  body {
+    margin: 0;
+    background: var(--bg-page);
+    color: var(--text-body);
+    font: 400 16px/1.7 system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    transition: background-color .2s ease, color .2s ease;
+  }
+
+  /* ===== 评审工具条（非生产 UI） ===== */
+  .review-bar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    background: var(--surface-nav);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .review-bar strong { font-size: 13px; color: var(--text-heading); font-weight: 500; }
+  .review-bar .states { display: flex; flex-wrap: wrap; gap: 6px; margin-right: auto; }
+  .review-bar .states a {
+    padding: 3px 12px; border: 1px solid var(--border); border-radius: 999px;
+    color: var(--text-muted); text-decoration: none; font-size: 12px;
+  }
+  .review-bar .states a[aria-current='true'] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .review-bar button {
+    padding: 3px 12px; border: 1px solid var(--border); border-radius: 999px;
+    background: transparent; color: var(--text-muted); font-size: 12px; cursor: pointer;
+  }
+
+  /* ===== 站点骨架（Starlight 布局的等比缩微） ===== */
+  .site { max-width: 1060px; margin: 0 auto; }
+
+  .site-header {
+    position: sticky; top: 41px; z-index: 10;
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 24px;
+    background: var(--surface-nav);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .logo { display: flex; align-items: center; gap: 8px; color: var(--text-heading); font-weight: 600; font-size: 17px; }
+  .logo svg { display: block; }
+  .search-mock {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 14px; min-width: 180px;
+    background: var(--bg-page);
+    border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text-faint); font-size: 13px;
+  }
+  .search-mock kbd {
+    margin-left: auto; padding: 0 6px;
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px;
+    font: 11px/1.6 ui-monospace, monospace; color: var(--text-faint);
+  }
+  .hamburger { display: none; }
+
+  .layout { display: grid; grid-template-columns: 220px 1fr; gap: 0; }
+
+  /* 侧边栏 */
+  .sidebar { padding: 24px 16px 48px; border-right: 1px solid var(--hairline); background: var(--surface-nav); }
+  .sidebar-group-title {
+    margin: 0 0 8px; padding: 0 10px;
+    color: var(--text-faint); font-size: 12px; font-weight: 500; letter-spacing: .08em;
+  }
+  .sidebar a {
+    display: block; padding: 6px 10px; border-radius: 6px;
+    color: var(--text-muted); text-decoration: none; font-size: 14px; line-height: 1.5;
+    transition: color 150ms ease, background-color 150ms ease;
+  }
+  .sidebar a:hover { color: var(--accent); background: var(--accent-soft); }
+  .sidebar a.active { color: var(--accent); font-weight: 500; }
+  .sidebar a.is-focus {
+    outline: 2px solid var(--ring-outer); outline-offset: 1px;
+    border-color: var(--ring-inner);
+  }
+
+  /* 正文 */
+  .content { padding: 36px 40px 80px; min-width: 0; }
+  .content h1 { margin: 0 0 12px; color: var(--text-heading); font-size: 30px; font-weight: 600; line-height: 1.3; }
+  .content h2 { margin: 32px 0 12px; color: var(--text-heading); font-size: 22px; font-weight: 500; }
+  .content p { margin: 0 0 14px; max-width: 72ch; }
+  .content ol, .content ul { margin: 0 0 14px; padding-left: 24px; max-width: 72ch; }
+  .content li { margin: 4px 0; }
+  .content a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent); text-underline-offset: 3px; transition: color 150ms ease; }
+  .content a:hover { color: var(--accent-high); text-decoration-color: currentColor; }
+  .content a.is-hover { color: var(--accent-high); text-decoration-color: currentColor; }
+  .content code {
+    padding: 2px 6px; border-radius: 5px;
+    background: var(--code-inline-bg);
+    font: 400 .875em ui-monospace, 'SF Mono', Menlo, monospace;
+    color: var(--text-heading);
+  }
+  .content pre {
+    margin: 0 0 18px; padding: 16px 18px;
+    background: var(--code-bg);
+    border: 1px solid var(--hairline); border-radius: 10px;
+    overflow-x: auto;
+  }
+  .content pre code { padding: 0; background: none; font-size: 13px; line-height: 1.7; }
+  .tok-c { color: var(--code-comment); }
+  .tok-k { color: var(--code-keyword); }
+  .tok-s { color: var(--code-string); }
+  .tok-f { color: var(--code-func); }
+  .tok-v { color: var(--code-var); }
+
+  /* callout（Starlight note） */
+  .note {
+    margin: 0 0 18px; padding: 12px 16px;
+    background: var(--note-bg);
+    border: 1px solid var(--note-border); border-left: 3px solid var(--note-border);
+    border-radius: 8px; font-size: 14.5px;
+  }
+  .note strong { color: var(--text-heading); font-weight: 500; }
+
+  /* 表格 */
+  .content table { margin: 0 0 18px; border-collapse: collapse; width: 100%; font-size: 14px; }
+  .content th { text-align: left; padding: 8px 12px; color: var(--text-heading); font-weight: 500; border-bottom: 2px solid var(--border); }
+  .content td { padding: 8px 12px; border-bottom: 1px solid var(--hairline); }
+
+  /* 令牌色卡（评审辅助） */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 12px; }
+  .swatch { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; font-size: 11px; }
+  .swatch .chip { height: 34px; }
+  .swatch .label { padding: 4px 8px; color: var(--text-muted); background: var(--surface-nav); }
+
+  /* ===== 状态演示 ===== */
+  .site.narrow .layout { grid-template-columns: 1fr; }
+  .site.narrow .sidebar { display: none; }
+  .site.narrow .site-header { padding: 10px 16px; }
+  .site.narrow .search-mock { min-width: 0; flex: 1; }
+  .site.narrow .hamburger { display: flex; align-items: center; }
+  .site.narrow .content { padding: 24px 16px 64px; }
+
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .hamburger { display: flex; }
+    .content { padding: 24px 16px 64px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="review-bar">
+  <strong>全站暖调主题 v1</strong>
+  <nav class="states" aria-label="状态切换">
+    <a href="#light">浅色</a>
+    <a href="#dark">深色</a>
+    <a href="#hover">链接悬停</a>
+    <a href="#focus">键盘焦点</a>
+    <a href="#mobile">移动端</a>
+  </nav>
+  <button id="theme-toggle" type="button">切主题（浅/深）</button>
+</header>
+
+<div class="site" id="site">
+  <header class="site-header">
+    <button class="hamburger" aria-label="打开菜单" style="border:none;background:none;color:var(--text-muted);font-size:16px;cursor:pointer;">☰</button>
+    <span class="logo">
+      <svg width="22" height="22" viewBox="0 0 128 128" aria-hidden="true"><rect width="128" height="128" rx="28" fill="var(--accent)"/><path d="M24 96 L64 30 L104 96" fill="none" stroke="var(--bg-page)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Ascension
+    </span>
+    <span class="search-mock">搜索文档…<kbd>⌘K</kbd></span>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="主侧边栏">
+      <p class="sidebar-group-title">方向</p>
+      <a href="#" class="active" id="nav-linux">Linux</a>
+      <a href="#">Java</a>
+      <a href="#">Python</a>
+      <a href="#">AI</a>
+      <a href="#">工具</a>
+      <p class="sidebar-group-title" style="margin-top:20px;">指南</p>
+      <a href="#">图表写作指南</a>
+    </aside>
+
+    <main class="content">
+      <h1>Linux</h1>
+      <p>命令行基础、文件系统、Shell 脚本、进程与服务管理、网络。以下为真实内容抽样，用于评审整体观感。</p>
+
+      <div class="note">
+        <strong>图谱说明</strong> — 节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。图谱数据维护在 <code>src/data/graphs/linux.json</code>。
+      </div>
+
+      <h2>学习路线</h2>
+      <ol>
+        <li><strong>基础命令</strong> — <a href="#" id="route-link" class="is-hover">文件与目录操作</a>（进行中）</li>
+        <li><strong>文本处理</strong> — grep / sed / awk 三剑客（待整理）</li>
+        <li><strong>Shell 脚本</strong> — 变量、流程控制、函数（待整理）</li>
+      </ol>
+
+      <h2>常用命令速查</h2>
+      <table>
+        <thead><tr><th>命令</th><th>作用</th><th>常用示例</th></tr></thead>
+        <tbody>
+          <tr><td><code>ls</code></td><td>列出目录</td><td><code>ls -lah</code>（含隐藏、人类可读大小）</td></tr>
+          <tr><td><code>find</code></td><td>查找</td><td><code>find . -name "*.log" -mtime +7</code></td></tr>
+          <tr><td><code>ln</code></td><td>链接</td><td><code>ln -s target link</code>（软链接）</td></tr>
+        </tbody>
+      </table>
+
+      <pre><code><span class="tok-c"># 删除 7 天前的日志（先确认再删）</span>
+<span class="tok-f">find</span> <span class="tok-v">./logs</span> -name <span class="tok-s">"*.log"</span> -mtime +7 -print
+<span class="tok-f">find</span> <span class="tok-v">./logs</span> -name <span class="tok-s">"*.log"</span> -mtime +7 -delete</code></pre>
+
+      <h2>设计令牌</h2>
+      <p>当前主题的色卡（切换深浅主题后自动更新）：</p>
+      <div class="swatches" id="swatches"></div>
+    </main>
+  </div>
+</div>
+
+<script>
+  // 状态路由：#light / #dark / #hover / #focus / #mobile
+  var HINTS = {
+    light: '浅色米白纸感：奶油底 #faf8f5、暖墨正文、琥珀链接。',
+    dark:  '深色暖褐黑夜：暖黑底 #171412、暖白文字、柔琥珀强调。',
+    hover: '「文件与目录操作」链接预置悬停态：强调色加深 + 下划线实色。',
+    focus: '侧边栏「Linux」当前项展示 :focus-visible 双线焦点环。',
+    mobile: '375px 窄屏：侧边栏收起为抽屉入口、内容单列全宽。'
+  };
+  var site = document.getElementById('site');
+  var root = document.documentElement;
+
+  function applyState(state) {
+    if (!HINTS[state]) state = 'light';
+    if (state === 'dark') root.setAttribute('data-theme', 'dark');
+    if (state === 'light') root.removeAttribute('data-theme');
+
+    site.classList.toggle('narrow', state === 'mobile');
+    document.getElementById('route-link').classList.toggle('is-hover', state === 'hover');
+    document.getElementById('nav-linux').classList.toggle('is-focus', state === 'focus');
+
+    var links = document.querySelectorAll('.states a');
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute('aria-current', links[i].getAttribute('href') === '#' + state ? 'true' : 'false');
+    }
+    renderSwatches();
+  }
+
+  // 色卡（评审辅助）
+  var TOKENS = [
+    ['页面底', 'bg-page'], ['导航表面', 'surface-nav'], ['次级表面', 'surface-2'],
+    ['标题', 'text-heading'], ['正文', 'text-body'], ['辅助', 'text-muted'],
+    ['边框', 'border'], ['强调/链接', 'accent'], ['强调悬停', 'accent-high'],
+    ['行内代码底', 'code-inline-bg'], ['代码块底', 'code-bg'], ['提示框底', 'note-bg']
+  ];
+  function renderSwatches() {
+    var cs = getComputedStyle(root);
+    var html = TOKENS.map(function (t) {
+      var v = cs.getPropertyValue('--' + t[1]).trim();
+      return '<div class="swatch"><div class="chip" style="background:' + v + '"></div><div class="label">' + t[0] + '<br>' + v + '</div></div>';
+    }).join('');
+    document.getElementById('swatches').innerHTML = html;
+  }
+
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    root.getAttribute('data-theme') === 'dark' ? root.removeAttribute('data-theme') : root.setAttribute('data-theme', 'dark');
+    renderSwatches();
+  });
+  window.addEventListener('hashchange', function () { applyState(location.hash.slice(1)); });
+
+  applyState(location.hash.slice(1) || 'light');
+</script>
+
+</body>
+</html>

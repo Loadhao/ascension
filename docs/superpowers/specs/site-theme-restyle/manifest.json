@@ -1,0 +1,16 @@
+{
+  "featureId": "site-theme-restyle",
+  "title": "全站暖调主题重做（深色优先）",
+  "uiLevel": "L2",
+  "revision": 1,
+  "confirmed": false,
+  "confirmedAt": null,
+  "widgets": [
+    {
+      "id": "widget",
+      "path": "after/widget.html",
+      "states": ["light", "dark", "hover", "focus", "mobile"]
+    }
+  ],
+  "notes": "用户反馈：深色主题不好看，整体样式丑。目标：沉稳暗暖调、低饱和、柔化颜色、更轻字重。待用户确认 v1 后实施。"
+}
