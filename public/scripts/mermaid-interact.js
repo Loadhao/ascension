@@ -24,9 +24,10 @@
   };
   let viewer = null; // { close } 单例
 
-  for (const svg of document.querySelectorAll('svg.flowchart[id^="mermaid-"]')) {
+  // 全屏缩放覆盖所有图型；悬停高亮依赖流程图结构，仅流程图启用
+  for (const svg of document.querySelectorAll('svg[id^="mermaid-"]')) {
     try {
-      enhance(svg);
+      if (svg.classList.contains('flowchart')) enhance(svg);
     } catch {
       /* 交互增强失败不影响静态图展示 */
     }
@@ -224,6 +225,36 @@
       e.preventDefault();
       openViewer(svg, btn, wrap);
     });
+
+    // 高图吸附：图顶滚出视野、图身仍在视野内时，按钮转 fixed 跟随视口顶
+    // （对齐图右缘，让开 Starlight 头部），读完图恢复原位。
+    // 注意：内容树内 .main-pane 等祖先会创建层叠上下文，内部 z-index 压不过
+    // fixed 导航栏，故吸附时把按钮挂到 body 下，还原时移回 wrap
+    let raf = 0;
+    const syncSticky = () => {
+      raf = 0;
+      const wb = wrap.getBoundingClientRect();
+      const stick = wb.top < 16 && wb.bottom > 76;
+      if (stick === btn.classList.contains('mmd-sticky')) return;
+      btn.classList.toggle('mmd-sticky', stick);
+      if (stick) {
+        const head = document.querySelector('header');
+        const headH = head ? head.getBoundingClientRect().height : 0;
+        btn.style.top = headH + 12 + 'px';
+        btn.style.left = Math.max(8, Math.min(wb.right - btn.offsetWidth - 10, innerWidth - 44)) + 'px';
+        document.body.appendChild(btn);
+      } else {
+        btn.style.top = '';
+        btn.style.left = '';
+        wrap.appendChild(btn);
+      }
+    };
+    const queue = () => {
+      if (!raf) raf = requestAnimationFrame(syncSticky);
+    };
+    addEventListener('scroll', queue, { passive: true });
+    addEventListener('resize', queue, { passive: true });
+    queue();
   }
 
   function openViewer(svg, trigger, home) {

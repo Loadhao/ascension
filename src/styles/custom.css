@@ -820,7 +820,7 @@
   position: relative;
 }
 
-/* 毛玻璃质感；配色复用图表主题令牌（--mmd-node-border / --mmd-glow），天然跟随亮暗 */
+/* 毛玻璃质感；灰阶令牌随亮暗自动换向（暗=白线，亮=黑线），与站点黑白主题一致 */
 .mmd-fullscreen-btn {
   position: absolute;
   top: 0.6rem;
@@ -831,12 +831,12 @@
   width: 32px;
   height: 32px;
   padding: 0;
-  border: 1px solid color-mix(in srgb, var(--mmd-node-border) 45%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sl-color-text) 20%, transparent);
   border-radius: 10px;
   background: color-mix(in srgb, var(--sl-color-bg) 64%, transparent);
-  backdrop-filter: blur(8px) saturate(1.15);
-  -webkit-backdrop-filter: blur(8px) saturate(1.15);
-  color: color-mix(in srgb, var(--sl-color-text) 72%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: color-mix(in srgb, var(--sl-color-text) 65%, transparent);
   cursor: zoom-in;
   opacity: 0;
   transform: translateY(3px) scale(0.92);
@@ -854,11 +854,11 @@
   transform: translateY(0) scale(1);
 }
 
-/* hover：琥珀描边 + 图标提亮 + 轻柔辉光，与图表高亮态同一视觉语言 */
+/* hover：描边与图标提亮 + 中性投影（无彩色，符合黑白主题） */
 .mmd-fullscreen-btn:hover {
-  border-color: color-mix(in srgb, var(--mmd-node-border) 85%, transparent);
-  color: var(--mmd-node-border);
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--mmd-glow) 60%, transparent);
+  border-color: color-mix(in srgb, var(--sl-color-text) 45%, transparent);
+  color: var(--sl-color-text);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.3);
 }
 
 .mmd-fullscreen-btn:active {
@@ -866,7 +866,7 @@
 }
 
 .mmd-fullscreen-btn:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--mmd-node-border) 85%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--sl-color-text) 45%, transparent);
   outline-offset: 2px;
 }
 
@@ -878,6 +878,22 @@
   }
 }
 
+/* 高图吸附态：图顶滚出视野后按钮跟随视口（JS 会把按钮挂到 body 下绕开
+   内容树的层叠上下文，top/left 按图右缘 + 头部高度写入）。
+   半常显（脱离图 hover 区也能看到），hover 图或按钮本体时全亮 */
+.mmd-fullscreen-btn.mmd-sticky {
+  position: fixed;
+  right: auto;
+  z-index: calc(var(--sl-z-index-navbar, 10) + 10);
+  opacity: 0.55;
+  transform: none;
+}
+
+.mmd-fullscreen-btn.mmd-sticky:hover,
+.mmd-zoom-wrap:hover .mmd-fullscreen-btn.mmd-sticky {
+  opacity: 1;
+}
+
 /* 覆盖层 */
 .mmd-viewer {
   position: fixed;
@@ -885,7 +901,7 @@
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  background: rgb(20 17 15 / 0.9);
+  background: rgb(10 10 10 / 0.92);
   backdrop-filter: blur(4px);
 }
 
@@ -906,7 +922,7 @@ html.mmd-viewer-open {
   align-items: center;
   gap: 0.125rem;
   padding: 0.2rem;
-  border: 1px solid color-mix(in srgb, var(--mmd-node-border) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sl-color-text) 18%, transparent);
   border-radius: 10px;
   background: color-mix(in srgb, var(--sl-color-bg) 72%, transparent);
   backdrop-filter: blur(10px);
@@ -928,10 +944,10 @@ html.mmd-viewer-open {
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-/* 琥珀暖调 hover，与全屏按钮一致 */
+/* 灰阶 hover，与全屏按钮一致 */
 .mmd-vbtn:hover {
-  background: color-mix(in srgb, var(--mmd-node-border) 16%, transparent);
-  color: var(--mmd-node-border);
+  background: color-mix(in srgb, var(--sl-color-text) 10%, transparent);
+  color: var(--sl-color-text);
 }
 
 .mmd-vbtn:active {
@@ -939,7 +955,7 @@ html.mmd-viewer-open {
 }
 
 .mmd-vbtn:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--mmd-node-border) 85%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--sl-color-text) 45%, transparent);
   outline-offset: -2px;
 }
 

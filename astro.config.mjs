@@ -170,7 +170,65 @@ export default defineConfig({
           collapsed: true,
           items: [{ label: '学习路线', link: '/python/' }],
         },
-        { label: 'AI', collapsed: true, items: [{ label: '学习路线', link: '/ai/' }] },
+        {
+          label: 'AI',
+          collapsed: true,
+          items: [
+            { label: '学习路线', link: '/ai/' },
+            {
+              label: '基础',
+              collapsed: false,
+              items: [
+                {
+                  label: 'Agent',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/ai/basic/agent/' },
+                    { label: 'Agent Loop 核心循环', link: '/ai/basic/agent/agent-loop/' },
+                    { label: '工具调用与分发', link: '/ai/basic/agent/tool-use/' },
+                    { label: '权限系统', link: '/ai/basic/agent/permission/' },
+                    { label: '钩子机制', link: '/ai/basic/agent/hooks/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '中级',
+              collapsed: false,
+              items: [
+                {
+                  label: 'Agent',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/ai/intermediate/agent/' },
+                    { label: '任务规划 TodoWrite', link: '/ai/intermediate/agent/todo-planning/' },
+                    { label: '系统提示组装', link: '/ai/intermediate/agent/system-prompt/' },
+                    { label: '上下文工程', link: '/ai/intermediate/agent/context-engineering/' },
+                    { label: '记忆系统', link: '/ai/intermediate/agent/memory/' },
+                    { label: '技能按需加载', link: '/ai/intermediate/agent/skill-loading/' },
+                    { label: 'RAG 检索增强生成', link: '/ai/intermediate/agent/rag/' },
+                    { label: '错误恢复', link: '/ai/intermediate/agent/error-recovery/' },
+                    { label: 'MCP 协议', link: '/ai/intermediate/agent/mcp/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '高级',
+              collapsed: false,
+              items: [
+                {
+                  label: 'Agent',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/ai/advanced/agent/' },
+                    { label: '子智能体与多 Agent 协作', link: '/ai/advanced/agent/multi-agent/' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         { label: '工具', collapsed: true, items: [{ label: '学习路线', link: '/tools/' }] },
       ],
     }),
