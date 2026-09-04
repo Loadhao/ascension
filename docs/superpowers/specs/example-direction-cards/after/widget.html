@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>方向入口卡片 · 设计 Widget（EXAMPLE）</title>
+<style>
+  /* ===== 设计令牌（spec.md 第 4 节） ===== */
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --text: #2d2a26;
+    --text-muted: #7a736a;
+    --accent: #b45309;
+    --accent-soft: #f5e9d9;
+    --border: #e5e0d8;
+    --ring-outer: #f0c48c;
+    --ring-inner: #b45309;
+    --shadow: 0 1px 3px rgba(60, 50, 40, .08);
+    --shadow-hover: 0 4px 14px rgba(60, 50, 40, .14);
+  }
+  [data-theme='dark'] {
+    --bg: #1c1a17;
+    --surface: #262320;
+    --text: #e8e4dc;
+    --text-muted: #9a928a;
+    --accent: #d9a066;
+    --accent-soft: #3a322a;
+    --border: #3a352f;
+    --ring-outer: #8a6a3f;
+    --ring-inner: #d9a066;
+    --shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    --shadow-hover: 0 4px 14px rgba(0, 0, 0, .55);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.6 system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  /* ===== 状态切换器（评审工具，非生产 UI） ===== */
+  .widget-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .widget-bar strong { font-size: 13px; margin-right: 8px; }
+  .widget-bar .states { display: flex; flex-wrap: wrap; gap: 6px; margin-right: auto; }
+  .widget-bar .states a {
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 12px;
+  }
+  .widget-bar .states a:hover { color: var(--accent); border-color: var(--accent); }
+  .widget-bar .states a[aria-current='true'] {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .widget-bar button {
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .stage { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; transition: max-width .2s ease; }
+  .stage.narrow { max-width: 380px; }
+
+  .stage-heading { margin: 0 0 16px; }
+  .stage-heading h1 { margin: 0; font-size: 20px; font-weight: 600; }
+  .stage-heading p { margin: 4px 0 0; color: var(--text-muted); }
+
+  /* ===== 卡片网格（F1，spec.md 第 3 节） ===== */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; gap: 12px; } }
+  .stage.narrow .grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* ===== 卡片 ===== */
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 96px;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 150ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-hover);
+  }
+  .card:focus-visible {
+    outline: 2px solid var(--ring-outer);
+    outline-offset: 2px;
+    border-color: var(--ring-inner);
+  }
+  .card-head { display: flex; align-items: center; gap: 10px; }
+  .dir-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    flex: none;
+  }
+  .card-head h3 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.3; }
+  .count { margin-left: auto; color: var(--text-muted); font-size: 12px; white-space: nowrap; }
+  .card p { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .card-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 12px;
+  }
+  .status .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .arrow { color: var(--text-muted); transition: transform 150ms ease-out; }
+  .card:hover .arrow { transform: translateX(2px); }
+
+  /* ===== 状态演示（评审用强制样式） ===== */
+  .card.is-hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-hover);
+  }
+  .card.is-hover .arrow { transform: translateX(2px); }
+  .card.is-focus {
+    outline: 2px solid var(--ring-outer);
+    outline-offset: 2px;
+    border-color: var(--ring-inner);
+  }
+
+  /* ===== 禁用卡（F4） ===== */
+  .card.is-disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  .card.is-disabled:hover { transform: none; border-color: var(--border); box-shadow: none; }
+  .card.is-disabled .dir-badge { background: var(--border); color: var(--text-muted); }
+  .card.is-disabled .status { background: transparent; color: var(--text-muted); }
+  .card.is-disabled .arrow { visibility: hidden; }
+
+  .hint { margin: 20px 0 0; color: var(--text-muted); font-size: 12px; }
+  .hint code { background: var(--accent-soft); color: var(--accent); padding: 1px 6px; border-radius: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card, .arrow, .stage { transition: none; }
+    .card:hover, .card.is-hover { transform: none; }
+  }
+  @media print {
+    .widget-bar { display: none; }
+    .grid { grid-template-columns: 1fr; }
+    .card { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="widget-bar">
+  <strong>方向入口卡片 · EXAMPLE</strong>
+  <nav class="states" aria-label="状态切换">
+    <a href="#normal">正常</a>
+    <a href="#hover">悬停</a>
+    <a href="#focus">键盘焦点</a>
+    <a href="#disabled">禁用</a>
+    <a href="#mobile">移动窄屏</a>
+  </nav>
+  <button id="theme-toggle" type="button">深 / 浅主题</button>
+</header>
+
+<main class="stage" id="stage">
+  <div class="stage-heading">
+    <h1>按方向开始学习</h1>
+    <p>五个方向持续更新，点击卡片进入方向首页与知识图谱。</p>
+  </div>
+
+  <section class="grid" aria-label="方向入口">
+    <a class="card" id="card-linux" href="#">
+      <div class="card-head">
+        <span class="dir-badge" aria-hidden="true">Li</span>
+        <h3>Linux</h3>
+        <span class="count">2 篇</span>
+      </div>
+      <p>命令行基础、文件系统、Shell 脚本、进程与服务管理、网络。</p>
+      <div class="card-foot">
+        <span class="status"><span class="dot" aria-hidden="true"></span>学习中 · 1 篇进行中</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
+
+    <a class="card" id="card-java" href="#">
+      <div class="card-head">
+        <span class="dir-badge" aria-hidden="true">Jv</span>
+        <h3>Java</h3>
+        <span class="count">2 篇</span>
+      </div>
+      <p>语法与集合、并发编程、JVM 内存与垃圾回收、Spring 生态。</p>
+      <div class="card-foot">
+        <span class="status"><span class="dot" aria-hidden="true"></span>学习中 · 1 篇进行中</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
+
+    <a class="card" id="card-python" href="#">
+      <div class="card-head">
+        <span class="dir-badge" aria-hidden="true">Py</span>
+        <h3>Python</h3>
+        <span class="count">1 篇</span>
+      </div>
+      <p>语法基础、函数与装饰器、面向对象、常用标准库与工程化。</p>
+      <div class="card-foot">
+        <span class="status">规划中</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
+
+    <a class="card" id="card-ai" href="#">
+      <div class="card-head">
+        <span class="dir-badge" aria-hidden="true">AI</span>
+        <h3>AI</h3>
+        <span class="count">1 篇</span>
+      </div>
+      <p>机器学习基础、深度学习、大模型、提示工程、RAG 与 Agent。</p>
+      <div class="card-foot">
+        <span class="status">规划中</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
+
+    <a class="card" id="card-tools" href="#">
+      <div class="card-head">
+        <span class="dir-badge" aria-hidden="true">Tw</span>
+        <h3>工具</h3>
+        <span class="count">1 篇</span>
+      </div>
+      <p>Git、Docker、编辑器、终端效率、正则与网络调试。</p>
+      <div class="card-foot">
+        <span class="status">规划中</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
+
+    <!-- F4：未开放方向占位（演示禁用态，随 #disabled 出现） -->
+    <a class="card is-disabled" id="card-db" href="#" tabindex="-1" aria-disabled="true">
+      <div class="card-head">
+        <span class="dir-badge" aria-hidden="true">Db</span>
+        <h3>数据库</h3>
+        <span class="count">0 篇</span>
+      </div>
+      <p>MySQL、索引与执行计划、事务与锁、Redis。</p>
+      <div class="card-foot">
+        <span class="status">即将上线</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
+  </section>
+
+  <p class="hint" id="hint">当前状态：<code>#normal</code> — 三列网格默认视图。悬停任意卡片查看 F2 反馈。</p>
+</main>
+
+<script>
+  // ===== 状态路由：#normal / #hover / #focus / #disabled / #mobile =====
+  var HINTS = {
+    normal:  ['#normal', '三列网格默认视图。悬停任意卡片查看 F2 反馈。'],
+    hover:   ['#hover', 'Linux 卡预置悬停样式（抬升 + 描边 + 箭头位移），模拟 F2。'],
+    focus:   ['#focus', 'Java 卡展示 :focus-visible 双线焦点环（F3），Tab 顺序即视觉顺序。'],
+    disabled:['#disabled', '「数据库 · 即将上线」占位卡（F4）：60% 透明、不可聚焦、光标禁用。'],
+    mobile:  ['#mobile', '容器收窄至 380px 模拟移动端（F1 响应式）：单列全宽、徽章不换行。']
+  };
+
+  function applyState(state) {
+    if (!HINTS[state]) state = 'normal';
+    document.getElementById('stage').classList.toggle('narrow', state === 'mobile');
+    document.getElementById('card-linux').classList.toggle('is-hover', state === 'hover');
+    document.getElementById('card-java').classList.toggle('is-focus', state === 'focus');
+    document.getElementById('card-db').style.display = (state === 'disabled') ? '' : 'none';
+    document.getElementById('card-db').setAttribute('aria-hidden', state !== 'disabled');
+
+    var links = document.querySelectorAll('.states a');
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute('aria-current', links[i].getAttribute('href') === '#' + state ? 'true' : 'false');
+    }
+    document.getElementById('hint').innerHTML =
+      '当前状态：<code>' + HINTS[state][0] + '</code> — ' + HINTS[state][1];
+    document.title = '方向入口卡片 · ' + state + '（EXAMPLE）';
+  }
+
+  window.addEventListener('hashchange', function () { applyState(location.hash.slice(1)); });
+
+  // 主题切换（浅 / 深横切维度）
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    var root = document.documentElement;
+    var dark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', dark ? 'light' : 'dark');
+  });
+
+  applyState(location.hash.slice(1) || 'normal');
+</script>
+
+</body>
+</html>

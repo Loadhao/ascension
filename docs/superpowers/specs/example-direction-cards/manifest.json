@@ -1,0 +1,16 @@
+{
+  "featureId": "example-direction-cards",
+  "title": "方向入口卡片（示例）",
+  "uiLevel": "L2",
+  "revision": 1,
+  "confirmed": false,
+  "confirmedAt": null,
+  "widgets": [
+    {
+      "id": "widget",
+      "path": "after/widget.html",
+      "states": ["normal", "hover", "focus", "disabled", "mobile"]
+    }
+  ],
+  "notes": "EXAMPLE：示范资产，演示 L2 设计资产契约（manifest/spec/matrix/widget）与审批流程，无需确认，勿作为真实需求实现。真实资产获批时将 confirmed 置 true 并填写 confirmedAt。"
+}
