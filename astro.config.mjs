@@ -150,6 +150,35 @@ export default defineConfig({
           items: [
             { label: '学习路线', link: '/java/' },
             {
+              label: '基础',
+              collapsed: false,
+              items: [
+                {
+                  label: '集合框架',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/java/basic/collection/' },
+                    { label: 'HashMap 源码分析', link: '/java/basic/collection/hashmap/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '中级',
+              collapsed: false,
+              items: [
+                {
+                  label: '并发编程',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/java/intermediate/concurrent/' },
+                    { label: '线程基础', link: '/java/intermediate/concurrent/thread-basics/' },
+                    { label: '线程池详解', link: '/java/intermediate/concurrent/thread-pool/' },
+                  ],
+                },
+              ],
+            },
+            {
               label: '高级',
               collapsed: false,
               items: [
