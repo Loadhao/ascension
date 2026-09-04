@@ -1,0 +1,26 @@
+docs/superpowers/specs/site-redesign/spec.md
+  h_9324126a55eff3 6,8,10,12,14,16,21-28,30-31,38,40,42,49-59,62,64,66,72,74,76,78,84,86,88,94,96,98,100,102,104
+public/scripts/mermaid-interact.js
+  h_9324126a55eff3 1-172
+scripts/dev.sh
+  h_9324126a55eff3 1-74
+scripts/interact-verify.mjs
+  h_9324126a55eff3 1-97
+scripts/mermaid-shots.mjs
+  h_9324126a55eff3 1-40
+scripts/mermaid-verify.mjs
+  h_9324126a55eff3 1-35
+scripts/pulse-verify.mjs
+  h_9324126a55eff3 1-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "88223e65f09cca9d8e95860977aa37f15172603d",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
