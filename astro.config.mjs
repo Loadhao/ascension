@@ -213,6 +213,7 @@ export default defineConfig({
                         { label: '反向代理与负载均衡', link: '/nginx/intermediate/proxy/01-reverse-proxy-lb/' },
                         { label: 'HTTPS、缓存与限流', link: '/nginx/intermediate/proxy/02-https-cache-ratelimit/' },
                         { label: 'keepalived 与 Nginx 高可用', link: '/nginx/intermediate/proxy/03-keepalived-ha/' },
+                        { label: 'CDN 原理：调度、缓存与安全', link: '/nginx/intermediate/proxy/04-cdn/' },
                       ],
                     },
                   ],
@@ -313,6 +314,7 @@ export default defineConfig({
                         { label: 'Spring Boot 自动配置原理', link: '/java/intermediate/spring/05-springboot-autoconfig/' },
                         { label: 'MyBatis 集成：SqlSessionTemplate', link: '/java/intermediate/spring/06-mybatis-sqlsession/' },
                         { label: '认证与单点登录：JWT/OAuth2/SSO/CAS', link: '/java/intermediate/spring/07-auth-sso/' },
+                        { label: '统一异常处理：@RestControllerAdvice', link: '/java/intermediate/spring/08-exception-advice/' },
                       ],
                     },
                     {

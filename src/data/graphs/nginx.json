@@ -5,7 +5,8 @@
     { "id": "static", "label": "静态服务与日志", "href": "/nginx/basic/config/02-static-server/", "group": "配置基础" },
     { "id": "proxy", "label": "反向代理负载均衡", "href": "/nginx/intermediate/proxy/01-reverse-proxy-lb/", "group": "代理进阶" },
     { "id": "http", "label": "HTTPS 缓存限流", "href": "/nginx/intermediate/proxy/02-https-cache-ratelimit/", "group": "代理进阶" },
-    { "id": "keepalived", "label": "keepalived 高可用", "href": "/nginx/intermediate/proxy/03-keepalived-ha/", "group": "代理进阶" }
+    { "id": "keepalived", "label": "keepalived 高可用", "href": "/nginx/intermediate/proxy/03-keepalived-ha/", "group": "代理进阶" },
+    { "id": "cdn", "label": "CDN 原理", "href": "/nginx/intermediate/proxy/04-cdn/", "group": "代理进阶" }
   ],
   "edges": [
     { "source": "root", "target": "model" },
@@ -14,6 +15,7 @@
     { "source": "model", "target": "proxy", "label": "location + proxy_pass" },
     { "source": "proxy", "target": "http", "label": "TLS/缓存/限流" },
     { "source": "proxy", "target": "keepalived", "label": "入口不能是单点" },
-    { "source": "static", "target": "http", "label": "动静分离" }
+    { "source": "static", "target": "http", "label": "动静分离" },
+    { "source": "http", "target": "cdn", "label": "proxy_cache 的全球化版" }
   ]
 }
