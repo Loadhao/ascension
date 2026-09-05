@@ -75,6 +75,28 @@ p.z = 3           # AttributeError：没有 __dict__，不能新增属性
 | 新增属性 | 运行时随意加 | 声明之外一律拒绝 |
 | 多继承 | 自由 | 与带 `__dict__` 的类混用会失效 |
 
+内存差异的来源——**普通实例对象里塞了一个整个 `__dict__` 哈希表**，slots
+则省掉它、直接在预分配槽位：
+
+```mermaid
+flowchart LR
+    subgraph 普通["普通 class 实例"]
+        PD1["属性 x"] 
+        PD2["属性 y"]
+        DICT["__dict__ 哈希表<br/>（存属性名->值 的映射）"] -.指向.-> PD1
+        DICT -.指向.-> PD2
+    end
+    subgraph slots["__slots__ = (x, y) 实例"]
+        S1["槽位1 x"]
+        S2["槽位2 y"]
+    end
+    style 普通 fill:#f5f0e6
+    style slots fill:#eef3ea
+```
+
+普通版多背一个 `__dict__`（为空也占空间）——这就是 slots 省内存、但代价
+是"不能动态加属性"的原因。
+
 @dataclass 配套写法：
 
 ```python

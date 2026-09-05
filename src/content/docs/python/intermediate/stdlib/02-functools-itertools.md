@@ -82,6 +82,22 @@ errors = (l for l in lines if "ERROR" in l)
 top = islice(errors, 10)          # 生成器 + 生成器表达式 + islice
 ```
 
+为什么这段代码能扛住"无限大"的文件？因为**每个生成器都只是"按需吐一行"的
+惰性管道**，数据逐行流过、边取边弃，整条链同时只保留一行在内存：
+
+```mermaid
+flowchart LR
+    F["open 文件<br/>（每行由一个生成器吐出）"] --> S["strip 去空白<br/>生成器1"]
+    S --> E["过滤 ERROR<br/>生成器2"]
+    E --> I["islice 取前 10<br/>惰性切片"]
+    I --> C["消费端<br/>一次处理一行"]
+    note["全程只同时持有 1 行<br/>不把整个文件读进内存"]
+    style F fill:#f5f0e6
+```
+
+**一个生成器出口、星链式透传**：下游要一行，上游才吐一行；不要就停在原地，
+文件不会整体载入。
+
 ## 小结
 
 - `lru_cache` 只缓存纯函数，参数必须可哈希；`cached_property` 缓存重计算。

@@ -21,6 +21,25 @@ train = timer(train)
 装饰器 = **接收函数、返回新函数的高阶函数**。理解了这一点，所有装饰器
 都能手撕出来。前提是闭包（见[函数与闭包](/python/basic/functions/01-functions-closures/)）。
 
+用一张图看 `@f` 到底发生了什么——**它不是魔法，就是一次函数调用，把结果
+重新绑定到原名字**：
+
+```mermaid
+flowchart LR
+    subgraph sugar["写 @timer 时"]
+        A["def train(...)"] 
+    end
+    subgraph desugar["Python 等价展开"]
+        B["timer(原函数)"] --> C["返回 wrapper<br/>（包了新逻辑+透传参）"]
+        C --> D["train 重绑定 = wrapper"]
+    end
+    A --> B
+    style desugar fill:#f5f0e6
+```
+
+这正是"装饰后 train.__name__ 会变成 wrapper"的根源——除非用
+`functools.wraps` 把它复制回来。
+
 ## 无参装饰器
 
 ```python
@@ -67,7 +86,19 @@ def retry(times):
 def call_api(): ...
 ```
 
-记忆法：**看到 `@xxx(参数)`，装饰器就得多一层**。
+记忆法：**看到 `@xxx(参数)`，装饰器就得多一层**。原因是调用顺序被拉长了
+一层——`retry(3)` 先跑，返回的才是那个真正接收函数的东西：
+
+```mermaid
+flowchart LR
+    R["retry(3)<br/>外层函数先执行，返回 decorator"] --> D["decorator<br/>真正接收原函数"]
+    D --> W["wrapper<br/>闭包住 times 与原函数"]
+    W --> F["call_api 重绑定 = wrapper"]
+    style D fill:#f5f0e6
+```
+
+每一层只负责一件事：**外层收参数、中层收函数、内层收调用**——这就是
+"三明治"结构的由来。
 
 ## 注册表模式：装饰器最优雅的实战
 

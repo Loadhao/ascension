@@ -40,7 +40,27 @@ chore: 升级 webpack 到 5.x
 | GitHub Flow | main 常绿 + 短命 feature 分支 + PR | 持续部署的 Web 产品（大多数团队够用） |
 | Git Flow | main / develop / release / hotfix / feature | 有版本发布周期的客户端、嵌入式 |
 
-趋势是**从简**：小团队用 GitHub Flow，需要发版时加一个 release 分支即可。
+两种模型的生命线差异，画成图一眼看清**谁更扁平、谁更多道闸**：
+
+```mermaid
+flowchart LR
+    subgraph GH["GitHub Flow：main 常绿"]
+        GH_M[main] -->|feature/最短分支 + PR| GH_M
+    end
+    subgraph GF["Git Flow：多道闸"]
+        GF_F[feature] --> GF_D[develop]
+        GF_D --> GF_R[release]
+        GF_R --> GF_M[main]
+        GF_H[hotfix] --> GF_M
+        GF_H -.合并回.-> GF_D
+    end
+    style GH fill:#eef3ea
+    style GF fill:#f5f0e6
+```
+
+**一条给团队的主心骨**：小团队用 GitHub Flow 滚 main + PR 就行；当真需要
+"打 tag 发版 + hotfix 快修"时，再在 GitHub Flow 上加一个 release 分支即可，
+不必上家人的 Git Flow 全家桶。从简是趋势。
 
 ## 高频踩坑清单
 

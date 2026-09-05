@@ -22,6 +22,22 @@ else:
 对比 Java 的做法（循环外定义 flag 变量），for-else 把"找没找到"压缩成
 一个结构，不需要额外的哨兵变量。
 
+`else` 的执行条件用一个流程图看清——**只有"正常耗尽迭代"才进 else，
+被 break 打断就不进**：
+
+```mermaid
+flowchart TD
+    START["进入 for 循环"] --> IT{"还有下一个元素?"}
+    IT -- 是 --> B{"满足 break 条件?"}
+    B -- 是 --> BRK["break 跳出<br/>则 else 不执行"]
+    B -- 否 --> IT
+    IT -- "否（迭代耗尽）" --> ELSE["else 块执行<br/>即全程未被 break"]
+    style ELSE fill:#eef3ea
+```
+
+这正是 for-else 的实现原理：Python 在迭代器耗尽时才转去执行 else，一旦
+break 就跳过 else 直接离开循环。
+
 ## 解包：星号表达式
 
 ```python
