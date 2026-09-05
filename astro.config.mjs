@@ -301,6 +301,41 @@ export default defineConfig({
               ],
             },
             {
+              label: 'JS',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/js/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '语言核心',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/js/basic/core/' },
+                        { label: 'JS 语言核心速览', link: '/js/basic/core/01-js-fundamentals/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: 'Node.js 运行时',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/js/intermediate/node/' },
+                        { label: 'GC 与内存管理', link: '/js/intermediate/node/01-node-gc-memory/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
               label: 'Python',
               collapsed: true,
               items: [
@@ -456,6 +491,42 @@ export default defineConfig({
               ],
             },
             {
+              label: 'PostgreSQL',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/postgresql/' },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '高可用与集群',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/postgresql/intermediate/ha/' },
+                        { label: 'Pgpool-II 与 Postgres-XL', link: '/postgresql/intermediate/ha/01-pgpool-postgres-xl/' },
+                        { label: 'pgpool 容灾高可用', link: '/postgresql/intermediate/ha/02-pgpool-dr/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '高级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '性能优化',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/postgresql/advanced/performance/' },
+                        { label: 'PostgreSQL 性能优化笔记', link: '/postgresql/advanced/performance/01-tuning/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
               label: 'Redis',
               collapsed: true,
               items: [
@@ -502,6 +573,50 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/redis/advanced/ha/' },
                         { label: '高可用：主从、哨兵与集群', link: '/redis/advanced/ha/01-replication-sentinel-cluster/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              label: 'MongoDB',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/mongodb/' },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '复制集',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/mongodb/intermediate/replication/' },
+                        { label: '复制集原理', link: '/mongodb/intermediate/replication/01-replication-set/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '高级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '分片集群',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/mongodb/advanced/sharding/' },
+                        { label: '分片集群：架构与配置', link: '/mongodb/advanced/sharding/01-sharding-cluster/' },
+                      ],
+                    },
+                    {
+                      label: '运维与容量',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/mongodb/advanced/operations/' },
+                        { label: '容量规划与硬件配置', link: '/mongodb/advanced/operations/01-capacity-planning/' },
+                        { label: '性能优化与启动加载', link: '/mongodb/advanced/operations/02-performance/' },
                       ],
                     },
                   ],

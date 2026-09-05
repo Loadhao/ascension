@@ -1,0 +1,19 @@
+{
+  "nodes": [
+    { "id": "root", "label": "PostgreSQL", "group": "核心" },
+    { "id": "ha", "label": "高可用与集群", "group": "高可用" },
+    { "id": "pgpoolxl", "label": "Pgpool-II 与 Postgres-XL", "href": "/postgresql/intermediate/ha/01-pgpool-postgres-xl/", "group": "高可用" },
+    { "id": "pgpooldr", "label": "pgpool 容灾高可用", "href": "/postgresql/intermediate/ha/02-pgpool-dr/", "group": "高可用" },
+    { "id": "performance", "label": "性能优化", "group": "使用进阶" },
+    { "id": "tuning", "label": "性能调优全景", "href": "/postgresql/advanced/performance/01-tuning/", "group": "使用进阶" }
+  ],
+  "edges": [
+    { "source": "root", "target": "ha" },
+    { "source": "root", "target": "performance" },
+    { "source": "ha", "target": "pgpoolxl" },
+    { "source": "ha", "target": "pgpooldr" },
+    { "source": "performance", "target": "tuning" },
+    { "source": "pgpoolxl", "target": "pgpooldr", "label": "选定 pgpool 方案后落地" },
+    { "source": "pgpooldr", "target": "tuning", "label": "流复制依赖 WAL，调优反哺复制" }
+  ]
+}

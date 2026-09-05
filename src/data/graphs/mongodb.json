@@ -1,0 +1,19 @@
+{
+  "nodes": [
+    { "id": "root", "label": "MongoDB", "group": "核心" },
+    { "id": "replication", "label": "复制集原理", "href": "/mongodb/intermediate/replication/01-replication-set/", "group": "使用进阶" },
+    { "id": "sharding", "label": "分片集群", "href": "/mongodb/advanced/sharding/01-sharding-cluster/", "group": "高可用" },
+    { "id": "capacity", "label": "容量规划", "href": "/mongodb/advanced/operations/01-capacity-planning/", "group": "高可用" },
+    { "id": "performance", "label": "性能优化与启动加载", "href": "/mongodb/advanced/operations/02-performance/", "group": "高可用" }
+  ],
+  "edges": [
+    { "source": "root", "target": "replication" },
+    { "source": "root", "target": "sharding" },
+    { "source": "root", "target": "capacity" },
+    { "source": "root", "target": "performance" },
+    { "source": "replication", "target": "sharding", "label": "每个分片是一个复制集" },
+    { "source": "replication", "target": "capacity", "label": "副本数放大容量" },
+    { "source": "sharding", "target": "capacity", "label": "分片数预估" },
+    { "source": "capacity", "target": "performance", "label": "工作集决定缓存参数" }
+  ]
+}

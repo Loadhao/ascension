@@ -1,0 +1,13 @@
+---
+title: 复制集
+description: oplog 同步机制、心跳与多数派选举、故障转移时序、读写关注
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+复制集聚焦 MongoDB 生产部署的高可用底座：数据靠 oplog 滚动窗口同步，
+主节点故障靠心跳与多数派选举自动切换，读写一致性靠 readPreference 与
+writeConcern 声明。理解复制集也是学习分片集群的前提——每个分片本身
+就是一个复制集。点击右侧圆点可标记学习状态（未学 → 学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="mongodb/intermediate/replication" />
