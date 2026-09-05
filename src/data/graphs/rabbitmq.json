@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    { "id": "root", "label": "RabbitMQ", "group": "AMQP 模型" },
+    { "id": "model", "label": "交换机·队列·绑定", "href": "/rabbitmq/basic/core/01-amqp-model/", "group": "AMQP 模型" },
+    { "id": "reliable", "label": "可靠投递·确认", "href": "/rabbitmq/basic/core/02-reliable-delivery/", "group": "AMQP 模型" },
+    { "id": "dlq", "label": "死信与延迟消息", "href": "/rabbitmq/intermediate/usage/01-deadletter-delay/", "group": "可靠与进阶" },
+    { "id": "cluster", "label": "集群与高可用", "href": "/rabbitmq/intermediate/usage/02-cluster-ha/", "group": "可靠与进阶" }
+  ],
+  "edges": [
+    { "source": "root", "target": "model" },
+    { "source": "root", "target": "reliable" },
+    { "source": "model", "target": "reliable", "label": "路由后要确认" },
+    { "source": "reliable", "target": "dlq", "label": "ACK 失败归档" },
+    { "source": "reliable", "target": "cluster", "label": "持久化与副本" },
+    { "source": "dlq", "target": "cluster", "label": "监控告警" }
+  ]
+}

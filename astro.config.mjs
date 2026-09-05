@@ -507,6 +507,43 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: 'Elasticsearch',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/elasticsearch/' },
+                {
+                  label: '基础',
+                  collapsed: false,
+                  items: [
+                    {
+                      label: '基础核心',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/elasticsearch/basic/core/' },
+                        { label: '倒排索引：ES 的提速引擎', link: '/elasticsearch/basic/core/01-inverted-index/' },
+                        { label: '文档、分片与副本', link: '/elasticsearch/basic/core/02-shard-replica/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: false,
+                  items: [
+                    {
+                      label: '查询与聚合',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/elasticsearch/intermediate/usage/' },
+                        { label: 'Query DSL：match、term 与 bool', link: '/elasticsearch/intermediate/usage/01-query-dsl/' },
+                        { label: '聚合分析：度量、桶与管道', link: '/elasticsearch/intermediate/usage/02-aggregation/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
@@ -687,6 +724,43 @@ export default defineConfig({
                         { label: '概览', link: '/mqtt/intermediate/usage/' },
                         { label: 'Broker 选型与 EMQX 部署', link: '/mqtt/intermediate/usage/01-broker-emqx/' },
                         { label: '保活、重连与保留消息', link: '/mqtt/intermediate/usage/02-keepalive-reconnect/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              label: 'RabbitMQ',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/rabbitmq/' },
+                {
+                  label: '基础',
+                  collapsed: false,
+                  items: [
+                    {
+                      label: 'AMQP 模型',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/rabbitmq/basic/core/' },
+                        { label: 'AMQP 模型：交换机、队列与绑定', link: '/rabbitmq/basic/core/01-amqp-model/' },
+                        { label: '可靠投递：确认与持久化', link: '/rabbitmq/basic/core/02-reliable-delivery/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: false,
+                  items: [
+                    {
+                      label: '可靠与进阶',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/rabbitmq/intermediate/usage/' },
+                        { label: '死信队列与延迟消息', link: '/rabbitmq/intermediate/usage/01-deadletter-delay/' },
+                        { label: '集群、镜像队列与高可用', link: '/rabbitmq/intermediate/usage/02-cluster-ha/' },
                       ],
                     },
                   ],

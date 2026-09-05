@@ -1,0 +1,13 @@
+---
+title: 可靠与进阶
+description: 死信队列与延迟消息、集群与镜像队列、常见坑排查
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+基础篇解决了"消息怎么路由、怎么不丢"。真正摆平生产环境的是这些进阶姿势：
+**死信队列**把处理失败的消息归档而不是死循环、**延迟消息**支撑超时/定时场景、
+**集群与仲裁/镜像队列**扛高可用。这一批笔记把这些主题写透。点击右侧圆点
+可标记学习状态（未学 → 学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="rabbitmq/intermediate/usage" />

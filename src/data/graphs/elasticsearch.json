@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Elasticsearch", "group": "基础核心" },
+    { "id": "inverted", "label": "倒排索引与分词", "href": "/elasticsearch/basic/core/01-inverted-index/", "group": "基础核心" },
+    { "id": "shard", "label": "文档·分片·副本", "href": "/elasticsearch/basic/core/02-shard-replica/", "group": "基础核心" },
+    { "id": "query", "label": "Query DSL", "href": "/elasticsearch/intermediate/usage/01-query-dsl/", "group": "查询聚合" },
+    { "id": "agg", "label": "聚合分析", "href": "/elasticsearch/intermediate/usage/02-aggregation/", "group": "查询聚合" }
+  ],
+  "edges": [
+    { "source": "root", "target": "inverted" },
+    { "source": "root", "target": "shard" },
+    { "source": "inverted", "target": "query", "label": "match 检索" },
+    { "source": "shard", "target": "query", "label": "路由到分片" },
+    { "source": "query", "target": "agg", "label": "查询结果上聚合" },
+    { "source": "inverted", "target": "agg", "label": "keyword 精确值" }
+  ]
+}

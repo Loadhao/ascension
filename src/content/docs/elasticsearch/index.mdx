@@ -1,0 +1,28 @@
+---
+title: Elasticsearch
+description: Elasticsearch 方向学习路线与知识地图：倒排索引、分词与映射、查询 DSL 与聚合、集群与调优
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/elasticsearch.json';
+
+## 学习路线
+
+按等级推进，每级下按主题分类。点击分类进入该主题的知识点目录；点击圆点标记学习状态：
+○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖 **基础核心**（倒排索引、分词与映射、文档/分片）→ **查询聚合**
+（Query DSL、全文与精确查询、聚合分析），后续可扩展集群架构、写入/查询优化、
+Logstash/Kibana 生态与日志场景等主题。
+
+<RoadmapIsland directionId="elasticsearch" />
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
+图谱数据维护在 `src/data/graphs/elasticsearch.json`。
+:::

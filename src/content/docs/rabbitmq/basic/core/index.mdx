@@ -1,0 +1,13 @@
+---
+title: AMQP 模型
+description: 生产者/交换机/队列分层、四类交换机 routing 语义、消息确认 —— 先看懂 RabbitMQ 的骨架
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+RabbitMQ 是 **AMQP 0-9-1 协议**的代表实现。理解它的钥匙是那条链：
+**生产者 → 交换机 → 队列 → 消费者**——交换机和队列之间的绑定规则，决定了
+一条消息流向哪里。这一篇把模型与四类交换机的路由语义讲透，是后续可靠性与
+死信/延迟的基础。点击右侧圆点可标记学习状态（未学 → 学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="rabbitmq/basic/core" />
