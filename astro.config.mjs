@@ -197,7 +197,6 @@ export default defineConfig({
                 },
                 {
                   label: 'Spring 框架',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/java/intermediate/spring/' },
@@ -210,7 +209,6 @@ export default defineConfig({
                 },
                 {
                   label: '设计模式',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/java/intermediate/design-pattern/' },
@@ -239,7 +237,6 @@ export default defineConfig({
                 },
                 {
                   label: 'Spring Cloud 微服务',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/java/advanced/springcloud/' },
@@ -265,7 +262,6 @@ export default defineConfig({
               items: [
                 {
                   label: 'MySQL 基础',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/database/basic/mysql/' },
@@ -275,7 +271,6 @@ export default defineConfig({
                 },
                 {
                   label: 'Redis 基础',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/database/basic/redis/' },
@@ -291,7 +286,6 @@ export default defineConfig({
               items: [
                 {
                   label: 'MySQL 进阶',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/database/intermediate/mysql/' },
@@ -302,7 +296,6 @@ export default defineConfig({
                 },
                 {
                   label: 'Redis 进阶',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/database/intermediate/redis/' },
@@ -319,7 +312,6 @@ export default defineConfig({
               items: [
                 {
                   label: 'MySQL 高级',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/database/advanced/mysql/' },
@@ -329,7 +321,6 @@ export default defineConfig({
                 },
                 {
                   label: 'Redis 高级',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/database/advanced/redis/' },
@@ -351,7 +342,6 @@ export default defineConfig({
               items: [
                 {
                   label: '理论基石',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/distributed/basic/theory/' },
@@ -367,7 +357,6 @@ export default defineConfig({
               items: [
                 {
                   label: '共识算法',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/distributed/intermediate/consensus/' },
@@ -376,7 +365,6 @@ export default defineConfig({
                 },
                 {
                   label: '分布式事务',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/distributed/intermediate/transaction/' },
@@ -392,7 +380,6 @@ export default defineConfig({
               items: [
                 {
                   label: '数据一致性',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/distributed/advanced/consistency/' },
@@ -401,7 +388,6 @@ export default defineConfig({
                 },
                 {
                   label: '高可用与容灾',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/distributed/advanced/availability/' },
@@ -410,7 +396,6 @@ export default defineConfig({
                 },
                 {
                   label: '可观测性',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/distributed/advanced/observability/' },
@@ -432,7 +417,6 @@ export default defineConfig({
               items: [
                 {
                   label: '消息队列基础',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/middleware/basic/mq/' },
@@ -448,7 +432,6 @@ export default defineConfig({
               items: [
                 {
                   label: 'Kafka 核心',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/middleware/intermediate/kafka/' },
@@ -465,7 +448,6 @@ export default defineConfig({
               items: [
                 {
                   label: 'RocketMQ 专题',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/middleware/advanced/rocketmq/' },
@@ -489,7 +471,6 @@ export default defineConfig({
               items: [
                 {
                   label: '语法基础',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/python/basic/syntax/' },
@@ -501,7 +482,6 @@ export default defineConfig({
                 },
                 {
                   label: '数据结构',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/python/basic/data-structures/' },
@@ -511,7 +491,6 @@ export default defineConfig({
                 },
                 {
                   label: '函数与装饰器',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/python/basic/functions/' },
@@ -522,7 +501,6 @@ export default defineConfig({
                 },
                 {
                   label: '面向对象',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/python/basic/oop/' },
@@ -539,7 +517,6 @@ export default defineConfig({
               items: [
                 {
                   label: '常用标准库',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/python/intermediate/stdlib/' },
@@ -551,7 +528,6 @@ export default defineConfig({
                 },
                 {
                   label: '第三方生态',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/python/intermediate/libs/' },
@@ -568,7 +544,6 @@ export default defineConfig({
               items: [
                 {
                   label: '工程化',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/python/advanced/eng/' },
@@ -660,7 +635,6 @@ export default defineConfig({
               items: [
                 {
                   label: '基础概念与命令',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/docker/basic/fundamentals/' },
@@ -677,7 +651,6 @@ export default defineConfig({
               items: [
                 {
                   label: '实战进阶',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/docker/intermediate/practice/' },
@@ -694,7 +667,6 @@ export default defineConfig({
               items: [
                 {
                   label: '编排与原理',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/docker/advanced/orchestration/' },
@@ -718,7 +690,6 @@ export default defineConfig({
               items: [
                 {
                   label: '基础入门',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/git/basic/foundations/' },
@@ -734,7 +705,6 @@ export default defineConfig({
               items: [
                 {
                   label: '协作开发',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/git/intermediate/collaboration/' },
@@ -751,7 +721,6 @@ export default defineConfig({
               items: [
                 {
                   label: '高级工作流',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/git/advanced/workflow/' },
@@ -775,7 +744,6 @@ export default defineConfig({
               items: [
                 {
                   label: '命令行工具',
-                  badge: '分类',
                   collapsed: false,
                   items: [
                     { label: '概览', link: '/tools/basic/cli/' },
