@@ -189,6 +189,28 @@ export default defineConfig({
           ],
         },
         {
+          label: 'Tomcat',
+          collapsed: true,
+          items: [
+            { label: '学习路线', link: '/tomcat/' },
+            {
+              label: '基础',
+              collapsed: true,
+              items: [
+                {
+                  label: '架构与原理',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/tomcat/basic/architecture/' },
+                    { label: 'Web 容器的本质', link: '/tomcat/basic/architecture/01-web-container/' },
+                    { label: 'Jetty 架构与 Tomcat 对比', link: '/tomcat/basic/architecture/02-jetty-architecture/' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
           label: '编程语言',
           collapsed: true,
           items: [

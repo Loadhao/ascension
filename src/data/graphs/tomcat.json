@@ -1,0 +1,11 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Tomcat", "group": "核心" },
+    { "id": "webcontainer", "label": "Web 容器的本质", "href": "/tomcat/basic/architecture/01-web-container/", "group": "架构" },
+    { "id": "jetty", "label": "Jetty 架构与对比", "href": "/tomcat/basic/architecture/02-jetty-architecture/", "group": "架构" }
+  ],
+  "edges": [
+    { "source": "root", "target": "webcontainer" },
+    { "source": "webcontainer", "target": "jetty", "label": "同为 HTTP 服务器 + Servlet 容器" }
+  ]
+}
