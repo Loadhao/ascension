@@ -185,6 +185,47 @@ Feign 默认 `feign.Client.Default` 走 JDK `HttpURLConnection`：**每次新建
 无连接池**，高并发时握手开销明显。换 OkHttp/Apache 得到连接池 + HTTP/2
 支持，冷启动和高吞吐场景收益大——配置就一行 `okhttp.enabled: true`。
 
+## 拦截器透传 traceId 与登录态（深入）
+
+Feign 一个极易踩又极常见的问题是：**网关/调用方带的 token、traceId 到了
+Feign 这就断了**。OpenFeign 提供 `RequestInterceptor`，在每次真实请求发出
+前统一给**带上当前上下文**：
+
+```java
+@Component
+public class PropagateHeaderInterceptor implements RequestInterceptor {
+    @Override
+    public void apply(RequestTemplate template) {
+        // ① 透传链路追踪 id：取 MDC 里当前请求的 traceId
+        String traceId = MDC.get("traceId");
+        if (traceId != null) {
+            template.header("X-Trace-Id", traceId);
+        }
+
+        // ② 透传登录态：从 Spring Security / ThreadLocal 取当前用户 token
+        String token = StpUtil != null ? (String) StpUtil.getTokenValue() : null;
+        if (token != null) {
+            template.header("Authorization", "Bearer " + token);
+        }
+    }
+}
+```
+
+**为什么必须靠拦截器而不是手动传参**：token、traceId 是**跨服务通用**的横切
+属性，用拦截器统一注入，调方代码零侵入；手动传参则每个方法都要加个无关参数，
+极易遗漏。这和大方向一篇说的"横切关注点抽成切面"是同一个思想。
+
+### 两个高频坑
+
+| 现象 | 根因 | 处理 |
+|---|---|---|
+| 下游拿不到当前用户 | 拦截器没生效，或 `MDC`/安全上下文清空 | 确认拦截器被扫描到、上下文在同一调用链 set 了 |
+| 拦截器能写 header 但某请求没透传 | 用的模板方法与拦截器分支没覆盖（如 FormBody） | 在 `apply` 里 `debug` 打印 template，别猜 |
+| traceId 每跳变化 | 只透传没在下游重新设 `MDC` | 下游按 `X-Trace-Id` 重建 MDC，链路才"连续" |
+
+链路追踪的"连续"除了头透传，还要求**下游把收到的 traceId 写回自己的 MDC**
+再继续往下带——只做一半就出现"中间一段 traceId 一样、再往后就断了"。
+
 ## 小结
 
 - OpenFeign = 注解契约 + JDK 动态代理 + 注册中心寻址，声明式让远程调用

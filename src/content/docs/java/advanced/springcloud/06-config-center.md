@@ -116,6 +116,54 @@ public class OrderProperties {
 - 直连 Nacos 验证配置真的在：`curl http://{nacos}:8848/nacos/v1/cs/configs?` 带
   dataId/group/namespace 拉一下，先排除"配置压根没发布成功"这一环。
 
+## 多环境隔离与配置灰度/回滚（深入）
+
+配置中心不只是"收拢配置"，更是**环境与发布策略的载体**。两套常用隔离维度：
+
+```text
+① Namespace = 环境大隔离
+   namespace: dev / test / prod
+   └─ 各自独立 set 配置，互不可见（适合"环境彻底分隔"）
+
+② Group / DataId 后缀 = 应用维度
+   group: DEFAULT_GROUP（默认）
+   dataId: user-service.yaml / user-service-gray.yaml
+   └─ 同一环境里按应用/灰度区分
+```
+
+**一个生产常用组合**：Namespace 切环境（dev/test/prod 不串）、Group 或
+DataId 后缀切灰度。给"灰度版本"单独一个 `-gray` 配置，只有灰度节点指向它，
+就能做到**配置灰度**（新配置先给小流量验证）。
+
+```yaml
+spring:
+  config:
+    import: "optional:nacos:user-service.yaml"      # 正式
+  cloud:
+    nacos:
+      config:
+        server-addr: nacos:8848
+        group: DEFAULT_GROUP
+        # 灰度节点覆盖到这里（或单独一个 `-gray.yaml`）
+```
+
+**灰度/回滚怎么操作（要点）：**
+
+1. **灰度**：先发一条新配置给灰度 dataId，验证通过再同步/升级为正式，别一上来
+   覆盖正式配置。
+2. **回滚**：Nacos 配置页带**历史版本**，能 diff 并一键回退到上一版——出问题
+   时这是最快救法（比多实例改代码快得多）。
+3. **回归纪律**：任何重要配置改动留"旧值可查"，用版本号对齐"哪个实例用的哪版"，
+   否则多实例 + 灰度混用时，追责全靠猜。
+
+### 环境易混的坑
+
+| 现象 | 根因 |
+|---|---|
+| 测试环境连到了 prod 的配置 | `namespace` 没配，默认 namespace 大家共用 |
+| 灰度上了实际全量生效 | 灰度节点没单独 namespace/group，和正式读的是同一份 |
+| 回滚了仍旧旧值 | 实例的 `@RefreshScope` 没触发，或回滚的是别的分组 |
+
 ## 小结
 
 - 配置中心收拢配置 + 动态刷新，免去微服务全量重启发版。

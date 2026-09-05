@@ -115,6 +115,71 @@ Stream（尤其 Kafka Binder）有自动背压：`Consumer` 处理不过来时�
 | 重启后重复消费 | 是否配了稳定的 group |
 | 消息积压但消费者空闲 | 处理函数里是不是卡在阻塞 IO |
 
+## 可靠性端到端：从生产者确认到消费成功（深入）
+
+很多人"用了 Stream 就以为消息绝对可靠"，其实可靠性要三段都接住——且
+Stream 的配置项正好一一对应三段：
+
+| 环节 | 对应 Stream 配置 / 行为 | 注记 |
+|---|---|---|
+| 生产者发成功 | Kafka Binder 的 `required-acks`（默认 all） | 相当于"broker 确认落盘" |
+| broker 不丢 | `replication.factor` + 参数 | 对应队列/主题副本冗余 |
+| 消费不丢 | 手动确认模式 `ackMode: MANUAL` | 成功才 ack，失败可重投 |
+| 不重复 | 业务幂等（唯一键去重） | Stream 只保证"至少一次" |
+
+```yaml
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          required-acks: all              # 生产端：副本都确认才算发成功
+          min-partition-count: 3
+      bindings:
+        monitor-in-0:
+          consumer:
+            ack-mode: MANUAL               # 消费端：手动 ack，不自动假装成功
+```
+
+**一个"手动 ack"场景下最容易踩的坑**：消费函数里**异常要自己捕获并按需重投**，
+否则抛异常时若开启了重试耗尽策略，消息可能进死信/丢弃。可靠性的铁律不变：
+**"不丢"看 broker + 确认，"不重"看业务幂等**——Stream 只是把这三个开关
+替你摆了位置，不改变责任边界。
+
+## Function 三形态与多 topic 拓扑（深入）
+
+除了 `Supplier`（只出）与 `Consumer`（只进），还有 `Function`（梯形：进→出），
+以及用 `Supplier<Flux<...>>` 做**多路输出**。拓扑决定绑定数量：
+
+```java
+// 只进：monitor-in-0
+@Bean Consumer<Monitor> consume() { ... }
+
+// 只出：send-out-0
+@Bean Supplier<Monitor> send() { ... }
+
+// 进出变换：transform-in-0 → transform-out-0（一个函数对应两个绑定）
+@Bean Function<Flux<Monitor>, Flux<Metric>> normalize() {
+    return in -> in.map(Monitor::toMetric);
+}
+
+// 多输出：用 returnMultiple / orElseThrow 区分 out-0 / out-1
+@Bean Function<Flux<Order>, Flux<?>> route() { ... }
+```
+
+**拓扑设计的两个实战原则：**
+
+1. **一个 Consumer 方法 = 一个消费绑定**；要么按"topic 数量"对齐方法数，
+   要么用 `Function` 加路由（`StreamBridge`）手动指定发往不同 destination。
+2. 用 `StreamBridge` 动态发消息更灵活：
+
+   ```java
+   StreamBridge.send("monitor-topic", payload);   // 不写死绑定名，运行期指定
+   ```
+
+适用度排序：**简单固定拓扑用函数式绑定；动态路由/多 destination 用 StreamBridge**。
+纠结时先选绑定量少的，别上来就多路。
+
 ## 小结
 
 - Stream 用 Binder 抽象掉具体 MQ，业务只依赖信道/绑定。

@@ -159,6 +159,65 @@ Mono.fromCallable(() -> jdbc.query(...))
 | 网关 504、后端明明正常 | 先查是不是 GlobalFilter 里包了阻塞操作拖垮 EventLoop |
 | 某些路径能通、某些 404 | 断言没匹配上 → 逐个 `curl -H` 验证 Predicate，别猜 |
 
+## 一个可跑的 JWT 鉴权 GlobalFilter（深入）
+
+前面是概念与坑，这里给一个**能直接粘进项目**的最小鉴权过滤器，顺带演示
+GlobalFilter + 白名单 + 响应式回调拒绝三个姿势：
+
+```java
+@Component
+public class JwtAuthFilter implements GlobalFilter, Ordered {
+
+    private final ReactiveStringRedisTemplate redis;   // 用 Redis 做失效名单
+
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        String path = exchange.getRequest().getURI().getPath();
+
+        // ① 白名单：登录、健康检查直接放行
+        if (path.startsWith("/api/auth/") || path.equals("/actuator/health")) {
+            return chain.filter(exchange);
+        }
+
+        // ② 取 token，空则直接 401 结束（不再进链）
+        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        if (token == null || token.isBlank()) {
+            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            return exchange.getResponse().setComplete();
+        }
+
+        // ③ 校验签名（纯内存运算，允许在 EventLoop 上）
+        Claims claims = JwtUtil.parse(token);
+        // ④ 查"是否已被强制下线"（用 tokenId 走 Redis，属 IO → 得切线程池）
+        return redis.hasKey("jwt:black:" + claims.get("jti"))
+            .defaultIfEmpty(false)
+            .flatMap(blacklisted -> {
+                if (blocklisted) {                         // 黑名单 → 403
+                    exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
+                    return exchange.getResponse().setComplete();
+                }
+                exchange.getRequest().mutate()              // 把用户身份传给下游
+                    .header("X-UserId", claims.get("uid").toString()).build();
+                return chain.filter(exchange);              // 放行
+            })
+            .subscribeOn(Schedulers.boundedElastic());      // Redis IO 走受限线程池
+    }
+
+    @Override
+    public int getOrder() { return -100; }                  // 尽量先执行
+}
+```
+
+**这个例子里最容易被忽略的约束**：第④步碰了 Redis（阻塞 IO），所以必须
+`.subscribeOn(Schedulers.boundedElastic())`——否则又掉进"EventLoop 被阻塞"
+的坑。**纯内存的 JWT 校验直接写，IO 一律丢线程池**，这是网关过滤器的铁律。
+
+### 白名单放行为什么在过滤器里最早判
+
+白名单放行意味着**后续过滤器全部不执行**、也不需要 token——把它判最前，
+既省解析又避免"健康检查"这类入口被误挡。顺序由 `@Order` 排序 + 流程内分支
+共同保证，别只依赖注解。
+
 ## 小结
 
 - 网关收拢横切关注点：鉴权、限流、跨域、灰度，是微服务唯一流量入口。

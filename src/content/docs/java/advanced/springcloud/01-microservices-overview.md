@@ -129,6 +129,50 @@ TCC、SEATA）。所以判断标准是：
 | 为"备案"而拆 | 没有差异化扩容/并行需求 | 模块化单体更省 |
 | 分布式事务铺天盖地 | 配置里一堆 Seata/TCC | 反思边界是否切错了 |
 
+## 版本 BOM 对齐：新手第一大坑（深入）
+
+三层组件（Spring Boot / Spring Cloud / Spring Cloud Alibaba）版本必须靠
+**官方 BOM 钉死**，否则启动即崩。给你可以直接照抄的装法：
+
+```xml
+<dependencyManagement>
+  <dependencies>
+    <!-- ① Spring Boot：语义化版本，如 3.2.x -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-dependencies</artifactId>
+      <version>3.2.0</version>
+      <type>pom</type><scope>import</scope>
+    </dependency>
+    <!-- ② Spring Cloud：一套 BOM 统管 Cloud 全家桶版本 -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-dependencies</artifactId>
+      <version>2023.0.0</version>
+      <type>pom</type><scope>import</scope>
+    </dependency>
+    <!-- ③ Alibaba 组件：需与上面两套兼容的配套版本 -->
+    <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+      <version>2023.0.1.0</version>
+      <type>pom</type><scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+```
+
+**为什么必须三条都写**：Spring Cloud 只管官方组件（Gateway/OpenFeign），
+Alibaba 管它的那一套（Nacos/Sentinel/Seata）。只引了 Cloud BOM 却没引
+Alibaba BOM，`nacos-client-spring-cloud` 的版本就是"飘的"。
+
+**对齐三字口诀：查对照表，不猜**。官方 release note 里每行是
+`Boot x.y.z ↔ Cloud ABC ↔ Alibaba a.b.c`，照着填。装完后**启动首屏若报
+`NoSuchMethodError` / `ClassNotFoundException`，先把三处版本回退到对照表
+一行再往下查**——九成是这个没对齐，不是代码问题。
+
+一个篱笆三根桩：BOM 定版本、不手动逐组件写版本、升级一次动统一处。
+
 ## 小结
 
 + 微服务换的是"并行研发 + 精准扩容"，付的是"分布式一切成本"。

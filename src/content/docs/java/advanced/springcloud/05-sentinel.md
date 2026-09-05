@@ -185,6 +185,39 @@ HALF_OPEN
 2. `minRequestAmount` 太大会导致**流量小的接口永远不触发熔断**（样本不足）
    而失控，冷门接口要调小它；反之高流量接口抢 CPU 时它反而是保护。
 
+## 规则为何要外置：从 Nacos 落到内存的链路（深入）
+
+Sentinel 的规则**默认只存在 JVM 内存**，重启即失。生产用
+`sentinel-datasource-nacos` 把它拉到 Nacos。很多人配了却摸不清"改了何时生效"，
+把链路拆开：
+
+```mermaid
+flowchart LR
+    N["Nacos 配置<br/>order-service-flow-rules"] -->|"sentinel-datasource-nacos<br/>监听 data/group"| DS["DataSource"]
+    DS -->|"解析成 List<FlowRule>"| SENTINAL["Sentinel 规则管理<br/>更新内存中的规则集"]
+    SENTINAL -->|"下一个请求命中该资源"| CHK["按新规则判定"]
+```
+
+**四个必懂的点：**
+
+1. **数据源是"监听 + 拉取"，不是"只读一次"**：Nacos 里改规则，数据源推新的
+   `List<...>` 给 Sentinel，内存规则立刻更新——所以**改规则不用重启**。
+2. **重启后规则哪来**：应用启动 → 数据源从 Nacos 拉一次 → 规则重建。
+   **内存与 Nacos 的"当前值"由数据源负责对齐**，这正是不外置就"重启丢规则"的原因。
+3. **`rule-type` 决定解析器**：`flow`（限流）、`degrade`（熔断）、`param-flow`
+   （热点）…… 规则 JSON 的字段随类型不同，`rule-type` 配错会解析失败。
+4. **规则下发是"覆盖式"**：一次拉起的就是该资源规则集的全量，Nacos 里删掉
+   某条，内存里也会少——不是只增量。
+
+**排障 "改了规则但没生效"：**
+
+| 现象 | 排查 |
+|---|---|
+| 控制台能看到、运行不按新规则 | DataSource 没连上 Nacos（server-addr/data-id/group 错一个都不行） |
+| 日志报 rule-type 解析异常 | `rule-type` 与实际 rules JSON 的类型对不上 |
+| 重启后规则又变默认 | 数据源没配或没扫到，回退了纯内存 |
+| 改了限流阈值没变化 | 确认改的是**同一 data-id/group**，且资源名 `value` 一致 |
+
 ## 小结
 
 - 雪崩机制 = 慢依赖 + 同步无界等待 → 线程池耗尽；限流管入口量，熔断
