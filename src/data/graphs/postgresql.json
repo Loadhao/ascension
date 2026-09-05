@@ -1,10 +1,10 @@
 {
   "nodes": [
     { "id": "root", "label": "PostgreSQL", "group": "核心" },
-    { "id": "ha", "label": "高可用与集群", "group": "高可用" },
+    { "id": "ha", "label": "高可用与集群", "href": "/postgresql/intermediate/ha/", "group": "高可用" },
     { "id": "pgpoolxl", "label": "Pgpool-II 与 Postgres-XL", "href": "/postgresql/intermediate/ha/01-pgpool-postgres-xl/", "group": "高可用" },
     { "id": "pgpooldr", "label": "pgpool 容灾高可用", "href": "/postgresql/intermediate/ha/02-pgpool-dr/", "group": "高可用" },
-    { "id": "performance", "label": "性能优化", "group": "使用进阶" },
+    { "id": "performance", "label": "性能优化", "href": "/postgresql/advanced/performance/", "group": "使用进阶" },
     { "id": "tuning", "label": "性能调优全景", "href": "/postgresql/advanced/performance/01-tuning/", "group": "使用进阶" }
   ],
   "edges": [

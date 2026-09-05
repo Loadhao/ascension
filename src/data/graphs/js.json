@@ -2,13 +2,11 @@
   "nodes": [
     { "id": "root", "label": "JS", "group": "核心" },
     { "id": "langcore", "label": "语言核心速览", "href": "/js/basic/core/01-js-fundamentals/", "group": "核心" },
-    { "id": "gcmemory", "label": "GC 与内存管理", "href": "/js/intermediate/node/01-node-gc-memory/", "group": "运行时" },
-    { "id": "ecosystem", "label": "生态与工程化", "group": "运行时" }
+    { "id": "gcmemory", "label": "GC 与内存管理", "href": "/js/intermediate/node/01-node-gc-memory/", "group": "运行时" }
   ],
   "edges": [
     { "source": "root", "target": "langcore" },
     { "source": "root", "target": "gcmemory" },
-    { "source": "langcore", "target": "gcmemory", "label": "闭包泄漏进 V8 堆" },
-    { "source": "gcmemory", "target": "ecosystem" }
+    { "source": "langcore", "target": "gcmemory", "label": "闭包泄漏进 V8 堆" }
   ]
 }
