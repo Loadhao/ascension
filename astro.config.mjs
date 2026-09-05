@@ -252,6 +252,7 @@ export default defineConfig({
                         { label: '循环依赖与三级缓存', link: '/java/intermediate/spring/03-circular-dependency/' },
                         { label: '事务与传播机制', link: '/java/intermediate/spring/04-transaction/' },
                         { label: 'Spring Boot 自动配置原理', link: '/java/intermediate/spring/05-springboot-autoconfig/' },
+                        { label: 'MyBatis 集成：SqlSessionTemplate', link: '/java/intermediate/spring/06-mybatis-sqlsession/' },
                       ],
                     },
                     {
@@ -453,6 +454,14 @@ export default defineConfig({
                         { label: '概览', link: '/mysql/basic/core/' },
                         { label: '一条 SQL 的执行流程', link: '/mysql/basic/core/01-sql-execution/' },
                         { label: '索引与 B+ 树', link: '/mysql/basic/core/02-index-btree/' },
+                      ],
+                    },
+                    {
+                      label: '原理与范式',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/mysql/basic/theory/' },
+                        { label: '函数依赖与三范式', link: '/mysql/basic/theory/01-normal-forms/' },
                       ],
                     },
                   ],

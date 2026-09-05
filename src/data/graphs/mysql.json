@@ -3,6 +3,7 @@
     { "id": "root", "label": "MySQL", "group": "核心" },
     { "id": "sqlexec", "label": "SQL 执行流程", "href": "/mysql/basic/core/01-sql-execution/", "group": "核心机制" },
     { "id": "index", "label": "索引与 B+ 树", "href": "/mysql/basic/core/02-index-btree/", "group": "核心机制" },
+    { "id": "normforms", "label": "函数依赖与三范式", "href": "/mysql/basic/theory/01-normal-forms/", "group": "核心机制" },
     { "id": "mvcc", "label": "事务与 MVCC", "href": "/mysql/intermediate/transaction-lock/01-transaction-mvcc/", "group": "事务与锁" },
     { "id": "locks", "label": "锁机制", "href": "/mysql/intermediate/transaction-lock/02-locks/", "group": "事务与锁" },
     { "id": "logs", "label": "三大日志", "href": "/mysql/intermediate/transaction-lock/03-redo-undo-binlog/", "group": "事务与锁" },
@@ -12,6 +13,8 @@
   "edges": [
     { "source": "root", "target": "sqlexec" },
     { "source": "root", "target": "index" },
+    { "source": "root", "target": "normforms" },
+    { "source": "normforms", "target": "index", "label": "表怎么设计" },
     { "source": "sqlexec", "target": "index", "label": "数据怎么组织" },
     { "source": "index", "target": "mvcc", "label": "并发读写" },
     { "source": "mvcc", "target": "locks", "label": "写写冲突" },
