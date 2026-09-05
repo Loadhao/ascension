@@ -2,11 +2,16 @@
   "nodes": [
     { "id": "root", "label": "JS", "group": "核心" },
     { "id": "langcore", "label": "语言核心速览", "href": "/js/basic/core/01-js-fundamentals/", "group": "核心" },
-    { "id": "gcmemory", "label": "GC 与内存管理", "href": "/js/intermediate/node/01-node-gc-memory/", "group": "运行时" }
+    { "id": "gcmemory", "label": "GC 与内存管理", "href": "/js/intermediate/node/01-node-gc-memory/", "group": "运行时" },
+    { "id": "websocket", "label": "WebSocket 原理", "href": "/js/intermediate/web/01-websocket/", "group": "网络" },
+    { "id": "cors", "label": "同源与跨域", "href": "/js/intermediate/web/02-cors/", "group": "网络" }
   ],
   "edges": [
     { "source": "root", "target": "langcore" },
     { "source": "root", "target": "gcmemory" },
-    { "source": "langcore", "target": "gcmemory", "label": "闭包泄漏进 V8 堆" }
+    { "source": "langcore", "target": "gcmemory", "label": "闭包泄漏进 V8 堆" },
+    { "source": "root", "target": "websocket" },
+    { "source": "root", "target": "cors" },
+    { "source": "websocket", "target": "cors", "label": "不受同源限制" }
   ]
 }

@@ -242,6 +242,8 @@ export default defineConfig({
                         { label: 'synchronized 与锁升级', link: '/java/intermediate/concurrent/04-synchronized/' },
                         { label: 'AQS 抽象队列同步器', link: '/java/intermediate/concurrent/05-aqs/' },
                         { label: 'ThreadLocal 原理与内存泄漏', link: '/java/intermediate/concurrent/06-threadlocal/' },
+                        { label: 'LongAdder 高并发计数', link: '/java/intermediate/concurrent/07-longadder/' },
+                        { label: '阻塞队列与 ArrayBlockingQueue', link: '/java/intermediate/concurrent/08-blocking-queue/' },
                       ],
                     },
                     {
@@ -333,6 +335,15 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/js/intermediate/node/' },
                         { label: 'GC 与内存管理', link: '/js/intermediate/node/01-node-gc-memory/' },
+                      ],
+                    },
+                    {
+                      label: '网络与通信',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/js/intermediate/web/' },
+                        { label: 'WebSocket 原理', link: '/js/intermediate/web/01-websocket/' },
+                        { label: '同源策略与九种跨域方案', link: '/js/intermediate/web/02-cors/' },
                       ],
                     },
                   ],
