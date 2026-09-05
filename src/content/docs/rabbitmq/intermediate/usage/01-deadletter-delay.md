@@ -55,6 +55,53 @@ flowchart LR
 - 延迟队列里塞了海量不同 TTL 的消息，会堆积在队头缓慢过期——延迟粒度
   太碎时慎用 TTL 方案，考虑插件或分级队列。
 
+## 跑通一个真实的延迟场景：订单超时自动取消（深入）
+
+把"TTL + 死信"从概念落成**能跑的最小实现**：下单 30 分钟未支付 → 自动取消。
+
+**Step 1：声明"延迟中转队列"，不消费、只等过期**
+
+```java
+Map<String, Object> args = new HashMap<>();
+args.put("x-message-ttl", 30 * 60 * 1000);          // 30 分钟 TTL
+args.put("x-dead-letter-exchange", "order.cancel.ex"); // 过期后转给它
+args.put("x-dead-letter-routing-key", "order.cancel");
+ch.queueDeclare("delay-queue", true, false, false, args);
+ch.exchangeDeclare("order.cancel.ex", BuiltinExchangeType.DIRECT, true);
+ch.queueDeclare("cancel-queue", true, false, false, null);
+ch.queueBind("cancel-queue", "order.cancel.ex", "order.cancel");
+```
+
+**Step 2：下单时把"取消命令"丢进延迟队列**
+
+```java
+ch.basicPublish("", "delay-queue",                        // 默认交换机同名队列
+    new AMQP.BasicProperties.Builder()
+        .deliveryMode(2).build(),
+    ("cancel:" + orderId).getBytes(StandardCharsets.UTF_8));
+```
+
+**Step 3：消费者监听取消队列，到点执行**
+
+```java
+// cancel-queue 的消费者：收到就执行取消（先查是否已支付，避免误取消）
+delivery -> {
+    if (orderNotPaidYet(orderId)) cancelOrder(orderId);
+    ch.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+};
+```
+
+**工作流真相**：下单消息一旦在 delay-queue 过期，RabbitMQ 把它**重新发布**
+到死信交换机 → cancel-queue，消费者到点后才看到它。这就是"先等再投"的延迟。
+
+**高频坑：**
+
+| 现象 | 根因 |
+|---|---|
+| 到点了没触发 | 死信交换机/路由键没配对，或消息没设 delivery_mode（重启全没） |
+| 大量延迟订单同秒到期 | TTL 一样 → 队头堆积，消息都挤在队头等队前释放（延迟抖动） |
+| 改了 TTL 不生效 | TTL 在**声明时**固定，改参数要重建队列 |
+
 ## 小结
 
 - 死信 = 被拒/过期/队满的消息转投死信队列，把失败隔离归档。

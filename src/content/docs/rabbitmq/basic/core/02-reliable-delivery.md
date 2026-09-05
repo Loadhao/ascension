@@ -55,6 +55,53 @@ RabbitMQ 的"至少一次"意味着**可能重复**。彻底解决靠业务幂�
 用消息里的唯一键（订单号/业务 ID）建幂等表或唯一索引，重复消息直接跳过。
 可靠队列负责"不丢"，幂等负责"不重"，两者配合才完整。
 
+## 消息从发送到落盘的完整时序（深入）
+
+"确认与持久化"是静态配置，真正要看懂"不丢"得把时序串起来。逐格放大：
+一次带持久化的可靠发布+手动 ACK 消费：
+
+```mermaid
+sequenceDiagram
+    participant P as 生产者
+    participant Ch as Channel
+    participant B as Broker(内存)
+    participant D as 磁盘(mirror/持久队列)
+    participant C as 消费者
+
+    P->>Ch: basicPublish(delivery_mode=2)
+    Ch->>B: 消息入队
+    B->>D: translog 刷盘前不可靠
+    B-->>Ch: 「暂无确认」——Confirm 门控着
+    B->>D: 落盘完成
+    B-->>Ch: basicAck(confirm) —— 此刻才算“不丢”
+    P->>P: 收到 confirm，才能删本地pending
+    B->>C: 投递给消费者
+    C-->>B: 消费者处理完 basicAck —— broker 才删这条消息
+```
+
+**两个"确认"别混淆**：
+
+| 确认 | 谁发给谁 | 含义 |
+|---|---|---|
+| 发布确认（confirm） | broker → 生产者 | 消息已安全到 broker（通常=已落盘） |
+| 消费确认（ACK） | 消费者 → broker | 消息已处理完，可删除 |
+
+生产上最容易踩的边界：**生产者收到 confirm 就以为"消费方已处理"**——错。
+confirm 只保证"broker 收到了"，消费是否成功取决于消费确认。两者是两段
+独立的责任链，一段失守消息就可能在另一端丢失。
+
+**confirm 超时要怎么办**：broker 迟迟不回 confirm（网络/磁盘慢），生产者
+把消息留在**本地未确认缓冲区**，超时后决定重发或记失败——绝不能发了就
+扔，那就是"本地假装成功"。
+
+### 不丢不重自检清单
+
+- [ ] 交换机、队列 durable
+- [ ] 发布时 `delivery_mode=2`（消息持久化）
+- [ ] 生产者开 confirm 且处理 unconfirmed
+- [ ] 消费者手动 ACK，成功才 ack
+- [ ] 消费端按业务唯一键幂等（扛重复）
+
 ## 小结
 
 - 三阶段各守一段：生产者 confirm、broker 持久化、消费者手动 ACK。
