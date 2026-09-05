@@ -52,6 +52,34 @@ git config --global core.autocrlf input       # macOS/Linux；Windows 用 true
 git config --global alias.lg "log --oneline --graph --all"
 ```
 
+## 临场出错的定位思路（深入）
+
+git 的报错信息很"不友好"，但**报错 → 一句话翻译 → 对应命令**是可背的：
+
+| 报错 / 现象 | 发生了什么 | 对症命令 |
+|---|---|---|
+| `You are in 'detached HEAD' state` | HEAD 不指向分支，指向某个提交 | `git switch -c fix-back <commit>` 把它挂回分支 |
+| `Changes not staged for commit` | 有改动但没 `git add` | `git add <file>` 或 `git diff` 确认 |
+| 想回退自己的工作区 | 丢弃未暂存改动 | `git checkout -- <file>`（**慎用，改动就没了**） |
+| 提交信息写错了 | 内容对、说明错 | 未 push：`git commit --amend -m "新说明"` |
+| `--amend` 了还想再改 | 上一步没 push | 再来一次 `--amend`，别往里加新提交 |
+| `pull` 有本地修改冲突 | 本地改动与远端冲突 | 先 `git stash` → `git pull` → `git stash pop` |
+
+**两次「救场复位」的边界（最易背错）**：
+
+```bash
+git reset --soft HEAD~1   # 撤销"最后一次提交"，改动留在暂存区（还能恢复，推荐）
+git reset --hard HEAD~1   # 撤销提交且丢弃改动（⚠️ 不可恢复，别对大库用）
+git revert <commit>       # 产生一个"反向提交"来抵消目标提交（已推送到远端时用它）
+```
+
+判断用哪个：**还没 push** → `reset`（soft 优先）；**已 push 且要保留历史**
+→ `revert`。revert 不改历史，最安全，唯一缺点是历史里有两次提交。
+
+**大脑里的保险丝**：不确定「会不会丢东西」的命令（`reset --hard`、
+`checkout --`、`clean -f`）——**先 `git stash` 或先 `git log` 确认**再动手。
+git 几乎所有"惨剧"都来自这几种不可逆操作。
+
 ## 要点备忘
 
 - 把 `git status` 和 `git log --oneline --graph` 当成「仪表盘」——任何不确定的时刻，先看这两个命令再操作

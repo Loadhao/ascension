@@ -36,6 +36,44 @@ curl -s -o /dev/null -w '%{http_code}\n' https://api.example.com/health
 curl -s https://api.example.com/users | jq '.data[] | .name'
 ```
 
+## -v 到底打印了什么（深入）
+
+`-v` 不神秘，它就是把你看到的"一次 HTTP 事务"从头到尾展开。读懂它，
+几乎所有"接口调不通"都能定位：
+
+```text
+* Trying 1.2.3.4:443...                  ← ① DNS 解析 + 建 TCP 连接
+* Connected to api.example.com port 443
+* ALPN, offering http/1.1                 ← ② TLS 握手（或 http:// 无此段）
+*  subject: CN=api.example.com            ← 证书链校验
+> GET /users HTTP/1.1                     ← ③ 发出的请求行
+> Host: api.example.com                   ← 请求头（> 表示"发送"）
+> Accept: */*
+...
+< HTTP/1.1 200 OK                        ← ④ 响应行（< 表示"收到"）
+< Content-Type: application/json          ← 响应头
+...
+* Connection #0 left intact              ← ⑤ 连接保持/关闭
+```
+
+**左手>右手<**：`>` 是你发出去的，`<` 是服务端回来的。卡在①→②多半网络/证书，
+卡在③后没`<`多半服务端没回。**比抓包轻，却是日常够用**的协议学习器。
+
+## 常见失效与对应的排障参数（深入）
+
+| 现象 | 原因 | 参数 |
+|---|---|---|
+| `SSL certificate problem` | 证书不信任/自签 | `-k`（临时）或 `--cacert` |
+| `301/302` 但响应空 | 需要跟随重定向 | `-L` |
+| 卡住半天超时 | 服务端慢/假死 | `--connect-timeout 5 --max-time 10` |
+| `Connection refused` | 端口没起/方向错 | 核对 host:port、`-x` 代理 |
+| `405 Method Not Allowed` | 方法不对 | `-X POST` |
+| 走了不该走的代理 | 环境变量代理 | `--noproxy '*'` |
+| 想存成文件 | 下载场景 | `-o file`（`-O` 用远端文件名） |
+
+**给调试留完整证据**：`curl -sv --max-time 10 <url> 2>&1 | tee /tmp/curl.log`，
+把 `2>&1`（-v 走 stderr）和超时参数一起留档——排查线上接口时这是黄金证据。
+
 ## 小结
 
 - 常用 `-X / -d / -H / -i / -v / -u / -k`，加上 `-s` 静默、`-L` 跳转。
