@@ -61,6 +61,41 @@ flowchart LR
 **text 与 keyword 选错是最常见的坑**：想在详情里做全文用 text，想精确
 过滤/排序/聚合用 keyword，对象线要分清楚。
 
+## 一个全文匹配查询怎么走（深入）
+
+把 `match` 从"能搜到"落到内部执行路径，才能真正理解"为什么这样分词、
+为什么相关度是这么排的"。
+
+**查询：`match title:"elasticsearch 实战"`**
+
+```text
+1. 分析查询串
+   title 字段是 text → 查询串也用同一分析器处理
+   "elasticsearch 实战" → 词项 [elasticsearch, 实战]
+
+2. 逐词查倒排索引
+   elasticsearch → [doc1, doc3, doc5]   （3 篇命中）
+   实战          → [doc1, doc2]          （2 篇命中）
+
+3. 并集 = 候选文档 [doc1, doc2, doc3, doc5]
+
+4. 相关度打分排序（默认 BM25）
+   doc1 两个词都命中且词频高 → 分最高，排第一
+```
+
+**关键收获：**
+
+1. **查询词与索引词必须"分析后一致"才匹配**。若查询走的是英文小写分词、
+   doc 里是中文 "elasticsearch"，匹配就落空——"搜不到"九成是分析器不一致。
+2. **打分不是固化 SQL 的"命中即 1"**，而是 BM25 综合词频、逆文档频率、
+   字段长度算出来——这就是"最相关在上"的来源。
+3. 想**理解一条为何排序靠前**：看 `_explain` API 返回的得分拆解，而不是瞎猜。
+
+```json
+GET /products/_doc/doc1/_explain
+{ "query": { "match": { "title": "elasticsearch" } } }
+```
+
 ## 小结
 
 - ES 靠倒排索引把"搜词"变成查字典，摆脱全表扫描。
