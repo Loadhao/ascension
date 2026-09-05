@@ -451,34 +451,48 @@ export default defineConfig({
                 },
               ],
             },
+          ],
+        },
+        {
+          label: 'Kafka',
+          collapsed: true,
+          items: [
+            { label: '学习路线', link: '/kafka/' },
             {
               label: '中级',
               collapsed: false,
               items: [
                 {
-                  label: 'Kafka 核心',
+                  label: '核心机制',
                   collapsed: false,
                   items: [
-                    { label: '概览', link: '/middleware/intermediate/kafka/' },
-                    { label: 'Kafka 架构与存储模型', link: '/middleware/intermediate/kafka/01-kafka-architecture/' },
-                    { label: '副本与 ISR 机制', link: '/middleware/intermediate/kafka/02-replica-isr/' },
-                    { label: '不丢消息与幂等消费', link: '/middleware/intermediate/kafka/03-reliability-idempotent/' },
+                    { label: '概览', link: '/kafka/intermediate/core/' },
+                    { label: 'Kafka 架构与存储模型', link: '/kafka/intermediate/core/01-kafka-architecture/' },
+                    { label: '副本与 ISR 机制', link: '/kafka/intermediate/core/02-replica-isr/' },
+                    { label: '不丢消息与幂等消费', link: '/kafka/intermediate/core/03-reliability-idempotent/' },
                   ],
                 },
               ],
             },
+          ],
+        },
+        {
+          label: 'RocketMQ',
+          collapsed: true,
+          items: [
+            { label: '学习路线', link: '/rocketmq/' },
             {
               label: '高级',
               collapsed: false,
               items: [
                 {
-                  label: 'RocketMQ 专题',
+                  label: '核心专题',
                   collapsed: false,
                   items: [
-                    { label: '概览', link: '/middleware/advanced/rocketmq/' },
-                    { label: 'RocketMQ 核心特性', link: '/middleware/advanced/rocketmq/01-rocketmq-features/' },
-                    { label: '顺序性与高性能原理', link: '/middleware/advanced/rocketmq/02-order-performance/' },
-                    { label: '消息积压治理', link: '/middleware/advanced/rocketmq/03-backlog/' },
+                    { label: '概览', link: '/rocketmq/advanced/core/' },
+                    { label: 'RocketMQ 核心特性', link: '/rocketmq/advanced/core/01-rocketmq-features/' },
+                    { label: '顺序性与高性能原理', link: '/rocketmq/advanced/core/02-order-performance/' },
+                    { label: '消息积压治理', link: '/rocketmq/advanced/core/03-backlog/' },
                   ],
                 },
               ],

@@ -1,0 +1,28 @@
+---
+title: Kafka
+description: Kafka 方向学习路线与知识地图：架构与存储、副本与 ISR、可靠性与幂等
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/kafka.json';
+
+## 学习路线
+
+按等级推进，每级下按主题分类。点击分类进入该主题的知识点目录；点击圆点标记学习状态：
+○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖**核心机制**：架构与存储模型、副本与 ISR、不丢消息与幂等消费。
+横向的 MQ 选型与"为什么用 MQ"见「中间件」方向。后续可扩展 Kafka
+Streams、KRaft、生产调优等主题。
+
+<RoadmapIsland directionId="kafka" />
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
+图谱数据维护在 `src/data/graphs/kafka.json`。
+:::

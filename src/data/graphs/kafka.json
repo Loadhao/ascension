@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Kafka", "group": "核心" },
+    { "id": "arch", "label": "架构与存储", "href": "/kafka/intermediate/core/01-kafka-architecture/", "group": "核心机制" },
+    { "id": "isr", "label": "副本与 ISR", "href": "/kafka/intermediate/core/02-replica-isr/", "group": "核心机制" },
+    { "id": "reliability", "label": "可靠性与幂等", "href": "/kafka/intermediate/core/03-reliability-idempotent/", "group": "核心机制" }
+  ],
+  "edges": [
+    { "source": "root", "target": "arch" },
+    { "source": "arch", "target": "isr", "label": "多副本高可用" },
+    { "source": "isr", "target": "reliability", "label": "acks 联动" }
+  ]
+}

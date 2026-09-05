@@ -41,6 +41,8 @@
 
 - 新增方向时四处同步：建目录与 `index.mdx` 路线图 + `astro.config.mjs` 侧边栏注册 + `src/data/graphs/` 建图谱数据 + `src/lib/notes.ts` 的 `DIRECTION_ORDER` 追加方向 slug。
 
+- 方向粒度的原则：**一个具体技术/工具 = 一个独立顶层方向**。不要用抽象的领域大方向（如 `database`、`middleware`）把多个独立技术（如 MySQL/Redis、Kafka/RocketMQ）并到大方向下，也不要让跨工具的对比/综述（如 MQ 选型对比）挂在某个具体工具方向下。此类对比内容放在它们之外的公共外层（独立的横向方向或归类到最能统领它的方向，不与单一工具绑定）。
+
 - 新笔记关联图谱：在对应方向 JSON 补节点（`href` 填笔记路径，如 `/java/advanced/jvm/memory/`）与关联边。
 
 ## 构建与验证

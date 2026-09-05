@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    { "id": "root", "label": "RocketMQ", "group": "核心" },
+    { "id": "rocketmq", "label": "核心特性", "href": "/rocketmq/advanced/core/01-rocketmq-features/", "group": "核心专题" },
+    { "id": "order", "label": "顺序与高性能", "href": "/rocketmq/advanced/core/02-order-performance/", "group": "核心专题" },
+    { "id": "backlog", "label": "积压治理", "href": "/rocketmq/advanced/core/03-backlog/", "group": "核心专题" }
+  ],
+  "edges": [
+    { "source": "root", "target": "rocketmq" },
+    { "source": "rocketmq", "target": "order", "label": "顺序消息实现" },
+    { "source": "order", "target": "backlog", "label": "消费不动了" }
+  ]
+}

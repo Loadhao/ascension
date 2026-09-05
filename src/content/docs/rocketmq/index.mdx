@@ -1,0 +1,28 @@
+---
+title: RocketMQ
+description: RocketMQ 方向学习路线与知识地图：核心特性、顺序与高性能、积压治理
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/rocketmq.json';
+
+## 学习路线
+
+按等级推进，每级下按主题分类。点击分类进入该主题的知识点目录；点击圆点标记学习状态：
+○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖**核心专题**：核心特性、顺序消息与高性能原理、积压治理实战。
+横向的 MQ 选型与"为什么用 MQ"见「中间件」方向。后续可扩展事务消息
+源码、NameServer 集群等主题。
+
+<RoadmapIsland directionId="rocketmq" />
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
+图谱数据维护在 `src/data/graphs/rocketmq.json`。
+:::
