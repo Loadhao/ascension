@@ -21,7 +21,21 @@ core: true
 
 ## 分层与缓存
 
-每条指令生成一层，**docker build 从上到下逐层检查缓存：某层失效，其下所有层全部重建**。
+每条指令生成一层，**docker build 从上到下逐层检查缓存：某层失效，其下所有层全部重建**：
+
+```mermaid
+flowchart TB
+    subgraph 构建["docker build 逐层走"]
+        L1["层1: COPY package.json"] --> L2["层2: RUN pnpm install"]
+        L2 --> L3["层3: COPY . ."]
+        L3 --> L4["层4: CMD ...(运行期)"]
+    end
+    L3 -. "改一行代码 → 层3哈希变 → <br/>层4需重建，但层1/层2缓存命中可用" .-> CACHE["缓存机制：<br/>上层缓存命中→下层级联复用"]
+    style CACHE fill:#f5f0e6
+```
+
+所以**依赖层要放在代码层之前**：`package.json` 一变才触发重装依赖；光改业务
+代码只重跑 COPY 之后的层，秒级构建。
 
 ```dockerfile
 # ✅ 好：依赖层与代码层分离，改代码不触发重装依赖
@@ -50,6 +64,16 @@ RUN pnpm install
 
 编译期工具链不进最终镜像，产物体积大幅缩小：
 
+```mermaid
+flowchart LR
+    subgraph B["构建阶段 build"]
+        N["node:22-alpine<br/>装依赖 + pnpm build"] --> ART["偏好产出 /app/dist"]
+    end
+    ART -->|"COPY --from=build<br/>只拷贝产物"| R["运行阶段 runtime<br/>nginx:alpine 平装 dist"]
+    N -. "工具链不下进 runtime" .-x R
+    style R fill:#f5f0e6
+```
+
 ```dockerfile
 # ---- 构建阶段 ----
 FROM node:22-alpine AS build
@@ -61,6 +85,8 @@ RUN pnpm install --frozen-lockfile && pnpm build
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 ```
+要点：最终镜像**只含 nginx + 构建产物**，node 及其 dev 依赖全被丢弃——这就是
+多阶段把镜像从"几百 MB"压到"几十 MB"的原理。
 
 ## 最佳实践
 

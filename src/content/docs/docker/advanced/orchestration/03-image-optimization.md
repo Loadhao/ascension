@@ -6,6 +6,20 @@ level: advanced
 
 ## 镜像瘦身
 
+先从"分析"切入——**先定位体积大头，再对症下药**，而不是盲目套手段：
+
+```mermaid
+flowchart TB
+    A["docker images 看哪些镜像大"] --> B["docker history / dive<br/>定位每一层占了多大"]
+    B --> C{"大头是哪层?"}
+    C -->|"基础镜像"| D["换 alpine / distroless"]
+    C -->|"工具链/依赖层"| E["多阶段构建：只拷产物"]
+    C -->|"层内缓存/垃圾"| F["合并 RUN + 层内清理<br/>rm 缓存后再提交"]
+    C -->|"上下文太大"| G[".dockerignore 排除"]
+
+    style B fill:#f5f0e6
+```
+
 | 手段 | 效果 | 说明 |
 |---|---|---|
 | 换基础镜像 | 通常最大头 | `node:22`(1GB) → `node:22-alpine`(约150MB) |

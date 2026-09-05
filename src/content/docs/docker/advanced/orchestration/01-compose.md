@@ -43,6 +43,16 @@ volumes:
 
 ## 关键点
 
+```mermaid
+flowchart LR
+    subgraph 网络["Compose 自定义网络（服务名即 DNS）"]
+        API["api 服务"] -->|"db:5432"| DB["db 服务<br/>postgres:16"]
+        API -. "depends_on: service_healthy" .-> HEAL["healthcheck pg_isready<br/>等 DB 就绪才起"]
+    end
+    DB --> V["具名卷 pgdata<br/>持久化数据"]
+    style 网络 fill:#f5f0e6
+```
+
 - **服务名即 DNS 名**：`api` 通过 `db:5432` 直连（Compose 自动建好自定义网络）
 - `depends_on` 只保证**启动顺序**；等依赖就绪要配合 `healthcheck` + `condition: service_healthy`
 - `build: .` 与 `image:` 二选一或并用（build 产物打上 image 指定的 tag）

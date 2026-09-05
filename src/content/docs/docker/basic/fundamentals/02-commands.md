@@ -7,6 +7,23 @@ core: true
 
 ## 镜像命令速查
 
+先用一张图理解"镜像是层"这件事，后面所有命令都基于它：
+
+```mermaid
+flowchart TB
+    subgraph IMG["镜像（只读层堆叠）"]
+        B0["基础层: nginx 的 OS"] --> B1["层1: 拷贝文件"]
+        B1 --> B2["层2: 配置/环境"]
+    end
+    B2 --> C["容器 = 镜像只读层 + <br/>顶部一层可写层"]
+    C --> D["docker ps/logs/exec 操作这个容器"]
+
+    style C fill:#f5f0e6
+```
+
+`docker pull` = 拉取这些只读层存到本地；`docker run` = 在镜像之上叠一个
+可写层变成容器；`docker save/load` = 把这组层打包成 tar 搬运。
+
 | 命令 | 作用 | 示例 |
 |---|---|---|
 | `docker pull` | 拉取镜像 | `docker pull nginx:1.27` |
