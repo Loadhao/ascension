@@ -7,6 +7,9 @@ dist/
 # 依赖
 node_modules/
 
+# pnpm 本地存储
+.pnpm-store/
+
 # 日志
 *.log
 pnpm-debug.log*
