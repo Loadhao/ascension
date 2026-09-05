@@ -57,8 +57,77 @@ flowchart TD
 - 容器启动时在顶部加一个**可写层**，删除文件只在可写层打标记（whiteout）
 - 层可被多个镜像共享，这也是「镜像很大但拉取很快」的原因
 
+### 写时复制：镜像和容器的分界
+
+关键机制是 **CoW（Copy-on-Write）**——容器"读"还是读镜像层，只有"写"才
+需要操作：
+
+```mermaid
+flowchart LR
+    subgraph 读文件
+        R1[容器读 /etc/nginx/nginx.conf] --> R2[自上而下找到镜像层直接读<br/>无需拷贝]
+    end
+    subgraph 改文件
+        W1[容器改 nginx.conf] --> W2[复制到可写层再改<br/>镜像层不受影响]
+    end
+```
+
+这就是"同一镜像起 10 个容器、改各自配置互不干扰、也不占 10 份磁盘"的原因
+——**每个容器只多一份可写层**，镜像只存一份。
+
+```bash
+# 用命令亲眼验证分层与共享
+docker history nginx            # 看每一层的构建记录与大小
+docker image inspect nginx      # 分层信息；RoLayer/RootFS
+```
+
+## 仓促踩坑与最佳实践
+
+**1. 忘结对 `--rm`，容器堆积**
+
+一次性调试容器不 `--rm`，日积月累一堆 Exited 容器占空间：
+`docker ps -a` 里的死容器记得清，`docker container prune` 可批量清理。
+
+**2. 改镜像却看不到变化**
+
+改了代码、build 出来的还是旧镜像，九成是**构建缓存**或**旧 tag 指向**：
+```bash
+docker build --no-cache -t myapp:v2 .   # 强制无缓存重建
+docker tag myapp:v2 myapp:latest        # 明确打新 tag
+```
+
+**3. `latest` tag 是个坑**
+
+`latest` 会被反复覆盖，线上没 pin 住某版本，回滚时不知道"上一个 latest"
+是哪个。生产应固定 tag 或 digest，见镜像优化篇。
+
+**4. 容器里看不到代码/日志**
+
+排查先确认挂载对不对，别怀疑环境：
+```bash
+docker exec -it web sh             # 进容器看
+docker logs --tail 100 web         # 看日志
+docker inspect web --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{"\n"}}{{end}}'
+```
+
+## 概念之间怎么流动：一句话讲清生命周期
+
+```mermaid
+flowchart LR
+    REG[(Registry<br/>镜像仓库)] -->|docker pull| IMG[镜像 Image]
+    IMG -->|docker run / create| CTN[容器 Container]
+    CTN -->|docker commit| IMG2[新镜像]
+    IMG2 -->|docker push| REG
+    CTN -->|docker rm| X["（可写层随之丢弃）"]
+```
+
+> 主线就三件事：**拉取镜像 → 跑成容器 → 需要持久化的数据进数据卷**。
+> 容器可写层随容器删除而消失，这决定了"数据必须放卷"的铁律。
+
 ## 要点备忘
 
-- 镜像是静态定义，容器是动态运行；同一镜像可起任意多个容器
-- 容器消亡时可写层随之丢弃——需要持久化的数据必须放**数据卷**
-- Registry 中 `nginx:1.27` 里 `1.27` 是 tag，`nginx` 是仓库名
+- 镜像是静态定义，容器是动态运行；同一镜像可起任意多个容器。
+- 分层 + CoW ：读共享镜像层，写复制到可写层——多容器不占多份镜像。
+- 容器消亡时可写层随之丢弃——需要持久化的数据必须放**数据卷**。
+- `docker history` / `docker image inspect` 是看懂分层的第一工具。
+- Registry 中 `nginx:1.27` 里 `1.27` 是 tag，`nginx` 是仓库名；`latest` 别进生产。
