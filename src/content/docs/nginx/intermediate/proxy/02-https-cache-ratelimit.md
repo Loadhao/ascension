@@ -25,6 +25,18 @@ server {
 server { listen 80; return 301 https://$host$request_uri; }
 ```
 
+TLS 终止的位置决定了证书与加密边界——**浏览器到 Nginx 加密、Nginx 到后端
+走内网 HTTP**：
+
+```mermaid
+flowchart LR
+    B["浏览器"] -->|"TLS 加密<br/>https://example.com"| N["Nginx<br/>代码 TLS 终止<br/>持有私钥/证书"]
+    N -->|"内网 HTTP<br/>http://backend"| APP["后端应用"]
+    style N fill:#f5f0e6
+```
+
+这是 HTTPS 入口最常见的形态：证书只在 Nginx 一处维护，后端不用各自配 TLS。
+
 ## 代理缓存：把 Hot 资源挡在外面
 
 ```nginx
@@ -95,6 +107,20 @@ http {
 |---|---|---|---|
 | 漏桶 | 请求流入、恒定速率流出 | 绝对平滑，**压突发** | `limit_req`（默认积压后按速率慢慢放） |
 | 令牌桶 | 攒令牌、拿到就放行 | 允许突发 | 需把 `burst nodelay` 理解为"先用完攒的令牌" |
+
+两种模型的差别在"来了一波突发请求"时怎么处理：
+
+```mermaid
+flowchart TB
+    subgraph 漏桶["漏桶：稳定流出（压突发）"]
+        L1["突发请求涌入<br/>缓存桶"] --> L2["以恒定速率逐个流出<br/>多余的排队/丢弃"]
+    end
+    subgraph 令牌桶["令牌桶：可突发（攒令牌）"]
+        T1["按固定速率攒令牌"] --> T2["拿到令牌就放行<br/>突发时先耗尽攒下的令牌"]
+    end
+    style 漏桶 fill:#f5f0e6
+    style 令牌桶 fill:#eef3ea
+```
 
 给一个能直接用的 QPS + 瞬发配置：
 

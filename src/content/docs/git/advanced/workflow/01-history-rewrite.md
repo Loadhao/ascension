@@ -37,6 +37,24 @@ git rebase -i HEAD~4
 
 典型用途：把「wip」「fix typo」的小提交压成一个干净的 feature 提交，再发 PR。
 
+看懂 rebase 到底在干嘛——它**不是"修改"旧提交，而是按新指令重放出一批全新
+提交**（哈希全变）：
+
+```mermaid
+flowchart LR
+    subgraph 前["改之前（HEAD~4）"]
+        A1["feat: 业务"] --> A2["wip: tmp"] --> A3["fix typo"] --> A4["feat: 收尾"]
+    end
+    subgraph 后["squash 之后（重新生成）"]
+        B1["feat: 完整业务<br/>（一条干净提交，哈希全变）"]
+    end
+    A1 -->|squash 合并 1234| B1
+    style 后 fill:#eef3ea
+```
+
+**这就是"改历史只适用于未推送提交"的原因**：`rebase -i` 之后这 4 条的
+哈希全部改变，如果已 push，别人的分支还挂在旧哈希上，两边就对不上了。
+
 ## 重放时的冲突
 
 rebase 是逐个提交重放，冲突会按提交依次出现。每次解决后：
@@ -56,6 +74,20 @@ git rebase --continue
 # git-filter-repo（官方推荐，替代 filter-branch）
 git filter-repo --path secrets.json --invert-paths   # 从全部历史中删除该文件
 git filter-repo --strip-blobs-bigger-than 50M        # 删除所有大 blob
+```
+
+filter-repo 的威力在于**把文件从每一层历史中物理剥离**，而不只是删掉最后一次：
+
+```mermaid
+flowchart TB
+    subgraph 清理前
+        C1[提交1 含 secret] --> C2[提交2 含 secret] --> C3[提交3 已删 secret]
+    end
+    C3 -. "新代码已经不用它<br/>但历史 blob 仍在仓库里" .-> S["仓库体积不减"]
+    subgraph 清理后[git filter-repo 重写全历史]
+        D1[提交1' 无 secret] --> D2[提交2' 无 secret] --> D3[提交3' 无 secret]
+    end
+    style 清理后 fill:#eef3ea
 ```
 
 > 注意：改写全部历史后所有提交哈希变化，需要 force push（`--force-with-lease`）并通知所有协作者重新克隆。

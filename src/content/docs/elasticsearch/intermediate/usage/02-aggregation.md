@@ -72,6 +72,21 @@ terms 桶（size=N）
 协调节点合并各分片 top-N → 重排 → 返回全局 top-N
 ```
 
+把"合并会丢桶"画成图——这就是"近似 top-N"的由来：
+
+```mermaid
+sequenceDiagram
+    participant C as 协调节点
+    participant S1 as 分片1
+    participant S2 as 分片2
+    C->>S1: 查询+聚合（各片独立算）
+    C->>S2: 查询+聚合
+    S1-->>C: 局部 top-2：['a':8, 'b':2]
+    S2-->>C: 局部 top-2：['b':3, 'c':2]
+    Note over C: 若全局 top-2，'c' 在乙片第3却可能落选——<br/>size 太小，单片的 top-N 兜不住全局高频
+    C-->>C: 合并重排取全局 top-N
+```
+
 **由此得到两个关键事实：**
 
 1. **terms 默认是"近似 top-N"**：`size` 太小时，某些高频词如果没进单个分片

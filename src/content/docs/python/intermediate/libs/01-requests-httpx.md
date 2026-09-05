@@ -44,6 +44,24 @@ retry = Retry(total=3, backoff_factor=0.5,       # 指数退避 0.5s/1s/2s
 s.mount("https://", HTTPAdapter(max_retries=retry))
 ```
 
+用一张图看清"裸调 vs Session"的区别——差别全在**连接复用**上：
+
+```mermaid
+flowchart LR
+    subgraph 裸调["每次 requests.get()"]
+        G1["请求1"] -->|TCP+TLS 握手| H1("连接1")
+        G2["请求2"] -->|TCP+TLS 握手| H2("连接2")
+        G3["请求3"] -->|TCP+TLS 握手| H3("连接3")
+    end
+    subgraph Session["同一 Session"]
+        S1["请求1"] --> P["连接池"]
+        S2["请求2"] --> P
+        S3["请求3"] --> P
+        P -->|同一连接复用| H4("一条连接")
+    end
+    style Session fill:#eef3ea
+```
+
 重试纪律：**只重试幂等方法（GET）与明确可重试的状态码**，
 POST 重试可能造成重复下单。
 
@@ -68,6 +86,15 @@ with client.stream("GET", url) as resp:      # 大文件不全量进内存
 选型：纯脚本/无 asyncio → requests 或 httpx 同步模式；已有 async 事件
 循环（FastAPI、高并发爬取）→ httpx AsyncClient。**别在异步代码里调
 同步 requests**——一个阻塞调用冻结整个事件循环。
+
+```mermaid
+flowchart TD
+    A{"代码是否运行在<br/>已有 async 事件循环里?"} -->|"是"| B["httpx.AsyncClient<br/>await 并发"]
+    A -->|"否（普通脚本/同步服务）"| C{"需要并发/流式?"}
+    C -->|"需要"| D["httpx（同步 Client 也支持流式）"]
+    C -->|"不需要"| E["requests 即可<br/>（或 httpx 同步模式）"]
+    style B fill:#eef3ea
+```
 
 ## 小结
 

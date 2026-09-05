@@ -42,6 +42,26 @@ public class Config {
 }
 ```
 
+单例四形态的真正差异在**实例何时创建**与**靠什么保证唯一**：
+
+```mermaid
+flowchart TB
+    subgraph 饿汉
+        E1["类加载时刻立即 new<br/>JVM 类初始化保证只一次"]
+    end
+    subgraph 枚举
+        EN1["JVM 枚举实例本身唯一<br/>且反序列化/反射也攻不破"]
+    end
+    subgraph 静态内部类
+        H1["首次 getInstance 时<br/>触发的类加载 new 一次"]
+    end
+    subgraph DCL
+        D1["首次 getInstance 时<br/>双重检查 + volatile 防半成品"]
+    end
+    H1 -->|主流推荐| 结论1["按需创建、无锁、安全"]
+    style 静态内部类 fill:#eef3ea
+```
+
 **Spring 的 singleton scope 不是单例模式**：它一个容器里"每个
 BeanDefinition 一个对象"，你自己 new 出来的同类对象不受它管理——
 概念上别混。
@@ -69,6 +89,22 @@ interface CloudFactory {
     Storage createStorage();     // AWS 族：Ec2 + S3 + Alb
     LoadBalancer createLb();
 }
+```
+
+三件套的"扩展方向"决定了什么时候用哪个：
+
+```mermaid
+flowchart TB
+    subgraph 简单["简单工厂（分派）"]
+        S["一参数 switch<br/>+产品=改方法（违开闭）"]
+    end
+    subgraph 工厂方法["工厂方法（每品一厂）"]
+        F["产品A ↔ 工厂A<br/>产品B ↔ 工厂B"]
+    end
+    subgraph 抽象工厂["抽象工厂（产品族）"]
+        A["一族互换：<br/>阿里云族 ↔ AWS 族"]
+    end
+    style 抽象工厂 fill:#f5f0e6
 ```
 
 | | 简单工厂 | 工厂方法 | 抽象工厂 |

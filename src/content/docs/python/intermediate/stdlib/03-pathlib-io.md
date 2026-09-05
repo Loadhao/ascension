@@ -25,6 +25,20 @@ cfg = home / ".config" / "app.toml"
 `/` 运算符就是拼接——这是魔术方法协议（见
 [类与魔术方法](/python/basic/oop/01-class-basics/)）的优雅应用。
 
+一个 Path 对象怎么"拆"，用图记住 `name/stem/suffix/parent` 的关系：
+
+```mermaid
+flowchart LR
+    subgraph 完整["Path('/data/logs/app.log')"]
+        P["/data/logs/app.log"]
+    end
+    P --> N["name = app.log"]
+    P --> PA["parent = /data/logs"]
+    N --> ST["stem = app"]
+    N --> SU["suffix = .log"]
+    style 完整 fill:#f5f0e6
+```
+
 ## 批量查找与读写
 
 ```python
@@ -52,6 +66,18 @@ with open("app.log", encoding="utf-8") as f:
 `with` 的协议是 `__enter__`/`__exit__`：**把"用完必须清理"从纪律
 变成语言结构**。finally + close 的手写版能忘，with 忘不了。
 数据库连接、锁、临时目录（`tempfile.TemporaryDirectory`）全部适用。
+
+`with` 为什么在异常路径也不泄漏——看它的协议时序：
+
+```mermaid
+sequenceDiagram
+    participant 代码 as 你的代码
+    participant 资源 as 资源对象
+    代码->>资源: __enter__(打开/获取)
+    Note over 代码: 正常做业务 / 可能抛异常
+    代码->>资源: __exit__(无论是否异常都到这里)
+    Note over 资源: 异常传播时<br/>__exit__ 照样执行清理
+```
 
 读写模式速查：`r` 读 / `w` 清空写 / `a` 追加 / `x` 独占创建（存在即报错，
 防覆盖）/ `b` 二进制。**文本模式永远带 `encoding=`**——不传等于把编码

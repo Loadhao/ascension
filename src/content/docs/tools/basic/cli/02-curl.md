@@ -59,6 +59,23 @@ curl -s https://api.example.com/users | jq '.data[] | .name'
 **左手>右手<**：`>` 是你发出去的，`<` 是服务端回来的。卡在①→②多半网络/证书，
 卡在③后没`<`多半服务端没回。**比抓包轻，却是日常够用**的协议学习器。
 
+把 -v 的五个阶段画成一次事务的时序，排障时对照"看到哪个阶段没走完"：
+
+```mermaid
+sequenceDiagram
+    participant C as curl(-v)
+    participant S as 服务端
+    Note over C: ① DNS + 建立 TCP 连接
+    C->>S: TCP 三次握手
+    Note over C: ② TLS 握手 + 证书校验
+    C->>S: ClientHello / 证书交换
+    Note over C,S: ③ 发送请求（> 开头）
+    C->>S: GET /users HTTP/1.1 + headers
+    Note over C,S: ④ 接收响应（< 开头）
+    S-->>C: HTTP/1.1 200 + headers + body
+    Note over C: ⑤ Connection 保持或关闭
+```
+
 ## 常见失效与对应的排障参数（深入）
 
 | 现象 | 原因 | 参数 |
