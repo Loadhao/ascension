@@ -108,7 +108,7 @@ OFFICIAL_DOCS = [
     # Linux 方向
     r'linuxcool\.com', r'jumpserver\.org', r'1panel\.cn', r'mirrors\.163\.com',
     r'mirrors\.tuna\.tsinghua\.edu\.cn', r'developer\.aliyun\.com/mirror',
-    r'hub\.docker\.com', r'mvnrepository\.com', r'help\.aliyun\.com',
+    r'help\.aliyun\.com',
     # AI 方向
     r'agents\.md', r'super\.engineering', r'docs\.openclaw\.ai',
     r'docs\.langchain\.com', r'bojieli\.github\.io', r'learn\.shareai\.run',
@@ -139,6 +139,8 @@ C_TITLE_PATTERNS = [
     r'时区问题', r'怎么去(掉|除)', r'参数说明', r'配置文件',
     r'搭建', r'部署', r'快速入门', r'下载地址', r'入门教程',
     r'快速上手', r'介绍$', r'[Ii]ndex [Oo]f', r'官网$',
+    # 营销/推广信号（阻断 A）
+    r'正在直播', r'直播课', r'免费领', r'限时', r'优惠券', r'下单',
 ]
 
 # B 级：主题深度信号

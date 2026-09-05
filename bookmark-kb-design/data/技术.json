@@ -1,0 +1,3974 @@
+{
+  "direction": "技术",
+  "total": 506,
+  "privacy_excluded": 6,
+  "deduped": 495,
+  "stats": {
+    "A": 16,
+    "B": 158,
+    "C": 308,
+    "D": 13
+  },
+  "items": [
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "Devops/Docker/portainer",
+      "title": "10张图带你深入理解Docker容器和镜像 - DockOne.io",
+      "url": "http://dockone.io/article/783",
+      "domain": "dockone.io"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "协议/LDAP",
+      "title": "LDAP概念和原理介绍 - WilburXu - 博客园",
+      "url": "https://www.cnblogs.com/wilburxu/p/9174353.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "协议/消息中间件/协议/EMQ",
+      "title": "nginx+keepalived实现emq集群负载均衡高可用（七） - qq_40384985的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_40384985/article/details/89810757",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "MQTT深入——物联网基础传输协议",
+      "url": "https://www.toutiao.com/a6721528056801919499/?tt_from=weixin&utm_campaign=client_share&wxshare_count=1&timestamp=1571715031&app=news_article&utm_source=weixin&utm_medium=toutiao_ios&req_id=20191022113030010023028159240BBF97&group_id=6721528056801919499",
+      "domain": "www.toutiao.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "org.eclipse.paho.client.mqttv3 源码解析（二） 接收 - 阿里云",
+      "url": "https://www.aliyun.com/jiaocheng/25334.html",
+      "domain": "www.aliyun.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "【MQTT学习笔记五】QoS，保留消息，清理回话解析（基于mosquitto）_小小小花刀的博客-CSDN博客_mosquitto qos实现原理",
+      "url": "https://blog.csdn.net/zhuo_lee_new/article/details/90416644",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "单点登陆和认证相关/第三方平台",
+      "title": "账户体系（JWT,OAuth,SSO与CAS）_firefly-CSDN博客_cas jwt",
+      "url": "https://blog.csdn.net/winter_wu_1998/article/details/104322353",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "单点登陆和认证相关/认证授权/Keycloak",
+      "title": "理解OAuth2协议原理_发飙的蜗牛~的博客-CSDN博客",
+      "url": "https://blog.csdn.net/little_kelvin/article/details/111232009",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "技术预言/java技术/文件存储",
+      "title": "SpringCloud-Stream3.x版本使用教程及如何整合rabbitmq – 源码巴士",
+      "url": "https://code84.com/747589.html",
+      "domain": "code84.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "技术预言/java技术/网关/神禹",
+      "title": "Apache ShenYu 介绍 | Apache ShenYu",
+      "url": "https://shenyu.apache.org/zh/docs/index/",
+      "domain": "shenyu.apache.org"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "技术预言/定位",
+      "title": "10种室内定位技术原理深度解析_bobuddy的博客-CSDN博客",
+      "url": "https://blog.csdn.net/u010783226/article/details/117226411?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-117226411-blog-126654919.235^v35^pc_relevant_default_base&spm=1001.2101.3001.4242.2&utm_relevant_index=2",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "技术预言/消息服务/移动端消息推送",
+      "title": "Aws Pinpoint消息推送,android推送原理,ios推送原理,APNS推送配置 - vincent_cyi - 博客园",
+      "url": "https://www.cnblogs.com/vincent-c/articles/14243376.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "算法/二叉树/红黑树",
+      "title": "浅析红黑树（RBTree）原理及实现_芮萌萌的博客-CSDN博客_红黑树",
+      "url": "https://blog.csdn.net/tanrui519521/article/details/80980135?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "算法/二叉树/红黑树",
+      "title": "深入学习二叉树(一) 二叉树基础 - 简书",
+      "url": "https://www.jianshu.com/p/bf73c8d50dc2",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "算法/二叉树/红黑树",
+      "title": "红黑树(一)之 原理和算法详细介绍 - 如果天空不死 - 博客园",
+      "url": "https://www.cnblogs.com/skywang12345/p/3245399.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "高可用",
+      "title": "keepalived实现nginx高可用 - 我为什么要写这个 - 博客园",
+      "url": "https://www.cnblogs.com/cxbhakim/p/9068833.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "AR/产品",
+      "title": "Rokid官网 - 构建AR生态，引领人机交互风向标",
+      "url": "https://www.rokid.com/",
+      "domain": "www.rokid.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "Devops/Docker/docker-compose",
+      "title": "dockerfile 与 docker-compose的区别_运维_Allen技术小站-CSDN博客",
+      "url": "https://blog.csdn.net/londa/article/details/91815208",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "Devops/Docker/镜像仓库",
+      "title": "goharbor/harbor: An open source trusted cloud native registry project that stores, signs, and scans content.",
+      "url": "https://github.com/goharbor/harbor",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "Devops/K8s",
+      "title": "KubeSphere",
+      "url": "https://kubesphere.com.cn/",
+      "domain": "kubesphere.com.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "Devops/K8s",
+      "title": "Kubernetes(K8S)中文文档_Kubernetes中文社区",
+      "url": "http://docs.kubernetes.org.cn/",
+      "domain": "docs.kubernetes.org.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "3D可视化_数字孪生_VR线上虚拟展厅_三维在线展示_智慧园区系统开发 【商迪3D】三维数字化服务商",
+      "url": "https://www.web3di.com/",
+      "domain": "www.web3di.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "GIS开发者 GIS开发",
+      "url": "https://www.giserdqy.com/",
+      "domain": "www.giserdqy.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "Leaflet -",
+      "url": "https://leafletjs.com/",
+      "domain": "leafletjs.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "GIS/webGIS",
+      "title": "Leaflet/Leaflet.markercluster：Leaflet 的标记聚类插件",
+      "url": "https://github.com/Leaflet/Leaflet.markercluster",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "Mapbox",
+      "url": "http://www.mapbox.cn/",
+      "domain": "www.mapbox.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/#map=11/24.6735/46.7091",
+      "domain": "www.openstreetmap.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "SuperMap iClient JavaScript 11i(2023)",
+      "url": "https://iclient.supermap.io/",
+      "domain": "iclient.supermap.io"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "SuperMap|超图软件 - GIS - 地理信息系统软件",
+      "url": "https://www.supermap.com/",
+      "domain": "www.supermap.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "Three.js中文网",
+      "url": "http://www.webgl3d.cn/",
+      "domain": "www.webgl3d.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "WebGIS教程",
+      "url": "http://webgis.cn/",
+      "domain": "webgis.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "WebGL中文网",
+      "url": "http://www.hewebgl.com/",
+      "domain": "www.hewebgl.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "GIS/webGIS",
+      "title": "geoman-io/leaflet-geoman: ️ The most powerful leaflet plugin for drawing and editing geometry layers",
+      "url": "https://github.com/geoman-io/leaflet-geoman",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "GIS/webGIS",
+      "title": "webgis 学习文档",
+      "url": "https://github.com/lovebetterworld/gis-spicy-hot-pot",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "与图-数智化地图服务专家,注册即可免费使用",
+      "url": "https://www.jd-ex.com/",
+      "domain": "www.jd-ex.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "地图慧——企业地图服务领导品牌 提供在线制作数据地图及物流行业分单管理平台",
+      "url": "http://www.dituhui.com/",
+      "domain": "www.dituhui.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "我秀中国 | 专业的物联网地图服务平台",
+      "url": "http://www.ishowchina.com/",
+      "domain": "www.ishowchina.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "GIS/webGIS",
+      "title": "老子云自动化3D云引擎",
+      "url": "https://www.laozicloud.com/",
+      "domain": "www.laozicloud.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "人工智能/openAI",
+      "title": "TensorFlow中文社区-首页",
+      "url": "http://www.tensorfly.cn/",
+      "domain": "www.tensorfly.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "人工智能/openAI",
+      "title": "db-gpt-web-phi.vercel.app",
+      "url": "https://db-gpt-web-phi.vercel.app/",
+      "domain": "db-gpt-web-phi.vercel.app"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "人工智能/openAI",
+      "title": "llrt/README.md at main · awslabs/llrt · GitHub",
+      "url": "https://github.com/awslabs/llrt/blob/main/README.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "人工智能/openAI",
+      "title": "商汤",
+      "url": "https://techday.sensetime.com/",
+      "domain": "techday.sensetime.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "协议/Coap",
+      "title": "LWM2M，MQTT与CoAP区别和联系 - 云+社区 - 腾讯云",
+      "url": "https://cloud.tencent.com/developer/news/19866",
+      "domain": "cloud.tencent.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "协议/Coap",
+      "title": "coap-iot-server/IotCoapServer.java at master · Mozilla9/coap-iot-server",
+      "url": "https://github.com/Mozilla9/coap-iot-server/blob/master/src/main/java/io/github/mozilla9/server/IotCoapServer.java",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "协议/Coap",
+      "title": "eclipse/californium",
+      "url": "https://github.com/eclipse/californium",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "协议/Coap",
+      "title": "emqx/emqx-coap: EMQ X CoAP Gateway",
+      "url": "https://github.com/emqx/emqx-coap",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "协议/LoRa",
+      "title": "LoRa和NB-IoT有什么区别？LoRa的优势在哪些方面？-电子发烧友网",
+      "url": "http://m.elecfans.com/article/754281.html",
+      "domain": "m.elecfans.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "协议/OPC",
+      "title": "GitHub - node-opcua/node-opcua: an implementation of a OPC UA stack fully written in javascript and nodejs - http://node-opcua.github.io/",
+      "url": "https://github.com/node-opcua/node-opcua",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "协议/消息中间件/协议/ActiveMQ",
+      "title": "ActiveMQ高级特性：虚拟Destinations实现消费者分组与简单路由 - KimmKing的技术博客 - CSDN博客",
+      "url": "https://blog.csdn.net/kimmking/article/details/9773085",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "MQTT",
+      "url": "http://mqtt.org/",
+      "domain": "mqtt.org"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "Spring整合MQTT - 我的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/u010784959/article/details/76416246",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "izerui/tomcat-redis-session-manager: 使用redis配置tomcat共享session",
+      "url": "https://github.com/izerui/tomcat-redis-session-manager",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "mqttjs / MQTT.js：Node.js和浏览器的MQTT客户端",
+      "url": "https://github.com/mqttjs/MQTT.js",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "mqtt的qos的三种模式 - CSDN",
+      "url": "https://www.csdn.net/tags/OtDaggysMDQ2MzktYmxvZwO0O0OO0O0O.html",
+      "domain": "www.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "协议/消息中间件/协议/rocketmq",
+      "title": "MQTT与kafka对比分析 - wang被注册了 - CSDN博客",
+      "url": "https://blog.csdn.net/yeshenzzrff/article/details/79021479",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "单点登陆和认证相关/cas",
+      "title": "cas单点登录系统：客户端(client)详细配置（重要） - 技术研究与问题解决 - 博客园",
+      "url": "https://www.cnblogs.com/liuys635/p/14320483.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "单点登陆和认证相关/第三方平台",
+      "title": "JustAuth",
+      "url": "https://www.justauth.wiki/",
+      "domain": "www.justauth.wiki"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "单点登陆和认证相关/第三方平台",
+      "title": "Sa-Token",
+      "url": "https://sa-token.dev33.cn/",
+      "domain": "sa-token.dev33.cn"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "单点登陆和认证相关/第三方平台",
+      "title": "Spring Cloud OAuth2 实现用户认证及单点登录 - 风的姿态 - 博客园",
+      "url": "https://www.cnblogs.com/fengzheng/p/11724625.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "单点登陆和认证相关/认证授权/Keycloak",
+      "title": "Keycloak",
+      "url": "https://www.keycloak.org/",
+      "domain": "www.keycloak.org"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "单点登陆和认证相关/认证授权/Keycloak",
+      "title": "keycloak/keycloak-quickstarts",
+      "url": "https://github.com/keycloak/keycloak-quickstarts?utm_source=gold_browser_extension",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "压力测试/JMeter",
+      "title": "ab性能测试工具的使用 - Andrea-Pirlo - 博客园",
+      "url": "https://www.cnblogs.com/ailiailan/p/10239849.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "压力测试/JMeter/MQTT-JMeter",
+      "title": "emqx/mqtt-jmeter: MQTT JMeter Plugin",
+      "url": "https://github.com/emqx/mqtt-jmeter",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "地图",
+      "title": "docker: 存放各种docker image构建脚本或者快速启动的docker-compose文件。 一处构建，处处可用，方便健忘人士和减轻国内开发人员的负担。",
+      "url": "https://gitee.com/kennylee/docker",
+      "domain": "gitee.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "地图",
+      "title": "similarity: similarity：相似度计算工具包，java编写。用于词语、短语、句子、词法分析、情感分析、语义分析等相关的相似度计算。 来源：https://github.com/shibing624/similarity.git",
+      "url": "https://gitee.com/zhzhenqin/similarity",
+      "domain": "gitee.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "地图",
+      "title": "国家地理信息公共服务平台 天地图",
+      "url": "https://www.tianditu.gov.cn/",
+      "domain": "www.tianditu.gov.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "地图",
+      "title": "在线地图编辑器-企业免费地图制作-无忧地图分布热力图工具-亿景智图",
+      "url": "https://zt.changjing.com.cn/",
+      "domain": "zt.changjing.com.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "地图",
+      "title": "百度地图开放平台 | 百度地图API SDK | 地图开发",
+      "url": "https://lbsyun.baidu.com/",
+      "domain": "lbsyun.baidu.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "地图",
+      "title": "腾讯位置服务 - 立足生态，连接未来",
+      "url": "https://lbs.qq.com/",
+      "domain": "lbs.qq.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "地图",
+      "title": "高德开放平台 | 高德地图API",
+      "url": "https://lbs.amap.com/",
+      "domain": "lbs.amap.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "大数据/ELK/logstash",
+      "title": "MongoDB input plugin for Logstash",
+      "url": "https://github.com/phutchins/logstash-input-mongodb",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "大数据/ELK/安装",
+      "title": "Elastic 中文社区",
+      "url": "https://elasticsearch.cn/",
+      "domain": "elasticsearch.cn"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "大数据/ELK/安装",
+      "title": "Lucene、solr以及elasticsearch之间的区别和联系 - weixin_37886463的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/weixin_37886463/article/details/79447063",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "大数据/ELK/安装",
+      "title": "时间序列数据库的秘密(2)——索引",
+      "url": "https://www.infoq.cn/article/database-timestamp-02/?utm_source=infoq&utm_medium=related_content_link&utm_campaign=relatedContent_articles_clk",
+      "domain": "www.infoq.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "大数据/Flink/安装部署",
+      "title": "Apache Flink",
+      "url": "https://flink.apache.org/zh/",
+      "domain": "flink.apache.org"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "大数据/Flink/安装部署",
+      "title": "Apache Flink 中文文档",
+      "url": "https://github.com/apachecn/flink-doc-zh",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "大数据/Flink/安装部署",
+      "title": "flink-local-train: flink入门到项目实践",
+      "url": "https://gitee.com/Cian_Smm/flink-local-train?_from=gitee_search",
+      "domain": "gitee.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "大数据/数据同步",
+      "title": "DataX 源码",
+      "url": "https://github.com/alibaba/DataX",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "大数据/数据存储/impala",
+      "title": "(1条消息)impala之springBoot整合jdbc和Druid数据源_justlpf的专栏-CSDN博客",
+      "url": "https://blog.csdn.net/justlpf/article/details/105967379",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "开源协议/开源项目",
+      "title": "开源软件 - Gitee.com",
+      "url": "https://gitee.com/explore",
+      "domain": "gitee.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/WMS-库存管理系统",
+      "title": "一套基于若依的wms仓库管理系统，支持lodop和网页打印入库单、出库单。包括仓库/库区/货架管理，出入库管理，客户/供应商/承运商，库存看板、库存记录等功能。",
+      "url": "https://github.com/zccbbg/wms-ruoyi",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/docker",
+      "title": "wallace5303/dapps-addons: dapps addons",
+      "url": "https://github.com/wallace5303/dapps-addons",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/google/GoogleMaps",
+      "title": "googlemaps/google-maps-services-java：Google Maps API Web 服务的 Java 客户端库",
+      "url": "https://github.com/googlemaps/google-maps-services-java?tab=readme-ov-file",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/java技术/文件存储",
+      "title": "Gobrs-Async（高性能多线程并发编程与动态编排框架）",
+      "url": "https://async.sizegang.cn/",
+      "domain": "async.sizegang.cn"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/java技术/文件存储",
+      "title": "Springboot-Notebook/springboot101/实时推送/springboot-realtime-data at master · chengxy-nds/Springboot-Notebook · GitHub",
+      "url": "https://github.com/chengxy-nds/Springboot-Notebook/tree/master/springboot101/%E5%AE%9E%E6%97%B6%E6%8E%A8%E9%80%81/springboot-realtime-data",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/java技术/文件存储",
+      "title": "X Spring File Storage",
+      "url": "http://spring-file-storage.xuyanwu.cn/#/",
+      "domain": "spring-file-storage.xuyanwu.cn"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/java技术/文件存储",
+      "title": "application/json和application/x-www-form-urlencoded区别 - gamedaybyday - 博客园",
+      "url": "https://www.cnblogs.com/gamedaybyday/p/7028128.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/java技术/网关/kong",
+      "title": "kong网关_fFee-ops的博客-CSDN博客_kong网关",
+      "url": "https://blog.csdn.net/qq_21040559/article/details/122961395",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/java技术/网关/神禹",
+      "title": "Docker-compose 部署 | Apache ShenYu",
+      "url": "https://shenyu.apache.org/zh/docs/deployment/deployment-docker-compose",
+      "domain": "shenyu.apache.org"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/java技术/网关/神禹",
+      "title": "Orange 是一个基于 OpenResty 的API网关",
+      "url": "https://github.com/orlabs/orange/blob/master/README_zh.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/java技术/网关/神禹",
+      "title": "高性能的Web网关，一个工具等于 Nginx + Https证书 + 内网穿透 + 图片切割水印 + 网关登录",
+      "url": "https://mp.weixin.qq.com/s/7mu7Q2BD5DhtedjkKD_MEQ",
+      "domain": "mp.weixin.qq.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/分布式定时任务",
+      "title": "Apache DolphinScheduler",
+      "url": "https://dolphinscheduler.apache.org/zh-cn",
+      "domain": "dolphinscheduler.apache.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/分布式定时任务",
+      "title": "PowerJob",
+      "url": "http://www.powerjob.tech/",
+      "domain": "www.powerjob.tech"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/前端/前端事件流",
+      "title": "TDesign - 开源的企业级设计体系",
+      "url": "https://tdesign.tencent.com/",
+      "domain": "tdesign.tencent.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/前端/前端事件流",
+      "title": "Vue2+element-plus 表格el-table前端分页、排序、搜索与加序号_pcyyyyyyyyyyyyyyyyyy的博客-CSDN博客_element table 前端搜索",
+      "url": "https://blog.csdn.net/ParkChanyelo/article/details/126229233?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-126229233-blog-108858230.pc_relevant_3mothn_strategy_and_data_recovery&spm=1001.2101.3001.4242.1&utm_relevant_index=1",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/前端/前端事件流",
+      "title": "Vue2.0的三种常用传值方式、父传子、子传父、非父子组件传值_vue 子组件传值给父组件_lander_xiong的博客-CSDN博客",
+      "url": "https://blog.csdn.net/lander_xiong/article/details/79018737?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-8-79018737-blog-123044309.235^v36^pc_relevant_default_base&spm=1001.2101.3001.4242.5&utm_relevant_index=9",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/前端/前端事件流",
+      "title": "el-table前端分页和后端分页的实现_xjh01的博客-CSDN博客_el-table 前端分页",
+      "url": "https://blog.csdn.net/xjh01/article/details/108858230",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/前端/前端事件流",
+      "title": "一个 Vue 3 UI 框架 | Element Plus",
+      "url": "https://element-plus.gitee.io/zh-CN/",
+      "domain": "element-plus.gitee.io"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/前端/前端事件流",
+      "title": "实现SSE的textevent-stream是什么？和applicationoctet-stream有什么区别？_勇敢*牛牛的博客-CSDN博客",
+      "url": "https://niuniu.blog.csdn.net/article/details/132718406?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7EPosition-3-132718406-blog-130485089.235%5Ev38%5Epc_relevant_sort&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7EPosition-3-132718406-blog-130485089.235%5Ev38%5Epc_relevant_sort",
+      "domain": "niuniu.blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/前端/前端事件流",
+      "title": "组件 | Element",
+      "url": "https://element.eleme.cn/#/zh-CN/component/installation",
+      "domain": "element.eleme.cn"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/向量搜索引擎",
+      "title": "Spring Boot整合Milvus-Spring专区论坛-技术-SpringForAll社区",
+      "url": "http://spring4all.com/forum-post/3284.html",
+      "domain": "spring4all.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/向量搜索引擎",
+      "title": "向量数据搜索引擎-Milvus",
+      "url": "https://milvus.io/",
+      "domain": "milvus.io"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/大数据/大数据平台-ETL工具/datax",
+      "title": "DataX/introduction.md at master · alibaba/DataX · GitHub",
+      "url": "https://github.com/alibaba/DataX/blob/master/introduction.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/大数据/大数据平台-ETL工具/datax",
+      "title": "DataX/tdenginereader-CN.md at master · alibaba/DataX",
+      "url": "https://github.com/alibaba/DataX/blob/master/tdenginereader/doc/tdenginereader-CN.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/大数据/大数据平台-ETL工具/datax",
+      "title": "DataX/tdenginewriter-CN.md at master · alibaba/DataX · GitHub",
+      "url": "https://github.com/alibaba/DataX/blob/master/tdenginewriter/doc/tdenginewriter-CN.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/大数据/大数据平台-ETL工具/kettle",
+      "title": "Apache SeaTunnel | Apache SeaTunnel",
+      "url": "https://seatunnel.incubator.apache.org/",
+      "domain": "seatunnel.incubator.apache.org"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/大数据/大数据平台-ETL工具/kettle",
+      "title": "常见数据集成工具的对比: Apache SeaTunnel VS Flume VS DataX VS Sqoop_追求进步的阶梯的博客-CSDN博客",
+      "url": "https://blog.csdn.net/d66380022/article/details/131252496",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/大数据/时空数据/GIS",
+      "title": "MetaBase VS. DataEase：架构、功能和效果对比 - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/427808594",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/大数据/时空数据/GeoMesa",
+      "title": "Home · GeoMesa",
+      "url": "http://www.geomesa.org/",
+      "domain": "www.geomesa.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/定位",
+      "title": "Getting Started | Country State City API",
+      "url": "https://countrystatecity.in/",
+      "domain": "countrystatecity.in"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/定位",
+      "title": "countries-states-cities-database/countries+states+cities.json at master · dr5hn/countries-states-cities-database",
+      "url": "https://github.com/dr5hn/countries-states-cities-database/blob/master/countries%2Bstates%2Bcities.json",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/定位",
+      "title": "离线IP地址定位库",
+      "url": "https://github.com/lionsoul2014/ip2region",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/定位",
+      "title": "设备管理软件-移动设备管理-设备上云 - 设备全生命周期管理系统",
+      "url": "http://www.weieam.com/product/ems.html",
+      "domain": "www.weieam.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/工单管理",
+      "title": "jyong-zhu/sigma: Java开源工单管理系统，集成 Camunda &amp;&amp; vue-element-admin",
+      "url": "https://github.com/jyong-zhu/sigma",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/工单管理",
+      "title": "lanyulei/ferry: 本系统是集工单统计、任务钩子、权限管理、灵活配置流程与模版等等于一身的开源工单系统，当然也可以称之为工作流引擎。 致力于减少跨部门之间的沟通，自动任务的执行，提升工作效率与工作质量，减少不必要的工作量与人为出错率。",
+      "url": "https://github.com/lanyulei/ferry",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/工单管理",
+      "title": "开源工单系统_工单系统源码_派单系统源码-FeelDesk开发者版",
+      "url": "https://www.feeldesk.com.cn/",
+      "domain": "www.feeldesk.com.cn"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/报表工具",
+      "title": "jeecgboot/jeecg-boot: 「企业级低代码平台」前后端分离架构SpringBoot 2.x，SpringCloud，Ant Design&amp;Vue，Mybatis，Shiro，JWT。强大的代码生成器让前后端代码一键生成，无需写任何代码! 引领新的开发模式OnlineCoding-&gt;代码生成-&gt;手工MERGE，帮助Java项目解决70%重复工作，让开发更关注业务，既能快速提高效率，帮助公司节省成本，同时又不失灵活性。",
+      "url": "https://github.com/jeecgboot/jeecg-boot",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方包文档",
+      "path": "技术预言/数据可视化/Web组态",
+      "title": "webtopo-svg-edit - npm",
+      "url": "https://www.npmjs.com/package/webtopo-svg-edit",
+      "domain": "www.npmjs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/Web组态",
+      "title": "webtopo-svg-editor",
+      "url": "http://svg.yaolm.top/",
+      "domain": "svg.yaolm.top"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/Web组态",
+      "title": "web组态-一站式工业物联平台-智雨物联",
+      "url": "http://www.krmes.com/",
+      "domain": "www.krmes.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/数据可视化/Web组态",
+      "title": "yaolunmao/vue-webtopo-svgeditor: 基于vue3实现的svg可视化web组态编辑器。可无需修改代码动态添加svg组件",
+      "url": "https://github.com/yaolunmao/vue-webtopo-svgeditor/tree/main",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/Web组态",
+      "title": "乐吾乐2D可视化 - 数据如此美轮美奂",
+      "url": "https://2ds.le5le.com/",
+      "domain": "2ds.le5le.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/Web组态",
+      "title": "组态工具-FUXA",
+      "url": "https://frangoteam.org/#downloads",
+      "domain": "frangoteam.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/三维可视化",
+      "title": "当康科技-专注于工业物联网3D可视化",
+      "url": "http://www.dangktech.cn/#/",
+      "domain": "www.dangktech.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "51建模网_3D建模_免费3d模型下载_3d建模网_建模渲染",
+      "url": "http://www.51jianmo.com/",
+      "domain": "www.51jianmo.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "EarthSDK官网",
+      "url": "http://earthsdk.com/",
+      "domain": "earthsdk.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "三维互动网：元宇宙时代的产品互动展示平台",
+      "url": "https://www.d-d-d.cn/",
+      "domain": "www.d-d-d.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "恒歌科技-三维实景-数据可视化-兵棋态势推演-卫星航天仿真-三维数字地球",
+      "url": "http://www.henggetec.com/",
+      "domain": "www.henggetec.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "火星科技 | 合肥火星科技有限公司 | 地图开发 |可视化开发",
+      "url": "http://marsgis.cn/index.html",
+      "domain": "marsgis.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "虚拟现实,虚拟仿真,数字博物馆,万维引擎-cool360（新媒体世界）",
+      "url": "http://www.cool360.com/#/home",
+      "domain": "www.cool360.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/三维可视化/建模",
+      "title": "Babylon.js: Powerful, Beautiful, Simple, Open - Web-Based 3D At Its Best",
+      "url": "https://www.babylonjs.com/",
+      "domain": "www.babylonjs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/数据可视化/三维可视化/建模",
+      "title": "Three.js – JavaScript 3D Library",
+      "url": "https://threejs.org/",
+      "domain": "threejs.org"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/数据可视化/三维可视化/建模",
+      "title": "WebGL、ThreeJS、BabylonJS、SceneJS和Cesium框架对比及简介 - 简书",
+      "url": "https://www.jianshu.com/p/f055155d95d8",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/数据可视化/三维可视化/建模",
+      "title": "vtxf/Cesium-Tutorials-Index: Cesium相关资料汇总",
+      "url": "https://github.com/vtxf/Cesium-Tutorials-Index",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/服务监控",
+      "title": "夜莺监控-开源云原生监控系统",
+      "url": "https://github.com/ccfos/nightingale",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "技术预言/服务监控/prometheus",
+      "title": "SpringBoot整合Prometheus_bearboy80的博客-CSDN博客",
+      "url": "https://blog.csdn.net/guiyiba/article/details/122731439?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-122731439-blog-111573828.pc_relevant_3mothn_strategy_recovery&spm=1001.2101.3001.4242.1&utm_relevant_index=1",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/消息服务/消息推送平台",
+      "title": "ZhongFuCheng3y/austin: 消息推送平台 推送下发【邮件】【短信】【微信服务号】【微信小程序】【企业微信】【钉钉】等消息类型。",
+      "url": "https://github.com/ZhongFuCheng3y/austin",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/消息服务/消息推送平台",
+      "title": "rememberber/WePush: 专注批量推送的小而美的工具，目前支持：模板消息-公众号、模板消息-小程序、微信客服消息、微信企业号/企业微信消息、阿里云短信、阿里大于模板短信 、腾讯云短信、云片网短信、E-Mail、HTTP请求、钉钉、华为云短信、百度云短信、又拍云短信、七牛云短信",
+      "url": "https://github.com/rememberber/WePush",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/消息服务/短信",
+      "title": "SMS4J",
+      "url": "https://wind.kim/",
+      "domain": "wind.kim"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/消息服务/短信",
+      "title": "pppscn/SmsForwarder: 短信转发器——监控Android手机短信、来电、APP通知，并根据指定规则转发到其他手机：钉钉群自定义机器人、钉钉企业内机器人、企业微信群机器人、飞书机器人、企业微信应用消息、邮箱、bark、webhook、Telegram机器人、Server酱、PushPlus、手机短信等。包括主动控制服务端与客户端，让你轻松远程发短信、查短信、查通话、查话簿、查电量等。（V3.0 新增）PS.这个APK主要是学习与自用，如有BUG请提ISSUE，同时欢迎大家提PR指正",
+      "url": "https://github.com/pppscn/SmsForwarder",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/知识库",
+      "title": "mahonelau/-kykms: 科亿知识库 KY KMS 是一款基于Elasticsearch的文档型知识库管理系统，提供强大的全文检索与文档分类管理功能",
+      "url": "https://github.com/mahonelau/-kykms",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/知识库",
+      "title": "文档型全文检索知识库 - 科亿知识库",
+      "url": "http://www.kykms.cn/",
+      "domain": "www.kykms.cn"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/算法",
+      "title": "Chat2DB/README_CN.md at main · alibaba/Chat2DB",
+      "url": "https://github.com/alibaba/Chat2DB/blob/main/README_CN.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/算法",
+      "title": "开源算法库-PaddlePaddle/PaddleDetection at release/2.5",
+      "url": "https://github.com/PaddlePaddle/PaddleDetection/tree/release/2.5",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/算法",
+      "title": "百度AI开放平台-全球领先的人工智能服务平台",
+      "url": "https://ai.baidu.com/",
+      "domain": "ai.baidu.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/算法",
+      "title": "虹软(ArcSoft) — 让视界从此不同",
+      "url": "https://www.arcsoft.com.cn/",
+      "domain": "www.arcsoft.com.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/算法",
+      "title": "阿里云|达摩院视觉智能开放平台",
+      "url": "https://vision.aliyun.com/",
+      "domain": "vision.aliyun.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/算法",
+      "title": "首页 - 达摩院",
+      "url": "https://damo.alibaba.com/",
+      "domain": "damo.alibaba.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/边缘计算",
+      "title": "Apache Guacamole™",
+      "url": "https://guacamole.apache.org/",
+      "domain": "guacamole.apache.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/边缘计算",
+      "title": "EdgexFoundry-中文",
+      "url": "https://cn.edgexfoundry.org/",
+      "domain": "cn.edgexfoundry.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/边缘计算",
+      "title": "OpenYurt",
+      "url": "https://openyurt.io/zh/",
+      "domain": "openyurt.io"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/边缘计算",
+      "title": "davidfantasy/mybatis-plus-generator-ui: 对mybatis-plus-generator进行封装，通过Web UI快速生成兼容Spring boot，mybatis-plus框架的各类业务代码",
+      "url": "https://github.com/davidfantasy/mybatis-plus-generator-ui",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/边缘计算",
+      "title": "eKuiper: 超轻量物联网边缘数据流处理引擎",
+      "url": "https://ekuiper.org/zh",
+      "domain": "ekuiper.org"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "技术预言/边缘计算",
+      "title": "openyurt/README.zh.md at master · openyurtio/openyurt",
+      "url": "https://github.com/openyurtio/openyurt/blob/master/README.zh.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/音视频",
+      "title": "AnyChat-行业领先的数智化应用解决方案",
+      "url": "https://www.anychat.cn/",
+      "domain": "www.anychat.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "技术预言/音视频",
+      "title": "WebRTC中文网-最权威的RTC实时通信平台 |",
+      "url": "https://webrtc.org.cn/",
+      "domain": "webrtc.org.cn"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "监控/prometheus",
+      "title": "容器领域的十大监控系统对比 - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/57740192",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "监控/prometheus/node_export/docker容器监控",
+      "title": "cadvisor/README.md at master · google/cadvisor",
+      "url": "https://github.com/google/cadvisor/blob/master/README.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "监控/prometheus/node_export/docker容器监控",
+      "title": "docker容器监控工具-cadvisor/api_v2.md",
+      "url": "https://github.com/google/cadvisor/blob/master/docs/api_v2.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "算法/二叉树",
+      "title": "LintCode 领扣 - 在线编程-训练算法",
+      "url": "https://www.lintcode.com/",
+      "domain": "www.lintcode.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "算法/二叉树",
+      "title": "labuladong的算法小抄 - labuladong的算法小抄",
+      "url": "https://labuladong.gitbook.io/algo/",
+      "domain": "labuladong.gitbook.io"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "算法/二叉树",
+      "title": "一致性 Hash 算法是什么？它带来了哪些问题以及解决方案",
+      "url": "https://blog.csdn.net/cy973071263/article/details/104497894",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "算法/二叉树",
+      "title": "一致性哈希算法(consistent hashing)_lisaem的专栏-CSDN博客",
+      "url": "https://blog.csdn.net/lisaem/article/details/49246637",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "算法/二叉树",
+      "title": "刷算法全靠套路，认准 labuladong 就够了！English version supported! Crack LeetCode, not only how, but also why.",
+      "url": "https://github.com/labuladong/fucking-algorithm",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "算法/二叉树",
+      "title": "数据结构与算法系列 目录 - 如果天空不死 - 博客园",
+      "url": "https://www.cnblogs.com/skywang12345/p/3603935.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "负载均衡/LVS",
+      "title": "四层、七层负载均衡的区别 - Perfectionist - 博客园",
+      "url": "https://www.cnblogs.com/zhaiyf/p/9051694.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "负载均衡/LVS",
+      "title": "负载均衡以及四层和七层负载均衡的区别 - 登高必自卑 行远必自迩 - CSDN博客",
+      "url": "https://blog.csdn.net/z45689/article/details/72458260",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "Nginx Proxy Manager",
+      "url": "https://nginxproxymanager.com/",
+      "domain": "nginxproxymanager.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "Nginx在线配置生成工具",
+      "url": "https://www.nginxedit.cn/",
+      "domain": "www.nginxedit.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "nginxWebUI - 首页",
+      "url": "https://www.nginxwebui.cn/",
+      "domain": "www.nginxwebui.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "负载均衡/kong",
+      "title": "kong官网",
+      "url": "https://konghq.com/",
+      "domain": "konghq.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "负载均衡/kong",
+      "title": "基于 docker-compose 容器化构建 Kong 微服务网关平台",
+      "url": "https://www.ngui.cc/el/1615011.html?action=onClick",
+      "domain": "www.ngui.cc"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "运维",
+      "title": "WGCLOUD - 极简运维监控系统 - 官网",
+      "url": "https://www.wgstart.com/",
+      "domain": "www.wgstart.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "高可用",
+      "title": "Nginx之——Nginx+keepalived双机热备（主从模式） - 冰河的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/l1028386804/article/details/80098334",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/CI/CD",
+      "title": "技术|什么是 CI/CD？",
+      "url": "https://linux.cn/article-9926-1.html",
+      "domain": "linux.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Dev-Ops",
+      "title": "Dev 与 Ops 互怼 | 科普一下 DevOps - GitChat技术杂谈 - CSDN博客",
+      "url": "https://blog.csdn.net/GitChat/article/details/79588757",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Dev-Ops",
+      "title": "DevOps 工具元素周期表 - Ledge DevOps 知识平台",
+      "url": "https://devops.phodal.com/home",
+      "domain": "devops.phodal.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Dev-Ops",
+      "title": "DevOps简介 - chuixue24的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/chuixue24/article/details/83623246",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Dev-Ops",
+      "title": "DevOps简介 - 刘大飞 - 博客园",
+      "url": "https://www.cnblogs.com/liufei1983/p/7152013.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Dev-Ops",
+      "title": "Ledge：一个开源的『DevOps + 研发效能』知识平台 - 掘金",
+      "url": "https://juejin.im/post/5e829ca8f265da47c916edc9",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Dev-Ops",
+      "title": "一分钟告诉你究竟DevOps是什么鬼？ - 瓏曦 - 博客园",
+      "url": "https://www.cnblogs.com/jetzhang/p/6068773.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Dev-Ops",
+      "title": "为什么大公司一定要使用DevOps? - 架构师小秘圈 - CSDN博客",
+      "url": "https://blog.csdn.net/g6U8W7p06dCO99fQ3/article/details/82056948",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/Docker Swarm",
+      "title": "Docker Swarm集群的数据持久化（NFS）",
+      "url": "https://blog.csdn.net/weixin_39991305/article/details/113435269",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Docker/docker-compose",
+      "title": "CentOS7安装docker-compose（附docker-compose命令介绍） - MrDarren - 博客园",
+      "url": "https://www.cnblogs.com/darren1112/p/15994616.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Docker/docker-compose",
+      "title": "Docker Compose 配置文件 docker-compose.yml 详解_BUG弄潮儿的博客-CSDN博客",
+      "url": "https://blog.csdn.net/huangjinjin520/article/details/124054043",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Docker/docker-compose",
+      "title": "Docker-compose教程（安装，使用， 快速入门）_开着拖拉机回家的博客-CSDN博客_dockercompose教程",
+      "url": "https://blog.csdn.net/qq_35995514/article/details/125468792",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/docker-compose",
+      "title": "如何在Docker容器中设置Java堆大小(Xms/Xmx)？ |",
+      "url": "https://qa.1r1g.com/sf/ask/2094647201/",
+      "domain": "qa.1r1g.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/dockerfile",
+      "title": "Dockerfile引用| Docker文档",
+      "url": "https://docs.docker.com/v17.09/engine/reference/builder/#env",
+      "domain": "docs.docker.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Docker/docker安装应用",
+      "title": "Docker安装Zookeeper并进行操作 - Radom&amp;7 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_26641781/article/details/80886831",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "Docker Playground",
+      "url": "https://labs.play-with-docker.com/p/cbcker244gtg00faa50g",
+      "domain": "labs.play-with-docker.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "Docker中文文档 Image镜像-DockerInfo",
+      "url": "http://www.dockerinfo.net/image%E9%95%9C%E5%83%8F",
+      "domain": "www.dockerinfo.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "Docker管理工具Portainer忘记admin登录密码怎么办? - Alive9 - 博客园",
+      "url": "https://www.cnblogs.com/A1999/p/15993682.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "Docker管理面板Portainer中文汉化 新增CE、EE企业版汉化 - 我不是矿神",
+      "url": "https://imnks.com/3406.html",
+      "domain": "imnks.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "docker官方文档笔记 - smile-you-me - 博客园",
+      "url": "https://www.cnblogs.com/smlile-you-me/p/7223994.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "docker容器详解（入门必看）(一) - 逃离地球的小小呆 - CSDN博客",
+      "url": "https://blog.csdn.net/gui951753/article/details/81148067",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "二、基于kubernetes构建Docker集群环境实战 - 純黑色 - 博客园",
+      "url": "https://www.cnblogs.com/xhyan/p/6655731.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "前言 · Docker 从入门到实践",
+      "url": "http://shouce.jb51.net/docker_practice/",
+      "domain": "shouce.jb51.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Docker/portainer",
+      "title": "在Debian 8（jessie）上安装Docker_Jackson_csdn的博客-CSDN博客_debian8 安装docker",
+      "url": "https://blog.csdn.net/u012066426/article/details/51865367",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "在docker容器中运行Ubuntu桌面版，并通过vnc连接_书一文，解一惑的博客-CSDN博客_dorowu/ubuntu-desktop-lxde-vnc",
+      "url": "https://blog.csdn.net/weixin_44350891/article/details/104538944?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-104538944-blog-119332461.pc_relevant_multi_platform_whitelistv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-104538944-blog-119332461.pc_relevant_multi_platform_whitelistv3&utm_relevant_index=2",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "基于Docker及Kubernetes技术构建容器云（PaaS）平台概述 - 胡伟煌的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/huwh_/article/details/75935700",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/portainer",
+      "title": "基于Docker和Kubernetes的最佳架构实践 - DockOne.io",
+      "url": "http://dockone.io/article/3694",
+      "domain": "dockone.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/安装docker",
+      "title": "Centos 升级docker 至最新版本或指定版本_我还不信这个昵称也被占用了的博客-CSDN博客_centos 升级docker",
+      "url": "https://blog.csdn.net/socct_yj/article/details/125656348",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Docker/安装docker",
+      "title": "Centos7搭建docker1.13.1镜像仓库并开启远程访问 - qq_38695182的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_38695182/article/details/85261545",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "下载/历史版本页",
+      "path": "Devops/Docker/安装docker",
+      "title": "docker安装包",
+      "url": "https://download.docker.com/linux/static/stable/x86_64/",
+      "domain": "download.docker.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Docker/安装docker",
+      "title": "linux centOS离线安装docker_古斯塔斯hugh的博客-CSDN博客_centos离线安装docker",
+      "url": "https://blog.csdn.net/houmenghu/article/details/123690559",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Docker/清理空间资源",
+      "title": "docker清理空间资源_Z_single的博客-CSDN博客_docker清理内存",
+      "url": "https://blog.csdn.net/weixin_42143550/article/details/118414879",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Docker/镜像仓库",
+      "title": "Harbor部署及使用",
+      "url": "https://blog.csdn.net/Gf19991225/article/details/121982824",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Docker/镜像仓库",
+      "title": "[基于harbor部署私有仓库] 4 推送镜像到harbor_独行侠_阿涛的博客-CSDN博客_harbor推送镜像",
+      "url": "https://blog.csdn.net/wltsysterm/article/details/120534202",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Jenkins",
+      "title": "Jenkins教程™",
+      "url": "https://www.yiibai.com/jenkins/",
+      "domain": "www.yiibai.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Jenkins",
+      "title": "Jenkins自动化部署-----持续交付 - xiangnan10的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/xiangnan10/article/details/80332866",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/Jenkins",
+      "title": "jenkins自动部署 - 平凡~坚持的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/zhangzhangjava/article/details/78425106",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/Jenkins",
+      "title": "实战：向GitHub提交代码时触发Jenkins自动构建 - boling_cavalry的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/boling_cavalry/article/details/78943061",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/K8s",
+      "title": "CentOS7安装Kubernetes图形化管理界面_小郄同学的博客-CSDN博客_centos安装k8s图形化",
+      "url": "https://blog.csdn.net/qiemengyan/article/details/123873345",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/K8s",
+      "title": "Kubernetes web界面kubernetes-dashboard安装【h】 - 编程之家",
+      "url": "https://www.jb51.cc/docker/1041996.html",
+      "domain": "www.jb51.cc"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/K8s",
+      "title": "Kubernetes 文档 - Kubernetes",
+      "url": "https://kubernetes.io/zh/docs/home/",
+      "domain": "kubernetes.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Devops/K8s",
+      "title": "Kubernetes的三种可视化UI界面-周周-51CTO博客",
+      "url": "https://blog.51cto.com/u_14157628/2473866",
+      "domain": "blog.51cto.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/K8s",
+      "title": "Kubernetes的单机版安装（CentOS7） - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/442358165",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/K8s",
+      "title": "k8s简单安装_grsAAAAAA的博客-CSDN博客_k8s 安装",
+      "url": "https://blog.csdn.net/grsAAAAAA/article/details/115184538",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/K8s",
+      "title": "kubernetes入门：可视化界面dashboard极简安装教程_8月日更_小鲍侃java_InfoQ写作社区",
+      "url": "https://xie.infoq.cn/article/233b87976c2788d6aa2ad3571",
+      "domain": "xie.infoq.cn"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Devops/K8s",
+      "title": "单机版的K8s环境搭建及部署Java Web应用Demo_山河已无恙的博客-CSDN博客_单机版k8s",
+      "url": "https://blog.csdn.net/sanhewuyang/article/details/120796158",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "Documentation - Leaflet - 一个交互式地图 JavaScript 库",
+      "url": "https://leafletjs.cn/reference.html",
+      "domain": "leafletjs.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "FreeXGIS",
+      "url": "http://www.freexgis.com/online/#/",
+      "domain": "www.freexgis.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "GIS相关基础知识 - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/144698549",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "GeoQ | 商业分析",
+      "url": "https://anapub.geoq.cn/manage/personalapp",
+      "domain": "anapub.geoq.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "IGS JavaScript API",
+      "url": "http://develop.smaryun.com:81/API/JS/IGS%20JavaScript%20API%20v02/index.htm",
+      "domain": "develop.smaryun.com:81"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "Leaflet-Geoman 帮助文档_GIS打工人的博客-CSDN博客",
+      "url": "https://blog.csdn.net/DI_ID/article/details/106861135",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "Leaflet.markercluster 中文文档 V1.5.4_leaflet中文文档_冰樱湛蓝的博客-CSDN博客",
+      "url": "https://blog.csdn.net/SuiFengDieWu/article/details/125886094",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "OpenLayers v7.0.0 - API文档",
+      "url": "https://openlayers.org/en/latest/apidoc/",
+      "domain": "openlayers.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "OpenLayers5示例",
+      "url": "http://develop.smaryun.com:81/API/JS/OL5InterfaceDemo/index.htm",
+      "domain": "develop.smaryun.com:81"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "WebGIS概念 - 简书",
+      "url": "https://www.jianshu.com/p/7ac9aa68750c",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "https://www.baidu.com/link?url=b4vcTNWD32y68uf5RmkxtsATEWL_6Gy83x5NmsdQNue9JbOyOYTCuiMDKF3fdi76&amp;wd=&amp;eqid=dab27e030001645300000004645df2e6",
+      "url": "https://www.baidu.com/link?url=b4vcTNWD32y68uf5RmkxtsATEWL_6Gy83x5NmsdQNue9JbOyOYTCuiMDKF3fdi76&wd=&eqid=dab27e030001645300000004645df2e6",
+      "domain": "www.baidu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "leaflet使用插件汇总 - 编程之家",
+      "url": "https://www.jb51.cc/notes/3288750.html",
+      "domain": "www.jb51.cc"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "leaflet常用插件库",
+      "url": "https://www.bbsmax.com/A/o75NZDEX5W/",
+      "domain": "www.bbsmax.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "【Leafletjs】L.Map 中文API_leaflet 设置语言_hdtrs2010的博客-CSDN博客",
+      "url": "https://blog.csdn.net/hdtrs2010/article/details/23423559",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "什么是倾斜摄影？从内涵、流程、优势和应用前景等多角度告诉你！—— 叁 - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/188331503",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "初识WebGis - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/470795133",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "GIS/webGIS",
+      "title": "开源web三维可视化_基于网页的三维可视化，要效率更要效果_weixin_39860757的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_39860757/article/details/111005956",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "license",
+      "title": "SpringBoot添加License的多种方式_java_脚本之家",
+      "url": "https://www.jb51.net/article/214915.htm",
+      "domain": "www.jb51.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "license",
+      "title": "springboot+license - 冬至夏未来 - 博客园",
+      "url": "https://www.cnblogs.com/DongStudyWinter/p/16611807.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能",
+      "title": "华为云AI",
+      "url": "https://console.huaweicloud.com/modelarts/?region=cn-southwest-2#/model-studio/deployment",
+      "domain": "console.huaweicloud.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能",
+      "title": "豆包 - 字节跳动旗下 AI 智能助手",
+      "url": "https://www.doubao.com/chat/?channel=baidu_sem&source=dbweb_baidusem_htl_pc_pinp_2&keywordid=973182309676&ad_platform_id=baidusearch_lead&account_id=53653088&a_planid=720987910&a_unitid=10812115429&a_keywordid=973182309676&a_creative=108560718849&a_matchtype=1&a_dongtai=0&a_trig_flag=nm&a_crowdid=0&a_kw_enc_utf8=%E8%B1%86%E5%8C%85%E5%AE%98%E6%96%B9%E7%BD%91%E9%A1%B5%E7%89%88%E5%85%A5%E5%8F%A3&ug_semver=v2.0.0&bd_vid=5339143766186171022",
+      "domain": "www.doubao.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能/openAI",
+      "title": "API Reference - OpenAI API",
+      "url": "https://platform.openai.com/docs/api-reference/introduction",
+      "domain": "platform.openai.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能/openAI",
+      "title": "CUDA 专区 | NVIDIA 开发者",
+      "url": "https://developer.nvidia.cn/cuda-zone",
+      "domain": "developer.nvidia.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能/openAI",
+      "title": "Claude-ai",
+      "url": "https://chat.claudeai.ai/chats",
+      "domain": "chat.claudeai.ai"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能/openAI",
+      "title": "GPTBots",
+      "url": "https://www.gptbots.ai/developer/docs",
+      "domain": "www.gptbots.ai"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能/openAI",
+      "title": "GPTs应用商店 - 轻松找到最适合您的GPTS应用",
+      "url": "https://top.aibase.com/gpts",
+      "domain": "top.aibase.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能/openAI",
+      "title": "Large Language Model in Action",
+      "url": "https://wangwei1237.github.io/LLM_in_Action/",
+      "domain": "wangwei1237.github.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能/openAI",
+      "title": "OpenAI Manager - a Hugging Face Space by junchenmo",
+      "url": "https://huggingface.co/spaces/junchenmo/OpenAI-Manager",
+      "domain": "huggingface.co"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能/openAI",
+      "title": "chat-gpt",
+      "url": "https://chat.openai.com/chat",
+      "domain": "chat.openai.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "人工智能/openAI",
+      "title": "国内体验OpenAI ChatGPT详细步骤_一个敲代码不秃头的俗人的博客-CSDN博客",
+      "url": "https://blog.csdn.net/qq_41580802/article/details/128254746",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "代码加密/java",
+      "title": "jar包加密防止反编译【技术选型】_lh155136的博客-CSDN博客_jar包防止反编译",
+      "url": "https://blog.csdn.net/lh155136/article/details/114533634",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/Coap",
+      "title": "COAP协议全面分析 - 博达智联 - CSDN博客",
+      "url": "https://blog.csdn.net/robert_tina/article/details/78864345",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/EDP",
+      "title": "EDP 协议介绍 - 原谅我这一生不羁放纵爱自由 - CSDN博客",
+      "url": "https://blog.csdn.net/weixin_40973138/article/details/89762768",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/HTTP",
+      "title": "HTTP协议 有这篇文章就够了 - 掘金",
+      "url": "https://juejin.im/post/5e57935be51d4526cf47fd46?utm_source=gold_browser_extension",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/HTTP",
+      "title": "我所理解的HTTP协议 - cryAllen - 博客园",
+      "url": "https://www.cnblogs.com/cr330326/p/9426018.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/LDAP",
+      "title": "8大常见物联网通信协议_新闻中心_物联网世界",
+      "url": "http://www.iotworld.com.cn/html/News/201812/f6fa59b570887ff8.shtml",
+      "domain": "www.iotworld.com.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/Modbus",
+      "title": "Modbus通讯协议原来是这么回事！看完秒懂了",
+      "url": "http://www.sohu.com/a/230628953_315598",
+      "domain": "www.sohu.com"
+    },
+    {
+      "level": "C",
+      "reason": "下载/历史版本页",
+      "path": "协议/OPC",
+      "title": "KepOPC工业互联网数据交换平台V2.4.9-网络监控工具类资源-CSDN下载",
+      "url": "https://download.csdn.net/download/weixin_29482793/11274730",
+      "domain": "download.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/OPC",
+      "title": "OPC UA 的发布/订阅（PUB/SUB）模式_网络_姚家湾博客-CSDN博客",
+      "url": "https://blog.csdn.net/yaojiawan/article/details/89307228#comments",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/OPC",
+      "title": "OPC UA 的本质_嵌入式_姚家湾博客-CSDN博客",
+      "url": "https://blog.csdn.net/yaojiawan/article/details/88990351",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/OPC",
+      "title": "OPC UA客户端测试连接工具（KepOPCUA）_数据库_jojo工作室-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_29482793/article/details/82799584",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/OPC",
+      "title": "OPC UA的监控项、订阅、和通知 - 纪玉奇 - 博客园",
+      "url": "https://www.cnblogs.com/jiyuqi/p/9639034.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/OPC",
+      "title": "OPC技术学习总结 - wise18146705004的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/wise18146705004/article/details/82347926",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/OPC",
+      "title": "node.js – node opc-ua – 如何在服务器中发现变量？ - 程序园",
+      "url": "http://www.voidcn.com/article/p-vnxtlbvr-bxy.html",
+      "domain": "www.voidcn.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/OPC",
+      "title": "下载 KEPServerEX",
+      "url": "https://www.kepware.com/zh-cn/demo-downloads/ex-thank-you-page/?product=d2239b8c-36f2-4d07-8fbd-e223d0e26bbf",
+      "domain": "www.kepware.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/OPC",
+      "title": "基于python的KepOPC中间件技术特点说明_Python_jojo工作室-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_29482793/article/details/79734662",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/OPC",
+      "title": "学习open62541 --- [2] 使用UaExpert_运维_whahu1989的专栏-CSDN博客",
+      "url": "https://blog.csdn.net/whahu1989/article/details/99476133",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/ZigBee",
+      "title": "无线智能家居WiFi与ZigBee哪个好？哪个更有优势",
+      "url": "http://www.qianjia.com/html/2018-05/22_292711.html",
+      "domain": "www.qianjia.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/openssl",
+      "title": "openssl_百度百科",
+      "url": "https://baike.baidu.com/item/openssl/5454803?fr=aladdin",
+      "domain": "baike.baidu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/EMQ",
+      "title": "EMQ X - 百万级开源 MQTT 消息服务器 3.0-beta.2 文档",
+      "url": "http://www.emqtt.com/docs/v3/install.html",
+      "domain": "www.emqtt.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/EMQ",
+      "title": "EMQ 的共享订阅 - 简书",
+      "url": "https://www.jianshu.com/p/a72de5fa5f61",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/EMQ",
+      "title": "EMQTT测试--压力测试 - 程高伟 - CSDN博客",
+      "url": "https://blog.csdn.net/frankcheng5143/article/details/52117057",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/EMQ",
+      "title": "emqtt 试用（五）emq 的用户密码认证",
+      "url": "https://www.bbsmax.com/A/8Bz8bGDk5x/",
+      "domain": "www.bbsmax.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/EMQ",
+      "title": "我的mqtt协议和emqttd开源项目个人理解（18） - 一个客户端sub很多主题和数据，出现宕机？使用本地共享订阅解决！ - $firecat的代码足迹$ - CSDN博客",
+      "url": "https://blog.csdn.net/libaineu2004/article/details/81633407",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "Eclipse Paho Java Client分析——整体架构分析 - Yy - CSDN博客",
+      "url": "https://blog.csdn.net/it_liuwei/article/details/62042407",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "IBM知识中心",
+      "url": "https://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.pro.doc/q002880_.htm",
+      "domain": "www.ibm.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "Introduction · MQTT协议中文版",
+      "url": "https://mcxiaoke.gitbooks.io/mqtt-cn/content/",
+      "domain": "mcxiaoke.gitbooks.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "MQTT介绍与使用 - StoneGeek - 博客园",
+      "url": "https://www.cnblogs.com/sxkgeek/p/9140180.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "MQTT协议中文版",
+      "url": "https://mcxiaoke.gitbooks.io/mqtt-cn/content/mqtt/03-ControlPackets.html",
+      "domain": "mcxiaoke.gitbooks.io"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "MQTT服务器搭建--Mosquitto用户名密码配置 - This My Life - chisj - CSDN博客",
+      "url": "https://blog.csdn.net/u012377333/article/details/69397124",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "MQTT系列教程3（客户端工具MQTTBox的安装和使用）",
+      "url": "https://www.hangge.com/blog/cache/detail_2350.html",
+      "domain": "www.hangge.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "SpringBoot+Mqtt遇到的坑!求大佬解答！！ - 桥豆麻袋丶 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_43318965/article/details/94889330",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "mosquitto 常用命令 - Abel的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/xiaofei_me/article/details/79094421",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "mosquitto_pub和mosquitto_sub 命令参数说明_ITPUB博客",
+      "url": "http://blog.itpub.net/28624388/viewspace-1440102/",
+      "domain": "blog.itpub.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "mosquitto配置文件详解 - 大JAVA解决方案 - CSDN博客",
+      "url": "https://blog.csdn.net/wangshuminjava/article/details/80429203",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "几个MQTT的知识点 - 我才是银古 - 博客园",
+      "url": "https://www.cnblogs.com/znlgis/p/4930990.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "第二章 – MQTT控制报文格式 · MQTT协议中文版",
+      "url": "https://mcxiaoke.gitbooks.io/mqtt-cn/content/mqtt/02-ControlPacketFormat.html",
+      "domain": "mcxiaoke.gitbooks.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "订阅mosquitto服务器状态各主题 - qhdcsj的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/qhdcsj/article/details/44630201",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/kafka",
+      "title": "Kafka笔记整理（一）-香飘叶子-51CTO博客",
+      "url": "http://blog.51cto.com/xpleaf/2090847",
+      "domain": "blog.51cto.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/消息中间件/协议/kafka",
+      "title": "kafka集群搭建（windows环境下） - 不懂代码的攻城师 - 博客园",
+      "url": "https://www.cnblogs.com/lentoo/p/7785004.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/rocketmq",
+      "title": "RocketMQ(4)---RocketMQ核心配置讲解 - 雨点的名字 - 博客园",
+      "url": "https://www.cnblogs.com/qdhxhz/p/11116197.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/rocketmq",
+      "title": "RocketMQ单机环境 - rocketmq-connector",
+      "url": "https://rocketmq-1.gitbook.io/rocketmq-connector/quick-start/qian-qi-zhun-bei/dan-ji-huan-jing",
+      "domain": "rocketmq-1.gitbook.io"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/消息中间件/协议/rocketmq",
+      "title": "RocketMQ安装及测试",
+      "url": "https://blog.csdn.net/yanyf2016/article/details/103662050",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/rocketmq",
+      "title": "mqttclient使用问题 - 踏雪无痕 - CSDN博客",
+      "url": "https://blog.csdn.net/i402097836/article/details/51952432",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/rocketmq",
+      "title": "为什么会需要消息队列(MQ)？ - xuyatao - 博客园",
+      "url": "https://www.cnblogs.com/xuyatao/p/6864109.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "协议/消息中间件/协议/rocketmq",
+      "title": "使用 Spring Boot 开发 MQ JMS 应用程序",
+      "url": "https://www.ibm.com/developerworks/cn/java/j-tutorials-mq-jms-application-development-with-spring-boot/index.html",
+      "domain": "www.ibm.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "协议/消息中间件/协议/rocketmq",
+      "title": "解决：rocketmq启动报错_Cannot allocate memory_春风化雨-CSDN博客",
+      "url": "https://blog.csdn.net/jiahao1186/article/details/103443501",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "单点登陆和认证相关/第三方平台",
+      "title": "什么是 SSO 与 CAS?",
+      "url": "https://www.cnblogs.com/btgyoyo/p/10722010.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "单点登陆和认证相关/认证授权/Keycloak",
+      "title": "Keycloak 梳理_帷幄庸者的博客-CSDN博客_keycloak",
+      "url": "https://blog.csdn.net/weiwoyonzhe/article/details/121026133",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "单点登陆和认证相关/认证授权/Keycloak",
+      "title": "OAuth2.0的四种授权方式_余生之君的博客-CSDN博客",
+      "url": "https://blog.csdn.net/java_collect/article/details/107597732",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "单点登陆和认证相关/认证授权/Keycloak",
+      "title": "OAuth2入门：（一）基本配置_/oauth/authorize_复读机3827的博客-CSDN博客",
+      "url": "https://blog.csdn.net/qq_61603262/article/details/127431541",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "单点登陆和认证相关/认证授权/Keycloak",
+      "title": "Oauth2.0 部分源码流程、自定义异常处理、自定义token解析、自定义返回等_oauth2.0源码_写代码的小韭菜的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_48838762/article/details/128118594",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "单点登陆和认证相关/认证授权/Keycloak",
+      "title": "Spring Security OAuth2.0认证授权二：搭建资源服务_spring oa搭建认证服务_Roc Lau的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_39977988/article/details/126580110",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "单点登陆和认证相关/认证授权/Keycloak",
+      "title": "什么是OIDC - 简书",
+      "url": "https://www.jianshu.com/p/fb4a386ef718",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "压力测试/JMeter",
+      "title": "Http压测工具wrk使用指南 - jiftle - 博客园",
+      "url": "https://www.cnblogs.com/jiftle/p/7158291.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "压力测试/JMeter/MQTT-JMeter",
+      "title": "如何使用jmeter进行MQTT压力测试？",
+      "url": "https://blog.csdn.net/cattle09/article/details/121356116",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "压力测试/JMeter/MQTT-JMeter",
+      "title": "运用MQTT-JMeter插件测试MQTT服务器性能 - 兰先生 - CSDN博客",
+      "url": "https://blog.csdn.net/weixin_36650524/article/details/77376038",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "下载/历史版本页",
+      "path": "压力测试/JMeter/数据库",
+      "title": "Apache JMeter - Download Apache JMeter",
+      "url": "http://jmeter.apache.org/download_jmeter.cgi",
+      "domain": "jmeter.apache.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "压力测试/JMeter/数据库",
+      "title": "JMeter ----请求数据参数设置-自动增长变量 - 清明-心若淡定 - 博客园",
+      "url": "https://www.cnblogs.com/saryli/p/9858625.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "压力测试/JMeter/数据库",
+      "title": "Jmeter直连postgresql数据库进行压测 - Invokerr - 博客园",
+      "url": "https://www.cnblogs.com/Invokerr/p/9928865.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "压力测试/JMeter/数据库",
+      "title": "java秒杀高并发------Jmeter压力测试 - Recar的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_28295425/article/details/80240238",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "压力测试/JMeter/数据库",
+      "title": "jmeter界面设置为中文，永久中文 - niuzaiwenjie的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/niuzaiwenjie/article/details/80864787",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "压力测试/JMeter/数据库",
+      "title": "jmeter的时间戳函数使用 - jocleyn的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/jocleyn/article/details/83414433",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "地图",
+      "title": "java-EasyExcel导出excel设置单元格为文本格式（含代码）_easyexcel设置列为文本-CSDN博客",
+      "url": "https://blog.csdn.net/qq798867485/article/details/129749594",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "地图",
+      "title": "亚信科技-AISWare AIMap 时空地理信息平台",
+      "url": "https://www.asiainfo.com/zh_cn/product_aisware_aimap.html",
+      "domain": "www.asiainfo.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "地图",
+      "title": "天地图和百度地图 高德地图展现形式有什么不同？ - 知乎",
+      "url": "https://www.zhihu.com/question/372778744?sort=created",
+      "domain": "www.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/ELK/logstash",
+      "title": "ELK生态：Logstash增量读取csv文件数据，导入到Elasticsearch_大数据_alan_liuyue的博客-CSDN博客",
+      "url": "https://blog.csdn.net/alan_liuyue/article/details/91998144",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/ELK/logstash",
+      "title": "Logstash处理json根式日志文档的三种方式_json_为一个人走几座城-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_40163498/article/details/80364920?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "大数据/ELK/安装",
+      "title": "ES5.6.9在windows下安装小记_qq_32534441的博客-CSDN博客",
+      "url": "https://blog.csdn.net/qq_32534441/article/details/89883141?depth_1.utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "大数据/ELK/安装",
+      "title": "Elasticsearch入门教程 - Elasticsearch教程™",
+      "url": "https://www.yiibai.com/elasticsearch/elasticsearch-getting-start.html",
+      "domain": "www.yiibai.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/ELK/安装",
+      "title": "Elasticsearch学习，请先看这一篇！_大数据_tony的专栏-CSDN博客",
+      "url": "https://blog.csdn.net/achuo/article/details/87865141",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/ELK/安装",
+      "title": "一篇文章搞懂filebeat（ELK） - 一寸HUI - 博客园",
+      "url": "https://www.cnblogs.com/zsql/p/13137833.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/ELK/安装",
+      "title": "序言 | Elasticsearch: 权威指南 | Elastic",
+      "url": "https://www.elastic.co/guide/cn/elasticsearch/guide/current/foreword_id.html",
+      "domain": "www.elastic.co"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/ETL",
+      "title": "ETL讲解（很详细！！！） - 鸿燕藏锋 - 博客园",
+      "url": "https://www.cnblogs.com/yjd_hycf_space/p/7772722.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/Flink/安装部署",
+      "title": "Flink 从 0 到 1 学习 —— Apache Flink 介绍 | zhisheng的博客",
+      "url": "http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/",
+      "domain": "www.54tianzhisheng.cn"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "大数据/Flink/安装部署",
+      "title": "Flink安装部署-window 本地部署_大数据_都是浮云-CSDN博客",
+      "url": "https://blog.csdn.net/clj198606061111/article/details/99694033",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/Flink/安装部署",
+      "title": "flink入门到项目(完整教程)_大数据_关注公众号：Data Porter-CSDN博客",
+      "url": "https://blog.csdn.net/lp284558195/article/details/92798595",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/Flink/安装部署",
+      "title": "java.lang.NoClassDefFoundError: org/apache/flink/streaming/api/datastream/DataStream_大数据_weixin_38842096的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_38842096/article/details/85723335",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "大数据/hadoop",
+      "title": "Hadoop详解及基于Dockerfile搭建Hadoop集群 - wang37444的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/wangchengaihuiming/article/details/88524227",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "大数据/hadoop",
+      "title": "Windows上安装运行Hadoop - pcwen.top - 博客园",
+      "url": "https://www.cnblogs.com/chevin/p/9090683.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/大数据爬虫/webcollector",
+      "title": "Java(9):浅谈WebCollector的数据抓取 - 得不到的永远是骚栋. - CSDN博客",
+      "url": "https://blog.csdn.net/qq_33591200/article/details/80836737",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "大数据/大数据爬虫/webcollector",
+      "title": "WebCollector 简介与 快速入门 - 蚩尤后裔 - CSDN博客",
+      "url": "https://blog.csdn.net/wangmx1993328/article/details/81662001",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/大数据爬虫/webcollector",
+      "title": "webcollector 爬虫框架使用说明 - lhz15527200472的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/lhz15527200472/article/details/77868996",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据同步",
+      "title": "Lambda架构，Kappa架构和去ETL化的IOTA架构 - 简书",
+      "url": "https://www.jianshu.com/p/4f18d82a9c75",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据同步",
+      "title": "数据库、数据湖、数据仓库、湖仓一体、智能湖仓，分别都是什么鬼？",
+      "url": "https://mp.weixin.qq.com/s/dQKFZLvR_xakdYJuZf-lyA",
+      "domain": "mp.weixin.qq.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据同步",
+      "title": "流式数据采集和计算（三）：Flume、Logstash、Filebeat调研报告_叶子叶来-CSDN博客_flume filebeat",
+      "url": "https://blog.csdn.net/yezonggang/article/details/95174354?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/hbase",
+      "title": "HBase数据导入工具总结-阿里云开发者社区",
+      "url": "https://developer.aliyun.com/article/178446?utm_content=g_1000118126",
+      "domain": "developer.aliyun.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/hbase",
+      "title": "入门HBase，看这一篇就够了 - 简书",
+      "url": "https://www.jianshu.com/p/b23800d9b227",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/impala",
+      "title": "(1条消息)Impala操作/读写Kudu，使用druid连接池_あずにゃん梓喵的博客-CSDN博客",
+      "url": "https://blog.csdn.net/zimiao552147572/article/details/90234974",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/impala",
+      "title": "Impala 技术点梳理 - TiestoRay - 博客园",
+      "url": "https://www.cnblogs.com/TiestoRay/p/10243365.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/impala",
+      "title": "Impala-Impala的数据类型 - MissRong - 博客园",
+      "url": "https://www.cnblogs.com/liuxinrong/articles/12924080.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/impala",
+      "title": "Impala架构 - 先天高手 - 博客园",
+      "url": "https://www.cnblogs.com/changbosha/p/5712532.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/impala",
+      "title": "mybatis的@Select条件判断_xupengbo527的博客-CSDN博客",
+      "url": "https://blog.csdn.net/xupengbo527/article/details/106617681/",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/kudu",
+      "title": "Sketch 素材库",
+      "url": "https://www.oursketch.com/resource",
+      "domain": "www.oursketch.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/kudu",
+      "title": "kudu系列: Java API使用和效率测试",
+      "url": "http://www.mamicode.com/info-detail-2245437.html",
+      "domain": "www.mamicode.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/kudu",
+      "title": "介绍 Kudu -",
+      "url": "http://loadhao.gitee.io/kudu-doc-zh/#/docs/1",
+      "domain": "loadhao.gitee.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/kudu",
+      "title": "实战kudu集成impala - CTO老王 - 博客园",
+      "url": "https://www.cnblogs.com/Javame/p/12222662.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "大数据/数据存储/kudu",
+      "title": "简单说说列式存储数据库 - 简书",
+      "url": "https://www.jianshu.com/p/d1114dd4f77a",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "开源协议/开源项目",
+      "title": "Eclipse Ditto™ | projects.eclipse.org",
+      "url": "https://projects.eclipse.org/projects/iot.ditto",
+      "domain": "projects.eclipse.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "开源协议/开源项目",
+      "title": "Eclipse Kapua™ | 项目.eclipse.org",
+      "url": "https://projects.eclipse.org/projects/iot.kapua",
+      "domain": "projects.eclipse.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "开源协议/开源项目",
+      "title": "Eclipse ioFog™ | 项目.eclipse.org",
+      "url": "https://projects.eclipse.org/projects/iot.iofog",
+      "domain": "projects.eclipse.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "开源协议/开源项目",
+      "title": "Licenses &amp; Standards | Open Source Initiative",
+      "url": "https://opensource.org/licenses",
+      "domain": "opensource.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "开源协议/开源项目",
+      "title": "Licenses | Choose a License",
+      "url": "https://choosealicense.com/licenses/",
+      "domain": "choosealicense.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "开源协议/开源项目",
+      "title": "代码开源协议",
+      "url": "https://www.cnblogs.com/Wayou/p/how_to_choose_a_license.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "开源协议/开源项目",
+      "title": "日食米洛 | 项目.eclipse.org",
+      "url": "https://projects.eclipse.org/projects/iot.milo",
+      "domain": "projects.eclipse.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "开源协议/开源项目",
+      "title": "项目.eclipse.org | 参与 Eclipse 项目以帮助他们取得成功。 我们欢迎用户和采用者成为社区的一部分。",
+      "url": "https://projects.eclipse.org/list-of-projects?combine=&field_project_techology_types_tid=65&field_state_value_2=All",
+      "domain": "projects.eclipse.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/docker",
+      "title": "Dapps基于docker的跨平台应用商店_哆啦好梦的博客-CSDN博客",
+      "url": "https://blog.csdn.net/qq_32660241/article/details/102688441",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/google/GoogleMaps",
+      "title": "JAVA Google地理编码API获取城市 | 码农家园",
+      "url": "https://www.codenong.com/37020376/",
+      "domain": "www.codenong.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/google/GoogleMaps",
+      "title": "谷歌地图官网 文档  |  Google for Developers",
+      "url": "https://developers.google.com/maps/documentation/?hl=zh-cn",
+      "domain": "developers.google.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/google/GooglePlay",
+      "title": "Goople Play 控制台",
+      "url": "https://play.google.com/console/u/0/developers/6763749343065263115/app-list",
+      "domain": "play.google.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/java技术/插件管理",
+      "title": "PF4J插件化~使用篇_0110编程之路的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_33347188/article/details/129880387",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/java技术/文件存储",
+      "title": "Jeepay - 开源支付系统",
+      "url": "https://docs.jeequan.com/docs/jeepay/index",
+      "domain": "docs.jeequan.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/java技术/网关/神禹",
+      "title": "apache-shenyu之启动项目老年人教程 - 简书",
+      "url": "https://www.jianshu.com/p/a6f45ce559ff",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/元宇宙",
+      "title": "元宇宙 3D 虚拟世界中的零售业未来_行业资讯_资讯_中国AGV网(www.chinaagv.com)_AMR网-专业智能地面移动机器人门户网站！",
+      "url": "https://www.chinaagv.com/news/detail/202301/25324.html",
+      "domain": "www.chinaagv.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "006_尚硅谷Vue技术_分析Hello案例_哔哩哔哩_bilibili",
+      "url": "https://www.bilibili.com/video/BV1Zy4y1K7SH/?p=6&spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=d17098d3f12a42a4e4d4a31a56d08508",
+      "domain": "www.bilibili.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "Ant Design Vue",
+      "url": "https://2x.antdv.com/docs/vue/introduce-cn/",
+      "domain": "2x.antdv.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "Arco Design Vue",
+      "url": "https://arco.design/vue/docs/start",
+      "domain": "arco.design"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "HTML/CSS/JS 在线工具 | 菜鸟工具",
+      "url": "https://c.runoob.com/front-end/61/",
+      "domain": "c.runoob.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "MyUI | MyUI 4.x",
+      "url": "https://newgateway.gitee.io/my/guide/",
+      "domain": "newgateway.gitee.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "NutUI - 移动端 Vue2、Vue3、小程序 组件库",
+      "url": "https://nutui.jd.com/3x/#/zh-CN/component/button",
+      "domain": "nutui.jd.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "Vuetify",
+      "url": "https://vuetifyjs.com/zh-Hans/components/buttons/",
+      "domain": "vuetifyjs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "java接收text/event-stream格式数据_java text/event-stream_明天我来了的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_44981472/article/details/130419720",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "leaflet-top",
+      "url": "https://leafletjs.cn/reference.html#popup",
+      "domain": "leafletjs.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "vue按钮权限控制 - 佑之以航 - 博客园",
+      "url": "https://www.cnblogs.com/yzyh/p/11550416.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "看了 9 个开源的 Vue3 组件库，发现了这些前端的流行趋势",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzA3MDMyMzk0NA==&mid=2650832107&idx=2&sn=eb9954db9ca752bc2f7a713567351fd9&chksm=84ca476cb3bdce7a03a3da04452bf2de2f3dd777e680185a3ce817a4ca74119a51aefda2228a&scene=27",
+      "domain": "mp.weixin.qq.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "简介 | Vue.js",
+      "url": "https://cn.vuejs.org/guide/introduction.html",
+      "domain": "cn.vuejs.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/前端/前端事件流",
+      "title": "设置 npm 源为淘宝镜像_beichen3997的博客-CSDN博客",
+      "url": "https://blog.csdn.net/beichen3997/article/details/125949188",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/在线offic",
+      "title": "Luckysheet文档",
+      "url": "https://dream-num.github.io/LuckysheetDocs/zh/",
+      "domain": "dream-num.github.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/大数据平台-ETL工具/datax",
+      "title": "Datax -阿里云",
+      "url": "https://www.aliyun.com/sswc/index-22055",
+      "domain": "www.aliyun.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/大数据平台-ETL工具/datax",
+      "title": "【知识】ETL大数据集成工具Sqoop、dataX、Kettle、Canal、StreamSets大比拼 - 腾讯云开发者社区-腾讯云",
+      "url": "https://cloud.tencent.com/developer/article/2002618?from=15425",
+      "domain": "cloud.tencent.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/大数据平台-ETL工具/kettle",
+      "title": "congjing/kettlepack - Docker Image | Docker Hub",
+      "url": "https://hub.docker.com/r/congjing/kettlepack",
+      "domain": "hub.docker.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/大数据平台-ETL工具/kettle",
+      "title": "hawkingrei/kettle Tags | Docker Hub",
+      "url": "https://hub.docker.com/r/hawkingrei/kettle/tags",
+      "domain": "hub.docker.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时序数据库/客户端工具",
+      "title": "2022年 Tdengine(3.0.0最新) 通过idea数据库管理工具连接Tdengine - 简书",
+      "url": "https://www.jianshu.com/p/56b5084247c7",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时序数据库/客户端工具",
+      "title": "DB-Engines Ranking - popularity ranking of time Series DBMS",
+      "url": "https://db-engines.com/en/ranking/time+series+dbms",
+      "domain": "db-engines.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "技术预言/大数据/时序数据库/客户端工具",
+      "title": "TDengine 入门教程②——基础概念和知识点_小康师兄的博客-CSDN博客_tdengine 索引",
+      "url": "https://blog.csdn.net/kangweijian/article/details/126912851",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时序数据库/客户端工具",
+      "title": "TDengine 如何进行数据建模？_指标_设备_处理",
+      "url": "https://www.sohu.com/a/565327891_121276745",
+      "domain": "www.sohu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时序数据库/客户端工具",
+      "title": "产品简介 | TDengine 文档 | 涛思数据",
+      "url": "https://docs.taosdata.com/intro/",
+      "domain": "docs.taosdata.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "技术预言/大数据/时序数据库/客户端工具",
+      "title": "时序数据库-TDengine涛思(taos)使用以及踩坑_MinggeQingchun的博客-CSDN博客_taos数据库",
+      "url": "https://blog.csdn.net/MinggeQingchun/article/details/124553960",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "技术预言/大数据/时空数据/GIS",
+      "title": "Geotools首页、文档和下载 - Java GIS 工具包 - OSCHINA - 中文开源技术交流社区",
+      "url": "https://www.oschina.net/p/geotools?hmsr=aladdin1e1",
+      "domain": "www.oschina.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时空数据/GIS",
+      "title": "shp是什么格式的文件-常见问题-PHP中文网",
+      "url": "https://www.php.cn/faq/467459.html",
+      "domain": "www.php.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时空数据/GIS",
+      "title": "什么是MPP数据库？ - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/106732543",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时空数据/GIS",
+      "title": "国产开源优秀新一代MPP数据库StarRocks入门之旅-数仓新利器（上）_Firstlucky77的博客-CSDN博客_国产mpp数据库",
+      "url": "https://blog.csdn.net/Firstlucky77/article/details/124968999",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时空数据/GIS",
+      "title": "大数据流处理引擎和框架大全 - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/370317586",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时空数据/PostGIS",
+      "title": "PostGIS教程一：PostGIS介绍_不睡觉的怪叔叔的博客-CSDN博客_postgis",
+      "url": "https://blog.csdn.net/qq_35732147/article/details/85158177",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/大数据/时空数据/PostGIS",
+      "title": "PostGIS简介 - 简书",
+      "url": "https://www.jianshu.com/p/66ea816f6fee",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/天气",
+      "title": "有什么免费好用的全球天气api? - 知乎",
+      "url": "https://www.zhihu.com/question/549877641?utm_id=0",
+      "domain": "www.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/工单管理",
+      "title": "FeelDesk 工单管理系统",
+      "url": "https://dev.feeldesk.cn/u-home",
+      "domain": "dev.feeldesk.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/工单管理",
+      "title": "工单系统_有哪些开源的工单系统",
+      "url": "https://it.cha138.com/ios/show-706254.html",
+      "domain": "it.cha138.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/微信扫码登录",
+      "title": "Java实现微信扫码登录_java微信扫码登录-CSDN博客",
+      "url": "https://blog.csdn.net/Cike___/article/details/128901949?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-4-128901949-blog-87003946.235^v43^pc_blog_bottom_relevance_base3&spm=1001.2101.3001.4242.3&utm_relevant_index=7",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/微信扫码登录",
+      "title": "微信扫描登录_软件工程微信扫描二维码时序图-CSDN博客",
+      "url": "https://blog.csdn.net/qq_44255146/article/details/124380631",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/微信扫码登录",
+      "title": "微信扫码登录流程-CSDN博客",
+      "url": "https://aiguangyuan.blog.csdn.net/article/details/87003946?spm=1001.2101.3001.6650.8&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-87003946-blog-124380631.235%5Ev43%5Epc_blog_bottom_relevance_base3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-87003946-blog-124380631.235%5Ev43%5Epc_blog_bottom_relevance_base3&utm_relevant_index=17",
+      "domain": "aiguangyuan.blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/微信扫码登录",
+      "title": "微信登录功能 / 网站应用微信登录开发指南",
+      "url": "https://developers.weixin.qq.com/doc/oplatform/Website_App/WeChat_Login/Wechat_Login.html?login=from_csdn",
+      "domain": "developers.weixin.qq.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/报表工具",
+      "title": "JasperReport：报表概述和模板制作_jasper report_HuCheng1997的博客-CSDN博客",
+      "url": "https://blog.csdn.net/qq_38697437/article/details/105293646?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-105293646-blog-126800234.235^v38^pc_relevant_anti_vip&spm=1001.2101.3001.4242.1&utm_relevant_index=3",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/报表工具",
+      "title": "集成第三方报表工具（集成jmreport积木报表）_若依框架集成报表_cgv3的博客-CSDN博客",
+      "url": "https://blog.csdn.net/csdn_avatar_2019/article/details/130098321?utm_source=miniapp_weixin%E2%80%98",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/报表工具",
+      "title": "项目介绍 - JeecgBoot 文档中心",
+      "url": "https://help.jeecg.com/jimureport/readme.html",
+      "domain": "help.jeecg.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/数据可视化/Web组态",
+      "title": "2D可视化Web前端组态界面模板_ -数维图",
+      "url": "https://www.sovitjs.com/demo.html",
+      "domain": "www.sovitjs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "技术预言/数据可视化/Web组态",
+      "title": "vue+vuex实现2D可视化图形编辑器_vue2画图编译器_#麻辣小龙虾#的博客-CSDN博客",
+      "url": "https://blog.csdn.net/CodingNoob/article/details/126604223?spm=1001.2101.3001.6650.10&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-10-126604223-blog-126898922.235%5Ev38%5Epc_relevant_anti_vip&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-10-126604223-blog-126898922.235%5Ev38%5Epc_relevant_anti_vip&utm_relevant_index=19",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/数据可视化/Web组态",
+      "title": "最火前端Web组态软件(可视化) - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/366839084",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "ThingJS - 资源中心",
+      "url": "https://store.thingjs.com/projects",
+      "domain": "store.thingjs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "support.supermap.com.cn:8090/webgl/examples/webgl/examples.html#layer",
+      "url": "http://support.supermap.com.cn:8090/webgl/examples/webgl/examples.html#layer",
+      "domain": "support.supermap.com.cn:8090"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "国内做三维GIS的公司总结-cesium和threejs_晴天蜗牛的博客-CSDN博客_超图大还是苍穹数码大",
+      "url": "https://blog.csdn.net/qq_21048515/article/details/115906691",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/数据可视化/三维可视化/三维公司产品",
+      "title": "图扑软件 - 构建先进 2D 和 3D 可视化所需要的一切",
+      "url": "https://www.hightopo.com/demos/index.html",
+      "domain": "www.hightopo.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/数据可视化/三维可视化/建模",
+      "title": "CesiumJS – Cesium",
+      "url": "https://cesium.com/platform/cesiumjs/",
+      "domain": "cesium.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/数据可视化/可视化大屏",
+      "title": "引导 | GoView 说明文档",
+      "url": "https://www.mtruning.club/guide/start/",
+      "domain": "www.mtruning.club"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/服务监控/prometheus",
+      "title": "Dashboards | Grafana Labs",
+      "url": "https://grafana.com/grafana/dashboards/",
+      "domain": "grafana.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/消息服务/短信",
+      "title": "sms-activate(手机短信接码平台)",
+      "url": "https://sms-activate.org/getNumber",
+      "domain": "sms-activate.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/消息服务/短信",
+      "title": "国内外短信接码平台合集 | 合集网",
+      "url": "https://233heji.com/28.html",
+      "domain": "233heji.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/消息服务/短信",
+      "title": "定时/延时消息 | RocketMQ",
+      "url": "https://rocketmq.apache.org/zh/docs/featureBehavior/02delaymessage",
+      "domain": "rocketmq.apache.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/消息服务/短信/亚马逊",
+      "title": "JAVA接入AWS短信服务_辣条哥哥的博客-CSDN博客_aws短信服务",
+      "url": "https://blog.csdn.net/qq_38641131/article/details/121640475",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/消息服务/短信/亚马逊",
+      "title": "使用亚马逊Amazon中pinpoint下的SMS发送手机短信_Survivor_L的博客-CSDN博客",
+      "url": "https://blog.csdn.net/Survivor_L/article/details/123483635",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/消息服务/移动端消息推送",
+      "title": "TPNS 离线推送（iOS）-即时通信 IM-文档中心-腾讯云",
+      "url": "https://cloud.tencent.com/document/product/269/68721#.E8.87.AA.E5.AE.9A.E4.B9.89.E6.B6.88.E6.81.AF.E4.B8.BA.E4.BB.80.E4.B9.88.E6.94.B6.E4.B8.8D.E5.88.B0.E7.A6.BB.E7.BA.BF.E6.8E.A8.E9.80.81.EF.BC.9F",
+      "domain": "cloud.tencent.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/消息服务/移动端消息推送",
+      "title": "使用Amazon Pinpoint做移动端推送_我思故我在a的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_42176087/article/details/128365778",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/消息服务/移动端消息推送",
+      "title": "极光推送-快速集成消息推送功能,提升APP运营效率",
+      "url": "https://www.jiguang.cn/push?source=bdAd&plan=1&unit=482&keyword=24724&bd_vid=12640702852903372420",
+      "domain": "www.jiguang.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/消息服务/移动端消息推送",
+      "title": "移动端消息推送机制 - 简书",
+      "url": "https://www.jianshu.com/p/ca9652ddaad2",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/知识库",
+      "title": "kkFileView - 在线文件预览",
+      "url": "https://kkfileview.keking.cn/zh-cn/index.html",
+      "domain": "kkfileview.keking.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/知识库",
+      "title": "科亿知识库 KY KMS 平台",
+      "url": "http://test.kykms.cn/front/RecommendTopicList",
+      "domain": "test.kykms.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/移动端/移动端发布",
+      "title": "2023年Google play上架流程-谷歌app上架攻略_应用_市场_信息",
+      "url": "https://it.sohu.com/a/722244900_121778079",
+      "domain": "it.sohu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/移动端/移动端发布",
+      "title": "hbuildx&amp;&amp;微信开发者工具-微信小程序测试_hbuilder清除缓存-CSDN博客",
+      "url": "https://blog.csdn.net/wangying202/article/details/110947162",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/移动端/移动端发布",
+      "title": "uniApp怎么实时的获取当前的位置，大部分的应用会在后台被杀死！ - DCloud问答",
+      "url": "https://ask.dcloud.net.cn/question/97949",
+      "domain": "ask.dcloud.net.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/移动端/移动端发布",
+      "title": "uniapp：APP开发，后台保活_uniapp 保活-CSDN博客",
+      "url": "https://blog.csdn.net/skyblacktoday/article/details/132882385",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "技术预言/第三方登录",
+      "title": "Sa-Token框架介绍",
+      "url": "https://sa-token.cc/doc.html#/",
+      "domain": "sa-token.cc"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/第三方登录",
+      "title": "SpringBoot + Layui + JustAuth +Mybatis-plus实现可第三方登录的简单后台管理系统 - C3Stones - 博客园",
+      "url": "https://www.cnblogs.com/cao-lei/p/13713604.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/第三方登录",
+      "title": "企业微信OAuth2登录 · JeecgBoot 开发文档 · 看云",
+      "url": "http://doc.jeecg.com/2315002",
+      "domain": "doc.jeecg.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "技术预言/第三方登录",
+      "title": "企业微信使用自建应用报错60020解决方法_canxaioz的博客-CSDN博客",
+      "url": "https://blog.csdn.net/canxaioz/article/details/130252124?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-130252124-blog-130069259.235%5Ev38%5Epc_relevant_anti_vip&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-130252124-blog-130069259.235%5Ev38%5Epc_relevant_anti_vip&utm_relevant_index=1",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/第三方登录",
+      "title": "使用 JustAuth 集成企业微信 | CodingDiary",
+      "url": "https://xkcoding.com/2019/08/06/use-justauth-integration-wechat-enterprise.html",
+      "domain": "xkcoding.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/第三方登录",
+      "title": "如何使用 | JustAuth",
+      "url": "https://www.justauth.cn/guide/quickstart/how-to-use/#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F",
+      "domain": "www.justauth.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/算法",
+      "title": "模型库 - 飞桨AI Studio - 人工智能学习实训社区",
+      "url": "https://aistudio.baidu.com/aistudio/modelsoverview",
+      "domain": "aistudio.baidu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/算法",
+      "title": "飞桨AI Studio - 人工智能学习实训社区",
+      "url": "https://aistudio.baidu.com/aistudio/index",
+      "domain": "aistudio.baidu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/边缘计算",
+      "title": "EdgeX Foundary 2.1Jakarta版官方文档中文翻译_edgex文档_Hey___Man的博客-CSDN博客",
+      "url": "https://blog.csdn.net/Hey___Man/article/details/122411358",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/边缘计算",
+      "title": "EdgeX Foundry - 知乎",
+      "url": "https://www.zhihu.com/people/edgex-foundry",
+      "domain": "www.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/边缘计算",
+      "title": "LF Edge eKuiper - 超轻量物联网边缘流处理软件 | eKuiper 文档",
+      "url": "https://ekuiper.org/docs/zh/latest/#%E5%8A%9F%E8%83%BD",
+      "domain": "ekuiper.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/边缘计算",
+      "title": "什么是云边协同？能力、架构介绍-三个皮匠报告",
+      "url": "https://www.sgpjbg.com/info/31694.html",
+      "domain": "www.sgpjbg.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/边缘计算",
+      "title": "基于OpenYurt和EdgeX的云边端协同新可能",
+      "url": "https://zhuanlan.zhihu.com/p/555238130",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/边缘计算",
+      "title": "系统架构 | OpenYurt",
+      "url": "https://openyurt.io/zh/docs/core-concepts/architecture/",
+      "domain": "openyurt.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/音视频",
+      "title": "360智汇云物联网视频解决方案-帝视 - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/352697224?utm_id=0",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/音视频",
+      "title": "实现聊天发送语音消息功能_发送语音功能实现_再※见了＆单纯，！的博客-CSDN博客",
+      "url": "https://blog.csdn.net/qq_44732752/article/details/126570046?spm=1001.2101.3001.6650.12&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-12-126570046-blog-122422799.235%5Ev36%5Epc_relevant_default_base&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-12-126570046-blog-122422799.235%5Ev36%5Epc_relevant_default_base&utm_relevant_index=14",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/音视频",
+      "title": "智汇云-企业数智化核心引擎",
+      "url": "https://zyun.360.cn/index",
+      "domain": "zyun.360.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "技术预言/音视频",
+      "title": "海康威视双目客流摄像机7个常见问题 – 弱电智能网",
+      "url": "https://www.ruodian360.com/tech/security-monitoring/41925.html",
+      "domain": "www.ruodian360.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "文件存储",
+      "title": "MinIO Quickstart Guide | Minio中文文档",
+      "url": "http://docs.minio.org.cn/docs/",
+      "domain": "docs.minio.org.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "监控/prometheus/node_export",
+      "title": "Exporters and integrations | Prometheus",
+      "url": "https://prometheus.io/docs/instrumenting/exporters/",
+      "domain": "prometheus.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "监控/prometheus/node_export",
+      "title": "Grafana Dashboards - discover and share dashboards for Grafana. | Grafana Labs",
+      "url": "https://grafana.com/grafana/dashboards",
+      "domain": "grafana.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "监控/prometheus/node_export/服务器监控",
+      "title": "概述 | 普罗米修斯",
+      "url": "https://prometheus.io/docs/introduction/overview/",
+      "domain": "prometheus.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "破解",
+      "title": "暴力破解字典列表 - bonelee - 博客园",
+      "url": "https://www.cnblogs.com/bonelee/p/9323488.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "破解",
+      "title": "目前最为流行的密码破解工具_爆破",
+      "url": "http://www.sohu.com/a/259586159_401710",
+      "domain": "www.sohu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "算法/二叉树",
+      "title": "力扣 (LeetCode) - 刷题-面试",
+      "url": "https://leetcode-cn.com/explore/",
+      "domain": "leetcode-cn.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "算法/二叉树",
+      "title": "序 | LeetCode Cookbook",
+      "url": "https://books.halfrost.com/leetcode/",
+      "domain": "books.halfrost.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "算法/二叉树",
+      "title": "数学之美：布隆过滤器 - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/72378274",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "算法/二叉树",
+      "title": "面向对象与面向过程",
+      "url": "http://hollischuang.gitee.io/tobetopjavaer/#/basics/object-oriented/object-oriented-vs-procedure-oriented",
+      "domain": "hollischuang.gitee.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "算法/二叉树/红黑树",
+      "title": "java程序-二叉树的深度优先和广度优先遍历 - 郭慕荣 - 博客园",
+      "url": "https://www.cnblogs.com/jelly12345/p/15728237.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "算法/二叉树/红黑树",
+      "title": "最容易懂得红黑树_Sun_TTTT的博客-CSDN博客_红黑树",
+      "url": "https://blog.csdn.net/Sun_TTTT/article/details/65445754?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "负载均衡/HAproxy",
+      "title": "CentOS 7 下安装 HAProxy - zhq383313582的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/zhq383313582/article/details/81365276",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/HAproxy",
+      "title": "HAProxy version 1.8r2 (2.0.0-190.717) Enterprise Edition Documentation - Configuration Manual",
+      "url": "https://www.haproxy.com/documentation/hapee/1-8r2/onepage/",
+      "domain": "www.haproxy.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "负载均衡/HAproxy",
+      "title": "Haproxy安装配置及使用详解 – IT技术精华",
+      "url": "http://it.orientpowertech.com/doc/24",
+      "domain": "it.orientpowertech.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/HAproxy",
+      "title": "haproxy做TCP层的负载均衡 - 大JAVA解决方案 - CSDN博客",
+      "url": "https://blog.csdn.net/wangshuminjava/article/details/80539471",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/LVS",
+      "title": "JAVA实现的HTTP反向代理 [smiley-http-proxy-servlet]学习 - 断舍离-重学JAVA之路 - 博客园",
+      "url": "https://www.cnblogs.com/java2java/p/13200636.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/LVS",
+      "title": "linux系统构架 - LB集群之LVS介绍 - dennyLinux - 博客园",
+      "url": "https://www.cnblogs.com/wangshaojun/p/5149532.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/LVS",
+      "title": "四层和七层负载均衡 - 详细总结-LINUX_Home-51CTO博客",
+      "url": "https://blog.51cto.com/dmwing/1896879",
+      "domain": "blog.51cto.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/Nginx",
+      "title": "Nginx中文文档",
+      "url": "http://www.nginx.cn/doc/",
+      "domain": "www.nginx.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "(1条消息)nginx worker_connections are not enough(错误) - Andy_Li的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/m0_37263637/article/details/80813881",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "NGINX Config | 网站",
+      "url": "https://www.digitalocean.com/community/tools/nginx?global.app.lang=zhCN",
+      "domain": "www.digitalocean.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "Nginx 单机百万QPS环境搭建 - 无脑仔的小明 - 博客园",
+      "url": "http://www.cnblogs.com/wunaozai/p/6073731.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "Nginx实战系列之功能篇----后端节点健康检查(转) - 舒润 - 博客园",
+      "url": "http://www.cnblogs.com/rainy-shurun/p/5416160.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "Nginx负载均衡与反向代理——扩展功能(NGINX Plus) - 米粒人生 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_24127857/article/details/79560090",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "Windows下用Nginx配置https服务器 - chasewade - 博客园",
+      "url": "https://www.cnblogs.com/chasewade/p/7661290.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "centos7安装Nginx - 极光天际 - 博客园",
+      "url": "https://www.cnblogs.com/kaid/p/7640723.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "负载均衡/Nginx/可视化工具",
+      "title": "使用 Nginx Plus 实现 MQTT 负载均衡和 Session 持久化 - 可译网",
+      "url": "http://coyee.com/article/12031-mqtt-load-balancing-and-session-persistence-with-nginx-plus",
+      "domain": "coyee.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "运维",
+      "title": "13款运维监控工具之开源工具介绍_luoyuegui的专栏-CSDN博客",
+      "url": "https://blog.csdn.net/luoyuegui/article/details/87470443",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "运维",
+      "title": "4个Linux下网络流量实时监控工具 | 生活日志录",
+      "url": "https://idoseek.com/1612",
+      "domain": "idoseek.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "运维",
+      "title": "运维人员须熟悉的38个运维工具汇总 - 安全牛",
+      "url": "https://www.aqniu.com/edu/52764.html",
+      "domain": "www.aqniu.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "高可用",
+      "title": "Haproxy+Keepalived高可用环境部署梳理（主主和主从模式）-云栖社区-阿里云",
+      "url": "https://yq.aliyun.com/articles/355470?spm=5176.11065265.1996646101.searchclickresult.7afb12ealqUezg&aly_as=lqAlclBG",
+      "domain": "yq.aliyun.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "高可用",
+      "title": "Keepalived日志 - hwlong - 博客园",
+      "url": "https://www.cnblogs.com/hwlong/p/6070575.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "高可用",
+      "title": "nginx+keepalived搭建高可用负载均衡(双主模式) - 这个名字想了很久 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_34021712/article/details/73441168",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（zoukankan\\.com）",
+      "path": "Devops/Docker/docker安装应用",
+      "title": "Docker部署cas - 走看看",
+      "url": "http://t.zoukankan.com/janes-p-14437787.html",
+      "domain": "t.zoukankan.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（baijiahao\\.baidu\\.com）",
+      "path": "Devops/Docker/镜像仓库",
+      "title": "Docker harbor的安装部署",
+      "url": "https://baijiahao.baidu.com/s?id=1708996113470887345&wfr=spider&for=pc",
+      "domain": "baijiahao.baidu.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（baijiahao\\.baidu\\.com）",
+      "path": "Devops/Jenkins",
+      "title": "OpenYurt，边缘云原生新界面",
+      "url": "https://baijiahao.baidu.com/s?id=1706131101838637468&wfr=spider&for=pc",
+      "domain": "baijiahao.baidu.com"
+    },
+    {
+      "level": "D",
+      "reason": "近似重复",
+      "path": "GIS/webGIS",
+      "title": "Leaflet - 中文",
+      "url": "https://leafletjs.cn/",
+      "domain": "leafletjs.cn"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（baijiahao\\.baidu\\.com）",
+      "path": "协议/消息中间件/协议/MQTT/MQTT",
+      "title": "物联网协议比较：MQTT 和 MQTT-SN",
+      "url": "https://baijiahao.baidu.com/s?id=1608466062692674965&wfr=spider&for=pc",
+      "domain": "baijiahao.baidu.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（zoukankan\\.com）",
+      "path": "技术预言/java技术/文件存储",
+      "title": "JAVA动态加载和卸载jar包 - 走看看",
+      "url": "http://t.zoukankan.com/kxxx-p-6840097.html",
+      "domain": "t.zoukankan.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（devpress\\.csdn\\.net）",
+      "path": "技术预言/前端/前端事件流",
+      "title": "chatGPT流式回复是怎么实现的_vue.js_锅巴胸-重庆城市开发者社区",
+      "url": "https://devpress.csdn.net/chongqing/64a039d96ac2ca4262dfad07.html",
+      "domain": "devpress.csdn.net"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（wenku\\.baidu\\.com）",
+      "path": "技术预言/大数据/时空数据/GIS",
+      "title": "城市时空数据引擎JUST架构设计与应用 - 百度文库",
+      "url": "https://wenku.baidu.com/view/573bb000be64783e0912a21614791711cc797993.html",
+      "domain": "wenku.baidu.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（baijiahao\\.baidu\\.com）",
+      "path": "技术预言/大数据/时空数据/GeoMesa",
+      "title": "GeoMesa介绍",
+      "url": "https://baijiahao.baidu.com/s?id=1694555909402064060&wfr=spider&for=pc",
+      "domain": "baijiahao.baidu.com"
+    },
+    {
+      "level": "D",
+      "reason": "近似重复",
+      "path": "技术预言/微信扫码登录",
+      "title": "微信登录功能 / 网站应用微信登录开发指南",
+      "url": "https://developers.weixin.qq.com/doc/oplatform/Website_App/WeChat_Login/Wechat_Login.html",
+      "domain": "developers.weixin.qq.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（baijiahao\\.baidu\\.com）",
+      "path": "技术预言/数据可视化/三维可视化",
+      "title": "web3D三维引擎(Direct3D、OpenGL、UE、U3D、threejs)基础扫盲",
+      "url": "https://baijiahao.baidu.com/s?id=1769866661815389158&wfr=spider&for=pc",
+      "domain": "baijiahao.baidu.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（zoukankan\\.com）",
+      "path": "技术预言/消息服务/移动端消息推送",
+      "title": "AWS 移动推送到iOS设备，Amazon Pinpoint - 走看看",
+      "url": "http://t.zoukankan.com/jys509-p-8496363.html",
+      "domain": "t.zoukankan.com"
+    },
+    {
+      "level": "D",
+      "reason": "近似重复",
+      "path": "技术预言/音视频",
+      "title": "智汇云-企业数智化核心引擎-物联网平台介绍文档",
+      "url": "https://zyun.360.cn/developer/doc?did=cpgs",
+      "domain": "zyun.360.cn"
+    }
+  ]
+}
