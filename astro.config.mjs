@@ -252,30 +252,21 @@ export default defineConfig({
           ],
         },
         {
-          label: '数据库',
+          label: 'MySQL',
           collapsed: true,
           items: [
-            { label: '学习路线', link: '/database/' },
+            { label: '学习路线', link: '/mysql/' },
             {
               label: '基础',
               collapsed: false,
               items: [
                 {
-                  label: 'MySQL 基础',
+                  label: '核心机制',
                   collapsed: false,
                   items: [
-                    { label: '概览', link: '/database/basic/mysql/' },
-                    { label: '一条 SQL 的执行流程', link: '/database/basic/mysql/01-sql-execution/' },
-                    { label: '索引与 B+ 树', link: '/database/basic/mysql/02-index-btree/' },
-                  ],
-                },
-                {
-                  label: 'Redis 基础',
-                  collapsed: false,
-                  items: [
-                    { label: '概览', link: '/database/basic/redis/' },
-                    { label: '数据结构与底层编码', link: '/database/basic/redis/01-data-structures/' },
-                    { label: '持久化：RDB 与 AOF', link: '/database/basic/redis/02-persistence/' },
+                    { label: '概览', link: '/mysql/basic/core/' },
+                    { label: '一条 SQL 的执行流程', link: '/mysql/basic/core/01-sql-execution/' },
+                    { label: '索引与 B+ 树', link: '/mysql/basic/core/02-index-btree/' },
                   ],
                 },
               ],
@@ -285,23 +276,13 @@ export default defineConfig({
               collapsed: false,
               items: [
                 {
-                  label: 'MySQL 进阶',
+                  label: '事务与锁',
                   collapsed: false,
                   items: [
-                    { label: '概览', link: '/database/intermediate/mysql/' },
-                    { label: '事务与 MVCC', link: '/database/intermediate/mysql/01-transaction-mvcc/' },
-                    { label: '锁机制', link: '/database/intermediate/mysql/02-locks/' },
-                    { label: '三大日志与两阶段提交', link: '/database/intermediate/mysql/03-redo-undo-binlog/' },
-                  ],
-                },
-                {
-                  label: 'Redis 进阶',
-                  collapsed: false,
-                  items: [
-                    { label: '概览', link: '/database/intermediate/redis/' },
-                    { label: '过期删除与内存淘汰', link: '/database/intermediate/redis/01-expiration-eviction/' },
-                    { label: '缓存穿透、击穿与雪崩', link: '/database/intermediate/redis/02-cache-problems/' },
-                    { label: '分布式锁的演进', link: '/database/intermediate/redis/03-distributed-lock/' },
+                    { label: '概览', link: '/mysql/intermediate/transaction-lock/' },
+                    { label: '事务与 MVCC', link: '/mysql/intermediate/transaction-lock/01-transaction-mvcc/' },
+                    { label: '锁机制', link: '/mysql/intermediate/transaction-lock/02-locks/' },
+                    { label: '三大日志与两阶段提交', link: '/mysql/intermediate/transaction-lock/03-redo-undo-binlog/' },
                   ],
                 },
               ],
@@ -311,20 +292,64 @@ export default defineConfig({
               collapsed: false,
               items: [
                 {
-                  label: 'MySQL 高级',
+                  label: '性能与高可用',
                   collapsed: false,
                   items: [
-                    { label: '概览', link: '/database/advanced/mysql/' },
-                    { label: 'SQL 优化与执行计划', link: '/database/advanced/mysql/01-optimization/' },
-                    { label: '主从复制与分库分表', link: '/database/advanced/mysql/02-replication-sharding/' },
+                    { label: '概览', link: '/mysql/advanced/performance-ha/' },
+                    { label: 'SQL 优化与执行计划', link: '/mysql/advanced/performance-ha/01-optimization/' },
+                    { label: '主从复制与分库分表', link: '/mysql/advanced/performance-ha/02-replication-sharding/' },
                   ],
                 },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Redis',
+          collapsed: true,
+          items: [
+            { label: '学习路线', link: '/redis/' },
+            {
+              label: '基础',
+              collapsed: false,
+              items: [
                 {
-                  label: 'Redis 高级',
+                  label: '核心',
                   collapsed: false,
                   items: [
-                    { label: '概览', link: '/database/advanced/redis/' },
-                    { label: '高可用：主从、哨兵与集群', link: '/database/advanced/redis/01-replication-sentinel-cluster/' },
+                    { label: '概览', link: '/redis/basic/core/' },
+                    { label: '数据结构与底层编码', link: '/redis/basic/core/01-data-structures/' },
+                    { label: '持久化：RDB 与 AOF', link: '/redis/basic/core/02-persistence/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '中级',
+              collapsed: false,
+              items: [
+                {
+                  label: '使用进阶',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/redis/intermediate/usage/' },
+                    { label: '过期删除与内存淘汰', link: '/redis/intermediate/usage/01-expiration-eviction/' },
+                    { label: '缓存穿透、击穿与雪崩', link: '/redis/intermediate/usage/02-cache-problems/' },
+                    { label: '分布式锁的演进', link: '/redis/intermediate/usage/03-distributed-lock/' },
+                  ],
+                },
+              ],
+            },
+            {
+              label: '高级',
+              collapsed: false,
+              items: [
+                {
+                  label: '高可用',
+                  collapsed: false,
+                  items: [
+                    { label: '概览', link: '/redis/advanced/ha/' },
+                    { label: '高可用：主从、哨兵与集群', link: '/redis/advanced/ha/01-replication-sentinel-cluster/' },
                   ],
                 },
               ],

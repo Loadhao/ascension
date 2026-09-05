@@ -37,7 +37,7 @@
 
 - 图表直接在正文写 ` ```mermaid ` 代码块，构建时渲染为 SVG，禁止引入客户端图表脚本。
 
-- 新增分类时三处同步：`<方向>/<等级>/<分类>/index.mdx` 分类页 + `astro.config.mjs` 侧边栏对应等级组内注册（分类项加 `badge: '分类'`）+ 知识点笔记放入该目录（笔记页底部 ProgressMark 由 Footer 覆盖自动注入，无需手写）。
+- 新增分类时三处同步：`<方向>/<等级>/<分类>/index.mdx` 分类页 + `astro.config.mjs` 侧边栏对应等级组内注册 + 知识点笔记放入该目录（分类项不设 `badge`；笔记页底部 ProgressMark 由 Footer 覆盖自动注入，无需手写）。
 
 - 新增方向时四处同步：建目录与 `index.mdx` 路线图 + `astro.config.mjs` 侧边栏注册 + `src/data/graphs/` 建图谱数据 + `src/lib/notes.ts` 的 `DIRECTION_ORDER` 追加方向 slug。
 
@@ -52,6 +52,18 @@
 - Mermaid 构建时渲染依赖 chromium，本地首次需 `pnpm exec playwright install chromium`。
 
 - 部署在 push 后由 GitHub Actions 完成，不在本地执行部署命令。
+
+## 提交与推送规范
+
+- 仅在 `main` 分支上开发和提交，不随便新建功能分支；确需临时分支时用后即删，不遗留。
+
+- 每次变更在本地 `pnpm build` 通过后再提交，提交后若没有阻塞即推送到 `origin/main`。
+
+- 提交信息用简洁的类型前缀（`feat:` / `fix:` / `chore:` 等）+ 中文说明，只说「做了什么、为什么」。
+
+- 未经用户确认的重构或结构性改动，先在改动前说明方案，确认后再落地。
+
+- 推送后由 GitHub Actions 自动构建部署，不在本地执行部署命令。
 
 ## 文档与落点
 
