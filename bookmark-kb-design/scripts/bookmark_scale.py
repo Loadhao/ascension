@@ -51,6 +51,15 @@ JUNK_URL_PATTERNS = [
     r'it1352\.com',                # 内容聚合站
     r'docs4dev\.com',              # 镜像文档聚合站（原文已可直达）
     r'w3school\.com\.cn',          # 入门教程站（知识库已覆盖）
+    r'juejin\.im/topics',          # 掘金话题聚合页（非文章）
+    r'cssmoban\.com',              # 模板下载站
+    r'f2er\.com',                  # 前端之家聚合站
+    r'bookmarkearth\.com',         # 书签地球营销页
+    r'likecs\.com',                # 内容农场
+    r'zoukankan\.com',             # 博客园爬取站
+    r'devpress\.csdn\.net',        # CSDN 转载站
+    r'baijiahao\.baidu\.com',      # 百家号
+    r'eepw\.com\.cn',              # 电子新闻分类页
 ]
 
 # 错放信号：标题/URL 命中且与当前方向无关（按方向配置在 MISFILED_KEYWORDS）
@@ -68,20 +77,36 @@ MISFILED_KEYWORDS = {
 
 # A 级：官方文档/文档站（域名白名单）
 OFFICIAL_DOCS = [
+    # SQL 方向
     r'postgresql\.org/docs', r'redis\.io/documentation', r'redis\.cn/commands',
     r'mongoing\.com', r'pingcap\.com', r'university\.pingcap\.com',
     r'shardingsphere\.apache\.org', r'flywaydb\.org', r'mp\.baomidou\.com',
     r'pagehelper\.github\.io', r'taosdata\.com/cn/documentation',
     r'v2\.docs\.influxdata\.com', r'clickhouse\.com', r'jasper-zhang1\.gitbooks\.io',
     r'mysql\.com', r'mongodb\.com',
+    # JS 方向
+    r'nodejs\.cn/api', r'nodejs\.org', r'npmjs\.com', r'npmjs\.cn',
+    r'tslang\.cn', r'typescriptlang\.org', r'eggjs\.org', r'reactjs\.org',
+    r'react\.docschina\.org', r'element\.eleme\.cn', r'ant\.design',
+    r'echarts\.apache\.org', r'd3js\.org', r'highcharts\.com', r'highcharts\.com\.cn',
+    r'es6\.ruanyifeng\.com', r'lodashjs\.com', r'ramda\.cn', r'licia\.liriliri\.io',
+    r'vueuse\.org', r'umijs\.org', r'qiankun\.umijs\.org', r'docs\.nestjs\.cn',
+    r'nest\.nestjs\.com', r'fastify\.cn', r'fastify\.io', r'babeljs\.cn',
+    r'axios-js\.com', r'dvajs\.com', r'docschina\.org', r'typeorm\.biunav\.com',
+    r'lesscss\.cn', r'antv\.vision', r'ucharts\.cn', r'nervjs\.github\.io',
+    # Linux 方向
+    r'linuxcool\.com', r'jumpserver\.org', r'1panel\.cn', r'mirrors\.163\.com',
+    r'mirrors\.tuna\.tsinghua\.edu\.cn', r'developer\.aliyun\.com/mirror',
+    r'hub\.docker\.com', r'mvnrepository\.com', r'help\.aliyun\.com',
 ]
 
 # A 级：标题深度信号（体系化、原理、源码、长文、集群、最佳实践）
 A_TITLE_PATTERNS = [
     r'原理', r'源码', r'体系', r'知识梳理', r'总结精讲', r'最佳实践',
-    r'3[wW]字', r'高可用', r'容灾', r'集群(技术|原理|实践|架构)',
+    r'3[wW]字', r'万字', r'高可用', r'容灾', r'集群(技术|原理|实践|架构)',
     r'分片(技术|架构|集群)', r'分布式', r'分库分表', r'性能优化',
     r'[一-龥]{0,6}深入', r'一文(带你|读懂|搞懂)', r'转写', r'课程',
+    r'垃圾回收', r'内存管理', r'全解',
 ]
 # C 级：操作性/速查信号（这些命中则不进 A）
 C_TITLE_PATTERNS = [
@@ -91,6 +116,7 @@ C_TITLE_PATTERNS = [
     r'报错', r'错误提示', r'异常', r'坑', r'爬坑', r'连接失败',
     r'时区问题', r'怎么去(掉|除)', r'参数说明', r'配置文件',
     r'搭建', r'部署', r'快速入门', r'下载地址', r'入门教程',
+    r'快速上手', r'介绍$', r'[Ii]ndex [Oo]f', r'官网$',
 ]
 
 # B 级：主题深度信号
@@ -101,6 +127,10 @@ B_TITLE_PATTERNS = [
     r'慢查询', r'性能测试', r'性能分析', r'explain', r'整合',
     r'范式', r'依赖', r'关系运算', r'超键', r'候选键', r'函数依赖',
     r'加解密', r'数据加密', r'过期(处理|时间)', r'where与having',
+    # 前端主题
+    r'组件通信', r'传值', r'生命周期', r'跨域', r'微前端', r'面试题',
+    r'工具函数', r'手写', r'数据结构', r'算法', r'装饰器', r'路由',
+    r'promise', r'异步', r'模块', r'类型(判断|定义|系统)',
 ]
 
 
@@ -121,6 +151,14 @@ def grade(direction, path, title, url, is_homepage=False):
 
     has_c_signal = any(re.search(p, text, re.I) for p in C_TITLE_PATTERNS)
     has_a_signal = any(re.search(p, text, re.I) for p in A_TITLE_PATTERNS)
+
+    # 下载/历史版本页 → C
+    if '/download' in u:
+        return 'C', '下载/历史版本页'
+
+    # npm 单包文档页 → B（包级文档，不到 A）
+    if re.search(r'npmjs\.com/package/', u):
+        return 'B', '官方包文档'
 
     # 产品首页：入口页不进 A（转写笔记无意义），一律 B
     if is_homepage:
@@ -201,7 +239,11 @@ def main():
                                    'url': url, 'domain': urlparse(url).netloc})
                     continue
             parsed = urlparse(url)
-            is_homepage = parsed.path in ('', '/', '/cn/', '/cn', '/zh/', '/zh', '/index.html')
+            hp = parsed.path
+            is_homepage = (hp in ('', '/', '/cn/', '/cn', '/zh/', '/zh',
+                                  '/zh-cn/', '/zh-cn', '/zh-CN/', '/zh-CN',
+                                  '/mirror/', '/index.html', '/zh-CN/index.html')
+                           or hp.startswith('/tags/'))
             level, reason = grade(direction, path, title, url, is_homepage)
             seen_cores[core] = True
         graded.append({

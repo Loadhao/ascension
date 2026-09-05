@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # 主题友好名（取书签一级子目录名映射）
 THEME_NAMES = {
+    # SQL 方向
     'MongoDB': 'MongoDB', 'PostgreSQL': 'PostgreSQL', 'MySQL': 'MySQL',
     '缓存': 'Redis 与缓存', 'MyBatis': 'MyBatis', 'InfluxDB': 'InfluxDB（时序）',
     'OLAP': 'OLAP 与分析', 'TiDB': 'TiDB', 'newSQL': 'NewSQL',
@@ -17,6 +18,28 @@ THEME_NAMES = {
     '数据库原理': '数据库原理', 'SQL': 'SQL 语言', 'SqlServer': 'SQL Server',
     '数据库版本管理工具': '版本管理工具', 'SequoiaDB': 'SequoiaDB',
     'TDengine': 'TDengine（时序）', '': '未分类',
+    # JS 方向
+    'Node-js': 'Node.js', 'TypeScript': 'TypeScript', 'JavaScript': 'JavaScript',
+    '框架': '框架与 UI 库', '工具': '工具库', '图表': '数据可视化',
+    '模板': '模板站', 'ECMAScript': 'ECMAScript/ES6', '微前端': '微前端',
+    'vue': 'Vue 生态',
+    # Linux 方向
+    'Linux服务器开荒': '服务器开荒', 'shell': 'Shell 脚本',
+    'Linux监控工具': '监控与面板', '服务器': '云服务器',
+    '源-镜像仓库': '镜像源与仓库', '常用': '常用命令', '嵌入式': '嵌入式',
+    '常用工具': '常用工具', 'TCP分析': '网络与 TCP', '树莓派': '树莓派',
+    'RAID': 'RAID 与存储',
+}
+
+# 主题展示顺序（按方向配置，未列出的排最后）
+THEME_ORDER = {
+    'SQL': ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis 与缓存', 'MyBatis',
+            '数据库原理', 'SQL 语言', '分库分表与中间件', 'OLAP 与分析',
+            'TiDB', 'NewSQL', 'ClickHouse', 'InfluxDB（时序）', 'TDengine（时序）'],
+    'JS': ['JavaScript', 'ECMAScript/ES6', 'TypeScript', 'Node.js',
+           '框架与 UI 库', 'Vue 生态', '微前端', '数据可视化', '工具库', '模板站'],
+    'Linux': ['服务器开荒', 'Shell 脚本', '常用命令', '常用工具', '网络与 TCP',
+              '监控与面板', '镜像源与仓库', 'RAID 与存储', '树莓派', '云服务器', '嵌入式'],
 }
 
 LEVEL_DESC = {
@@ -37,15 +60,16 @@ def theme_of(item):
     return THEME_NAMES.get(key, key or '未分类')
 
 
-def theme_order_key(name):
-    """主题排序：核心主题在前"""
-    order = ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis 与缓存', 'MyBatis',
-            '数据库原理', 'SQL 语言', '分库分表与中间件', 'OLAP 与分析',
-            'TiDB', 'NewSQL', 'ClickHouse', 'InfluxDB（时序）', 'TDengine（时序）']
-    try:
-        return order.index(name)
-    except ValueError:
-        return len(order)
+def theme_order_key_factory(direction):
+    """主题排序：核心主题在前（按方向配置）"""
+    order = THEME_ORDER.get(direction, [])
+
+    def key(name):
+        try:
+            return order.index(name)
+        except ValueError:
+            return len(order)
+    return key
 
 
 def render(direction):
@@ -91,7 +115,7 @@ def render(direction):
     by_theme = defaultdict(list)
     for i in b_items:
         by_theme[theme_of(i)].append(i)
-    for theme in sorted(by_theme, key=theme_order_key):
+    for theme in sorted(by_theme, key=theme_order_key_factory(direction)):
         entries = by_theme[theme]
         lines.append(f'### {theme}（{len(entries)}）')
         lines.append('')
@@ -107,7 +131,7 @@ def render(direction):
     c_by_theme = defaultdict(list)
     for i in c_items:
         c_by_theme[theme_of(i)].append(i)
-    for theme in sorted(c_by_theme, key=theme_order_key):
+    for theme in sorted(c_by_theme, key=theme_order_key_factory(direction)):
         entries = c_by_theme[theme]
         lines.append(f'### {theme}（{len(entries)}）')
         lines.append('')

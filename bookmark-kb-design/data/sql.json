@@ -4,8 +4,8 @@
   "deduped": 156,
   "stats": {
     "A": 26,
-    "B": 49,
-    "C": 69,
+    "B": 48,
+    "C": 70,
     "D": 12
   },
   "items": [
@@ -368,14 +368,6 @@
       "title": "事务的隔离级别 - h294590501的专栏 - CSDN博客",
       "url": "https://blog.csdn.net/h294590501/article/details/80386000",
       "domain": "blog.csdn.net"
-    },
-    {
-      "level": "B",
-      "reason": "官方入口/产品页",
-      "path": "数据库相关/MySQL/安装",
-      "title": "MySQL官方下载地址",
-      "url": "https://downloads.mysql.com/archives/community/",
-      "domain": "downloads.mysql.com"
     },
     {
       "level": "B",
@@ -904,6 +896,14 @@
       "title": "MySQL- 5..7.24-winx64 安装详解 - zgfraymond - 博客园",
       "url": "http://www.cnblogs.com/zgfraymond/articles/9938880.html",
       "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "下载/历史版本页",
+      "path": "数据库相关/MySQL/安装",
+      "title": "MySQL官方下载地址",
+      "url": "https://downloads.mysql.com/archives/community/",
+      "domain": "downloads.mysql.com"
     },
     {
       "level": "C",

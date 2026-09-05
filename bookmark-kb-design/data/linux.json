@@ -1,0 +1,445 @@
+{
+  "direction": "Linux",
+  "total": 54,
+  "deduped": 54,
+  "stats": {
+    "A": 2,
+    "B": 10,
+    "C": 37,
+    "D": 5
+  },
+  "items": [
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "RAID",
+      "title": "图文并茂 RAID 技术全解 – RAID0、RAID1、RAID5、RAID100…… - 菲宇运维 - CSDN博客",
+      "url": "https://blog.csdn.net/bbwangj/article/details/81877861",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "TCP分析",
+      "title": "Linux实例常用内核网络参数介绍与常见问题处理",
+      "url": "https://help.aliyun.com/document_detail/41334.html",
+      "domain": "help.aliyun.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "Linux监控工具",
+      "title": "1Panel - 现代化、开源的 Linux 服务器运维管理面板",
+      "url": "https://1panel.cn/",
+      "domain": "1panel.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "Linux监控工具",
+      "title": "JumpServer - 开源堡垒机 - 官网",
+      "url": "https://www.jumpserver.org/",
+      "domain": "www.jumpserver.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "shell",
+      "title": "Linux命令大全(手册) – 真正好用的Linux命令在线查询网站",
+      "url": "https://www.linuxcool.com/",
+      "domain": "www.linuxcool.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "常用",
+      "title": "Linux恢复误删除的文件或者目录 - 简书",
+      "url": "https://www.jianshu.com/p/662293f12a47",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "树莓派",
+      "title": "树莓派中文站 – 海量讯息/教程资料/创意项目/原创产品",
+      "url": "http://www.52pi.net/",
+      "domain": "www.52pi.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "源-镜像仓库/yum-163源网站",
+      "title": "Index of /centos/7/os/x86_64/Packages/",
+      "url": "http://mirrors.163.com/centos/7/os/x86_64/Packages/",
+      "domain": "mirrors.163.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "源-镜像仓库/yum-163源网站",
+      "title": "Maven Repository: maven",
+      "url": "https://mvnrepository.com/tags/maven",
+      "domain": "mvnrepository.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "源-镜像仓库/yum-163源网站",
+      "title": "docker Hub",
+      "url": "https://hub.docker.com/",
+      "domain": "hub.docker.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "源-镜像仓库/yum-163源网站",
+      "title": "清华大学开源软件镜像站 | Tsinghua Open Source Mirror",
+      "url": "https://mirrors.tuna.tsinghua.edu.cn/",
+      "domain": "mirrors.tuna.tsinghua.edu.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "源-镜像仓库/yum-163源网站",
+      "title": "阿里巴巴开源镜像站-OPSX镜像站-阿里云开发者社区",
+      "url": "https://developer.aliyun.com/mirror/",
+      "domain": "developer.aliyun.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Linux服务器开荒",
+      "title": "CentOS7系统配置国内yum源和epel源 - renpingsheng - 博客园",
+      "url": "https://www.cnblogs.com/renpingsheng/p/7845096.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Linux服务器开荒",
+      "title": "linux 新添加的硬盘格式化并挂载到目录下 - 呆呆熊学习中 - 博客园",
+      "url": "https://www.cnblogs.com/ddbear/p/7009736.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Linux服务器开荒",
+      "title": "解决Centos-7 修改DNS后还无法解析地址问题_branwel的博客-CSDN博客_centos7域名解析不了",
+      "url": "https://blog.csdn.net/branwel/article/details/102907927",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Linux监控工具",
+      "title": "HFish: HFish 是一款基于 Golang 开发的跨平台多功能主动诱导型蜜罐框架系统，为了企业安全防护测试做出了精心的打造",
+      "url": "https://gitee.com/lauix/HFish/",
+      "domain": "gitee.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "RAID",
+      "title": "CentOS7忘记密码怎么办",
+      "url": "https://blog.csdn.net/sinat_39979357/article/details/119363678",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "RAID",
+      "title": "Linux/Ubuntu - 随笔分类 - 如果天空不死 - 博客园",
+      "url": "https://www.cnblogs.com/skywang12345/category/481789.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TCP分析",
+      "title": "linux tcp 大量 TIME_WAIT 问题_木偶跳舞的博客-CSDN博客_linux tcp wait",
+      "url": "https://blog.csdn.net/u013372487/article/details/79149252?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-79149252-blog-116960327.pc_relevant_multi_platform_whitelistv1&spm=1001.2101.3001.4242.2&utm_relevant_index=2",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TCP分析",
+      "title": "正确理解tcp_fin_timeout到底起什么作用?_狂奔的蚂蚁（达克）的博客-CSDN博客_tcp_fin_timeout",
+      "url": "https://blog.csdn.net/weixin_42104231/article/details/83656208",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "7个shell脚本实例--shell脚本练习必备 - 许明初 - 博客园",
+      "url": "https://www.cnblogs.com/dasha/p/11326410.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "Linux下使用《du》命令查看某文件及目录的大小 - 东邪西毒 - 博客园",
+      "url": "https://www.cnblogs.com/liuyansheng/p/6483233.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "Shell中判断文件,目录是否存在 - SummerChill - 博客园",
+      "url": "https://www.cnblogs.com/DreamDrive/p/7706585.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "linux下的shell脚本（基本） - 殷大侠 - 博客园",
+      "url": "https://www.cnblogs.com/yinheyi/p/6648242.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "shell - sed匹配某一行开头，替换整行内容 - SAGGITAR GODDESS XM - CSDN博客",
+      "url": "https://blog.csdn.net/xuezhangjun0121/article/details/84560921",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "shell中if判断一个变量为空 - 记忆残留 - 博客园",
+      "url": "https://www.cnblogs.com/zwgblog/p/6006063.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "shell执行字符串中的命令 - 冷冰若水 - 博客园",
+      "url": "https://www.cnblogs.com/lit10050528/p/8553701.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "【shell】【sed】删除和替换文件中某一行的方法 - 勿于浮沙筑高台 - CSDN博客",
+      "url": "https://blog.csdn.net/feifei_csdn/article/details/80841442",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "在Shell脚本中获取指定进程的PID - virgosnail - 博客园",
+      "url": "https://www.cnblogs.com/virgosnail/p/10289385.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "shell",
+      "title": "编程工具（三）Shell编程基础 - weixin_42329335的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/weixin_42329335/article/details/90044391",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "嵌入式",
+      "title": "刘凯老师STM32培训视频（全集80集）_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+      "url": "https://www.bilibili.com/video/av18459452/?p=10",
+      "domain": "www.bilibili.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "CentOS7查看和关闭防火墙 - ytangdigl的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/ytangdigl/article/details/79796961",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "Linux chown命令 | 菜鸟教程",
+      "url": "http://www.runoob.com/linux/linux-comm-chown.html",
+      "domain": "www.runoob.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "Linux 提示 Resource temporarily unavailable - 学到了 - CSDN博客",
+      "url": "https://blog.csdn.net/wngpenghao/article/details/82821104",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "awk 用法（使用入门） - emanlee - 博客园",
+      "url": "https://www.cnblogs.com/emanlee/p/3327576.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "centos chmod改变文件权限 - 微澜 - CSDN博客",
+      "url": "https://blog.csdn.net/u012408083/article/details/51753307",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "常用",
+      "title": "centos7 安装 iftop - 简书",
+      "url": "https://www.jianshu.com/p/d096f548c1b8",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "centos7修改文件写权限 - BetterWorld的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/junbujianwpl/article/details/51164227",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "常用",
+      "title": "iftop官网",
+      "url": "http://www.ex-parrot.com/~pdw/iftop/",
+      "domain": "www.ex-parrot.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "linux top命令VIRT,RES,SHR,DATA的含义 - 风信绮缘.唧唧的博客",
+      "url": "https://javawind.net/p131",
+      "domain": "javawind.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "常用",
+      "title": "rpm安装和卸载软件 - 坏~牧羊人 - 博客园",
+      "url": "https://www.cnblogs.com/520playboy/p/6231158.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "关于Linux报Resource temporarily unavailable问题解决记录 - Sucreyy的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_35963057/article/details/81489907",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "查看Linux磁盘及内存占用情况 - Hdx的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/u014311799/article/details/78775175",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用",
+      "title": "每天一个 linux命令（32）：vmstat命令_运维_zjq001X的博客-CSDN博客",
+      "url": "https://blog.csdn.net/zjq001x/article/details/83752113",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "常用工具/ftp",
+      "title": "Linux FTP服务搭建（完整步骤）",
+      "url": "https://blog.csdn.net/ALISONLAU2/article/details/110500770",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "常用工具/ftp",
+      "title": "lrzsz – Freecode",
+      "url": "http://freshmeat.sourceforge.net/projects/lrzsz/",
+      "domain": "freshmeat.sourceforge.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "常用工具/ftp",
+      "title": "【Linux】htop命令 安装、介绍（top命令增强版） - 品味·舍得 - 博客园",
+      "url": "https://www.cnblogs.com/humor-bin/p/12785597.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "树莓派",
+      "title": "树莓派启用root用户 - 简书",
+      "url": "https://www.jianshu.com/p/dd09d8cf985e",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "源-镜像仓库/yum-163源网站",
+      "title": "容器镜像服务",
+      "url": "https://cr.console.aliyun.com/cn-hangzhou/instances",
+      "domain": "cr.console.aliyun.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（baijiahao\\.baidu\\.com）",
+      "path": "RAID",
+      "title": "centos7安装cockpit图形管理界面",
+      "url": "https://baijiahao.baidu.com/s?id=1733870933299872665&wfr=spider&for=pc",
+      "domain": "baijiahao.baidu.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（likecs\\.com）",
+      "path": "RAID",
+      "title": "linux下双网卡双网关配置 - 爱码网",
+      "url": "https://www.likecs.com/show-259839.html",
+      "domain": "www.likecs.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（eepw\\.com\\.cn）",
+      "path": "嵌入式",
+      "title": "技术社区_电子产品世界",
+      "url": "http://www.eepw.com.cn/news/category",
+      "domain": "www.eepw.com.cn"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（zoukankan\\.com）",
+      "path": "常用工具/ftp",
+      "title": "ftp命令和scp命令 - 走看看",
+      "url": "http://t.zoukankan.com/Struts-pring-p-5011976.html",
+      "domain": "t.zoukankan.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（bookmarkearth\\.com）",
+      "path": "服务器",
+      "title": "国内外云服务器厂商推荐表 |书签地球",
+      "url": "https://www.bookmarkearth.com/activity/detail/server",
+      "domain": "www.bookmarkearth.com"
+    }
+  ]
+}

@@ -1,0 +1,957 @@
+{
+  "direction": "JS",
+  "total": 118,
+  "deduped": 118,
+  "stats": {
+    "A": 15,
+    "B": 42,
+    "C": 56,
+    "D": 5
+  },
+  "items": [
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "JavaScript/JS 数据结构解析和算法",
+      "title": "JS 万字总结 重量级干货！！！ - 掘金",
+      "url": "https://juejin.im/post/5e9f0bdce51d4546f5791989?utm_source=gold_browser_extension",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "Node-js/shell工具",
+      "title": "API 文档 | Node.js 中文网",
+      "url": "http://nodejs.cn/api/",
+      "domain": "nodejs.cn"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "Node-js/shell工具",
+      "title": "querystring | Node.js API 文档",
+      "url": "http://nodejs.cn/api/querystring.html#querystring_query_string",
+      "domain": "nodejs.cn"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "Node-js/shell工具",
+      "title": "深入理解Node.js垃圾回收与内存管理 - 简书",
+      "url": "https://www.jianshu.com/p/4129a3fce7bb",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "TypeScript/网站",
+      "title": "文档简介 · TypeScript中文网 · TypeScript——JavaScript的超集",
+      "url": "https://www.tslang.cn/docs/home.html",
+      "domain": "www.tslang.cn"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "vue",
+      "title": "Babel 是什么？ · Babel 中文网",
+      "url": "https://www.babeljs.cn/docs/",
+      "domain": "www.babeljs.cn"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "图表",
+      "title": "uCharts官网 - 秋云uCharts跨平台图表库",
+      "url": "https://www.ucharts.cn/v2/#/",
+      "domain": "www.ucharts.cn"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "图表",
+      "title": "场景案例 | AntV",
+      "url": "https://antv.vision/zh/case",
+      "domain": "antv.vision"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "工具/Licia",
+      "title": "Docs - Licia: Useful Utility",
+      "url": "https://licia.liriliri.io/docs_cn.html#",
+      "domain": "licia.liriliri.io"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "工具/VScode",
+      "title": "Ramda Documentation",
+      "url": "https://ramda.cn/docs/#add",
+      "domain": "ramda.cn"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "微前端",
+      "title": "微前端",
+      "url": "https://umijs.org/docs/max/micro-frontend",
+      "domain": "umijs.org"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "框架/Ant Design",
+      "title": "Ant Design - 一套企业级 UI 设计语言和 React 组件库",
+      "url": "https://ant.design/index-cn",
+      "domain": "ant.design"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "框架/Taro",
+      "title": "Taro 介绍 · Taro",
+      "url": "https://nervjs.github.io/taro/docs/README.html",
+      "domain": "nervjs.github.io"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "框架/egg",
+      "title": "egg教程 - 为企业级框架和应用而生",
+      "url": "https://eggjs.org/zh-cn/tutorials/index.html",
+      "domain": "eggjs.org"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "框架/nest",
+      "title": "插件 | Fastify 中文网",
+      "url": "https://www.fastify.cn/docs/latest/Plugins/",
+      "domain": "www.fastify.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "ECMAScript/ES6",
+      "title": "ECMAScript 6 入门",
+      "url": "http://es6.ruanyifeng.com/",
+      "domain": "es6.ruanyifeng.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "JavaScript/JS 数据结构解析和算法",
+      "title": "22 道高频 JavaScript 手写面试题及答案 - 掘金",
+      "url": "https://juejin.im/post/5d51e16d6fb9a06ae17d6bbc",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "Node-js/mongoose",
+      "title": "(17条消息)mongoose批量修改数组内的集合_数据结构与算法_weixin_39907636的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_39907636/article/details/90669139",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "Node-js/mongoose",
+      "title": "(1条消息) MongoDB4.0支持事务管理_路漫漫其修远兮，吾将上下而求索。-CSDN博客",
+      "url": "https://blog.csdn.net/qq_33774822/article/details/84065571",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "Node-js/mongoose",
+      "title": "使用注解简化 Mongoose 事务的使用_天如 - SegmentFault 思否",
+      "url": "https://segmentfault.com/a/1190000021400281",
+      "domain": "segmentfault.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "Node-js/npm",
+      "title": "npm 中文文档 | npm 中文网",
+      "url": "https://www.npmjs.cn/",
+      "domain": "www.npmjs.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "Node-js/npm",
+      "title": "淘宝 NPM 镜像",
+      "url": "https://npm.taobao.org/",
+      "domain": "npm.taobao.org"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "Node-js/shell工具",
+      "title": "27- ES6 装饰器 - 简书",
+      "url": "https://www.jianshu.com/p/8745660de050",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "Node-js/shell工具",
+      "title": "TypeORM 中文文档",
+      "url": "https://typeorm.biunav.com/",
+      "domain": "typeorm.biunav.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "Node-js/shell工具",
+      "title": "npm",
+      "url": "https://www.npmjs.com/",
+      "domain": "www.npmjs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方包文档",
+      "path": "Node-js/shell工具",
+      "title": "ssh2-sftp-client - npm",
+      "url": "https://www.npmjs.com/package/ssh2-sftp-client#sec-5-2-20",
+      "domain": "www.npmjs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方包文档",
+      "path": "Node-js/shell工具",
+      "title": "ssh2-utils - npm",
+      "url": "https://www.npmjs.com/package/ssh2-utils",
+      "domain": "www.npmjs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "Node-js/shell工具",
+      "title": "批量杀死node进程 pkill 、 taskkill_大道至简-CSDN博客_kill node",
+      "url": "https://blog.csdn.net/themagickeyjianan/article/details/86603882",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "Node-js/常用包",
+      "title": "Less 中文网",
+      "url": "http://lesscss.cn/",
+      "domain": "lesscss.cn"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "TypeScript/应用",
+      "title": "TypeScript 之类型判断 - 叙帝利 - 博客园",
+      "url": "https://www.cnblogs.com/nzbin/p/9357247.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "TypeScript/应用",
+      "title": "在 Typescript 2.0 中使用 @types 类型定义 - 冠军 - 博客园",
+      "url": "https://www.cnblogs.com/haogj/p/6194472.html?utm_source=itdadao&utm_medium=referral",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方包文档",
+      "path": "TypeScript/网站",
+      "title": "typescript - npm",
+      "url": "https://www.npmjs.com/package/typescript",
+      "domain": "www.npmjs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "vue",
+      "title": "Nunjucks 中文文档",
+      "url": "https://nunjucks.bootcss.com/",
+      "domain": "nunjucks.bootcss.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "vue",
+      "title": "UmiJS - 插件化的企业级前端应用框架",
+      "url": "https://umijs.org/zh-CN",
+      "domain": "umijs.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "vue",
+      "title": "axios中文网|axios API 中文文档 | axios",
+      "url": "http://www.axios-js.com/",
+      "domain": "www.axios-js.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "vue",
+      "title": "中国 Web 前端开发人员提供优质文档！",
+      "url": "https://docschina.org/",
+      "domain": "docschina.org"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "vue",
+      "title": "前端解决跨域问题的8种方案（最新最全）（转）_网络_weixin_30929195的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_30929195/article/details/97796143?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "vue",
+      "title": "快速上手 | DvaJS",
+      "url": "https://dvajs.com/guide/getting-started.html#%E4%BD%BF%E7%94%A8-antd",
+      "domain": "dvajs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "vue/vue3",
+      "title": "Vue3 组件通信、组件间传值的几种方式(分享)-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_60547084/article/details/129319202",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "vue/vue3",
+      "title": "vue3.0生命周期 - 奇奇怪怪&amp; - 博客园",
+      "url": "https://www.cnblogs.com/wwf2/p/14211407.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "vue/vue3",
+      "title": "用无限滚动vue-infinite-scroll实现分页加载-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_42582488/article/details/108336088?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-108336088-blog-93191038.235^v38^pc_relevant_sort&spm=1001.2101.3001.4242.2&utm_relevant_index=4",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "图表",
+      "title": "Apache ECharts",
+      "url": "https://echarts.apache.org/zh/",
+      "domain": "echarts.apache.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "图表",
+      "title": "D3.js-数据驱动的文档",
+      "url": "https://d3js.org/",
+      "domain": "d3js.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "图表",
+      "title": "Highcharts -兼容 IE6+、完美支持移动端、图表类型丰富的 HTML5 交互图表 |",
+      "url": "https://www.highcharts.com.cn/",
+      "domain": "www.highcharts.com.cn"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "工具/VScode",
+      "title": "JavaScript 工具函数大全（新） - 掘金",
+      "url": "https://juejin.im/post/5da1a04ae51d45783d6122bf",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "工具/VScode",
+      "title": "VueUse | VueUse",
+      "url": "https://vueuse.org/",
+      "domain": "vueuse.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "工具/VScode",
+      "title": "jscode",
+      "url": "http://jscode.online/",
+      "domain": "jscode.online"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "工具/lodash",
+      "title": "Lodash 中文文档 | Lodash 中文网",
+      "url": "https://www.lodashjs.com/",
+      "domain": "www.lodashjs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "微前端",
+      "title": "qiankun微前端路由模式_微前端qiankun路由_落梅抚雪的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_43825389/article/details/109313017",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "框架/React",
+      "title": "React – 用于构建用户界面的 JavaScript 库",
+      "url": "https://zh-hans.reactjs.org/",
+      "domain": "zh-hans.reactjs.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "框架/React",
+      "title": "入门教程: 认识 React – React",
+      "url": "https://react.docschina.org/tutorial/tutorial.html",
+      "domain": "react.docschina.org"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "框架/egg",
+      "title": "Egg.js: 配置跨域请求插件 egg-cors_JethroLiu的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_46618182/article/details/108354273",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "框架/egg",
+      "title": "快速入门 - 为企业级框架和应用而生",
+      "url": "https://eggjs.org/zh-cn/intro/quickstart.html",
+      "domain": "eggjs.org"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "框架/element",
+      "title": "Element - 网站快速成型工具",
+      "url": "https://element.eleme.cn/#/zh-CN",
+      "domain": "element.eleme.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "框架/nest",
+      "title": "Arco Design - 企业级产品的完整设计和开发解决方案",
+      "url": "https://arco.design/",
+      "domain": "arco.design"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "框架/nest",
+      "title": "nest官网",
+      "url": "https://docs.nestjs.cn/7/introduction",
+      "domain": "docs.nestjs.cn"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "框架/nest",
+      "title": "qiankun - qiankun",
+      "url": "https://qiankun.umijs.org/zh",
+      "domain": "qiankun.umijs.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "ECMAScript/ES6",
+      "title": "【ES6学习笔记之】Object.assign() - 简书",
+      "url": "https://www.jianshu.com/p/d5f572dd3776",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "ECMAScript/ES6",
+      "title": "理解和使用ES6中的Symbol - 简书",
+      "url": "https://www.jianshu.com/p/f40a77bbd74e",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "JavaScript/JS 数据结构解析和算法",
+      "title": "JS 动态获取对象多级属性_ctwen的专栏-CSDN博客_js 多层级对象属性值获取",
+      "url": "https://blog.csdn.net/ctwen/article/details/84742273",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "JavaScript/JS 数据结构解析和算法",
+      "title": "ilovejwl/MaoDataStructures: Arrays(数组)、Stacks(栈)、Queues(队列)、LinkedList(链表)、Recursion(递归思想)、BinarySearchTree(二分搜索树)、Set(集合)、Map(映射)、Heap(堆)、PriorityQueue(优先队列)、SegmentTree(线段树)、Trie(字典树)、UnionFind(并查集)、AVLTree(AVL平衡树树)、RedBlackTree(红黑平衡树)、HashTable(哈希表)",
+      "url": "https://github.com/ilovejwl/MaoDataStructures",
+      "domain": "github.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "JavaScript/JS 数据结构解析和算法",
+      "title": "js去掉字符串的空格回车换行_JavaScript_xiejunna的博客-CSDN博客",
+      "url": "https://blog.csdn.net/xiejunna/article/details/77879324",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "JavaScript/JS 数据结构解析和算法",
+      "title": "使用js判断两个时间段是否重合(两段时间是否有交集)_网络_weixin_30449239的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_30449239/article/details/101707752",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/mongoose",
+      "title": "MedusaLeee/mongodb-transactions-guides: mongodb 4.0 事物示例",
+      "url": "https://github.com/MedusaLeee/mongodb-transactions-guides",
+      "domain": "github.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/mongoose",
+      "title": "nodejs连接多个mongodb数据库",
+      "url": "https://blog.csdn.net/m0_37263637/article/details/78963991",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/npm",
+      "title": "npm install 很慢很慢解决办法 - phpfzh的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/phpfzh/article/details/71131485",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/npm",
+      "title": "npm publish过滤部分文件 - 简书",
+      "url": "https://www.jianshu.com/p/44b61940e40e",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Node-js/npm",
+      "title": "nrm安装与配置 - 简书",
+      "url": "https://www.jianshu.com/p/94d084ce6834",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/npm",
+      "title": "使用nvm进行node、npm多版本管理_npm 多版本-CSDN博客",
+      "url": "https://blog.csdn.net/sh11223312/article/details/139680711",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/shell工具",
+      "title": "NodeJS学习笔记 (7)网络服务-http-client(ok) - eret9616 - 博客园",
+      "url": "https://www.cnblogs.com/eret9616/p/9187757.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/shell工具",
+      "title": "NodeJs 获取程序根目录的几种方式",
+      "url": "https://www.mscoder.cn/program/nodejs-get-root-dir/",
+      "domain": "www.mscoder.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/shell工具",
+      "title": "mac 管理使用多个版本node - 我的故事没编好 - 博客园",
+      "url": "https://www.cnblogs.com/xguoz/p/17206424.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/shell工具",
+      "title": "node.js 加密 (crypto) - isHoMeTown的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/isHoMeTown/article/details/100583156",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "下载/历史版本页",
+      "path": "Node-js/shell工具",
+      "title": "nodejs历史版本",
+      "url": "https://nodejs.org/download/release/",
+      "domain": "nodejs.org"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/shell工具",
+      "title": "nodejs学习——判断一个值是否在数组中_JavaScript_m0_37876745的博客-CSDN博客",
+      "url": "https://blog.csdn.net/m0_37876745/article/details/100738370",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/shell工具",
+      "title": "如何优雅的创建nodejs共享常量 - 巍影之戈 - CSDN博客",
+      "url": "https://blog.csdn.net/wp270280522/article/details/49635581?utm_source=blogxgwz1",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "Node-js/shell工具",
+      "title": "如何快速删除node_modules文件夹（windows+linux） - 漫思 - 博客园",
+      "url": "https://www.cnblogs.com/sexintercourse/p/15260559.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Node-js/安装",
+      "title": "CentOS安装NodeJS - 玄同太子 - 博客园",
+      "url": "https://www.cnblogs.com/zhi-leaf/p/10979629.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Node-js/安装",
+      "title": "Linux系统下安装NodeJS - 简书",
+      "url": "https://www.jianshu.com/p/69bd39848845",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "Node-js/安装",
+      "title": "离线安装 node.js_翼晗的博客-CSDN博客_离线安装nodejs",
+      "url": "https://blog.csdn.net/qq_34164814/article/details/120667609",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TypeScript/应用",
+      "title": "SuuQi/egg-router-decorator: 装饰者模式写egg-router（Routers for eggjs by decorator pattern）。",
+      "url": "https://github.com/SuuQi/egg-router-decorator",
+      "domain": "github.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TypeScript/应用",
+      "title": "TS错误信息列表_JavaScript_Jinmy的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_42659625/article/details/81002985",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TypeScript/应用",
+      "title": "TypeScript 中实现自定义事件（Event）_weixin_34406796的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_34406796/article/details/91942382",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TypeScript/应用",
+      "title": "TypeScript 实现常量类 - 简书",
+      "url": "https://www.jianshu.com/p/8d52f45e425d",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TypeScript/应用",
+      "title": "Typescript：导入导入json文件的js库？ - 问答 - 云+社区 - 腾讯云",
+      "url": "https://cloud.tencent.com/developer/ask/175204",
+      "domain": "cloud.tencent.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TypeScript/应用",
+      "title": "WebStorm开发TypeScript的设置 - WFaceBoss - 博客园",
+      "url": "https://www.cnblogs.com/wfaceboss/p/10043101.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "TypeScript/应用",
+      "title": "tsconfig.json编译选项",
+      "url": "https://www.cnblogs.com/zaihuilou/p/9556373.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "TypeScript/应用",
+      "title": "typescript(二)--ts环境搭建(webStorm)_开发工具_jasnet_u的博客-CSDN博客",
+      "url": "https://blog.csdn.net/jasnet_u/article/details/81144026?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TypeScript/应用",
+      "title": "typescript读写文件_开发工具_wulong710的专栏-CSDN博客",
+      "url": "https://blog.csdn.net/wulong710/article/details/97927479",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "TypeScript/应用",
+      "title": "使用typescript构建Koa应用 - 简书",
+      "url": "https://www.jianshu.com/p/bf8dde16c8d7",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "TypeScript/应用",
+      "title": "快速搭建一个TypeScript项目 - 简书",
+      "url": "https://www.jianshu.com/p/df14afcfdb03",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue",
+      "title": "2021 年最值得使用的 Node.js 框架",
+      "url": "https://juejin.cn/post/6955402195311263751?utm_source=gold_browser_extension",
+      "domain": "juejin.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue",
+      "title": "Vue项目基于driverjs实现新用户导航_driver.js vue-CSDN博客",
+      "url": "https://blog.csdn.net/qq_39335404/article/details/130270705",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue",
+      "title": "localstorage 必知必会 | 菜鸟教程",
+      "url": "https://www.runoob.com/w3cnote/localstorage-spec.html",
+      "domain": "www.runoob.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue",
+      "title": "浅谈bluebird包的使用理解_qq_24884955的博客-CSDN博客",
+      "url": "https://blog.csdn.net/qq_24884955/article/details/84564778",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue/vue3",
+      "title": "Element Plus Menu二级菜单的样式修改 el-popper_香芋味的可可的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_51467172/article/details/133175807",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue/vue3",
+      "title": "Vue3展示Markdown内容_vue3-markdown-it_「已注销」的博客-CSDN博客",
+      "url": "https://blog.csdn.net/yml9528/article/details/118058894?utm_source=miniapp_weixin",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue/vue3",
+      "title": "Vue中使用Base64编码 · 智慧技巧",
+      "url": "https://www.miyil.com/vue/1132.html",
+      "domain": "www.miyil.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue/vue3",
+      "title": "cursor:pointer属性,鼠标经过或点击有小手样式_cursor: pointer;-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_50255994/article/details/109098526",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue/vue3",
+      "title": "v-for循环el-button默认选中第一个button按钮,执行第一个按钮的事件_写bug小白的博客-CSDN博客",
+      "url": "https://blog.csdn.net/weixin_44740072/article/details/131087093?utm_source=miniapp_weixin",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue/vue3",
+      "title": "点击el-card区域触发事件，点击button区域，阻止冒泡 ​-CSDN博客",
+      "url": "https://blog.csdn.net/syiting/article/details/100576828?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-100576828-blog-127093700.235%5Ev39%5Epc_relevant_3m_sort_dl_base3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-100576828-blog-127093700.235%5Ev39%5Epc_relevant_3m_sort_dl_base3&utm_relevant_index=2",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue/vue3",
+      "title": "自定义工具栏 | v-md-editor",
+      "url": "https://ckang1229.gitee.io/vue-markdown-editor/zh/senior/toolbar.html",
+      "domain": "ckang1229.gitee.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "vue/vue3",
+      "title": "解决navigator.clipboard Cannot read property ‘writeText‘ of undefined - 简书",
+      "url": "https://www.jianshu.com/p/735ccacb80db",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "图表",
+      "title": "数据可视化工具D3js &amp;Highcharts&amp;Echarts_心冰之海的技术博客_51CTO博客",
+      "url": "https://blog.51cto.com/lhxsoft/3178286",
+      "domain": "blog.51cto.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "工具/VScode",
+      "title": "Node.js的安装与VS code配合 - 永远的三分钟热度的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/willjojo/article/details/83442435",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "工具/VScode",
+      "title": "VS Code 必备插件推荐 - 小贤笔记 - CSDN博客",
+      "url": "https://blog.csdn.net/shenxianhui1995/article/details/81604818#commentsedit",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "工具/VScode",
+      "title": "网页JS自动翻译",
+      "url": "https://github.com/xnx3/translate/blob/master/doc/README.cn.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "框架/Koa",
+      "title": "使用Typescript和Koa构建Node应用（一） - 简书",
+      "url": "https://www.jianshu.com/p/1a91f36e5153",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "框架/React",
+      "title": "React 元素渲染 | 菜鸟教程",
+      "url": "https://www.runoob.com/react/react-rendering-elements.html",
+      "domain": "www.runoob.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "框架/egg",
+      "title": "json web token for Egg.js 实践 - 掘金",
+      "url": "https://juejin.im/post/5bfc1bcdf265da61273d128a",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "框架/egg",
+      "title": "使用eggjs框架配置监听地址和端口问题 - 欧氏空间 - CSDN博客",
+      "url": "https://blog.csdn.net/sinat_33856143/article/details/83037697",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "框架/egg",
+      "title": "自定义Egg.js的请求级别日志 - 掘金",
+      "url": "https://juejin.im/post/5bdcfd1f518825171b2d820d",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "框架/nest",
+      "title": "MyUI 4.x",
+      "url": "https://newgateway.gitee.io/my/",
+      "domain": "newgateway.gitee.io"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（juejin\\.im/topics）",
+      "path": "TypeScript/应用",
+      "title": "话题",
+      "url": "https://juejin.im/topics",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（f2er\\.com）",
+      "path": "vue",
+      "title": "QDFuns - 开发团队 - 前端之家",
+      "url": "https://www.f2er.com/team/8NG3agNo",
+      "domain": "www.f2er.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（devpress\\.csdn\\.net）",
+      "path": "vue/vue3",
+      "title": "Vue 3 兄弟组件间传值_vue.js_weixin_51204324-ViewDesign",
+      "url": "https://devpress.csdn.net/viewdesign/64094e58986c660f3cf91d0e.html",
+      "domain": "devpress.csdn.net"
+    },
+    {
+      "level": "D",
+      "reason": "近似重复",
+      "path": "微前端",
+      "title": "qiankun - qiankun",
+      "url": "https://qiankun.umijs.org/zh/",
+      "domain": "qiankun.umijs.org"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（cssmoban\\.com）",
+      "path": "模板",
+      "title": "整站网站模板_整站网站模板免费下载_模板之家",
+      "url": "http://www.cssmoban.com/tags.asp?page=5&n=%E6%95%B4%E7%AB%99",
+      "domain": "www.cssmoban.com"
+    }
+  ]
+}
