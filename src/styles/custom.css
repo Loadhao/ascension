@@ -43,6 +43,27 @@
   --sl-color-accent-low: #f2f2f2;
 }
 
+/* ===== 目录侧边栏字体统一规范 =====
+   Starlight 默认混排：分组标题 600 字重 + --sl-text-lg(移动)/base(桌面)，
+   叶子链接 400 + sm。此处统一为：
+     · 字号全树一致 var(--sl-text-sm)
+     · 分组标题 500 / 叶子链接 400 / 当前页 600
+   层级区分只靠字重，黑体加深不再零散出现。 */
+.sidebar-content .group-label .large {
+  font-size: var(--sl-text-sm);
+  font-weight: 500;
+}
+.sidebar-content a,
+.sidebar-content a.large {
+  font-size: var(--sl-text-sm);
+  font-weight: 400;
+}
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover,
+.sidebar-content a[aria-current='page']:focus {
+  font-weight: 600;
+}
+
 /* ===== 字重调轻（F4）：H1 600 / H2–H6 500 / 正文 400 ===== */
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
   font-weight: 500;
