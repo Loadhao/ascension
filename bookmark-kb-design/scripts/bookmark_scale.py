@@ -198,9 +198,13 @@ def grade(direction, path, title, url, is_homepage=False, base_len=3):
     if is_homepage:
         return 'B', '官方入口/产品页'
 
+    # 广告投放落地页：URL 带投放跟踪参数，厂商营销页不进 A/B（官方文档规则跳过）
+    is_ad_landing = bool(re.search(
+        r'(bd_vid=|utm_medium=baidu|utm_source=baidu|source=baidu-|e_keywordid=)', u))
+
     # A：官方文档/文档站
     for pat in OFFICIAL_DOCS:
-        if re.search(pat, u) and not has_c_signal:
+        if re.search(pat, u) and not has_c_signal and not is_ad_landing:
             return 'A', '官方文档/文档站'
     # A：深度长文（无 C 级操作信号干扰）
     if has_a_signal and not has_c_signal:
@@ -208,7 +212,7 @@ def grade(direction, path, title, url, is_homepage=False, base_len=3):
 
     # B：官方/产品入口
     for pat in OFFICIAL_DOCS:
-        if re.search(pat, u):
+        if re.search(pat, u) and not is_ad_landing:
             return 'B', '官方入口/产品页'
     # B：主题深度文章
     if any(re.search(p, text, re.I) for p in B_TITLE_PATTERNS) and not has_c_signal:

@@ -4,9 +4,9 @@
   "privacy_excluded": 0,
   "deduped": 126,
   "stats": {
-    "A": 13,
+    "A": 11,
     "B": 60,
-    "C": 45,
+    "C": 47,
     "D": 8
   },
   "items": [
@@ -86,25 +86,9 @@
       "level": "A",
       "reason": "官方文档/文档站",
       "path": "混合云",
-      "title": "混合云 | 青云QingCloud",
-      "url": "https://www.qingcloud.com/hybridcloud-connection?source=baidu-hunheyun&utm_source=AD&utm_medium=baidu&utm_campaign=NEW-%E6%B7%B7%E5%90%88%E4%BA%91&utm_content=%E6%A0%B8%E5%BF%83%E8%AF%8D&utm_term=%E6%B7%B7%E5%90%88%E4%BA%91%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88&e_matchtype=2&e_creative=43531742917&e_keywordid=194318095666&e_keywordid2=194318095666&bd_vid=10228560029174010181",
-      "domain": "www.qingcloud.com"
-    },
-    {
-      "level": "A",
-      "reason": "官方文档/文档站",
-      "path": "混合云",
       "title": "混合云多活解决方案架构 - 通用解决方案 - 阿里云",
       "url": "https://help.aliyun.com/document_detail/100089.html",
       "domain": "help.aliyun.com"
-    },
-    {
-      "level": "A",
-      "reason": "官方文档/文档站",
-      "path": "混合云",
-      "title": "混合云管理平台|混合云架构|同架构混合云解决方案-深信服",
-      "url": "https://www.sangfor.com.cn/need/b2?utm_source=baidu&utm_medium=PC&utm_campaign=jihua&utm_content=danyuan&utm_term=PCdate20190311_keyword01084&renqun_youhua=433560&bd_vid=10453555292888729135",
-      "domain": "www.sangfor.com.cn"
     },
     {
       "level": "A",
@@ -873,6 +857,22 @@
       "title": "架构笔记：负载均衡SLB，互联网架构大剖析_qinglianchen0851的博客-CSDN博客",
       "url": "https://blog.csdn.net/qinglianchen0851/article/details/84306448",
       "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "混合云",
+      "title": "混合云 | 青云QingCloud",
+      "url": "https://www.qingcloud.com/hybridcloud-connection?source=baidu-hunheyun&utm_source=AD&utm_medium=baidu&utm_campaign=NEW-%E6%B7%B7%E5%90%88%E4%BA%91&utm_content=%E6%A0%B8%E5%BF%83%E8%AF%8D&utm_term=%E6%B7%B7%E5%90%88%E4%BA%91%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88&e_matchtype=2&e_creative=43531742917&e_keywordid=194318095666&e_keywordid2=194318095666&bd_vid=10228560029174010181",
+      "domain": "www.qingcloud.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "混合云",
+      "title": "混合云管理平台|混合云架构|同架构混合云解决方案-深信服",
+      "url": "https://www.sangfor.com.cn/need/b2?utm_source=baidu&utm_medium=PC&utm_campaign=jihua&utm_content=danyuan&utm_term=PCdate20190311_keyword01084&renqun_youhua=433560&bd_vid=10453555292888729135",
+      "domain": "www.sangfor.com.cn"
     },
     {
       "level": "C",
