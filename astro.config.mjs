@@ -286,6 +286,7 @@ export default defineConfig({
                         { label: '类加载机制与双亲委派', link: '/java/advanced/jvm/01-class-loading/' },
                         { label: '运行时数据区', link: '/java/advanced/jvm/02-memory/' },
                         { label: '垃圾回收算法与收集器', link: '/java/advanced/jvm/03-garbage-collection/' },
+                        { label: '四种引用：强、软、弱、虚', link: '/java/advanced/jvm/04-references/' },
                       ],
                     },
                     {
@@ -677,6 +678,7 @@ export default defineConfig({
                         { label: '概览', link: '/elasticsearch/intermediate/usage/' },
                         { label: 'Query DSL：match、term 与 bool', link: '/elasticsearch/intermediate/usage/01-query-dsl/' },
                         { label: '聚合分析：度量、桶与管道', link: '/elasticsearch/intermediate/usage/02-aggregation/' },
+                        { label: '深翻页方案与查询性能优化', link: '/elasticsearch/intermediate/usage/03-pagination/' },
                       ],
                     },
                   ],
