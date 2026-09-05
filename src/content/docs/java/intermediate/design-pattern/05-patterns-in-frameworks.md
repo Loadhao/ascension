@@ -9,6 +9,38 @@ level: intermediate
 背 23 个模式没有意义，**在熟悉的框架里认出它们**才有——以下每个
 模式都关联站内已有笔记，拼成一张"学过的都是模式"的地图。
 
+## 看一个模式如何被框架化：给"代理"写一个微缩 Spring
+
+与其背"AOP 用了代理模式"，不如亲手演示**框架如何把决策变成代理**。下面这段
+就还原了 Spring 最核心的机制——**读注解 → 生成代理 → 调用兜底**：
+
+```java
+// 1. 一个"注解式"需求：方法上标了 @Retry 的方法失败时自动重试
+@Retention(RetentionPolicy.RUNTIME)
+@interface Retry { int times() default 3; }
+
+// 2. 框架层：用 JDK 动态代理拦截被 @Retry 标注的调用
+static Object wrap(Object target) {
+    return Proxy.newProxyInstance(
+        target.getClass().getClassLoader(),
+        target.getClass().getInterfaces(),       // JDK 代理要求面向接口
+        (proxy, method, args) -> {
+            Retry r = method.getAnnotation(Retry.class);
+            if (r == null) return method.invoke(target, args);  // 没标 → 直接调
+            Throwable last = null;
+            for (int i = 0; i < r.times(); i++) {
+                try { return method.invoke(target, args); }     // 有标 → 重试兜底
+                catch (Throwable e) { last = e; /* 进入下一轮重试 */ }
+            }
+            throw new RuntimeException("重试失败", last);
+        });
+}
+```
+
+把这段的 `@Retry` 换成 `@Transactional`、把"重试"换成"开启事务+回滚"，你就
+得到了 Spring AOP 的骨架。**这正是它和"手动写 if/else"的区别**：业务方法不用
+改一行，横切逻辑由代理在运行期注入——代理模式在这里被"框架化"成了生产力。
+
 ## JDK 现场速查
 
 | 模式 | JDK 现场 | 一句话原理 |
