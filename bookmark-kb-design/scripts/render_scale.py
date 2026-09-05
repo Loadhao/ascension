@@ -29,6 +29,21 @@ THEME_NAMES = {
     '源-镜像仓库': '镜像源与仓库', '常用': '常用命令', '嵌入式': '嵌入式',
     '常用工具': '常用工具', 'TCP分析': '网络与 TCP', '树莓派': '树莓派',
     'RAID': 'RAID 与存储',
+    # AI 方向
+    '业务Agent': '业务 Agent', '公司AI': '公司 AI 平台', 'AI分享': 'AI 分享',
+    'coding plan': 'Coding Plan 订阅', 'AI网站': 'AI 网站与模型', 'skills': 'Skills 生态',
+    'MCP': 'MCP', 'ai多项目管理': 'AI 多项目管理', 'ai开发规范': 'AI 开发规范',
+    'harness': 'Harness', 'SOP': 'SOP', 'trader': '量化交易',
+    'AI生产级-解决方案': '生产级方案', '其他': '其他',
+    # 架构方向
+    '微服务': '微服务', '分布式': '分布式', '架构相关': '架构通识',
+    '架构思考': '架构思考', '方案': '权限方案', '权限': '认证与权限',
+    '设计模式': '设计模式', '规范': 'API 规范', '外包': '外包平台',
+    '产品': '产品经理', '运营': '运营', '数据分析': '数据分析',
+    '开源项目-学习': '开源项目学习', '便捷式开发（代码生成框架）': '快速开发框架',
+    '系统设计': '系统设计', '定义': '概念定义', '行业分析': '行业分析',
+    '企业应用集成': '系统集成', '低代码': '低代码', '管理': '研发管理',
+    '混合云': '混合云', '开源社区': '开源社区', '项目': '项目管理',
 }
 
 # 主题展示顺序（按方向配置，未列出的排最后）
@@ -40,6 +55,13 @@ THEME_ORDER = {
            '框架与 UI 库', 'Vue 生态', '微前端', '数据可视化', '工具库', '模板站'],
     'Linux': ['服务器开荒', 'Shell 脚本', '常用命令', '常用工具', '网络与 TCP',
               '监控与面板', '镜像源与仓库', 'RAID 与存储', '树莓派', '云服务器', '嵌入式'],
+    'AI': ['业务 Agent', 'Harness', 'AI 开发规范', 'Skills 生态', 'MCP',
+           'AI 网站与模型', 'AI 多项目管理', 'Coding Plan 订阅', 'AI 分享',
+           '量化交易', 'SOP', '生产级方案', '公司 AI 平台', '其他'],
+    '架构': ['微服务', '分布式', '认证与权限', '权限方案', 'API 规范', '设计模式',
+             '系统设计', '架构通识', '架构思考', '混合云', '快速开发框架',
+             '开源项目学习', '开源社区', '数据分析', '概念定义', '系统集成',
+             '研发管理', '项目管理', '低代码', '行业分析', '产品经理', '运营', '外包平台'],
 }
 
 LEVEL_DESC = {
@@ -79,6 +101,9 @@ def render(direction):
     stats = data['stats']
 
     lines = []
+    src_label = f'方向/{direction}' if direction in ('SQL', 'JS', 'Linux', 'Java') else direction
+    privacy_note = (f'，内网/本地链接剔除 {data["privacy_excluded"]} 条（不入公开产物）'
+                    if data.get('privacy_excluded') else '')
     lines.append('---')
     lines.append(f'title: {direction} 方向书签筛选清单')
     lines.append(f'description: {direction} 方向书签机器首轮分级（A{stats["A"]}·B{stats["B"]}·C{stats["C"]}·D{stats["D"]}），A 级为转写候选，B/C 按主题分组导航')
@@ -86,7 +111,7 @@ def render(direction):
     lines.append('')
     lines.append(f'# {direction} 方向书签筛选清单')
     lines.append('')
-    lines.append(f'> 来源：浏览器书签 `方向/{direction}`（{data["total"]} 条，URL 去重后 {data["deduped"]} 条）。'
+    lines.append(f'> 来源：浏览器书签 `{src_label}`（{data["total"]} 条，URL 去重后 {data["deduped"]} 条{privacy_note}）。'
                  '机器首轮分级，**待人工校准**：A 级确认后再转写笔记，D 级确认后整批清理。')
     lines.append('')
     lines.append('## 概览')

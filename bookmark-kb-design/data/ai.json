@@ -1,0 +1,982 @@
+{
+  "direction": "AI",
+  "total": 148,
+  "privacy_excluded": 27,
+  "deduped": 121,
+  "stats": {
+    "A": 10,
+    "B": 60,
+    "C": 47,
+    "D": 4
+  },
+  "items": [
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "AI网站/开源模型",
+      "title": "kimi 官方文档",
+      "url": "https://platform.moonshot.cn/docs/introduction",
+      "domain": "platform.moonshot.cn"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "AI网站/开源模型",
+      "title": "快速开始 - Qoder",
+      "url": "https://docs.qoder.com/zh/plugins/quick-start",
+      "domain": "docs.qoder.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "MCP",
+      "title": "MCP 广场 · 魔搭社区",
+      "url": "https://www.modelscope.cn/mcp",
+      "domain": "www.modelscope.cn"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "业务Agent/cube腾讯开源 - E2B",
+      "title": "AgentScope 2.0 是什么？ - AgentScope",
+      "url": "https://docs.agentscope.io/versions/2.0.5dev/zh",
+      "domain": "docs.agentscope.io"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "其他",
+      "title": "Router - Docs by LangChain",
+      "url": "https://docs.langchain.com/oss/python/langchain/multi-agent/router#single-agent",
+      "domain": "docs.langchain.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "其他",
+      "title": "深入理解 AI Agent - AI Agents in Depth",
+      "url": "https://bojieli.github.io/ai-agent-book/",
+      "domain": "bojieli.github.io"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "其他/openclaw",
+      "title": "Learn Claude Code",
+      "url": "https://learn.shareai.run/zh/s01/",
+      "domain": "learn.shareai.run"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "其他/openclaw",
+      "title": "快速开始 - Agent TARS",
+      "url": "https://agent-tars.com/zh/guide/get-started/quick-start.html",
+      "domain": "agent-tars.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "其他/openclaw/阅读",
+      "title": "OpenClaw 工作原理 | 菜鸟教程",
+      "url": "https://www.runoob.com/ai-agent/openclaw-how-it-works.html",
+      "domain": "www.runoob.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "其他/openclaw/阅读",
+      "title": "OpenClaw常见问题文档概述了用户在使用过程中可能遇到的主要问题及其解决方案。-轻量应用服务器(SAS)-阿里云帮助中心",
+      "url": "https://help.aliyun.com/zh/simple-application-server/use-cases/openclaw-faq?spm=a2c4g.11186623.help-menu-58607.d_3_0_0_6.c9904b76XKLeKo&scm=20140722.H_3019867._.OR_help-T_cn~zh-V_1",
+      "domain": "help.aliyun.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "AI网站/chat",
+      "title": "ChatGPT - 中",
+      "url": "https://gpt-ai.chatshare.biz/",
+      "domain": "gpt-ai.chatshare.biz"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "AI网站/chat",
+      "title": "DeepSeek - chat",
+      "url": "https://chat.deepseek.com/",
+      "domain": "chat.deepseek.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "AI网站/chat",
+      "title": "Google Gemini - chat",
+      "url": "https://gemini.google.com/",
+      "domain": "gemini.google.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "AI网站/chat",
+      "title": "Xiaomi MiMo  - chat",
+      "url": "https://aistudio.xiaomimimo.com/#/chat/a2a564328e14963a464e28b2082f82e5",
+      "domain": "aistudio.xiaomimimo.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "AI网站/开源模型",
+      "title": "AI导航",
+      "url": "https://www.faxianai.com/",
+      "domain": "www.faxianai.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "AI网站/开源模型",
+      "title": "MiniMax Agent: Minimize Effort, Maximize Intelligence",
+      "url": "https://agent.minimax.io/",
+      "domain": "agent.minimax.io"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "AI网站/开源模型",
+      "title": "能跑什么模型",
+      "url": "https://www.canirun.ai/",
+      "domain": "www.canirun.ai"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "SOP",
+      "title": "Playwright 中文网",
+      "url": "https://playwright.nodejs.cn/",
+      "domain": "playwright.nodejs.cn"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "SOP",
+      "title": "SkillHub-专为中国用户优化的Skills社区",
+      "url": "https://skillhub.cloud.tencent.com/skills/user_fcba917f/sop-extractor-plus",
+      "domain": "skillhub.cloud.tencent.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "ai多项目管理",
+      "title": "abhigyanpatwari/GitNexus: GitNexus: The Zero-Server Code Intelligence Engine - GitNexus is a client-side knowledge graph creator that runs entirely in your browser. Drop in a GitHub repo or ZIP file, and get an interactive knowledge graph wit a built in Graph RAG Agent. Perfect for code exploration",
+      "url": "https://github.com/abhigyanpatwari/GitNexus",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "ai多项目管理",
+      "title": "graphify/README.zh-CN.md at v4 · safishamsi/graphify · GitHub",
+      "url": "https://github.com/safishamsi/graphify/blob/v4/README.zh-CN.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "ai开发规范",
+      "title": "Fission-AI/OpenSpec: Spec-driven development (SDD) for AI coding assistants.",
+      "url": "https://github.com/Fission-AI/OpenSpec",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "ai开发规范",
+      "title": "awesome-design-md：一系列 DESIGN.md 文件，这些文件捕捉了热门网站的设计系统。只需将其中一个文件拖放到您的项目中，即可让编码代理构建匹配的 UI。",
+      "url": "https://github.com/VoltAgent/awesome-design-md/tree/main",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "ai开发规范",
+      "title": "obra/superpowers: An agentic skills framework &amp; software development methodology that works.",
+      "url": "https://github.com/obra/superpowers",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "coding plan/真香",
+      "title": "AI Coding Plan 对比 - Coding Plan 对比工具",
+      "url": "https://z4crk6mg95.coze.site/",
+      "domain": "z4crk6mg95.coze.site"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "harness",
+      "title": "Codex | OpenAI 工程技术：在智能体优先的世界中利用",
+      "url": "https://openai.com/zh-Hans-CN/index/harness-engineering/",
+      "domain": "openai.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "harness",
+      "title": "bytedance/deer-flow: An open-source SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skills and subagents, it handles different levels of tasks that could take minutes to hours.",
+      "url": "https://github.com/bytedance/deer-flow/tree/main",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "harness",
+      "title": "harness/harness: Harness Open Source is an end-to-end developer platform with Source Control Management, CI/CD Pipelines, Hosted Developer Environments, and Artifact Registries.",
+      "url": "https://github.com/harness/harness",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "skills/skill开源网站",
+      "title": "Agent Skills | Cursor Docs",
+      "url": "https://cursor.com/cn/docs/context/skills",
+      "domain": "cursor.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "skills/skill开源网站",
+      "title": "Agent Skills 市场 - Claude、Codex 和 ChatGPT Skills | SkillsMP",
+      "url": "https://skillsmp.com/zh",
+      "domain": "skillsmp.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "skills/skill开源网站",
+      "title": "Anthropic官方Skills",
+      "url": "https://github.com/anthropics/skills/tree/main/skills",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "skills/skill开源网站",
+      "title": "ComposioHQ/awesome-claude-skills: A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "trader",
+      "title": "autotrader — live · overview",
+      "url": "https://trader.gaagent.ai/",
+      "domain": "trader.gaagent.ai"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "trader",
+      "title": "freqtrade/freqtrade: Free, open source crypto trading bot",
+      "url": "https://github.com/freqtrade/freqtrade",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "trader",
+      "title": "lsdefine/GenericAgent - 自主进化的Agent",
+      "url": "https://github.com/lsdefine/GenericAgent#-%E8%87%AA%E6%88%91%E8%BF%9B%E5%8C%96%E6%9C%BA%E5%88%B6",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "业务Agent/cube腾讯开源 - E2B",
+      "title": "CubeSandbox/docs/zh/guide/quickstart.md at master · TencentCloud/CubeSandbox",
+      "url": "https://github.com/TencentCloud/CubeSandbox/blob/master/docs/zh/guide/quickstart.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "业务Agent/cube腾讯开源 - E2B",
+      "title": "JitAi - 业务Agent平台",
+      "url": "https://jit.pro/zh/docs/devguide/ai-agent/agent-runtime-context",
+      "domain": "jit.pro"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "业务Agent/cube腾讯开源 - E2B",
+      "title": "智果（AgentArts）智能体平台-华为云",
+      "url": "https://support.huaweicloud.com/highcode-agentarts/agentarts_10_001.html",
+      "domain": "support.huaweicloud.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "业务Agent/开源Agent框架",
+      "title": "Top 15 AI Agent Frameworks in 2026",
+      "url": "https://pickaxe.co/post/top-ai-agent-frameworks",
+      "domain": "pickaxe.co"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "业务Agent/开源Agent框架",
+      "title": "agentscope-ai/agentscope: Build and run agents you can see, understand and trust.",
+      "url": "https://github.com/agentscope-ai/agentscope/tree/main",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "业务Agent/开源Agent框架",
+      "title": "anthropics/anthropic-sdk-java",
+      "url": "https://github.com/anthropics/anthropic-sdk-java",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "业务Agent/开源Agent框架",
+      "title": "langchain-ai/deepagents: The batteries-included agent harness.",
+      "url": "https://github.com/langchain-ai/deepagents",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "公司AI/GitNexus",
+      "title": "GitNexus-UI",
+      "url": "https://gitnexus.vercel.app/",
+      "domain": "gitnexus.vercel.app"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他",
+      "title": "AGENTS.md",
+      "url": "https://agents.md/",
+      "domain": "agents.md"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他",
+      "title": "WisMe.ai — 你的 AI 个人知识库与阅读助手 · WisMe.ai",
+      "url": "https://wisme.ai/",
+      "domain": "wisme.ai"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他",
+      "title": "stablyai/orca: Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop and mobile.",
+      "url": "https://github.com/stablyai/orca",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他",
+      "title": "super.engineering",
+      "url": "https://super.engineering/",
+      "domain": "super.engineering"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/ai-本地",
+      "title": "【cliproxy】远程代理地址（ngrok http 8317）",
+      "url": "https://parageusic-unperspired-karren.ngrok-free.dev/",
+      "domain": "parageusic-unperspired-karren.ngrok-free.dev"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/openclaw",
+      "title": "ClawHub",
+      "url": "https://clawhub.ai/",
+      "domain": "clawhub.ai"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/openclaw",
+      "title": "GitHub Copilot 快速入门 - GitHub 文档",
+      "url": "https://docs.github.com/zh/copilot/quickstart",
+      "domain": "docs.github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw",
+      "title": "MaxKB4j: 🔥MaxKB4j 是一款基于Java语言开发的LLM工作流应用和 RAG 的开源LLMOps平台，项目主要借鉴了MaxKB、AIFlowy、Dify和FastGPT, 使用高性能、高稳定性以及安全可靠的JAVA语言重新设计开发。MaxKB4j广泛应用于智能客服、企业内部知识库、学术研究与教育等场景。",
+      "url": "https://gitee.com/taisan/MaxKB4j",
+      "domain": "gitee.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw",
+      "title": "MiroFish/README-ZH.md at main · 666ghj/MiroFish",
+      "url": "https://github.com/666ghj/MiroFish/blob/main/README-ZH.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/openclaw",
+      "title": "OpenClaw - 官方文档",
+      "url": "https://docs.openclaw.ai/zh-CN",
+      "domain": "docs.openclaw.ai"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/openclaw",
+      "title": "RunningHub：高可用性云端ComfyUI，在线创作AI应用",
+      "url": "https://www.runninghub.ai/",
+      "domain": "www.runninghub.ai"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw",
+      "title": "huobao-drama/README-CN.md at master · chatfire-AI/huobao-drama",
+      "url": "https://github.com/chatfire-AI/huobao-drama/blob/master/README-CN.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw",
+      "title": "liangdabiao/make-prompt-seedance2: seedance2结构化提示语，整合了 Seedance 2.0（字节跳动 AI 视频生成模型）的结构化提示词使用方法，帮助用户快速上手并创作出高质量的视频内容。包含 16+ 个模板和 8+ 个示例 |",
+      "url": "https://github.com/liangdabiao/make-prompt-seedance2",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw",
+      "title": "make-prompt-seedance2/structured-prompt.md at main · liangdabiao/make-prompt-seedance2",
+      "url": "https://github.com/liangdabiao/make-prompt-seedance2/blob/main/structured-prompt.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw",
+      "title": "token-monitor/README.zh-CN.md at main · Javis603/token-monitor",
+      "url": "https://github.com/Javis603/token-monitor/blob/main/README.zh-CN.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw",
+      "title": "xianyu110/clawbot: Clawdbot完整配置指南：从安装到Claude Code中转",
+      "url": "https://github.com/xianyu110/clawbot?tab=readme-ov-file",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/openclaw",
+      "title": "快速入门 - LangChain 文档",
+      "url": "https://docs.langchain.com/oss/python/langchain/quickstart",
+      "domain": "docs.langchain.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/openclaw",
+      "title": "（服务器）opencalw - ClawDeckX",
+      "url": "http://www.zhhcloud.cn:15791/",
+      "domain": "www.zhhcloud.cn:15791"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw/阅读",
+      "title": "ARC-MX/sgcc_electricity_new: HomeAssistant 国家电网电费查询",
+      "url": "https://github.com/ARC-MX/sgcc_electricity_new",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw/阅读",
+      "title": "BlockRunAI/ClawRouter: The agent-native LLM router empowering OpenClaw — by BlockRunAI",
+      "url": "https://github.com/BlockRunAI/ClawRouter",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw/阅读",
+      "title": "BytePioneer-AI/openclaw-china: OpenClaw中国插件：支持飞书，钉钉，QQ，企业微信，微信",
+      "url": "https://github.com/BytePioneer-AI/openclaw-china",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw/阅读",
+      "title": "ClawDeckX - openclaw UI",
+      "url": "https://github.com/ClawDeckX/ClawDeckX",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/openclaw/阅读",
+      "title": "OpenClaw官网",
+      "url": "https://docs.openclaw.ai/",
+      "domain": "docs.openclaw.ai"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/openclaw/阅读",
+      "title": "Reddit - 全网主阵地",
+      "url": "https://www.reddit.com/?feed=home",
+      "domain": "www.reddit.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw/阅读",
+      "title": "cft0808/edict: 🏛️ 三省六部制 · OpenClaw Multi-Agent Orchestration System — 9 specialized AI agents with real-time dashboard, model config, and full audit trails",
+      "url": "https://github.com/cft0808/edict",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "开源项目/仓库",
+      "path": "其他/openclaw/阅读",
+      "title": "openclaw/openclaw: Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞",
+      "url": "https://github.com/openclaw/openclaw",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "其他/openclaw/阅读",
+      "title": "腾讯Skills社区",
+      "url": "https://skillhub.tencent.com/",
+      "domain": "skillhub.tencent.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/chat",
+      "title": "Claude - chat",
+      "url": "https://claude.ai/new",
+      "domain": "claude.ai"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/chat",
+      "title": "Grok - chat",
+      "url": "https://grok.com/c/9f839aec-e105-494a-87bd-a20c22c8cf1e?rid=85d4c710-7b65-4cd5-b4b9-3fc3153c4585",
+      "domain": "grok.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/chat",
+      "title": "Qwen - chat",
+      "url": "https://chat.qwen.ai/c/ac0e5cb8-7c94-4164-b566-2cec174558b5",
+      "domain": "chat.qwen.ai"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "AI Models — Compare 300+ LLMs by Intelligence, Price &amp; Speed",
+      "url": "https://llm-stats.com/models?category=llm",
+      "domain": "llm-stats.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "Cursor 官网文档",
+      "url": "https://cursor.com/cn/docs",
+      "domain": "cursor.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "Google AI Studio",
+      "url": "https://aistudio.google.com/apps",
+      "domain": "aistudio.google.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "Google Gemini",
+      "url": "https://gemini.google.com/app",
+      "domain": "gemini.google.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "LLM Leaderboard - Best Text &amp; Chat AI Models Compared",
+      "url": "https://arena.ai/leaderboard/text",
+      "domain": "arena.ai"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "Models – Hugging Face",
+      "url": "https://huggingface.co/models",
+      "domain": "huggingface.co"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "Seedance",
+      "url": "https://seedance.io/zh/seedance",
+      "domain": "seedance.io"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "openrouter.ai/sign-up#/sso-callback?sign_up_force_redirect_url=https%3A%2F%2Fopenrouter.ai%2F%3F&amp;sign_in_force_redirect_url=https%3A%2F%2Fopenrouter.ai%2F%3F",
+      "url": "https://openrouter.ai/sign-up#/sso-callback?sign_up_force_redirect_url=https%3A%2F%2Fopenrouter.ai%2F%3F&sign_in_force_redirect_url=https%3A%2F%2Fopenrouter.ai%2F%3F",
+      "domain": "openrouter.ai"
+    },
+    {
+      "level": "C",
+      "reason": "下载/历史版本页",
+      "path": "AI网站/开源模型",
+      "title": "下载 OllaMan - Windows、macOS 和 Linux 的 Ollama 桌面 GUI 应用程序",
+      "url": "https://ollaman.com/zh/download",
+      "domain": "ollaman.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "即梦AI - 一站式AI创作平台",
+      "url": "https://jimeng.jianying.com/ai-tool/home",
+      "domain": "jimeng.jianying.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "影像 - Grok",
+      "url": "https://grok.com/imagine",
+      "domain": "grok.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "智谱AI开放平台",
+      "url": "https://open.bigmodel.cn/usercenter/proj-mgmt/apikeys",
+      "domain": "open.bigmodel.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "火山方舟管理控制台",
+      "url": "https://console.volcengine.com/ark/region:ark+cn-beijing/model/detail?Id=doubao-seedance-2-0",
+      "domain": "console.volcengine.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "百炼控制台 - 千文图形和视频理解",
+      "url": "https://bailian.console.aliyun.com/cn-beijing/?spm=5176.29619931.nav-v2-dropdown-menu-0.d_main_1_0_0.77bd10d7dd4tMW&tab=doc&scm=20140722.M_10968366._.V_1#/doc/?type=model&url=2845871",
+      "domain": "bailian.console.aliyun.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "AI网站/开源模型",
+      "title": "硅基流动官网",
+      "url": "https://cloud.siliconflow.cn/me/models",
+      "domain": "cloud.siliconflow.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "通义万相 | 领先的AI视频与图像生成模型",
+      "url": "https://tongyi.aliyun.com/wan/explore",
+      "domain": "tongyi.aliyun.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "AI网站/开源模型",
+      "title": "通义官网 - 大模型服务平台百炼控制台",
+      "url": "https://bailian.console.aliyun.com/cn-beijing/?tab=model#/model-market",
+      "domain": "bailian.console.aliyun.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "ai多项目管理",
+      "title": "Codeindex · 让大模型更好地理解你的代码",
+      "url": "https://mp.weixin.qq.com/s/F0dqp08Qas_aSui4eVplCA",
+      "domain": "mp.weixin.qq.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "coding plan/真香",
+      "title": "MiniMax API 平台",
+      "url": "https://platform.minimaxi.com/subscribe/token-plan",
+      "domain": "platform.minimaxi.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "coding plan/真香",
+      "title": "Seedance 2.0 系列模型资源包使用规则--火山方舟-火山引擎",
+      "url": "https://www.volcengine.com/docs/82379/2191775?lang=zh",
+      "domain": "www.volcengine.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "coding plan/真香",
+      "title": "智谱 coding plan",
+      "url": "https://bigmodel.cn/glm-coding?utm_source=bigModel&utm_medium=Special&utm_content=glm-code&utm_campaign=Platform_Ops&_channel_track_key=8BAeCdUS",
+      "domain": "bigmodel.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "coding plan/真香",
+      "title": "火山方舟 Coding-Plan",
+      "url": "https://www.volcengine.com/activity/codingplan",
+      "domain": "www.volcengine.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "coding plan/真香",
+      "title": "百度千帆Coding Plan-百度智能云",
+      "url": "https://cloud.baidu.com/product/codingplan.html?from=yingxiaotie",
+      "domain": "cloud.baidu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "coding plan/真香",
+      "title": "百炼 - coding plan",
+      "url": "https://bailian.console.aliyun.com/cn-beijing/?tab=coding-plan#/efm/index",
+      "domain": "bailian.console.aliyun.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "coding plan/真香",
+      "title": "移动云-模型服务平台MoMA",
+      "url": "https://ecloud.10086.cn/api/page/icp/console/modelSquare?poolId=CIDC-RP-48",
+      "domain": "ecloud.10086.cn"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "coding plan/真香",
+      "title": "讯飞星辰MaaS平台-官网",
+      "url": "https://maas.xfyun.cn/packageSubscription",
+      "domain": "maas.xfyun.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "业务Agent/cube腾讯开源 - E2B",
+      "title": "Cube Sandbox 替代 E2B：零代码迁移+性能碾压+私有化落地体验Cube Sandbox 是腾讯云2026年 - 掘金",
+      "url": "https://juejin.cn/post/7644774213569462326",
+      "domain": "juejin.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "公司AI/GitNexus",
+      "title": "AI-Backend-Specs使用感受收集",
+      "url": "https://doc.weixin.qq.com/sheet/e3_AV8A5QYAAIYCNnuQndbSFQFm0YpKL?scode=AEUAsQc-AA4VkX7gVmAV8A5QYAAIY&tab=BB08J2",
+      "domain": "doc.weixin.qq.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "公司AI/GitNexus",
+      "title": "新业务-马达租车系统组- AI报销情况",
+      "url": "https://doc.weixin.qq.com/sheet/e3_AV8A5QYAAIYCNwCgt0f2hTnGTJWtm?scode=AEUAsQc-AA4SCxbIafAV8A5QYAAIY&tab=wirej7",
+      "domain": "doc.weixin.qq.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他",
+      "title": "⁡﻿‍⁣⁤​‍​﻿﻿﻿​​⁢​‍​⁣﻿⁢⁣⁡⁤⁢⁢​‬﻿⁣⁣​‍‍⁢‍⁣​​​‌⁤⁤⁣‍⁡﻿‌TRAE Work 官方知识库 - 飞书云文档",
+      "url": "https://bytedance.larkoffice.com/wiki/RxVXweukSi7JtIkhOKBcuSlbnfC",
+      "domain": "bytedance.larkoffice.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw",
+      "title": "Google AI Studio：Gemini赋能的零代码AI应用开发平台-人工智能-PHP中文网",
+      "url": "https://www.php.cn/faq/1950974.html",
+      "domain": "www.php.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw",
+      "title": "ZenMux",
+      "url": "https://zenmux.ai/pricing/subscription",
+      "domain": "zenmux.ai"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw",
+      "title": "[实践|教程|长文] 了解 AI 及其工具运行逻辑来提效 —— 从实践角度的出发（快进来学） - 开发调优 - LINUX DO",
+      "url": "https://linux.do/t/topic/1537257",
+      "domain": "linux.do"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw",
+      "title": "‌⁣⁤⁡⁤​⁣‌‌⁢⁣​​​​⁣​​‍⁤⁤⁣⁤⁢﻿‬⁤​​⁢‍⁣‬​‬‬​⁤﻿​⁣⁣‬​⁡⁡‍‍​​🎬 即梦 Seedance 2.0 使用手册（全新多模态创作体验） - 飞书云文档",
+      "url": "https://bytedance.larkoffice.com/wiki/A5RHwWhoBiOnjukIIw6cu5ybnXQ",
+      "domain": "bytedance.larkoffice.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "其他/openclaw",
+      "title": "【Tavily】官网",
+      "url": "https://app.tavily.com/home",
+      "domain": "app.tavily.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw/阅读",
+      "title": "MiniMax API 开放平台",
+      "url": "https://platform.minimaxi.com/user-center/payment/coding-plan",
+      "domain": "platform.minimaxi.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "其他/openclaw/阅读",
+      "title": "OpenClaw飞书官方插件上线｜一文讲清功能、安装更新教程与常见问题！ - 飞书官网",
+      "url": "https://www.feishu.cn/content/article/7613711414611463386",
+      "domain": "www.feishu.cn"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "其他/openclaw/阅读",
+      "title": "OpenClaw飞书官方插件部署指南 - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/2014490076206346661",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw/阅读",
+      "title": "QQ机器人管理端",
+      "url": "https://q.qq.com/qqbot/#/home",
+      "domain": "q.qq.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw/阅读",
+      "title": "openclaw到底用哪个模型最好？ - 知乎",
+      "url": "https://www.zhihu.com/question/2004740930700322122/answer/2009647674127822945",
+      "domain": "www.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw/阅读",
+      "title": "⁡‬‍﻿﻿⁡‌​⁢‌⁤‌⁣‌​⁤⁢⁡​​⁡⁢⁤⁤⁣‌⁣‌‌‬​‬​‌‬⁣‌‍‍⁡⁣​⁣﻿‍⁣﻿⁣‌OpenClaw飞书官方插件使用指南（公开版） - 飞书云文档",
+      "url": "https://bytedance.larkoffice.com/docx/MFK7dDFLFoVlOGxWCv5cTXKmnMh",
+      "domain": "bytedance.larkoffice.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw/阅读",
+      "title": "小艺开放平台",
+      "url": "https://developer.huawei.com/consumer/cn/hag/abilityportal/#/agent/detail?agentId=agent88ac11cd441b4bc589189dfaac88b402&agentUuid=f9e1f03cb9cc4d1d9c68c5c1c0f84c93",
+      "domain": "developer.huawei.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "其他/openclaw/阅读",
+      "title": "开发者后台 - 飞书开放平台",
+      "url": "https://open.feishu.cn/app?lang=zh-CN",
+      "domain": "open.feishu.cn"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "其他/openclaw/阅读",
+      "title": "飞书/钉钉/QQ 机器人一站式搞定！OpenClaw Docker 部署教程-云社区-华为云",
+      "url": "https://bbs.huaweicloud.com/blogs/474871",
+      "domain": "bbs.huaweicloud.com"
+    },
+    {
+      "level": "D",
+      "reason": "错放（与方向无关）",
+      "path": "AI生产级-解决方案",
+      "title": "消息传输存储的二级容器-轻量主题-云消息队列 RocketMQ 版-阿里云-云消息队列 RocketMQ 版(RocketMQ)-阿里云帮助中心",
+      "url": "https://help.aliyun.com/zh/apsaramq-for-rocketmq/cloud-message-queue-rocketmq-5-x-series/developer-reference/litetopic?spm=5176.31619486.J_0m1BZJhr4lWRrkFCF4I_N.1.23e8aa63m5mqR6",
+      "domain": "help.aliyun.com"
+    },
+    {
+      "level": "D",
+      "reason": "近似重复",
+      "path": "AI网站/开源模型",
+      "title": "火山方舟管理 - 控制台",
+      "url": "https://console.volcengine.com/ark/region:ark+cn-beijing/openManagement?LLM=%7B%7D&advancedActiveKey=subscribe",
+      "domain": "console.volcengine.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（dxmcs\\.xin）",
+      "path": "coding plan/真香",
+      "title": "zhenxiangpp",
+      "url": "https://zxiang.dxmcs.xin/console/token",
+      "domain": "zxiang.dxmcs.xin"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（dxmcs\\.xin）",
+      "path": "coding plan/真香",
+      "title": "真香 - 下单",
+      "url": "https://faka.dxmcs.xin/",
+      "domain": "faka.dxmcs.xin"
+    }
+  ]
+}

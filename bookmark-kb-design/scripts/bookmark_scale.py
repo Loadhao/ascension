@@ -60,6 +60,15 @@ JUNK_URL_PATTERNS = [
     r'devpress\.csdn\.net',        # CSDN 转载站
     r'baijiahao\.baidu\.com',      # 百家号
     r'eepw\.com\.cn',              # 电子新闻分类页
+    r'mbd\.baidu\.com',            # 百度营销落地页
+    r'wangan\.com',                # 网安问答
+    r'dxmcs\.xin',                 # 代购/下单站（敏感）
+    r'baidu\.com/s\?',             # 百度搜索结果页
+]
+
+# 隐私域名：公司内网/内部系统，任何产物不收录
+PRIVATE_DOMAINS = [
+    '17usoft.com', '17u.cn', 'toca.17u.cn', 'walle.17usoft.com',
 ]
 
 # 错放信号：标题/URL 命中且与当前方向无关（按方向配置在 MISFILED_KEYWORDS）
@@ -73,6 +82,8 @@ def is_misfiled(direction, title, url):
 MISFILED_KEYWORDS = {
     # SQL 方向里明显属于其它方向的散链
     'SQL': ['npm 中文文档', 'npmjs', 'countdownlatch'],
+    # AI 方向里的消息队列文档属 RocketMQ 方向
+    'AI': ['rocketmq'],
 }
 
 # A 级：官方文档/文档站（域名白名单）
@@ -98,14 +109,25 @@ OFFICIAL_DOCS = [
     r'linuxcool\.com', r'jumpserver\.org', r'1panel\.cn', r'mirrors\.163\.com',
     r'mirrors\.tuna\.tsinghua\.edu\.cn', r'developer\.aliyun\.com/mirror',
     r'hub\.docker\.com', r'mvnrepository\.com', r'help\.aliyun\.com',
+    # AI 方向
+    r'agents\.md', r'super\.engineering', r'docs\.openclaw\.ai',
+    r'docs\.langchain\.com', r'bojieli\.github\.io', r'learn\.shareai\.run',
+    r'anthropics/skills', r'docs\.agentscope\.io', r'platform\.moonshot\.cn/docs',
+    r'cursor\.com/docs', r'docs\.qoder\.com', r'agent-tars\.com',
+    r'modelscope\.cn/mcp', r'skillhub\.tencent\.com', r'openai\.com/zh-Hans',
+    r'docs\.github\.com',
+    # 架构方向
+    r'seata\.io', r'nacos\.io', r'shenyu\.apache\.org', r'graphql\.cn',
+    r'baomidou\.com', r'ruoyi\.vip', r'doc\.ruoyi\.vip', r'justauth\.wiki',
+    r'doc\.xiaominfo\.com', r'torna\.cn', r'sangfor\.com\.cn', r'qingcloud\.com',
 ]
 
 # A 级：标题深度信号（体系化、原理、源码、长文、集群、最佳实践）
 A_TITLE_PATTERNS = [
     r'原理', r'源码', r'体系', r'知识梳理', r'总结精讲', r'最佳实践',
     r'3[wW]字', r'万字', r'高可用', r'容灾', r'集群(技术|原理|实践|架构)',
-    r'分片(技术|架构|集群)', r'分布式', r'分库分表', r'性能优化',
-    r'[一-龥]{0,6}深入', r'一文(带你|读懂|搞懂)', r'转写', r'课程',
+    r'分片(技术|架构|集群)', r'分布式(系统|事务|架构|缓存|锁|ID)', r'分库分表',
+    r'性能优化', r'[一-龥]{0,6}深入', r'一文(带你|读懂|搞懂|搞定)', r'转写', r'课程',
     r'垃圾回收', r'内存管理', r'全解',
 ]
 # C 级：操作性/速查信号（这些命中则不进 A）
@@ -131,10 +153,16 @@ B_TITLE_PATTERNS = [
     r'组件通信', r'传值', r'生命周期', r'跨域', r'微前端', r'面试题',
     r'工具函数', r'手写', r'数据结构', r'算法', r'装饰器', r'路由',
     r'promise', r'异步', r'模块', r'类型(判断|定义|系统)',
+    # AI / 架构主题
+    r'agent', r'智能体', r'mcp', r'skill', r'harness', r'prompt',
+    r'工作原理', r'微服务', r'分布式事务', r'架构剖析', r'选型',
+    r'权限设计', r'数据权限', r'单点登录', r'service mesh', r'网关',
+    r'配置中心', r'注册中心', r'缓存架构', r'分布式锁', r'状态机',
+    r'设计模式', r'六大原则', r'开闭原则', r'观察者模式',
 ]
 
 
-def grade(direction, path, title, url, is_homepage=False):
+def grade(direction, path, title, url, is_homepage=False, base_len=3):
     """对单条书签分级，返回 (级别, 依据)"""
     text = title
     u = url.lower()
@@ -159,6 +187,12 @@ def grade(direction, path, title, url, is_homepage=False):
     # npm 单包文档页 → B（包级文档，不到 A）
     if re.search(r'npmjs\.com/package/', u):
         return 'B', '官方包文档'
+
+    # GitHub 仓库/文档页 → B（开源项目入口与官方仓库）
+    if re.search(r'^https?://(www\.)?github\.com/', u):
+        return 'B', '开源项目/仓库'
+    if re.search(r'^https?://gitee\.com/', u):
+        return 'B', '开源项目/仓库'
 
     # 产品首页：入口页不进 A（转写笔记无意义），一律 B
     if is_homepage:
@@ -185,7 +219,7 @@ def grade(direction, path, title, url, is_homepage=False):
         return 'C', '操作/速查/排错'
 
     # 兜底：有明确主题归属 → C，无主题散链 → D
-    if len(path) >= 4:  # 位于具体子分类下，尚有主题价值
+    if len(path) > base_len:  # 位于具体子分类下，尚有主题价值
         return 'C', '分类下一般条目'
     return 'D', '无主题散链'
 
@@ -203,11 +237,35 @@ def main():
     content = SOURCE.read_text(encoding='utf-8', errors='replace')
     items = parse_bookmarks(content)
 
-    # 抽取指定方向
+    # 抽取指定方向：书签栏/方向/<名称>（base_len=3）或书签栏/<顶层名称>（base_len=2）
     scoped = []
+    base_len = None
     for path, title, url in items:
         if len(path) >= 3 and path[0] == '书签栏' and path[1] == '方向' and path[2] == direction:
             scoped.append((path, title, url))
+            base_len = 3
+        elif len(path) >= 2 and path[0] == '书签栏' and path[1] == direction and direction != '方向':
+            scoped.append((path, title, url))
+            base_len = 2
+    if base_len is None:
+        print(f'未找到方向 {direction} 的书签')
+        sys.exit(1)
+
+    # 隐私过滤：内网/本地/公司域名链接不入公开产物（单独计数，不写明细）
+    def is_private(url):
+        u = url.lower()
+        if u.startswith('file://') or u.startswith('http://localhost') or u.startswith('https://localhost'):
+            return True
+        if re.match(r'https?://(10\.|127\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)', u):
+            return True
+        for dom in PRIVATE_DOMAINS:
+            if dom in u:
+                return True
+        return False
+
+    total = len(scoped)
+    scoped = [(p, t, u) for p, t, u in scoped if not is_private(u)]
+    privacy_excluded = total - len(scoped)
 
     # URL 去重（保留首个）
     seen = {}
@@ -223,7 +281,7 @@ def main():
     graded = []
     for path, title, url in deduped:
         core = normalize_title(title)
-        folder = '/'.join(path[3:-1]) if len(path) > 4 else ''
+        folder = '/'.join(path[base_len:-1]) if len(path) > base_len + 1 else ''
         # 近似重复：同归一化标题出现过
         if core in seen_cores:
             level, reason = 'D', '近似重复'
@@ -235,7 +293,7 @@ def main():
                 if theme_counts[key] > 2:
                     level, reason = 'D', '同主题多篇（对比类）'
                     graded.append({'level': level, 'reason': reason,
-                                   'path': '/'.join(path[3:]), 'title': title,
+                                   'path': '/'.join(path[base_len:]), 'title': title,
                                    'url': url, 'domain': urlparse(url).netloc})
                     continue
             parsed = urlparse(url)
@@ -244,12 +302,12 @@ def main():
                                   '/zh-cn/', '/zh-cn', '/zh-CN/', '/zh-CN',
                                   '/mirror/', '/index.html', '/zh-CN/index.html')
                            or hp.startswith('/tags/'))
-            level, reason = grade(direction, path, title, url, is_homepage)
+            level, reason = grade(direction, path, title, url, is_homepage, base_len)
             seen_cores[core] = True
         graded.append({
             'level': level,
             'reason': reason,
-            'path': '/'.join(path[3:]),
+            'path': '/'.join(path[base_len:]),
             'title': title,
             'url': url,
             'domain': urlparse(url).netloc,
@@ -260,7 +318,8 @@ def main():
     counter = Counter(g['level'] for g in graded)
     out = {
         'direction': direction,
-        'total': len(scoped),
+        'total': total,
+        'privacy_excluded': privacy_excluded,
         'deduped': len(graded),
         'stats': {k: counter.get(k, 0) for k in 'ABCD'},
         'items': sorted(graded, key=lambda g: ('ABCD'.index(g['level']), g['path'], g['title'])),
@@ -271,7 +330,7 @@ def main():
     out_path = data_dir / f'{direction.lower()}.json'
     out_path.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding='utf-8')
 
-    print(f"方向 {direction}: 总 {out['total']} 条，去重 {out['deduped']} 条")
+    print(f"方向 {direction}: 总 {out['total']} 条，隐私剔除 {privacy_excluded} 条，去重后 {out['deduped']} 条")
     print(f"分级：A {out['stats']['A']} · B {out['stats']['B']} · C {out['stats']['C']} · D {out['stats']['D']}")
     print(f'输出：{out_path}')
 
