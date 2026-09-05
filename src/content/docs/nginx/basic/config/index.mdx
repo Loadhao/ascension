@@ -1,0 +1,12 @@
+---
+title: 配置基础
+description: 事件驱动与 master/worker 模型、nginx.conf 指令上下文、server/location 匹配
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+Nginx 常被叫"高性能 web 服务器"，性能来自**事件驱动 + 多 worker** 的模型。
+这一篇先把工作模型和 `nginx.conf` 的指令/上下文规则讲透——配置不报错不等于
+行为正确，多数生产事故都出自指令放错层级。点击右侧圆点可标记学习状态。
+
+<CategoryNotesIsland categoryId="nginx/basic/config" />

@@ -148,6 +148,43 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: 'Nginx',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/nginx/' },
+                {
+                  label: '基础',
+                  collapsed: false,
+                  items: [
+                    {
+                      label: '配置基础',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/nginx/basic/config/' },
+                        { label: '工作模型与配置核心', link: '/nginx/basic/config/01-working-model/' },
+                        { label: '静态服务与日志', link: '/nginx/basic/config/02-static-server/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: false,
+                  items: [
+                    {
+                      label: '代理进阶',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/nginx/intermediate/proxy/' },
+                        { label: '反向代理与负载均衡', link: '/nginx/intermediate/proxy/01-reverse-proxy-lb/' },
+                        { label: 'HTTPS、缓存与限流', link: '/nginx/intermediate/proxy/02-https-cache-ratelimit/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
@@ -255,6 +292,8 @@ export default defineConfig({
                         { label: '服务网关 Spring Cloud Gateway', link: '/java/advanced/springcloud/03-gateway/' },
                         { label: '服务通信：OpenFeign 与负载均衡', link: '/java/advanced/springcloud/04-openfeign-loadbalancer/' },
                         { label: '熔断限流：Sentinel', link: '/java/advanced/springcloud/05-sentinel/' },
+                        { label: '配置中心：Nacos 动态刷新', link: '/java/advanced/springcloud/06-config-center/' },
+                        { label: 'Spring Cloud Stream 消息驱动', link: '/java/advanced/springcloud/07-stream/' },
                       ],
                     },
                   ],
@@ -611,6 +650,43 @@ export default defineConfig({
                         { label: 'RocketMQ 核心特性', link: '/rocketmq/advanced/core/01-rocketmq-features/' },
                         { label: '顺序性与高性能原理', link: '/rocketmq/advanced/core/02-order-performance/' },
                         { label: '消息积压治理', link: '/rocketmq/advanced/core/03-backlog/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              label: 'MQTT',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/mqtt/' },
+                {
+                  label: '基础',
+                  collapsed: false,
+                  items: [
+                    {
+                      label: '协议核心',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/mqtt/basic/core/' },
+                        { label: 'MQTT 协议模型：发布订阅与报文', link: '/mqtt/basic/core/01-mqtt-protocol/' },
+                        { label: 'QoS、会话与遗嘱机制', link: '/mqtt/basic/core/02-qos-session/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: false,
+                  items: [
+                    {
+                      label: '使用实战',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/mqtt/intermediate/usage/' },
+                        { label: 'Broker 选型与 EMQX 部署', link: '/mqtt/intermediate/usage/01-broker-emqx/' },
+                        { label: '保活、重连与保留消息', link: '/mqtt/intermediate/usage/02-keepalive-reconnect/' },
                       ],
                     },
                   ],

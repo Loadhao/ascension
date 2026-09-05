@@ -1,0 +1,74 @@
+---
+title: MQTT 协议模型：发布订阅与报文
+description: 定位与设计取舍、主题与通配符、Quality of Service 三档、报文构成与连接生命周期
+level: basic
+core: true
+---
+
+## 它解决什么问题
+
+物联场景的典型约束：**带宽小、设备掉线频繁、设备功耗敏感**。HTTP 的
+"请求-响应 + 长连接保活"太重。MQTT 换了个思路——**发布订阅**：设备
+A 不用知道设备 B 的地址，只要双方约定一个"主题（Topic）"，中间靠
+**Broker** 转发。
+
+```mermaid
+flowchart LR
+    P1["传感器<br/>发布者 Publish"] --> B["Broker（MQTT 服务器）"]
+    P2["App 上报<br/>发布者"] --> B
+    B --> C1["看板<br/>订阅者 Subscribe"]
+    B --> C2["手机<br/>订阅者"]
+    B --> C3["服务端<br/>订阅者"]
+    
+    style B fill:#f5f0e6
+```
+
+核心特性：**极轻量**（固定头最小 2 字节）、**双向**（可订阅可发布）、
+**基于主题解耦**、支持 **QoS** 保证与 **遗嘱/保留** 机制。
+
+## 主题与通配符
+
+主题是分层结构（`/` 分隔），不预先创建，订阅时按模式匹配：
+
+| 通配符 | 含义 | 例子 |
+|---|---|---|
+| `+` | 单层通配 | `sensors/+/temp` 匹配 `sensors/1/temp` |
+| `#` | 多层通配（只能结尾） | `sensors/#` 匹配 `sensors/1/temp`、`sensors/2` |
+
+注意：MQTT 的 `#` 与 HTTP 的"URL 路径"语义不同——**主题是逻辑路由
+约定，不是目录**，谁的订阅匹配到谁就收。
+
+## 报文：固定头 + 可变头 + 载荷
+
+每次通信是一个报文，核心是**固定头**：
+
+| 字段 | 位数 | 作用 |
+|---|---|---|
+| 报文类型 + 标志 | 8 bit | 4 bit 类型（CONNECT/PUBLISH/SUBSCRIBE…）+ 4 bit 标志 |
+| 剩余长度 | 1–4 B | 可变头 + 载荷的总字节数（变长编码，省字节） |
+
+一个 PUBLISH 报文固定头只需 **2 字节** 起步——这就是"极轻量"的来处。
+
+## 连接生命周期
+
+```mermaid
+sequenceDiagram
+    participant D as 设备 Client
+    participant B as Broker
+    D->>B: CONNECT（含 clientId、会话清理、遗嘱字段）
+    B-->>D: CONNACK（返回会话已存在/新建）
+    D->>B: SUBSCRIBE topic + QoS
+    B-->>D: SUBACK（确认授予的 QoS）
+    B->>D: PUBLISH 数据
+    D->>D: 等待，直到 PINGREQ/PINGRESP 保活
+    D->>B: DISCONNECT / 掉线
+```
+
+关键设计：**clientId 唯一标识一个客户端**，Broker 依据它复用/重建会话，
+遗嘱在异常掉线时由 Broker 代发。这点在与会话机制连着看时才完整。
+
+## 小结
+
+- MQTT 是面向物联的极轻量发布订阅协议，Broker 居中转发。
+- 主题是分层路由约定，`+`/`#` 做模式匹配；报文靠剩余长度变长编码省字节。
+- 连接四元组（clientId、cleanSession、遗嘱、保活）是后续会话与 QoS 的地基。

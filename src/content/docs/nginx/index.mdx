@@ -1,0 +1,28 @@
+---
+title: Nginx
+description: Nginx 方向学习路线与知识地图：配置模型、静态服务、反向代理与负载均衡、HTTPS 与缓存
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/nginx.json';
+
+## 学习路线
+
+按等级推进，每级下按主题分类。点击分类进入该主题的知识点目录；点击圆点标记学习状态：
+○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖 **配置基础**（工作模型、nginx.conf 指令与模块）→ **代理进阶**
+（反向代理与负载均衡、HTTPS、缓存与限流），后续可扩展动静分离、Lua 扩展
+(OpenResty)、K8s Ingress 等主题。
+
+<RoadmapIsland directionId="nginx" />
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
+图谱数据维护在 `src/data/graphs/nginx.json`。
+:::

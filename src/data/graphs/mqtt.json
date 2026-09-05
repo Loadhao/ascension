@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    { "id": "root", "label": "MQTT", "group": "协议核心" },
+    { "id": "protocol", "label": "发布订阅与报文", "href": "/mqtt/basic/core/01-mqtt-protocol/", "group": "协议核心" },
+    { "id": "qos", "label": "QoS 与会话遗嘱", "href": "/mqtt/basic/core/02-qos-session/", "group": "协议核心" },
+    { "id": "broker", "label": "Broker 与集群", "href": "/mqtt/intermediate/usage/01-broker-emqx/", "group": "使用实战" },
+    { "id": "keepalive", "label": "保活重连与保留", "href": "/mqtt/intermediate/usage/02-keepalive-reconnect/", "group": "使用实战" }
+  ],
+  "edges": [
+    { "source": "root", "target": "protocol" },
+    { "source": "root", "target": "qos" },
+    { "source": "protocol", "target": "qos", "label": "报文承载 QoS" },
+    { "source": "qos", "target": "keepalive", "label": "会话/保活落地" },
+    { "source": "protocol", "target": "broker", "label": "Broker 转发" },
+    { "source": "broker", "target": "keepalive", "label": "集群与重连" }
+  ]
+}

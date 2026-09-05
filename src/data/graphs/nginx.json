@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Nginx", "group": "配置基础" },
+    { "id": "model", "label": "工作模型与配置", "href": "/nginx/basic/config/01-working-model/", "group": "配置基础" },
+    { "id": "static", "label": "静态服务与日志", "href": "/nginx/basic/config/02-static-server/", "group": "配置基础" },
+    { "id": "proxy", "label": "反向代理负载均衡", "href": "/nginx/intermediate/proxy/01-reverse-proxy-lb/", "group": "代理进阶" },
+    { "id": "http", "label": "HTTPS 缓存限流", "href": "/nginx/intermediate/proxy/02-https-cache-ratelimit/", "group": "代理进阶" }
+  ],
+  "edges": [
+    { "source": "root", "target": "model" },
+    { "source": "root", "target": "static" },
+    { "source": "model", "target": "static", "label": "server/location 落地" },
+    { "source": "model", "target": "proxy", "label": "location + proxy_pass" },
+    { "source": "proxy", "target": "http", "label": "TLS/缓存/限流" },
+    { "source": "static", "target": "http", "label": "动静分离" }
+  ]
+}
