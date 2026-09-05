@@ -29,6 +29,25 @@ git worktree list
 git worktree remove ../hotfix-dir
 ```
 
+多个工作目录**共享同一份 `.git` 对象**、各有一个独立的工作区文件——这是
+它比 clone 省空间的关键：
+
+```mermaid
+flowchart TB
+    subgraph 主["主工作区（当前分支）"]
+        M1["工作区文件"]
+    end
+    subgraph 挂["worktree 工作区（hotfix 分支）"]
+        H1["工作区文件"]
+    end
+    subgraph 共享["同一份 .git 对象库"]
+        G["对象/引用/HEAD<br/>（全仓库共享）"]
+    end
+    主 --> 共享
+    挂 --> 共享
+    style 共享 fill:#f5f0e6
+```
+
 ## submodule：仓库嵌套仓库
 
 主仓库记录子仓库的某个 commit 指针。能用普通依赖就用普通依赖，确需子模块时：

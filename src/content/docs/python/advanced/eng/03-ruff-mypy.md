@@ -81,6 +81,27 @@ ignore_errors = true`，新代码全严格。
 任何一环红了不予合并。**质量工具的价值在于"不是人盯"**——
 风格不再 review 时讨论，类型错误进不了主干。
 
+## 工具链分工：每个环节管一件事
+
+代码从"保存"到"合入"要经过四道不同性质的闸，各管一层：
+
+```mermaid
+flowchart LR
+    SRC["源码"] --> L["ruff check<br/>坏味道 / 可自动修的 bug"]
+    SRC --> F["ruff format<br/>排版（无争论）"]
+    SRC --> T["mypy<br/>类型正确性"]
+    SRC --> P["pytest<br/>行为正确性"]
+    L --> OK["合格 → 可合入"]
+    F --> OK
+    T --> OK
+    P --> OK
+    style L fill:#eef3ea
+    style T fill:#f5f0e6
+```
+
+四者看的东西不同：**ruff 看"风格/坏味道"、mypy 看"类型对不对"、pytest
+看"行为对不对"**——彼此不重叠，缺一不可。
+
 ## 工具链分工总结
 
 | 关注点 | 工具 | 一句话 |
