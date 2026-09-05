@@ -18,6 +18,18 @@ class Point:
 99% 的类只写 `__init__`。需要控制实例创建本身时（单例、缓存复用、
 元编程）才碰 `__new__`。
 
+两者的分工和时序：`__new__` 造出对象，`__init__` 才往上面填内容——
+
+```mermaid
+flowchart LR
+    A["cls 类对象"] --> B["__new__(cls)<br/>分配并返回实例"]
+    B --> C{"返回的是<br/>cls 的实例?"}
+    C -- "是" --> D["__init__(self)<br/>初始化属性"]
+    C -- "否（返回别的对象）" --> E["不调用 __init__<br/>（单例/缓存复用常这样）"]
+    D --> F["可用实例"]
+    style D fill:#eef3ea
+```
+
 ## 属性查找：实例 → 类 → 父类
 
 ```python
@@ -30,6 +42,19 @@ a, b = Dog("旺财"), Dog("来福")
 a.species          # 犬科——自己没有，去类上找
 Dog.species = "犬"  # 改类属性影响所有实例
 a.species = "猫"   # 实例上新建同名属性，遮蔽类属性（只影响 a）
+```
+
+访问 `a.xxx` 的查找路径是**实例字典 → 类 → 父类**，找到即停：
+
+```mermaid
+flowchart LR
+    READ["读 a.species"] --> I{"a.__dict__ 有?"}
+    I -- "有→停" --> I_OK["用实例的 ✅"]
+    I -- "无" --> C{"类 Dog 有?"}
+    C -- "有→停" --> C_OK["用类属性 ✅（共享）"]
+    C -- "无" --> P{"父类有?"}
+    P -- "无" --> ERR["AttributeError"]
+    style C_OK fill:#f5f0e6
 ```
 
 **可变类属性是隐形雷区**：`tricks: list = []` 会被所有实例共享，和

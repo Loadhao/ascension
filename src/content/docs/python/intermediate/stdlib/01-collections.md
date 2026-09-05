@@ -54,6 +54,23 @@ q.popleft()                   # O(1)
 
 `maxlen` 参数让 deque 变成定容滑动窗口，日志限流、最近记录一行的活。
 
+deque 的双端结构与 `maxlen` 的"满了挤出最老"行为，画成图最直观：
+
+```mermaid
+flowchart LR
+    subgraph dq["deque(maxlen=5) 环形缓冲"]
+        H[head<br/>最老] --> V1["a"] --> V2["b"] --> V3["c"] --> V4["d"] --> T[tail<br/>最新]
+    end
+    subgraph 操作["两端 O(1)"]
+        L["appendleft / popleft<br/>头部进出"]
+        R["append / pop<br/>尾部进出"]
+    end
+    dq --> 操作
+    style dq fill:#f5f0e6
+```
+
+对比 list：**头部进出是 O(n)**（全员平移），deque 才能做到两端 O(1)。
+
 ## namedtuple：轻量记录
 
 ```python

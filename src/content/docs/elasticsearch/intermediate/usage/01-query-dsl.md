@@ -49,6 +49,22 @@ core: true
 }
 ```
 
+四个子句的"是否参与打分 + 是否必须"用一张图分清：
+
+```mermaid
+flowchart LR
+    subgraph bool["bool 查询"]
+        MUST["must<br/>必须 + 打分"]
+        FILTER["filter<br/>必须、不打分、可缓存"]
+        SHOULD["should<br/>提升相关度（OR）"]
+        MUSTNOT["must_not<br/>排除、不打分"]
+    end
+    DOC["候选文档"] --> bool
+    bool --> RESULT{"通过所有<br/>must/filter/must_not 约束?"}
+    RESULT -- "是" --> OUT["返回并按打分排序"]
+    style FILTER fill:#f5f0e6
+```
+
 **filter 常被忽略的收益**：纯过滤条件（状态、类目、价格区间）放进 `filter`
 不参与打分还走缓存，性能与准确性都更好，别一锅端进 `must`。
 

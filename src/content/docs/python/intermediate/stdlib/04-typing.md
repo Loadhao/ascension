@@ -19,6 +19,27 @@ def scale(items: list[float], factor: float) -> list[float]:
 猜参数是什么。3.9+ 内置容器直接标注（`list[str]`、`dict[str, int]`），
 不再需要 `typing.List`。
 
+"标注运行时不强制、但静态工具检查"是渐进式类型的关键——二者在不同的
+时间点介入：
+
+```mermaid
+flowchart LR
+    subgraph 开发时["开发/CI（静态检查）"]
+        MY["mypy / pyright<br/>读注解、查类型不匹配"]
+        IDE["IDE 补全 + 跳转"]
+    end
+    subgraph 运行时["运行时（解释器）"]
+        RUN["注解被忽略<br/>当作普通默认值"]
+    end
+    SRC["带注解的源码"] --> 开发时
+    SRC --> 运行时
+    开发时 -->|"发现问题→改代码"| SRC
+    style 开发时 fill:#eef3ea
+```
+
+所以类型错误**不会在运行时报**——它要靠 CI/mypy 提前拦下，这也是为什么
+"标了类型却没人跑 mypy"等于没标。
+
 ## Optional 与 Union
 
 ```python

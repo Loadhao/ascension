@@ -59,6 +59,22 @@ def outer():
     print(x)          # changed
 ```
 
+名字查找是一路向外、**找到即停**的链式顺序，用图一眼记住：
+
+```mermaid
+flowchart LR
+    inner["inner 内<br/>local"] --> BR{"local 有这个名字?"}
+    BR -- "有→停" --> L_OK["用它 ✅"]
+    BR -- "无" --> ENC["outer 内<br/>enclosing"]
+    ENC --> EBR{"enc 有?"}
+    EBR -- "有→停" --> E_OK["用它 ✅"]
+    EBR -- "无" --> G["模块层<br/>global"]
+    G --> GBR{"global 有?"}
+    GBR -- "有→停" --> G_OK["用它 ✅"]
+    GBR -- "无" --> B["builtin 内置名"]
+    style L_OK fill:#eef3ea
+```
+
 Python 没有块级作用域：if/for 块里的赋值直接落在函数局部——
 `for i in ...:` 之后 `i` 仍然可用。要写全局用 `global x`，写闭包外层用
 `nonlocal x`；两者都只在"需要赋值"时才写（读取不需要声明）。
@@ -87,6 +103,28 @@ funcs = [lambda: i for i in range(3)]
 funcs = [lambda i=i: i for i in range(3)]   # 默认值在定义时求值 → 固定住
 [f() for f in funcs]              # [0, 1, 2]
 ```
+
+为什么会是 `[2, 2, 2]`——**所有 lambda 捕获的是同一个 doomed 到循环变量的
+cell，循环结束时它停在终值 2**：
+
+```mermaid
+flowchart LR
+    subgraph 未固定["lambda: i（捕获同一 cell）"]
+        C["i 的 cell<br/>结束时 i=2"] --> F1["f() 读到 2"]
+        C --> F2["f() 读到 2"]
+        C --> F3["f() 读到 2"]
+    end
+    subgraph 固定["lambda i=i: i（默认值定义时求值）"]
+        D1["cell1=0"] --> A1["f() 读到 0"]
+        D2["cell2=1"] --> A2["f() 读到 1"]
+        D3["cell3=2"] --> A3["f() 读到 2"]
+    end
+    style 未固定 fill:#f7e8e8
+    style 固定 fill:#eef3ea
+```
+
+**修复的本质**：把"变量地址"换成"定义时的值快照"——`i=i` 让默认值在
+def 执行的那一刻求值，把当时的 `i` 值固化进函数。
 
 ## lambda：表达式版的单行函数
 
