@@ -186,3 +186,10 @@ flowchart TB
 - 最终一致三件套：TCC（业务侵入换粒度）、本地消息表（朴素可靠）、
   MQ 事务消息（回查免扫表）——核心都是"本地事务锚定 + 幂等 + 补偿"。
 - Seata AT 零侵入是国产生态最爱；消费端幂等是所有方案的前置条件。
+
+## 延伸阅读
+
+- [分布式事务 Seata 及其三种模式详解（Seata 官方博客）](https://seata.io/zh-cn/blog/seata-at-tcc-saga.html)
+- [分布式事务最终一致性常用方案（CSDN）](https://blog.csdn.net/weixin_33750452/article/details/86112964)
+- [分布式事务的四种解决方案（hhbbz Blog）](https://hhbbz.github.io/2018/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E7%A7%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/)
+- [分布式系统事务一致性（博客园）](https://www.cnblogs.com/luxiaoxun/p/8832915.html)

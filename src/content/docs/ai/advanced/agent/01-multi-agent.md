@@ -51,6 +51,20 @@ flowchart LR
 上下文的共享与隔离、失败模式，以及涌现的"Agent 社会"。核心论点：**群体智能
 高于个体**，但前提是协作结构设计得当——否则多个 Agent 只会更贵、更乱。
 
+## 路由范式：Router / Supervisor / Handoffs
+
+从编排视角，多 Agent 协作收敛为三种范式（LangChain 文档）：
+
+| 范式 | 谁做决策 | 一句话 |
+|---|---|---|
+| **Router** | 专用路由步骤（一次分类调用/规则） | 预处理分发：输入类别清晰时最轻量，可并行扇出后合成 |
+| **Supervisor** | 主 Agent 在对话中动态决定 | 对话感知：维持上下文，跨轮编排子智能体 |
+| **Handoffs** | Agent 之间直接移交控制权 | 交接语义清晰，适合多轮分工 |
+
+与上演进路线的关系：Router 是"外挂的分诊台"，Subagent/团队协作是"内生的
+指挥链"——前者无状态最省心，后者才承载复杂工作流。范式细节与状态化方案
+见[Agent 框架版图](/ai/advanced/agent/10-agent-frameworks/)。
+
 ## 要点备忘
 
 - 多 Agent 的第一动机是**上下文管理**（隔离与并行），其次才是"更多算力"
@@ -69,4 +83,6 @@ flowchart LR
 - [Learn Claude Code 课程首页](https://learn.shareai.run/zh/)（s01-s20 全 20 章渐进式课程）
 
 - [深入理解 AI Agent · 第 10 章 多 Agent 协作](https://bojieli.github.io/ai-agent-book/book/chapter10/)
+
+- [LangChain Multi-Agent: Router](https://docs.langchain.com/oss/python/langchain/multi-agent/router)（Router/Supervisor/Handoffs 范式对比与状态化方案）
 

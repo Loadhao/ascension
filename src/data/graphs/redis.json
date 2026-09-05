@@ -5,6 +5,7 @@
     { "id": "persistence", "label": "持久化", "href": "/redis/basic/core/02-persistence/", "group": "核心" },
     { "id": "eviction", "label": "过期与淘汰", "href": "/redis/intermediate/usage/01-expiration-eviction/", "group": "使用进阶" },
     { "id": "cacheproblems", "label": "缓存三兄弟", "href": "/redis/intermediate/usage/02-cache-problems/", "group": "使用进阶" },
+    { "id": "cachepatterns", "label": "缓存架构模式", "href": "/redis/intermediate/usage/04-cache-patterns/", "group": "使用进阶" },
     { "id": "distlock", "label": "分布式锁", "href": "/redis/intermediate/usage/03-distributed-lock/", "group": "使用进阶" },
     { "id": "ha", "label": "哨兵与集群", "href": "/redis/advanced/ha/01-replication-sentinel-cluster/", "group": "高可用" }
   ],
@@ -15,7 +16,8 @@
     { "source": "persistence", "target": "ha", "label": "RDB 也用于全量同步" },
     { "source": "redisdata", "target": "eviction", "label": "内存管理" },
     { "source": "eviction", "target": "cacheproblems", "label": "缓存使用姿势" },
-    { "source": "cacheproblems", "target": "distlock", "label": "互斥重建进阶" },
+    { "source": "cacheproblems", "target": "cachepatterns", "label": "出问题的表象 vs 不出问题的底子" },
+    { "source": "cachepatterns", "target": "distlock", "label": "互斥重建进阶" },
     { "source": "distlock", "target": "ha", "label": "主从切换丢锁" }
   ]
 }

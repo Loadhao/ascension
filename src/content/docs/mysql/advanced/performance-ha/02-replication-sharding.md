@@ -105,3 +105,8 @@ int shard = Math.floorMod(userId.hashCode(), 4);
 - 复制 = dump 推送 + IO 接收 + SQL 重放；延迟本质是单线程重放大事务。
 - 读写分离先想清楚"写后读"路由；分库分表是最后手段。
 - 分片键选最高频查询维度，用冗余与异构索引补跨维度查询的债。
+
+## 延伸阅读
+
+- [Apache ShardingSphere（官网）](https://shardingsphere.apache.org/index_zh.html)——开源分布式数据库中间件：分片、读写分离、数据加密一站式，Java 生态分库分表默认选项之一。
+- [海量数据分库分表方案（一）算法方案（博客园）](https://www.cnblogs.com/kelvin-cai/p/12793361.html)——range/hash/一致性哈希/基因法等分片算法的取舍推演，衔接本篇"分片键怎么选"。

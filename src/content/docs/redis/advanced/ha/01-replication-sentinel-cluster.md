@@ -114,3 +114,7 @@ hash tag `{orderId}:items`、`{orderId}:detail` 强制同槽。
   min-replicas 参数缓解。
 - Cluster：CRC16 分 16384 槽 + MOVED/ASK 重定向 + Gossip 探活，
   分片与高可用一体化。
+
+## 延伸阅读
+
+- [Redis 高可用集群原理和实践（掘金）](https://juejin.cn/post/7103551714879340580)——主从/哨兵/Cluster 三方案的原理解析与实操部署，覆盖本篇三段的落地细节。

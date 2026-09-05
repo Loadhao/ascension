@@ -224,3 +224,7 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
 - 三层模型：断言决定匹配、过滤器决定加工；lb:// 让路由直接对接注册中心。
 - 非阻塞模型换吞吐，代价是全链路响应式 + 禁阻塞操作——门卫不能干
   保姆的活。
+
+## 延伸阅读
+
+- [Apache ShenYu（官方文档）](https://shenyu.apache.org/zh/docs/index/)——国产开源高性能网关，多协议（HTTP/WebSocket/gRPC/Dubbo）、插件化鉴权限流，同样走响应式（WebFlux）路线；SCG 之外的多协议/多注册中心场景可对比选型。

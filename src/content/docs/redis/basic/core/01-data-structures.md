@@ -107,3 +107,8 @@ flowchart TB
 - 类型 ≠ 实现：编码按数据量动态切换，小而省、大而快。
 - SDS 修好 C 字符串三宗罪；跳表靠随机层数替代平衡树且范围查询更顺。
 - 渐进式 rehash 把大停顿摊成顺路小步——这个思想值得搬进自己的系统设计。
+
+## 延伸阅读
+
+- [Redis 官方文档](https://redis.io/documentation)（命令、数据类型与实现文档一站入口）
+- [Redis 命令中心 · CRUG](http://www.redis.cn/commands.html)（命令速查，按分组检索）

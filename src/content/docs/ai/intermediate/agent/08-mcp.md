@@ -84,6 +84,10 @@ MCP 是跨客户端的开放协议，一次构建、处处集成：
 
 - 开发工具：VS Code（Copilot Chat）、Cursor、MCPJam 等
 
+- Server 广场：[MCP 广场 · 魔搭社区](https://www.modelscope.cn/mcp)等市场
+  聚合了大量现成 Server（搜索、数据库、地图……），接入前先逛广场，别急着
+  自己造
+
 ## 三个核心协议能力：发现 / 调用 / 读资源
 
 MCP 端点只有三类，全部走 **JSON-RPC 2.0** 消息：
@@ -221,6 +225,8 @@ def connect_mcp_server(name, server_spec):
 ## 延伸阅读
 
 - [MCP 官方文档](https://modelcontextprotocol.io/)（概念、架构与快速开始）
+
+- [MCP 广场 · 魔搭社区](https://www.modelscope.cn/mcp)（现成 Server 市场）
 
 - [Learn Claude Code s19: MCP Tools](https://learn.shareai.run/zh/s19/)
 

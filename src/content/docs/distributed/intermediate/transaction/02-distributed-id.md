@@ -112,3 +112,7 @@ UUID 留给 trace_id 这种不做索引的追踪场景。
   B+ 树页分裂。
 - 雪花 = 时间戳 + 机器 + 序列；时钟回拨是最大坑，ZK 校准是工业解。
 - 号段模式用"批量预领 + 双 buffer"把 DB 压力降到 1/step，换来严格递增。
+
+## 延伸阅读
+
+- [一文搞定分布式系统 ID 生成方案（微信公众号长文）](https://mp.weixin.qq.com/s?__biz=MzUyMDA4OTY3MQ==&mid=2247488671&idx=2&sn=22d8ad4b33138e92d980dcb06f493c0b)

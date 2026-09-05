@@ -183,3 +183,7 @@ Retryer.Default retryer = new Retryer.Default(100, MILLISECONDS, 3);
 - 注册中心 = 分布式通讯录：注册、心跳续约、发现三动作，调用路径不经过它。
 - Eureka 自我保护是 AP 取舍的活教材；Nacos 用临时/永久实例切 AP/CP。
 - 列表有滞后是常态，重试 + 熔断才是调用方的安全带。
+
+## 延伸阅读
+
+- [Nacos Spring Cloud 快速开始（官方文档）](https://nacos.io/zh-cn/docs/quick-start-spring-cloud.html)

@@ -27,6 +27,8 @@
     { "id": "autonomous", "label": "自主智能体", "href": "/ai/advanced/agent/07-autonomous-agents/", "group": "应用" },
     { "id": "worktree", "label": "Worktree 隔离", "href": "/ai/advanced/agent/08-worktree-isolation/", "group": "应用" },
     { "id": "comprehensive", "label": "综合 Harness", "href": "/ai/advanced/agent/09-comprehensive-agent/", "group": "应用" },
+    { "id": "frameworks", "label": "Agent 框架", "href": "/ai/advanced/agent/10-agent-frameworks/", "group": "应用" },
+    { "id": "openclaw", "label": "OpenClaw", "href": "/ai/advanced/agent/11-openclaw/", "group": "应用" },
     { "id": "eval", "label": "评测与对齐", "group": "应用" }
   ],
   "edges": [
@@ -62,6 +64,8 @@
     { "source": "autonomous", "target": "worktree", "label": "目录隔离" },
     { "source": "worktree", "target": "comprehensive", "label": "全部归位" },
     { "source": "mcp", "target": "comprehensive", "label": "外部工具池" },
+    { "source": "comprehensive", "target": "frameworks", "label": "生产级化" },
+    { "source": "frameworks", "target": "openclaw", "label": "落地产品" },
     { "source": "llm", "target": "eval" }
   ]
 }
