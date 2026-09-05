@@ -64,6 +64,58 @@ public class OrderProperties {
 一起刷新、import 方式对不对**。想在启动后验证，可调用 **Nacos 的发布接口**
 或直接改配置页观察日志中的 `Refresh scope 'default'`。
 
+## 长轮询与 @RefreshScope 刷新的完整链路（深入）
+
+"改配置秒级生效"不是轮询拉取，而是 **Nacos 长轮询（Long-Polling）**。
+把链路拆开，你才知道缺失哪一环会导致"改了半天不生效"。
+
+**服务端变更如何触达客户端：**
+
+```text
+客户端需要配置
+  → 发起长轮询请求，服务端【hold 住响应 30s】并不立刻返回
+  → 期间配置无变化：30s 超时返回"空"，客户端马上再发起下一轮（续航）
+  → 期间配置有变化：服务端立刻返回变更，客户端收到后重建连接重拉
+```
+
+这就是"秒级生效"的真相——**不是每 30s 拉一次，而是服务端有变更就主动
+断开让客户端立刻重拉**，长轮询把它近似成"即时"。
+
+**客户端拿到新配置后怎么热更新 Bean：**
+
+```mermaid
+flowchart LR
+    N["Nacos 变更通知"] --> E["Environment 变更<br/>（PropertySource 更新）"]
+    E --> RB["RefreshScope 收到 refresh 事件"]
+    RB -->|"销毁 @RefreshScope 的 Bean"| D["旧的 OrderProperties 被废弃"]
+    RB -->|"下次 getBean 重建"| NEW["重建新 Bean，读新配置"]
+```
+
+## 失效排查的完整复现（深入）
+
+先造一个能稳定复现"改了不生效"的最小装置，再逐环排查：
+
+```java
+@Component                    // ❌ 没加 @RefreshScope
+@ConfigurationProperties(prefix = "order")
+public class OrderProperties {
+    private int maxRetry;
+}
+```
+
+| # | 你改的是 | 表现 | 卡在哪一环 |
+|---|---|---|---|
+| 1 | Nacos 里 `order.max-retry=5` | 永不生效 | 长轮询没连上（address/namespace 配错） |
+| 2 | 同上 | 日志有 `Refresh range` 但值没变 | 类没有 **@RefreshScope**，Bean 没重建 |
+| 3 | 生产改了 | 只有个别节点生效 | 多实例里一部分连的不是同一 namespace |
+| 4 | 想刷 `@Value` | 仍旧旧值 | @Value 注入的类未在 refresh 链上，或类非 refresh scope |
+
+**两个压箱底排查命令：**
+
+- 看有没有触发刷新：日志搜 `Refresh scope 'default'`、`refreshable context`。
+- 直连 Nacos 验证配置真的在：`curl http://{nacos}:8848/nacos/v1/cs/configs?` 带
+  dataId/group/namespace 拉一下，先排除"配置压根没发布成功"这一环。
+
 ## 小结
 
 - 配置中心收拢配置 + 动态刷新，免去微服务全量重启发版。

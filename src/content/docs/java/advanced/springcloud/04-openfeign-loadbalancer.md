@@ -139,6 +139,52 @@ public class OrderClientFallback implements OrderClient {
 fallback 与 Sentinel/Resilience4j 联动（下一篇展开）：熔断打开后不再
 发起真实调用，直接进 fallback——**降级是设计出来的，不是报错兜出来的**。
 
+## @FeignClient 是怎么变成一个 Bean 的（深入）
+
+"注入的是动态代理"这句话背后是一整套 Bean 生命周期。逐层拆：
+
+1. **扫描**：`@EnableFeignClients` 里 `@Import(FeignClientsRegistrar.class)`，
+   registrar 用 `ClassPathScanningCandidateComponentProvider` 扫所有带
+   `@FeignClient` 的接口。
+2. **注册**：对每个接口注册一个 **`FeignClientFactoryBean`**。
+3. **工厂化**：真正 `@Autowired OrderClient orderClient` 时，Spring 调用这个
+   FactoryBean 的 `getObject()`——**接口本身没有实现类，Bean 是这个工厂临时
+   造的**。
+
+```mermaid
+flowchart TB
+    A["@EnableFeignClients<br/>(扫描 + Import)"] --> B["对每个 @FeignClient 接口<br/>注册 FeignClientFactoryBean"]
+    B --> C["@Autowired 触发 getObject()"]
+    C --> D["Feign.build()<br/>Contract 解析注解 → MethodHandler"]
+    D --> E["InvocationHandlerFactory<br/>生成 JDK 动态代理 $Proxy"]
+    E --> F["整个代理对象作为 Bean 注入"]
+```
+
+关键点：**这是"工厂 Bean + 动态代理"的设计样本**——`@FeignClient` 只是把
+"让接口变成可调用 Bean"这件事的交给了工厂，代理在 `getObject()` 时才生成，
+接口本身从不被实例化。
+
+**一次调用在代理里的展开：**
+
+```text
+orderClient.getOrder(42)
+→ InvocationHandler.invoke
+   → 解析 @GetMapping("/api/order/{id}") + @PathVariable
+   → 拼出 URL：/api/order/42
+   → LoadBalancer 从服务列表选实例 → 组装 http://ip:port/api/order/42
+   → 默认 feign.Client（可配 OkHttp/Apache）发请求
+   → Decoder 把返回 JSON 反序列化为 Order
+```
+
+生产里"Feign 报找不到服务/404"往往是拼 URL 那一步和 Controller 的
+`@RequestMapping` 路径**没对齐**，直接在代理展开的第 3 步打日志最容易定位。
+
+### 为什么常配 OkHttp/Apache
+
+Feign 默认 `feign.Client.Default` 走 JDK `HttpURLConnection`：**每次新建连接，
+无连接池**，高并发时握手开销明显。换 OkHttp/Apache 得到连接池 + HTTP/2
+支持，冷启动和高吞吐场景收益大——配置就一行 `okhttp.enabled: true`。
+
 ## 小结
 
 - OpenFeign = 注解契约 + JDK 动态代理 + 注册中心寻址，声明式让远程调用

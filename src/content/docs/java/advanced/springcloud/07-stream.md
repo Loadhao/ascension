@@ -78,6 +78,43 @@ public class MonitorStream {
 同一个项目常混用：框架接入走 Stream，性能敏感或强语义走原生。选型不讲绝对
 优劣，讲**这一层抽象值不值**。
 
+## 绑定生命周期与消费组/背压（深入）
+
+**绑定不是"启动就有"**，它的生命周期是：应用启动 → 扫描函数式 Bean →
+转换成 Binding → 建立中间件连接。缺了任一环，消息就进不来/出不去。
+
+```mermaid
+flowchart LR
+    A["函数式 Bean<br/>(Supplier/Consumer/Function)"] -->|"StreamFunctionAutoConfiguration<br/>按名称绑定"| B["Binding 注册<br/>out-0 / in-0 命名后缀"]
+    B -->|"Binder（如 Kafka/SR）"| C["中间件连接<br/>topic/queue + 收发线程"]
+```
+
+- **命名约定**：`xxx-out-0`、`xxx-in-0` 的末尾 `-0` 是"绑定序号"——一个
+  Supplier 只能有一个输出，所以永远是 `-0`；`xxx` 是 Bean 方法名。yaml 里
+  `bindings.xxx-out-0` 要和它严格对应，拼错最常见的结果就是**消息进了默认
+  topic 而你监听根本不在那**。
+- **消费组（group）复数**：同 group 的多个实例**负载分担**（一条消息只被一
+  个实例消费）；不同 group 是**各自的副本**。如果 Consumer 没配 group，每次
+  实例重启都会被当成新的 group（自动生成随机 group）——**重启后重复消费旧
+  消息**就是没配/配错 group 的经典症状。
+
+**背压：消费太慢会怎样**
+
+Stream（尤其 Kafka Binder）有自动背压：`Consumer` 处理不过来时，Binder
+会**暂停拉取**（paused 状态），不会无限灌爆内存；恢复后自动续拉。所以：
+
+- 消费者处理函数里**别做长阻塞**——它表现为"消息堆积但消费线程 idle（在
+  等某个同步操作）"，是排查积压的第一步。
+- 需要调吞吐去提高 `maxPollRecords`/并发消费者数，而不是赌中间件自动喂饱。
+
+### 三句排查口诀
+
+| 现象 | 先查 |
+|---|---|
+| 发出去消费不到 | `bindings` 的 destination/group 与名字是否对齐 |
+| 重启后重复消费 | 是否配了稳定的 group |
+| 消息积压但消费者空闲 | 处理函数里是不是卡在阻塞 IO |
+
 ## 小结
 
 - Stream 用 Binder 抽象掉具体 MQ，业务只依赖信道/绑定。

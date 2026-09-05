@@ -107,6 +107,58 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
 | 长连接 | 弱 | WebSocket 友好 |
 | 生态 | 停止演进 | Spring 官方亲儿子 |
 
+## 过滤器链的真实时序与阻塞陷阱（深入）
+
+很多人背熟了"pre → 转发 → post"，但没意识到 Gateway 的过滤器链是一个
+**围绕 `chain.filter(exchange)` 的嵌套链**——`return chain.filter(exchange)`
+之后写的代码，是在**下游全部处理完后**才执行的（等价于后置逻辑）。
+
+```java
+@Component
+public class TimingGlobalFilter implements GlobalFilter, Ordered {
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        long start = System.nanoTime();
+        return chain.filter(exchange)                       // 交给下一个过滤器
+            .doFinally(sig ->                               // 全部 filter 走完后回到这里
+                System.out.println("耗时 " + (System.nanoTime() - start)));
+    }
+    public int getOrder() { return -1; }                    // 越靠前 → 越先 pre、越后 post
+}
+```
+
+**两条实战规则由此得出：**
+
+1. **用 `-` 或 `doFinally` 包"后置/计时"**，而不是在 `filter(...)` 返回前直接
+   打印——那样打印的只是"交给下家"的时刻，不是真实耗时。
+2. **越小的 `getOrder()` 越先进入 pre 阶段、越靠后收尾 post 阶段**——所以
+   鉴权要小 Order（先挡），耗时统计要小 Order（后收尾），两者不冲突。
+
+### 阻塞陷阱：为什么网关里不能跑 JDBC
+
+WebFlux 跑在**少量 EventLoop 线程**上，一个请求被阻塞会占住整条线程池：
+
+```java
+// ❌ 反例：在 Filter 里同步查库，EventLoop 卡住 → 所有请求排队
+.jdbcTemplate.queryForObject(...)   // 线程阻塞，非阻塞模型失效
+
+// ✅ 正解：把阻塞调用丢到专门的"受限线程池"（boundedElastic）
+Mono.fromCallable(() -> jdbc.query(...))
+    .subscribeOn(Schedulers.boundedElastic())
+    .flatMap(...)
+```
+
+症状特征：**某个请求慢，其他无关请求全部跟着变慢**——这就是 EventLoop
+被阻塞的典型信号。所以网关保持无状态、不做本地存储、不碰阻塞 IO，并非
+作者保守，而是非阻塞模型的硬性约束。
+
+### 生产排查二连
+
+| 现象 | 排查路径 |
+|---|---|
+| 网关 504、后端明明正常 | 先查是不是 GlobalFilter 里包了阻塞操作拖垮 EventLoop |
+| 某些路径能通、某些 404 | 断言没匹配上 → 逐个 `curl -H` 验证 Predicate，别猜 |
+
 ## 小结
 
 - 网关收拢横切关注点：鉴权、限流、跨域、灰度，是微服务唯一流量入口。

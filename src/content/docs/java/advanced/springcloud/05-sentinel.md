@@ -127,6 +127,64 @@ public Item getItem(Long itemId) { ... }
 计数（便宜但慢调用仍占着调用线程）——Sentinel 认为配合熔断器切慢依赖
 后，计数已够用。
 
+## 滑动窗口的内部实现：LeapArray（深入）
+
+"滑动窗口"四个字背后是 Sentinel 的 **LeapArray（环形数组）**：用固定长度
+数组 + 环形复用，O(1) 统计任意滑动区间。核心：
+
+```java
+public class LeapArray<T> {
+    private final AtomicReferenceArray<WindowWrap<T>> array;  // 环形数组
+    private final int windowLengthInMs;   // 每格时长，如 500ms
+    private final int sampleCount;        // 格数，如 2 → 总窗口 1s
+    private final int intervalInMs;       // 总窗口 = 格数 × 每格
+}
+```
+
+**取格子时为什么是"环形"**：时间戳对总窗口取模定位下标，格子复用、不重建。
+每次新请求进来：
+
+```text
+now / windowLength → 目标下标
+重复命中同一格子 → 同格的 atomic 计数 +1（无需锁）
+时间跨进下一格 → 新格覆盖复用，旧窗口的"最老一格"自然被丢弃
+```
+
+这就是"滑动"的真相——**不是真的平移，而是环形复用 + 丢弃最老格**，所以
+无论统计"近 1s 还是近 10s"，都是常数级开销。
+
+**为什么这样设计能解决固定窗口的突刺**：固定窗口是"整分钟一个计数器"，
+边界处（59s↔61s）两个相邻窗口各自都能放过一个满阈值的流量，瞬时 2 倍。
+滑动窗口把窗口切成小格、以格子为粒度滚动，统计的是"跨越边界时相邻格
+之和"，突刺被格子粒度抹平。
+
+## 熔断状态机的触发时序（深入）
+
+三态不是"魔法"，是**时间 + 统计驱动**的判定链。以慢调用比例为例：
+
+```text
+CLOSED
+  ├─ 每个请求记录 RT，落到滑动窗口
+  ├─ 需求条件：窗口数 ≥ minRequestAmount(默认5) 且 慢调用比例 > 阈值(默认0.8)
+  └─ 满足 → CircuitBreaker 置 OPEN，丢出一个 DegradeException（由 blockHandler 处理）
+
+OPEN
+  ├─ 记录开启时刻 statStartTime
+  └─ 每次请求判断 now < statStartTime + 熔断时长 → 直接拒绝（不再测量）
+
+HALF_OPEN
+  ├─ 熔断时长到 → 放行最大 halfOpenMaxAllowedQps(默认10) 个"探测请求"
+  ├─ 探测成功数达标 → 状态回 CLOSED（先睡 1s 不让连续探测）
+  └─ 任一探测失败 → 立刻回 OPEN，并重置计时
+```
+
+**两个实战结论：**
+
+1. **OPEN 态从来不再测量**——它只"看时间到了没有"，所以熔断是**即时止损**
+   而不是"每次再统计确认一遍"。
+2. `minRequestAmount` 太大会导致**流量小的接口永远不触发熔断**（样本不足）
+   而失控，冷门接口要调小它；反之高流量接口抢 CPU 时它反而是保护。
+
 ## 小结
 
 - 雪崩机制 = 慢依赖 + 同步无界等待 → 线程池耗尽；限流管入口量，熔断
