@@ -126,6 +126,42 @@ public class SmsAutoConfiguration {
 启动后 IDEA 里可以用 **Actuator 的 /actuator/conditions**（或启动日志
 `--debug`）查每个自动配置类的命中情况，排查"为什么没装配上"。
 
+### 失效案例：引入依赖了，组件却没起来
+
+**核心含义**：自动配置是"条件让路，不是无条件注入"。SPI 清单只给出
+**候选名单**，一个类最终注不注册，取决于一堆 @Conditional* 是否全过。
+引入依赖没生效，九成是条件不满足，而不是代码写错。
+
+**原因（为什么）**：候选类在容器启动期被逐一评估，命中路径是"全条件
+AND"。classpath 缺某个依赖类、容器里已有同名 Bean、配置项没配/配错、
+不是 Web 应用——任何一个条件失败，整个配置类就被跳过，且不报错。
+
+**例子**：
+
+```java
+@AutoConfiguration
+@ConditionalOnProperty(name = "sms.enabled", havingValue = "true")  // ← 没配就跳过
+@EnableConfigurationProperties(SmsProperties.class)
+public class SmsAutoConfiguration {
+    @Bean
+    @ConditionalOnMissingBean
+    public SmsClient smsClient() { return new SmsClient(); }
+}
+```
+
+业务方引了 starter、代码里 `@Autowired SmsClient`，启动却直接报 NoSuchBeanDefinition
+——因为 `application.yml` 里忘了写 `sms.enabled=true`，或者
+`@ConditionalOnClass` 引的类不在依赖里。
+
+**解法（排查口诀，连问四句）**：
+
+| 排查项 | 检查动作 |
+|---|---|
+| 条件命中了吗 | 启动加 `--debug` 或 `/actuator/conditions`，看配置类为何被跳过 |
+| 依赖齐全吗 | `@ConditionalOnClass` 引的类确实在 classpath |
+| 撞 Bean 了吗 | `@ConditionalOnMissingBean` 是否和你自己的 Bean 同名同类 |
+| 配置前缀对吗 | `@ConfigurationProperties` 前缀与 `application.yml` 逐字一致（缺前缀整组绑定不上） |
+
 ## 小结
 
 - 三合一注解里 @EnableAutoConfiguration 是发动机；SPI 清单（imports

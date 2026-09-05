@@ -107,6 +107,55 @@ public class LifecycleDemo implements BeanNameAware, InitializingBean, Disposabl
 | prototype         | 每次 getBean 新建，容器只负责创建不管销毁 |
 | request / session | Web 环境：一次请求 / 一个会话一个实例    |
 
+### 失效案例：单例注入原型 Bean，原型其实只有一份
+
+**核心含义**：作用域管的是"容器返回时的创建策略"，管不到"单例 Bean
+内部持有的那个引用"。**单例只在创建时注入一次依赖**，之后引用一路复用。
+
+**原因（为什么）**：属性填充发生在 Bean 生命周期第②步，而单例 Bean 一
+生只被创建一次，这"一次注入"里翻译成依赖的 action 也就执行一遍。
+prototype 的"每次 getBean 新建"只对"向容器主动要"生效——单例早已把
+第一个实例攥在手里，后面的调用根本不会再向容器要。
+
+**例子**：
+
+```java
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class Task {
+    public Task() { System.out.println("new Task: " + this); }
+}
+
+@Service
+public class TaskRunner {        // 默认 singleton
+    @Autowired
+    private Task task;           // 仅在 TaskRunner 创建时注入一次
+
+    public void run() { System.out.println("run with " + task); }
+}
+```
+
+调多少次 `run()`，打印的 Task 都是**同一个地址**——只发生过一次 `new Task`。
+
+**解法**：注入"提供者"而不是"实例本身"，让依赖在使用时才向容器要。
+
+```java
+@Service
+public class TaskRunner {
+    private final ObjectProvider<Task> provider;   // 每次 getObject() 都是新实例
+    public TaskRunner(ObjectProvider<Task> provider) { this.provider = provider; }
+
+    public void run() { Task t = provider.getObject(); /* 每次都新建 */ }
+}
+```
+
+| 解法 | 做法 | 特点 |
+|---|---|---|
+| **ObjectProvider**（推荐） | 注入 `ObjectProvider<T>`，用时 `.getObject()` | 同源、最少侵入，天然每次新建 |
+| `@Lookup` | 给方法标 `@Lookup`，返回新原型 | 基于 CGLIB 重写方法，优雅但隐蔽 |
+| Supplier 注入 | 注入 `Supplier<T>`，用时 `.get()` | 函数式、透明 |
+| `ApplicationContext.getBean` | 注入容器，用时 `getBean(T.class)` | 侵入大，慎防循环依赖 |
+
 ## 注入方式与注解选择
 
 | 注解         | 来源      | 匹配规则                      |
