@@ -149,6 +149,46 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 );
 ```
 
+## 线程数到底怎么定？（深入）
+
+"CPU 密集 N+1、IO 密集 2N"只是起步，实战要用**吞吐公式 + 压测定型**。
+
+**理论骨架**：
+
+```text
+CPU 密集：线程数 ≈ 核数 + 1（多压的一两个线程去消化偶发等待）→ 避免频繁切换
+IO 密集：线程数 ≈ 核数 × (1 + 等待时间/计算时间)
+         等待占比越高 → 放更多线程补足"被 IO 卡住"的空窗
+```
+
+**关键认知**：IO 密集的线程不是"越多越好"，加线程数 = 更多上下文切换 +
+更高内存（每线程默认约 1MB 栈）。真正该做的是**先约定一个 `CPU 数`，用
+`压测 → 观察 QPS/RT/线程活跃` → 调参**，而不是套个公式定死。
+
+**生产上的动态线程池**（美团思路）——线程数和队列**运行期可调**，配监控；
+核心思路是让 pool 参数可改、有阈值触发扩容：
+
+```java
+// 手动调整 core/max，配合监控看活跃线程、队列长度、拒绝数
+executor.setCorePoolSize(newCore);
+executor.setMaximumPoolSize(newMax);
+executor.setKeepAliveTime(60, TimeUnit.SECONDS);
+
+// 监控脚本（伪码）
+while (true) {
+    long active = executor.getActiveCount();
+    int queue   = executor.getQueue().size();          // 队列存压
+    if (queue > 1000 && active < executor.getCorePoolSize()) {
+        executor.setCorePoolSize(executor.getCorePoolSize() + 2);  // 触发扩容
+    }
+    Thread.sleep(1000);
+}
+```
+
+**一句话总结定参方法**：公式定初值 → 压测看 `活跃线程数 + 队列积压 + RT` →
+用"队列涨就加线程、活跃长期贴顶就加核/减队列"的动态策略兜底。**别把参数
+写死就当完成**，运行时压力是变化的。
+
 ## 要点备忘
 
 - 执行顺序：核心线程 → **队列** → 非核心线程 → 拒绝（队列优先于扩线程）

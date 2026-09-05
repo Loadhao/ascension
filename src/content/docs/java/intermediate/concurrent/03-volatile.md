@@ -131,6 +131,41 @@ public static Singleton getInstance() { return Holder.INSTANCE; }
 - 一次性发布：配置对象加载完成后 volatile 引用发布，读者看到完整对象。
 - 不适合：计数器（count++）、多变量不变式（lower <= upper）。
 
+## 内存屏障与缓存伪共享（深入）
+
+"volatile 是可见性"背后落到硬件是**内存屏障 + 缓存一致性协议**，再往深
+一点你还可能遇到**伪共享**——两者一起讲，把它们解耦清楚。
+
+**内存屏障（Memory Barrier）**：volatile 写/读在汇编层会插入屏障指令，
+禁止跨越该变量的重排并强制刷读：
+
+```text
+volatile 写   → 前插 StoreStore 屏障（前面普通写先落盘）
+              → 后插 StoreLoad 屏障（本写对其他核可见，不再被重排到后面）
+volatile 读   → 前后各插 LoadLoad / LoadStore 屏障
+```
+
+**缓存一致性（MESI）**：写 volatile 会让其他核心对应**缓存行失效**，下次
+读到强制从主存/发共享请求重取。这两层协作，才是"改一个 volatile，别的核
+立刻能看到"的完整机制。
+
+**伪共享（False Sharing）**：缓存一致性的最小单位是**缓存行（64 字节）**，
+不是单个变量。两个**无关**变量若被放到同一缓存行，一个被写会使整行失效、
+另一个的下次读也要重取——明明不共享，却因"同一行"互相拖慢：
+
+```java
+static class Counter {
+    volatile long a;              // 高并发热写
+    // (填补 padding 或 @Contended) 让 b 不与 a 同缓存行
+    volatile long b;              // 另一个热写，却受 a 牵连
+}
+// Java 8+ 可用 sun.misc.Contended（需 JVM 参数 --add-exports）或手动 padding
+```
+
+**实战判断**：多核高并发热写多个长整型，若出现"两个互不相干的字段 QPS 一起掉"
+且卡在缓存一致性上，就往 `@Contended`/padding 方向排查——普通业务极少遇到，
+但秒杀计数器、Disruptor 这类才有意义。
+
 ## 小结
 
 - JMM 立规矩：主内存 + 工作内存，可见性与有序性问题由此而生。
