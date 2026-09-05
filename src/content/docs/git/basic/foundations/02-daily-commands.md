@@ -12,6 +12,32 @@ git clone <url> [目录名]           # 克隆远程仓库
 git clone --depth 1 <url>         # 浅克隆，只要最近 1 次提交（大仓救星）
 ```
 
+## 一张图看懂日常命令指向哪两个区域
+
+`status/diff/add/commit` 都绕不开"工作区 ↔ 暂存区 ↔ 仓库"的流动。记这
+张最小的命令地图，比逐个背命令高效应强：
+
+```mermaid
+flowchart LR
+    subgraph 工作区["工作区 Working"]
+        W["编辑中的文件"]
+    end
+    subgraph 暂存["暂存区 index"]
+        S["本次提交的草稿"]
+    end
+    subgraph 仓库["本地仓库"]
+        C["已提交历史"]
+    end
+    W -->|"git add"| S
+    S -->|"git commit"| C
+    C -.->|"git diff --staged <br/>暂存区 vs 提交"| S
+    W -.->|"git diff <br/>工作区 vs 暂存区"| S
+    style 暂存 fill:#f5f0e6
+```
+
+对照下面的命令，能少走很多弯路——**先弄清"此刻改动在哪一层"，才知道用
+哪个 diff 看它**。
+
 ## 状态与差异
 
 ```bash
@@ -71,6 +97,19 @@ git 的报错信息很"不友好"，但**报错 → 一句话翻译 → 对应�
 git reset --soft HEAD~1   # 撤销"最后一次提交"，改动留在暂存区（还能恢复，推荐）
 git reset --hard HEAD~1   # 撤销提交且丢弃改动（⚠️ 不可恢复，别对大库用）
 git revert <commit>       # 产生一个"反向提交"来抵消目标提交（已推送到远端时用它）
+```
+
+一张图帮你决定这次该用哪个：
+
+```mermaid
+flowchart TD
+    A{"这次想撤销的提交<br/>是否已 push 到公共分支?"} -->|"是"| R["git revert<br/>新提交抵消旧提交<br/>（不破坏公共历史，最安全）"]
+    A -->|"否"| B{"改动还要不要保留?"}
+    B -->|"要"| C["git reset --soft<br/>退回暂存区，改动全在"]
+    B -->|"不要"| D["git reset --hard<br/>连改动一起丢<br/>（⚠️ 不可恢复）"]
+    style R fill:#eef3ea
+    style C fill:#f5f0e6
+    style D fill:#f7e8e8
 ```
 
 判断用哪个：**还没 push** → `reset`（soft 优先）；**已 push 且要保留历史**

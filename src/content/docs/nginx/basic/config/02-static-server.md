@@ -28,8 +28,24 @@ server {
 - `alias /opt/assets/`：`/static/a.png` → `/opt/assets/a.png`
   （**alias 只替换前缀 `/static/` 部分**）。
 
-两者混用想当然，会得到 404 或错文件——先默认用 root，确实需要"前缀替换"
-再上 alias。
+用一张图区分"拼完整 URI"和"替换前缀"：
+
+```mermaid
+flowchart LR
+    subgraph ROOT["root=/var/www/site"]
+        R1["请求 /img/a.png"] --> R2["root+URI"] --> R3["/var/www/site/img/a.png OK"]
+    end
+    subgraph ALIAS["alias=/opt/assets/"]
+        A1["请求 /static/a.png"] --> A2["替换前缀"] --> A3["/opt/assets/a.png OK"]
+    end
+    style ALIAS fill:#f5f0e6
+```
+
+**记忆**：`root` 把 URI **追加**在根路径后，`alias` 把 URI 里的**前缀
+剥掉再替换**。两者混用想当然，会得到 404 或错文件——先默认用 root，
+确实需要"前缀替换"再上 alias。一个明显信号：**`alias` 常配 `location`
+里的末尾目录**（如 `location /img/ { alias /srv/img/; }`），而 `root`
+配在 `server`/`location` 顶层即可。
 
 ## try_files：优雅地走"找不到再降级"
 
@@ -99,6 +115,22 @@ server {
 
 ```text
 精确(=) > ^~ 前缀(不再查正) > 正则(~ / ~*) > 最长通用前缀
+```
+
+把判定过程画成一张流程图，背规则变成"看路径分叉"：
+
+```mermaid
+flowchart TD
+    START["收到请求 URI"] --> E{"存在等号精确 match?"}
+    E -->|"有"| E1["命中精确 location"]
+    E -->|"无"| P["记录最长前缀命中<br/>以及是否 caret-tilde 前缀"]
+    P --> Q{"存在 caret-tilde 前缀命中?"}
+    Q -->|"有"| Q1["直接用该前缀<br/>不再查正则"]
+    Q -->|"无"| R{"有正则命中?"}
+    R -->|"有"| R1["用书写顺序最先命中的正则"]
+    R -->|"无"| L["用之前记下的最长通用前缀"]
+    style E1 fill:#eef3ea
+    style Q1 fill:#f5f0e6
 ```
 
 **两个高频踩坑：**

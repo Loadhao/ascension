@@ -5,6 +5,35 @@ level: basic
 core: true
 ---
 
+## 用一张图理解执行流向
+
+`try / except / else / finally` 四个分支的执行时机，新手最容易搞混；
+尤其**`finally` 无论结果如何都执行**、`else` 只在"无异常"时跑：
+
+```mermaid
+flowchart TD
+    T["try 块执行"] --> B{"抛异常?"}
+    B -- 否 --> E["else 块执行<br/>（成功路径挪出 try）"]
+    B -- 是 --> C{"异常类型能被 except 捕获?"}
+    C -- 是 --> H["对应 except 块执行"]
+    C -- 否 --> N["异常继续向上抛<br/>（不被本地 except 拦）"]
+    E --> F["finally 块执行<br/>【无论结果如何】"]
+    H --> F["finally 块执行"]
+    N --> F2["finally 块执行后再上传"]
+    F --> D["正常继续"]
+    style F fill:#f5f0e6
+    style E fill:#eef3ea
+```
+
+**由此可推理出三条纪律：**
+
+- **不要裸 `except:`**——它会连 `KeyboardInterrupt`（Ctrl+C）、系统退出信号
+  一起吞掉；最低限度也要 `except Exception`。
+- **捕获从窄到宽排队**，子类异常放前面（否则父类的纯捕获会让子类永远
+  轮不到）。
+- **`else` 块的价值**：只把"可能抛异常"的最小操作包进 try，`else` 里的
+  成功分支即使抛了异常，也不会被同一个 except 误捕。
+
 ## EAFP：Python 的世界观
 
 Java 是 LBYL（Look Before You Leap，先检查再动手），Python 是
@@ -45,14 +74,6 @@ finally:
     f.close()                 # ④ 无论如何都执行：清理资源
 ```
 
-三条纪律：
-
-- **不要裸 `except:`**——它会连 `KeyboardInterrupt`（Ctrl+C）、系统退出信号
-  一起吞掉；最低限度也要 `except Exception`。
-- 捕获从窄到宽排队，子类异常放前面。
-- `else` 块的价值：缩小 try 范围，`process()` 抛的异常不会被同一个
-  except 误捕。
-
 ## 异常链：raise from
 
 ```python
@@ -65,6 +86,22 @@ def load_config(path):
 
 不加 `from e`，原始异常的堆栈就丢了——排查时看不到"真正死因"。
 `raise ... from None` 则是刻意隐藏原因，少用。
+
+用图看 `raise from` 的价值：
+
+```mermaid
+flowchart LR
+    subgraph W["with from e（推荐）"]
+        A1["FileNotFoundError<br/>（根因：文件不存在）"] -->|"caused by"| B1["ConfigError"]
+        B1 --> C1["堆栈完整可回溯"]
+    end
+    subgraph WO["裸 raise（丢根因）"]
+        A2["FileNotFoundError"] -.->|"被丢弃"| B2["ConfigError"]
+        B2 --> C2["只剩 NewErr 堆栈<br/>根因不可见"]
+    end
+    style C1 fill:#eef3ea
+    style C2 fill:#f7e8e8
+```
 
 ## 自定义异常
 
