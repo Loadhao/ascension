@@ -144,6 +144,39 @@ export default defineConfig({
                         { label: '文件与目录操作', link: '/linux/basic/commands/01-file-ops/' },
                       ],
                     },
+                    {
+                      label: '文件系统',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/linux/basic/filesystem/' },
+                        { label: '文件系统与磁盘管理', link: '/linux/basic/filesystem/01-filesystem/' },
+                      ],
+                    },
+                    {
+                      label: '用户与权限',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/linux/basic/permission/' },
+                        { label: '用户与权限体系', link: '/linux/basic/permission/01-users-permissions/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '系统管理',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/linux/intermediate/system/' },
+                        { label: 'Shell 脚本', link: '/linux/intermediate/system/01-shell-script/' },
+                        { label: '进程管理', link: '/linux/intermediate/system/02-process-management/' },
+                        { label: '系统服务与 systemd', link: '/linux/intermediate/system/03-system-service/' },
+                        { label: '网络', link: '/linux/intermediate/system/04-network/' },
+                      ],
+                    },
                   ],
                 },
               ],
@@ -789,6 +822,69 @@ export default defineConfig({
               ],
             },
             {
+              label: 'ZooKeeper',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/zookeeper/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '核心机制',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/zookeeper/basic/core/' },
+                        { label: 'ZooKeeper 核心机制', link: '/zookeeper/basic/core/01-zookeeper-core/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              label: 'etcd',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/etcd/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '核心机制',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/etcd/basic/core/' },
+                        { label: 'etcd 核心机制', link: '/etcd/basic/core/01-etcd-core/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              label: 'Seata',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/seata/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '核心机制',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/seata/basic/core/' },
+                        { label: 'Seata 核心机制', link: '/seata/basic/core/01-seata-core/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
               label: '消息中间件',
               collapsed: true,
               items: [
@@ -946,6 +1042,15 @@ export default defineConfig({
                   collapsed: true,
                   items: [
                     {
+                      label: 'AI 基础',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/ai/basic/foundation/' },
+                        { label: '机器学习基础', link: '/ai/basic/foundation/01-machine-learning/' },
+                        { label: '深度学习', link: '/ai/basic/foundation/02-deep-learning/' },
+                      ],
+                    },
+                    {
                       label: 'Agent',
                       collapsed: false,
                       items: [
@@ -962,6 +1067,15 @@ export default defineConfig({
                   label: '中级',
                   collapsed: true,
                   items: [
+                    {
+                      label: '大模型',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/ai/intermediate/llm/' },
+                        { label: '大模型 LLM', link: '/ai/intermediate/llm/01-llm/' },
+                        { label: '提示工程', link: '/ai/intermediate/llm/02-prompt-engineering/' },
+                      ],
+                    },
                     {
                       label: 'Agent',
                       collapsed: false,
@@ -984,6 +1098,14 @@ export default defineConfig({
                   label: '高级',
                   collapsed: true,
                   items: [
+                    {
+                      label: '评测与对齐',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/ai/advanced/eval/' },
+                        { label: '评测与对齐', link: '/ai/advanced/eval/01-evaluation-align/' },
+                      ],
+                    },
                     {
                       label: 'Agent',
                       collapsed: false,
@@ -1138,6 +1260,17 @@ export default defineConfig({
                         { label: 'grep / sed / awk：文本处理三件套', link: '/tools/basic/cli/01-grep-sed-awk/' },
                         { label: 'curl：命令行 HTTP 请求', link: '/tools/basic/cli/02-curl/' },
                         { label: 'jq：命令行 JSON 处理', link: '/tools/basic/cli/03-jq/' },
+                      ],
+                    },
+                    {
+                      label: '效率工具',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/tools/basic/efficiency/' },
+                        { label: '编辑器与 IDE', link: '/tools/basic/efficiency/01-editor-ide/' },
+                        { label: '终端效率', link: '/tools/basic/efficiency/02-terminal/' },
+                        { label: '正则表达式', link: '/tools/basic/efficiency/03-regex/' },
+                        { label: '网络调试', link: '/tools/basic/efficiency/04-network-debug/' },
                       ],
                     },
                   ],

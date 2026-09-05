@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    { "id": "root", "label": "ZooKeeper", "group": "核心" },
+    { "id": "core", "label": "核心机制", "href": "/zookeeper/basic/core/01-zookeeper-core/", "group": "核心机制" }
+  ],
+  "edges": [
+    { "source": "root", "target": "core" }
+  ]
+}

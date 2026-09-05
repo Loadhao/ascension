@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    { "id": "root", "label": "etcd", "group": "核心" },
+    { "id": "core", "label": "核心机制", "href": "/etcd/basic/core/01-etcd-core/", "group": "核心机制" }
+  ],
+  "edges": [
+    { "source": "root", "target": "core" }
+  ]
+}

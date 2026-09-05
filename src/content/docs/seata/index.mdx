@@ -1,0 +1,27 @@
+---
+title: Seata
+description: Seata 方向学习路线与知识地图：分布式事务的 AT 模式与实现机制
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/seata.json';
+
+## 学习路线
+
+按等级推进，每级下按主题分类。点击分类进入该主题的知识点目录；点击圆点标记学习状态：
+○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖**核心机制**：Seata 的 AT 模式如何用"全局事务 + 回滚日志"实现分布式
+事务。理论脉络与五种方案对比见「分布式」方向的「分布式事务」笔记。
+
+<RoadmapIsland directionId="seata" />
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放；带金色描边的节点已关联笔记，点击即可跳转。
+图谱数据维护在 `src/data/graphs/seata.json`。
+:::

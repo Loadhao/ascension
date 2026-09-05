@@ -9,10 +9,10 @@
     { "id": "consistency", "label": "数据一致性", "href": "/distributed/advanced/consistency/01-consistency-patterns/", "group": "一致" },
     { "id": "ha", "label": "容灾多活", "href": "/distributed/advanced/availability/01-dr-multi-active/", "group": "落地" },
     { "id": "tracing", "label": "链路追踪", "href": "/distributed/advanced/observability/01-distributed-tracing/", "group": "可观测" },
-    { "id": "zk", "label": "ZooKeeper", "group": "落地" },
-    { "id": "etcd", "label": "etcd", "group": "落地" },
-    { "id": "seata", "label": "Seata", "group": "落地" },
-    { "id": "kafka", "label": "Kafka", "group": "落地" }
+    { "id": "zk", "label": "ZooKeeper", "href": "/zookeeper/", "group": "落地" },
+    { "id": "etcd", "label": "etcd", "href": "/etcd/", "group": "落地" },
+    { "id": "seata", "label": "Seata", "href": "/seata/", "group": "落地" },
+    { "id": "kafka", "label": "Kafka", "href": "/kafka/", "group": "落地" }
   ],
   "edges": [
     { "source": "root", "target": "cap" },

@@ -1,16 +1,17 @@
 {
   "nodes": [
     { "id": "root", "label": "AI", "group": "核心" },
-    { "id": "ml", "label": "机器学习基础", "group": "基础" },
-    { "id": "dl", "label": "深度学习", "group": "基础" },
-    { "id": "llm", "label": "大模型 LLM", "group": "应用" },
-    { "id": "prompt", "label": "提示工程", "group": "应用" },
+    { "id": "ml", "label": "机器学习基础", "href": "/ai/basic/foundation/01-machine-learning/", "group": "基础" },
+    { "id": "dl", "label": "深度学习", "href": "/ai/basic/foundation/02-deep-learning/", "group": "基础" },
+    { "id": "llm", "label": "大模型 LLM", "href": "/ai/intermediate/llm/01-llm/", "group": "应用" },
+    { "id": "prompt", "label": "提示工程", "href": "/ai/intermediate/llm/02-prompt-engineering/", "group": "应用" },
     { "id": "agent", "label": "Agent 智能体", "href": "/ai/basic/agent/", "group": "应用" },
     { "id": "agentloop", "label": "Agent Loop", "href": "/ai/basic/agent/01-agent-loop/", "group": "应用" },
     { "id": "tools", "label": "工具调用", "href": "/ai/basic/agent/02-tool-use/", "group": "应用" },
     { "id": "permission", "label": "权限闸门", "href": "/ai/basic/agent/03-permission/", "group": "应用" },
     { "id": "hooks", "label": "钩子机制", "href": "/ai/basic/agent/04-hooks/", "group": "应用" },
     { "id": "planning", "label": "任务规划", "href": "/ai/intermediate/agent/01-todo-planning/", "group": "应用" },
+    { "id": "subagent", "label": "子代理 Subagent", "href": "/ai/intermediate/agent/09-subagent/", "group": "应用" },
     { "id": "sysprompt", "label": "提示组装", "href": "/ai/intermediate/agent/02-system-prompt/", "group": "应用" },
     { "id": "context", "label": "上下文工程", "href": "/ai/intermediate/agent/03-context-engineering/", "group": "应用" },
     { "id": "memory", "label": "记忆系统", "href": "/ai/intermediate/agent/04-memory/", "group": "应用" },
@@ -29,7 +30,7 @@
     { "id": "comprehensive", "label": "综合 Harness", "href": "/ai/advanced/agent/09-comprehensive-agent/", "group": "应用" },
     { "id": "frameworks", "label": "Agent 框架", "href": "/ai/advanced/agent/10-agent-frameworks/", "group": "应用" },
     { "id": "openclaw", "label": "OpenClaw", "href": "/ai/advanced/agent/11-openclaw/", "group": "应用" },
-    { "id": "eval", "label": "评测与对齐", "group": "应用" }
+    { "id": "eval", "label": "评测与对齐", "href": "/ai/advanced/eval/01-evaluation-align/", "group": "应用" }
   ],
   "edges": [
     { "source": "root", "target": "ml" },

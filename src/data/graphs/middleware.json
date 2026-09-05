@@ -3,9 +3,9 @@
     { "id": "root", "label": "中间件", "group": "核心" },
     { "id": "whymq", "label": "为什么需要 MQ", "href": "/middleware/basic/mq/01-why-mq/", "group": "消息队列" },
     { "id": "compare", "label": "三大 MQ 选型", "href": "/middleware/basic/mq/02-mq-comparison/", "group": "消息队列" },
-    { "id": "kafka", "label": "Kafka", "group": "落地" },
-    { "id": "rocketmq", "label": "RocketMQ", "group": "落地" },
-    { "id": "rabbitmq", "label": "RabbitMQ", "group": "落地" }
+    { "id": "kafka", "label": "Kafka", "href": "/kafka/", "group": "落地" },
+    { "id": "rocketmq", "label": "RocketMQ", "href": "/rocketmq/", "group": "落地" },
+    { "id": "rabbitmq", "label": "RabbitMQ", "href": "/rabbitmq/", "group": "落地" }
   ],
   "edges": [
     { "source": "root", "target": "whymq" },

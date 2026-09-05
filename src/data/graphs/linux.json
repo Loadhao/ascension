@@ -2,12 +2,12 @@
   "nodes": [
     { "id": "root", "label": "Linux", "group": "核心" },
     { "id": "basics", "label": "基础命令", "href": "/linux/basic/commands/01-file-ops/", "group": "基础" },
-    { "id": "fs", "label": "文件系统", "group": "基础" },
-    { "id": "perm", "label": "用户与权限", "group": "基础" },
-    { "id": "shell", "label": "Shell 脚本", "group": "进阶" },
-    { "id": "proc", "label": "进程管理", "group": "进阶" },
-    { "id": "svc", "label": "系统服务", "group": "进阶" },
-    { "id": "net", "label": "网络", "group": "进阶" }
+    { "id": "fs", "label": "文件系统", "href": "/linux/basic/filesystem/01-filesystem/", "group": "基础" },
+    { "id": "perm", "label": "用户与权限", "href": "/linux/basic/permission/01-users-permissions/", "group": "基础" },
+    { "id": "shell", "label": "Shell 脚本", "href": "/linux/intermediate/system/01-shell-script/", "group": "进阶" },
+    { "id": "proc", "label": "进程管理", "href": "/linux/intermediate/system/02-process-management/", "group": "进阶" },
+    { "id": "svc", "label": "系统服务", "href": "/linux/intermediate/system/03-system-service/", "group": "进阶" },
+    { "id": "net", "label": "网络", "href": "/linux/intermediate/system/04-network/", "group": "进阶" }
   ],
   "edges": [
     { "source": "root", "target": "basics" },
