@@ -1,7 +1,7 @@
 {
   "nodes": [
     { "id": "root", "label": "Linux", "group": "核心" },
-    { "id": "basics", "label": "基础命令", "href": "/linux/basic/commands/file-ops/", "group": "基础" },
+    { "id": "basics", "label": "基础命令", "href": "/linux/basic/commands/01-file-ops/", "group": "基础" },
     { "id": "fs", "label": "文件系统", "group": "基础" },
     { "id": "perm", "label": "用户与权限", "group": "基础" },
     { "id": "shell", "label": "Shell 脚本", "group": "进阶" },

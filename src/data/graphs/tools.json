@@ -4,12 +4,19 @@
     { "id": "editor", "label": "编辑器与 IDE", "group": "效率" },
     { "id": "terminal", "label": "终端效率", "group": "效率" },
     { "id": "regex", "label": "正则表达式", "group": "效率" },
-    { "id": "netdebug", "label": "网络调试", "group": "效率" }
+    { "id": "netdebug", "label": "网络调试", "group": "效率" },
+    { "id": "text", "label": "grep/sed/awk", "href": "/tools/basic/cli/01-grep-sed-awk/", "group": "效率" },
+    { "id": "curl", "label": "curl", "href": "/tools/basic/cli/02-curl/", "group": "效率" },
+    { "id": "jq", "label": "jq", "href": "/tools/basic/cli/03-jq/", "group": "效率" }
   ],
   "edges": [
     { "source": "root", "target": "editor" },
     { "source": "root", "target": "terminal" },
     { "source": "terminal", "target": "regex", "label": "grep/sed" },
-    { "source": "root", "target": "netdebug" }
+    { "source": "root", "target": "netdebug" },
+    { "source": "terminal", "target": "text", "label": "文本处理" },
+    { "source": "text", "target": "regex", "label": "pattern" },
+    { "source": "netdebug", "target": "curl", "label": "HTTP 调试" },
+    { "source": "curl", "target": "jq", "label": "解析响应" }
   ]
 }

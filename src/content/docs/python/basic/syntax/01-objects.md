@@ -66,7 +66,7 @@ print(x)                    # [1] —— 原列表被改了
 ```
 
 这不是 bug 是特性，但要求一个纪律：**可变默认值绝不能做函数参数默认值**
-（详见[函数与闭包](/python/basic/func/01-functions-closures/)）。
+（详见[函数与闭包](/python/basic/functions/01-functions-closures/)）。
 
 不可变对象的价值：可以安全地在多线程间共享、可以做 dict 的 key
 （前提：可哈希）。

@@ -55,7 +55,7 @@ Python 的态度：sum/all/any/itertools.accumulate 覆盖了九成场景，
 
 ## itertools：惰性组合子
 
-全部返回迭代器，内存 O(1)，与[生成器管道](/python/basic/func/02-iterators-generators/)无缝拼接：
+全部返回迭代器，内存 O(1)，与[生成器管道](/python/basic/functions/02-iterators-generators/)无缝拼接：
 
 ```python
 from itertools import chain, islice, groupby, product, count

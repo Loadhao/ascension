@@ -88,7 +88,7 @@ class Point:
 
 `NotImplemented`（不是 `NotImplementedError`！）表示"我不会比这个类型"，
 解释器会转而尝试对面的 `__eq__`。要放进 set/dict 作 key 记得同时重写
-`__hash__`（见 [dict 与 set](/python/basic/data/02-dict-set/)）。
+`__hash__`（见 [dict 与 set](/python/basic/data-structures/02-dict-set/)）。
 
 ## property：字段的门卫
 

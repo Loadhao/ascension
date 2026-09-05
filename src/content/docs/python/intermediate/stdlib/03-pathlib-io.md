@@ -38,7 +38,7 @@ stats = [f.stat().st_size for f in Path("logs").iterdir() if f.is_file()]
 ```
 
 read_text/write_text 是"小文件一步到位"糖；大文件仍然回到生成器流式
-读取（见[迭代器与生成器](/python/basic/func/02-iterators-generators/)）。
+读取（见[迭代器与生成器](/python/basic/functions/02-iterators-generators/)）。
 
 ## with：资源必须托管
 

@@ -6,6 +6,9 @@
     { "id": "paxos", "label": "Paxos 与 Raft", "href": "/distributed/intermediate/consensus/01-paxos-raft/", "group": "共识" },
     { "id": "disttx", "label": "分布式事务", "href": "/distributed/intermediate/transaction/01-distributed-transaction/", "group": "事务" },
     { "id": "distid", "label": "分布式 ID", "href": "/distributed/intermediate/transaction/02-distributed-id/", "group": "事务" },
+    { "id": "consistency", "label": "数据一致性", "href": "/distributed/advanced/consistency/01-consistency-patterns/", "group": "一致" },
+    { "id": "ha", "label": "容灾多活", "href": "/distributed/advanced/availability/01-dr-multi-active/", "group": "落地" },
+    { "id": "tracing", "label": "链路追踪", "href": "/distributed/advanced/observability/01-distributed-tracing/", "group": "可观测" },
     { "id": "zk", "label": "ZooKeeper", "group": "落地" },
     { "id": "etcd", "label": "etcd", "group": "落地" },
     { "id": "seata", "label": "Seata", "group": "落地" },
@@ -21,6 +24,10 @@
     { "source": "paxos", "target": "kafka", "label": "KRaft" },
     { "source": "disttx", "target": "seata", "label": "AT 模式" },
     { "source": "disttx", "target": "distid", "label": "分库后的配套" },
-    { "source": "chash", "target": "kafka", "label": "分区分配的思想近亲" }
+    { "source": "chash", "target": "kafka", "label": "分区分配的思想近亲" },
+    { "source": "cap", "target": "consistency", "label": "取舍落地到业务" },
+    { "source": "disttx", "target": "consistency", "label": "幂等兜底" },
+    { "source": "consistency", "target": "ha", "label": "多活的代价" },
+    { "source": "ha", "target": "tracing", "label": "故障定位" }
   ]
 }
