@@ -68,6 +68,40 @@ kill -USR2 pid  # 热升级二进制（平滑升级，保留连接）
 `reload` 会关闭旧 worker 的连接但**把正在处理的请求跑完**，所以线上改配置
 基本零抖动。养成"改完先 `nginx -t`"的习惯能省下大量返工。
 
+## 一个请求在 worker 里的完整生命周期（深入）
+
+"epoll 事件循环"听着抽象，用一个请求从进来到回响应拆开它的内部流转：
+
+```text
+客户端发请求
+  → OS 网卡收到 → epoll_wait 把"可读"事件交给 worker
+  → worker 为新连接建立 http 状态机（读头）：
+       读请求头 → 匹配 server → 匹配 location
+  → 若转发（proxy_pass）：
+       worker 向 upstream 发起连接（异步，不阻塞）
+       等 upstream 回包时 worker 继续处理其他请求（这才是"高并发"的关键）
+  → upstream 回包 → worker 把响应写给客户端（异步可写）
+  → 事件驱动流程结束，连接按配置保持/关闭
+```
+
+**为什么这是"高"并发的本质**：一个事件循环线程**从不干等 IO**——它发起
+请求后立刻去忙别的连接，IO 完成再回来。对比"每连接一线程"模型，等 IO
+时线程闲置却占资源；Nginx 用几个 worker 就撑住了海量连接的"等待"。
+
+**两个由此得出的调优事实：**
+
+1. `worker_processes = CPU 核数`，因为每个 worker 是单线程，核数才等于
+   并行度；配多了反而上下文切换变多。
+2. `worker_connections` 是**每个 worker** 的最大连接数（doc 里字样常叫
+   `worker_rlimit_nofile` 配合调文件句柄上限）。海量长连接场景不调它、
+   不放大 `ulimit -n`，会先撞文件句柄而不是性能。
+
+### 别把 worker 当进程池
+
+worker 之间默认**不共享内存变量**（各自独立）——这一点在做"跨请求状态"
+（如共享计数器）时最容易误解：即使有多个 worker，任何状态若要跨请求都要
+放到上游（Redis/DB），不能指望 worker 内存。
+
 ## 小结
 
 - 快 = 事件驱动（epoll）+ 多 worker 满核并行，`worker_processes = 核数`。

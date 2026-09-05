@@ -66,6 +66,37 @@ server {
 还推荐用 **`health_check`**（商业版）/ 配合 `proxy_next_upstream` 在后端
 挂掉时自动重试下一个。
 
+## proxy_pass 尾斜杠：四种组合一张判定表（深入）
+
+"尾斜杠是否丢前缀"是最常见事故。把 `location` 与 `proxy_pass` 的斜杠
+四种组合一次列清，你就能对症设置而不用试错：
+
+```nginx
+# 假设后端真实接口：GET /api/detail (后端根路径直接是 detail)
+location /a/ { proxy_pass http://backend; }        # 情况 1
+location /a/ { proxy_pass http://backend/; }      # 情况 2
+location /a  { proxy_pass http://backend; }        # 情况 3
+location /a  { proxy_pass http://backend/; }      # 情况 4
+```
+
+| 情况 | 请求 `/a/x/y` 转发成 | 结论 |
+|---|---|---|
+| 1：location 带斜杠 + proxy 不带 | `http://backend/a/x/y` | **保留** location 前缀 |
+| 2：location 带斜杠 + proxy 带斜杠 | `http://backend/x/y` | **去掉** location 前缀 |
+| 3：location 不带斜杠 + proxy 不带 | `http://backend/a/x/y` | **保留**（同 1） |
+| 4：location 不带斜杠 + proxy 带斜杠 | `http://backend/x/y` | **去掉**（同 2） |
+
+**真正的决定因素只有一个：`proxy_pass` 里有没有**（`http://host:` 后的）**URI
+部分或尾斜杠**。带 → 匹配到的 location 前缀被替换；不带 → 完整原始 URI
+原样转发。
+
+**两条排障铁律：**
+
+1. **改配置前先用 `nginx -t`**，再 `curl http://localhost` 打出实际转发后的
+   地址（可在后端临时打日志），确认没丢前缀。
+2. `proxy_pass` 里目标 `host:port` 后面**跟了路径/斜杠**就要想清楚——最常见
+   的"代理后 404"都是这里丢了个前缀忘了补。
+
 ## 小结
 
 - 正向代理代表客户端、反向代理代表服务器；Nginx 是典型反向代理网关。
