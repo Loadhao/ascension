@@ -32,6 +32,24 @@ User(id="abc", ...)
 对比手写校验（`if not isinstance(...)` 的梯田）：**校验规则和字段定义
 写在同一行**，错了有精确的字段级错误报告，还是结构化嵌套的。
 
+## 核心管线：校验进、序列化出
+
+Pydantic 的价值全在**边界处的"进/出"两个动作**——它把不可信的原始 dict
+在入口转成强类型模型，出口再按需序列化（可排除敏感字段）：
+
+```mermaid
+flowchart LR
+    subgraph 入["边界入（可信化）"]
+        R["原始 dict / JSON<br/>（不可信）"] --> V["model_validate<br/>类型转换 + 约束校验"]
+        V --> M["强类型 User 模型"]
+    end
+    M --> U["业务代码<br/>访问强类型字段"]
+    M --> D["model_dump / dump_json<br/>序列化（exclude 敏感字段）"]
+    style 入 fill:#f5f0e6
+```
+
+整条链让"外部任意 JSON"在入口**一次性被驯服**，其后代码不再面对裸 dict。
+
 ## 嵌套模型：复杂结构层层解析
 
 ```python
@@ -51,6 +69,19 @@ order.user.name                                # 全部有类型保证
 
 原始 dict 的 `raw["user"]["naem"]`（拼错）运行时才炸，且报错位置
 不知所云；Pydantic 在入口一次解析，**之后代码面对的是强类型世界**。
+
+嵌套模型是一棵"一次递归解析的树"——外层校验到字段时，若它又是
+BaseModel，就递归调用其 `model_validate`：
+
+```mermaid
+flowchart TD
+    REQ["原始 dict"] --> O["Order.model_validate"]
+    O -->|"字段 user"| U["User<br/>递归校验"]
+    O -->|"字段 address"| A["Address<br/>递归校验"]
+    O -->|"字段 items"| I["list[dict]<br/>浅层校验"]
+    U --> DONE["整树强类型可用"]
+    style U fill:#f5f0e6
+```
 
 ## 序列化往返
 
