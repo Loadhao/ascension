@@ -179,6 +179,7 @@ export default defineConfig({
                         { label: '概览', link: '/nginx/intermediate/proxy/' },
                         { label: '反向代理与负载均衡', link: '/nginx/intermediate/proxy/01-reverse-proxy-lb/' },
                         { label: 'HTTPS、缓存与限流', link: '/nginx/intermediate/proxy/02-https-cache-ratelimit/' },
+                        { label: 'keepalived 与 Nginx 高可用', link: '/nginx/intermediate/proxy/03-keepalived-ha/' },
                       ],
                     },
                   ],
@@ -221,6 +222,7 @@ export default defineConfig({
                         { label: 'ArrayList 源码与扩容', link: '/java/basic/collection/01-arraylist/' },
                         { label: 'HashMap 源码分析', link: '/java/basic/collection/02-hashmap/' },
                         { label: 'ConcurrentHashMap 详解', link: '/java/basic/collection/03-concurrenthashmap/' },
+                        { label: '红黑树：从 BST 到 TreeMap', link: '/java/basic/collection/04-red-black-tree/' },
                       ],
                     },
                   ],
@@ -253,6 +255,7 @@ export default defineConfig({
                         { label: '事务与传播机制', link: '/java/intermediate/spring/04-transaction/' },
                         { label: 'Spring Boot 自动配置原理', link: '/java/intermediate/spring/05-springboot-autoconfig/' },
                         { label: 'MyBatis 集成：SqlSessionTemplate', link: '/java/intermediate/spring/06-mybatis-sqlsession/' },
+                        { label: '认证与单点登录：JWT/OAuth2/SSO/CAS', link: '/java/intermediate/spring/07-auth-sso/' },
                       ],
                     },
                     {

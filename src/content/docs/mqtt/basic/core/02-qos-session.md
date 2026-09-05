@@ -112,3 +112,8 @@ A 重连后：
 - QoS 从 0 到 2，可靠性升高、开销也升高；默认用 QoS 1 + 幂等消费。
 - 会话与连接分离：cleanSession 决定离线状态是否保留。
 - 遗嘱=异常掉线的主动通知，保留消息=给新订阅者补发最新状态。
+
+## 延伸阅读
+
+- [MQTT 学习笔记五：QoS、保留消息、清理会话解析（基于 mosquitto）（CSDN）](https://blog.csdn.net/zhuo_lee_new/article/details/90416644)——三大概念与 mosquitto 实测验证
+- [org.eclipse.paho.client.mqttv3 源码解析（二）接收（阿里云社区）](https://www.aliyun.com/jiaocheng/25334.html)——客户端视角的消息接收与 QoS 应答实现

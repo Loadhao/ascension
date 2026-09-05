@@ -185,3 +185,7 @@ spring:
 - Stream 用 Binder 抽象掉具体 MQ，业务只依赖信道/绑定。
 - 函数式 Supplier/Consumer + yaml 绑定，group 决定集群消费还是广播。
 - 追求解耦可切换用 Stream，追求强控制/性能用原生客户端。
+
+## 延伸阅读
+
+- [Spring Cloud Stream 3.x 版本使用教程及如何整合 RabbitMQ（code84）](https://code84.com/747589.html)——3.x 函数式绑定的上手教程，与本篇函数式演进对照阅读

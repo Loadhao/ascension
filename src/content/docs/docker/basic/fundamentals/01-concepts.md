@@ -131,3 +131,7 @@ flowchart LR
 - 容器消亡时可写层随之丢弃——需要持久化的数据必须放**数据卷**。
 - `docker history` / `docker image inspect` 是看懂分层的第一工具。
 - Registry 中 `nginx:1.27` 里 `1.27` 是 tag，`nginx` 是仓库名；`latest` 别进生产。
+
+## 延伸阅读
+
+- [10 张图带你深入理解 Docker 容器和镜像（DockOne.io）](http://dockone.io/article/783)——分层与 CoW 的图解版，配本篇"镜像与容器"一节食用
