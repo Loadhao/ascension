@@ -1,0 +1,1261 @@
+{
+  "direction": "SQL",
+  "total": 156,
+  "deduped": 156,
+  "stats": {
+    "A": 26,
+    "B": 49,
+    "C": 69,
+    "D": 12
+  },
+  "items": [
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/ClinkHouse",
+      "title": "一文带你走进clickhouse的世界(3W字建议收藏)",
+      "url": "https://mp.weixin.qq.com/s/KwMmZybbMzx3kTO7aK-5qA",
+      "domain": "mp.weixin.qq.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/InfluxDB",
+      "title": "InfluxDB v2.0 文档",
+      "url": "https://v2.docs.influxdata.com/v2.0/",
+      "domain": "v2.docs.influxdata.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/InfluxDB",
+      "title": "前言 · InfluxDB中文文档",
+      "url": "https://jasper-zhang1.gitbooks.io/influxdb/content/",
+      "domain": "jasper-zhang1.gitbooks.io"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/MongoDB/使用小结",
+      "title": "10分钟完成MongoDB的容量规划及硬件配置 | MongoDB中文社区",
+      "url": "https://mongoing.com/archives/878",
+      "domain": "mongoing.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/MongoDB/使用小结",
+      "title": "MongoDB大量集合启动加载优化原理 | MongoDB中文社区",
+      "url": "https://mongoing.com/archives/34733",
+      "domain": "mongoing.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/MongoDB/分片技术",
+      "title": "MongoDB 分片架构配置-zenge_nodes-51CTO博客",
+      "url": "https://blog.51cto.com/zengestudy/2105849",
+      "domain": "blog.51cto.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/MongoDB/分片技术",
+      "title": "MongoDB 分片集群技术 - 惨绿少年 - 博客园",
+      "url": "https://www.cnblogs.com/clsn/p/8214345.html#auto_id_0",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/MongoDB/复制集",
+      "title": "MongoDB复制集原理 - 偶素浅小浅 - 博客园",
+      "url": "https://www.cnblogs.com/purpleraintear/p/6035111.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/MongoDB/官网",
+      "title": "MongoDB最佳实践中文手册 - Tsoagta - 博客园",
+      "url": "https://www.cnblogs.com/Tsoagta/p/8877404.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/MongoDB/性能",
+      "title": "开发高性能的MongoDB应用—浅谈MongoDB性能优化 - 吴纹羽 - 博客园",
+      "url": "https://www.cnblogs.com/mokafamily/p/4102829.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/MyBatis/批量操作",
+      "title": "Mybatis SqlSessionTemplate 源码解析 - 大新博客 - 博客园",
+      "url": "https://www.cnblogs.com/daxin/p/3544188.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/MySQL/索引",
+      "title": "B-tree/b+tree 原理以及聚簇索引和非聚簇索引 - 白先森的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/u010727189/article/details/79399384",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/PostgreSQL/学习官网",
+      "title": "PostgreSQL：文档",
+      "url": "https://www.postgresql.org/docs/",
+      "domain": "www.postgresql.org"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/PostgreSQL/性能",
+      "title": "PostgresSQL 性能优化笔记 - 简书",
+      "url": "https://www.jianshu.com/p/4ad2aa772812",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/PostgreSQL/高可用",
+      "title": "PG的两种集群技术：Pgpool-II与Postgres-XL_-= 大 明 =- 的专栏-CSDN博客_postgresql 集群",
+      "url": "https://blog.csdn.net/zhq651/article/details/91347407",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/PostgreSQL/高可用",
+      "title": "postgresql + pgpool 构建容灾高可用集群(数据同步流复制/主备自动切换) - 世间草木 - 博客园",
+      "url": "https://www.cnblogs.com/applerosa/p/13160566.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/TDengine",
+      "title": "文档 | 涛思数据",
+      "url": "https://www.taosdata.com/cn/documentation/",
+      "domain": "www.taosdata.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/TiDB",
+      "title": "TiDB DBA 课程 | PingCAP University",
+      "url": "https://university.pingcap.com/tidb-dba-courses/",
+      "domain": "university.pingcap.com"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/分库分表/Apache-shardingSphere",
+      "title": "ShardingSphere官网-开源的分布式数据库中间件",
+      "url": "http://shardingsphere.apache.org/index_zh.html",
+      "domain": "shardingsphere.apache.org"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/分库分表/Apache-shardingSphere",
+      "title": "海量数据分库分表方案（一）算法方案 - 地藏Kelvin - 博客园",
+      "url": "https://www.cnblogs.com/kelvin-cai/p/12793361.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/数据库原理",
+      "title": "数据库原理知识梳理 - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/37435149",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/数据库原理",
+      "title": "数据库原理笔记 - 古立 - 博客园",
+      "url": "https://www.cnblogs.com/defias/p/3331740.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "Redis 总结精讲 看一篇成高手系统-4 - hjm4702192的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/hjm4702192/article/details/80518856",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "A",
+      "reason": "深度体系化内容",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "Redis 高可用集群原理和实践 - 掘金",
+      "url": "https://juejin.cn/post/7103551714879340580",
+      "domain": "juejin.cn"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "Redis命令中心（Redis commands） -- Redis中国用户组（CRUG）",
+      "url": "http://www.redis.cn/commands.html",
+      "domain": "www.redis.cn"
+    },
+    {
+      "level": "A",
+      "reason": "官方文档/文档站",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "redis-doc",
+      "url": "https://redis.io/documentation",
+      "domain": "redis.io"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关",
+      "title": "代码生成 - SQL之父",
+      "url": "https://www.sqlfather.com/",
+      "domain": "www.sqlfather.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关/ClinkHouse",
+      "title": "ClickHouse - 安装",
+      "url": "https://clickhouse.tech/#quick-start",
+      "domain": "clickhouse.tech"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/CRUD",
+      "title": "MongoDB之聚合查询 - rabbit鲜森 - CSDN博客",
+      "url": "https://blog.csdn.net/sinat_32366329/article/details/82080900",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/springboot整合",
+      "title": "(1条消息)springData+mongodb 条件查询+条件分页排序 - qq_35534453的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_35534453/article/details/67639620",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/springboot整合",
+      "title": "springboot整合mongodb - 简书",
+      "url": "https://www.jianshu.com/p/7d9b6f36ef2a",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/分页处理",
+      "title": "MongoDB动态条件之分页查询 - 时间-海 - 博客园",
+      "url": "https://www.cnblogs.com/wslook/p/9275861.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/分页处理",
+      "title": "mongodb在Java中的分页查询 - 用心丈量世界 - CSDN博客",
+      "url": "https://blog.csdn.net/wanglong1990421/article/details/77978527",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/复制集",
+      "title": "MongoDB副本集 - 数据库 - SegmentFault 思否",
+      "url": "https://segmentfault.com/a/1190000013867864?utm_source=tag-newest",
+      "domain": "segmentfault.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/存储引擎",
+      "title": "mongodb存储引擎WiredTiger - 简书",
+      "url": "https://www.jianshu.com/p/bea62e2dce31",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关/MongoDB/官网",
+      "title": "MongoDB中文社区 | 中文社区",
+      "url": "http://www.mongoing.com/",
+      "domain": "www.mongoing.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/性能",
+      "title": "MongoDB与MySQL的插入、查询性能测试 - atarik@163.com - CSDN博客",
+      "url": "https://blog.csdn.net/asdfsadfasdfsa/article/details/60872180",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/性能",
+      "title": "MongoDB查询性能分析—— explain 操作返回结果详解 - 学习,你不是一个人在战斗 - CSDN博客",
+      "url": "https://blog.csdn.net/user_longling/article/details/83957085",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/索引",
+      "title": "MongoDB 索引相关知识 - jyzhou - 博客园",
+      "url": "https://www.cnblogs.com/zhoujinyi/p/4665903.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MongoDB/索引",
+      "title": "MongoDB：16-MongoDB-索引数组字段和索引子文档字段 - 琦彦 - CSDN博客",
+      "url": "https://blog.csdn.net/fly910905/article/details/78336961",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关/MyBatis",
+      "title": "MyBatis-Plus",
+      "url": "https://mp.baomidou.com/",
+      "domain": "mp.baomidou.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关/MyBatis/PageHelper",
+      "title": "MyBatis 分页插件 PageHelper",
+      "url": "https://pagehelper.github.io/",
+      "domain": "pagehelper.github.io"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MyBatis/批量操作",
+      "title": "mybatis批量插入、批量更新和批量删除 - 简书",
+      "url": "https://www.jianshu.com/p/041bec8ae6d3",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MyBatis/批量操作",
+      "title": "mysql批量insert时，若某个字段已经存在，则更新row - 醉疯觞博客 - CSDN博客",
+      "url": "https://blog.csdn.net/u012143730/article/details/90519229",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MySQL/事务",
+      "title": "事务的隔离级别 - h294590501的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/h294590501/article/details/80386000",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关/MySQL/安装",
+      "title": "MySQL官方下载地址",
+      "url": "https://downloads.mysql.com/archives/community/",
+      "domain": "downloads.mysql.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MySQL/性能",
+      "title": "【Mysql优化】聚簇索引与非聚簇索引概念 - QiaoZhi - 博客园",
+      "url": "https://www.cnblogs.com/qlqwjy/p/8592684.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/MySQL/锁",
+      "title": "浅谈Mysql共享锁、排他锁、悲观锁、乐观锁及其使用场景 - localhost01 - CSDN博客",
+      "url": "https://blog.csdn.net/localhost01/article/details/78720727",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/OLAP",
+      "title": "MongoDB的备份与恢复 - 惨绿少年 - 博客园",
+      "url": "https://www.cnblogs.com/clsn/p/8244206.html#auto-id-13",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/OLAP",
+      "title": "fancylife/mongodb-backuper: mongodb数据备份",
+      "url": "https://github.com/fancylife/mongodb-backuper",
+      "domain": "github.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/OLAP",
+      "title": "数据库设计的基础——数据库范式",
+      "url": "https://juejin.im/post/6844904183611523086",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/PostgreSQL/与MySQL对比",
+      "title": "MySQL和PgSQL的区别 - Zuoerfeng - CSDN博客",
+      "url": "https://blog.csdn.net/u012414189/article/details/84064146",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/PostgreSQL/存储过程",
+      "title": "PostgreSQL存储过程(1)-基于SQL的存储过程 - li0924 - 博客园",
+      "url": "https://www.cnblogs.com/lottu/p/7404722.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/PostgreSQL/安装",
+      "title": "Postgresql主从配置 - 等待与憧憬 - 博客园",
+      "url": "https://www.cnblogs.com/guoximing/p/9429009.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/PostgreSQL/性能",
+      "title": "PostgreSQL 慢查询SQL语句跟踪_数据库_KK 笔记：专注数据-CSDN博客",
+      "url": "https://blog.csdn.net/kk185800961/article/details/78490191",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/PostgreSQL/性能",
+      "title": "PostgreSQL 慢查询SQL跟踪 - VicLW - 博客园",
+      "url": "https://www.cnblogs.com/VicLiu/p/12017704.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/PostgreSQL/数据加密",
+      "title": "Java与Postgresql中的加解密API对应 - 彭冲的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/jerome_peng/article/details/77935463",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/PostgreSQL/数据加密",
+      "title": "Postgresql数据加密函数介绍 - dazuiba008 - CSDN博客",
+      "url": "https://blog.csdn.net/dazuiba008/article/details/79641321",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/PostgreSQL/数据加密",
+      "title": "postgresql数据库使用AES加解密和java使用AES加解密不一致的问题 - 夕阳的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/hcd321/article/details/84920523",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/SQL",
+      "title": "DQL、DML、DDL、DCL的概念与区别 - 范兵 - 博客园",
+      "url": "https://www.cnblogs.com/fan-yuan/p/7879353.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/SQL",
+      "title": "SQL中Where与Having的区别 - 反光的小鱼儿 - 博客园",
+      "url": "https://www.cnblogs.com/fanguangdexiaoyuer/p/6268211.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关/SequoiaDB",
+      "title": "巨杉数据库 SequoiaDB—金融级分布式数据库",
+      "url": "http://www.sequoiadb.com/cn/",
+      "domain": "www.sequoiadb.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/SqlServer",
+      "title": "SQL Server的权限设置以及数据备份还原 - 关系型数据库 - 亿速云",
+      "url": "https://www.yisu.com/zixun/2134.html",
+      "domain": "www.yisu.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关/TiDB",
+      "title": "PingCAP-国产开源分布式关系型数据库",
+      "url": "https://pingcap.com/",
+      "domain": "pingcap.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/数据库原理",
+      "title": "mysql 数据库的设计三范式 - cool小伙 - 博客园",
+      "url": "https://www.cnblogs.com/xiaozengzeng/p/10720226.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/数据库原理",
+      "title": "sql中完全依赖，部分依赖，传递依赖关系_linkunpeng_的博客-CSDN博客",
+      "url": "https://blog.csdn.net/linkunpeng_/article/details/107783446",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/数据库原理",
+      "title": "数据库关系模式的函数依赖习题讲解 - 云+社区 - 腾讯云",
+      "url": "https://cloud.tencent.com/developer/article/1671853",
+      "domain": "cloud.tencent.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/数据库原理",
+      "title": "数据库的关系运算包括哪些？-SQL-PHP中文网",
+      "url": "https://www.php.cn/sql/453933.html",
+      "domain": "www.php.cn"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/数据库原理",
+      "title": "数据库设计三大范式 - Ruthless - 博客园",
+      "url": "https://www.cnblogs.com/linjiqin/archive/2012/04/01/2428695.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/数据库原理",
+      "title": "超键、候选键和主键_陈金荣 -CSDN博客",
+      "url": "https://blog.csdn.net/cjr15233661143/article/details/12970323",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关/数据库版本管理工具",
+      "title": "Flyway-官方地址",
+      "url": "https://flywaydb.org/",
+      "domain": "flywaydb.org"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "Redis批量删除key的小技巧，你知道吗？ - Java碎碎念 - 博客园",
+      "url": "https://www.cnblogs.com/haha12/p/11327906.html#h1scanxargs",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "Redis的key过期处理策略 - 半城枫叶半城雨丶 - 博客园",
+      "url": "https://www.cnblogs.com/xinde123/p/8295860.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "B",
+      "reason": "官方入口/产品页",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "※ Redis学习网站",
+      "url": "https://try.redis.io/",
+      "domain": "try.redis.io"
+    },
+    {
+      "level": "B",
+      "reason": "主题深度文章",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "使用流水线（pipelined）提高Redis的命令性能",
+      "url": "http://c.biancheng.net/view/4546.html",
+      "domain": "c.biancheng.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/ClinkHouse",
+      "title": "【错误提示】localhost:9000 failed on connection exception: java.net.ConnectException: 拒绝连接_u013248911的博客-CSDN博客",
+      "url": "https://blog.csdn.net/u013248911/article/details/81605998?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.vipsorttest&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.vipsorttest",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/InfluxDB",
+      "title": "InfluxDB 介绍、安装及基本使用 - zx711166的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/zx711166/article/details/84325838",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/InfluxDB",
+      "title": "InfluxDB学习之InfluxDB的安装和简介 - waitig - 博客园",
+      "url": "https://www.cnblogs.com/waitig/p/6044177.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/InfluxDB",
+      "title": "Influxdb配置文件详解---influxdb.conf - 山人是我师 - 博客园",
+      "url": "https://www.cnblogs.com/guyeshanrenshiwoshifu/p/9188368.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/InfluxDB",
+      "title": "influxdb 安装及简单使用 - 我和我的倔强 - 博客园",
+      "url": "https://www.cnblogs.com/takemybreathaway/articles/10774787.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/CRUD",
+      "title": "MongoDB中关于Criteria的各种查询实例(is、in、regex、gte、lte、elemMatch) - 全幼稚园最可爱 - CSDN博客",
+      "url": "https://blog.csdn.net/u011974399/article/details/79384077",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/CRUD",
+      "title": "java 查询 mongodb 中的objectid - Hi_Amos - 博客园",
+      "url": "https://www.cnblogs.com/amosli/p/3616643.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/CRUD",
+      "title": "mongodb_查询操作使用_条件查询、where子句等(转) - 幻星宇 - 博客园",
+      "url": "https://www.cnblogs.com/xingmeng/p/5133782.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/springboot整合",
+      "title": "(1条消息)SpringBoot:java实现Repository统一接口操作MongoDB - G0_hw - CSDN博客",
+      "url": "https://blog.csdn.net/G0_hw/article/details/78319472",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/springboot整合",
+      "title": "MongoDB 保存Java实体对象数据出现_class 如何去掉 - zhangvalue的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/zhangvalue/article/details/89709818",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/springboot整合",
+      "title": "Mongodb4.0+spring boot+事务问题（爬坑） - weixin_42322445的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/weixin_42322445/article/details/89358688",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/springboot整合",
+      "title": "崛起于Springboot2.X之集成MongoDB使用Repository增删改查(26) - 纯粹而又极致的光--木九天 - OSCHINA",
+      "url": "https://my.oschina.net/mdxlcj/blog/1859615",
+      "domain": "my.oschina.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/使用小结",
+      "title": "MongoDB Aggregation Match ObjectId 技术指南",
+      "url": "http://www.chinacion.cn/article/562.html",
+      "domain": "www.chinacion.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/使用小结",
+      "title": "MongoDB使用小结：一些不常见的经验分享 - 烛秋 - 博客园",
+      "url": "https://www.cnblogs.com/cswuyg/p/4355948.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/使用小结",
+      "title": "mongoose Schema 的静态方法和query helper方法 - Postbird - 猫既吾命",
+      "url": "http://www.ptbird.cn/monoose-schema-static-query-helper-methods.html",
+      "domain": "www.ptbird.cn"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/分片技术",
+      "title": "MongoDB 分片管理 - pursuer.chen - 博客园",
+      "url": "https://www.cnblogs.com/chenmh/p/8963215.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/分片技术",
+      "title": "MongoDB分片（Sharding）技术 - duanxz - 博客园",
+      "url": "https://www.cnblogs.com/duanxz/p/10730121.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/分片技术",
+      "title": "Mongodb分片集群部署 - 简书",
+      "url": "https://www.jianshu.com/p/cb55bb333e2d",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/分片技术",
+      "title": "mongodb mongod 启动参数 - Xsi64 - 博客园",
+      "url": "https://www.cnblogs.com/xsi640/p/3765911.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/分片技术",
+      "title": "使用MongoDB进行分片 - 云+社区 - 腾讯云",
+      "url": "https://cloud.tencent.com/developer/article/1425928",
+      "domain": "cloud.tencent.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/复制集",
+      "title": "MongoDB Ops Manager 部署指南-candon123-51CTO博客",
+      "url": "https://blog.51cto.com/candon123/2162461",
+      "domain": "blog.51cto.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/复制集",
+      "title": "Mongodb 集群配置用户名密码认证 - weixin_33806300的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/weixin_33806300/article/details/92196599",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/复制集",
+      "title": "Mongodb-复制集架构搭建 - 长裙小短腿的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/weixin_38934186/article/details/82801568",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/复制集",
+      "title": "mongodb需要配置仲裁节点 - yisun123456的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/yisun123456/article/details/79161279",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/复制集",
+      "title": "搭建高可用mongodb集群（四）—— 分片 | 严澜(lanceyan)的博客 - 技术分享 框架交流 大数据处理 架构搭建 机器人",
+      "url": "http://www.lanceyan.com/tech/arch/mongodb_shard1.html",
+      "domain": "www.lanceyan.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/常用命令",
+      "title": "MongoDB常用命令 - --smile - 博客园",
+      "url": "https://www.cnblogs.com/--smile/p/11055204.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/常用命令",
+      "title": "Mongodb启动命令mongod参数说明 - 交流技术，不断学习 - OSCHINA",
+      "url": "https://my.oschina.net/LingBlog/blog/338492",
+      "domain": "my.oschina.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/日志",
+      "title": "Logback日志输出到mongodb - xiweiller的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/xiweiller/article/details/82665378",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MongoDB/索引",
+      "title": "mongoose 数据过期 - Mr_Kahn - 博客园",
+      "url": "https://www.cnblogs.com/Mr-Kahn/articles/11254654.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/配置设置",
+      "title": "(1条消息)mongodb 启用身份验证 - Mori技术客栈 - CSDN博客",
+      "url": "https://blog.csdn.net/weixin_36492969/article/details/80999673",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/配置设置",
+      "title": "MongoDB创建用户和库 - VacantYang的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/lin521lh/article/details/79863005",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MongoDB/配置设置",
+      "title": "MongoDB开启安全认证 - jeanette_zlj的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/jeanette_zlj/article/details/79563954",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MyBatis/批量操作",
+      "title": "MyBatis7：MyBatis插件及示例----打印每条SQL语句及其执行时间 - 五月的仓颉 - 博客园",
+      "url": "https://www.cnblogs.com/xrq730/p/6972268.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MyBatis/批量操作",
+      "title": "PostgreSQL on duplicate update - 水水~~~ - OSCHINA",
+      "url": "https://my.oschina.net/beetlerx/blog/1554475",
+      "domain": "my.oschina.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MyBatis/批量操作",
+      "title": "mybatis的insert元素属性详解 及 在insert插入数据获取主键id的值 - a281246240的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/a281246240/article/details/53463620",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MySQL/学习",
+      "title": "MySQL常用数据类型 - GeaoZhang - 博客园",
+      "url": "https://www.cnblogs.com/geaozhang/p/6718773.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MySQL/安装",
+      "title": "MySQL- 5..7.24-winx64 安装详解 - zgfraymond - 博客园",
+      "url": "http://www.cnblogs.com/zgfraymond/articles/9938880.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/MySQL/索引",
+      "title": "简单剖析B树（B-Tree）与Ｂ+树 - 编程随笔与杂谈 - CSDN博客",
+      "url": "https://blog.csdn.net/z_ryan/article/details/79685072",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/MySQL/设置",
+      "title": "MySQL如何修改密码 - 眼泪，还是流了 - 博客园",
+      "url": "http://www.cnblogs.com/yang82/p/7794712.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/OLAP",
+      "title": "30分钟概览OLAP——起源，概念及现状_数据库_简单就好-CSDN博客",
+      "url": "https://blog.csdn.net/xwc35047/article/details/86369465",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/OLAP",
+      "title": "postgresql数据库时区设置_数据库_ozhy111的博客-CSDN博客",
+      "url": "https://blog.csdn.net/ozhy111/article/details/91411244?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/OLAP",
+      "title": "questdb/README.zh-cn.md at master · questdb/questdb",
+      "url": "https://github.com/questdb/questdb/blob/master/i18n/README.zh-cn.md",
+      "domain": "github.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/OLAP",
+      "title": "「数据库调优」屡试不爽的面试连环combo - 掘金",
+      "url": "https://juejin.im/post/5ee193a1e51d45783d0eb8b2",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/OLAP",
+      "title": "数据库时区问题_数据库_蓝凌的博客-CSDN博客",
+      "url": "https://blog.csdn.net/qq_30553235/article/details/79612824",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/PostgreSQL/与MySQL对比",
+      "title": "MySQL与PostgreSQL相比哪个更好？ - 程序猿开发日志【学习永无止境】 - CSDN博客",
+      "url": "https://blog.csdn.net/hj7jay/article/details/65434955",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/PostgreSQL/与MySQL对比",
+      "title": "MySQL和PostgreSQL的比较 - 我是小黑，我要发发。 - CSDN博客",
+      "url": "https://blog.csdn.net/xiaohei5188/article/details/78967537",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/PostgreSQL/学习官网",
+      "title": "PostgreSQL教程™",
+      "url": "https://www.yiibai.com/postgresql/",
+      "domain": "www.yiibai.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/PostgreSQL/学习官网",
+      "title": "postgreSQL常用基本类型 - 天涯 - ITeye博客",
+      "url": "https://fzd8589.iteye.com/blog/1119689",
+      "domain": "fzd8589.iteye.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/PostgreSQL/安装",
+      "title": "postgresql编译安装与调试（tar.gz）_Paris_0008的博客-CSDN博客",
+      "url": "https://blog.csdn.net/paris_0008/article/details/53465788",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/PostgreSQL/安装",
+      "title": "安装postgreSQL出现configure:error:readline library not found解决方法 - Still water run deep - 博客园",
+      "url": "https://www.cnblogs.com/xiaotengyi/p/3888681.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/PostgreSQL/常用设置",
+      "title": "pgsql远程设置 - qq_36179561的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_36179561/article/details/79925403",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/PostgreSQL/常见问题",
+      "title": "PostgreSQL 函数 - 殇莫忆的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/qq_28289405/article/details/80485515",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/PostgreSQL/常见问题",
+      "title": "Postgresql常用函数整理 - 猿林锦风 - 博客园",
+      "url": "https://www.cnblogs.com/keynotes/p/8430310.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/PostgreSQL/常见问题",
+      "title": "postgreSQL格式化时间的函数详解 - snn1410的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/snn1410/article/details/7741283",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/PostgreSQL/常见问题",
+      "title": "postgreSql——时区问题 - 晴天彩虹 - 博客园",
+      "url": "https://www.cnblogs.com/panpanwelcome/p/7837654.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/PostgreSQL/性能",
+      "title": "POSTGRESQL 查看用户使用情况以及杀掉相应的进程 - 李秋 - 博客园",
+      "url": "https://www.cnblogs.com/liqiu/p/4096927.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/PostgreSQL/性能",
+      "title": "postgresql修改最大连接数 - 迪米特 - 博客园",
+      "url": "https://www.cnblogs.com/shijingjing07/p/6178878.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/PostgreSQL/高可用",
+      "title": "pg_hba.conf、pool_hba.conf 以及 pool_passwd 三者间的关系 - autopenguin - 博客园",
+      "url": "https://www.cnblogs.com/autopenguin/p/10069880.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/PostgreSQL/高可用",
+      "title": "pgpool-II 入门教程 - shuaixf - 博客园",
+      "url": "https://www.cnblogs.com/shuaixf/archive/2011/11/22/2259279.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/PostgreSQL/高可用",
+      "title": "postgresql 高可用集群搭建资料 - 简书",
+      "url": "https://www.jianshu.com/p/77f07af6ca4b",
+      "domain": "www.jianshu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/SQL",
+      "title": "后端程序员必备：书写高质量SQL的30条建议 - 掘金",
+      "url": "https://juejin.im/post/5e624d156fb9a07ca80ab6f2?utm_source=gold_browser_extension",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/SQL",
+      "title": "数据库group by 两个或以上条件的分析 - 汪小哥 - CSDN博客",
+      "url": "https://blog.csdn.net/u012881904/article/details/51325044",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/newSQL",
+      "title": "newSQL 到底是什么？ - 知乎",
+      "url": "https://zhuanlan.zhihu.com/p/95650799",
+      "domain": "zhuanlan.zhihu.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/newSQL",
+      "title": "我们为什么放弃 MongoDB 和 MySQL，选择 TiDB",
+      "url": "https://juejin.im/post/6877727080675868679?utm_source=gold_browser_extension#heading-2",
+      "domain": "juejin.im"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/数据库原理",
+      "title": "关系代数运算_ACM-CSDN博客_关系代数运算",
+      "url": "https://blog.csdn.net/qq_37521566/article/details/80854134",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "操作/速查/排错",
+      "path": "数据库相关/数据库版本管理工具",
+      "title": "flyway的快速入门教程",
+      "url": "https://blog.csdn.net/qq_41378597/article/details/124134146",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/缓存/ehcache",
+      "title": "【Ehcache】ehcache2.5.2缓存的使用 - QiaoZhi - 博客园",
+      "url": "https://www.cnblogs.com/qlqwjy/p/9613269.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "StringRedisTemplate操作redis数据 - 慢城 - 博客园",
+      "url": "https://www.cnblogs.com/slowcity/p/9002660.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "C",
+      "reason": "分类下一般条目",
+      "path": "数据库相关/缓存/redis/redis流水号",
+      "title": "基于redis的规则流水号生成(一)_数据库_流云小筑-CSDN博客",
+      "url": "https://blog.csdn.net/wzh474420999/article/details/81352848",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（docs4dev\\.com）",
+      "path": "数据库相关/MongoDB/使用小结",
+      "title": "Mongodb v3.6 中文文档 - $dateFromString (aggregation) | Docs4dev",
+      "url": "https://www.docs4dev.com/docs/zh/mongodb/v3.6/reference/reference-operator-aggregation-dateFromString.html",
+      "domain": "www.docs4dev.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（docs4dev\\.com）",
+      "path": "数据库相关/MongoDB/使用小结",
+      "title": "Mongodb v3.6 中文文档 - $dateToString (aggregation) | Docs4dev",
+      "url": "https://www.docs4dev.com/docs/zh/mongodb/v3.6/reference/reference-operator-aggregation-dateToString.html",
+      "domain": "www.docs4dev.com"
+    },
+    {
+      "level": "D",
+      "reason": "错放（与方向无关）",
+      "path": "数据库相关/MongoDB/分片技术",
+      "title": "npm 中文文档",
+      "url": "https://www.npmjs.cn/getting-started/what-is-npm/",
+      "domain": "www.npmjs.cn"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（blog\\.sina\\.com\\.cn）",
+      "path": "数据库相关/MongoDB/分页处理",
+      "title": "MongoDB分页处理方案（适用于一般数据库的分页方法）_大立_新浪博客",
+      "url": "http://blog.sina.com.cn/s/blog_56545fd30101442b.html",
+      "domain": "blog.sina.com.cn"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（it1352\\.com）",
+      "path": "数据库相关/MongoDB/分页处理",
+      "title": "MongoDB聚合的有效分页？ - IT屋-程序员软件开发技术分享社区",
+      "url": "https://www.it1352.com/1636287.html",
+      "domain": "www.it1352.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（bbs\\.csdn\\.net）",
+      "path": "数据库相关/MongoDB/索引",
+      "title": "(3条消息) MONGODB索引的过期时间问题-CSDN论坛",
+      "url": "https://bbs.csdn.net/topics/392019189",
+      "domain": "bbs.csdn.net"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（cache\\.baiducontent\\.com）",
+      "path": "数据库相关/MySQL/设置",
+      "title": "开启MySQL远程访问权限 允许远程连接 - weifengCorp - 博客园",
+      "url": "http://cache.baiducontent.com/c?m=9f65cb4a8c8507ed19fa950d100b92235c4380146d8b804b2281d25f93130a1c187ba6ec7c76475886c67a6300b20b41effb3071330327a09bbfd20c82e5866d72c8713b2f57c7024cc418dfdc3027d656e74d99a50e96bce733e3b9a4d5c82457dd23046df1819c5b7003ba6ae76530f4d7ee5f642c&p=9b759a4f87820afc57efd4651e&newp=882a9f1d95d009e405be9b7c4653d8224216ed603bddc44324b9d71fd325001c1b69e7bf27281700d0ce7d6004a84c5aeff73c74341766dada9fca458ae7c4706c9b6f7f2d&user=baidu&fm=sc&query=mysql%D0%DE%B8%C4%D4%B6%B3%CC%B7%C3%CE%CA&qid=cda3f8f20006997c&p1=1",
+      "domain": "cache.baiducontent.com"
+    },
+    {
+      "level": "D",
+      "reason": "同主题多篇（对比类）",
+      "path": "数据库相关/PostgreSQL/与MySQL对比",
+      "title": "PostgreSQL与MySQL对比 - tiandao2009的博客 - CSDN博客",
+      "url": "https://blog.csdn.net/tiandao2009/article/details/79839037",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "D",
+      "reason": "错放（与方向无关）",
+      "path": "数据库相关/SQL",
+      "title": "CountDownLatch的妙用 - 飞在江湖的专栏 - CSDN博客",
+      "url": "https://blog.csdn.net/figo0423/article/details/80604921",
+      "domain": "blog.csdn.net"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（w3school\\.com\\.cn）",
+      "path": "数据库相关/SQL",
+      "title": "SQL 简介",
+      "url": "http://www.w3school.com.cn/sql/sql_intro.asp",
+      "domain": "www.w3school.com.cn"
+    },
+    {
+      "level": "D",
+      "reason": "同主题多篇（对比类）",
+      "path": "数据库相关/数据库原理",
+      "title": "平凡依赖，非平凡依赖，完全依赖，部分依赖，传递依赖，直接依赖的区别 - CC陈三愿 - 博客园",
+      "url": "https://www.cnblogs.com/guojiaxue/p/12655068.html",
+      "domain": "www.cnblogs.com"
+    },
+    {
+      "level": "D",
+      "reason": "低价值平台（wenku\\.baidu\\.com）",
+      "path": "数据库相关/数据库原理",
+      "title": "数据库关系运算 - 百度文库",
+      "url": "https://wenku.baidu.com/view/483b09836e1aff00bed5b9f3f90f76c661374cd0.html",
+      "domain": "wenku.baidu.com"
+    }
+  ]
+}

@@ -25,3 +25,6 @@ pnpm-debug.log*
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# 书签源数据（个人全量书签，不入公开仓库；可随时从浏览器重新导出）
+bookmark-kb-design/source/
