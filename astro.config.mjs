@@ -138,7 +138,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '基础命令',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/linux/basic/commands/' },
                         { label: '文件与目录操作', link: '/linux/basic/commands/01-file-ops/' },
@@ -159,7 +159,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '配置基础',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/nginx/basic/config/' },
                         { label: '工作模型与配置核心', link: '/nginx/basic/config/01-working-model/' },
@@ -174,7 +174,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '代理进阶',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/nginx/intermediate/proxy/' },
                         { label: '反向代理与负载均衡', link: '/nginx/intermediate/proxy/01-reverse-proxy-lb/' },
@@ -202,7 +202,7 @@ export default defineConfig({
                   items: [
                     {
                       label: 'Java 基础',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/java/basic/syntax/' },
                         { label: '面向对象：封装、继承、多态', link: '/java/basic/syntax/01-oop/' },
@@ -215,7 +215,7 @@ export default defineConfig({
                     },
                     {
                       label: '集合框架',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/java/basic/collection/' },
                         { label: 'ArrayList 源码与扩容', link: '/java/basic/collection/01-arraylist/' },
@@ -231,7 +231,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '并发编程',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/java/intermediate/concurrent/' },
                         { label: '线程基础', link: '/java/intermediate/concurrent/01-thread-basics/' },
@@ -244,7 +244,7 @@ export default defineConfig({
                     },
                     {
                       label: 'Spring 框架',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/java/intermediate/spring/' },
                         { label: 'IoC 容器与 Bean 生命周期', link: '/java/intermediate/spring/01-ioc-bean-lifecycle/' },
@@ -256,7 +256,7 @@ export default defineConfig({
                     },
                     {
                       label: '设计模式',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/java/intermediate/design-pattern/' },
                         { label: 'SOLID 设计原则', link: '/java/intermediate/design-pattern/01-principles/' },
@@ -274,7 +274,7 @@ export default defineConfig({
                   items: [
                     {
                       label: 'JVM',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/java/advanced/jvm/' },
                         { label: '类加载机制与双亲委派', link: '/java/advanced/jvm/01-class-loading/' },
@@ -284,7 +284,7 @@ export default defineConfig({
                     },
                     {
                       label: 'Spring Cloud 微服务',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/java/advanced/springcloud/' },
                         { label: '微服务与 Spring Cloud 总览', link: '/java/advanced/springcloud/01-microservices-overview/' },
@@ -311,7 +311,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '语法基础',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/python/basic/syntax/' },
                         { label: '一切皆对象：变量、引用与可变性', link: '/python/basic/syntax/01-objects/' },
@@ -322,7 +322,7 @@ export default defineConfig({
                     },
                     {
                       label: '数据结构',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/python/basic/data-structures/' },
                         { label: 'list 与 tuple：动态数组', link: '/python/basic/data-structures/01-list-tuple/' },
@@ -331,7 +331,7 @@ export default defineConfig({
                     },
                     {
                       label: '函数与装饰器',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/python/basic/functions/' },
                         { label: '函数：参数、作用域与闭包', link: '/python/basic/functions/01-functions-closures/' },
@@ -341,7 +341,7 @@ export default defineConfig({
                     },
                     {
                       label: '面向对象',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/python/basic/oop/' },
                         { label: '类、实例与魔术方法', link: '/python/basic/oop/01-class-basics/' },
@@ -357,7 +357,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '常用标准库',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/python/intermediate/stdlib/' },
                         { label: 'collections：容器扩展', link: '/python/intermediate/stdlib/01-collections/' },
@@ -368,7 +368,7 @@ export default defineConfig({
                     },
                     {
                       label: '第三方生态',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/python/intermediate/libs/' },
                         { label: 'requests 与 httpx', link: '/python/intermediate/libs/01-requests-httpx/' },
@@ -384,7 +384,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '工程化',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/python/advanced/eng/' },
                         { label: '环境管理与 uv', link: '/python/advanced/eng/01-venv-uv/' },
@@ -413,7 +413,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '核心机制',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/mysql/basic/core/' },
                         { label: '一条 SQL 的执行流程', link: '/mysql/basic/core/01-sql-execution/' },
@@ -428,7 +428,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '事务与锁',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/mysql/intermediate/transaction-lock/' },
                         { label: '事务与 MVCC', link: '/mysql/intermediate/transaction-lock/01-transaction-mvcc/' },
@@ -444,7 +444,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '性能与高可用',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/mysql/advanced/performance-ha/' },
                         { label: 'SQL 优化与执行计划', link: '/mysql/advanced/performance-ha/01-optimization/' },
@@ -466,7 +466,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '核心',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/redis/basic/core/' },
                         { label: '数据结构与底层编码', link: '/redis/basic/core/01-data-structures/' },
@@ -481,7 +481,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '使用进阶',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/redis/intermediate/usage/' },
                         { label: '过期删除与内存淘汰', link: '/redis/intermediate/usage/01-expiration-eviction/' },
@@ -497,7 +497,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '高可用',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/redis/advanced/ha/' },
                         { label: '高可用：主从、哨兵与集群', link: '/redis/advanced/ha/01-replication-sentinel-cluster/' },
@@ -518,7 +518,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '基础核心',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/elasticsearch/basic/core/' },
                         { label: '倒排索引：ES 的提速引擎', link: '/elasticsearch/basic/core/01-inverted-index/' },
@@ -533,7 +533,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '查询与聚合',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/elasticsearch/intermediate/usage/' },
                         { label: 'Query DSL：match、term 与 bool', link: '/elasticsearch/intermediate/usage/01-query-dsl/' },
@@ -561,7 +561,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '理论基石',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/distributed/basic/theory/' },
                         { label: 'CAP 与 BASE', link: '/distributed/basic/theory/01-cap-base/' },
@@ -576,7 +576,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '共识算法',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/distributed/intermediate/consensus/' },
                         { label: 'Paxos 与 Raft', link: '/distributed/intermediate/consensus/01-paxos-raft/' },
@@ -584,7 +584,7 @@ export default defineConfig({
                     },
                     {
                       label: '分布式事务',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/distributed/intermediate/transaction/' },
                         { label: '分布式事务五种方案', link: '/distributed/intermediate/transaction/01-distributed-transaction/' },
@@ -599,7 +599,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '数据一致性',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/distributed/advanced/consistency/' },
                         { label: '数据一致性：从强一致到最终一致', link: '/distributed/advanced/consistency/01-consistency-patterns/' },
@@ -607,7 +607,7 @@ export default defineConfig({
                     },
                     {
                       label: '高可用与容灾',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/distributed/advanced/availability/' },
                         { label: '容灾与多活：RTO/RPO 与切换策略', link: '/distributed/advanced/availability/01-dr-multi-active/' },
@@ -615,7 +615,7 @@ export default defineConfig({
                     },
                     {
                       label: '可观测性',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/distributed/advanced/observability/' },
                         { label: '分布式链路追踪', link: '/distributed/advanced/observability/01-distributed-tracing/' },
@@ -636,7 +636,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '消息队列基础',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/middleware/basic/mq/' },
                         { label: '为什么需要消息队列', link: '/middleware/basic/mq/01-why-mq/' },
@@ -658,7 +658,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '核心机制',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/kafka/intermediate/core/' },
                         { label: 'Kafka 架构与存储模型', link: '/kafka/intermediate/core/01-kafka-architecture/' },
@@ -681,7 +681,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '核心专题',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/rocketmq/advanced/core/' },
                         { label: 'RocketMQ 核心特性', link: '/rocketmq/advanced/core/01-rocketmq-features/' },
@@ -704,7 +704,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '协议核心',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/mqtt/basic/core/' },
                         { label: 'MQTT 协议模型：发布订阅与报文', link: '/mqtt/basic/core/01-mqtt-protocol/' },
@@ -719,7 +719,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '使用实战',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/mqtt/intermediate/usage/' },
                         { label: 'Broker 选型与 EMQX 部署', link: '/mqtt/intermediate/usage/01-broker-emqx/' },
@@ -741,7 +741,7 @@ export default defineConfig({
                   items: [
                     {
                       label: 'AMQP 模型',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/rabbitmq/basic/core/' },
                         { label: 'AMQP 模型：交换机、队列与绑定', link: '/rabbitmq/basic/core/01-amqp-model/' },
@@ -756,7 +756,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '可靠与进阶',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/rabbitmq/intermediate/usage/' },
                         { label: '死信队列与延迟消息', link: '/rabbitmq/intermediate/usage/01-deadletter-delay/' },
@@ -784,7 +784,7 @@ export default defineConfig({
                   items: [
                     {
                       label: 'Agent',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/ai/basic/agent/' },
                         { label: 'Agent Loop 核心循环', link: '/ai/basic/agent/01-agent-loop/' },
@@ -801,7 +801,7 @@ export default defineConfig({
                   items: [
                     {
                       label: 'Agent',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/ai/intermediate/agent/' },
                         { label: '任务规划 TodoWrite', link: '/ai/intermediate/agent/01-todo-planning/' },
@@ -823,7 +823,7 @@ export default defineConfig({
                   items: [
                     {
                       label: 'Agent',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/ai/advanced/agent/' },
                         { label: '多 Agent 协作总览', link: '/ai/advanced/agent/01-multi-agent/' },
@@ -858,7 +858,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '基础概念与命令',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/docker/basic/fundamentals/' },
                         { label: '容器与镜像核心概念', link: '/docker/basic/fundamentals/01-concepts/' },
@@ -874,7 +874,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '实战进阶',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/docker/intermediate/practice/' },
                         { label: 'Dockerfile 编写指南', link: '/docker/intermediate/practice/01-dockerfile/' },
@@ -890,7 +890,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '编排与原理',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/docker/advanced/orchestration/' },
                         { label: 'Docker Compose 编排', link: '/docker/advanced/orchestration/01-compose/' },
@@ -913,7 +913,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '基础入门',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/git/basic/foundations/' },
                         { label: '核心心智模型与对象存储', link: '/git/basic/foundations/01-core-model/' },
@@ -928,7 +928,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '协作开发',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/git/intermediate/collaboration/' },
                         { label: '分支与合并', link: '/git/intermediate/collaboration/01-branch-merge/' },
@@ -944,7 +944,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '高级工作流',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/git/advanced/workflow/' },
                         { label: '历史改写', link: '/git/advanced/workflow/01-history-rewrite/' },
@@ -967,7 +967,7 @@ export default defineConfig({
                   items: [
                     {
                       label: '命令行工具',
-                      collapsed: true,
+                      collapsed: false,
                       items: [
                         { label: '概览', link: '/tools/basic/cli/' },
                         { label: 'grep / sed / awk：文本处理三件套', link: '/tools/basic/cli/01-grep-sed-awk/' },
