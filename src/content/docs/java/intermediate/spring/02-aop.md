@@ -120,7 +120,7 @@ self.validate();                        // 走代理，切面生效
 // ③ 最干净：把方法拆到另一个 Bean
 ```
 
-这也是 @Transactional 失效的头号原因（详见事务篇）。
+这也是 @Transactional 失效的头号原因（详见[事务篇](/ascension/java/intermediate/spring/04-transaction/)）。
 
 ## 小结
 

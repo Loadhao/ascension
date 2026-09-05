@@ -9,7 +9,7 @@ core: true
 
 AOP 环绕通知（TransactionInterceptor）：**开启事务 → 执行业务方法 →
 正常提交 / 异常回滚**。所以它继承了 AOP 的全部命门——最典型的是自调用
-失效（见 AOP 篇）。
+失效（原理见 [AOP 篇](/ascension/java/intermediate/spring/02-aop/)）。
 
 ```mermaid
 flowchart LR
@@ -102,7 +102,7 @@ public class OrderService {
 
 | # | 场景 | 根因 |
 |---|---|---|
-| 1 | 自调用 this.method() | 不经过代理 |
+| 1 | 自调用 this.method() | 不经过代理（详见下文三个例子） |
 | 2 | 方法非 public | 代理层面直接跳过 |
 | 3 | 异常被 catch 吞掉 | 切面感知不到异常 |
 | 4 | 抛受检异常没配 rollbackFor | 默认规则只认运行时异常 |
@@ -113,6 +113,80 @@ public class OrderService {
 
 排查口诀：**过了代理吗、public 吗、异常到了切面吗、回滚规则匹配吗**。
 
+### 自调用失效：三个典型例子
+
+失效表第 1 行"自调用"是头号嫌疑，展开成三个最典型的场景（原理见
+[AOP 篇](/ascension/java/intermediate/spring/02-aop/)——`this.方法()` 用的是
+原始对象、绕开了代理）：
+
+**例 1：无事务方法调用本类事务方法（最常见）**
+
+```java
+@Service
+public class UserService {
+    public void addUser(User user) {
+        userMapper.insert(user);
+        this.saveLog(user.getId());   // 自调用：不走代理
+    }
+
+    @Transactional
+    public void saveLog(Long userId) { // 不会生效
+        userMapper.insertLog(new Log(userId));
+        int i = 1 / 0;                // 抛异常
+    }
+}
+```
+
+结果：日志和用户数据**都不回滚**——整个过程没开事务。
+
+**例 2：事务方法调用本类事务方法（传播行为失效）**
+
+```java
+@Service
+public class OrderService {
+    @Transactional
+    public void createOrder(Order order) {
+        orderMapper.insert(order);
+        this.deductStock(order.getProductId());   // 自调用，传播失效
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void deductStock(Long productId) {
+        productMapper.updateStock(productId);
+        int i = 1 / 0;               // 扣库存异常
+    }
+}
+```
+
+结果：`REQUIRES_NEW` 不生效，扣库存和下单**同一个事务**，一起回滚——
+达不到"扣库存独立、订单不跟着回滚"的预期。
+
+**例 3：调用本类私有事务方法**
+
+```java
+@Service
+public class PayService {
+    @Transactional
+    public void pay(Long orderId) {
+        this.updatePayStatus(orderId);   // 自调用私有方法
+    }
+
+    @Transactional
+    private void updatePayStatus(Long orderId) { /* 私有方法同样失效 */ }
+}
+```
+
+结果：私有方法本就不被 AOP 拦截，加上自调用，事务完全失效。
+
+### 自调用的四种解法
+
+| 解法 | 做法 | 特点 |
+|---|---|---|
+| **拆分类**（最推荐） | 把被调用方法抽到另一个 Service，注入那个 Bean 调用 | 走代理，天然生效 |
+| 注入自身 | `@Autowired` 注入自己，用代理对象调 | Spring 4.3+ 支持，稍绕 |
+| AopContext | `((Xxx) AopContext.currentProxy()).method()` | 需 `exposeProxy=true` |
+| 编程式事务 | `TransactionTemplate` 手动 `execute()` | 不依赖 AOP 代理 |
+
 ## 与隔离级别联动
 
 ```java
@@ -121,7 +195,7 @@ public void biz() { }
 ```
 
 隔离级别交由数据库实现（MySQL 默认 REPEATABLE READ），Spring 只是透传
-——原理见 MySQL 事务篇。
+——原理见 [MySQL 事务篇](/ascension/mysql/intermediate/transaction-lock/01-transaction-mvcc/)。
 
 ## 小结
 
