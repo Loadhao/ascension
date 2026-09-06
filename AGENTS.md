@@ -22,7 +22,7 @@
 | 学习状态存储 | `src/lib/learn.ts`             | localStorage 状态圆点存储与事件同步             |
 | 图谱数据   | `src/data/graphs/<方向>.json`    | 与方向目录一一对应                                 |
 | 全局样式   | `src/styles/custom.css`        | 黑白主题令牌、学习组件样式、Mermaid 与打印样式             |
-| 站点配置   | `astro.config.mjs`             | 手动嵌套侧边栏、Footer 覆盖、Mermaid 插件、base 路径    |
+| 站点配置   | `astro.config.mjs`             | 手动嵌套侧边栏、Footer/Sidebar 覆盖、Mermaid 插件、base 路径    |
 | 部署流水线 | `.github/workflows/deploy.yml` | push main 自动构建发布 GitHub Pages            |
 | 书签入库工作区 | `bookmark-kb-design/`        | 浏览器书签分级入库的独立设计区（源数据/分级流水线/清单产物），不参与站点构建，详见其 `方案设计.md` |
 
