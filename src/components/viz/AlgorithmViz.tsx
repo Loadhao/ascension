@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 /** 单个元素：id 为原始身份（跨帧稳定，交换时跟随元素移动），value 决定柱高 */
 export interface VizItem {
@@ -112,6 +112,8 @@ export default function AlgorithmViz({ title, frames }: VizConfig) {
 	const [step, setStep] = useState(0);
 	const [playing, setPlaying] = useState(true);
 	const [speedIdx, setSpeedIdx] = useState(2);
+	// 速率走 ref：切换档位不打断当前帧的计时，从下一帧起生效
+	const speedRef = useRef(SPEEDS[2]!.ms);
 
 	const last = frames.length - 1;
 	const frame = frames[Math.min(step, last)];
@@ -120,10 +122,10 @@ export default function AlgorithmViz({ title, frames }: VizConfig) {
 	// 自动循环：末帧多停留几拍让读者看清终态，再回到首帧
 	useEffect(() => {
 		if (!playing) return;
-		const ms = SPEEDS[speedIdx]!.ms * (step >= last ? 3 : 1);
+		const ms = speedRef.current * (step >= last ? 3 : 1);
 		const timer = setTimeout(() => setStep((s) => (s >= last ? 0 : s + 1)), ms);
 		return () => clearTimeout(timer);
-	}, [playing, step, speedIdx, last]);
+	}, [playing, step, last]);
 
 	/** 手动操作（单步/拖进度）会暂停自动播放，按播放恢复 */
 	const seek = (target: number) => {
@@ -137,6 +139,10 @@ export default function AlgorithmViz({ title, frames }: VizConfig) {
 		}
 		if (step >= last) setStep(0);
 		setPlaying(true);
+	};
+	const changeSpeed = (idx: number) => {
+		speedRef.current = SPEEDS[idx]!.ms;
+		setSpeedIdx(idx);
 	};
 
 	const activeSet = useMemo(() => new Set(frame?.active ?? []), [frame]);
@@ -248,7 +254,7 @@ export default function AlgorithmViz({ title, frames }: VizConfig) {
 							type="button"
 							key={speed.label}
 							className={'algo-viz-speed' + (idx === speedIdx ? ' algo-viz-speed--on' : '')}
-							onClick={() => setSpeedIdx(idx)}
+							onClick={() => changeSpeed(idx)}
 						>
 							{speed.label}
 						</button>
