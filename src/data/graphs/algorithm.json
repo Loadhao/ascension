@@ -14,7 +14,10 @@
     { "id": "two-pointers", "label": "双指针", "href": "/algorithm/basic/searching/02-two-pointers/", "group": "查找" },
     { "id": "sliding-window", "label": "滑动窗口", "href": "/algorithm/basic/searching/03-sliding-window/", "group": "查找" },
     { "id": "quickselect", "label": "快速选择", "href": "/algorithm/basic/searching/04-quickselect/", "group": "查找" },
-    { "id": "rotated", "label": "搜索旋转数组", "href": "/algorithm/basic/searching/05-rotated-array-search/", "group": "查找" }
+    { "id": "rotated", "label": "搜索旋转数组", "href": "/algorithm/basic/searching/05-rotated-array-search/", "group": "查找" },
+    { "id": "prefix", "label": "前缀和", "href": "/algorithm/basic/techniques/01-prefix-sum/", "group": "数组技巧" },
+    { "id": "diff", "label": "差分", "href": "/algorithm/basic/techniques/02-difference-array/", "group": "数组技巧" },
+    { "id": "monotonic", "label": "单调栈", "href": "/algorithm/basic/techniques/03-monotonic-stack/", "group": "数组技巧" }
   ],
   "edges": [
     { "source": "root", "target": "bubble" },
@@ -31,6 +34,9 @@
     { "source": "root", "target": "three-way" },
     { "source": "root", "target": "quickselect" },
     { "source": "root", "target": "rotated" },
+    { "source": "root", "target": "prefix" },
+    { "source": "root", "target": "diff" },
+    { "source": "root", "target": "monotonic" },
     { "source": "bubble", "target": "quick", "label": "优化方向：分治" },
     { "source": "quick", "target": "binary", "label": "同为分治思想" },
     { "source": "bubble", "target": "insertion", "label": "同为相邻比较，插入更早停" },
@@ -44,6 +50,9 @@
     { "source": "quick", "target": "three-way", "label": "重复元素多时的优化" },
     { "source": "quick", "target": "quickselect", "label": "分区复用，只递归一侧" },
     { "source": "heap", "target": "quickselect", "label": "Top-K 双解法：堆 vs 快选" },
-    { "source": "binary", "target": "rotated", "label": "二分变体：判哪半有序" }
+    { "source": "binary", "target": "rotated", "label": "二分变体：判哪半有序" },
+    { "source": "prefix", "target": "diff", "label": "互为逆运算" },
+    { "source": "sliding-window", "target": "prefix", "label": "窗口和也可用前缀差" },
+    { "source": "two-pointers", "target": "monotonic", "label": "指针配对 → 栈内等待" }
   ]
 }

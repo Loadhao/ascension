@@ -1065,6 +1065,16 @@ export default defineConfig({
                         { label: '搜索旋转排序数组', link: '/algorithm/basic/searching/05-rotated-array-search/' },
                       ],
                     },
+                    {
+                      label: '数组技巧',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/algorithm/basic/techniques/' },
+                        { label: '前缀和', link: '/algorithm/basic/techniques/01-prefix-sum/' },
+                        { label: '差分', link: '/algorithm/basic/techniques/02-difference-array/' },
+                        { label: '单调栈', link: '/algorithm/basic/techniques/03-monotonic-stack/' },
+                      ],
+                    },
                   ],
                 },
               ],

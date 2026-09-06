@@ -871,6 +871,158 @@ function rotatedBinarySearchDemo(): VizConfig {
 	return { title: `旋转数组二分 · 找 ${target}`, frames };
 }
 
+/** 前缀和：一趟预处理出累加数组 P，之后任意区间和 = 两次前缀值相减 */
+function prefixSumDemo(): VizConfig {
+	const values = [3, 1, 4, 1, 5, 9, 2, 6];
+	const n = values.length;
+	const items = toItems(values);
+	const frames: VizFrame[] = [];
+	const prefix: number[] = [0];
+	const [ql, qr] = [2, 5];
+
+	frames.push({
+		items: [...items],
+		note: `需求：多次查询任意区间 [l, r] 的和。每次现场累加是 O(n)，m 次查询就要 O(nm)。前缀和的思路：先花一趟 O(n) 预处理出「每个位置前面的累加和」，之后每次查询只要一次减法。`,
+	});
+
+	for (let i = 0; i < n; i++) {
+		prefix.push(prefix[prefix.length - 1]! + values[i]!);
+		frames.push({
+			items: [...items],
+			active: Array.from({ length: i + 1 }, (_, k) => k),
+			pointers: { i },
+			note: `P[${i + 1}] = P[${i}] + a[${i}] = ${prefix[i]} + ${values[i]} = ${prefix[i + 1]}（前 ${i + 1} 个数的总和，橙色列）`,
+		});
+	}
+	frames.push({
+		items: [...items],
+		note: `预处理完成：P = [${prefix.join(', ')}]，其中 P[0] = 0 是哨兵，用来统一「区间从下标 0 开始」时的边界。查询阶段开始：`,
+	});
+
+	const pl = prefix[ql]!;
+	const pr = prefix[qr + 1]!;
+	frames.push({
+		items: [...items],
+		active: Array.from({ length: qr - ql + 1 }, (_, k) => ql + k),
+		pointers: { l: ql, r: qr },
+		note: `查询区间 [${ql}, ${qr}]（橙色列这 4 个数）的和——不需要重新累加它们`,
+	});
+	frames.push({
+		items: [...items],
+		active: Array.from({ length: qr + 1 }, (_, k) => k),
+		pointers: { r: qr },
+		note: `P[${qr + 1}] = ${pr}：前 ${qr + 1} 个数的总和。它比目标区间多算了前 ${ql} 个数`,
+	});
+	frames.push({
+		items: [...items],
+		active: Array.from({ length: ql }, (_, k) => k),
+		pointers: { l: ql },
+		note: `P[${ql}] = ${pl}：多算的正是前 ${ql} 个数（橙色列），把它减掉`,
+	});
+	frames.push({
+		items: [...items],
+		locked: Array.from({ length: qr - ql + 1 }, (_, k) => ql + k),
+		note: `${pr} - ${pl} = ${pr - pl}，即 [${ql}, ${qr}] 的和 = ${values.slice(ql, qr + 1).join(' + ')} = ${pr - pl}。每次查询一次减法，O(1)`,
+	});
+	return { title: '前缀和 · 预处理一次，查询一次减法', frames };
+}
+
+/** 差分：区间整体加 v 只在差分数组改两个端点，最后前缀和一趟还原（前缀和的逆运算） */
+function differenceArrayDemo(): VizConfig {
+	const n = 8;
+	const updates: Array<[number, number, number]> = [
+		[0, 3, 5],
+		[2, 5, 2],
+		[4, 7, 1],
+	];
+	const frames: VizFrame[] = [];
+	const diff = new Array<number>(n).fill(0);
+	const stubs = (): VizItem[] => Array.from({ length: n }, (_, i) => ({ id: 100 + i, value: 0 }));
+	const out: VizItem[] = Array.from({ length: n }, (_, i) => ({ id: 100 + i, value: 0 }));
+
+	frames.push({
+		items: stubs(),
+		note: `构造目标数组：区间 [0, 3] 整体 +5、[2, 5] 整体 +2、[4, 7] 整体 +1（柱子现在全为 0，还没写入）。逐位加每次要 O(n)；差分让每次区间加法只改 2 个数，最后统一还原。`,
+	});
+
+	for (const [l, r, v] of updates) {
+		diff[l]! += v;
+		if (r + 1 < n) diff[r + 1]! -= v;
+		const ds = diff
+			.map((d, i) => (d === 0 ? null : `diff[${i}]=${d > 0 ? '+' : ''}${d}`))
+			.filter(Boolean)
+			.join('，');
+		frames.push({
+			items: stubs(),
+			active: Array.from({ length: r - l + 1 }, (_, k) => l + k),
+			note: `区间 [${l}, ${r}] 整体 +${v}（橙色列）：不逐位改，只记 diff[${l}] += ${v}${r + 1 < n ? `、diff[${r + 1}] -= ${v}` : '（r+1 已越界，只加不减）'}。当前 ${ds}`,
+		});
+	}
+	frames.push({
+		items: stubs(),
+		note: `三次区间加法总共只做了 6 次单点修改（diff = [${diff.join(', ')}]）。现在像前缀和那样一趟还原出目标数组：`,
+	});
+
+	let run = 0;
+	for (let i = 0; i < n; i++) {
+		run += diff[i]!;
+		out[i] = { id: 100 + i, value: run };
+		frames.push({
+			items: out.map((it) => ({ ...it })),
+			active: [i],
+			locked: [...Array(i).keys()],
+			note: `a[${i}] = a[${i - 1}] + diff[${i}]${diff[i]! === 0 ? '' : `（${diff[i]! > 0 ? '+' : ''}${diff[i]}`}）= ${run}——差分数组的前缀和就是原数组`,
+		});
+	}
+	frames.push({
+		items: out.map((it) => ({ ...it })),
+		locked: [...Array(n).keys()],
+		note: '还原完成：m 次区间修改每次 O(1) + 一趟 O(n) 还原，总计 O(n + m)；逐位改则是 O(nm)。只要「修改期间不需要查询」，差分就是最优解',
+	});
+	return { title: '差分 · 区间加法只改两个数', frames };
+}
+
+/** 单调栈：一遍扫描为每个元素找「右边第一个更大元素」，橙色柱始终是栈内成员（值递减） */
+function monotonicStackDemo(): VizConfig {
+	const values = [3, 7, 2, 8, 5, 9, 1];
+	const n = values.length;
+	const items = toItems(values);
+	const frames: VizFrame[] = [];
+	const stack: number[] = [];
+	const answers = new Array<number>(n).fill(-1);
+
+	frames.push({
+		items: [...items],
+		note: `对每个元素找「右边第一个比它大的元素」。暴力解对每个位置向右扫一遍，O(n²)。单调栈：栈里存下标、对应值从底到顶递减，橙色列就是当前栈内元素；谁被新元素弹出，谁的答案就当场确定。`,
+	});
+
+	for (let i = 0; i < n; i++) {
+		while (stack.length > 0 && values[stack[stack.length - 1]!]! < values[i]!) {
+			const top = stack.pop()!;
+			answers[top] = values[i]!;
+			frames.push({
+				items: [...items],
+				active: [...stack],
+				pointers: { i, ...(stack.length ? { 栈顶: stack[stack.length - 1]! } : {}) },
+				note: `a[${i}] = ${values[i]} > 栈顶 a[${top}] = ${values[top]}：${values[top]} 的「下一个更大」就是 ${values[i]}，弹出记录答案（该柱已退出橙色栈区）`,
+			});
+		}
+		stack.push(i);
+		frames.push({
+			items: [...items],
+			active: [...stack],
+			pointers: { i, 栈顶: i },
+			note: `${values[i]} 入栈：栈内值从底到顶 ${stack.map((idx) => values[idx]).join(' > ')}，保持递减，等待右边更大的元素`,
+		});
+	}
+	frames.push({
+		items: [...items],
+		locked: [...Array(n).keys()],
+		note: `扫描结束：仍在栈里的 ${stack.map((idx) => values[idx]).join('、')} 右边没有更大元素（答案 -1）。每个元素至多入栈一次、出栈一次，整体 O(n)`,
+	});
+	return { title: '单调栈 · 下一个更大元素', frames };
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的演示注册表 */
 export const vizDemos: Record<string, VizConfig> = {
 	'bubble-sort': bubbleSortDemo(),
@@ -887,4 +1039,7 @@ export const vizDemos: Record<string, VizConfig> = {
 	'three-way-partition': threeWayPartitionDemo(),
 	'quickselect': quickSelectDemo(),
 	'rotated-binary-search': rotatedBinarySearchDemo(),
+	'prefix-sum': prefixSumDemo(),
+	'difference-array': differenceArrayDemo(),
+	'monotonic-stack': monotonicStackDemo(),
 };

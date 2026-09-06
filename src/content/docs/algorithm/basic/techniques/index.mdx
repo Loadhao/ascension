@@ -1,0 +1,13 @@
+---
+title: 数组技巧
+description: 前缀和、差分与单调栈：用预处理和单调性把 O(n²) 的重复扫描降到一遍的三个经典套路
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+很多数组题的暴力解都是同一个形状：**对每个位置，再扫一遍区间**。这一类问题的通用加速思路是
+「提前做一次性工作换掉重复劳动」——前缀和用一趟预处理把区间和查询变成一次减法；
+差分是它的逆运算，把区间修改压成两个端点；单调栈用「栈内保持单调」的不变量，
+让每个元素至多进出一次就拿到「下一个更大/更小」的答案。
+
+<CategoryNotesIsland categoryId="algorithm/basic/techniques" />
