@@ -122,6 +122,11 @@ export default defineConfig({
           tag: 'script',
           attrs: { type: 'module', src: '/ascension/scripts/mermaid-interact.js' },
         },
+        {
+          // 侧边栏目录树交互（子树联动/批量开合/localStorage 持久化）
+          tag: 'script',
+          attrs: { type: 'module', src: '/ascension/scripts/sidebar-tree.js' },
+        },
       ],
       sidebar: [
         { label: '指南', items: [{ autogenerate: { directory: 'guide' } }] },
