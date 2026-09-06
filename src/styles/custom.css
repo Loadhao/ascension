@@ -1107,10 +1107,18 @@ html.mmd-viewer-open {
   font-weight: 500;
 }
 .algo-viz-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   margin-left: auto;
   color: var(--sl-color-gray-3);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
+}
+.algo-viz-loop {
+  display: inline-flex;
+  color: var(--algo-bar-active);
+  opacity: 0.75;
 }
 
 .algo-viz-plot {
@@ -1226,17 +1234,25 @@ html.mmd-viewer-open {
   margin-top: 12px;
 }
 .algo-viz-btn {
-  padding: 5px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 10px;
   border: 1px solid var(--sl-color-gray-4);
   border-radius: 8px;
   background: none;
   color: var(--sl-color-gray-1);
-  font-size: 13px;
+  font-size: 12.5px;
   cursor: pointer;
   transition:
     color 150ms ease,
     border-color 150ms ease,
     background-color 150ms ease;
+}
+.algo-viz-btn svg {
+  display: block;
+  flex: none;
 }
 .algo-viz-btn:hover:not(:disabled) {
   border-color: var(--sl-color-gray-2);
@@ -1266,7 +1282,10 @@ html.mmd-viewer-open {
   border-radius: 8px;
 }
 .algo-viz-speed {
-  padding: 3px 9px;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 9px;
   border: none;
   border-radius: 6px;
   background: none;

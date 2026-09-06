@@ -29,33 +29,112 @@ const SPEEDS = [
 	{ label: '2×', ms: 165 },
 ];
 
-/** 算法步骤动画播放器：柱状数组 + 指针芯片 + 逐帧说明，支持播放/单步/跳转/变速 */
+/** 线性 SVG 图标（currentColor 跟随主题），替代 Unicode 字符避免被渲染成彩色 emoji */
+function Icon({ path, fill }: { path: React.ReactNode; fill?: boolean }) {
+	return (
+		<svg
+			width="11"
+			height="11"
+			viewBox="0 0 24 24"
+			fill={fill ? 'currentColor' : 'none'}
+			stroke={fill ? 'none' : 'currentColor'}
+			strokeWidth="2.2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			aria-hidden="true"
+		>
+			{path}
+		</svg>
+	);
+}
+
+const icons = {
+	reset: (
+		<Icon
+			path={
+				<>
+					<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+					<path d="M3 3v5h5" />
+				</>
+			}
+		/>
+	),
+	prev: (
+		<Icon
+			path={
+				<>
+					<polygon points="19 20 9 12 19 4" fill="currentColor" stroke="none" />
+					<line x1="5" y1="5" x2="5" y2="19" />
+				</>
+			}
+		/>
+	),
+	next: (
+		<Icon
+			path={
+				<>
+					<polygon points="5 4 15 12 5 20" fill="currentColor" stroke="none" />
+					<line x1="19" y1="5" x2="19" y2="19" />
+				</>
+			}
+		/>
+	),
+	play: <Icon path={<polygon points="6 3 20 12 6 21" />} fill />,
+	pause: (
+		<Icon
+			path={
+				<>
+					<rect x="5" y="4" width="4.5" height="16" rx="1.2" stroke="none" />
+					<rect x="14.5" y="4" width="4.5" height="16" rx="1.2" stroke="none" />
+				</>
+			}
+			fill
+		/>
+	),
+	loop: (
+		<Icon
+			path={
+				<>
+					<path d="m17 2 4 4-4 4" />
+					<path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+					<path d="m7 22-4-4 4-4" />
+					<path d="M21 13v1a4 4 0 0 1-4 4H3" />
+				</>
+			}
+		/>
+	),
+};
+
+/** 算法步骤动画播放器：柱状数组 + 指针芯片 + 逐帧说明；进入视口自动播放并循环 */
 export default function AlgorithmViz({ title, frames }: VizConfig) {
 	const [step, setStep] = useState(0);
-	const [playing, setPlaying] = useState(false);
+	const [playing, setPlaying] = useState(true);
 	const [speedIdx, setSpeedIdx] = useState(1);
 
 	const last = frames.length - 1;
 	const frame = frames[Math.min(step, last)];
 	const max = useMemo(() => Math.max(...frames[0]!.items.map((it) => it.value)), [frames]);
 
+	// 自动循环：末帧多停留几拍让读者看清终态，再回到首帧
 	useEffect(() => {
 		if (!playing) return;
-		if (step >= last) {
-			setPlaying(false);
-			return;
-		}
-		const timer = setTimeout(() => setStep((s) => s + 1), SPEEDS[speedIdx]!.ms);
+		const ms = SPEEDS[speedIdx]!.ms * (step >= last ? 3 : 1);
+		const timer = setTimeout(() => setStep((s) => (s >= last ? 0 : s + 1)), ms);
 		return () => clearTimeout(timer);
 	}, [playing, step, speedIdx, last]);
 
+	/** 手动操作（单步/拖进度）会暂停自动播放，按播放恢复 */
 	const seek = (target: number) => {
 		setPlaying(false);
 		setStep(Math.max(0, Math.min(last, target)));
 	};
 	const togglePlay = () => {
-		if (!playing && step >= last) setStep(0);
-		setPlaying((p) => !p);
+		if (playing) {
+			setPlaying(false);
+			return;
+		}
+		if (step >= last) setStep(0);
+		setPlaying(true);
 	};
 
 	const activeSet = useMemo(() => new Set(frame?.active ?? []), [frame]);
@@ -100,7 +179,8 @@ export default function AlgorithmViz({ title, frames }: VizConfig) {
 		<figure className="algo-viz" role="group" aria-label={title} tabIndex={0} onKeyDown={onKeyDown}>
 			<figcaption className="algo-viz-head">
 				<span className="algo-viz-title">{title}</span>
-				<span className="algo-viz-step">
+				<span className="algo-viz-step" title="自动循环播放">
+					{playing && <span className="algo-viz-loop">{icons.loop}</span>}
 					{step + 1} / {frames.length}
 				</span>
 			</figcaption>
@@ -144,17 +224,21 @@ export default function AlgorithmViz({ title, frames }: VizConfig) {
 			</div>
 
 			<div className="algo-viz-controls">
-				<button type="button" className="algo-viz-btn" onClick={() => seek(0)} disabled={step === 0}>
-					重置
+				<button type="button" className="algo-viz-btn" onClick={() => setStep(0)} disabled={step === 0}>
+					{icons.reset}
+					<span>重置</span>
 				</button>
 				<button type="button" className="algo-viz-btn" onClick={() => seek(step - 1)} disabled={step === 0}>
-					◀ 上一步
+					{icons.prev}
+					<span>上一步</span>
 				</button>
 				<button type="button" className="algo-viz-btn algo-viz-btn--primary" onClick={togglePlay}>
-					{playing ? '⏸ 暂停' : '▶ 播放'}
+					{playing ? icons.pause : icons.play}
+					<span>{playing ? '暂停' : '播放'}</span>
 				</button>
 				<button type="button" className="algo-viz-btn" onClick={() => seek(step + 1)} disabled={step >= last}>
-					下一步 ▶
+					<span>下一步</span>
+					{icons.next}
 				</button>
 				<span className="algo-viz-speeds">
 					{SPEEDS.map((speed, idx) => (
