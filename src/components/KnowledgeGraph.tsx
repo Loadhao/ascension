@@ -9,6 +9,8 @@ export interface GraphNode {
   label: string;
   href?: string;
   group?: string;
+  /** 0–1 归一化权重，映射节点内边距与字号（内容量越多节点越大）；缺省 0 */
+  weight?: number;
 }
 
 export interface GraphEdge {
@@ -70,6 +72,19 @@ function contrastText(color: Rgb): string {
   return luma > 150 ? '#111111' : '#ffffff';
 }
 
+/** 节点权重 → 内边距/字号增量：大节点 = 内容多，标签始终可读 */
+const PAD_BASE = 10;
+const PAD_SPAN = 16;
+const FONT_BASE = 12.5;
+const FONT_SPAN = 2.5;
+
+function weightOf(ele: cytoscape.SingularElementArgument): number {
+  const w = ele.data('weight');
+  return typeof w === 'number' && Number.isFinite(w)
+    ? Math.min(1, Math.max(0, w))
+    : 0;
+}
+
 function isDarkTheme(): boolean {
   return document.documentElement.dataset.theme !== 'light';
 }
@@ -108,7 +123,8 @@ function buildStyles(dark: boolean): cytoscape.Stylesheet[] {
         label: 'data(label)',
         color: (ele: cytoscape.SingularElementArgument) =>
           groupTint(ele.data('group'), dark, dark ? 0.82 : 0.85),
-        'font-size': 13,
+        'font-size': (ele: cytoscape.SingularElementArgument) =>
+          Math.round(FONT_BASE + FONT_SPAN * weightOf(ele)),
         'font-family':
           'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif',
         'font-weight': 400,
@@ -117,7 +133,8 @@ function buildStyles(dark: boolean): cytoscape.Stylesheet[] {
         'text-halign': 'center',
         width: 'label',
         height: 'label',
-        padding: '10px',
+        padding: (ele: cytoscape.SingularElementArgument) =>
+          `${Math.round(PAD_BASE + PAD_SPAN * weightOf(ele))}px`,
       },
     },
     {
@@ -231,9 +248,12 @@ function autoHeight(nodeCount: number): number {
 export default function KnowledgeGraph({
   data,
   height,
+  groupCounts,
 }: {
   data: GraphData;
   height?: number;
+  /** 覆盖图例计数的展示口径（如全景图显示知识点数而非节点数）；缺省用分组节点数 */
+  groupCounts?: Record<string, number>;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
@@ -265,6 +285,7 @@ export default function KnowledgeGraph({
             label: node.label,
             href: node.href ? withBase(node.href) : undefined,
             group: node.group,
+            weight: node.weight,
           },
         })),
         ...data.edges.map((edge) => ({
@@ -446,7 +467,7 @@ export default function KnowledgeGraph({
               >
                 {!active && <span className="kg-dot" style={{ backgroundColor: color }} />}
                 <span>{group}</span>
-                <span className="kg-count">{count}</span>
+                <span className="kg-count">{groupCounts?.[group] ?? count}</span>
               </button>
             );
           })}

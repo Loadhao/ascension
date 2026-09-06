@@ -580,6 +580,20 @@ summary .sl-tree-toggle:hover {
   color: var(--sl-color-black);
 }
 
+/* 仪表盘底部全站图谱入口 */
+.learn-panorama-link {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-gray-3);
+  font-size: 13px;
+}
+.learn-panorama-link a {
+  color: var(--sl-color-gray-1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* 笔记页底部标记（F7 第二入口） */
 .learn-page-mark {
   display: flex;

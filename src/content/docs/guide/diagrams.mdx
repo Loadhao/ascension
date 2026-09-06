@@ -342,3 +342,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 维护流程：新增笔记后，在对应方向的 JSON 里加一个节点，`href` 填笔记路径，
 再补上与已有知识点的关联边即可。
+
+另有全站级的「[知识全景](/panorama/)」图谱：由 `src/lib/notes.ts` 在构建期
+自动聚合全部方向与分类生成（`src/components/GlobalGraphIsland.astro`），
+节点大小代表该方向/分类收录的知识点数量，无需手工维护数据。

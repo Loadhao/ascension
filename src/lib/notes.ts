@@ -14,6 +14,9 @@ export const LEVEL_LABELS: Record<Level, string> = {
 /** 仪表盘方向展示顺序（未知方向按字典序追加） */
 const DIRECTION_ORDER = ['linux', 'nginx', 'java', 'js', 'mysql', 'postgresql', 'redis', 'mongodb', 'elasticsearch', 'distributed', 'zookeeper', 'etcd', 'seata', 'middleware', 'kafka', 'rocketmq', 'mqtt', 'rabbitmq', 'python', 'algorithm', 'ai', 'docker', 'git', 'tools'];
 
+/** 根级保留页：不参与方向聚合（index/404 之外，panorama 为全站图谱入口页） */
+const RESERVED_ROOT_IDS = new Set(['index', '404', 'panorama']);
+
 function isLevel(seg: string): seg is Level {
   return (LEVEL_KEYS as readonly string[]).includes(seg);
 }
@@ -109,7 +112,7 @@ export async function getSiteData(): Promise<SiteData> {
     };
 
     // 方向首页：<dir>（index 规范化）
-    if (segs.length === 1 && entry.id !== 'index' && entry.id !== '404') {
+    if (segs.length === 1 && !RESERVED_ROOT_IDS.has(entry.id)) {
       ensureDirection(buckets, segs[0]!, data.title, data.description);
       continue;
     }

@@ -1,0 +1,62 @@
+---
+import KnowledgeGraph, { type GraphData, type GraphEdge, type GraphNode } from './KnowledgeGraph';
+import { getSiteData } from '../lib/notes';
+
+// 全局知识图谱：方向（大节点）→ 分类（小节点）两级聚合，节点大小随内容量。
+// 方向按知识点数降序输出，图例即「内容量排行」。
+const site = await getSiteData();
+
+const directionStats = site.directions
+  .map((direction) => ({
+    direction,
+    count: direction.levels.reduce(
+      (sum, level) =>
+        sum + level.categories.reduce((t, category) => t + category.notes.length, 0),
+      0,
+    ),
+  }))
+  .sort((a, b) => b.count - a.count);
+
+const maxDirCount = Math.max(1, ...directionStats.map((s) => s.count));
+const maxCatCount = Math.max(
+  1,
+  ...directionStats.flatMap(({ direction }) =>
+    direction.levels.flatMap((level) =>
+      level.categories.map((category) => category.notes.length),
+    ),
+  ),
+);
+
+const nodes: GraphNode[] = [];
+const edges: GraphEdge[] = [];
+const groupCounts: Record<string, number> = {};
+
+for (const { direction, count } of directionStats) {
+  nodes.push({
+    id: direction.id,
+    label: direction.title,
+    href: direction.href,
+    group: direction.title,
+    // sqrt 压缩数量差异，避免头部方向过分放大
+    weight: Math.sqrt(count / maxDirCount),
+  });
+  groupCounts[direction.title] = count;
+  for (const level of direction.levels) {
+    for (const category of level.categories) {
+      nodes.push({
+        id: category.id,
+        label: category.title,
+        href: category.href,
+        group: direction.title,
+        // 分类整体压在方向之下，保持两级视觉层次
+        weight: 0.15 + 0.5 * Math.sqrt(category.notes.length / maxCatCount),
+      });
+      edges.push({ source: direction.id, target: category.id, label: level.label });
+    }
+  }
+}
+
+const graph: GraphData = { nodes, edges };
+---
+
+<KnowledgeGraph client:visible data={graph} height={860} groupCounts={groupCounts} />

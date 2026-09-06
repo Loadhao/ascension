@@ -130,6 +130,7 @@ export default defineConfig({
       ],
       sidebar: [
         { label: '指南', items: [{ autogenerate: { directory: 'guide' } }] },
+        { label: '知识全景', link: '/panorama/' },
         {
           label: '系统与运维',
           collapsed: true,
