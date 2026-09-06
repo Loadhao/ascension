@@ -106,6 +106,8 @@ export default defineConfig({
       components: {
         // 笔记页页脚自动注入学习状态标记（ProgressMark）
         Footer: './src/components/starlight/Footer.astro',
+        // 侧边栏目录树工具条（全部展开/收起）
+        Sidebar: './src/components/starlight/Sidebar.astro',
       },
       head: [
         {
