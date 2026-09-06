@@ -1,0 +1,9 @@
+---
+import AlgorithmViz from './AlgorithmViz';
+import { vizDemos } from '../../data/viz';
+
+const { demo } = Astro.props as { demo: string };
+const config = vizDemos[demo];
+---
+
+{config && <AlgorithmViz client:visible {...config} />}

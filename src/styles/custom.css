@@ -1058,3 +1058,243 @@ html.mmd-viewer-open {
     --mmd-shadow: none;
   }
 }
+
+/* ===== 算法动画组件（AlgorithmViz）：柱状数组步骤播放器 ===== */
+:root {
+  --algo-plot-bg: #17130f;
+  --algo-bar: #4d4033;
+  --algo-bar-active: #d9a066;
+  --algo-bar-active-glow: rgb(217 160 102 / 0.35);
+  --algo-bar-locked: #2a231b;
+  --algo-bar-text: #e8ddcb;
+  --algo-chip-bg: #2b2216;
+  --algo-chip-border: #5c4a33;
+  --algo-chip-text: #ddcfb8;
+}
+
+:root[data-theme='light'] {
+  --algo-plot-bg: #faf6ee;
+  --algo-bar: #d8c5a5;
+  --algo-bar-active: #c2844a;
+  --algo-bar-active-glow: rgb(194 132 74 / 0.28);
+  --algo-bar-locked: #ece2cf;
+  --algo-bar-text: #3f3428;
+  --algo-chip-bg: #f6efe3;
+  --algo-chip-border: #d8c5a5;
+  --algo-chip-text: #6d5a42;
+}
+
+.algo-viz {
+  margin: 22px 0;
+  padding: 16px 18px 14px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 14px;
+  background: var(--sl-color-bg);
+}
+.algo-viz:focus-visible {
+  outline: 2px solid var(--sl-color-gray-4);
+  outline-offset: 2px;
+}
+
+.algo-viz-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.algo-viz-title {
+  color: var(--sl-color-white);
+  font-size: 14.5px;
+  font-weight: 500;
+}
+.algo-viz-step {
+  margin-left: auto;
+  color: var(--sl-color-gray-3);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.algo-viz-plot {
+  position: relative;
+  height: 150px;
+  margin-top: 12px;
+  border-radius: 10px;
+  background: var(--algo-plot-bg);
+}
+.algo-viz-plot::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--algo-chip-border);
+}
+
+.algo-viz-bar {
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  border-radius: 6px 6px 2px 2px;
+  background: var(--algo-bar);
+  transition:
+    left 260ms ease,
+    height 260ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+.algo-viz-bar--locked {
+  background: var(--algo-bar-locked);
+}
+.algo-viz-bar--locked .algo-viz-value {
+  color: var(--sl-color-gray-3);
+}
+.algo-viz-bar--active {
+  background: var(--algo-bar-active);
+  box-shadow: 0 0 14px var(--algo-bar-active-glow);
+}
+.algo-viz-bar--active .algo-viz-value {
+  color: var(--algo-bar-text);
+  font-weight: 600;
+}
+.algo-viz-value {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--algo-bar-text);
+  font-size: 11px;
+  line-height: 1;
+}
+
+.algo-viz-axis {
+  position: relative;
+  height: 24px;
+  margin-top: 6px;
+}
+.algo-viz-chip {
+  position: absolute;
+  top: 4px;
+  display: flex;
+  gap: 5px;
+  padding: 2px 8px;
+  border: 1px solid var(--algo-chip-border);
+  border-radius: 999px;
+  background: var(--algo-chip-bg);
+  color: var(--algo-chip-text);
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+  font-size: 11px;
+  line-height: 1.3;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  transition: left 260ms ease;
+}
+
+.algo-viz-note {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--algo-bar-active);
+  border-radius: 8px;
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-gray-2);
+  font-size: 13.5px;
+}
+
+.algo-viz-progress {
+  position: relative;
+  height: 4px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--sl-color-gray-5);
+  cursor: pointer;
+}
+.algo-viz-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--algo-bar-active);
+  transition: width 200ms ease;
+}
+
+.algo-viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+}
+.algo-viz-btn {
+  padding: 5px 12px;
+  border: 1px solid var(--sl-color-gray-4);
+  border-radius: 8px;
+  background: none;
+  color: var(--sl-color-gray-1);
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+.algo-viz-btn:hover:not(:disabled) {
+  border-color: var(--sl-color-gray-2);
+  color: var(--sl-color-white);
+}
+.algo-viz-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.algo-viz-btn--primary {
+  border-color: var(--sl-color-accent);
+  background: var(--sl-color-accent);
+  color: var(--sl-color-accent-low);
+}
+.algo-viz-btn--primary:hover:not(:disabled) {
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-accent-low);
+  opacity: 0.9;
+}
+
+.algo-viz-speeds {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+  padding: 2px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+}
+.algo-viz-speed {
+  padding: 3px 9px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--sl-color-gray-3);
+  font-size: 12px;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
+}
+.algo-viz-speed--on {
+  background: var(--sl-color-gray-5);
+  color: var(--sl-color-white);
+}
+
+@media (max-width: 480px) {
+  .algo-viz-plot {
+    height: 120px;
+  }
+  .algo-viz-speeds {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .algo-viz-bar,
+  .algo-viz-chip,
+  .algo-viz-progress-fill {
+    transition: none;
+  }
+}

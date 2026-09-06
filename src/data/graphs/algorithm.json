@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    { "id": "root", "label": "算法", "group": "核心" },
+    { "id": "bubble", "label": "冒泡排序", "href": "/algorithm/basic/sorting/01-bubble-sort/", "group": "排序" },
+    { "id": "quick", "label": "快速排序", "href": "/algorithm/basic/sorting/02-quick-sort/", "group": "排序" },
+    { "id": "binary", "label": "二分查找", "href": "/algorithm/basic/searching/01-binary-search/", "group": "查找" }
+  ],
+  "edges": [
+    { "source": "root", "target": "bubble" },
+    { "source": "root", "target": "quick" },
+    { "source": "root", "target": "binary" },
+    { "source": "bubble", "target": "quick", "label": "优化方向：分治" },
+    { "source": "quick", "target": "binary", "label": "同为分治思想" }
+  ]
+}

@@ -1,0 +1,73 @@
+---
+title: 冒泡排序
+description: 相邻比较两两交换、每轮冒出最大值、swapped 提前退出的 O(n²) 稳定排序
+level: basic
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+冒泡排序（Bubble Sort）是最直观的交换排序：**从头到尾两两比较相邻元素，逆序就交换**。
+每一轮扫完，当前无序区间的最大值就像气泡一样「冒」到区间末尾；n - 1 轮后整体有序。
+
+## 动态演示
+
+橙色柱是当前比较/交换的位置，灰色柱表示已就位。点击「播放」看完整过程，也可单步前进后退、拖动进度条跳转：
+
+<AlgorithmVizIsland demo="bubble-sort" />
+
+## Java 实现
+
+```java
+public static void bubbleSort(int[] a) {
+    for (int i = 0; i < a.length - 1; i++) {          // 共 n-1 轮
+        boolean swapped = false;
+        // 无序区间 [0, n-1-i)：区间末尾已就位的部分不用再比
+        for (int j = 0; j < a.length - 1 - i; j++) {
+            if (a[j] > a[j + 1]) {
+                int tmp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = tmp;
+                swapped = true;
+            }
+        }
+        if (!swapped) break;   // 本轮一次交换都没发生 → 已经整体有序
+    }
+}
+```
+
+进阶版：不按「轮数」收缩边界，而是记录**最后一次交换的位置**——该位置之后全部有序，下一轮直接扫到这里为止：
+
+```java
+public static void bubbleSort2(int[] a) {
+    int end = a.length - 1;
+    while (end > 0) {
+        int lastSwap = 0;              // 本轮最后一次交换的下标
+        for (int j = 0; j < end; j++) {
+            if (a[j] > a[j + 1]) {
+                int t = a[j]; a[j] = a[j + 1]; a[j + 1] = t;
+                lastSwap = j;
+            }
+        }
+        end = lastSwap;                // lastSwap 之后已有序，边界直接跳过去
+    }
+}
+```
+
+这个版本对「前半段乱序、后半段已经有序」的数组特别有效，比如 `[3, 9, 1, 2, 4, 5, 6, 7, 8]`。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间（平均 / 最坏） | O(n²) | 逆序数组时比较、交换都拉满 |
+| 时间（最好） | O(n) | 数组已有序 + `swapped` 提前退出，一轮扫完 |
+| 空间 | O(1) | 原地排序，只需一个临时变量 |
+| 稳定性 | **稳定** | 只在严格大于时才交换，相等元素相对次序不变 |
+
+## 面试要点
+
+- 手写时最常丢分的边界：内层循环上界是 `n - 1 - i`，别漏 `- i`。
+- 稳定的根源：比较条件是 `a[j] > a[j + 1]` 而不是 `>=`。
+- 「冒泡怎么优化」标准答案就两条：**提前退出**（有序即停）和**边界收缩**（记录最后交换位置）。
+- 实际工程几乎不用（交换次数太多、常数大），价值在于它用最短的代码演示了这两个通用的排序优化思想——快排、插入排序的优化是同思路的放大版。

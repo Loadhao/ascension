@@ -1018,6 +1018,42 @@ export default defineConfig({
           ],
         },
         {
+          label: '算法',
+          collapsed: true,
+          items: [
+            {
+              label: '算法',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/algorithm/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '排序算法',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/algorithm/basic/sorting/' },
+                        { label: '冒泡排序', link: '/algorithm/basic/sorting/01-bubble-sort/' },
+                        { label: '快速排序', link: '/algorithm/basic/sorting/02-quick-sort/' },
+                      ],
+                    },
+                    {
+                      label: '查找算法',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/algorithm/basic/searching/' },
+                        { label: '二分查找', link: '/algorithm/basic/searching/01-binary-search/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
           label: 'AI',
           collapsed: true,
           items: [

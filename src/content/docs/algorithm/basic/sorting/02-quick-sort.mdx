@@ -1,0 +1,79 @@
+---
+title: 快速排序
+description: Lomuto 分区、基准归位与分治递归，平均 O(n log n) 的原地不稳定排序
+level: basic
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+快速排序（Quick Sort）是分治思想的代表：每一轮选一个**基准（pivot）**做**分区（partition）**，
+让基准左边的元素都小于它、右边都不小于它——基准就此归位；然后对左右两个子区间**递归**做同样的事。
+
+## 动态演示
+
+`i` 指向「小于基准的区域」的下一个空位，`j` 负责扫描，橙色柱是当步比较/交换的元素，灰色柱是已归位的基准：
+
+<AlgorithmVizIsland demo="quick-sort" />
+
+## Java 实现
+
+经典教材写法是 Lomuto 分区：取区间末尾作基准，`i` 维护「小于基准」的边界，`j` 扫描一遍：
+
+```java
+public static void quickSort(int[] a) {
+    quickSort(a, 0, a.length - 1);
+}
+
+private static void quickSort(int[] a, int low, int high) {
+    if (low >= high) return;              // 区间为空或只剩一个元素
+    int p = partition(a, low, high);      // 基准归位到 p
+    quickSort(a, low, p - 1);             // 递归左半区
+    quickSort(a, p + 1, high);            // 递归右半区
+}
+
+private static int partition(int[] a, int low, int high) {
+    int pivot = a[high];                  // 取末尾元素为基准
+    int i = low;                          // i 左边的都 < pivot
+    for (int j = low; j < high; j++) {
+        if (a[j] < pivot) {
+            swap(a, i, j);                // 把小的换到左侧
+            i++;
+        }
+    }
+    swap(a, i, high);                     // 基准与 i 位置交换，归位
+    return i;
+}
+
+private static void swap(int[] a, int i, int j) {
+    if (i == j) return;
+    int t = a[i]; a[i] = a[j]; a[j] = t;
+}
+```
+
+工业界的写法（如 `Arrays.sort` 对基本类型的双轴快排）还有两个关键加固，面试可作为「怎么优化」的答案：
+
+```java
+// 1. 随机基准：分区前随机挑一个元素换到末尾，避免「已有序数组」退化成 O(n²)
+int randomIdx = low + ThreadLocalRandom.current().nextInt(high - low + 1);
+swap(a, randomIdx, high);
+
+// 2. 小区间切换插入排序：区间长度小于阈值（约 16~47）时，插入排序常数更小
+if (high - low < 16) { insertionSort(a, low, high); return; }
+```
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间（平均） | O(n log n) | 每次分区大致对半，共 log n 层，每层 O(n) |
+| 时间（最坏） | O(n²) | 每次基准都是最值（如已有序数组取末尾做基准），分区只缩短 1 |
+| 空间 | O(log n) | 原地排序，开销来自递归栈；最坏退化 O(n) |
+| 稳定性 | **不稳定** | partition 的远距离交换会打平相等元素的相对次序 |
+
+## 面试要点
+
+- **为什么实际中最快**：内层循环只有一次比较加一次顺序访问，缓存命中率极高；对比归并排序省掉了 O(n) 辅助数组。
+- **最坏情况怎么避免**：随机基准、三数取中（首/中/尾取中位数）、Introsort（递归过深转堆排序）。
+- **与冒泡的对比**：两者都是交换排序，但冒泡每轮只把一个最大值送到末尾（每轮消灭「一处」错位），快排每次分区让一个基准**精确归位一半规模**，指数级缩小问题。
+- 与归并的共同点都是分治，差别在「分工阶段」：快排的功夫花在分区上（先做事后递归），归并的功夫花在合并上（先递归后做事）。
