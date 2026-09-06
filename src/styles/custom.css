@@ -1,8 +1,96 @@
-/* 交互式知识图谱容器（React + Cytoscape） */
+/* 交互式知识图谱容器（React + Cytoscape）：
+   画布内配色由组件按明暗主题计算，覆盖层（工具栏/图例）走 CSS 变量 */
 .knowledge-graph {
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 12px;
   background: var(--sl-color-bg);
+}
+.kg-canvas {
+  width: 100%;
+  height: 100%;
+}
+.kg-toolbar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  display: flex;
+  gap: 6px;
+}
+.kg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--sl-color-bg) 78%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--sl-color-gray-2);
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+.kg-btn:hover {
+  border-color: var(--sl-color-gray-2);
+  color: var(--sl-color-white);
+}
+.kg-legend {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: min(72%, 560px);
+}
+.kg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--sl-color-bg) 78%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--sl-color-gray-2);
+  font-size: 11.5px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
+}
+.kg-chip:hover {
+  border-color: var(--sl-color-gray-2);
+  color: var(--sl-color-white);
+}
+/* 选中态配色由组件按分组色内联注入（优先级高于 hover） */
+.kg-chip[aria-pressed='true']:hover {
+  filter: brightness(1.1);
+}
+.kg-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+.kg-count {
+  margin-left: 2px;
+  font-size: 10.5px;
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 480px) {
+  .kg-legend {
+    max-width: calc(100% - 20px);
+  }
 }
 
 /* ===== 黑白主题令牌（site-redesign spec 第 4 节） =====
