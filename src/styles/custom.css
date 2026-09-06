@@ -1233,6 +1233,11 @@ html.mmd-viewer-open {
   align-items: center;
   margin-top: 12px;
 }
+/* Starlight 正文会给「非首个兄弟元素」注入 margin-block-start（内容间距），
+   显式归零，避免按钮与速率组被顶得高低不平 */
+.algo-viz-controls :is(.algo-viz-btn, .algo-viz-speeds, .algo-viz-speed) {
+  margin: 0;
+}
 .algo-viz-btn {
   display: inline-flex;
   align-items: center;
@@ -1275,7 +1280,9 @@ html.mmd-viewer-open {
 
 .algo-viz-speeds {
   display: flex;
+  align-items: center;
   gap: 2px;
+  height: 28px;
   margin-left: auto;
   padding: 2px;
   border: 1px solid var(--sl-color-gray-5);
@@ -1284,7 +1291,8 @@ html.mmd-viewer-open {
 .algo-viz-speed {
   display: inline-flex;
   align-items: center;
-  height: 24px;
+  justify-content: center;
+  height: 22px;
   padding: 0 9px;
   border: none;
   border-radius: 6px;
