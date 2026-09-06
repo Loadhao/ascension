@@ -143,6 +143,12 @@ export default function KnowledgeGraph({
       if (href) window.location.assign(href);
     });
 
+    // 中文等字体晚于首次标签测量就绪时，'label' 尺寸被记为 0 且不再重测，
+    // 节点会永远不被渲染；字体就绪后强制重算一次样式触发重绘。
+    document.fonts?.ready.then(() => {
+      if (!cy.destroyed()) cy.style().update();
+    });
+
     return () => {
       cy.destroy();
     };
