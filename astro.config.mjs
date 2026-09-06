@@ -223,28 +223,6 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Tomcat',
-          collapsed: true,
-          items: [
-            { label: '学习路线', link: '/tomcat/' },
-            {
-              label: '基础',
-              collapsed: true,
-              items: [
-                {
-                  label: '架构与原理',
-                  collapsed: false,
-                  items: [
-                    { label: '概览', link: '/tomcat/basic/architecture/' },
-                    { label: 'Web 容器的本质', link: '/tomcat/basic/architecture/01-web-container/' },
-                    { label: 'Jetty 架构与 Tomcat 对比', link: '/tomcat/basic/architecture/02-jetty-architecture/' },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
           label: '编程语言',
           collapsed: true,
           items: [
@@ -279,6 +257,15 @@ export default defineConfig({
                         { label: 'HashMap 源码分析', link: '/java/basic/collection/02-hashmap/' },
                         { label: 'ConcurrentHashMap 详解', link: '/java/basic/collection/03-concurrenthashmap/' },
                         { label: '红黑树：从 BST 到 TreeMap', link: '/java/basic/collection/04-red-black-tree/' },
+                      ],
+                    },
+                    {
+                      label: 'Tomcat 与 Web 容器',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/java/basic/tomcat/' },
+                        { label: 'Web 容器的本质', link: '/java/basic/tomcat/01-web-container/' },
+                        { label: 'Jetty 架构与 Tomcat 对比', link: '/java/basic/tomcat/02-jetty-architecture/' },
                       ],
                     },
                   ],
