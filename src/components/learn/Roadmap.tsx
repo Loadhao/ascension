@@ -1,4 +1,4 @@
-import type { DirectionMeta, Level } from '../../lib/notes';
+import type { NavDirection, Level } from '../../lib/notes';
 import { withBase, type LearnStatus } from '../../lib/learn';
 import LearnDot, { useStatusSnapshot } from './LearnDot';
 
@@ -51,7 +51,7 @@ function countLevel(
 }
 
 /** 方向首页路线图（F6）：等级分段 + 分类目录入口 + 段头完成计数 */
-export default function Roadmap({ direction }: { direction: DirectionMeta }) {
+export default function Roadmap({ direction }: { direction: NavDirection }) {
   const snapshot = useStatusSnapshot();
 
   const totalNotes = direction.levels.reduce(

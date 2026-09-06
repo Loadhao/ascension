@@ -12,5 +12,5 @@ const entry = Astro.locals.starlightRoute?.entry as
 const noteId = entry?.data?.level !== undefined ? entry.id : null;
 ---
 
-{noteId && <ProgressMark client:load noteId={noteId} />}
+{noteId && <ProgressMark client:idle noteId={noteId} />}
 <DefaultFooter />

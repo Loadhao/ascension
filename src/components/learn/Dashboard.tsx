@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { SiteData } from '../../lib/notes';
+import type { NavSiteData } from '../../lib/notes';
 import { getLastVisit, withBase, type LastVisit } from '../../lib/learn';
 import { useStatusSnapshot } from './LearnDot';
 
@@ -12,7 +12,7 @@ interface FlatNote {
   categoryTitle: string;
 }
 
-function flatten(data: SiteData): FlatNote[] {
+function flatten(data: NavSiteData): FlatNote[] {
   const notes: FlatNote[] = [];
   for (const direction of data.directions)
     for (const level of direction.levels)
@@ -35,7 +35,7 @@ function formatDate(ts: number): string {
 }
 
 /** 首页学习仪表盘（F5）：继续上次学习 → 方向进度 → 下一步推荐 */
-export default function Dashboard({ data }: { data: SiteData }) {
+export default function Dashboard({ data }: { data: NavSiteData }) {
   const snapshot = useStatusSnapshot();
   const [lastVisit, setLastVisit] = useState<LastVisit | null>(null);
   useEffect(() => {

@@ -195,3 +195,59 @@ export async function getCategory(categoryId: string): Promise<CategoryMeta | nu
   }
   return null;
 }
+
+// ===== 岛屿精简载荷 =====
+// 路线图/仪表盘只需 id、href、title；岛屿 props 会整体内联进 HTML，
+// 去掉 description/core 等长文本字段可显著缩小页面体积。
+
+export interface NavNote {
+  id: string;
+  href: string;
+  title: string;
+}
+
+export interface NavCategory {
+  id: string;
+  href: string;
+  title: string;
+  notes: NavNote[];
+}
+
+export interface NavLevel {
+  key: Level;
+  label: string;
+  categories: NavCategory[];
+}
+
+export interface NavDirection {
+  id: string;
+  href: string;
+  title: string;
+  levels: NavLevel[];
+}
+
+export interface NavSiteData {
+  directions: NavDirection[];
+}
+
+export function toNavDirection(direction: DirectionMeta): NavDirection {
+  return {
+    id: direction.id,
+    href: direction.href,
+    title: direction.title,
+    levels: direction.levels.map((level) => ({
+      key: level.key,
+      label: level.label,
+      categories: level.categories.map((category) => ({
+        id: category.id,
+        href: category.href,
+        title: category.title,
+        notes: category.notes.map(({ id, href, title }) => ({ id, href, title })),
+      })),
+    })),
+  };
+}
+
+export function toNavSiteData(site: SiteData): NavSiteData {
+  return { directions: site.directions.map(toNavDirection) };
+}

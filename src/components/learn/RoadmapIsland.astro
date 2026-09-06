@@ -1,6 +1,6 @@
 ---
 import Roadmap from './Roadmap';
-import { getSiteData } from '../../lib/notes';
+import { getSiteData, toNavDirection } from '../../lib/notes';
 
 const { directionId } = Astro.props as { directionId: string };
 const site = await getSiteData();
@@ -9,6 +9,6 @@ const direction = site.directions.find((d) => d.id === directionId);
 
 {
 	direction && (
-		<Roadmap client:load direction={direction} />
+		<Roadmap client:load direction={toNavDirection(direction)} />
 	)
 }
