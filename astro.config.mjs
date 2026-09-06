@@ -1044,6 +1044,10 @@ export default defineConfig({
                         { label: '概览', link: '/algorithm/basic/sorting/' },
                         { label: '冒泡排序', link: '/algorithm/basic/sorting/01-bubble-sort/' },
                         { label: '快速排序', link: '/algorithm/basic/sorting/02-quick-sort/' },
+                        { label: '插入排序', link: '/algorithm/basic/sorting/03-insertion-sort/' },
+                        { label: '选择排序', link: '/algorithm/basic/sorting/04-selection-sort/' },
+                        { label: '归并排序', link: '/algorithm/basic/sorting/05-merge-sort/' },
+                        { label: '堆排序', link: '/algorithm/basic/sorting/06-heap-sort/' },
                       ],
                     },
                     {
@@ -1052,6 +1056,8 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/algorithm/basic/searching/' },
                         { label: '二分查找', link: '/algorithm/basic/searching/01-binary-search/' },
+                        { label: '双指针', link: '/algorithm/basic/searching/02-two-pointers/' },
+                        { label: '滑动窗口', link: '/algorithm/basic/searching/03-sliding-window/' },
                       ],
                     },
                   ],

@@ -1,0 +1,72 @@
+---
+title: 堆排序
+description: 数组即完全二叉树：建大顶堆后逐个取堆顶归位的原地 O(n log n) 排序，Top-K 与优先队列的地基
+level: basic
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+堆排序（Heap Sort）把数组直接当作**完全二叉树**用：下标 `k` 的孩子是 `2k+1` 与 `2k+2`，层序排布、不需要任何指针。
+排序分两步：先把数组调整成**大顶堆**（父 ≥ 孩子），然后反复「堆顶（最大值）与无序区末尾交换 → 堆大小减一 → 堆顶下沉恢复堆性质」。
+整个过程原地完成，任何输入都是 O(n log n)。
+
+## 动态演示
+
+`父`、`大子` 指针展示下沉比较的位置；建堆阶段先让整棵树满足「父 ≥ 孩子」，随后每轮堆顶归位（灰色柱）。
+组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="heap-sort" />
+
+## Java 实现
+
+```java
+public static void heapSort(int[] a) {
+    int n = a.length;
+    // 1. 建堆：从最后一个非叶子节点自底向上下沉，叶子天然满足堆性质
+    for (int i = n / 2 - 1; i >= 0; i--) siftDown(a, i, n);
+    // 2. 每轮：堆顶（当前最大值）换到无序区末尾归位，堆大小减一
+    for (int end = n - 1; end > 0; end--) {
+        swap(a, 0, end);
+        siftDown(a, 0, end);                    // 换上来的元素从堆顶下沉
+    }
+}
+
+/** 自顶向下调整：与较大的孩子比较、下沉，恢复「父 ≥ 孩子」 */
+private static void siftDown(int[] a, int start, int size) {
+    int p = start;
+    while (true) {
+        int l = 2 * p + 1, r = l + 1;
+        if (l >= size) return;                  // 没有孩子，到叶子了
+        int big = l;
+        if (r < size && a[r] > a[l]) big = r;   // 取较大的孩子比（大顶堆只关心最大）
+        if (a[big] <= a[p]) return;             // 父不小于最大孩子，堆性质满足
+        swap(a, p, big);
+        p = big;                                // 继续检查换下去的元素
+    }
+}
+
+private static void swap(int[] a, int i, int j) {
+    int t = a[i]; a[i] = a[j]; a[j] = t;
+}
+```
+
+两个记忆点：**建堆从 `n/2 - 1` 倒着走到 0**（叶子不用调）；**下沉永远和较大的孩子比**（大顶堆要保证父是三者最大）。
+
+JDK 对应物是 `PriorityQueue`——它就是堆（默认小顶堆），不过 `PriorityQueue` 不支持原地堆排序，`Arrays.sort` 在快排递归过深时也会切堆排序（Introsort 策略），正是看中它的最坏保证。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间（所有情况） | O(n log n) | 建堆 O(n) + n 次取顶各 O(log n)，不挑输入 |
+| 空间 | **O(1)** | 原地，只有几个临时变量（三大 O(n log n) 排序中唯一） |
+| 稳定性 | 不稳定 | 堆顶与末尾的远距离交换会打乱相等元素 |
+| 实际速度 | 慢于快排 | 跳跃式访问缓存不友好，且每步都跨全数组比较 |
+
+## 面试要点
+
+- **建堆为什么是 O(n) 而不是 O(n log n)**：自底向上时，多数节点在叶子附近、下沉距离极短（一半节点下沉 0 层，四分之三不超过 1 层），按高度加权求和收敛到 O(n)。逐个「上浮插入」建堆才是 O(n log n)。
+- **明明复杂度一样，为什么实测比快排慢**：快排顺序扫数组缓存命中率极高；堆的下沉要在 `k` 与 `2k+1` 之间跳跃，缓存不友好，且建堆本身就把局部有序性打散了。
+- **Top-K 标准答案**：亿级数据找最大 K 个——维护大小为 K 的小顶堆，来一个元素和堆顶比，更大就换入并下沉，O(n log k) 时间、O(k) 空间；对比全排序 O(n log n) 或维护全部的 O(n) 空间。
+- 与选择排序的血脉关系：堆排序 = 「每轮选最大放末尾」的选择排序，只是用堆把「选最值」从 O(n) 降到了 O(log n)。

@@ -3,13 +3,32 @@
     { "id": "root", "label": "算法", "group": "核心" },
     { "id": "bubble", "label": "冒泡排序", "href": "/algorithm/basic/sorting/01-bubble-sort/", "group": "排序" },
     { "id": "quick", "label": "快速排序", "href": "/algorithm/basic/sorting/02-quick-sort/", "group": "排序" },
-    { "id": "binary", "label": "二分查找", "href": "/algorithm/basic/searching/01-binary-search/", "group": "查找" }
+    { "id": "insertion", "label": "插入排序", "href": "/algorithm/basic/sorting/03-insertion-sort/", "group": "排序" },
+    { "id": "selection", "label": "选择排序", "href": "/algorithm/basic/sorting/04-selection-sort/", "group": "排序" },
+    { "id": "merge", "label": "归并排序", "href": "/algorithm/basic/sorting/05-merge-sort/", "group": "排序" },
+    { "id": "heap", "label": "堆排序", "href": "/algorithm/basic/sorting/06-heap-sort/", "group": "排序" },
+    { "id": "binary", "label": "二分查找", "href": "/algorithm/basic/searching/01-binary-search/", "group": "查找" },
+    { "id": "two-pointers", "label": "双指针", "href": "/algorithm/basic/searching/02-two-pointers/", "group": "查找" },
+    { "id": "sliding-window", "label": "滑动窗口", "href": "/algorithm/basic/searching/03-sliding-window/", "group": "查找" }
   ],
   "edges": [
     { "source": "root", "target": "bubble" },
     { "source": "root", "target": "quick" },
     { "source": "root", "target": "binary" },
+    { "source": "root", "target": "insertion" },
+    { "source": "root", "target": "selection" },
+    { "source": "root", "target": "merge" },
+    { "source": "root", "target": "heap" },
+    { "source": "root", "target": "two-pointers" },
+    { "source": "root", "target": "sliding-window" },
     { "source": "bubble", "target": "quick", "label": "优化方向：分治" },
-    { "source": "quick", "target": "binary", "label": "同为分治思想" }
+    { "source": "quick", "target": "binary", "label": "同为分治思想" },
+    { "source": "bubble", "target": "insertion", "label": "同为相邻比较，插入更早停" },
+    { "source": "bubble", "target": "selection", "label": "O(n²) 兄弟：一个换最多、一个换最少" },
+    { "source": "selection", "target": "heap", "label": "堆把「选最值」降到 O(log n)" },
+    { "source": "insertion", "target": "quick", "label": "快排小区间切插入排序" },
+    { "source": "merge", "target": "quick", "label": "分治双子星：合并稳定 vs 分区更快" },
+    { "source": "binary", "target": "two-pointers", "label": "有序性换比较次数" },
+    { "source": "two-pointers", "target": "sliding-window", "label": "对撞指针 → 同向窗口" }
   ]
 }

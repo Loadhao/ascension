@@ -1,0 +1,67 @@
+---
+title: 归并排序
+description: 递归对半拆分、有序两半合并的 O(n log n) 稳定排序：任何输入都有最坏保证，对象排序与外排序的主力
+level: basic
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+归并排序（Merge Sort）是分治的另一个代表：**递归把数组对半拆，拆到单个元素天然有序，再把两个有序的半区合并成一个有序区间**。
+与快排「功夫花在分区、先做事后递归」相反，归并的功夫全花在合并上——**先递归后做事**。它不挑输入：最好、最坏都是 O(n log n)，
+并且**稳定**，这两个保证换来的代价是 O(n) 辅助数组。
+
+## 动态演示
+
+橙色列是当前正在合并的区间，`k` 是写回位置，`i`、`j` 指向两半暂存在辅助数组中的头部；被顶替的元素会暂时右移让位。
+注意「相等取左」这一步——它就是稳定性的来源。组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="merge-sort" />
+
+## Java 实现
+
+```java
+public static void mergeSort(int[] a) {
+    int[] aux = new int[a.length];              // 辅助数组复用，避免每次 merge 都分配
+    mergeSort(a, aux, 0, a.length - 1);
+}
+
+private static void mergeSort(int[] a, int[] aux, int low, int high) {
+    if (low >= high) return;                    // 0 或 1 个元素天然有序
+    int mid = low + (high - low) / 2;
+    mergeSort(a, aux, low, mid);                // 排左半区
+    mergeSort(a, aux, mid + 1, high);           // 排右半区
+    merge(a, aux, low, mid, high);              // 合并两个有序半区
+}
+
+private static void merge(int[] a, int[] aux, int low, int mid, int high) {
+    System.arraycopy(a, low, aux, low, high - low + 1);  // 暂存，a 的区间将被逐个写回覆盖
+    int i = low, j = mid + 1;
+    for (int k = low; k <= high; k++) {
+        if (i > mid)                     a[k] = aux[j++];        // 左半取完，搬右半剩余
+        else if (j > high)               a[k] = aux[i++];        // 右半取完，搬左半剩余
+        else if (aux[j] < aux[i])        a[k] = aux[j++];        // 右边更小，取右
+        else                             a[k] = aux[i++];        // <=：相等取左，保证稳定
+    }
+}
+```
+
+合并的四个分支是手写高频出错点：两个「取完」的兜底在前，比较在后；**相等时取左边**这一行决定稳定性。
+
+JDK 里的对应物：`Arrays.sort(int[])` 基本类型用双轴快排；`Arrays.sort(Object[])` 对象排序用 **TimSort**——归并排序的改进版（识别已有序片段「run」再合并，兼得插入排序的自适应性和归并的稳定性），对象排序必须稳定是比较器语义的要求。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间（所有情况） | O(n log n) | 拆分共 log₂n 层，每层合并整体扫一遍 O(n)，最好最坏同价 |
+| 空间 | O(n) | 辅助数组；递归栈 O(log n) 相比之下可忽略 |
+| 稳定性 | **稳定** | 相等时取左半元素，相对次序不乱 |
+| 适用 | 要稳定 / 要最坏保证 / 链表 / 外排序 | 见下 |
+
+## 面试要点
+
+- **与快排的对比是必考题**：快排平均更快（原地、缓存友好、常系数小）但最坏 O(n²) 且不稳定；归并多花 O(n) 空间，换来最坏 O(n log n) 与稳定。所以「为什么对象用归并系、基本类型用快排系」——对象比较贵、且业务语义要求稳定。
+- **链表排序首选**：链表合并不需要随机访问，也不需要 O(n) 辅助空间（改指针即可），`LinkedList` 场景下归并是最优选择。
+- **外排序的地基**：数据大到内存放不下时，「每块内部排序 → 多路归并」是标准方案；多路归并用小顶堆/败者树选每次该吐出哪一路的头元素。
+- 手写坑点：`aux` 拷贝区间是 `[low, high]` 而不是整个数组每次全拷；`mid` 用 `low + (high - low) / 2` 防溢出（和二分同一个坑）。
