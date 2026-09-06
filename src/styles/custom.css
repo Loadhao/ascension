@@ -64,6 +64,64 @@
   font-weight: 600;
 }
 
+/* ===== 侧边栏目录树工具条与子树开关 ===== */
+.sl-sidebar-tools {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--sl-color-hairline-light);
+  margin-bottom: 0.5rem;
+}
+.sl-sidebar-tools button {
+  font-size: var(--sl-text-xs);
+  color: var(--sl-color-gray-2);
+  background: transparent;
+  border: 1px solid var(--sl-color-hairline-light);
+  border-radius: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  cursor: pointer;
+}
+.sl-sidebar-tools button:hover {
+  color: var(--sl-color-white);
+  border-color: var(--sl-color-gray-3);
+}
+summary .sl-tree-toggle {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: none;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--sl-color-gray-3);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+/* space-between 会把注入按钮居中成第三项：label 顶开剩余空间，按钮归位行尾 */
+summary .group-label {
+  margin-inline-end: auto;
+}
+summary:hover .sl-tree-toggle,
+summary .sl-tree-toggle:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+summary .sl-tree-toggle:hover {
+  color: var(--sl-color-white);
+  background: var(--sl-color-hairline-light);
+}
+@media (hover: none) {
+  summary .sl-tree-toggle {
+    opacity: 0.5;
+    pointer-events: auto;
+  }
+}
+
 /* ===== 字重调轻（F4）：H1 600 / H2–H6 500 / 正文 400 ===== */
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
   font-weight: 500;
