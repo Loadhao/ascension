@@ -24,9 +24,11 @@ export interface VizConfig {
 }
 
 const SPEEDS = [
-	{ label: '0.5×', ms: 660 },
-	{ label: '1×', ms: 330 },
-	{ label: '2×', ms: 165 },
+	{ label: '0.25×', ms: 2800 },
+	{ label: '0.5×', ms: 1400 },
+	{ label: '1×', ms: 700 },
+	{ label: '1.5×', ms: 470 },
+	{ label: '2×', ms: 350 },
 ];
 
 /** 线性 SVG 图标（currentColor 跟随主题），替代 Unicode 字符避免被渲染成彩色 emoji */
@@ -109,7 +111,7 @@ const icons = {
 export default function AlgorithmViz({ title, frames }: VizConfig) {
 	const [step, setStep] = useState(0);
 	const [playing, setPlaying] = useState(true);
-	const [speedIdx, setSpeedIdx] = useState(1);
+	const [speedIdx, setSpeedIdx] = useState(2);
 
 	const last = frames.length - 1;
 	const frame = frames[Math.min(step, last)];
