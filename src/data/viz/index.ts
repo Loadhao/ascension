@@ -570,6 +570,307 @@ function slidingWindowDemo(): VizConfig {
 	return { title: `滑动窗口 · 和 ≥ ${target} 的最短子数组`, frames };
 }
 
+/** 希尔排序：gap 从大到小分组插入，远距离先消除逆序，gap=1 时数组已近乎有序 */
+function shellSortDemo(): VizConfig {
+	const arr = toItems([8, 5, 9, 2, 6, 3, 7, 1]);
+	const n = arr.length;
+	const frames: VizFrame[] = [];
+	const snap = (): VizItem[] => arr.map((it) => ({ ...it }));
+	const gaps = [4, 2, 1];
+
+	frames.push({
+		items: snap(),
+		note: `初始数组（${n} 个元素）。希尔排序是插入排序的推广：按下标间隔 gap 分组做插入排序，gap 从大到小递减——大 gap 一步消除远距离逆序，最后 gap = 1 时数组已近乎有序，插入排序接近 O(n)。`,
+	});
+
+	for (const gap of gaps) {
+		frames.push({
+			items: snap(),
+			note: `gap = ${gap}：下标相差 ${gap} 的元素视为一组，组内做插入排序`,
+		});
+		for (let i = gap; i < n; i++) {
+			let j = i;
+			while (j >= gap && arr[j - gap]!.value > arr[j]!.value) {
+				const front = arr[j - gap]!.value;
+				const cur = arr[j]!.value;
+				frames.push({
+					items: snap(),
+					active: [j - gap, j],
+					pointers: { i: j, 前: j - gap },
+					note: `同组比较相距 ${gap} 的 ${front} 与 ${cur}：${front} > ${cur}，交换（小值一步跨越 ${gap} 格）`,
+				});
+				[arr[j - gap], arr[j]] = [arr[j]!, arr[j - gap]!];
+				frames.push({
+					items: snap(),
+					active: [j - gap, j],
+					pointers: { i: j - gap, 前: j },
+					note: `${cur} 前移了 ${gap} 格，继续与同组前一个比较`,
+				});
+				j -= gap;
+			}
+		}
+		frames.push({
+			items: snap(),
+			note: `gap = ${gap} 完成：${gap === 1 ? '整个数组有序' : `任意相距 ${gap} 的两个元素之间已有序`}`,
+		});
+	}
+	frames.push({
+		items: snap(),
+		locked: [...Array(n).keys()],
+		note: '排序完成：三层 gap 逐层逼近有序，最后一轮 gap = 1 只做了少量移动',
+	});
+	return { title: '希尔排序 · 间隔分组插入', frames };
+}
+
+/** 计数排序（简化展开版）：阶段一逐个计数，阶段二换一排柱子按计数从左到右还原输出 */
+function countingSortDemo(): VizConfig {
+	const values = [4, 2, 2, 8, 3, 3, 1];
+	const n = values.length;
+	const maxV = Math.max(...values);
+	const minV = Math.min(...values);
+	const frames: VizFrame[] = [];
+	const counts = new Map<number, number>();
+
+	frames.push({
+		items: [...toItems(values)],
+		note: `初始数组：值都是 ${minV} ~ ${maxV} 之间的小整数。计数排序不比较元素大小——先数出每个值出现几次，再按值的顺序直接还原输出，用「值本身当地址」绕开了比较排序 O(n log n) 的下界。`,
+	});
+
+	for (let i = 0; i < n; i++) {
+		const v = values[i]!;
+		counts.set(v, (counts.get(v) ?? 0) + 1);
+		const table = [...counts.entries()].sort((a, b) => a[0] - b[0]).map(([val, c]) => `${val}×${c}`).join('，');
+		frames.push({
+			items: [...toItems(values)],
+			active: [i],
+			note: `数到值 ${v}：count[${v}] = ${counts.get(v)}。当前计数表：${table}`,
+		});
+	}
+
+	const out: VizItem[] = values.map((_, i) => ({ id: 100 + i, value: 0 }));
+	frames.push({
+		items: out.map((it) => ({ ...it })),
+		note: '计数完成。下面换一排新柱子表示输出数组：从左到右按值从小到大、每个值写入它的次数（矮柱是尚未写入的位置）',
+	});
+	let w = 0;
+	let skipped: number[] = [];
+	const flushSkipped = () => {
+		if (skipped.length === 0) return;
+		frames.push({
+			items: out.map((it) => ({ ...it })),
+			locked: [...Array(w).keys()],
+			note: `count[${skipped.join('、')}] = 0：这些值没出现过，跳过`,
+		});
+		skipped = [];
+	};
+	for (let v = minV; v <= maxV; v++) {
+		const c = counts.get(v) ?? 0;
+		if (c === 0) {
+			skipped.push(v);
+			continue;
+		}
+		flushSkipped();
+		for (let m = 0; m < c; m++) out[w + m] = { id: 100 + w + m, value: v };
+		frames.push({
+			items: out.map((it) => ({ ...it })),
+			active: Array.from({ length: c }, (_, k) => w + k),
+			locked: [...Array(w).keys()],
+			note: `count[${v}] = ${c}：连续写入 ${c} 个 ${v}`,
+		});
+		w += c;
+	}
+	flushSkipped();
+	frames.push({
+		items: out.map((it) => ({ ...it })),
+		locked: [...Array(n).keys()],
+		note: `还原完成：全程只做了「数一遍 + 写一遍」，耗时 O(n + k)（k 是值的范围），与元素间的比较无关`,
+	});
+	return { title: '计数排序 · 计数与还原', frames };
+}
+
+/** 三路分区（荷兰国旗问题）：一次扫描把数组分成 <、=、> 三段 */
+function threeWayPartitionDemo(): VizConfig {
+	const arr = toItems([5, 2, 9, 2, 5, 9, 2]);
+	const n = arr.length;
+	const pivot = 5;
+	const frames: VizFrame[] = [];
+	const snap = (): VizItem[] => arr.map((it) => ({ ...it }));
+	let lt = 0;
+	let i = 0;
+	let gt = n - 1;
+
+	frames.push({
+		items: snap(),
+		pointers: { lt, i, gt },
+		note: `荷兰国旗问题：以 ${pivot} 为基准，一次扫描把数组分成「< ${pivot}｜= ${pivot}｜> ${pivot}」三段。不变量：lt 左边全部小于基准，gt 右边全部大于，i 负责扫描中间的未知区。`,
+	});
+
+	while (i <= gt) {
+		const v = arr[i]!.value;
+		if (v < pivot) {
+			frames.push({
+				items: snap(),
+				active: [lt, i],
+				pointers: { lt, i, gt },
+				note: `arr[i] = ${v} < 基准：换到 lt 位置进入「小于」段，随后 lt、i 各右移一格`,
+			});
+			[arr[lt], arr[i]] = [arr[i]!, arr[lt]!];
+			lt++;
+			i++;
+		} else if (v > pivot) {
+			frames.push({
+				items: snap(),
+				active: [i, gt],
+				pointers: { lt, i, gt },
+				note: `arr[i] = ${v} > 基准：换到 gt 位置进入「大于」段，gt 左移；i 不动——换过来的元素还没检查过`,
+			});
+			[arr[i], arr[gt]] = [arr[gt]!, arr[i]!];
+			gt--;
+		} else {
+			frames.push({
+				items: snap(),
+				active: [i],
+				pointers: { lt, i, gt },
+				note: `arr[i] = ${v} = 基准：留在中段，i 右移即可`,
+			});
+			i++;
+		}
+	}
+	frames.push({
+		items: snap(),
+		locked: [...Array(n).keys()],
+		note: `i > gt，未知区清空：[0, ${lt - 1}] 全 < ${pivot}，[${lt}, ${gt}] 全 = ${pivot}（共 ${gt - lt + 1} 个），[${gt + 1}, ${n - 1}] 全 > ${pivot}`,
+	});
+	return { title: `三路分区 · 荷兰国旗问题（基准 ${pivot}）`, frames };
+}
+
+/** 快速选择：借用快排分区找第 K 小，每次只递归包含答案的一侧，平均 O(n) */
+function quickSelectDemo(): VizConfig {
+	const arr = toItems([7, 3, 8, 2, 9, 1, 5]);
+	const n = arr.length;
+	const k = 3;
+	const frames: VizFrame[] = [];
+	const snap = (): VizItem[] => arr.map((it) => ({ ...it }));
+
+	function partition(low: number, high: number): number {
+		const pivot = arr[high]!.value;
+		frames.push({
+			items: snap(),
+			active: [high],
+			pointers: { low, high, 基准: high },
+			note: `在 [${low}, ${high}] 内分区：取末尾 ${pivot} 为基准，让它落到「整体有序时应在的位置」——该位置左侧都不大于它、右侧都不小于它`,
+		});
+		let i = low;
+		for (let j = low; j < high; j++) {
+			const cur = arr[j]!.value;
+			frames.push({
+				items: snap(),
+				active: [j],
+				pointers: { i, j, 基准: high },
+				note: `j 扫到 ${cur}：${cur < pivot ? `小于基准 ${pivot}，归入左侧` : `不小于基准 ${pivot}，留在右侧`}`,
+			});
+			if (cur < pivot) {
+				if (i !== j) {
+					[arr[i], arr[j]] = [arr[j]!, arr[i]!];
+					frames.push({
+						items: snap(),
+						active: [i, j],
+						pointers: { i, j, 基准: high },
+						note: `交换到左侧「小于基准」区，i 右移`,
+					});
+				}
+				i++;
+			}
+		}
+		if (i !== high) [arr[i], arr[high]] = [arr[high]!, arr[i]!];
+		frames.push({
+			items: snap(),
+			active: [i],
+			pointers: { k: k - 1 },
+			note: `基准 ${pivot} 归位到下标 ${i}，它就是第 ${i + 1} 小。${i === k - 1 ? '正好是目标！' : i < k - 1 ? `第 ${k} 小比它大，答案只可能在右侧 [${i + 1}, ${high}]——左侧整段直接不用管` : `第 ${k} 小比它小，答案只可能在左侧 [${low}, ${i - 1}]——右侧整段直接不用管`}`,
+		});
+		return i;
+	}
+
+	let low = 0;
+	let high = n - 1;
+	frames.push({
+		items: snap(),
+		pointers: { k: k - 1 },
+		note: `找第 ${k} 小（目标下标 ${k - 1}，k 指针固定标记它）。整体排序要 O(n log n)，快速选择每次分区后只进入「包含答案的那一侧」，另一侧整段丢弃，平均 O(n)。`,
+	});
+	for (;;) {
+		const p = partition(low, high);
+		if (p === k - 1) {
+			frames.push({
+				items: snap(),
+				locked: [k - 1],
+				note: `找到：第 ${k} 小是 ${arr[k - 1]!.value}。注意数组并没有整体有序——只为一个答案付出了约一次扫描的成本`,
+			});
+			return { title: `快速选择 · 找第 ${k} 小`, frames };
+		}
+		if (p < k - 1) low = p + 1;
+		else high = p - 1;
+	}
+}
+
+/** 搜索旋转排序数组：旋转后的有序数组上二分，mid 两侧必有一侧有序 */
+function rotatedBinarySearchDemo(): VizConfig {
+	const values = [15, 18, 2, 5, 6, 8, 11, 12];
+	const target = 2;
+	const items = toItems(values);
+	const n = values.length;
+	const frames: VizFrame[] = [];
+	let low = 0;
+	let high = n - 1;
+
+	frames.push({
+		items: [...items],
+		pointers: { low, high },
+		note: `数组原本升序、在某个点被旋转过（这里 ${values[2]} 就是旋转点）。找 target = ${target}：二分仍然可用——对任何 mid，[low, mid] 与 [mid, high] 至少有一半是有序的，用有序的那半判断 target 在不在其中。`,
+	});
+
+	while (low <= high) {
+		const mid = low + ((high - low) >> 1);
+		const mv = values[mid]!;
+		const leftSorted = values[low]! <= mv;
+		let direction = '';
+		if (mv === target) {
+			direction = `正好等于 target，命中！`;
+		} else if (leftSorted) {
+			const inLeft = values[low]! <= target && target < mv;
+			direction = `左半 [${low}, ${mid}] 有序（${values[low]}…${mv}）：${inLeft ? `target 在其中，去左半：high = mid - 1 = ${mid - 1}` : `target 不在有序左半，只能去右半：low = mid + 1 = ${mid + 1}`}`;
+		} else {
+			const inRight = mv < target && target <= values[high]!;
+			direction = `右半 [${mid}, ${high}] 有序（${mv}…${values[high]}）：${inRight ? `target 在其中，去右半：low = mid + 1 = ${mid + 1}` : `target 不在有序右半，只能去左半：high = mid - 1 = ${mid - 1}`}`;
+		}
+		frames.push({
+			items: [...items],
+			active: [mid],
+			pointers: { low, mid, high },
+			note: `mid = ${mid}，值 ${mv}。${direction}`,
+		});
+		if (mv === target) {
+			frames.push({
+				items: [...items],
+				active: [mid],
+				locked: [mid],
+				note: `arr[${mid}] = ${target}。旋转没有破坏二分的本质：每一步仍然安全地排除一半区间，仍是 O(log n)`,
+			});
+			return { title: `旋转数组二分 · 找 ${target}`, frames };
+		}
+		if (leftSorted) {
+			if (values[low]! <= target && target < mv) high = mid - 1;
+			else low = mid + 1;
+		} else {
+			if (mv < target && target <= values[high]!) low = mid + 1;
+			else high = mid - 1;
+		}
+	}
+	frames.push({ items: [...items], note: `low > high，区间为空，${target} 不在数组中` });
+	return { title: `旋转数组二分 · 找 ${target}`, frames };
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的演示注册表 */
 export const vizDemos: Record<string, VizConfig> = {
 	'bubble-sort': bubbleSortDemo(),
@@ -581,4 +882,9 @@ export const vizDemos: Record<string, VizConfig> = {
 	'heap-sort': heapSortDemo(),
 	'two-pointers': twoPointersDemo(),
 	'sliding-window': slidingWindowDemo(),
+	'shell-sort': shellSortDemo(),
+	'counting-sort': countingSortDemo(),
+	'three-way-partition': threeWayPartitionDemo(),
+	'quickselect': quickSelectDemo(),
+	'rotated-binary-search': rotatedBinarySearchDemo(),
 };

@@ -1,0 +1,66 @@
+---
+title: 搜索旋转排序数组
+description: 旋转后的有序数组上二分：判断 mid 哪一侧有序、目标是否落在有序半区，每步仍安全排除一半，O(log n) 不变
+level: basic
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+升序数组在某个旋转点被「整体搬移」后（如 `[4,5,6,7,0,1,2]`），局部仍然有序、全局不再单调。
+直接二分会失效，但有一个关键观察：**取任何 mid，`[low, mid]` 与 `[mid, high]` 至少有一半是完全有序的**
+（旋转点只有一个，不可能同时落在两半）。用有序的那半判断 target 在不在其中，每一步仍然安全地排除一半区间——
+二分的本质没变（LeetCode 33）。
+
+## 动态演示
+
+旋转点是 2。每步先判断 mid 哪侧有序，再看 target 是否落在那个有序区间内，从而决定去哪半。
+组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="rotated-binary-search" />
+
+## Java 实现
+
+```java
+/** 旋转一次的升序数组（无重复）中找 target，O(log n) */
+public static int searchRotated(int[] a, int target) {
+    int low = 0, high = a.length - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (a[mid] == target) return mid;
+
+        if (a[low] <= a[mid]) {                          // 左半 [low, mid] 有序（<= 兼容 low==mid）
+            if (a[low] <= target && target < a[mid])
+                high = mid - 1;                          // target 在有序左半内
+            else
+                low = mid + 1;                           // 不在，去右半
+        } else {                                         // 右半 [mid, high] 有序
+            if (a[mid] < target && target <= a[high])
+                low = mid + 1;                           // target 在有序右半内
+            else
+                high = mid - 1;                          // 不在，去左半
+        }
+    }
+    return -1;
+}
+```
+
+写对的关键是把「判有序」和「判在不在」拆成两个独立判断：
+
+- **哪半有序**：`a[low] <= a[mid]` 为真则左半有序，否则右半有序。相等的两端点（`low == mid` 的单元素半区）必须归入「有序」，所以用 `<=`。
+- **在不在有序半区内**：用闭开区间端点夹逼——左半有序查 `[a[low], a[mid])`，右半有序查 `(a[mid], a[high]]`。两侧端点一侧取等、一侧不取等（`a[mid]` 已排除）。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间 | O(log n) | 每步仍排除一半；多做的只是「判哪半有序」的 O(1) 判断 |
+| 空间 | O(1) | 迭代二分 |
+| 前提 | 无重复、只旋转一次 | 有重复时判有序失效，退化为 O(n)（LC 81） |
+
+## 面试要点
+
+- **变体一：找旋转点/最小值（LC 153）**——不需要 target，比较 `a[mid]` 与 `a[high]`：`a[mid] > a[high]` 说明最小值在右半（mid+1 起），否则在左半（含 mid）；写对的标准是让「最小值始终在 [low, high] 内」这一不变量保持成立。
+- **变体二：含重复元素（LC 81）**——`a[low] == a[mid] == a[high]` 时无法判断哪半有序，只能 `low++` 缩边，最坏退化 O(n)，要能说清为什么。
+- **为什么它仍然是二分**：折叠点不破坏「mid 两侧必有一侧有序」的性质，于是「target 在有序半区吗」总能给出确定答案，区间折半得以继续——这是「换一个循环不变量」的二分思想的最佳练习题（呼应二分查找笔记的循环不变量）。
+- 手写坑：两个边界判断的 `<=` / `<` 取等方向，写反了在「target 恰是端点」的用例上必错——测试至少要覆盖 target = 首元素、尾元素、旋转点本身。

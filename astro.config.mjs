@@ -1048,6 +1048,9 @@ export default defineConfig({
                         { label: '选择排序', link: '/algorithm/basic/sorting/04-selection-sort/' },
                         { label: '归并排序', link: '/algorithm/basic/sorting/05-merge-sort/' },
                         { label: '堆排序', link: '/algorithm/basic/sorting/06-heap-sort/' },
+                        { label: '希尔排序', link: '/algorithm/basic/sorting/07-shell-sort/' },
+                        { label: '计数排序', link: '/algorithm/basic/sorting/08-counting-sort/' },
+                        { label: '三路分区（荷兰国旗）', link: '/algorithm/basic/sorting/09-three-way-partition/' },
                       ],
                     },
                     {
@@ -1058,6 +1061,8 @@ export default defineConfig({
                         { label: '二分查找', link: '/algorithm/basic/searching/01-binary-search/' },
                         { label: '双指针', link: '/algorithm/basic/searching/02-two-pointers/' },
                         { label: '滑动窗口', link: '/algorithm/basic/searching/03-sliding-window/' },
+                        { label: '快速选择', link: '/algorithm/basic/searching/04-quickselect/' },
+                        { label: '搜索旋转排序数组', link: '/algorithm/basic/searching/05-rotated-array-search/' },
                       ],
                     },
                   ],

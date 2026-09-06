@@ -7,9 +7,14 @@
     { "id": "selection", "label": "选择排序", "href": "/algorithm/basic/sorting/04-selection-sort/", "group": "排序" },
     { "id": "merge", "label": "归并排序", "href": "/algorithm/basic/sorting/05-merge-sort/", "group": "排序" },
     { "id": "heap", "label": "堆排序", "href": "/algorithm/basic/sorting/06-heap-sort/", "group": "排序" },
+    { "id": "shell", "label": "希尔排序", "href": "/algorithm/basic/sorting/07-shell-sort/", "group": "排序" },
+    { "id": "counting", "label": "计数排序", "href": "/algorithm/basic/sorting/08-counting-sort/", "group": "排序" },
+    { "id": "three-way", "label": "三路分区", "href": "/algorithm/basic/sorting/09-three-way-partition/", "group": "排序" },
     { "id": "binary", "label": "二分查找", "href": "/algorithm/basic/searching/01-binary-search/", "group": "查找" },
     { "id": "two-pointers", "label": "双指针", "href": "/algorithm/basic/searching/02-two-pointers/", "group": "查找" },
-    { "id": "sliding-window", "label": "滑动窗口", "href": "/algorithm/basic/searching/03-sliding-window/", "group": "查找" }
+    { "id": "sliding-window", "label": "滑动窗口", "href": "/algorithm/basic/searching/03-sliding-window/", "group": "查找" },
+    { "id": "quickselect", "label": "快速选择", "href": "/algorithm/basic/searching/04-quickselect/", "group": "查找" },
+    { "id": "rotated", "label": "搜索旋转数组", "href": "/algorithm/basic/searching/05-rotated-array-search/", "group": "查找" }
   ],
   "edges": [
     { "source": "root", "target": "bubble" },
@@ -21,6 +26,11 @@
     { "source": "root", "target": "heap" },
     { "source": "root", "target": "two-pointers" },
     { "source": "root", "target": "sliding-window" },
+    { "source": "root", "target": "shell" },
+    { "source": "root", "target": "counting" },
+    { "source": "root", "target": "three-way" },
+    { "source": "root", "target": "quickselect" },
+    { "source": "root", "target": "rotated" },
     { "source": "bubble", "target": "quick", "label": "优化方向：分治" },
     { "source": "quick", "target": "binary", "label": "同为分治思想" },
     { "source": "bubble", "target": "insertion", "label": "同为相邻比较，插入更早停" },
@@ -29,6 +39,11 @@
     { "source": "insertion", "target": "quick", "label": "快排小区间切插入排序" },
     { "source": "merge", "target": "quick", "label": "分治双子星：合并稳定 vs 分区更快" },
     { "source": "binary", "target": "two-pointers", "label": "有序性换比较次数" },
-    { "source": "two-pointers", "target": "sliding-window", "label": "对撞指针 → 同向窗口" }
+    { "source": "two-pointers", "target": "sliding-window", "label": "对撞指针 → 同向窗口" },
+    { "source": "insertion", "target": "shell", "label": "gap 分组：一步跨多格的插入" },
+    { "source": "quick", "target": "three-way", "label": "重复元素多时的优化" },
+    { "source": "quick", "target": "quickselect", "label": "分区复用，只递归一侧" },
+    { "source": "heap", "target": "quickselect", "label": "Top-K 双解法：堆 vs 快选" },
+    { "source": "binary", "target": "rotated", "label": "二分变体：判哪半有序" }
   ]
 }

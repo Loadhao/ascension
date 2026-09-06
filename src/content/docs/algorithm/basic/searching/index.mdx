@@ -6,7 +6,7 @@ description: 有序集合上的高效查找：二分查找及其变体，配可�
 import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
 
 查找的核心是「利用已知的结构信息减少比较次数」：数组有序 + 随机访问，就能把 O(n)
-的线性扫描变成 O(log n) 的区间折半；有序还能支撑两端对撞的双指针，连续区间的约束搜索
-则交给滑动窗口——每个元素至多进出窗口一次，整体仍是 O(n)。
+的线性扫描变成 O(log n) 的区间折半，旋转过的有序数组也不例外；有序还能支撑两端对撞的双指针，
+连续区间的约束搜索交给滑动窗口；只要一个答案不要全序时，快速选择用分区把第 K 小降到平均 O(n)。
 
 <CategoryNotesIsland categoryId="algorithm/basic/searching" />
