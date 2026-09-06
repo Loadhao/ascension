@@ -213,7 +213,7 @@ git commit -m "feat(侧边栏): 目录树子树联动与 localStorage 持久化"
 - Modify: `src/styles/custom.css`（「目录侧边栏」段之后追加）
 
 **Interfaces:**
-- Consumes: Task 1 的 `[data-tree-action]` 按钮；Task 2 的 `save`/`descendants`/`chainKey`。
+- Consumes: Task 1 的 `[data-tree-action]` 按钮；Task 2 的 `save`/`descendants` 函数与 `if (root)` 作用域、`const open = readState().open ?? {};` 插入锚点。
 
 - [ ] **Step 1: 脚本追加子树按钮与工具条事件**
 
