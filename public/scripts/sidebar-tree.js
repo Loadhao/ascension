@@ -88,22 +88,35 @@ if (root) {
     summary.insertBefore(btn, caret);
   }
 
-  // 工具条：全部展开；全部收起保留当前页所在链路
+  // 工具条：全部展开 = 字面全开；全部收起 = 字面全收（当前页链路由下一节的定位逻辑在换页时恢复）
   for (const btn of root.querySelectorAll('[data-tree-action]')) {
     btn.addEventListener('click', () => {
-      const current = root.querySelector('a[aria-current="page"]');
       const expand = btn.dataset.treeAction === 'expand-all';
       for (const details of root.querySelectorAll('details')) {
-        details.open = expand || Boolean(current && details.contains(current));
+        details.open = expand;
       }
       save();
     });
   }
 
-  // 先恢复再注入：无记录的分组维持 SSR 默认（当前页链路展开）
+  // 恢复已存状态
   const open = readState().open ?? {};
   for (const details of root.querySelectorAll('details')) {
     const key = chainKey(details);
     if (key && key in open) details.open = open[key];
+  }
+
+  // 打开知识文档时：无论已存状态如何，当前节点所在链路强制展开，并把侧边栏滚动到可见
+  const current = root.querySelector('a[aria-current="page"]');
+  const scrollerEl = document.getElementById('starlight__sidebar');
+  if (current && scrollerEl) {
+    for (let el = current.closest('details'); el && root.contains(el); el = el.parentElement?.closest('details')) {
+      el.open = true;
+    }
+    const nr = current.getBoundingClientRect();
+    const sr = scrollerEl.getBoundingClientRect();
+    if (nr.top < sr.top || nr.bottom > sr.bottom) {
+      scrollerEl.scrollTop += nr.top - sr.top - sr.height / 2 + nr.height / 2;
+    }
   }
 }
