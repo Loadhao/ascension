@@ -1,0 +1,20 @@
+src/components/KnowledgeGraph.tsx
+  h_9324126a55eff3 352-355,412,416-418
+src/content/docs/index.mdx
+  h_9324126a55eff3 2-3,9
+src/content/docs/panorama/index.mdx
+  h_9324126a55eff3 9,13
+src/styles/custom.css
+  h_9324126a55eff3 29-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "9a93e338fb4e0bf8777dcf1a25d930fe92d55b33",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
