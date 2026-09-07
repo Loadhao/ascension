@@ -255,6 +255,7 @@ export default defineConfig({
                         { label: 'Java 异常体系', link: '/java/basic/syntax/05-exception/' },
                         { label: '反射与注解', link: '/java/basic/syntax/06-reflection-annotation/' },
                         { label: '位运算与原码、反码、补码', link: '/java/basic/syntax/07-bit-operations/' },
+                        { label: '序列化与 serialVersionUID', link: '/java/basic/syntax/08-serialization/' },
                       ],
                     },
                     {
@@ -782,6 +783,15 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/distributed/intermediate/consensus/' },
                         { label: 'Paxos 与 Raft', link: '/distributed/intermediate/consensus/01-paxos-raft/' },
+                      ],
+                    },
+                    {
+                      label: '三高与性能优化',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/distributed/intermediate/performance/' },
+                        { label: '三高架构：高并发、高性能、高可用', link: '/distributed/intermediate/performance/01-triple-high/' },
+                        { label: '接口性能优化：从耗时量级出发', link: '/distributed/intermediate/performance/02-interface-optimization/' },
                       ],
                     },
                     {

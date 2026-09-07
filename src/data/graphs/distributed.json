@@ -4,6 +4,8 @@
     { "id": "cap", "label": "CAP 与 BASE", "href": "/distributed/basic/theory/01-cap-base/", "group": "理论" },
     { "id": "chash", "label": "一致性哈希", "href": "/distributed/basic/theory/02-consistent-hashing/", "group": "理论" },
     { "id": "paxos", "label": "Paxos 与 Raft", "href": "/distributed/intermediate/consensus/01-paxos-raft/", "group": "共识" },
+    { "id": "triplehigh", "label": "三高架构", "href": "/distributed/intermediate/performance/01-triple-high/", "group": "性能" },
+    { "id": "ifaceopt", "label": "接口性能优化", "href": "/distributed/intermediate/performance/02-interface-optimization/", "group": "性能" },
     { "id": "disttx", "label": "分布式事务", "href": "/distributed/intermediate/transaction/01-distributed-transaction/", "group": "事务" },
     { "id": "distid", "label": "分布式 ID", "href": "/distributed/intermediate/transaction/02-distributed-id/", "group": "事务" },
     { "id": "consistency", "label": "数据一致性", "href": "/distributed/advanced/consistency/01-consistency-patterns/", "group": "一致" },
@@ -16,6 +18,9 @@
   ],
   "edges": [
     { "source": "root", "target": "cap" },
+    { "source": "root", "target": "triplehigh", "label": "三高的方法论" },
+    { "source": "triplehigh", "target": "ifaceopt", "label": "落到接口三板斧" },
+    { "source": "ifaceopt", "target": "kafka", "label": "削峰靠 MQ" },
     { "source": "root", "target": "chash", "label": "数据分布" },
     { "source": "cap", "target": "paxos", "label": "CP 的实现路径" },
     { "source": "cap", "target": "disttx", "label": "AP 的补偿路径" },
