@@ -1,0 +1,188 @@
+AGENTS.md
+  h_9324126a55eff3 41-42
+scripts/mermaid-contrast-verify.mjs
+  h_9324126a55eff3 1-83
+src/content/docs/distributed/advanced/observability/01-distributed-tracing.md
+  h_9324126a55eff3 25-26,225
+src/content/docs/distributed/basic/theory/01-cap-base.md
+  h_9324126a55eff3 26-29,71-74
+src/content/docs/distributed/basic/theory/02-consistent-hashing.md
+  h_9324126a55eff3 27-28,75-76
+src/content/docs/distributed/intermediate/transaction/01-distributed-transaction.md
+  h_9324126a55eff3 76-77,104-105
+src/content/docs/distributed/intermediate/transaction/02-distributed-id.md
+  h_9324126a55eff3 31-34
+src/content/docs/docker/advanced/orchestration/01-compose.md
+  h_9324126a55eff3 53-54
+src/content/docs/docker/advanced/orchestration/03-image-optimization.md
+  h_9324126a55eff3 20-21
+src/content/docs/docker/basic/fundamentals/02-commands.md
+  h_9324126a55eff3 21-22
+src/content/docs/docker/intermediate/practice/01-dockerfile.md
+  h_9324126a55eff3 34-35,75-76
+src/content/docs/elasticsearch/basic/core/01-inverted-index.md
+  h_9324126a55eff3 19-20,104
+src/content/docs/elasticsearch/intermediate/usage/01-query-dsl.md
+  h_9324126a55eff3 65-66,117
+src/content/docs/git/advanced/workflow/01-history-rewrite.md
+  h_9324126a55eff3 52-53,91-92
+src/content/docs/git/advanced/workflow/02-advanced-tools.md
+  h_9324126a55eff3 48-49
+src/content/docs/git/advanced/workflow/03-team-standards.md
+  h_9324126a55eff3 57-60
+src/content/docs/git/basic/foundations/02-daily-commands.md
+  h_9324126a55eff3 35-36,111-116
+src/content/docs/git/intermediate/collaboration/02-remote-collab.md
+  h_9324126a55eff3 79-80
+src/content/docs/guide/diagrams.mdx
+  h_9324126a55eff3 105-145
+src/content/docs/java/advanced/jvm/01-class-loading.md
+  h_9324126a55eff3 95-96
+src/content/docs/java/advanced/jvm/03-garbage-collection.md
+  h_9324126a55eff3 29-33,51-52,126-129
+src/content/docs/java/advanced/springcloud/01-microservices-overview.md
+  h_9324126a55eff3 47-50,81-83
+src/content/docs/java/advanced/springcloud/02-registry.md
+  h_9324126a55eff3 27-28,52-53,92-93
+src/content/docs/java/advanced/springcloud/03-gateway.md
+  h_9324126a55eff3 22-23
+src/content/docs/java/advanced/springcloud/04-openfeign-loadbalancer.md
+  h_9324126a55eff3 38-40
+src/content/docs/java/advanced/springcloud/05-sentinel.md
+  h_9324126a55eff3 17-18,37-42
+src/content/docs/java/advanced/springcloud/07-stream.md
+  h_9324126a55eff3 22-24,192
+src/content/docs/java/basic/collection/04-red-black-tree.md
+  h_9324126a55eff3 50-58
+src/content/docs/java/basic/syntax/06-reflection-annotation.md
+  h_9324126a55eff3 125-127
+src/content/docs/java/intermediate/concurrent/03-volatile.md
+  h_9324126a55eff3 107-110
+src/content/docs/java/intermediate/concurrent/04-synchronized.md
+  h_9324126a55eff3 69-72
+src/content/docs/java/intermediate/concurrent/05-aqs.md
+  h_9324126a55eff3 38-39,83-85
+src/content/docs/java/intermediate/concurrent/06-threadlocal.md
+  h_9324126a55eff3 39-40,79-82
+src/content/docs/java/intermediate/design-pattern/01-principles.md
+  h_9324126a55eff3 107-108,132-133
+src/content/docs/java/intermediate/design-pattern/02-creational.md
+  h_9324126a55eff3 62-63,108-109
+src/content/docs/java/intermediate/design-pattern/03-structural.md
+  h_9324126a55eff3 29-30
+src/content/docs/java/intermediate/design-pattern/04-behavioral.md
+  h_9324126a55eff3 87-88
+src/content/docs/java/intermediate/spring/01-ioc-bean-lifecycle.md
+  h_9324126a55eff3 62-64
+src/content/docs/java/intermediate/spring/02-aop.md
+  h_9324126a55eff3 89-90
+src/content/docs/java/intermediate/spring/04-transaction.md
+  h_9324126a55eff3 24-25
+src/content/docs/java/intermediate/spring/05-springboot-autoconfig.md
+  h_9324126a55eff3 47-48
+src/content/docs/java/intermediate/spring/06-mybatis-sqlsession.md
+  h_9324126a55eff3 91-92
+src/content/docs/kafka/intermediate/core/01-kafka-architecture.md
+  h_9324126a55eff3 31-32,64-65,117-118
+src/content/docs/kafka/intermediate/core/02-replica-isr.md
+  h_9324126a55eff3 31-34
+src/content/docs/kafka/intermediate/core/03-reliability-idempotent.md
+  h_9324126a55eff3 18-21,121-122
+src/content/docs/middleware/basic/mq/01-why-mq.md
+  h_9324126a55eff3 28-29,54-57
+src/content/docs/middleware/basic/mq/02-mq-comparison.md
+  h_9324126a55eff3 86-89
+src/content/docs/mqtt/basic/core/01-mqtt-protocol.md
+  h_9324126a55eff3 23-24,112
+src/content/docs/mqtt/intermediate/usage/01-broker-emqx.md
+  h_9324126a55eff3 31-34,103
+src/content/docs/mysql/advanced/performance-ha/01-optimization.md
+  h_9324126a55eff3 89-90
+src/content/docs/mysql/advanced/performance-ha/02-replication-sharding.md
+  h_9324126a55eff3 22-24,82-83
+src/content/docs/mysql/basic/core/01-sql-execution.md
+  h_9324126a55eff3 32-33,72-74
+src/content/docs/mysql/basic/core/02-index-btree.md
+  h_9324126a55eff3 45-48
+src/content/docs/mysql/basic/theory/01-normal-forms.md
+  h_9324126a55eff3 84-85
+src/content/docs/mysql/intermediate/transaction-lock/02-locks.md
+  h_9324126a55eff3 16-17
+src/content/docs/nginx/basic/config/02-static-server.md
+  h_9324126a55eff3 41-42,133-136,153
+src/content/docs/nginx/intermediate/proxy/02-https-cache-ratelimit.md
+  h_9324126a55eff3 35-36,122-125,152
+src/content/docs/nginx/intermediate/proxy/03-keepalived-ha.md
+  h_9324126a55eff3 27-28
+src/content/docs/postgresql/intermediate/ha/01-pgpool-postgres-xl.md
+  h_9324126a55eff3 33-34,67-68
+src/content/docs/postgresql/intermediate/ha/02-pgpool-dr.md
+  h_9324126a55eff3 93-94
+src/content/docs/python/advanced/eng/02-pytest.md
+  h_9324126a55eff3 81-82,92-93
+src/content/docs/python/advanced/eng/03-ruff-mypy.md
+  h_9324126a55eff3 98-101
+src/content/docs/python/basic/data-structures/01-list-tuple.md
+  h_9324126a55eff3 33-34
+src/content/docs/python/basic/functions/01-functions-closures.md
+  h_9324126a55eff3 75-76,123-126
+src/content/docs/python/basic/functions/03-decorators.md
+  h_9324126a55eff3 37-38,98-99
+src/content/docs/python/basic/oop/01-class-basics.md
+  h_9324126a55eff3 30-31,58-59
+src/content/docs/python/basic/oop/03-dataclass-slots.md
+  h_9324126a55eff3 93-96
+src/content/docs/python/basic/syntax/02-control-flow.md
+  h_9324126a55eff3 35-36
+src/content/docs/python/basic/syntax/04-exceptions.md
+  h_9324126a55eff3 24-27,104-107
+src/content/docs/python/intermediate/libs/01-requests-httpx.md
+  h_9324126a55eff3 62-63,97-98
+src/content/docs/python/intermediate/libs/02-pydantic.md
+  h_9324126a55eff3 48-49,84-85
+src/content/docs/python/intermediate/stdlib/01-collections.md
+  h_9324126a55eff3 69-70
+src/content/docs/python/intermediate/stdlib/02-functools-itertools.md
+  h_9324126a55eff3 95-96
+src/content/docs/python/intermediate/stdlib/03-pathlib-io.md
+  h_9324126a55eff3 39-40
+src/content/docs/python/intermediate/stdlib/04-typing.md
+  h_9324126a55eff3 37-38
+src/content/docs/rabbitmq/basic/core/01-amqp-model.md
+  h_9324126a55eff3 21-22,112
+src/content/docs/redis/advanced/ha/01-replication-sentinel-cluster.md
+  h_9324126a55eff3 91-92
+src/content/docs/redis/basic/core/01-data-structures.md
+  h_9324126a55eff3 50-52,57-58,94-95
+src/content/docs/redis/basic/core/02-persistence.md
+  h_9324126a55eff3 31-34,77-80
+src/content/docs/redis/intermediate/usage/01-expiration-eviction.md
+  h_9324126a55eff3 32-33
+src/content/docs/redis/intermediate/usage/02-cache-problems.md
+  h_9324126a55eff3 24-29,57-58
+src/content/docs/redis/intermediate/usage/03-distributed-lock.md
+  h_9324126a55eff3 63-64
+src/content/docs/rocketmq/advanced/core/01-rocketmq-features.md
+  h_9324126a55eff3 19-20
+src/content/docs/rocketmq/advanced/core/02-order-performance.md
+  h_9324126a55eff3 24-25,62-63,74-75,99-100
+src/content/docs/rocketmq/advanced/core/03-backlog.md
+  h_9324126a55eff3 33-36,52-53
+src/content/docs/tools/basic/cli/01-grep-sed-awk.md
+  h_9324126a55eff3 78-82,128
+src/content/docs/tools/basic/cli/03-jq.md
+  h_9324126a55eff3 78-79,106
+src/styles/custom.css
+  h_9324126a55eff3 838-911,944-945,949-1054,1449-1464
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c47815be12722416ac15eb0d0a5b1f809284b4d6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
