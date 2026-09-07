@@ -349,6 +349,10 @@ export default function KnowledgeGraph({
       layoutRunning = false;
       cy.resize();
       cy.fit(undefined, FIT_PADDING);
+      // 全景树默认再放大一档，首屏圆点更醒目（围绕视野中心放大）
+      if (isTree) {
+        cy.zoom(Math.min(MAX_ZOOM, cy.zoom() * 1.2));
+      }
     });
     const resizeObserver = new ResizeObserver(() => {
       if (cy.destroyed() || layoutRunning) return;
@@ -405,9 +409,13 @@ export default function KnowledgeGraph({
       const stretch = () => {
         card.style.marginLeft = '';
         card.style.width = '';
+        card.style.height = '';
         const naturalLeft = Math.round(card.getBoundingClientRect().left);
         card.style.marginLeft = '0';
         card.style.width = `${document.documentElement.clientWidth - naturalLeft}px`;
+        // 高度同样撑满：视口高 - 卡片顶部偏移 - 页面底部留白
+        const top = card.getBoundingClientRect().top;
+        card.style.height = `${Math.max(420, window.innerHeight - Math.round(top) - 40)}px`;
       };
       stretch();
       window.addEventListener('resize', stretch);

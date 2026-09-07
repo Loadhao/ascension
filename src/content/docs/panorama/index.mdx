@@ -6,13 +6,9 @@ toc: false
 
 import GlobalGraphIsland from '../../../components/GlobalGraphIsland.astro';
 
-全站知识以方向为簇聚合成一张图谱：大圆点是学习方向（标注知识点数），周围同色的小圆点
-是它的分类，圆点越大内容越丰富。悬停圆点高亮关联关系并显示连线上
-的等级（基础/中级/高级），点按圆点直达对应页面。
-
-<GlobalGraphIsland height="calc(100vh - 320px)" fullBleed />
+<GlobalGraphIsland height="calc(100vh - 240px)" fullBleed />
 
 :::note[图谱说明]
 圆点大小 = 该方向/分类收录的知识点数量，顶部图例按数量降序排列（即内容量排行）；
-点按图例可只看某个方向，右上角按钮可缩放、复位视图。
+点按图例可只看某个方向，右上角按钮可缩放、复位视图；悬停圆点高亮关联关系。
 :::

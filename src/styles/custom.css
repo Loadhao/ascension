@@ -26,6 +26,23 @@
 .lg\:sl-flex:has(.kg-fullbleed) aside.right-sidebar-container {
   display: none;
 }
+/* 图谱全宽页：压缩页题与正文区的上下留白，图谱高度最大化
+   （页面里有两个 .content-panel：外层包页题、内层包正文，
+   从 wrapper 级命中全部；Starlight scoped 样式优先级更高，需 !important） */
+.lg\:sl-flex:has(.kg-fullbleed) .content-panel {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+.lg\:sl-flex:has(.kg-fullbleed) astro-island {
+  margin-top: 0 !important;
+}
+/* 图谱全宽页隐藏页脚（编辑链接/元信息），还高度给图谱 */
+.lg\:sl-flex:has(.kg-fullbleed) .content-panel footer {
+  display: none;
+}
+.content-panel:has(.kg-fullbleed) .sl-container h1 {
+  margin-bottom: 8px;
+}
 /* bar 布局：操作按钮悬浮画布右上，分组统计作为底部条全部展开（不滚动） */
 .kg-toolbar {
   position: absolute;
