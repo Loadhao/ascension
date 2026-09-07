@@ -314,7 +314,13 @@ export default function KnowledgeGraph({
     // 复合容器图（全景）无跨区连线，收紧间距让容器更紧凑
     const hasCompound = data.nodes.some((node) => node.parent);
     const separation = hasCompound ? 110 : 220;
+    // 复合节点的动画布局若中途被 resize/样式更新打断，cytoscape 的 batch
+    // 可能不再闭合，之后所有渲染静默排队（画面冻结）。复合图直接跳过动画。
+    const animateLayout = !reducedMotion && !hasCompound;
 
+    // 不在构造器里自动跑布局：animate:false 时布局同步完成，layoutstop
+    // 会先于监听器挂载发出，导致 layoutRunning 永远为 true。先建实例、
+    // 挂好监听，再显式 run()。
     const cy = cytoscape({
       container,
       elements: [
@@ -341,18 +347,6 @@ export default function KnowledgeGraph({
       minZoom: MIN_ZOOM,
       maxZoom: MAX_ZOOM,
       style: buildStyles(isDarkTheme()),
-      layout: {
-        name: 'fcose',
-        quality: 'proof',
-        animate: !reducedMotion,
-        animationDuration: 500,
-        padding: FIT_PADDING,
-        nodeSeparation: separation,
-        idealEdgeLength: separation,
-        randomize: true,
-        // 节点尺寸来自 label，布局需把标签算进去否则节点互相叠压
-        nodeDimensionsIncludeLabels: true,
-      },
     });
     cyRef.current = cy;
 
@@ -395,10 +389,19 @@ export default function KnowledgeGraph({
       }
     });
 
-    // 布局落定后整体纳入视野；容器尺寸变化时保持全图可见
-    cy.on('layoutstop', () => cy.fit(undefined, FIT_PADDING));
+    // 布局进行中的 resize/样式更新会打断 fcose（尤其复合节点动画布局），
+    // 全部推迟到 layoutstop 统一处理：补一次 resize + 适配视野
+    let layoutRunning = true;
+    cy.on('layoutstart', () => {
+      layoutRunning = true;
+    });
+    cy.on('layoutstop', () => {
+      layoutRunning = false;
+      cy.resize();
+      cy.fit(undefined, FIT_PADDING);
+    });
     const resizeObserver = new ResizeObserver(() => {
-      if (cy.destroyed()) return;
+      if (cy.destroyed() || layoutRunning) return;
       cy.resize();
       cy.fit(undefined, FIT_PADDING);
     });
@@ -406,7 +409,8 @@ export default function KnowledgeGraph({
 
     // 明暗主题切换时重算画布配色（canvas 不吃 CSS 变量）
     const themeObserver = new MutationObserver(() => {
-      if (!cy.destroyed()) cy.style(buildStyles(isDarkTheme())).update();
+      if (!cy.destroyed() && !layoutRunning)
+        cy.style(buildStyles(isDarkTheme())).update();
     });
     themeObserver.observe(document.documentElement, {
       attributes: true,
@@ -416,8 +420,22 @@ export default function KnowledgeGraph({
     // 中文等字体晚于首次标签测量就绪时，'label' 尺寸被记为 0 且不再重测，
     // 节点会永远不被渲染；字体就绪后强制重算一次样式触发重绘。
     document.fonts?.ready.then(() => {
-      if (!cy.destroyed()) cy.style().update();
+      if (!cy.destroyed() && !layoutRunning) cy.style().update();
     });
+
+    // 监听器就位后再跑布局（layoutstop 依赖上面挂载的 handler）
+    cy.layout({
+      name: 'fcose',
+      quality: 'proof',
+      animate: animateLayout,
+      animationDuration: 500,
+      padding: FIT_PADDING,
+      nodeSeparation: separation,
+      idealEdgeLength: separation,
+      randomize: true,
+      // 节点尺寸来自 label，布局需把标签算进去否则节点互相叠压
+      nodeDimensionsIncludeLabels: true,
+    }).run();
 
     return () => {
       resizeObserver.disconnect();
