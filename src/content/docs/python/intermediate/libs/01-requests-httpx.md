@@ -59,7 +59,8 @@ flowchart LR
         S3["请求3"] --> P
         P -->|同一连接复用| H4("一条连接")
     end
-    style Session fill:#eef3ea
+    class Session good
+    classDef good stroke-width:1.5px
 ```
 
 重试纪律：**只重试幂等方法（GET）与明确可重试的状态码**，
@@ -93,7 +94,8 @@ flowchart TD
     A -->|"否（普通脚本/同步服务）"| C{"需要并发/流式?"}
     C -->|"需要"| D["httpx（同步 Client 也支持流式）"]
     C -->|"不需要"| E["requests 即可<br/>（或 httpx 同步模式）"]
-    style B fill:#eef3ea
+    class B good
+    classDef good stroke-width:1.5px
 ```
 
 ## 小结

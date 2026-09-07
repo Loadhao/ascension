@@ -18,7 +18,8 @@ flowchart TB
     B2 --> C["容器 = 镜像只读层 + <br/>顶部一层可写层"]
     C --> D["docker ps/logs/exec 操作这个容器"]
 
-    style C fill:#f5f0e6
+    class C hl
+    classDef hl stroke-width:1.5px
 ```
 
 `docker pull` = 拉取这些只读层存到本地；`docker run` = 在镜像之上叠一个

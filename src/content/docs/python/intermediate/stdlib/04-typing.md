@@ -34,7 +34,8 @@ flowchart LR
     SRC["带注解的源码"] --> 开发时
     SRC --> 运行时
     开发时 -->|"发现问题→改代码"| SRC
-    style 开发时 fill:#eef3ea
+    class 开发时 good
+    classDef good stroke-width:1.5px
 ```
 
 所以类型错误**不会在运行时报**——它要靠 CI/mypy 提前拦下，这也是为什么

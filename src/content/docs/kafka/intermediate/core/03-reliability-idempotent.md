@@ -15,9 +15,10 @@ flowchart LR
     B -.对策.-> D2["min.insync.replicas"]
     C -.对策.-> D3["处理完再手动提交"]
 
-    style D1 fill:#eef3ea
-    style D2 fill:#eef3ea
-    style D3 fill:#eef3ea
+    class D1 good
+    class D2 good
+    class D3 good
+    classDef good stroke-width:1.5px
 ```
 
 ### ① 生产端
@@ -117,7 +118,8 @@ flowchart LR
     DLQ --> M["人工介入 / 告警 / 修数据后重放"]
     R -->|重试成功| OK["正常提交"]
 
-    style DLQ fill:#f7e8e8
+    class DLQ bad
+    classDef bad stroke-width:1.5px
 ```
 
 RocketMQ 自带（`%RETRY%`/`%DLQ%`）；Kafka 需自建 topic 或交给

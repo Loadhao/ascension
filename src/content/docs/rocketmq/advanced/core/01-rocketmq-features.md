@@ -16,7 +16,8 @@ flowchart TB
     B1 -.->|"主从同步"| B2
     C --> B1
 
-    style NS fill:#f5f0e6
+    class NS hl
+    classDef hl stroke-width:1.5px
 ```
 
 与 Kafka 的关键差异：

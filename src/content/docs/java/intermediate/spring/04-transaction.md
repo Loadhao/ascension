@@ -21,7 +21,8 @@ flowchart LR
     D --> F["归还连接"]
     E --> F
 
-    style P fill:#f5f0e6
+    class P hl
+    classDef hl stroke-width:1.5px
 ```
 
 事务与连接绑定在 ThreadLocal（事务同步管理器）里——这解释了为什么

@@ -59,8 +59,9 @@ flowchart TB
     G --> H["容器关闭"]
     H --> I["⑧ 销毁<br/>@PreDestroy → DisposableBean.destroy<br/>→ destroy-method"]
 
-    style A fill:#f5f0e6
-    style G fill:#f5f0e6
+    class A hl
+    class G hl
+    classDef hl stroke-width:1.5px
 ```
 
 用一个回调齐全的类验证：

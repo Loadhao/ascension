@@ -13,7 +13,8 @@ flowchart TB
     M --> I["意向锁 IS/IX<br/>表级，声明「表里有行锁」"]
     I --> R["行锁<br/>Record / Gap / Next-Key（仅 InnoDB）"]
 
-    style R fill:#f5f0e6
+    class R hl
+    classDef hl stroke-width:1.5px
 ```
 
 - **全局锁**：`flush tables with read lock`，全库阻塞更新。InnoDB 逻辑

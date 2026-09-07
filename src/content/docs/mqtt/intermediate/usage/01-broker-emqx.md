@@ -28,9 +28,10 @@ flowchart TB
     N1 --> S["共享后端<br/>路由表/消息落地"
 ]
 
-    style N1 fill:#f5f0e6
-    style N2 fill:#f5f0e6
-    style N3 fill:#f5f0e6
+    class N1 hl
+    class N2 hl
+    class N3 hl
+    classDef hl stroke-width:1.5px
 ```
 
 集群内**每个节点都知道全部订阅关系**（路由表同步），任意设备连任意节点

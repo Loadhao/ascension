@@ -32,7 +32,8 @@ flowchart TD
     B -- 是 --> BRK["break 跳出<br/>则 else 不执行"]
     B -- 否 --> IT
     IT -- "否（迭代耗尽）" --> ELSE["else 块执行<br/>即全程未被 break"]
-    style ELSE fill:#eef3ea
+    class ELSE good
+    classDef good stroke-width:1.5px
 ```
 
 这正是 for-else 的实现原理：Python 在迭代器耗尽时才转去执行 else，一旦

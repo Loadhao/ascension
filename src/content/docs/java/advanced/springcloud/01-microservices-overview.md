@@ -44,8 +44,10 @@ flowchart TB
     P4 --> C4
     P5 --> C5
 
-    style PROBLEMS fill:#f7e8e8
-    style SC fill:#eef3ea
+    class PROBLEMS bad
+    class SC good
+    classDef bad stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 Spring Cloud 本体只是**规范 + 集成胶水**（BOM、抽象接口），具体组件是
@@ -76,8 +78,9 @@ flowchart LR
     A --> C["MySQL"]
     A -.Seata.-> B
 
-    style N fill:#f5f0e6
-    style GW fill:#f5f0e6
+    class N hl
+    class GW hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 版本号的小知识

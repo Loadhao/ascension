@@ -83,8 +83,10 @@ flowchart TB
     C -->|否、团队熟 Java| R
     K --> NOTE["现实中常见组合：<br/>日志走 Kafka，业务走 RocketMQ<br/>（两条总线并存）"]
 
-    style K fill:#eef3ea
-    style R fill:#f5f0e6
+    class K good
+    class R hl
+    classDef good stroke-width:1.5px
+    classDef hl stroke-width:1.5px
 ```
 
 三个工程提醒：

@@ -88,7 +88,8 @@ flowchart LR
     N1 -->|"CRC16(user:42)%16384=9842<br/>不在我这"| MOVED["MOVED 9842 节点C"]
     C -->|重新请求| N3["节点C 槽 10923~16383<br/>执行"]
 
-    style MOVED fill:#f5f0e6
+    class MOVED hl
+    classDef hl stroke-width:1.5px
 ```
 
 **为什么是 16384**：心跳包里要携带"我负责哪些槽"的位图，16384 bit =

@@ -60,7 +60,8 @@ flowchart LR
     C -->|持有中| C
     C -->|unlock 或客户端崩溃| D["停止续期<br/>（客户端崩了：最多 30s 自动释放）"]
 
-    style C fill:#f5f0e6
+    class C hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## Redisson 的完整答案

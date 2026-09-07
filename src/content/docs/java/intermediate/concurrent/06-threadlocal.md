@@ -36,7 +36,8 @@ flowchart LR
     TL -.弱引用.-> E1
     TL -.弱引用.-> E2["Entry（在 M2 里）"]
 
-    style TL fill:#f5f0e6
+    class TL hl
+    classDef hl stroke-width:1.5px
 ```
 
 关键反转：**Map 挂在 Thread 身上，而不是 ThreadLocal 里**。
@@ -75,8 +76,10 @@ flowchart TB
     C -->|调过| E["探测式清理<br/>stale entry 被顺路清除"]
 
     D --> F["线程池核心线程永生<br/>→ value 泄漏放大"]
-    style F fill:#f7e8e8
-    style E fill:#eef3ea
+    class F bad
+    class E good
+    classDef bad stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 泄漏成立需要**两个条件同时满足**：ThreadLocal 实例被回收（key = null），

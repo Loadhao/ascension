@@ -28,8 +28,10 @@ flowchart TB
     HW["HW = min(ISR 的 LEO) = 99<br/>≤ HW 的消息对消费者可见"]
     LEO["LEO = 每个副本日志的下一个写入位<br/>Leader LEO = 100"]
 
-    style F3 fill:#f7e8e8
-    style HW fill:#f5f0e6
+    class F3 bad
+    class HW hl
+    classDef bad stroke-width:1.5px
+    classDef hl stroke-width:1.5px
 ```
 
 两个进度指标：

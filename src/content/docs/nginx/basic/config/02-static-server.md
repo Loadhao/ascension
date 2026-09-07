@@ -38,7 +38,8 @@ flowchart LR
     subgraph ALIAS["alias=/opt/assets/"]
         A1["请求 /static/a.png"] --> A2["替换前缀"] --> A3["/opt/assets/a.png OK"]
     end
-    style ALIAS fill:#f5f0e6
+    class ALIAS hl
+    classDef hl stroke-width:1.5px
 ```
 
 **记忆**：`root` 把 URI **追加**在根路径后，`alias` 把 URI 里的**前缀
@@ -129,8 +130,10 @@ flowchart TD
     Q -->|"无"| R{"有正则命中?"}
     R -->|"有"| R1["用书写顺序最先命中的正则"]
     R -->|"无"| L["用之前记下的最长通用前缀"]
-    style E1 fill:#eef3ea
-    style Q1 fill:#f5f0e6
+    class E1 good
+    class Q1 hl
+    classDef good stroke-width:1.5px
+    classDef hl stroke-width:1.5px
 ```
 
 **两个高频踩坑：**

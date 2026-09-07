@@ -45,7 +45,8 @@ flowchart TB
     end
     主 --> 共享
     挂 --> 共享
-    style 共享 fill:#f5f0e6
+    class 共享 hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## submodule：仓库嵌套仓库

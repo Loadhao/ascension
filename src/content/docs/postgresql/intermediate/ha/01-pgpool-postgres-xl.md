@@ -30,7 +30,8 @@ flowchart LR
     M -. "WAL 流复制" .-> S1
     M -. "WAL 流复制" .-> S2
 
-    style P fill:#f5f0e6
+    class P hl
+    classDef hl stroke-width:1.5px
 ```
 
 它补上的正是裸主从缺的三件事：
@@ -63,7 +64,8 @@ flowchart TB
     GTM["GTM<br/>全局事务 ID 与快照"] -.-> CO1
     GTM -.-> CO2
 
-    style GTM fill:#f5f0e6
+    class GTM hl
+    classDef hl stroke-width:1.5px
 ```
 
 - **GTM（Global Transaction Manager）**：提供全局事务 ID 与快照，保证

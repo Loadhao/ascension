@@ -36,7 +36,8 @@ flowchart LR
     P --> PA["parent = /data/logs"]
     N --> ST["stem = app"]
     N --> SU["suffix = .log"]
-    style 完整 fill:#f5f0e6
+    class 完整 hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 批量查找与读写

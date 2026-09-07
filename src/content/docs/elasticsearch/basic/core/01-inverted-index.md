@@ -16,7 +16,8 @@ flowchart LR
     D2["文档2：Java 编程 指南"] --> TERM
     TERM -->|"查询 java → 直接命中 1,2"| RES["命中文档"]
 
-    style TERM fill:#f5f0e6
+    class TERM hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 建索引的三步：分词 → 规范 → 倒排

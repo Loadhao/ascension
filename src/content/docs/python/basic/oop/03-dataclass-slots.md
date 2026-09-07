@@ -90,8 +90,10 @@ flowchart LR
         S1["槽位1 x"]
         S2["槽位2 y"]
     end
-    style 普通 fill:#f5f0e6
-    style slots fill:#eef3ea
+    class 普通 hl
+    class slots good
+    classDef hl stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 普通版多背一个 `__dict__`（为空也占空间）——这就是 slots 省内存、但代价

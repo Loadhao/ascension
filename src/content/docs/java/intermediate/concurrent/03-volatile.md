@@ -104,9 +104,10 @@ flowchart LR
     A["① 分配内存"] --> B["② 初始化对象字段"]
     B --> C["③ instance 指向内存"]
     A -.->|"②③ 可能重排成<br/>先指向后初始化"| C
-    style A fill:#f5f0e6
-    style B fill:#f5f0e6
-    style C fill:#f5f0e6
+    class A hl
+    class B hl
+    class C hl
+    classDef hl stroke-width:1.5px
 ```
 
 若 ②③ 重排：线程 A 刚执行完"③ 指向"（对象还没初始化），线程 B 在 ① 处

@@ -44,7 +44,8 @@ flowchart TB
     G --> I["@ConditionalOnMissingBean<br/>用户没配 → 注册默认 RedisTemplate"]
     I --> J["容器就绪：开箱即用"]
 
-    style D fill:#f5f0e6
+    class D hl
+    classDef hl stroke-width:1.5px
 ```
 
 以 RedisAutoConfiguration 为例（简化）：

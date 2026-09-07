@@ -29,7 +29,8 @@ flowchart TB
     EXE <--> BUF
     EXE <--> LOG
 
-    style SERVER fill:#f5f0e6
+    class SERVER hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 一条查询语句的旅程
@@ -68,8 +69,9 @@ flowchart LR
     F --> G["返回客户端成功"]
     G -.后台.-> H["脏页择机刷盘<br/>（WAL：先写日志后写数据）"]
 
-    style D fill:#f5f0e6
-    style E fill:#f5f0e6
+    class D hl
+    class E hl
+    classDef hl stroke-width:1.5px
 ```
 
 **WAL（Write-Ahead Logging）**：先顺序写日志、再择机随机写数据页——

@@ -76,7 +76,8 @@ flowchart LR
     RM -->|"git merge / rebase<br/>= pull 做的事"| LM
     LM -->|"git push"| OM
 
-    style RM fill:#f5f0e6
+    class RM hl
+    classDef hl stroke-width:1.5px
 ```
 
 - **fetch**：只更新 `origin/main` 这份"远端快照"，工作区不动 —— 安全看发生了什么。

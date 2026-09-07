@@ -75,9 +75,11 @@ flowchart LR
     G --> S["sed 改流<br/>逐行替换/编辑"]
     S --> A["awk 切列统计<br/>取字段/累加"]
     A --> OUT["结果输出"]
-    style G fill:#eef3ea
-    style S fill:#f5f0e6
-    style A fill:#f0eef5
+    class G good
+    class S hl
+    class A hl
+    classDef good stroke-width:1.5px
+    classDef hl stroke-width:1.5px
 ```
 
 **每个工具默认不改原文件、输出到 stdout**，正是"逐行流"才让 `|` 无缝衔接。

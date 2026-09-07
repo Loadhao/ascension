@@ -21,7 +21,8 @@ flowchart LR
         B["订单 42 的事件"] -.->|乱进不同分区| P2["Partition 0 / 2 / 5<br/>顺序无保证"]
     end
 
-    style P1 fill:#eef3ea
+    class P1 good
+    classDef good stroke-width:1.5px
 ```
 
 ### 乱序的真实来源（比生产端更隐蔽）
@@ -58,7 +59,8 @@ flowchart LR
     SA -->|DMA 拷贝| N["网卡"]
     N1["4 次拷贝 + 4 次内核/用户态切换<br/>数据在内核与用户空间来回搬运"] -.-> D
 
-    style N1 fill:#f7e8e8
+    class N1 bad
+    classDef bad stroke-width:1.5px
 ```
 
 ### sendfile 零拷贝（Kafka 消费路径）
@@ -69,7 +71,8 @@ flowchart LR
     PC -->|"sendfile：内核直接转发<br/>（带 SG-DMA 可全程不经 CPU）"| N["网卡"]
     N2["数据完全不进用户空间<br/>2 次拷贝、0 次多余切换"] -.-> D
 
-    style N2 fill:#eef3ea
+    class N2 good
+    classDef good stroke-width:1.5px
 ```
 
 为什么 Kafka 能用：消费的本质是"**把日志文件原样发出去**"（不修改、
@@ -93,7 +96,8 @@ flowchart LR
     C --> D["Broker 顺序写整批"]
     D --> E["消费者一次拉一批"]
 
-    style A fill:#f5f0e6
+    class A hl
+    classDef hl stroke-width:1.5px
 ```
 
 ```yaml

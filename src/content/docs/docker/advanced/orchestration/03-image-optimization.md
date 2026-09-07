@@ -17,7 +17,8 @@ flowchart TB
     C -->|"层内缓存/垃圾"| F["合并 RUN + 层内清理<br/>rm 缓存后再提交"]
     C -->|"上下文太大"| G[".dockerignore 排除"]
 
-    style B fill:#f5f0e6
+    class B hl
+    classDef hl stroke-width:1.5px
 ```
 
 | 手段 | 效果 | 说明 |

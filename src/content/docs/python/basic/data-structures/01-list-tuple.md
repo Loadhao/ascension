@@ -30,7 +30,8 @@ flowchart LR
         E2 --> E3["容量 16<br/>剩 10 格"] --> E4["容量 32...<br/>资源越发充裕"]
     end
     E4 -. "均摊 O(1) 来源" .-> note["每次翻倍转移 O(n) 一次性开销，<br/>均摊到后续 n/2 次 append"]
-    style E2 fill:#f5f0e6
+    class E2 hl
+    classDef hl stroke-width:1.5px
 ```
 
 关键后果：

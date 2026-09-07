@@ -24,7 +24,8 @@ flowchart LR
     D -->|直连调用| A
     D -->|直连调用| C
 
-    style R fill:#f5f0e6
+    class R hl
+    classDef hl stroke-width:1.5px
 ```
 
 三个动作：
@@ -48,7 +49,8 @@ flowchart TB
     B -->|是| C["停止剔除所有实例<br/>宁可保留已死实例<br/>（调用方靠重试/熔断自保）"]
     B -->|否| D["正常剔除超时未续约实例"]
 
-    style C fill:#f7e8e8
+    class C bad
+    classDef bad stroke-width:1.5px
 ```
 
 为什么这么做：心跳大面积消失大概率是**网络分区**而不是实例全死。此时
@@ -87,7 +89,8 @@ flowchart LR
     L2 --> R["注册中心集群"]
     L1 -. 列表里逐个尝试<br/>配合重试与熔断 .- INST["实例们"]
 
-    style L1 fill:#eef3ea
+    class L1 good
+    classDef good stroke-width:1.5px
 ```
 
 这带来一个必答面试题：**实例刚下线，调用方多久感知？** 答案 = 注册中心

@@ -25,7 +25,8 @@ flowchart LR
         MQ -.->|"新订阅方自己接入<br/>订单服务无感"| T4["大数据"]
     end
 
-    style AFTER fill:#eef3ea
+    class AFTER good
+    classDef good stroke-width:1.5px
 ```
 
 判断标准：**下游增减时上游要不要动**。订单创建后 N 个下游关心，
@@ -50,8 +51,10 @@ flowchart LR
     MQ2 --> B["DB 按自己的节奏消化<br/>（填谷）"]
     A -.没有 MQ.-> C["DB 被打死<br/>（连接池耗尽）"]
 
-    style C fill:#f7e8e8
-    style MQ2 fill:#eef3ea
+    class C bad
+    class MQ2 good
+    classDef bad stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 数据库能稳定消化 5k QPS，但流量天生有波峰——**MQ 的本质是把"处理速率"

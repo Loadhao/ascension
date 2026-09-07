@@ -66,9 +66,10 @@ flowchart LR
     B -->|"另一线程来竞争"| L["轻量级锁<br/>栈上 Lock Record<br/>CAS 自旋抢"]
     L -->|"自旋失败/竞争加剧"| W["重量级锁<br/>ObjectMonitor<br/>阻塞挂起（内核态）"]
 
-    style B fill:#f5f0e6
-    style L fill:#f5f0e6
-    style W fill:#f5f0e6
+    class B hl
+    class L hl
+    class W hl
+    classDef hl stroke-width:1.5px
 ```
 
 ### 偏向锁（Biased Locking，JDK 15 移除）

@@ -66,7 +66,8 @@ flowchart LR
         R["append / pop<br/>尾部进出"]
     end
     dq --> 操作
-    style dq fill:#f5f0e6
+    class dq hl
+    classDef hl stroke-width:1.5px
 ```
 
 对比 list：**头部进出是 O(n)**（全员平移），deque 才能做到两端 O(1)。

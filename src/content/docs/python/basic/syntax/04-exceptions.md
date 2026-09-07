@@ -21,8 +21,10 @@ flowchart TD
     H --> F["finally 块执行"]
     N --> F2["finally 块执行后再上传"]
     F --> D["正常继续"]
-    style F fill:#f5f0e6
-    style E fill:#eef3ea
+    class F hl
+    class E good
+    classDef hl stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 **由此可推理出三条纪律：**
@@ -99,8 +101,10 @@ flowchart LR
         A2["FileNotFoundError"] -.->|"被丢弃"| B2["ConfigError"]
         B2 --> C2["只剩 NewErr 堆栈<br/>根因不可见"]
     end
-    style C1 fill:#eef3ea
-    style C2 fill:#f7e8e8
+    class C1 good
+    class C2 bad
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
 ```
 
 ## 自定义异常

@@ -19,8 +19,9 @@ flowchart LR
     end
     DUMP -->|"网络"| IO
 
-    style BL fill:#f5f0e6
-    style RELAY fill:#f5f0e6
+    class BL hl
+    class RELAY hl
+    classDef hl stroke-width:1.5px
 ```
 
 三个线程各司其职：主库 dump 推送、从库 IO 接收写 relay、SQL 线程重放。
@@ -78,7 +79,8 @@ flowchart TB
     H --> H1["按范围 range：按时间/ID 段<br/>好扩容，热点集中"]
     H --> H2["按哈希 hash：分片键 hash 取模/一致性哈希<br/>均匀，扩容要迁移数据"]
 
-    style H2 fill:#f5f0e6
+    class H2 hl
+    classDef hl stroke-width:1.5px
 ```
 
 **分片键是灵魂**：它决定每条数据的归属。选型原则——**最高频的查询

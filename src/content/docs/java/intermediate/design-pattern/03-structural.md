@@ -26,7 +26,8 @@ graph TB
     subgraph 组合
         CO_R[容器<br/>Directory] -- "包含" --> CO_L[叶子<br/>File]
     end
-    style 外观 fill:#f5f0e6
+    class 外观 hl
+    classDef hl stroke-width:1.5px
 ```
 
 它们想解决的问题不同：**代理管"能不能访问"、装饰器管"加不加能力"、

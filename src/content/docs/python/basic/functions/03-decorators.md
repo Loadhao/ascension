@@ -34,7 +34,8 @@ flowchart LR
         C --> D["train 重绑定 = wrapper"]
     end
     A --> B
-    style desugar fill:#f5f0e6
+    class desugar hl
+    classDef hl stroke-width:1.5px
 ```
 
 这正是"装饰后 train.__name__ 会变成 wrapper"的根源——除非用
@@ -94,7 +95,8 @@ flowchart LR
     R["retry(3)<br/>外层函数先执行，返回 decorator"] --> D["decorator<br/>真正接收原函数"]
     D --> W["wrapper<br/>闭包住 times 与原函数"]
     W --> F["call_api 重绑定 = wrapper"]
-    style D fill:#f5f0e6
+    class D hl
+    classDef hl stroke-width:1.5px
 ```
 
 每一层只负责一件事：**外层收参数、中层收函数、内层收调用**——这就是

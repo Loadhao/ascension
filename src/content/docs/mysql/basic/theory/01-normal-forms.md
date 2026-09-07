@@ -81,7 +81,8 @@ flowchart LR
     B --> C["学院名称 / 学院电话"]
     A -. 传递依赖 .-> C
 
-    style C fill:#f5e6e6
+    class C bad
+    classDef bad stroke-width:1.5px
 ```
 
 学院电话依赖的是学院而非学生，却跟着学号冗余存储。**拆出学院表**：

@@ -95,8 +95,10 @@ flowchart LR
     F --> OK
     T --> OK
     P --> OK
-    style L fill:#eef3ea
-    style T fill:#f5f0e6
+    class L good
+    class T hl
+    classDef good stroke-width:1.5px
+    classDef hl stroke-width:1.5px
 ```
 
 四者看的东西不同：**ruff 看"风格/坏味道"、mypy 看"类型对不对"、pytest

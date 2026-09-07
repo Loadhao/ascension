@@ -62,7 +62,8 @@ flowchart LR
     DOC["候选文档"] --> bool
     bool --> RESULT{"通过所有<br/>must/filter/must_not 约束?"}
     RESULT -- "是" --> OUT["返回并按打分排序"]
-    style FILTER fill:#f5f0e6
+    class FILTER hl
+    classDef hl stroke-width:1.5px
 ```
 
 **filter 常被忽略的收益**：纯过滤条件（状态、类目、价格区间）放进 `filter`

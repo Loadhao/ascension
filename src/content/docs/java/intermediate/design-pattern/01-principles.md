@@ -104,7 +104,8 @@ flowchart LR
         I -.-> D2["MongoOrderDao"]
     end
 
-    style I fill:#f5f0e6
+    class I hl
+    classDef hl stroke-width:1.5px
 ```
 
 "倒置"倒的是什么：**编译期依赖方向与运行期调用方向解耦**——调用
@@ -128,7 +129,8 @@ flowchart TB
     LSP["里氏替换<br/>（继承的纪律）"] --> ISP["接口隔离<br/>（胖接口的解药）"]
     CARP["组合复用<br/>（继承的替代）"]
 
-    style OCP fill:#f5f0e6
+    class OCP hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 小结

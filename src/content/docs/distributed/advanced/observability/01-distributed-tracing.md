@@ -22,7 +22,8 @@ flowchart TB
     G["网关<br/>traceId=abc span=x"] --> A["服务A<br/>span=a parent=x"]
     A --> B["服务B<br/>span=b parent=a"]
     A --> C["服务C（DB 等）<br/>span=c parent=a"]
-    style A fill:#eef3ea
+    class A good
+    classDef good stroke-width:1.5px
 ```
 
 一条请求进网关时生成 `traceId`，此后每个服务**透传 traceId + 上级 spanId**，

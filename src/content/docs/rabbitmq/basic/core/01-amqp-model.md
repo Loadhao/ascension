@@ -18,7 +18,8 @@ flowchart LR
     Q1 --> C1["消费者A"]
     Q2 --> C2["消费者B"]
     
-    style X fill:#f5f0e6
+    class X hl
+    classDef hl stroke-width:1.5px
 ```
 
 关键认知：**交换机和队列都不保存消息如何分发的逻辑，规则在"绑定"里**。

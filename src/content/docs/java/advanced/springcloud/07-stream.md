@@ -19,8 +19,9 @@ flowchart LR
     M --> B2["Binder"]
     B2 --> C["业务 Consumer<br/>monitor 信道"]
 
-    style B fill:#f5f0e6
-    style B2 fill:#f5f0e6
+    class B hl
+    class B2 hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 三个概念串起来

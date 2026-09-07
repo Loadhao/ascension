@@ -20,7 +20,8 @@ flowchart LR
     B --> C2["手机<br/>订阅者"]
     B --> C3["服务端<br/>订阅者"]
     
-    style B fill:#f5f0e6
+    class B hl
+    classDef hl stroke-width:1.5px
 ```
 
 核心特性：**极轻量**（固定头最小 2 字节）、**双向**（可订阅可发布）、

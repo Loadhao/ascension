@@ -14,7 +14,8 @@ flowchart LR
     C --> D["依赖订单的服务<br/>也全部阻塞"]
     D --> E["全站雪崩"]
 
-    style E fill:#f7e8e8
+    class E bad
+    classDef bad stroke-width:1.5px
 ```
 
 传导机制：**同步调用 + 无界等待**——下游变慢（不是挂，挂了还能快速失败），
@@ -33,9 +34,12 @@ flowchart TB
     H -->|探测成功| C
     H -->|"仍失败"| O
 
-    style C fill:#eef3ea
-    style O fill:#f7e8e8
-    style H fill:#f5f0e6
+    class C good
+    class O bad
+    class H hl
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
+    classDef hl stroke-width:1.5px
 ```
 
 - **CLOSED**：正常工作，同时滑动窗口统计失败率/慢调用比例。

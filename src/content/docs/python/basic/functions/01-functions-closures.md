@@ -72,7 +72,8 @@ flowchart LR
     G --> GBR{"global 有?"}
     GBR -- "有→停" --> G_OK["用它 ✅"]
     GBR -- "无" --> B["builtin 内置名"]
-    style L_OK fill:#eef3ea
+    class L_OK good
+    classDef good stroke-width:1.5px
 ```
 
 Python 没有块级作用域：if/for 块里的赋值直接落在函数局部——
@@ -119,8 +120,10 @@ flowchart LR
         D2["cell2=1"] --> A2["f() 读到 1"]
         D3["cell3=2"] --> A3["f() 读到 2"]
     end
-    style 未固定 fill:#f7e8e8
-    style 固定 fill:#eef3ea
+    class 未固定 bad
+    class 固定 good
+    classDef bad stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 **修复的本质**：把"变量地址"换成"定义时的值快照"——`i=i` 让默认值在

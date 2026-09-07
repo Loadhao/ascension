@@ -92,7 +92,8 @@ flowchart LR
     E --> I["islice 取前 10<br/>惰性切片"]
     I --> C["消费端<br/>一次处理一行"]
     note["全程只同时持有 1 行<br/>不把整个文件读进内存"]
-    style F fill:#f5f0e6
+    class F hl
+    classDef hl stroke-width:1.5px
 ```
 
 **一个生成器出口、星链式透传**：下游要一行，上游才吐一行；不要就停在原地，

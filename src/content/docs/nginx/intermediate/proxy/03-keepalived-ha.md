@@ -24,7 +24,8 @@ flowchart TB
     end
     C["客户端"] -->|"访问 VIP 10.0.0.10"| M
     M --> U["上游后端"]
-    style M fill:#eef3ea
+    class M good
+    classDef good stroke-width:1.5px
 ```
 
 - N 台机器组成一个**虚拟路由器组**，共享一个 **VIP**（对外服务的 IP）；

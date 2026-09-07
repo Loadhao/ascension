@@ -35,7 +35,8 @@ flowchart TB
     AQS --> CD["CountDownLatch<br/>tryAcquireShared：state==0 才放行"]
     AQS --> RW["ReentrantReadWriteLock<br/>state 高 16 位读计数<br/>低 16 位写计数"]
 
-    style AQS fill:#f5f0e6
+    class AQS hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## CLH 队列：虚拟双向链表
@@ -79,8 +80,9 @@ flowchart TB
     PARK -->|是| P2["LockSupport.park(this)<br/>线程挂起"]
     P2 -. "前驱释放时 unpark 唤醒" .-> SPIN
 
-    style OK fill:#f5f0e6
-    style P2 fill:#f5f0e6
+    class OK hl
+    class P2 hl
+    classDef hl stroke-width:1.5px
 ```
 
 关键细节：

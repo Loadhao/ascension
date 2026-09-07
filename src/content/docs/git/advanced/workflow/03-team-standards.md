@@ -54,8 +54,10 @@ flowchart LR
         GF_H[hotfix] --> GF_M
         GF_H -.合并回.-> GF_D
     end
-    style GH fill:#eef3ea
-    style GF fill:#f5f0e6
+    class GH good
+    class GF hl
+    classDef good stroke-width:1.5px
+    classDef hl stroke-width:1.5px
 ```
 
 **一条给团队的主心骨**：小团队用 GitHub Flow 滚 main + PR 就行；当真需要

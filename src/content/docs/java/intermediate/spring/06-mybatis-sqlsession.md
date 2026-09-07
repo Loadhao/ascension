@@ -88,7 +88,8 @@ flowchart TB
     E -->|是| F["bindResource(factory, holder) 存入 ThreadLocal<br/>注册 SqlSessionSynchronization<br/>标记与事务同步 + 引用计数"]
     E -->|否| G["裸会话直接返回<br/>（用完即 close）"]
 
-    style C fill:#eef3ea
+    class C good
+    classDef good stroke-width:1.5px
 ```
 
 要点：

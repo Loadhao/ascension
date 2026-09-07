@@ -21,9 +21,12 @@ flowchart TB
     B -->|"单个热点（击穿）"| H["互斥重建 / 逻辑过期"]
     B -->|"大面积（雪崩）"| X["随机 TTL / 多级缓存 / 集群高可用"]
 
-    style P fill:#eef3ea
-    style H fill:#f5f0e6
-    style X fill:#f7e8e8
+    class P good
+    class H hl
+    class X bad
+    classDef good stroke-width:1.5px
+    classDef hl stroke-width:1.5px
+    classDef bad stroke-width:1.5px
 ```
 
 ## 穿透：不存在的数据
@@ -51,7 +54,8 @@ flowchart LR
     Q1 -->|"有 0 位"| ANS2["【一定不存在】→ 直接拒绝，不打 DB"]
     ANS -->|"存在 → 放行查缓存和 DB"| ANS3["不存在 = 误判，可接受"]
 
-    style ANS2 fill:#eef3ea
+    class ANS2 good
+    classDef good stroke-width:1.5px
 ```
 
 核心性质：**判"不存在"绝对可靠，判"存在"有误判率**——正好匹配穿透

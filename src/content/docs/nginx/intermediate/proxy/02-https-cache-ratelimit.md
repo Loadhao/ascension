@@ -32,7 +32,8 @@ TLS 终止的位置决定了证书与加密边界——**浏览器到 Nginx 加�
 flowchart LR
     B["浏览器"] -->|"TLS 加密<br/>https://example.com"| N["Nginx<br/>代码 TLS 终止<br/>持有私钥/证书"]
     N -->|"内网 HTTP<br/>http://backend"| APP["后端应用"]
-    style N fill:#f5f0e6
+    class N hl
+    classDef hl stroke-width:1.5px
 ```
 
 这是 HTTPS 入口最常见的形态：证书只在 Nginx 一处维护，后端不用各自配 TLS。
@@ -118,8 +119,10 @@ flowchart TB
     subgraph 令牌桶["令牌桶：可突发（攒令牌）"]
         T1["按固定速率攒令牌"] --> T2["拿到令牌就放行<br/>突发时先耗尽攒下的令牌"]
     end
-    style 漏桶 fill:#f5f0e6
-    style 令牌桶 fill:#eef3ea
+    class 漏桶 hl
+    class 令牌桶 good
+    classDef hl stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 给一个能直接用的 QPS + 瞬发配置：

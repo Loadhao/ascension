@@ -49,7 +49,8 @@ flowchart LR
         B1["feat: 完整业务<br/>（一条干净提交，哈希全变）"]
     end
     A1 -->|squash 合并 1234| B1
-    style 后 fill:#eef3ea
+    class 后 good
+    classDef good stroke-width:1.5px
 ```
 
 **这就是"改历史只适用于未推送提交"的原因**：`rebase -i` 之后这 4 条的
@@ -87,7 +88,8 @@ flowchart TB
     subgraph 清理后[git filter-repo 重写全历史]
         D1[提交1' 无 secret] --> D2[提交2' 无 secret] --> D3[提交3' 无 secret]
     end
-    style 清理后 fill:#eef3ea
+    class 清理后 good
+    classDef good stroke-width:1.5px
 ```
 
 > 注意：改写全部历史后所有提交哈希变化，需要 force push（`--force-with-lease`）并通知所有协作者重新克隆。

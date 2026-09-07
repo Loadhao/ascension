@@ -47,15 +47,15 @@ struct sdshdr {
 flowchart LR
     subgraph SKIP["跳表（查找 35）"]
         direction LR
-        L3["L3: head → 50"]:::idx
-        L2["L2: head → 20 → 50"]:::idx
-        L1["L1: head → 10 → 20 → 30 → 50"]:::data
+        L3["L3: head → 50"]:::hl
+        L2["L2: head → 20 → 50"]:::hl
+        L1["L1: head → 10 → 20 → 30 → 50"]:::good
         subgraph PATH["查找路径"]
             P1["L2 从 head 到 20"] --> P2["20 在 L2 的下一个是 50，太大 → 下沉 L1"] --> P3["L1 顺序走到 30 → 30 的下一个是 50 → 下沉"] --> P4["30 下层就是要找的 35"]
         end
     end
-    classDef idx fill:#f5f0e6
-    classDef data fill:#eef3ea
+    classDef hl stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 - 插入时**随机决定层数**：每层晋升概率 1/4，最高 64 层——期望层数
@@ -91,7 +91,8 @@ flowchart TB
     E -->|完了| F["ht[1] 变成 ht[0]<br/>rehashidx = -1"]
     B2["期间所有操作：<br/>读 → 两张表都查<br/>写 → 只写新表"] -.-> C
 
-    style C fill:#f5f0e6
+    class C hl
+    classDef hl stroke-width:1.5px
 ```
 
 期间查询要查两张表、新增只进新表——这就是"渐进式"：把一次大停顿摊薄

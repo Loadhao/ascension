@@ -86,7 +86,8 @@ flowchart TB
     E --> F
     F --> G["@Around 后半段"]
 
-    style C fill:#f5f0e6
+    class C hl
+    classDef hl stroke-width:1.5px
 ```
 
 @Around 最强大也最危险：手里握着 proceed()，可以改参数、改返回值、吞

@@ -86,7 +86,8 @@ flowchart TB
     H -->|是| I["架构层：<br/>读写分离 / 归档 / 分库分表"]
     H -->|否| J["达标：上线观察"]
 
-    style B fill:#f5f0e6
+    class B hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 小结

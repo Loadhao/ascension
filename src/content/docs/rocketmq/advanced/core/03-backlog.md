@@ -30,8 +30,10 @@ flowchart TB
     D -->|能（日志类）| E["直接丢弃旧消息<br/>（reset offset 到最新）"]
     D -->|不能| F["扩容消费能力"]
 
-    style E fill:#f7e8e8
-    style F fill:#eef3ea
+    class E bad
+    class F good
+    classDef bad stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 ## 紧急扩容四步法（Kafka 版）
@@ -47,7 +49,8 @@ flowchart LR
         C --> D["④ 积压清零后<br/>恢复原架构"]
     end
 
-    style A fill:#f5f0e6
+    class A hl
+    classDef hl stroke-width:1.5px
 ```
 
 ```java

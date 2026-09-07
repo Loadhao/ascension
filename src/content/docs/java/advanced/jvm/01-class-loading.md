@@ -92,7 +92,8 @@ flowchart LR
     PLAT2["Platform"] -->|"④找不到<br/>ClassNotFoundException 往回抛"| APP2["Application"]
     APP2 -->|"⑤自己加载<br/>classpath 找到了"| OK2["返回 Class"]
 
-    style BOOT fill:#f5f0e6
+    class BOOT hl
+    classDef hl stroke-width:1.5px
 ```
 
 三个目的：

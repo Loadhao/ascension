@@ -24,7 +24,8 @@ flowchart LR
     BEFORE -->|"分母从 3 变 4<br/>几乎所有 key 重新洗牌"| AFTER
     AFTER --> CACHE_MISS["缓存集体失效<br/>洪峰直冲 DB（雪崩）"]
 
-    style CACHE_MISS fill:#f7e8e8
+    class CACHE_MISS bad
+    classDef bad stroke-width:1.5px
 ```
 
 数学直觉：分母从 N 变 N+1，hash 值模数改变的 key 占 N/(N+1)——**扩容
@@ -71,7 +72,8 @@ flowchart LR
     end
     NOTE["D 插入后：只有「B 到 D 之间」原本属于 B 的 key 迁移<br/>其余全部不动"]
 
-    style D fill:#eef3ea
+    class D good
+    classDef good stroke-width:1.5px
 ```
 
 ## 数据倾斜与虚拟节点

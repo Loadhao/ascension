@@ -59,7 +59,8 @@ flowchart TB
         D1["首次 getInstance 时<br/>双重检查 + volatile 防半成品"]
     end
     H1 -->|主流推荐| 结论1["按需创建、无锁、安全"]
-    style 静态内部类 fill:#eef3ea
+    class 静态内部类 good
+    classDef good stroke-width:1.5px
 ```
 
 **Spring 的 singleton scope 不是单例模式**：它一个容器里"每个
@@ -104,7 +105,8 @@ flowchart TB
     subgraph 抽象工厂["抽象工厂（产品族）"]
         A["一族互换：<br/>阿里云族 ↔ AWS 族"]
     end
-    style 抽象工厂 fill:#f5f0e6
+    class 抽象工厂 hl
+    classDef hl stroke-width:1.5px
 ```
 
 | | 简单工厂 | 工厂方法 | 抽象工厂 |

@@ -29,7 +29,8 @@ flowchart TB
     D -->|"是（过期 key 还很多）"| B
     D -->|否| E["本轮结束<br/>（单轮有时间上限，防卡主线程）"]
 
-    style D fill:#f5f0e6
+    class D hl
+    classDef hl stroke-width:1.5px
 ```
 
 **抽样 + 阈值循环**：过期的 key 比例高就接着抽，比例低就收工——

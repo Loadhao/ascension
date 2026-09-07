@@ -35,8 +35,9 @@ flowchart TB
     LB --> HTTP["HTTP 客户端发送<br/>（默认 JDK HttpURLConnection，可换 OkHttp/Apache）"]
     HTTP --> DECODE["响应反序列化为 Order 对象"]
 
-    style P fill:#f5f0e6
-    style LB fill:#f5f0e6
+    class P hl
+    class LB hl
+    classDef hl stroke-width:1.5px
 ```
 
 与 Java 基础篇反射与注解遥相呼应：**@FeignClient 的本质 = 注解元数据 +

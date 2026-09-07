@@ -47,13 +47,15 @@ flowchart TB
     R17 --> B15((15 黑))
     R17 --> B25((25 黑))
 
-    style B13 fill:#333,color:#fff
-    style R8 fill:#c0392b,color:#fff
-    style R17 fill:#c0392b,color:#fff
-    style B1 fill:#333,color:#fff
-    style B11 fill:#333,color:#fff
-    style B15 fill:#333,color:#fff
-    style B25 fill:#333,color:#fff
+    class B13 rb-black
+    class R8 rb-red
+    class R17 rb-red
+    class B1 rb-black
+    class B11 rb-black
+    class B15 rb-black
+    class B25 rb-black
+    classDef rb-black stroke-width:1.5px
+    classDef rb-red stroke-width:1.5px
 ```
 
 ## 等价视角：红黑树 = 拍扁的 2-3-4 树

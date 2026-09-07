@@ -28,7 +28,8 @@ flowchart TB
     C1 --> B1
     C2 --> B2
 
-    style TOPIC fill:#f5f0e6
+    class TOPIC hl
+    classDef hl stroke-width:1.5px
 ```
 
 三个概念一句话：
@@ -60,7 +61,8 @@ flowchart LR
     W["生产者"] -->|"顺序追加（append-only）"| S2
     S1 -.索引.-> IDX[".index稀疏索引：offset → 文件位置"]
 
-    style S2 fill:#eef3ea
+    class S2 good
+    classDef good stroke-width:1.5px
 ```
 
 - **只在文件尾追加**：磁盘顺序写 ≈ 内存随机写的速度（几百 MB/s），
@@ -112,7 +114,8 @@ flowchart LR
     D["批量 + 压缩"] --> R4["网络往返摊薄<br/>l zstd/gzip"]
     E["分区水平扩展"] --> R5["吞吐随机器线性涨"]
 
-    style R1 fill:#eef3ea
+    class R1 good
+    classDef good stroke-width:1.5px
 ```
 
 ## 小结

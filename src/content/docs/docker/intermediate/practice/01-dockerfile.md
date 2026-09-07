@@ -31,7 +31,8 @@ flowchart TB
         L3 --> L4["层4: CMD ...(运行期)"]
     end
     L3 -. "改一行代码 → 层3哈希变 → <br/>层4需重建，但层1/层2缓存命中可用" .-> CACHE["缓存机制：<br/>上层缓存命中→下层级联复用"]
-    style CACHE fill:#f5f0e6
+    class CACHE hl
+    classDef hl stroke-width:1.5px
 ```
 
 所以**依赖层要放在代码层之前**：`package.json` 一变才触发重装依赖；光改业务
@@ -71,7 +72,8 @@ flowchart LR
     end
     ART -->|"COPY --from=build<br/>只拷贝产物"| R["运行阶段 runtime<br/>nginx:alpine 平装 dist"]
     N -. "工具链不下进 runtime" .-x R
-    style R fill:#f5f0e6
+    class R hl
+    classDef hl stroke-width:1.5px
 ```
 
 ```dockerfile

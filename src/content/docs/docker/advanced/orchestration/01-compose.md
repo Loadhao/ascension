@@ -50,7 +50,8 @@ flowchart LR
         API -. "depends_on: service_healthy" .-> HEAL["healthcheck pg_isready<br/>等 DB 就绪才起"]
     end
     DB --> V["具名卷 pgdata<br/>持久化数据"]
-    style 网络 fill:#f5f0e6
+    class 网络 hl
+    classDef hl stroke-width:1.5px
 ```
 
 - **服务名即 DNS 名**：`api` 通过 `db:5432` 直连（Compose 自动建好自定义网络）

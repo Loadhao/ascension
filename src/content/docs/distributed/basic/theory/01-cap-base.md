@@ -23,8 +23,10 @@ flowchart TB
     Q -->|"保 C：拒绝写入<br/>（返回错误）"| CC["CP<br/>ZooKeeper / etcd / Redis Cluster 写"]
     Q -->|"保 A：照常接受<br/>（B 组稍后才知道）"| AA["AP<br/>Eureka / Cassandra / Nacos 临时实例"]
 
-    style CC fill:#eef3ea
-    style AA fill:#f7e8e8
+    class CC good
+    class AA bad
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
 ```
 
 CP 的典型体验：ZooKeeper 集群挂掉过半节点后**拒绝所有写请求**——宁可
@@ -66,8 +68,10 @@ flowchart LR
     T2 --> T3["t2：分区恢复<br/>异步复制追赶"]
     T3 --> T4["t3：最终一致<br/>所有副本 x=1"]
 
-    style T2 fill:#f7e8e8
-    style T4 fill:#eef3ea
+    class T2 bad
+    class T4 good
+    classDef bad stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 日常所见大多是最终一致：DNS 传播、Redis 主从异步复制、电商"已下单，

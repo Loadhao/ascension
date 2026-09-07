@@ -28,8 +28,10 @@ level: intermediate
 flowchart LR
     A["1 bit<br/>符号位<br/>恒 0"] --- B["41 bit<br/>时间戳（毫秒）<br/>约 69 年"] --- C["10 bit<br/>机器 ID<br/>5机房+5机器<br/>最多 1024 节点"] --- D["12 bit<br/>序列号<br/>每毫秒 4096 个"]
 
-    style B fill:#f5f0e6
-    style D fill:#eef3ea
+    class B hl
+    class D good
+    classDef hl stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 ```java

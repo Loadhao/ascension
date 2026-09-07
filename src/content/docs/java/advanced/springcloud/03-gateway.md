@@ -19,7 +19,8 @@ flowchart LR
     P & L & C & G --> S1["订单服务 v1"]
     G -.-> S2["订单服务 v2（灰度）"]
 
-    style GW fill:#f5f0e6
+    class GW hl
+    classDef hl stroke-width:1.5px
 ```
 
 它与 Nginx/LVS 的层次差异：LVS 是四层负载（转发 TCP 包）、Nginx 是

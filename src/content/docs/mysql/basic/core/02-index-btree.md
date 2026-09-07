@@ -42,8 +42,10 @@ flowchart TB
     R["根节点（1170 路标）"] --> N1["中间层 × 1170"]
     N1 --> L["叶子层：1170 × 1170 个页<br/>每个 16 行数据<br/>叶子间双向链表 →"]
 
-    style R fill:#f5f0e6
-    style L fill:#eef3ea
+    class R hl
+    class L good
+    classDef hl stroke-width:1.5px
+    classDef good stroke-width:1.5px
 ```
 
 一次主键查询最多 **3 次页 IO**——这就是"单表建议不超过 2000 万行"经验

@@ -84,7 +84,8 @@ flowchart LR
     E --> O2["@EventListener<br/>积分监听器"]
     E --> O3["@EventListener<br/>短信监听器"]
 
-    style E fill:#f5f0e6
+    class E hl
+    classDef hl stroke-width:1.5px
 ```
 
 ```java

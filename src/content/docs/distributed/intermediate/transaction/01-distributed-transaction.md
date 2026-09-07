@@ -73,7 +73,8 @@ flowchart LR
     C -. "Confirm 失败 → 重试" .-> C
     X -. "Cancel 失败 → 重试" .-> X
 
-    style T fill:#f5f0e6
+    class T hl
+    classDef hl stroke-width:1.5px
 ```
 
 - **无长时间锁**：Try 只做资源预留（冻结额度/预扣库存），粒度由业务定。
@@ -100,7 +101,8 @@ flowchart TB
     C["消费方"] -->|处理完| ACK["ack 消息"]
     C -. 对账兜底：超时未处理可人工/自动核对 .-> M
 
-    style A fill:#eef3ea
+    class A good
+    classDef good stroke-width:1.5px
 ```
 
 ```sql

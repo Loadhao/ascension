@@ -122,8 +122,9 @@ flowchart LR
     H --> R["method.invoke(目标对象)<br/>反射转发"]
     R --> T["真实逻辑"]
 
-    style P fill:#f5f0e6
-    style H fill:#f5f0e6
+    class P hl
+    class H hl
+    classDef hl stroke-width:1.5px
 ```
 
 - **JDK 动态代理**：基于接口，`$Proxy0` 是运行期生成的类，实现目标接口并把

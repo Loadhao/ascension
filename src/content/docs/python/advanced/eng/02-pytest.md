@@ -78,7 +78,8 @@ fixture 是一个**按依赖图解析的注入器**——测试声明要什么�
 flowchart LR
     TEST["test_create_user<br/>（声明需要 api_client）"] --> CLIENT["fixture: api_client"]
     CLIENT --> TMP["fixture: tmp_path<br/>（内置，先被构建）"]
-    style CLIENT fill:#f5f0e6
+    class CLIENT hl
+    classDef hl stroke-width:1.5px
 ```
 
 作用域控制构建成本：`@pytest.fixture(scope="session")` 全程只建一次
@@ -88,7 +89,8 @@ scope 决定了 fixture 实例"活多久"：
 ```mermaid
 flowchart TB
     S["session：整个测试会话建一次"] --> M["module：每个模块一次"] --> C["class：每类一次"] --> F["function：每个测试一次（默认）"]
-    style F fill:#f5f0e6
+    class F hl
+    classDef hl stroke-width:1.5px
 ```
 
 越靠左越省（重资源少建）、隔离越弱；越靠右隔离越强、构建越频繁。

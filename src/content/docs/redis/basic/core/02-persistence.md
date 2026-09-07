@@ -28,8 +28,10 @@ flowchart TB
     E["主进程要改某个数据页"] --> F["操作系统复制该页<br/>子进程看到的仍是旧页"]
     F -. "代价：脏页越多<br/>内存占用越接近 2 倍".-> G["极端下 fork + 全页复制<br/>触发 OOM 风险"]
 
-    style B fill:#f5f0e6
-    style F fill:#f7e8e8
+    class B hl
+    class F bad
+    classDef hl stroke-width:1.5px
+    classDef bad stroke-width:1.5px
 ```
 
 COW 让子进程拍到的永远是 fork 那一刻的"照片"，但代价是**主进程改多少
@@ -72,8 +74,10 @@ flowchart LR
     end
     C["重启加载：先按 RDB 快速恢复全量<br/>再重放增量 AOF"] --> AOF2
 
-    style R fill:#eef3ea
-    style A fill:#f5f0e6
+    class R good
+    class A hl
+    classDef good stroke-width:1.5px
+    classDef hl stroke-width:1.5px
 ```
 
 兼得两家之长：恢复速度接近 RDB，丢失窗口保持 1 秒。

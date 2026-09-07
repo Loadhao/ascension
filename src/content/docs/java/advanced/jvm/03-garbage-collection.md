@@ -26,10 +26,11 @@ flowchart TB
     X["不可达对象 X"] -.等待回收.- G["GC"]
     Y["不可达对象 Y"] -.等待回收.- G
 
-    style R1 fill:#f5f0e6
-    style R2 fill:#f5f0e6
-    style X fill:#eeeeee
-    style Y fill:#eeeeee
+    class R1 hl
+    class R2 hl
+    class X hl
+    class Y hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 分代假说与堆布局
@@ -47,7 +48,8 @@ flowchart LR
     EDEN -->|"Minor GC：存活对象<br/>Eden+S0 → S1 复制" | S1
     S1 -->|"年龄 > 15<br/>或动态判定" | OLD
 
-    style HEAP fill:#f5f0e6
+    class HEAP hl
+    classDef hl stroke-width:1.5px
 ```
 
 - 对象优先在 Eden 分配（TLAB 线程私有分配缓冲，分配只需指针碰撞）。
@@ -121,8 +123,10 @@ flowchart LR
     C["收集队列（按回收收益排序）"] --> O2
     C --> E1
 
-    style O2 fill:#f7e8e8
-    style C fill:#f5f0e6
+    class O2 bad
+    class C hl
+    classDef bad stroke-width:1.5px
+    classDef hl stroke-width:1.5px
 ```
 
 核心能力：`-XX:MaxGCPauseMillis=200` **软目标停顿预测**——基于历史

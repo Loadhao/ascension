@@ -90,7 +90,8 @@ flowchart TB
     PDB -- "WAL 流复制" --> SDB
     PA -. "watchdog 心跳" .- PB
 
-    style VIP fill:#f5f0e6
+    class VIP hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 关键配置参数

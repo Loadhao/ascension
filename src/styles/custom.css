@@ -835,6 +835,80 @@ summary .sl-tree-toggle:hover {
   color: var(--mmd-cluster-text) !important;
 }
 
+/* —— 语义强调节点（classDef good/bad/hl 仅作打标，配色全部由主题变量提供）——
+   图表内禁止硬编码颜色（style/classDef 的 fill/color/stroke 等）：Mermaid 会将其
+   烘焙为行内 !important，压过本文件的主题变量接管，暗色主题下会出现浅底浅字。
+   语义类在亮/暗两种主题下都保证文字对比度。 */
+:root {
+  --mmd-good-fill: #232a1b;
+  --mmd-good-border: #6d7f4c;
+  --mmd-bad-fill: #2e1f1b;
+  --mmd-bad-border: #96574a;
+  --mmd-hl-fill: #2d2618;
+  --mmd-hl-border: #9a7c4d;
+}
+
+:root[data-theme='light'] {
+  --mmd-good-fill: #ecf1de;
+  --mmd-good-border: #93a269;
+  --mmd-bad-fill: #f5e6e1;
+  --mmd-bad-border: #c08070;
+  --mmd-hl-fill: #f3ecdb;
+  --mmd-hl-border: #c2a36c;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']:not(.mindmapDiagram)
+  .node.good :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-good-fill) !important;
+  stroke: var(--mmd-good-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']:not(.mindmapDiagram)
+  .node.bad :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-bad-fill) !important;
+  stroke: var(--mmd-bad-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']:not(.mindmapDiagram)
+  .node.hl :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-hl-fill) !important;
+  stroke: var(--mmd-hl-border) !important;
+}
+
+/* —— 红黑树节点（classDef rb-black/rb-red）：节点色即语义，双主题固定深底白字 —— */
+:root {
+  --mmd-rb-black-fill: #2e2e2e;
+  --mmd-rb-black-border: #8f8f8f;
+  --mmd-rb-red-fill: #b03a2e;
+  --mmd-rb-red-border: #d9968a;
+  --mmd-rb-text: #ffffff;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']:not(.mindmapDiagram)
+  .node.rb-black :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-rb-black-fill) !important;
+  stroke: var(--mmd-rb-black-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']:not(.mindmapDiagram)
+  .node.rb-red :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-rb-red-fill) !important;
+  stroke: var(--mmd-rb-red-border) !important;
+}
+
+/* 白字要压过上方通用文字规则（选择器多出 .rb-* 一层类） */
+:is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] .node:is(.rb-black, .rb-red) .label,
+:is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] .node:is(.rb-black, .rb-red) span.nodeLabel,
+:is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] .node:is(.rb-black, .rb-red) text {
+  color: var(--mmd-rb-text) !important;
+  fill: var(--mmd-rb-text) !important;
+}
+
 /* —— 连线与箭头 —— */
 :is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] .flowchart-link,
 :is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] .edgePaths .path,
@@ -867,8 +941,115 @@ summary .sl-tree-toggle:hover {
 }
 
 :is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] .edgeLabel .label,
-:is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] .edgeLabel span {
+:is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] span.edgeLabel,
+:is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] .edgeLabel :is(span, p, div) {
   color: var(--mmd-text) !important;
+}
+
+/* —— 脑图（mindmap）——
+   分支填充由构建期烘焙（浅琥珀色阶），中深段琥珀配深棕文字不足 4.5:1，
+   此处按分支 class 接管配色：亮色主题浅底深字、暗色主题深底白字，
+   色相仍按分支错开以保留分组感；文字色随主题切换。 */
+:root {
+  --mmd-mm-text: #ffffff;
+  --mmd-mm-root: #7a5a30;
+  --mmd-mm-0: #6f5c2a;
+  --mmd-mm-1: #74532e;
+  --mmd-mm-2: #7a4a2e;
+  --mmd-mm-3: #655230;
+  --mmd-mm-4: #70572c;
+  --mmd-mm-5: #6b4e38;
+  --mmd-mm-6: #75502a;
+  --mmd-mm-7: #685232;
+}
+
+:root[data-theme='light'] {
+  --mmd-mm-text: #3f3428;
+  --mmd-mm-root: #ecd9ae;
+  --mmd-mm-0: #e9ddb2;
+  --mmd-mm-1: #ead6b4;
+  --mmd-mm-2: #eed3ae;
+  --mmd-mm-3: #e6d8b6;
+  --mmd-mm-4: #ecd4a9;
+  --mmd-mm-5: #e8d2b0;
+  --mmd-mm-6: #eed7ab;
+  --mmd-mm-7: #e5d4b2;
+}
+
+:is(.sl-markdown-content, .mmd-viewer) svg[id^='mermaid-'] .mindmap-node span.nodeLabel {
+  color: var(--mmd-mm-text) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']
+  .mindmap-node:is(.section-root, .section--1)
+  :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-mm-root) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']
+  .mindmap-node.section-0
+  :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-mm-0) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']
+  .mindmap-node.section-1
+  :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-mm-1) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']
+  .mindmap-node.section-2
+  :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-mm-2) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']
+  .mindmap-node.section-3
+  :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-mm-3) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']
+  .mindmap-node.section-4
+  :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-mm-4) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']
+  .mindmap-node.section-5
+  :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-mm-5) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']
+  .mindmap-node.section-6
+  :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-mm-6) !important;
+  stroke: var(--mmd-node-border) !important;
+}
+
+:is(.sl-markdown-content, .mmd-viewer)
+  svg[id^='mermaid-']
+  .mindmap-node.section-7
+  :is(rect, circle, ellipse, polygon, path) {
+  fill: var(--mmd-mm-7) !important;
+  stroke: var(--mmd-node-border) !important;
 }
 
 /* —— 时序图 —— */
@@ -1265,6 +1446,22 @@ html.mmd-viewer-open {
     --mmd-signal: #6b5b45;
     --mmd-activation: #f0e4d0;
     --mmd-shadow: none;
+    --mmd-good-fill: #ecf1de;
+    --mmd-good-border: #93a269;
+    --mmd-bad-fill: #f5e6e1;
+    --mmd-bad-border: #c08070;
+    --mmd-hl-fill: #f3ecdb;
+    --mmd-hl-border: #c2a36c;
+    --mmd-mm-text: #3f3428;
+    --mmd-mm-root: #ecd9ae;
+    --mmd-mm-0: #e9ddb2;
+    --mmd-mm-1: #ead6b4;
+    --mmd-mm-2: #eed3ae;
+    --mmd-mm-3: #e6d8b6;
+    --mmd-mm-4: #ecd4a9;
+    --mmd-mm-5: #e8d2b0;
+    --mmd-mm-6: #eed7ab;
+    --mmd-mm-7: #e5d4b2;
   }
 }
 

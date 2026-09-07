@@ -32,7 +32,8 @@ flowchart LR
     S -->|"git commit"| C
     C -.->|"git diff --staged <br/>暂存区 vs 提交"| S
     W -.->|"git diff <br/>工作区 vs 暂存区"| S
-    style 暂存 fill:#f5f0e6
+    class 暂存 hl
+    classDef hl stroke-width:1.5px
 ```
 
 对照下面的命令，能少走很多弯路——**先弄清"此刻改动在哪一层"，才知道用
@@ -107,9 +108,12 @@ flowchart TD
     A -->|"否"| B{"改动还要不要保留?"}
     B -->|"要"| C["git reset --soft<br/>退回暂存区，改动全在"]
     B -->|"不要"| D["git reset --hard<br/>连改动一起丢<br/>（⚠️ 不可恢复）"]
-    style R fill:#eef3ea
-    style C fill:#f5f0e6
-    style D fill:#f7e8e8
+    class R good
+    class C hl
+    class D bad
+    classDef good stroke-width:1.5px
+    classDef hl stroke-width:1.5px
+    classDef bad stroke-width:1.5px
 ```
 
 判断用哪个：**还没 push** → `reset`（soft 优先）；**已 push 且要保留历史**

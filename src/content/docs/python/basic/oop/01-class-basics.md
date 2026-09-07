@@ -27,7 +27,8 @@ flowchart LR
     C -- "是" --> D["__init__(self)<br/>初始化属性"]
     C -- "否（返回别的对象）" --> E["不调用 __init__<br/>（单例/缓存复用常这样）"]
     D --> F["可用实例"]
-    style D fill:#eef3ea
+    class D good
+    classDef good stroke-width:1.5px
 ```
 
 ## 属性查找：实例 → 类 → 父类
@@ -54,7 +55,8 @@ flowchart LR
     C -- "有→停" --> C_OK["用类属性 ✅（共享）"]
     C -- "无" --> P{"父类有?"}
     P -- "无" --> ERR["AttributeError"]
-    style C_OK fill:#f5f0e6
+    class C_OK hl
+    classDef hl stroke-width:1.5px
 ```
 
 **可变类属性是隐形雷区**：`tricks: list = []` 会被所有实例共享，和

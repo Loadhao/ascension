@@ -102,6 +102,47 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 仅作打标，配色由站点主题统一接管）。也可用 `class 节点ID pulse` 语法
 给已有节点补标。可与连线动画组合使用。
 
+## 语义强调节点（good / bad / hl）
+
+要突出「正向 / 负向 / 中性强调」节点时，用语义类打标，**不写任何颜色**：
+绿（good）、红（bad）、暖金（hl）三套配色由站点主题按亮/暗模式提供，
+两种主题下文字都保证可读。
+
+<Tabs>
+  <TabItem label="效果">
+    ```mermaid
+    flowchart LR
+        A[瞬时洪峰] --> MQ[MQ 缓冲池]:::good --> B[DB 按节奏消化]
+        A -.没有 MQ.-> C[DB 被打死]:::bad
+        classDef good stroke-width:1.5px
+        classDef bad stroke-width:1.5px
+    ```
+  </TabItem>
+  <TabItem label="源码">
+    `````text
+    ```mermaid
+    flowchart LR
+        A[瞬时洪峰] --> MQ[MQ 缓冲池]:::good --> B[DB 按节奏消化]
+        A -.没有 MQ.-> C[DB 被打死]:::bad
+        classDef good stroke-width:1.5px
+        classDef bad stroke-width:1.5px
+    ```
+    `````
+  </TabItem>
+</Tabs>
+
+要点：
+
+- 打标可用 `节点ID:::good` 内联或 `class 节点ID bad` 补标；中性强调用 `hl`。
+- 用到的每个语义类都要有一行 `classDef good stroke-width:1.5px`（仅作打标，
+  配色由主题接管，`1.5px` 略粗边框作强调）。
+- 红黑树等「节点色即语义」的特例用 `rb-black` / `rb-red`（固定深底白字，
+  亮暗主题都可读）。
+- **严禁在图表里硬编码颜色**：`style X fill:#…`、`classDef … fill:#…`、
+  `%%{init}%%` 主题指令等一律不允许——Mermaid 会把颜色烘焙成行内 `!important`，
+  压过站点主题 CSS，另一种主题下必然出现浅底浅字看不清。需要新语义时在
+  `src/styles/custom.css` 加主题变量与类规则，图表里只引用类名。
+
 ## 悬停交互（hover focus）
 
 全站流程图默认开启：**悬停**节点、子图或连线，高亮关联链路并淡出其余部分；

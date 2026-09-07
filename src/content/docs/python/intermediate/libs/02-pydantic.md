@@ -45,7 +45,8 @@ flowchart LR
     end
     M --> U["业务代码<br/>访问强类型字段"]
     M --> D["model_dump / dump_json<br/>序列化（exclude 敏感字段）"]
-    style 入 fill:#f5f0e6
+    class 入 hl
+    classDef hl stroke-width:1.5px
 ```
 
 整条链让"外部任意 JSON"在入口**一次性被驯服**，其后代码不再面对裸 dict。
@@ -80,7 +81,8 @@ flowchart TD
     O -->|"字段 address"| A["Address<br/>递归校验"]
     O -->|"字段 items"| I["list[dict]<br/>浅层校验"]
     U --> DONE["整树强类型可用"]
-    style U fill:#f5f0e6
+    class U hl
+    classDef hl stroke-width:1.5px
 ```
 
 ## 序列化往返
