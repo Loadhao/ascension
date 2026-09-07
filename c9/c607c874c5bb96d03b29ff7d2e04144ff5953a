@@ -1,0 +1,19 @@
+src/components/KnowledgeGraph.tsx
+  s_76224e048b54fe::t_2b0c5a1f03b95a 12,31-35,79-87,96-97,100,102-103,106,109-116,118-121,123-130,136-142,145,148,151-154,156-159,161,163,170-171,176,264-266,375
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c9c607c874c5bb96d03b29ff7d2e04144ff5953a",
+  "prompts": {},
+  "sessions": {
+    "s_76224e048b54fe": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "d08b0ac5-49f6-4dab-8c22-c76c4cffa27b",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
