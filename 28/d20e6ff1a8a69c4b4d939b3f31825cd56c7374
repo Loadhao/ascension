@@ -1,0 +1,14 @@
+src/components/KnowledgeGraph.tsx
+  h_9324126a55eff3 317-319,321-323,392-402,404,412-413,423,426-439
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "28d20e6ff1a8a69c4b4d939b3f31825cd56c7374",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
