@@ -1,0 +1,235 @@
+/* ===== 算法动画组件（链表 / 二叉树 / 栈）结构画法样式 =====
+   播放器外壳（.algo-viz-*）与主题令牌（--algo-*）定义在 custom.css，
+   本文件只放三种结构画法自己的绘图区样式。 */
+
+/* ---- 链表 ---- */
+.algo-list-plot {
+  height: 190px;
+}
+
+.algo-list-svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.algo-list-node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  border: 1px solid var(--algo-chip-border);
+  border-radius: 9px;
+  background: var(--algo-bar);
+  color: var(--algo-bar-text);
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+.algo-list-node--locked {
+  border-color: var(--algo-chip-border);
+  background: var(--algo-bar-locked);
+  color: var(--algo-bar-text);
+}
+.algo-list-node--active {
+  border-color: var(--algo-bar-active);
+  background: var(--algo-bar-active);
+  color: var(--algo-bar-text);
+  box-shadow: 0 0 14px var(--algo-bar-active-glow);
+}
+
+.algo-list-edge {
+  fill: none;
+  stroke: var(--algo-chip-border);
+  stroke-width: 1.6;
+}
+.algo-list-edge--back {
+  stroke-dasharray: 5 4;
+}
+.algo-list-edge--result {
+  stroke: var(--algo-bar-active);
+  stroke-width: 2.2;
+}
+.algo-list-arrowhead {
+  fill: var(--algo-chip-border);
+}
+.algo-list-arrowhead--result {
+  fill: var(--algo-bar-active);
+}
+.algo-list-null {
+  fill: var(--algo-chip-text);
+  font-size: 14px;
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+}
+.algo-list-nullmark {
+  position: absolute;
+  bottom: 8px;
+  transform: translateX(-100%);
+  color: var(--algo-chip-text);
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+/* ---- 二叉树 ---- */
+.algo-tree-plot {
+  height: 216px;
+}
+
+.algo-tree-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.algo-tree-edge {
+  stroke: var(--algo-chip-border);
+  stroke-width: 1.4;
+}
+
+.algo-tree-node rect {
+  fill: var(--algo-bar);
+  stroke: var(--algo-chip-border);
+  stroke-width: 1.2;
+  transition:
+    fill 150ms ease,
+    stroke 150ms ease;
+}
+.algo-tree-node text {
+  fill: var(--algo-bar-text);
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.algo-tree-node--visited rect {
+  fill: var(--algo-bar-locked);
+}
+.algo-tree-node--active rect {
+  fill: var(--algo-bar-active);
+  stroke: var(--algo-bar-active);
+}
+.algo-tree-node--active text {
+  fill: var(--algo-bar-text);
+}
+
+.algo-tree-queue {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.algo-tree-queue-label {
+  color: var(--algo-chip-text);
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+.algo-tree-qchip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 7px;
+  border: 1px solid var(--algo-chip-border);
+  border-radius: 7px;
+  background: var(--algo-chip-bg);
+  color: var(--algo-chip-text);
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+  font-size: 11.5px;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+.algo-tree-qchip--head {
+  border-color: var(--algo-bar-active);
+  background: var(--algo-bar-active);
+  color: var(--algo-bar-text);
+  font-weight: 600;
+}
+.algo-tree-queue-empty {
+  color: var(--algo-chip-text);
+  font-size: 11.5px;
+  opacity: 0.8;
+}
+
+/* ---- 栈（1~2 个并列）---- */
+.algo-stack-plot {
+  display: flex;
+  justify-content: space-evenly;
+  height: 210px;
+}
+
+.algo-stack-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 96px;
+}
+
+.algo-stack-name {
+  margin-bottom: 6px;
+  color: var(--algo-chip-text);
+  font-size: 11.5px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* column-reverse：数组序即「底 → 顶」，视觉上第一项沉底、最后一项在顶 */
+.algo-stack-tube {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  gap: 3px;
+  height: 170px;
+  padding: 5px;
+  border: 1px dashed var(--algo-chip-border);
+  border-radius: 10px;
+}
+
+.algo-stack-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  border-radius: 7px;
+  background: var(--algo-bar);
+  color: var(--algo-bar-text);
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+  font-size: 12.5px;
+  font-weight: 600;
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+.algo-stack-item--top {
+  border: 1px solid var(--algo-chip-border);
+}
+.algo-stack-item--active {
+  background: var(--algo-bar-active);
+  box-shadow: 0 0 12px var(--algo-bar-active-glow);
+}
+.algo-stack-empty {
+  align-self: center;
+  color: var(--algo-chip-text);
+  font-size: 11.5px;
+  opacity: 0.8;
+}
+
+.algo-stack-scan {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .algo-list-node,
+  .algo-stack-item,
+  .algo-tree-node rect {
+    transition: none;
+  }
+}

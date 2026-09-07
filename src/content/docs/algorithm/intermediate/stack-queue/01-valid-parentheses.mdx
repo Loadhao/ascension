@@ -1,0 +1,60 @@
+---
+title: 有效的括号
+description: 左括号入栈、右括号弹栈顶配对：栈「最近者优先」性质的教科书演示，三种失败模式各对应一处边界
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+判断括号串是否合法（LeetCode 20）是栈的教科书应用。洞察只有一句：
+**必须先关闭最后打开的括号**——「最近的未匹配左括号最先被配对」，这正是栈「后进先出」的定义。
+扫描到左括号就入栈等着；到右括号就弹栈顶，必须恰好同种。
+
+## 动态演示
+
+演示分两幕：合法串 `{[()]}` 顺利配对，非法串 `{[(])}` 在 `]` 处弹出 `(` 配对失败。
+扫描条高亮当前字符，竖直栈列看得见压入弹出。组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="valid-parentheses" />
+
+## Java 实现
+
+```java
+public boolean isValid(String s) {
+    Deque<Character> stack = new ArrayDeque<>();
+    for (char c : s.toCharArray()) {
+        switch (c) {
+            case '(': case '[': case '{' -> stack.push(c);      // 左括号：入栈等待
+            case ')' -> { if (stack.isEmpty() || stack.pop() != '(') return false; }
+            case ']' -> { if (stack.isEmpty() || stack.pop() != '[') return false; }
+            case '}' -> { if (stack.isEmpty() || stack.pop() != '{') return false; }
+            default  -> { }
+        }
+    }
+    return stack.isEmpty();     // 扫完栈必须恰好为空（失败模式三）
+}
+```
+
+三种失败模式对三处边界：
+
+1. **弹出不匹配**（`]` 弹出 `(`）——`pop() != 对应左括号`；
+2. **栈空还要弹**（右括号多了）——`stack.isEmpty()` 判空在 `pop()` **之前**，否则 `EmptyStackException`；
+3. **扫完栈非空**（左括号多了）——最后的 `return stack.isEmpty()`，写成 `return true` 就漏判。
+
+小技巧：右括号先查空再弹的判断顺序不能合并成 `stack.pop() != xxx` 一行——空栈时直接异常。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间 | O(n) | 每字符至多一次入栈一次出栈 |
+| 空间 | O(n) | 最坏全是左括号，全部压栈 |
+| 信号 | 嵌套 / 最近配对 / 匹配消除 | 见到这些词先想栈 |
+
+## 面试要点
+
+- **「栈消配对」是一整类题的模板**：删除字符串中的所有相邻重复项（LC 1047，`abbaca → ca`）、反括号表达式、消消乐类题，骨架完全相同——「新元素和栈顶能不能抵消」。
+- 进阶追问「最长有效括号」（LC 32，Hard）：栈存**下标**而不是字符， unmatched 的下标之间量出长度——栈里存下标是括号题的通用升级手段。
+- 工程关联：编译器语法检查、编辑器括号高亮、JSON/XML 的标签配对，全是这个算法的真实落地；Jackson 报「未闭合的 JSON」就是这层检查。
+- 用 `ArrayDeque` 而不是 `Stack` 类——`Stack` 继承自 `Vector`、所有方法同步，是 JDK 的历史包袱，官方 Javadoc 都推荐 Deque。

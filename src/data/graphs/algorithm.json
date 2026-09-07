@@ -17,7 +17,15 @@
     { "id": "rotated", "label": "搜索旋转数组", "href": "/algorithm/basic/searching/05-rotated-array-search/", "group": "查找" },
     { "id": "prefix", "label": "前缀和", "href": "/algorithm/basic/techniques/01-prefix-sum/", "group": "数组技巧" },
     { "id": "diff", "label": "差分", "href": "/algorithm/basic/techniques/02-difference-array/", "group": "数组技巧" },
-    { "id": "monotonic", "label": "单调栈", "href": "/algorithm/basic/techniques/03-monotonic-stack/", "group": "数组技巧" }
+    { "id": "monotonic", "label": "单调栈", "href": "/algorithm/basic/techniques/03-monotonic-stack/", "group": "数组技巧" },
+    { "id": "reverse-list", "label": "反转链表", "href": "/algorithm/intermediate/linked-list/01-reverse-list/", "group": "链表" },
+    { "id": "cycle", "label": "环形链表", "href": "/algorithm/intermediate/linked-list/02-cycle-detection/", "group": "链表" },
+    { "id": "merge-lists", "label": "合并有序链表", "href": "/algorithm/intermediate/linked-list/03-merge-lists/", "group": "链表" },
+    { "id": "parentheses", "label": "有效的括号", "href": "/algorithm/intermediate/stack-queue/01-valid-parentheses/", "group": "栈与队列" },
+    { "id": "min-stack", "label": "最小栈", "href": "/algorithm/intermediate/stack-queue/02-min-stack/", "group": "栈与队列" },
+    { "id": "two-stack-queue", "label": "双栈实现队列", "href": "/algorithm/intermediate/stack-queue/03-queue-via-stacks/", "group": "栈与队列" },
+    { "id": "traversal", "label": "二叉树遍历", "href": "/algorithm/intermediate/tree/01-tree-traversal/", "group": "二叉树" },
+    { "id": "bst", "label": "二叉搜索树", "href": "/algorithm/intermediate/tree/02-bst/", "group": "二叉树" }
   ],
   "edges": [
     { "source": "root", "target": "bubble" },
@@ -53,6 +61,20 @@
     { "source": "binary", "target": "rotated", "label": "二分变体：判哪半有序" },
     { "source": "prefix", "target": "diff", "label": "互为逆运算" },
     { "source": "sliding-window", "target": "prefix", "label": "窗口和也可用前缀差" },
-    { "source": "two-pointers", "target": "monotonic", "label": "指针配对 → 栈内等待" }
+    { "source": "two-pointers", "target": "monotonic", "label": "指针配对 → 栈内等待" },
+    { "source": "root", "target": "reverse-list" },
+    { "source": "root", "target": "cycle" },
+    { "source": "root", "target": "merge-lists" },
+    { "source": "root", "target": "parentheses" },
+    { "source": "root", "target": "min-stack" },
+    { "source": "root", "target": "two-stack-queue" },
+    { "source": "root", "target": "traversal" },
+    { "source": "root", "target": "bst" },
+    { "source": "two-pointers", "target": "cycle", "label": "快慢指针家族" },
+    { "source": "merge", "target": "merge-lists", "label": "归并的链表形态：免辅助数组" },
+    { "source": "monotonic", "target": "parentheses", "label": "同是「栈」家族" },
+    { "source": "binary", "target": "bst", "label": "有序数组 vs 有序树" },
+    { "source": "traversal", "target": "bst", "label": "中序 = 升序" },
+    { "source": "two-stack-queue", "target": "traversal", "label": "队列驱动层序遍历" }
   ]
 }

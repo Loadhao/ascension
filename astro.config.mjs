@@ -102,7 +102,7 @@ export default defineConfig({
       social: [
         { label: 'GitHub', href: 'https://github.com/Loadhao/ascension', icon: 'github' },
       ],
-      customCss: ['./src/styles/custom.css'],
+      customCss: ['./src/styles/custom.css', './src/styles/viz-structures.css'],
       components: {
         // 笔记页页脚自动注入学习状态标记（ProgressMark）
         Footer: './src/components/starlight/Footer.astro',
@@ -1074,6 +1074,41 @@ export default defineConfig({
                         { label: '前缀和', link: '/algorithm/basic/techniques/01-prefix-sum/' },
                         { label: '差分', link: '/algorithm/basic/techniques/02-difference-array/' },
                         { label: '单调栈', link: '/algorithm/basic/techniques/03-monotonic-stack/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '链表',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/algorithm/intermediate/linked-list/' },
+                        { label: '反转链表', link: '/algorithm/intermediate/linked-list/01-reverse-list/' },
+                        { label: '环形链表与快慢指针', link: '/algorithm/intermediate/linked-list/02-cycle-detection/' },
+                        { label: '合并有序链表', link: '/algorithm/intermediate/linked-list/03-merge-lists/' },
+                      ],
+                    },
+                    {
+                      label: '栈与队列',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/algorithm/intermediate/stack-queue/' },
+                        { label: '有效的括号', link: '/algorithm/intermediate/stack-queue/01-valid-parentheses/' },
+                        { label: '最小栈', link: '/algorithm/intermediate/stack-queue/02-min-stack/' },
+                        { label: '双栈实现队列', link: '/algorithm/intermediate/stack-queue/03-queue-via-stacks/' },
+                      ],
+                    },
+                    {
+                      label: '二叉树',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/algorithm/intermediate/tree/' },
+                        { label: '二叉树遍历', link: '/algorithm/intermediate/tree/01-tree-traversal/' },
+                        { label: '二叉搜索树', link: '/algorithm/intermediate/tree/02-bst/' },
                       ],
                     },
                   ],

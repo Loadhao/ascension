@@ -1,0 +1,82 @@
+---
+title: 二叉树遍历
+description: 前中后序只差「访问根的时机」，层序靠队列分层：一棵树连播四种顺序，递归栈与队列双视角
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+二叉树所有遍历的递归框架只有一个：
+
+```java
+void traverse(TreeNode root) {
+    if (root == null) return;
+    // 位置 1：前序
+    traverse(root.left);
+    // 位置 2：中序
+    traverse(root.right);
+    // 位置 3：后序
+}
+```
+
+**前序 / 中序 / 后序的差别只是「访问根节点」放在位置 1 / 2 / 3**，走树的路完全相同（沿左链扎到底再回溯）。
+层序则是另一族——广度优先，靠队列一层层推进。同一棵树连播四种顺序，差别一眼看穿。
+
+## 动态演示
+
+同一棵 7 节点树依次播放前序、中序、后序（橙色 = 当前访问，灰色 = 已访问），
+最后层序登场并展示队列条的进出。组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="tree-traversal" />
+
+## Java 实现
+
+```java
+// 深度优先：递归三件套，只是「做事」的位置不同
+public void preorder(TreeNode root, List<Integer> out) {
+    if (root == null) return;
+    out.add(root.val);                 // 位置 1
+    preorder(root.left, out);
+    preorder(root.right, out);
+}
+
+// 层序：队列逐层进出
+public List<List<Integer>> levelOrder(TreeNode root) {
+    List<List<Integer>> res = new ArrayList<>();
+    if (root == null) return res;
+    Queue<TreeNode> queue = new ArrayDeque<>();
+    queue.offer(root);
+    while (!queue.isEmpty()) {
+        int size = queue.size();               // 先锁住本层人数
+        List<Integer> level = new ArrayList<>();
+        for (int i = 0; i < size; i++) {       // 恰好处理一层
+            TreeNode node = queue.poll();
+            level.add(node.val);
+            if (node.left != null) queue.offer(node.left);
+            if (node.right != null) queue.offer(node.right);
+        }
+        res.add(level);
+    }
+    return res;
+}
+```
+
+层序的**分层技巧**是 `int size = queue.size()` 先存下来：队列在循环里进出，不锁定就会「边处理本层边混入下一层」。
+
+前中后序的**非递归版**用显式栈（中序：一路压左、弹出访问、转右；后序：前序变形「根右左」再整体反转），
+面试常追问「不用递归写中序」，务必练到能默写。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间 | O(n) | 每个节点进出各一次 |
+| 空间 | O(h) 递归栈 / 层序 O(w) | h 树高（最坏链状 O(n)）；w 最宽层的节点数 |
+
+## 面试要点
+
+- **「前序 + 中序重建二叉树」**（LC 105）：前序第一个是根，中序里根把左右子树切开，递归下去——理解了两种顺序各自「根在哪」，这题就是水到渠成。
+- **「访问时机」决定一切的应用**：前序适合「自顶向下」（序列化、复制树），后序适合「自底向上」（求高度、算子树信息——左右答案都有了才轮到我），中序专属 BST（升序序列）。
+- 层序是「图 BFS 在树上的特例」：BFS 求无权最短路、按层处理（如最小深度 LC 111）都用同一个队列框架，树题练熟直接迁移到图。
+- 手写坑：层序忘锁 `size` 导致分层失败；递归忘写空判直接空指针；「迭代中序」压左循环和转右的顺序写反。

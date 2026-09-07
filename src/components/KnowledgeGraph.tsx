@@ -11,6 +11,10 @@ export interface GraphNode {
   group?: string;
   /** 0–1 归一化权重，映射节点内边距与字号（内容量越多节点越大）；缺省 0 */
   weight?: number;
+  /** 复合容器节点（方向）：以色块容器呈现，子节点收纳其中 */
+  role?: 'direction';
+  /** 复合父节点 id，声明后本节点成为其容器内的子节点 */
+  parent?: string;
 }
 
 export interface GraphEdge {
@@ -146,6 +150,35 @@ function buildStyles(dark: boolean): cytoscape.Stylesheet[] {
       },
     },
     {
+      // 方向容器（复合父节点）：分类收纳其中，容器边距随内容量增长
+      selector: "node[role = 'direction']",
+      style: {
+        'background-color': dark ? '#121212' : '#fafafa',
+        'border-color': (ele: cytoscape.SingularElementArgument) =>
+          groupTint(ele.data('group'), dark, dark ? 0.7 : 0.55),
+        'border-width': 2,
+        'corner-radius': 16,
+        color: strong,
+        'font-size': 14,
+        'font-weight': 700,
+        'text-valign': 'top',
+        'text-halign': 'center',
+        'text-margin-y': 12,
+        padding: (ele: cytoscape.SingularElementArgument) =>
+          `${Math.round(30 + 14 * weightOf(ele))}px`,
+      },
+    },
+    {
+      // 容器高亮只提亮描边，不用整块实色填充
+      selector: "node[role = 'direction'].hl",
+      style: {
+        'background-color': dark ? '#121212' : '#fafafa',
+        'border-color': (ele: cytoscape.SingularElementArgument) =>
+          colorForGroup(ele.data('group')),
+        color: strong,
+      },
+    },
+    {
       selector: 'node.hl',
       style: {
         'background-color': (ele: cytoscape.SingularElementArgument) =>
@@ -249,11 +282,14 @@ export default function KnowledgeGraph({
   data,
   height,
   groupCounts,
+  legendLayout = 'overlay',
 }: {
   data: GraphData;
   height?: number;
   /** 覆盖图例计数的展示口径（如全景图显示知识点数而非节点数）；缺省用分组节点数 */
   groupCounts?: Record<string, number>;
+  /** overlay = 悬浮在画布上（默认，适合少分组）；bar = 画布上方控制条（分组多时不遮节点） */
+  legendLayout?: 'overlay' | 'bar';
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
@@ -275,6 +311,9 @@ export default function KnowledgeGraph({
     const reducedMotion = window.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
     ).matches;
+    // 复合容器图（全景）无跨区连线，收紧间距让容器更紧凑
+    const hasCompound = data.nodes.some((node) => node.parent);
+    const separation = hasCompound ? 110 : 220;
 
     const cy = cytoscape({
       container,
@@ -286,6 +325,8 @@ export default function KnowledgeGraph({
             href: node.href ? withBase(node.href) : undefined,
             group: node.group,
             weight: node.weight,
+            role: node.role,
+            parent: node.parent,
           },
         })),
         ...data.edges.map((edge) => ({
@@ -306,8 +347,8 @@ export default function KnowledgeGraph({
         animate: !reducedMotion,
         animationDuration: 500,
         padding: FIT_PADDING,
-        nodeSeparation: 220,
-        idealEdgeLength: 220,
+        nodeSeparation: separation,
+        idealEdgeLength: separation,
         randomize: true,
         // 节点尺寸来自 label，布局需把标签算进去否则节点互相叠压
         nodeDimensionsIncludeLabels: true,
@@ -411,68 +452,84 @@ export default function KnowledgeGraph({
     });
   };
 
+  const toolbar = (
+    <div className="kg-toolbar" role="group" aria-label="图谱视图控制">
+      <button
+        type="button"
+        className="kg-btn"
+        title="放大"
+        aria-label="放大"
+        onClick={() => zoomBy(1.35)}
+      >
+        {ICON_ZOOM_IN}
+      </button>
+      <button
+        type="button"
+        className="kg-btn"
+        title="缩小"
+        aria-label="缩小"
+        onClick={() => zoomBy(1 / 1.35)}
+      >
+        {ICON_ZOOM_OUT}
+      </button>
+      <button
+        type="button"
+        className="kg-btn"
+        title="复位视图"
+        aria-label="复位视图"
+        onClick={() => cyRef.current?.fit(undefined, FIT_PADDING)}
+      >
+        {ICON_FIT}
+      </button>
+    </div>
+  );
+
+  const legend =
+    groups.length > 0 ? (
+      <div className="kg-legend" role="group" aria-label="分组图例（点按筛选）">
+        {groups.map(([group, count]) => {
+          const color = colorForGroup(group);
+          const active = activeGroup === group;
+          return (
+            <button
+              key={group}
+              type="button"
+              className="kg-chip"
+              aria-pressed={active}
+              style={
+                active
+                  ? {
+                      backgroundColor: color,
+                      borderColor: color,
+                      color: contrastText(hexToRgb(color)),
+                    }
+                  : undefined
+              }
+              onClick={() => setActiveGroup(active ? null : group)}
+            >
+              {!active && <span className="kg-dot" style={{ backgroundColor: color }} />}
+              <span>{group}</span>
+              <span className="kg-count">{groupCounts?.[group] ?? count}</span>
+            </button>
+          );
+        })}
+      </div>
+    ) : null;
+
   return (
     <div className="knowledge-graph" style={{ width: '100%', height: boxHeight }}>
-      <div ref={containerRef} className="kg-canvas" />
-      <div className="kg-toolbar" role="group" aria-label="图谱视图控制">
-        <button
-          type="button"
-          className="kg-btn"
-          title="放大"
-          aria-label="放大"
-          onClick={() => zoomBy(1.35)}
-        >
-          {ICON_ZOOM_IN}
-        </button>
-        <button
-          type="button"
-          className="kg-btn"
-          title="缩小"
-          aria-label="缩小"
-          onClick={() => zoomBy(1 / 1.35)}
-        >
-          {ICON_ZOOM_OUT}
-        </button>
-        <button
-          type="button"
-          className="kg-btn"
-          title="复位视图"
-          aria-label="复位视图"
-          onClick={() => cyRef.current?.fit(undefined, FIT_PADDING)}
-        >
-          {ICON_FIT}
-        </button>
-      </div>
-      {groups.length > 0 && (
-        <div className="kg-legend" role="group" aria-label="分组图例（点按筛选）">
-          {groups.map(([group, count]) => {
-            const color = colorForGroup(group);
-            const active = activeGroup === group;
-            return (
-              <button
-                key={group}
-                type="button"
-                className="kg-chip"
-                aria-pressed={active}
-                style={
-                  active
-                    ? {
-                        backgroundColor: color,
-                        borderColor: color,
-                        color: contrastText(hexToRgb(color)),
-                      }
-                    : undefined
-                }
-                onClick={() => setActiveGroup(active ? null : group)}
-              >
-                {!active && <span className="kg-dot" style={{ backgroundColor: color }} />}
-                <span>{group}</span>
-                <span className="kg-count">{groupCounts?.[group] ?? count}</span>
-              </button>
-            );
-          })}
+      {legendLayout === 'bar' ? (
+        <div className="kg-bar">
+          {legend}
+          {toolbar}
         </div>
+      ) : (
+        <>
+          {toolbar}
+          {legend}
+        </>
       )}
+      <div ref={containerRef} className="kg-canvas" />
     </div>
   );
 }

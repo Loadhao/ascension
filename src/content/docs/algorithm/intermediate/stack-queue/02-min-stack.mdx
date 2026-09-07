@@ -1,0 +1,76 @@
+---
+title: 最小栈
+description: 主栈旁并排一个最小栈同步压入当前最小值：push/pop/getMin 全 O(1) 的空间换时间经典
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+设计一个栈，`push`、`pop`、`getMin` 都要 O(1)（LeetCode 155）。
+普通栈 push/pop 本来就是 O(1)，难点只在 getMin——从头扫是 O(n)，排序更不可能。
+经典解法是**空间换时间**：旁边再开一个「最小栈」，与主栈完全同步，
+每次 push 时把「当前最小值」也压进去，最小值永远躺在最小栈顶端。
+
+## 动态演示
+
+左列是主栈，右列是最小栈，两列同步涨落。注意 push 4 时最小栈压的不是 4 而是 2——
+「压入 min(新值, 当前最小栈顶)」。组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="min-stack" />
+
+## Java 实现
+
+```java
+class MinStack {
+    private final Deque<Long> stack = new ArrayDeque<>();   // 存差值，见下方变体
+    private long min;
+
+    public void push(int val) {
+        if (stack.isEmpty()) {
+            stack.push(0L);            // 差值 0，min = val
+            min = val;
+        } else {
+            stack.push((long) val - min);   // 存「与当前最小值的差」
+            if (val < min) min = val;       // 差值为负：新最小值出现
+        }
+    }
+
+    public void pop() {
+        long diff = stack.pop();
+        if (diff < 0) min -= diff;     // 差值是负说明弹掉的是最小值，回滚上一个最小
+    }
+
+    public int top() {
+        long diff = stack.peek();
+        return diff >= 0 ? (int) (min + diff) : (int) min;   // 负差值时它自己就是 min
+    }
+
+    public int getMin() {
+        return (int) min;
+    }
+}
+```
+
+演示里展示的是**双栈版**（更直观），代码给的是**差值版**（单栈 O(1) 空间，面试加分项）。
+双栈版的骨架更简单：
+
+```java
+// 双栈版核心：与主栈同步压入 min(新值, 最小栈顶)，pop 时同弹
+minStack.push(minStack.isEmpty() || val <= minStack.peek() ? val : minStack.peek());
+```
+
+## 复杂度与特点
+
+| 维度 | 双栈版 | 差值版 |
+| --- | --- | --- |
+| 时间 | 三操作全 O(1) | 三操作全 O(1) |
+| 空间 | O(n) 额外一整列 | O(1) 额外（差值混存在主栈里） |
+| 易读性 | 直观，推荐先写 | 巧妙但要解释差值含义 |
+
+## 面试要点
+
+- **「辅助结构记录额外信息」是通用套路**：最小栈记录「到当前深度为止的最小值」，和前缀和记录「到当前位置为止的累加」是同一个思想——把查询需要的历史提前存下来。
+- 差值版的三个易错点：`val < min` 时才更新 min（差值为负的判断）；pop 回滚 `min -= diff`；差值用 `long` 存防止 `val - min` 溢出 int。
+- 延伸题「滑动窗口最大值」（LC 239）：窗口版的最值问题，单调队列登场——最小栈管「栈内」最值，单调队列管「窗口内」最值，一对兄弟结构。
+- 追问「pop 之后最小值怎么知道」就是考你最小栈为什么同步弹——第二小的信息在它下面那格里，从入栈那天就备好了。

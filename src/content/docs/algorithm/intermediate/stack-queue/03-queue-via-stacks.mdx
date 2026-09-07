@@ -1,0 +1,70 @@
+---
+title: 双栈实现队列
+description: 入队压 in 栈、出队时 out 栈空才整体倒栈：负负得正，均摊 O(1) 的结构设计入门题
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+用两个栈实现队列（LeetCode 232）。栈是后进先出、队列要先进先出，两个栈串联恰好**负负得正**：
+入队一律压进 in 栈；出队时若 out 栈为空，先把 in 栈整体弹出压入 out 栈（顺序反转一次），再从 out 栈弹出——
+最早入队的元素恰好翻到了 out 栈顶。
+
+## 动态演示
+
+左列是 in 栈、右列是 out 栈。看整体倒栈的那一段：1、2、3 依次翻过去后，1 到了 out 栈顶——
+先进先出达成。组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="queue-via-stacks" />
+
+## Java 实现
+
+```java
+class MyQueue {
+    private final Deque<Integer> in = new ArrayDeque<>();    // 只负责入队
+    private final Deque<Integer> out = new ArrayDeque<>();   // 只负责出队
+
+    public void push(int x) {
+        in.push(x);                       // 入队：永远直接压 in 栈
+    }
+
+    public int pop() {
+        peek();                           // 复用：保证 out 栈有货
+        return out.pop();
+    }
+
+    public int peek() {
+        if (out.isEmpty()) {
+            while (!in.isEmpty())         // 关键：out 栈空才倒，且一次倒完
+                out.push(in.pop());
+        }
+        return out.peek();
+    }
+
+    public boolean empty() {
+        return in.isEmpty() && out.isEmpty();
+    }
+}
+```
+
+**「out 栈空才倒」是正确性与效率的共同关键**：out 栈还有货就倒，会把新元素压在旧元素下面，顺序立刻错乱；
+而只在空时倒一次，每个元素一生恰好「进 in、出 in、进 out、出 out」各一次。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 单次操作 | 最坏 O(n) | 倒栈那一次 pop 要搬空整个 in 栈 |
+| 均摊 | **O(1)** | n 个元素总搬运次数 ≤ 2n，摊到每次操作上是常数 |
+| 空间 | O(n) | 两栈合计 |
+
+**均摊分析**是本题的隐藏考点：不能说「pop 是 O(n) 所以队列慢」——每个元素至多被搬运一次，
+把代价摊到它的入队/出队上，单次均摊 O(1)。
+
+## 面试要点
+
+- 对称问题「两个队列实现栈」也常连带问：一个队列存主力，pop 时把前 n-1 个转去另一个队列、最后一个就是栈顶——没有均摊魔法，每次 pop 都是 O(n)，两题对比恰好说明均摊的珍贵。
+- 这个结构不是玩具：当队列需要「倒序处理一批再正序处理」时天然出现；某些消息缓冲、撤销/重做栈（两个栈互倒）就是它的变体。
+- 手写坑：`peek` 与 `pop` 共用倒栈逻辑（上面代码让 pop 调 peek）；`empty` 要同时看两栈；倒栈条件是 `out.isEmpty()` 而不是 `in.isEmpty()`。
+- 追问「为什么不用一个栈 + 反转」——反转本身就是 O(n) 且破坏均摊结构，两个栈各司其职才是正解。

@@ -1,9 +1,10 @@
 ---
-import KnowledgeGraph, { type GraphData, type GraphEdge, type GraphNode } from './KnowledgeGraph';
+import KnowledgeGraph, { type GraphData, type GraphNode } from './KnowledgeGraph';
 import { getSiteData } from '../lib/notes';
 
-// 全局知识图谱：方向（大节点）→ 分类（小节点）两级聚合，节点大小随内容量。
-// 方向按知识点数降序输出，图例即「内容量排行」。
+// 全局知识全景：方向 = 复合容器节点（色块区块），分类 = 容器内子节点，
+// 包含关系取代连线，容器边距随内容量增长。方向按知识点数降序输出，
+// 图例即「内容量排行」。
 const site = await getSiteData();
 
 const directionStats = site.directions
@@ -28,15 +29,15 @@ const maxCatCount = Math.max(
 );
 
 const nodes: GraphNode[] = [];
-const edges: GraphEdge[] = [];
 const groupCounts: Record<string, number> = {};
 
 for (const { direction, count } of directionStats) {
   nodes.push({
     id: direction.id,
-    label: direction.title,
+    label: `${direction.title} · ${count}`,
     href: direction.href,
     group: direction.title,
+    role: 'direction',
     // sqrt 压缩数量差异，避免头部方向过分放大
     weight: Math.sqrt(count / maxDirCount),
   });
@@ -48,15 +49,21 @@ for (const { direction, count } of directionStats) {
         label: category.title,
         href: category.href,
         group: direction.title,
+        parent: direction.id,
         // 分类整体压在方向之下，保持两级视觉层次
         weight: 0.15 + 0.5 * Math.sqrt(category.notes.length / maxCatCount),
       });
-      edges.push({ source: direction.id, target: category.id, label: level.label });
     }
   }
 }
 
-const graph: GraphData = { nodes, edges };
+const graph: GraphData = { nodes, edges: [] };
 ---
 
-<KnowledgeGraph client:visible data={graph} height={860} groupCounts={groupCounts} />
+<KnowledgeGraph
+  client:visible
+  data={graph}
+  height={880}
+  groupCounts={groupCounts}
+  legendLayout="bar"
+/>

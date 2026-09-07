@@ -1,0 +1,66 @@
+---
+title: 反转链表
+description: prev/curr/next 三指针迭代反转：先记 next 再调头，O(n) 时间 O(1) 空间的链表第一题
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+反转单链表（LeetCode 206）是链表题的「Hello World」，也是三指针配合的最小完整样本。
+迭代法只要记住一个口诀：**「先记后改」——改指向之前，一定先把 `curr.next` 存下来**，
+否则一调头，后半条链就断了。
+
+## 动态演示
+
+节点位置固定、箭头随 `next` 一根根调头（下方虚线弧是指向左边的反向边）。
+`prev` 初始为 null（左侧 NULL 桩），最后 `prev` 就是新链表的头。组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="reverse-list" />
+
+## Java 实现
+
+```java
+public ListNode reverseList(ListNode head) {
+    ListNode prev = null;
+    ListNode curr = head;
+    while (curr != null) {
+        ListNode next = curr.next;   // 1. 先记：保存后继，防止断链
+        curr.next = prev;            // 2. 调头：当前节点指向前驱
+        prev = curr;                 // 3. 前驱跟进
+        curr = next;                 // 4. 当前指针右移
+    }
+    return prev;                     // curr 为 null 时 prev 恰是新头
+}
+```
+
+四行的顺序不能乱：`next` 必须在调头**之前**取，`prev/curr` 必须在调头**之后**才前进。
+
+递归版也常被要求手写，思路是「反转我之后的部分，再把我接到尾部」：
+
+```java
+public ListNode reverseListRec(ListNode head) {
+    if (head == null || head.next == null) return head;  // 空表/单节点：自己就是答案
+    ListNode newHead = reverseListRec(head.next);        // 反转后面的部分
+    head.next.next = head;                               // 让后继反过来指我
+    head.next = null;                                    // 我变成尾
+    return newHead;
+}
+```
+
+递归版简洁但有 O(n) 栈开销，工程上首选迭代版。
+
+## 复杂度与特点
+
+| 维度 | 迭代版 | 递归版 |
+| --- | --- | --- |
+| 时间 | O(n) | O(n) |
+| 空间 | **O(1)** | O(n) 递归栈 |
+| 风险 | 四行顺序写错 | 超长链爆栈 |
+
+## 面试要点
+
+- **「反转前 N 个 / 反转区间 [m, n] / K 个一组反转」全是本题的Extension**：把「反转一个节点」抽成小函数，区间版在头部接一个 dummy 节点统一边界，K 组版递归拼接——先把这题的四行写熟，后面全是组装。
+- dummy（哨兵）节点是链表题第一生产力：头节点可能变化时（反转、删除头），`dummy.next = head` 让「删头」和「删中间」变成同一套代码，最后返回 `dummy.next`。
+- 自测用例至少三个：空链表、单节点、两节点——递归边界和迭代终止条件最容易在这三处翻车。
+- 断链事故的标准画像：先改了 `curr.next` 再想取 `curr.next`——取到的是已经调头后的值，链表从这里开始丢失后半段。

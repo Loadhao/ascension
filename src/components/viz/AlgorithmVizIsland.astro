@@ -1,9 +1,20 @@
 ---
 import AlgorithmViz from './AlgorithmViz';
+import ListViz from './ListViz';
+import TreeViz from './TreeViz';
+import StackViz from './StackViz';
 import { vizDemos } from '../../data/viz';
+import { listDemos, stackDemos, treeDemos } from '../../data/viz/structures';
 
 const { demo } = Astro.props as { demo: string };
-const config = vizDemos[demo];
+// 按注册表分发到对应画法；旧柱状数组演示的 props 保持不变
+const bars = vizDemos[demo];
+const list = listDemos[demo];
+const tree = treeDemos[demo];
+const stack = stackDemos[demo];
 ---
 
-{config && <AlgorithmViz client:visible {...config} />}
+{bars && <AlgorithmViz client:visible {...bars} />}
+{list && <ListViz client:visible {...list} />}
+{tree && <TreeViz client:visible {...tree} />}
+{stack && <StackViz client:visible {...stack} />}
