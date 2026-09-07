@@ -254,6 +254,7 @@ export default defineConfig({
                         { label: '泛型与类型擦除', link: '/java/basic/syntax/04-generics/' },
                         { label: 'Java 异常体系', link: '/java/basic/syntax/05-exception/' },
                         { label: '反射与注解', link: '/java/basic/syntax/06-reflection-annotation/' },
+                        { label: '位运算与原码、反码、补码', link: '/java/basic/syntax/07-bit-operations/' },
                       ],
                     },
                     {
@@ -282,6 +283,14 @@ export default defineConfig({
                   label: '中级',
                   collapsed: true,
                   items: [
+                    {
+                      label: 'Stream 与函数式',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/java/intermediate/stream/' },
+                        { label: 'Stream 原理与并行流', link: '/java/intermediate/stream/01-stream-principle/' },
+                      ],
+                    },
                     {
                       label: '并发编程',
                       collapsed: false,
