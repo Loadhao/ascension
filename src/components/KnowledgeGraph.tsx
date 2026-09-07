@@ -26,7 +26,7 @@ export interface GraphData {
 
 const MIN_ZOOM = 0.15;
 const MAX_ZOOM = 2.5;
-const FIT_PADDING = 48;
+const FIT_PADDING = 32;
 
 /** 圆点直径：缺省 10px，权重 1 时再加 34px */
 const DOT_MIN = 10;
@@ -233,15 +233,20 @@ export default function KnowledgeGraph({
   height,
   groupCounts,
   legendLayout = 'overlay',
+  fullBleed = false,
 }: {
   data: GraphData;
-  height?: number;
+  /** 容器高度：数字（px）或任意 CSS 高度（如 calc(100vh - 260px)） */
+  height?: number | string;
   /** 覆盖图例计数的展示口径（如全景图显示知识点数而非节点数）；缺省用分组节点数 */
   groupCounts?: Record<string, number>;
   /** overlay = 悬浮在画布上（默认，适合少分组）；bar = 画布上方控制条（分组多时不遮节点） */
   legendLayout?: 'overlay' | 'bar';
+  /** 全宽展示：容器左右边缘推到视口两侧（Starlight 侧栏布局下按实际偏移计算） */
+  fullBleed?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   const boxHeight = height ?? autoHeight(data.nodes.length);
@@ -261,9 +266,9 @@ export default function KnowledgeGraph({
     const reducedMotion = window.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
     ).matches;
-    // 全景（方向→分类树）收紧间距，方向内聚；各方向知识图谱保持舒展
+    // 全景（方向→分类树）收紧间距让首屏更大，各方向知识图谱保持舒展
     const isTree = data.edges.length > 0 && data.nodes.length > 40;
-    const separation = isTree ? 130 : 220;
+    const separation = isTree ? 80 : 220;
 
     // 不在构造器里自动跑布局：animate:false 时布局同步完成，layoutstop
     // 会先于监听器挂载发出，导致 layoutRunning 永远为 true。先建实例、
@@ -288,7 +293,7 @@ export default function KnowledgeGraph({
           },
         })),
       ],
-      wheelSensitivity: 0.25,
+      wheelSensitivity: 0.35,
       minZoom: MIN_ZOOM,
       maxZoom: MAX_ZOOM,
       style: buildStyles(isDarkTheme()),
@@ -390,7 +395,30 @@ export default function KnowledgeGraph({
     };
   }, [data]);
 
-  // 图例点选：按分组过滤节点（隐藏节点的边自动消失），并回到全图视野
+    // 全宽：左缘保持正文自然位置（不会压在 fixed 左侧栏下），右缘顶到
+    // 视口右边界（main 有 max-width 居中限制，不能以它为界）。
+    // 宽度取 clientWidth 差值，天然不含滚动条，不会产生横向滚动。
+    useEffect(() => {
+      if (!fullBleed) return;
+      const card = cardRef.current;
+      if (!card) return;
+      const stretch = () => {
+        card.style.marginLeft = '';
+        card.style.width = '';
+        const naturalLeft = Math.round(card.getBoundingClientRect().left);
+        card.style.marginLeft = '0';
+        card.style.width = `${document.documentElement.clientWidth - naturalLeft}px`;
+      };
+      stretch();
+      window.addEventListener('resize', stretch);
+      return () => {
+        window.removeEventListener('resize', stretch);
+        card.style.marginLeft = '';
+        card.style.width = '';
+      };
+    }, [fullBleed]);
+
+    // 图例点选：按分组过滤节点（隐藏节点的边自动消失），并回到全图视野
   useEffect(() => {
     const cy = cyRef.current;
     if (!cy) return;
@@ -449,7 +477,11 @@ export default function KnowledgeGraph({
 
   const legend =
     groups.length > 0 ? (
-      <div className="kg-legend" role="group" aria-label="分组图例（点按筛选）">
+      <div
+        className={`kg-legend${legendLayout === 'bar' ? ' kg-legend--footer' : ''}`}
+        role="group"
+        aria-label="分组图例（点按筛选）"
+      >
         {groups.map(([group, count]) => {
           const color = colorForGroup(group);
           const active = activeGroup === group;
@@ -480,19 +512,24 @@ export default function KnowledgeGraph({
     ) : null;
 
   return (
-    <div className="knowledge-graph" style={{ width: '100%', height: boxHeight }}>
+    <div
+      ref={cardRef}
+      className={`knowledge-graph${fullBleed ? ' kg-fullbleed' : ''}`}
+      style={{ width: '100%', height: boxHeight }}
+    >
       {legendLayout === 'bar' ? (
-        <div className="kg-bar">
-          {legend}
+        <>
           {toolbar}
-        </div>
+          <div ref={containerRef} className="kg-canvas" />
+          {legend}
+        </>
       ) : (
         <>
           {toolbar}
           {legend}
+          <div ref={containerRef} className="kg-canvas" />
         </>
       )}
-      <div ref={containerRef} className="kg-canvas" />
     </div>
   );
 }

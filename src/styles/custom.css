@@ -14,31 +14,19 @@
   min-height: 0;
   width: 100%;
 }
-/* bar 布局：图例与工具栏作为画布上方控制条（分组多时不遮节点） */
-.kg-bar {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  padding: 10px 12px 8px;
-  border-bottom: 1px solid color-mix(in srgb, var(--sl-color-gray-5) 55%, transparent);
+/* 全宽态：占满视口宽，去掉卡片圆角与侧边框 */
+.knowledge-graph {
+  min-height: 420px;
 }
-.kg-bar .kg-legend {
-  position: static;
-  flex: 1;
-  min-width: 0;
-  max-width: none;
-  max-height: 78px;
-  overflow-y: auto;
-  backdrop-filter: none;
+.kg-fullbleed {
+  border-radius: 0;
+  border-inline: none;
 }
-.kg-bar .kg-chip {
-  background: none;
-  backdrop-filter: none;
+/* 图谱全宽页：收起整个右侧栏（含 On this page），正文占满剩余宽度 */
+.lg\:sl-flex:has(.kg-fullbleed) aside.right-sidebar-container {
+  display: none;
 }
-.kg-bar .kg-toolbar {
-  position: static;
-  flex: none;
-}
+/* bar 布局：操作按钮悬浮画布右上，分组统计作为底部条全部展开（不滚动） */
 .kg-toolbar {
   position: absolute;
   top: 10px;
@@ -46,6 +34,11 @@
   z-index: 5;
   display: flex;
   gap: 6px;
+}
+/* Starlight 正文会给「非首个兄弟元素」注入 margin-block-start，
+   导致工具栏按钮错位、统计 chips 行距虚高，这里统一归零 */
+.knowledge-graph :is(.kg-btn, .kg-chip) {
+  margin: 0;
 }
 .kg-btn {
   display: inline-flex;
@@ -119,6 +112,21 @@
   .kg-legend {
     max-width: calc(100% - 20px);
   }
+}
+/* bar 布局：操作按钮悬浮画布右上，分组统计作为底部条全部展开（不滚动）。
+   必须位于基础 .kg-legend 规则之后才能覆盖其定位与宽度限制 */
+.kg-legend--footer {
+  position: static;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  padding: 10px 16px 12px;
+  border-top: 1px solid color-mix(in srgb, var(--sl-color-gray-5) 55%, transparent);
+  backdrop-filter: none;
+}
+.kg-legend--footer .kg-chip {
+  background: none;
+  backdrop-filter: none;
 }
 
 /* ===== 黑白主题令牌（site-redesign spec 第 4 节） =====
