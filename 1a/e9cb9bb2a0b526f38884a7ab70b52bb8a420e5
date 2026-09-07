@@ -1,0 +1,22 @@
+src/components/GlobalGraphIsland.astro
+  h_9324126a55eff3 9-10,13,76
+src/components/KnowledgeGraph.tsx
+  h_9324126a55eff3 29,236,239-240,245-246,249,269,271,296,398-421,480-484,515-519,521,523-525,530
+src/content/docs/index.mdx
+  h_9324126a55eff3 3-4,15
+src/content/docs/panorama/index.mdx
+  h_9324126a55eff3 13
+src/styles/custom.css
+  h_9324126a55eff3 17-19,21-23,25-27,29,38-42,116-130
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "1ae9cb9bb2a0b526f38884a7ab70b52bb8a420e5",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
