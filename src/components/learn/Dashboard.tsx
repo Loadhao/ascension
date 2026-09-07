@@ -163,13 +163,6 @@ export default function Dashboard({ data }: { data: NavSiteData }) {
           </a>
         </div>
       ) : null}
-
-      {/* ③ 全站图谱入口 */}
-      <p className="learn-panorama-link">
-        想纵览全站？
-        <a href={withBase('/panorama/')}>知识全景</a>
-        按内容量展示所有方向与分类。
-      </p>
     </div>
   );
 }

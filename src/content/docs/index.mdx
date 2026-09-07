@@ -1,8 +1,19 @@
 ---
 title: 今天学点什么
-description: 学习仪表盘：继续上次学习、各方向进度与下一步推荐
+description: 知识全景图谱与学习仪表盘：探索全站知识点、继续上次学习、获取下一步推荐
 ---
 
+import GlobalGraphIsland from '../../components/GlobalGraphIsland.astro';
 import DashboardIsland from '../../components/learn/DashboardIsland.astro';
+
+## 知识全景
+
+全站知识以方向为簇聚合成一张图谱：圆点越大代表收录的知识点越多，颜色区分方向，
+细线连接方向与其分类。自由拖拽、滚轮缩放；悬停圆点高亮关联关系，点按圆点直达
+对应方向或分类。
+
+<GlobalGraphIsland height={720} />
+
+## 学习进度
 
 <DashboardIsland />

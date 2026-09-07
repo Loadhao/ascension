@@ -9,12 +9,8 @@ export interface GraphNode {
   label: string;
   href?: string;
   group?: string;
-  /** 0–1 归一化权重，映射节点内边距与字号（内容量越多节点越大）；缺省 0 */
+  /** 0–1 归一化权重，映射圆点大小（内容量越多节点越大）；缺省为最小圆点 */
   weight?: number;
-  /** 复合容器节点（方向）：以色块容器呈现，子节点收纳其中 */
-  role?: 'direction';
-  /** 复合父节点 id，声明后本节点成为其容器内的子节点 */
-  parent?: string;
 }
 
 export interface GraphEdge {
@@ -32,7 +28,11 @@ const MIN_ZOOM = 0.15;
 const MAX_ZOOM = 2.5;
 const FIT_PADDING = 48;
 
-/** 分组基色：低饱和，向明暗主题底色混合后仍可区分 */
+/** 圆点直径：缺省 10px，权重 1 时再加 34px */
+const DOT_MIN = 10;
+const DOT_SPAN = 34;
+
+/** 分组基色：低饱和，作圆点填充在明暗主题下均可区分 */
 const PALETTE = [
   '#0e7490',
   '#b45309',
@@ -76,11 +76,15 @@ function contrastText(color: Rgb): string {
   return luma > 150 ? '#111111' : '#ffffff';
 }
 
-/** 节点权重 → 内边距/字号增量：大节点 = 内容多，标签始终可读 */
-const PAD_BASE = 10;
-const PAD_SPAN = 16;
-const FONT_BASE = 12.5;
-const FONT_SPAN = 2.5;
+/** 圆点填充色：暗色主题略微提亮，亮色主题用原色 */
+function dotColor(group: string | undefined, dark: boolean): string {
+  const rgb = hexToRgb(colorForGroup(group));
+  return dark ? mix(rgb, [255, 255, 255], 0.22) : `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+}
+
+function isDarkTheme(): boolean {
+  return document.documentElement.dataset.theme !== 'light';
+}
 
 function weightOf(ele: cytoscape.SingularElementArgument): number {
   const w = ele.data('weight');
@@ -89,141 +93,87 @@ function weightOf(ele: cytoscape.SingularElementArgument): number {
     : 0;
 }
 
-function isDarkTheme(): boolean {
-  return document.documentElement.dataset.theme !== 'light';
-}
-
-/** 画布底色（对应 .knowledge-graph 的 --sl-color-bg：暗纯黑 / 亮纯白） */
-const CANVAS_DARK: Rgb = [10, 10, 10];
-const CANVAS_LIGHT: Rgb = [255, 255, 255];
-
-/** 分组色的主题化变体：芯片淡彩底 / 描边 / 文字三档浓度 */
-function groupTint(
-  group: string | undefined,
-  dark: boolean,
-  weight: number,
-): string {
-  return mix(
-    dark ? CANVAS_DARK : CANVAS_LIGHT,
-    hexToRgb(colorForGroup(group)),
-    weight,
-  );
-}
+const FONT_STACK =
+  'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
 
 function buildStyles(dark: boolean): cytoscape.Stylesheet[] {
+  const canvas = dark ? '#0a0a0a' : '#ffffff';
   const strong = dark ? '#f5f5f5' : '#111111';
+  const textMuted = dark ? '#a3a3a3' : '#525252';
+  const edgeLine = dark ? '#333333' : '#d4d4d4';
   return [
     {
+      // Obsidian 风格：圆点 + 下方悬浮标签
       selector: 'node',
       style: {
-        shape: 'round-rectangle',
-        'corner-radius': 8,
-        'background-color': (
-          ele: cytoscape.SingularElementArgument,
-        ) => groupTint(ele.data('group'), dark, dark ? 0.22 : 0.08),
-        'border-color': (ele: cytoscape.SingularElementArgument) =>
-          groupTint(ele.data('group'), dark, dark ? 0.55 : 0.5),
-        'border-width': 1.25,
+        shape: 'ellipse',
+        width: (ele: cytoscape.SingularElementArgument) =>
+          DOT_MIN + DOT_SPAN * weightOf(ele),
+        height: (ele: cytoscape.SingularElementArgument) =>
+          DOT_MIN + DOT_SPAN * weightOf(ele),
+        'background-color': (ele: cytoscape.SingularElementArgument) =>
+          dotColor(ele.data('group'), dark),
+        'border-width': 0,
         label: 'data(label)',
-        color: (ele: cytoscape.SingularElementArgument) =>
-          groupTint(ele.data('group'), dark, dark ? 0.82 : 0.85),
-        'font-size': (ele: cytoscape.SingularElementArgument) =>
-          Math.round(FONT_BASE + FONT_SPAN * weightOf(ele)),
-        'font-family':
-          'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif',
-        'font-weight': 400,
-        'text-wrap': 'wrap',
-        'text-valign': 'center',
+        color: textMuted,
+        'font-size': 11.5,
+        'font-family': FONT_STACK,
+        'text-valign': 'bottom',
         'text-halign': 'center',
-        width: 'label',
-        height: 'label',
-        padding: (ele: cytoscape.SingularElementArgument) =>
-          `${Math.round(PAD_BASE + PAD_SPAN * weightOf(ele))}px`,
-      },
-    },
-    {
-      // 已关联笔记的节点：加重描边与字重，配合 pointer 光标表达可点
-      selector: 'node[href]',
-      style: {
-        'border-width': 2,
-        'font-weight': 600,
-      },
-    },
-    {
-      // 方向容器（复合父节点）：分类收纳其中，容器边距随内容量增长
-      selector: "node[role = 'direction']",
-      style: {
-        'background-color': dark ? '#121212' : '#fafafa',
-        'border-color': (ele: cytoscape.SingularElementArgument) =>
-          groupTint(ele.data('group'), dark, dark ? 0.7 : 0.55),
-        'border-width': 2,
-        'corner-radius': 16,
-        color: strong,
-        'font-size': 14,
-        'font-weight': 700,
-        'text-valign': 'top',
-        'text-halign': 'center',
-        'text-margin-y': 12,
-        padding: (ele: cytoscape.SingularElementArgument) =>
-          `${Math.round(30 + 14 * weightOf(ele))}px`,
-      },
-    },
-    {
-      // 容器高亮只提亮描边，不用整块实色填充
-      selector: "node[role = 'direction'].hl",
-      style: {
-        'background-color': dark ? '#121212' : '#fafafa',
-        'border-color': (ele: cytoscape.SingularElementArgument) =>
-          colorForGroup(ele.data('group')),
-        color: strong,
+        'text-margin-y': 7,
+        'text-wrap': 'ellipsis',
+        'text-max-width': 120,
+        // 轻微标签底色，避免与连线交叠时难读
+        'text-background-color': canvas,
+        'text-background-opacity': 0.6,
+        'text-background-padding': 2,
+        'text-background-shape': 'roundrectangle',
       },
     },
     {
       selector: 'node.hl',
       style: {
-        'background-color': (ele: cytoscape.SingularElementArgument) =>
-          colorForGroup(ele.data('group')),
-        'border-color': (ele: cytoscape.SingularElementArgument) =>
-          colorForGroup(ele.data('group')),
-        color: (ele: cytoscape.SingularElementArgument) =>
-          contrastText(hexToRgb(colorForGroup(ele.data('group')))),
+        width: (ele: cytoscape.SingularElementArgument) =>
+          (DOT_MIN + DOT_SPAN * weightOf(ele)) * 1.3,
+        height: (ele: cytoscape.SingularElementArgument) =>
+          (DOT_MIN + DOT_SPAN * weightOf(ele)) * 1.3,
+        color: strong,
+        'font-weight': 600,
+        'text-background-opacity': 0.9,
       },
     },
-    { selector: 'node.faded', style: { opacity: 0.16 } },
+    { selector: 'node.faded', style: { opacity: 0.15 } },
     { selector: 'node.gfiltered', style: { display: 'none' } },
     {
+      // 细直线（haystack），Obsidian 不用箭头
       selector: 'edge',
       style: {
-        width: 1.25,
-        'line-color': dark ? '#333333' : '#d4d4d4',
-        'target-arrow-color': dark ? '#333333' : '#d4d4d4',
-        'target-arrow-shape': 'triangle',
-        'arrow-scale': 0.7,
-        'curve-style': 'bezier',
+        width: 1,
+        'line-color': edgeLine,
+        'curve-style': 'haystack',
+        'haystack-radius': 0.4,
         label: 'data(label)',
-        'font-size': 10.5,
-        'font-family':
-          'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif',
-        color: dark ? '#a3a3a3' : '#737373',
-        // 边标签默认隐藏，仅在高亮邻域时出现，避免满屏文字噪音
+        'font-size': 10,
+        'font-family': FONT_STACK,
+        color: textMuted,
+        // 边标签默认隐藏，仅在高亮邻域时出现
         'text-opacity': 0,
-        'text-background-color': dark ? '#0a0a0a' : '#ffffff',
+        'text-background-color': canvas,
         'text-background-opacity': 0,
-        'text-background-padding': 3,
+        'text-background-padding': 2,
         'text-background-shape': 'roundrectangle',
       },
     },
     {
       selector: 'edge.hl',
       style: {
-        width: 2,
-        'line-color': strong,
-        'target-arrow-color': strong,
+        width: 1.5,
+        'line-color': dark ? '#8a8a8a' : '#737373',
         'text-opacity': 1,
         'text-background-opacity': 1,
       },
     },
-    { selector: 'edge.faded', style: { opacity: 0.08 } },
+    { selector: 'edge.faded', style: { opacity: 0.06 } },
   ];
 }
 
@@ -311,12 +261,9 @@ export default function KnowledgeGraph({
     const reducedMotion = window.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
     ).matches;
-    // 复合容器图（全景）无跨区连线，收紧间距让容器更紧凑
-    const hasCompound = data.nodes.some((node) => node.parent);
-    const separation = hasCompound ? 110 : 220;
-    // 复合节点的动画布局若中途被 resize/样式更新打断，cytoscape 的 batch
-    // 可能不再闭合，之后所有渲染静默排队（画面冻结）。复合图直接跳过动画。
-    const animateLayout = !reducedMotion && !hasCompound;
+    // 全景（方向→分类树）收紧间距，方向内聚；各方向知识图谱保持舒展
+    const isTree = data.edges.length > 0 && data.nodes.length > 40;
+    const separation = isTree ? 130 : 220;
 
     // 不在构造器里自动跑布局：animate:false 时布局同步完成，layoutstop
     // 会先于监听器挂载发出，导致 layoutRunning 永远为 true。先建实例、
@@ -331,8 +278,6 @@ export default function KnowledgeGraph({
             href: node.href ? withBase(node.href) : undefined,
             group: node.group,
             weight: node.weight,
-            role: node.role,
-            parent: node.parent,
           },
         })),
         ...data.edges.map((edge) => ({
@@ -427,7 +372,7 @@ export default function KnowledgeGraph({
     cy.layout({
       name: 'fcose',
       quality: 'proof',
-      animate: animateLayout,
+      animate: !reducedMotion,
       animationDuration: 500,
       padding: FIT_PADDING,
       nodeSeparation: separation,
