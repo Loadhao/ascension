@@ -1,0 +1,14 @@
+scripts/mermaid-syntax-verify.mjs
+  h_9324126a55eff3 1-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "2a5b1fbf86639f2ddf8f877aa8641f9ccdb3ff4d",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
