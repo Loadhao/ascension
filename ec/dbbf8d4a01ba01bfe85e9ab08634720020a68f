@@ -1,0 +1,22 @@
+astro.config.mjs
+  h_9324126a55eff3 1006,1034
+src/content/docs/distributed/advanced/availability/04-full-link-gray.md
+  h_9324126a55eff3 1-95
+src/content/docs/distributed/index.mdx
+  h_9324126a55eff3 19,21-22
+src/content/docs/distributed/intermediate/case-studies/04-design-interview.md
+  h_9324126a55eff3 1-120
+src/data/graphs/distributed.json
+  h_9324126a55eff3 25,34,73-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "ecdbbf8d4a01ba01bfe85e9ab08634720020a68f",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
