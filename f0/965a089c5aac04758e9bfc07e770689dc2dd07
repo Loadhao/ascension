@@ -1,0 +1,14 @@
+src/content/docs/java/basic/tomcat/index.mdx
+  h_9324126a55eff3 8-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "f0965a089c5aac04758e9bfc07e770689dc2dd07",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
