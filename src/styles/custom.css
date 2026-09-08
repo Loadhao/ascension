@@ -362,6 +362,15 @@ main:has(.kg-fullbleed) {
 .content-panel .sl-container {
   margin-inline: auto;
 }
+/* 展开态（有左侧目录 + 有右侧目录）正文靠右排：余白全部让给左侧，
+   内容右缘只保留基础内边距；收起态不适用（保持对称留白）。
+   余白不足时 max(0) 兜底回退为贴左填充 */
+@media (min-width: 50rem) {
+  :root:not([data-sidebar-tree='collapsed'])[data-has-sidebar][data-has-toc] .content-panel .sl-container {
+    margin-left: max(0rem, calc(100% - var(--sl-content-width)));
+    margin-right: auto;
+  }
+}
 @media (min-width: 72rem) {
   .right-sidebar-container {
     width: 16rem;
