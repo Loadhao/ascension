@@ -67,6 +67,24 @@
 - 新证据与经验：并行会话持续高强度提交（本轮开工时 distributed 方向又新增 2 篇+图谱改动）；审计脚本对 dist 快照运行，不受并行未提交改动干扰，适合无人值守轮次。
 - 下一轮入口：候选项 4——frontmatter 规范与笔记内链接体检（level 与目录等级一致、title/description 必填、内链/图片死链），只修已提交且未被占用的文件。
 
+### 第 3 轮（2026-09-08）
+
+- 选择：候选项 4——frontmatter 规范与笔记内链接体检。
+- 依据：候选项 2 已完成退场；候选项 3（补内容）需动 astro.config.mjs，该文件持续被并行会话占用，继续顺延。
+- 交付：①体检脚本结论；②修复 distributed/intermediate/coordination/03-distributed-scheduler.md 第 43 行内链 `/etcd/basic/core/02-etcd-lease-txn-watch.md/` → `…-watch/`（全站唯一断链）。
+- 验证：468 篇已提交笔记体检：frontmatter 0 缺陷、level 与目录等级 0 不一致、图片 0 死链、470 处站点绝对内链仅 1 处断链（已修）；修复后 `pnpm build` 通过（474 页，页面数增长来自并行会话新内容）；提交 ff18304 已推送。
+- 结论：修问题。
+- 新证据与经验：①**提交事故与教训（重要）**：第 2 轮提交时用裸 `git commit` 把并行会话已暂存的 java spring 目录重命名（9 文件）一并带入提交 3d40ce4 并已推送——内容完整无损（rename 100%）但提交归属混淆；自本轮起改用 `git commit -- <pathspec>` 只提交指定路径，第 3 轮 ff18304 已验证该方式干净。建议后续轮次一律沿用。②绝对内链以 `/` 开头的写法在 187 个品种、470 处中仅 1 处出错，是低风险惯例；代码块内链接需在体检时剔除围栏避免误报。
+- 下一轮入口：候选项 3（为未被占用方向补内容，需观察 astro.config.mjs 占用解除）；或重新跑三合一体检（一致性+对比度+frontmatter/内链）作为轮前例行验证。
+
+## 经验与判断沉淀（第 1–3 轮）
+
+- **每轮开工铁律**：先 `git status` 重新定界占用区（并行会话活跃度高，3 轮内占用区换了三轮：js/mysql/redis 图谱 → algorithm/distributed/guide → java spring 重命名）；只提交本轮自建/自改文件，**必须用 `git commit -- <pathspec>`，禁止裸 commit**（会吞并行会话已暂存内容，第 2 轮已实际发生）。
+- 提交前先 `git fetch` 看远端是否领先（并行会话可能同时推送），推送被拒则按 AGENTS.md rebase 后重试。
+- 三项可复用体检（均已在本状态文件留下脚本逻辑）：一致性体检（侧边栏/图谱/覆盖率）、Mermaid 双主题对比度审计（`scripts/mermaid-contrast-verify.mjs`，需先 `pnpm preview`）、frontmatter+内链体检（剔除代码围栏后匹配）。
+- astro.config.mjs 是高冲突文件（手动侧边栏+并行会话常改）：涉及它的改动只在确认暂存区干净、且用 pathspec 提交时进行。
+- 一致性体检中 guide/diagrams、guide/resources 为有意豁免项（元文档）。
+
 ## 经验与判断沉淀
 
 - 工作区常驻并行会话改动（git status 长期不干净）：每轮开工先 git status 定界，只提交本轮自建/自改文件；astro.config.mjs 与 graphs/{js,mysql,redis}.json 当前为占用区。
