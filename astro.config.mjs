@@ -869,6 +869,20 @@ export default defineConfig({
               items: [
                 { label: '学习路线', link: '/mongodb/' },
                 {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: 'MongoDB 基础',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/mongodb/basic/core/' },
+                        { label: '文档模型与选型', link: '/mongodb/basic/core/01-document-model/' },
+                      ],
+                    },
+                  ],
+                },
+                {
                   label: '中级',
                   collapsed: true,
                   items: [

@@ -1,12 +1,15 @@
 {
   "nodes": [
     { "id": "root", "label": "MongoDB", "group": "核心" },
+    { "id": "docmodel", "label": "文档模型与选型", "href": "/mongodb/basic/core/01-document-model/", "group": "基础" },
     { "id": "replication", "label": "复制集原理", "href": "/mongodb/intermediate/replication/01-replication-set/", "group": "使用进阶" },
     { "id": "sharding", "label": "分片集群", "href": "/mongodb/advanced/sharding/01-sharding-cluster/", "group": "高可用" },
     { "id": "capacity", "label": "容量规划", "href": "/mongodb/advanced/operations/01-capacity-planning/", "group": "高可用" },
     { "id": "performance", "label": "性能优化与启动加载", "href": "/mongodb/advanced/operations/02-performance/", "group": "高可用" }
   ],
   "edges": [
+    { "source": "root", "target": "docmodel" },
+    { "source": "docmodel", "target": "replication", "label": "读多写少选型后落地" },
     { "source": "root", "target": "replication" },
     { "source": "root", "target": "sharding" },
     { "source": "root", "target": "capacity" },
