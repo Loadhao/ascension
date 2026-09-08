@@ -763,6 +763,20 @@ export default defineConfig({
               items: [
                 { label: '学习路线', link: '/postgresql/' },
                 {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: 'PostgreSQL 基础',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/postgresql/basic/core/' },
+                        { label: 'PostgreSQL 与 MySQL：一张差异地图', link: '/postgresql/basic/core/01-pg-vs-mysql/' },
+                      ],
+                    },
+                  ],
+                },
+                {
                   label: '中级',
                   collapsed: true,
                   items: [
