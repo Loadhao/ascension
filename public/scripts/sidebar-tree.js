@@ -1,4 +1,4 @@
-// 侧边栏目录树交互增强：点击分组联动开合整棵子树、批量工具条、目录过滤搜索、
+// 侧边栏目录树交互增强：点击分组只切自身、子树按钮/工具条批量开合、目录过滤搜索、
 // 侧边栏整体收起/展开、localStorage 持久化。
 // 设计规格：docs/superpowers/specs/2026-09-06-sidebar-tree-interaction.md
 const STORAGE_KEY = 'ascension:sidebar-tree';
@@ -31,7 +31,7 @@ if (root) {
   // 过滤搜索期间不做持久化，避免临时展开的链路冲掉用户的折叠布局
   let filtering = false;
 
-  // 用 setTimeout 而非 requestAnimationFrame 做去抖：后台标签页会暂停 rAF，导致联动与持久化静默失效
+  // 用 setTimeout 而非 requestAnimationFrame 做去抖：后台标签页会暂停 rAF，导致持久化静默失效
   let saveTimer = 0;
   const save = () => {
     if (filtering) return;
@@ -47,23 +47,9 @@ if (root) {
     }, 0);
   };
 
-  // 子树联动只由用户点击触发：原生切换完成后把整棵子树同步为该组新状态。
-  // 不能挂 toggle——原生 sessionStorage 恢复与我们的 restore 也会触发 toggle，
-  // 若在 toggle 上联动，会把新页链路的祖先同步波及整棵子树，冲掉已存的用户意图。
-  root.addEventListener('click', (event) => {
-    const target = event.target;
-    if (!(target instanceof Element) || target.closest('.sl-tree-toggle')) return;
-    const summary = target.closest('summary');
-    if (!summary || !root.contains(summary)) return;
-    const details = summary.parentElement;
-    if (!(details instanceof HTMLDetailsElement)) return;
-    // summary 的默认切换行为在点击事件结束后生效，延后到下一宏任务再读新状态
-    setTimeout(() => {
-      for (const d of descendants(details)) d.open = details.open;
-      save();
-    }, 0);
-  });
-  // 任何来源的开合变化都如实记账（含原生恢复），写入即当前屏幕状态
+  // 点击 summary 只走原生 `<details>` 切换自身，不把后代同步为同一 open。
+  // 整棵子树的一键开合只由 `.sl-tree-toggle` 与工具条写入；收起父级时也不清空后代 open，
+  // 下次再打开父级时子分组仍保持各自状态。toggle 仅记账（含原生恢复），不做联动。
   root.addEventListener(
     'toggle',
     () => save(),
