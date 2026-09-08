@@ -1,0 +1,34 @@
+astro.config.mjs
+  h_9324126a55eff3 337-347,363-366
+src/content/docs/java/advanced/jvm/05-object-layout.md
+  h_9324126a55eff3 1-115
+src/content/docs/java/advanced/jvm/06-jit.md
+  h_9324126a55eff3 1-119
+src/content/docs/java/advanced/jvm/07-tuning.md
+  h_9324126a55eff3 1-118
+src/content/docs/java/advanced/jvm/08-troubleshooting.md
+  h_9324126a55eff3 1-130
+src/content/docs/java/intermediate/version/01-java8.md
+  h_9324126a55eff3 1-132
+src/content/docs/java/intermediate/version/02-java9-11.md
+  h_9324126a55eff3 1-113
+src/content/docs/java/intermediate/version/03-java14-17.md
+  h_9324126a55eff3 1-138
+src/content/docs/java/intermediate/version/04-java18-21.md
+  h_9324126a55eff3 1-130
+src/content/docs/java/intermediate/version/index.mdx
+  h_9324126a55eff3 1-14
+src/data/graphs/java.json
+  h_9324126a55eff3 35-43,104-118
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "6f29cdf9990b0d2df1c2e779c45bc37dc7cf43a4",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
