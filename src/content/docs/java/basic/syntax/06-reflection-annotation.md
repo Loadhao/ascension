@@ -56,9 +56,8 @@ flowchart LR
 `getMethod` 只取公有方法（含继承），`getDeclaredMethod` 能拿到私有但不含
 继承——这对方法在类初始化时会解析出所有方法对象的镜像。
 
-代价：反射调用比直接调用慢（早期 JIT 难内联），高频路径可用 `MethodHandle`
-或缓存 Method 对象缓解；同时它破坏封装（setAccessible），属于"框架的特权，
-业务代码慎用"。
+反射有代价：比直接调用慢、破坏封装（setAccessible），属于"框架的特权，
+业务代码慎用"——原理与缓解手段见文末[反射的原理与性能](#反射的原理与性能)。
 
 ## 注解：给类贴机器可读的标签
 
@@ -136,6 +135,32 @@ flowchart LR
 MyBatis 的 Mapper 没有实现类却能源源不断执行 SQL——正是动态代理：
 接口方法调用被拦截到 MapperProxy，方法名与注解被翻译成 SQL 执行。
 
+## 反射的原理与性能
+
+`Method.invoke` 一次调用背后，JVM 要做参数装箱、可访问性校验、目标
+方法查找。早期实现走本地方法（JIT 难内联），调用约 15 次后会
+"inflation"——膨胀成动态生成的字节码类直接分派；JDK 18 起统一改用
+MethodHandle 机制。于是有两条成熟的优化路径：
+
+| 手段 | 做法 | 收益 |
+|---|---|---|
+| **缓存反射对象** | 启动期 getDeclaredMethods 一次，Method/Field 存进 Map 复用 | 省掉每次查找与数组复制，框架标配 |
+| **MethodHandle / VarHandle** | 编译期可校验的方法句柄，Lookup 控制权限 | 更接近直接调用，JIT 能内联 |
+
+三种调用方式对比：
+
+```mermaid
+flowchart LR
+    D["直接调用<br/>编译期绑定 · 最快"] ~~~ R["反射 invoke<br/>运行期解析 · 慢数倍<br/>但零耦合"] ~~~ M["MethodHandle<br/>运行期灵活 · 接近直接调用<br/>需描述符签名"]
+    R -. 高频路径优化 .-> M
+```
+
+还有一道现代限制要认识：**JPMS 模块化**（JDK 9+）。对未开放（opens）
+的模块内私有成员调 `setAccessible(true)` 会直接抛
+`InaccessibleObjectException`——Spring 5+ 能反射 JKD 内部类越来越少
+就是这个原因，被反射的老框架要加 `--add-opens java.base/java.lang=ALL-UNNAMED`
+这类启动参数放行。
+
 ## 小结
 
 - 反射是运行期解剖类的窗口：Class → Constructor/Method/Field，框架的一切
@@ -145,4 +170,7 @@ MyBatis 的 Mapper 没有实现类却能源源不断执行 SQL——正是动态
 
 - JDK 动态代理走接口 + InvocationHandler，CGLIB 走继承——Spring 事务、
   MyBatis Mapper 的原理都是这一套。
+
+- 高频反射先缓存 Method 对象，追求极致换 MethodHandle；模块化时代
+  setAccessible 受 opens 限制，反射不再是万能钥匙。
 

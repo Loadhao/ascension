@@ -258,6 +258,8 @@ export default defineConfig({
                         { label: '序列化与 serialVersionUID', link: '/java/basic/syntax/08-serialization/' },
                         { label: '深浅拷贝与包装类型缓存', link: '/java/basic/syntax/09-object-copy/' },
                         { label: 'SPI 机制：ServiceLoader', link: '/java/basic/syntax/10-spi/' },
+                        { label: '常用接口与抽象类地图', link: '/java/basic/syntax/11-common-interfaces/' },
+                        { label: 'JNI 与 JNDI：本地调用与命名查找', link: '/java/basic/syntax/12-jni-jndi/' },
                       ],
                     },
                     {
@@ -340,6 +342,8 @@ export default defineConfig({
                         { label: '统一异常处理：@RestControllerAdvice', link: '/java/intermediate/spring/08-exception-advice/' },
                         { label: 'Spring MVC 请求处理全流程', link: '/java/intermediate/spring/09-springmvc-flow/' },
                         { label: 'Spring 扩展点全景', link: '/java/intermediate/spring/10-extension-points/' },
+                        { label: 'ApplicationContext：容器体系与内置组件', link: '/java/intermediate/spring/11-application-context/' },
+                        { label: '常用注解地图：Java / Spring / Spring Boot', link: '/java/intermediate/spring/12-annotations-map/' },
                       ],
                     },
                     {
@@ -883,6 +887,7 @@ export default defineConfig({
                         { label: '概览', link: '/distributed/intermediate/performance/' },
                         { label: '三高架构：高并发、高性能、高可用', link: '/distributed/intermediate/performance/01-triple-high/' },
                         { label: '接口性能优化：从耗时量级出发', link: '/distributed/intermediate/performance/02-interface-optimization/' },
+                        { label: '容量规划与全链路压测', link: '/distributed/intermediate/performance/03-capacity-planning/' },
                       ],
                     },
                     {
@@ -934,6 +939,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/distributed/intermediate/traffic/' },
                         { label: '分布式限流：从单机到全局', link: '/distributed/intermediate/traffic/01-distributed-rate-limiting/' },
+                        { label: '超时与重试：预算、退避与重试风暴', link: '/distributed/intermediate/traffic/02-timeout-retry/' },
                       ],
                     },
                     {
@@ -999,6 +1005,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/zookeeper/basic/core/' },
                         { label: 'ZooKeeper 核心机制', link: '/zookeeper/basic/core/01-zookeeper-core/' },
+                        { label: '高频追问：ZAB、Watcher 与 Session', link: '/zookeeper/basic/core/02-zk-deep-dive/' },
                       ],
                     },
                   ],
@@ -1041,6 +1048,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/seata/basic/core/' },
                         { label: 'Seata 核心机制', link: '/seata/basic/core/01-seata-core/' },
+                        { label: '高频追问：全局锁与失效场景', link: '/seata/basic/core/02-seata-deep-dive/' },
                       ],
                     },
                   ],

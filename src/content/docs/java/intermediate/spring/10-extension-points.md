@@ -98,12 +98,50 @@ public class OrderEvents {
 "下单成功后发通知"不丢事件也不回滚邮件的正确姿势（事务语境见
 [事务与传播](/java/intermediate/spring/04-transaction/)）。
 
+## 初始化与销毁：三套写法的固定顺序
+
+同一 Bean 可以同时挂三套初始化/销毁回调，顺序**固定不变**：
+
+| 顺序 | 初始化 | 销毁 |
+| --- | --- | --- |
+| ① | `@PostConstruct` | `@PreDestroy` |
+| ② | `InitializingBean.afterPropertiesSet()` | `DisposableBean.destroy()` |
+| ③ | `@Bean(initMethod="…")` | `@Bean(destroyMethod="…")` |
+
+选型：注解版给业务代码（零框架入侵）、接口版给库代码（比注解出现早）、
+method 版给源码不可改的第三方类。一个 Bean 挑一套用满，别三套各写一半。
+
+BeanPostProcessor 还有两个实践推论：
+
+- **注册顺序敏感**：PriorityOrdered → Ordered → 无序。想抢在 AOP 织入
+  前加工 Bean，必须用 `@Order` 排到自动代理创建器之前——否则你改的是
+  原始对象，一织入代理修改就"丢"了。
+- **@Value 依赖 BFPP**：占位符解析器（一个 BeanFactoryPostProcessor）
+  没注册时，注入的就是 `${key}` 原文——环境里查"@Value 没替换"先看它。
+
+## Boot 时代的启停钩子
+
+| 扩展点 | 时机 | 典型用途 |
+| --- | --- | --- |
+| `EnvironmentPostProcessor` | 容器刷新前 | 自定义属性源（配置解密、远程配置合并） |
+| `CommandLineRunner` / `ApplicationRunner` | 应用就绪时 | 启动后初始化：预热缓存、跑迁移（`String[]` vs `ApplicationArguments` 参数形态之差） |
+| `SmartLifecycle` | refresh 完成 / close | 有 start/stop 的组件，优雅停机的标准落点 |
+
+Runner 之间用 `@Order` 排先后；Web 层还留有四个高频插槽——
+`HandlerMethodArgumentResolver`（自定义注解参数，如从 Header 解析
+当前用户）、`Converter/Formatter`（类型转换）、
+`RequestBodyAdvice/ResponseBodyAdvice`（报文加解密与日志）、
+`HandlerExceptionResolver`（@ControllerAdvice 的底层机制，见
+[统一异常处理](/java/intermediate/spring/08-exception-advice/)）。
+
 ## 小结
 
 - 时间轴记忆：BFPP 改图纸 → Registry 后处理器加图纸 → Aware 递
   部件 → BeanPostProcessor 前后加工（AOP 在这里）→ 初始化 → 事件
   收尾。
+- 初始化销毁三套写法顺序固定：注解 → 接口 → init-method；BPP 顺序
+  敏感，抢位次靠 Ordered。
 - FactoryBean 是"注册工厂、取出产品"，MyBatis Mapper 的注入本质；
   @Import 三形态是向容器塞东西的统一入口，自动配置即其 SPI 组合。
 - 事件默认同步、随事务可选提交后触发——把它当"进程内解耦"用，
-  别当消息队列用。
+  别当消息队列用；启停期另有 Runner 与 SmartLifecycle 接管。
