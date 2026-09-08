@@ -38,17 +38,34 @@ const report = {};
 
   const graphHrefs = new Set();
   let graphDead = [];
+  const dupIds = [];
+  const danglingEdges = [];
+  const connected = new Set();
+  const allNodeIds = [];
   for (const g of readdirSync(ROOT + '/src/data/graphs').filter((f) => f.endsWith('.json'))) {
     const d = JSON.parse(readFileSync(ROOT + '/src/data/graphs/' + g, 'utf8'));
+    const ids = new Set();
     for (const n of d.nodes || []) {
+      if (ids.has(n.id)) dupIds.push(`${g}: 节点 id 重复 "${n.id}"`);
+      ids.add(n.id);
+      allNodeIds.push(`${g}|${n.id}`);
       if (!n.href) continue;
       graphHrefs.add(n.href.replace(/^\/+|\/+$/g, ''));
       if (!resolveLink(n.href)) graphDead.push(`${g}:${n.label || n.id}->${n.href}`);
+    }
+    for (const e of d.edges || []) {
+      connected.add(`${g}|${e.source}`);
+      connected.add(`${g}|${e.target}`);
+      if (!ids.has(e.source) || !ids.has(e.target)) {
+        danglingEdges.push(`${g}: ${e.source}->${e.target}（端点不存在于节点表）`);
+      }
     }
   }
   report['3.图谱死链'] = { ok: graphDead.length === 0, detail: '25+ 份图谱', bad: graphDead };
   const uncovered = notes.filter((f) => !graphHrefs.has(f.replace(/^src\/content\/docs\//, '').replace(/\.(md|mdx)$/, '')));
   report['4.图谱覆盖率'] = { ok: uncovered.length === 0, detail: `${((notes.length - uncovered.length) / notes.length * 100).toFixed(1)}%`, bad: uncovered };
+  report['9.图谱结构（重复id/悬空边）'] = { ok: dupIds.length + danglingEdges.length === 0, detail: '节点唯一、边端点有效', bad: [...dupIds, ...danglingEdges] };
+  var orphanWarnings = allNodeIds.filter((id) => !connected.has(id));
 
   const brokenLinks = [];
   const fmIssues = [];
@@ -93,6 +110,10 @@ let failed = 0;
 for (const [name, r] of Object.entries(report)) {
   console.log(`${r.ok ? '✓' : '✗'} ${name}（${r.detail}）${r.ok ? '' : ': ' + r.bad.join('; ')}`);
   if (!r.ok) failed++;
+}
+const orphans = orphanWarnings;
+if (orphans.length) {
+  console.log(`⚠ 孤立节点警告（无任何边连接，不阻塞）：${orphans.join('; ')}`);
 }
 if (failed) {
   console.log(`\n失败 ${failed} 项`);
