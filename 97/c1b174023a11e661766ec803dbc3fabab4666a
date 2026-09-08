@@ -1,0 +1,32 @@
+astro.config.mjs
+  h_9324126a55eff3 347-352,863,902-917,931-932,1039-1052
+src/content/docs/java/intermediate/design-pattern/03-factory.md
+  h_9324126a55eff3 1-112
+src/content/docs/python/advanced/eng/04-packaging.md
+  h_9324126a55eff3 1-98
+src/content/docs/python/advanced/eng/index.mdx
+  h_9324126a55eff3 3,9-11
+src/content/docs/python/intermediate/libs/04-sqlalchemy.md
+  h_9324126a55eff3 1-120
+src/content/docs/python/intermediate/libs/index.mdx
+  h_9324126a55eff3 3,10-11
+src/content/docs/python/intermediate/stdlib/05-datetime.md
+  h_9324126a55eff3 1-105
+src/content/docs/python/intermediate/stdlib/index.mdx
+  h_9324126a55eff3 3,9-10
+src/data/graphs/java.json
+  h_9324126a55eff3 72-77,170-171
+src/data/graphs/python.json
+  h_9324126a55eff3 48-51,116-123
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "97c1b174023a11e661766ec803dbc3fabab4666a",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
