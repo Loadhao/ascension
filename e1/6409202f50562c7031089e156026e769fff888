@@ -1,0 +1,40 @@
+astro.config.mjs
+  h_9324126a55eff3 1207-1226
+src/components/viz/AlgorithmViz.tsx
+  h_9324126a55eff3 29-33
+src/content/docs/algorithm/intermediate/backtracking/01-subsets.mdx
+  h_9324126a55eff3 1-57
+src/content/docs/algorithm/intermediate/backtracking/02-permutations.mdx
+  h_9324126a55eff3 1-62
+src/content/docs/algorithm/intermediate/backtracking/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/algorithm/intermediate/dp/01-climbing-stairs.mdx
+  h_9324126a55eff3 1-63
+src/content/docs/algorithm/intermediate/dp/02-house-robber.mdx
+  h_9324126a55eff3 1-53
+src/content/docs/algorithm/intermediate/dp/03-max-subarray.mdx
+  h_9324126a55eff3 1-54
+src/content/docs/algorithm/intermediate/dp/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/algorithm/intermediate/tree/03-invert-tree.mdx
+  h_9324126a55eff3 1-64
+src/content/docs/algorithm/intermediate/tree/index.mdx
+  h_9324126a55eff3 10-11
+src/data/graphs/algorithm.json
+  h_9324126a55eff3 3-193,196-464
+src/data/viz/index.ts
+  h_9324126a55eff3 1026-1162,1182-1184
+src/data/viz/structures.ts
+  h_9324126a55eff3 369-522,527-528,724-777,781
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "e16409202f50562c7031089e156026e769fff888",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
