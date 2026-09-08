@@ -132,7 +132,14 @@ export default defineConfig({
         },
       ],
       sidebar: [
-        { label: '指南', items: [{ autogenerate: { directory: 'guide' } }] },
+        {
+          label: '指南',
+          items: [
+            { link: '/guide/resources/', label: '资源导航' },
+            { link: '/guide/interview-cheatsheet/', label: '速答手册' },
+            { link: '/guide/quiz/', label: '自测作答' },
+          ],
+        },
         { label: '知识全景', link: '/panorama/' },
         {
           label: '系统与运维',

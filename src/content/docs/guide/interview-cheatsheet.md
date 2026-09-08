@@ -1,5 +1,5 @@
 ---
-title: 面试速答手册
+title: 速答手册
 description: 全站高频面试八股的一句话答案索引——Java、MySQL、Redis、网络、消息队列、分布式与系统设计，每条链回完整笔记
 ---
 
