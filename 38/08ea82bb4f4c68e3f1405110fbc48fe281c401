@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1367
+src/content/docs/algorithm/advanced/principles/03-complexity-analysis.mdx
+  h_9324126a55eff3 1-82
+src/data/graphs/algorithm.json
+  h_9324126a55eff3 241-246,645-673
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "3808ea82bb4f4c68e3f1405110fbc48fe281c401",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
