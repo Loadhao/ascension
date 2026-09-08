@@ -3,6 +3,8 @@
     { "id": "root", "label": "中间件", "group": "核心" },
     { "id": "whymq", "label": "为什么需要 MQ", "href": "/middleware/basic/mq/01-why-mq/", "group": "消息队列" },
     { "id": "compare", "label": "三大 MQ 选型", "href": "/middleware/basic/mq/02-mq-comparison/", "group": "消息队列" },
+    { "id": "reliability", "label": "消息可靠性三问", "href": "/middleware/intermediate/reliability/01-message-reliability/", "group": "消息队列" },
+    { "id": "idem", "label": "接口幂等", "href": "/distributed/intermediate/coordination/02-idempotency/", "group": "分布式" },
     { "id": "kafka", "label": "Kafka", "href": "/kafka/", "group": "落地" },
     { "id": "rocketmq", "label": "RocketMQ", "href": "/rocketmq/", "group": "落地" },
     { "id": "rabbitmq", "label": "RabbitMQ", "href": "/rabbitmq/", "group": "落地" }
@@ -10,6 +12,8 @@
   "edges": [
     { "source": "root", "target": "whymq" },
     { "source": "whymq", "target": "compare", "label": "收益代价 → 选型" },
+    { "source": "compare", "target": "reliability", "label": "选完型再保可靠" },
+    { "source": "reliability", "target": "idem", "label": "不重的标准解" },
     { "source": "compare", "target": "kafka", "label": "大数据管道" },
     { "source": "compare", "target": "rocketmq", "label": "业务消息" },
     { "source": "compare", "target": "rabbitmq", "label": "复杂路由" }
