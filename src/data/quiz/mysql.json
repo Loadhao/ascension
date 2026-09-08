@@ -1,0 +1,68 @@
+{
+  "questions": [
+    {
+      "id": "mysql-btree-001",
+      "noteId": "mysql/basic/core/02-index-btree",
+      "type": "single",
+      "q": "InnoDB「三层 B+ 树可存约 2000 万行」的推导中，非叶子节点单页能放约 1170 个索引项，关键前提是？",
+      "options": [
+        "非叶子节点只存键+指针，bigint 8B+页指针 6B≈14B，16KB 页可放 16384/14≈1170 项",
+        "非叶子节点也存整行数据，每行 1KB，每页可放 16 行",
+        "叶子节点间用双向链表串联，省出了指针空间",
+        "根节点常驻 Buffer Pool，所以能放更多索引项"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "「非叶子也存整行」是 B 树的形态，正是 B+ 树刻意避免的（单页键变少→树更高）；链表和根常驻内存影响的是范围扫描与实际 IO 次数，不改变单页能容纳多少索引项。"
+    },
+    {
+      "id": "mysql-btree-002",
+      "noteId": "mysql/basic/core/02-index-btree",
+      "type": "judge",
+      "q": "二级索引的叶子节点存的是整行数据，所以按普通索引查询不需要回表。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "叶子存整行的是聚簇索引；二级索引叶子只存「索引列+主键值」，拿到主键还要回聚簇索引查整行——这正是回表，只有覆盖索引才能免掉。"
+    },
+    {
+      "id": "mysql-mvcc-003",
+      "noteId": "mysql/intermediate/transaction-lock/01-transaction-mvcc",
+      "type": "multiple",
+      "q": "关于 InnoDB 的 MVCC 与 RR 隔离级别，下列说法正确的有？（多选）",
+      "options": [
+        "RC 与 RR 的唯一区别是 ReadView 的生成时机：RC 每次快照读重新生成，RR 第一次生成后复用",
+        "版本 trx_id ≥ max_trx_id（ReadView 生成后才开启的事务）的版本不可见",
+        "RR 下快照读靠 MVCC 防幻读、当前读靠 Next-Key Lock，但两者混用仍可能出现幻读",
+        "RR 下普通 select 属于当前读，读到的是最新已提交版本"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "第 4 项正好说反——普通 select 是快照读，沿版本链读历史快照；会升级成当前读的是 for update/lock in share mode 和 insert/update/delete 这些加锁操作。"
+    },
+    {
+      "id": "mysql-log-004",
+      "noteId": "mysql/intermediate/transaction-lock/03-redo-undo-binlog",
+      "type": "single",
+      "q": "MySQL 崩溃恢复时发现某事务的 redo log 停在 prepare 状态，该事务最终提交还是回滚由什么裁决？",
+      "options": [
+        "redo 是物理日志，按页重放即可提交",
+        "看 binlog 是否完整：完整则提交，不完整则回滚",
+        "看 undo log 里是否存在反向操作，存在则回滚",
+        "看该事务修改的数据页是否已经刷盘，已刷则提交"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "直接重放会破坏与 binlog 的一致性（从库会多一笔或少一笔），这正是需要两阶段提交的原因；undo 和数据页刷盘进度都不参与裁决，裁决依据只有 binlog 完整性。"
+    }
+  ]
+}

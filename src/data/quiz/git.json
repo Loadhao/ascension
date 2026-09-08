@@ -1,0 +1,50 @@
+{
+  "questions": [
+    {
+      "id": "git-object-001",
+      "noteId": "git/basic/foundations/01-core-model",
+      "type": "single",
+      "q": "关于 Git 的对象模型与分支本质，下列说法正确的是？",
+      "options": [
+        "blob 对象同时保存文件内容和文件名",
+        "Git 存储的是每个版本相对上一版的差异，因此查看历史较慢",
+        "中央仓库是 Git 架构上的必需品，断网后本地无法提交",
+        "分支是一个 40 字节文件，内容为它指向的 commit 哈希，创建成本几乎为零"
+      ],
+      "answer": [
+        3
+      ],
+      "hint": "文件名由 tree 记录、blob 只存内容；Git 是快照+指针复用而非差异存储，看历史 O(1)；Git 是分布式的——本地就是完整仓库，断网照样提交。"
+    },
+    {
+      "id": "git-squash-002",
+      "noteId": "git/intermediate/collaboration/01-branch-merge",
+      "type": "judge",
+      "q": "使用 git merge --squash 合并 feature 分支后，可以直接用 git branch -d feature 删除该分支。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "squash 没有生成合并提交，Git 判定该分支处于未合并状态会拒绝 -d——这正是它需要 -D 强删的原因。"
+    },
+    {
+      "id": "git-undo-003",
+      "noteId": "git/intermediate/collaboration/03-undo-recovery",
+      "type": "single",
+      "q": "关于 Git 撤销命令的选型，下列说法正确的是？",
+      "options": [
+        "git reset --soft HEAD~1 会把最近一次提交退回暂存区，修改全部保留",
+        "已 push 到公共分支的提交，应用 git reset --hard 撤销",
+        "git restore --staged <file> 会把文件移出暂存区并丢弃工作区修改",
+        "被 reset --hard 清掉的未提交修改，一定能通过 reflog 找回"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "reset 改历史、只能用于私有分支，公共分支必须用 revert；restore --staged 移出暂存区但修改保留；reflog 救的是提交历史——未提交的修改被 --hard 清掉就真没了。"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "questions": [
+    {
+      "id": "docker-cow-001",
+      "noteId": "docker/basic/fundamentals/01-concepts",
+      "type": "single",
+      "q": "关于容器可写层与数据持久化，下列说法正确的是？",
+      "options": [
+        "容器删除后，可写层里的数据会回写进镜像长久保留",
+        "容器的写入直接修改镜像层，因此同镜像的多个容器会互相覆盖配置",
+        "容器删除后可写层随之丢弃，需要持久化的数据必须放数据卷",
+        "同一镜像起多个容器，每个容器都会在磁盘上完整复制一份镜像层"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "写入走写时复制——读共享镜像层、写只复制到自己的可写层，互不干扰；「完整复制一份镜像」把「只多一份可写层」误当成整份拷贝；镜像只读、可写层随容器销毁，所以持久化必须用数据卷。"
+    },
+    {
+      "id": "docker-ns-002",
+      "noteId": "docker/advanced/orchestration/02-principles",
+      "type": "multiple",
+      "q": "关于容器的三大底层机制，下列说法正确的有？（多选）",
+      "options": [
+        "--memory=512m 超限时 OOM killer 直接杀进程，容器退出码为 137",
+        "--cpus=1.5 表示容器最多能使用 1.5 个 CPU 核",
+        "Namespace 负责限制「能用多少」，Cgroups 负责隔离「看得见什么」",
+        "overlay2 驱动中，可写层对应 upperdir，镜像只读层对应 lowerdir"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "第 3 项把两大机制的职责说反了——Namespace 管隔离视图「看得见什么」，Cgroups 管资源配额「能用多少」。"
+    },
+    {
+      "id": "docker-dockerfile-003",
+      "noteId": "docker/intermediate/practice/01-dockerfile",
+      "type": "single",
+      "q": "关于 Dockerfile 指令的运行时机与覆盖行为，下列说法正确的是？",
+      "options": [
+        "docker run 镜像 args 中，args 会替换掉 ENTRYPOINT 定义的内容",
+        "docker run 镜像 args 中，args 会替换 CMD，但会追加给 ENTRYPOINT",
+        "RUN 和 CMD 都在容器运行期执行",
+        "写了 EXPOSE 3000 后容器即可被外部访问，无需 -p 映射"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "args 对 ENTRYPOINT 是追加不是替换（典型组合：ENTRYPOINT 定主命令、CMD 给默认参数）；RUN 是构建期、CMD/ENTRYPOINT 是运行期；EXPOSE 只是声明，真正生效靠 docker run -p。"
+    },
+    {
+      "id": "docker-net-004",
+      "noteId": "docker/intermediate/practice/03-network",
+      "type": "multiple",
+      "q": "关于 Docker 容器网络，下列说法正确的有？（多选）",
+      "options": [
+        "-p 8080:80 中 8080 是容器端口、80 是宿主端口",
+        "默认 bridge 网络内的容器不能直接通过容器名互访",
+        "host 模式下配置 -p 端口映射依然有效",
+        "容器出外网的 SNAT 与外部访问容器的 DNAT 都体现在 iptables 的 nat 表里"
+      ],
+      "answer": [
+        1,
+        3
+      ],
+      "hint": "-p 8080:80 的顺序是宿主:容器；host 模式直接监听宿主端口，-p 发布规则不适用；服务互连用自定义 bridge + 容器名（内置 DNS），别写死会变的容器 IP。"
+    }
+  ]
+}

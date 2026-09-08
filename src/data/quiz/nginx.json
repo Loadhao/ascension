@@ -1,0 +1,52 @@
+{
+  "questions": [
+    {
+      "id": "nginx-worker-001",
+      "noteId": "nginx/basic/config/01-working-model",
+      "type": "single",
+      "q": "关于 Nginx 的 worker 与连接模型，下列说法正确的是？",
+      "options": [
+        "worker_processes 应设为 CPU 核数的 2~4 倍，以利用 IO 等待时间",
+        "worker_connections 是整个 Nginx 实例的最大连接数上限",
+        "worker 是单线程 epoll 事件循环，向 upstream 发起连接后不干等 IO，转去处理其他连接",
+        "多个 worker 之间可以靠共享内存变量实现跨请求状态（如共享计数器）"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "worker 是单线程，核数才等于并行度，配多了反而上下文切换变多；worker_connections 是「每个 worker」的上限；worker 间默认不共享内存变量，跨请求状态要放 Redis/DB。"
+    },
+    {
+      "id": "nginx-proxy-002",
+      "noteId": "nginx/intermediate/proxy/01-reverse-proxy-lb",
+      "type": "judge",
+      "q": "配置 location /api/ { proxy_pass http://backend; }（proxy_pass 不带尾斜杠）时，请求 /api/users 会被转发为 http://backend/users（location 前缀被去掉）。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "只有 proxy_pass 自身带了 URI 部分/尾斜杠才会替换前缀；不带斜杠时完整原始 URI 原样转发，与 location 写法无关——「代理后 404」多半是把这个决定因素安错了地方。"
+    },
+    {
+      "id": "nginx-limit-003",
+      "noteId": "nginx/intermediate/proxy/02-https-cache-ratelimit",
+      "type": "multiple",
+      "q": "关于 Nginx 的缓存与限流，下列说法正确的有？（多选）",
+      "options": [
+        "limit_req 默认是漏桶形态，突发请求被压平、以恒定速率流出",
+        "burst=20 nodelay 中的 nodelay 表示超出的请求先进入排队、稍后按速率慢慢放行",
+        "限流超限后 Nginx 返回 503，在入口就把流量挡住",
+        "缓存串数据的元凶通常是 cache_key 没带全影响结果的参数/头"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "nodelay 的语义说反了——nodelay 是「积压也立刻放」（消耗 burst 配额），去掉 nodelay 才是排队限速流出。"
+    }
+  ]
+}

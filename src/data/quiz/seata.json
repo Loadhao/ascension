@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": "seata-at-001",
+      "noteId": "seata/basic/core/01-seata-core",
+      "type": "single",
+      "q": "关于 Seata AT 模式一阶段的行为，下列说法正确的是？",
+      "options": [
+        "各分支执行业务 SQL 时把 beforeImage/afterImage 记入 undo log，随后立即提交本地事务",
+        "各分支持有本地事务不提交，直到二阶段收到 TC 的全局提交指令",
+        "一阶段只向 TC 注册分支，业务 SQL 统一留到二阶段执行",
+        "全局回滚时，RM 按 afterImage 把数据改回去"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "把 AT 想成 2PC 式同步阻塞是误区——「一阶段就提交本地事务，undo log 兜底回滚」正是 AT 锁短、省心的精髓；回滚用的是修改前的镜像 beforeImage，不是 afterImage。"
+    },
+    {
+      "id": "seata-lock-002",
+      "noteId": "seata/basic/core/02-seata-deep-dive",
+      "type": "multiple",
+      "q": "下列哪些场景会导致 @GlobalTransactional 注解失效（不生效）？（多选）",
+      "options": [
+        "同类中通过 this.doBusiness() 自调用，绕过了代理对象",
+        "业务异常被 try-catch 吞掉，没有抛出去",
+        "被注解的方法不是 public",
+        "多数据源场景中，连接池是手动 new 的、未被 DataSourceProxy 代理",
+        "全局事务参与方太多，超过 TC 默认的分支数上限"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": "失效四坑与 @Transactional 同源：自调用、吞异常、非 public、数据源未代理；其中数据源未代理会连 undo log 都不生成，快速排查看 undo_log 表和 TC 三张表有无记录。"
+    }
+  ]
+}

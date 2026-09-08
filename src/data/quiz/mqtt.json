@@ -1,0 +1,48 @@
+{
+  "questions": [
+    {
+      "id": "mqtt-wildcard-001",
+      "noteId": "mqtt/basic/core/01-mqtt-protocol",
+      "type": "judge",
+      "q": "MQTT 订阅时，多层通配符 # 可以放在主题过滤器的任意层级，例如 sensors/#/temp 是合法订阅。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "# 只能结尾，单层通配是 +；另外主题是逻辑路由约定而非目录，不能拿 URL 路径的层级直觉来套。"
+    },
+    {
+      "id": "mqtt-qos0-002",
+      "noteId": "mqtt/basic/core/02-qos-session",
+      "type": "judge",
+      "q": "使用持久会话（cleanSession=false）时，Broker 也会为离线客户端缓存 QoS 0 消息，重连后统一补发。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "QoS 0 没有确认机制、根本不入会话队列，离线直接丢；离线补偿必须 QoS≥1，且重投队列还有配额上限，不是无限「邮局」。"
+    },
+    {
+      "id": "mqtt-qos2-003",
+      "noteId": "mqtt/basic/core/02-qos-session",
+      "type": "single",
+      "q": "MQTT QoS 2 能做到「恰好一次」（不重不丢），靠的关键机制是？",
+      "options": [
+        "接收方对 PUBREC 过的 message id 记账，重复报文只回 ACK 不再投递；发送方未收到 PUBCOMP 时重发的是 PUBREL 而非 PUBLISH",
+        "每条消息携带全局唯一 UUID，Broker 靠唯一索引兜底去重",
+        "PUBLISH 报文内置时间戳，接收方丢弃超出重传窗口的重复包",
+        "QoS 2 无需专门机制，靠 TCP 可靠传输天然保证应用层恰好一次"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "把传输层可靠等同于消息层恰好一次是常见误区——重发仍会造成应用层重复；消重靠「中间态记账」：接收方按 message id 去重，发送方只重发确认报文、不重发数据。"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "questions": [
+    {
+      "id": "ai-sft-001",
+      "noteId": "ai/intermediate/llm/01-llm",
+      "type": "judge",
+      "q": "基座模型（Base Model）不能直接当助手用，是因为它没经过对齐微调，对话时会「接话续写」而不是「按指令回答」。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "预训练目标就是续写文本而非遵从指令；「听懂指令」是 SFT 的职责、「说人爱听的话」是 RLHF 的职责，分不清两步对齐各自做什么就会在这里含糊。"
+    },
+    {
+      "id": "ai-rag-002",
+      "noteId": "ai/intermediate/agent/06-rag",
+      "type": "single",
+      "q": "企业知识库项目中，哪种情况应优先考虑微调而不是 RAG？",
+      "options": [
+        "知识库文档每周更新，答案必须标注引用来源",
+        "模型懂领域术语，但输出格式和风格总不稳定",
+        "文档涉及权限隔离，不同用户可见片段不同",
+        "文档量达到百万级，需要按问题检索相关片段"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "时效与引用、权限过滤（在应用层做）、海量检索都是 RAG 的主场；风格/格式/行为不稳对应的是微调解决的「模型不按你的方式做事」，两者定位别对调。"
+    },
+    {
+      "id": "ai-mcp-003",
+      "noteId": "ai/intermediate/agent/08-mcp",
+      "type": "multiple",
+      "q": "下列关于 MCP 的说法，哪些正确？（多选）",
+      "options": [
+        "让 M 个 AI 应用对接 N 个外部系统，从 M×N 种私有集成变为 M+N 的标准集成",
+        "Client 是 Host 内部与某个 Server 保持的会话，一个 Host 可同时挂多个 Client",
+        "tools/list 返回的工具带 JSON Schema，模型据此知道该传什么参数",
+        "MCP 强制所有 Server 必须实现 resources 能力，否则无法接入",
+        "MCP 协议消息基于 JSON-RPC 2.0"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "hint": "resources 恰恰是草案中的可选理念，多数 Server 不常用，落地最实的是 tools——把「三类端点」记成「三个都必须实现」就会中招。"
+    },
+    {
+      "id": "ai-loop-004",
+      "noteId": "ai/basic/agent/01-agent-loop",
+      "type": "judge",
+      "q": "在 Agent Loop 中，模型输出的工具调用由模型自身执行完毕后，再把结果返回给用户。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "分工搞反了——模型只「举手」发出调用请求，真正执行工具的是 Harness（运行框架）；执行结果包装为 tool_result 追加回 messages 让循环继续。"
+    }
+  ]
+}

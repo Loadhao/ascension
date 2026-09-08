@@ -1,11 +1,11 @@
 ---
 title: 速答手册
-description: 全站高频面试八股的一句话答案索引——Java、MySQL、Redis、网络、消息队列、分布式与系统设计，每条链回完整笔记
+description: 全站高频面试八股的一句话答案索引——覆盖 Java、数据库、消息队列、网络、分布式、算法、Python、AI 等全站方向，每条链回完整笔记
 ---
 
 按主题分组的高频问题速答索引，每条一句话抓核心，点链接进完整
-笔记（含推导、图解与追问）。覆盖 Java、MySQL、Redis、网络、消息
-队列、分布式与系统设计等后端面试高频区。
+笔记（含推导、图解与追问）。覆盖 Java、MySQL、PostgreSQL、Redis、
+网络、消息队列、分布式、算法、Python、AI 等全站方向。
 
 :::tip[先看后测]
 过完速答想检验记忆？到[自测作答](/guide/quiz/)勾选方向逐题作答：
@@ -81,6 +81,15 @@ description: 全站高频面试八股的一句话答案索引——Java、MySQL�
 | [大表 DDL 怎么变更](/mysql/advanced/performance-ha/03-online-ddl/) | Online DDL / gh-ost 双写切表——锁表变更在业务高峰是事故 |
 | [三范式](/mysql/basic/theory/01-normal-forms/) | 1NF 原子性、2NF 消除部分依赖、3NF 消除传递依赖；反范式是读性能的主动取舍 |
 
+## PostgreSQL
+
+| 问题 | 一句话答案 |
+|---|---|
+| [PG 与 MySQL 的 MVCC 差异](/postgresql/basic/core/01-pg-vs-mysql/) | PG 的 UPDATE 写新元组、旧元组留在表内等 VACUUM 回收（会表膨胀），InnoDB 旧版本放 undo log 由 purge 清理 |
+| [Pgpool-II 与 Postgres-XL 怎么选](/postgresql/intermediate/ha/01-pgpool-postgres-xl/) | 要容灾与读扩展选零侵入中间件 Pgpool-II（连接池+读负载均衡+故障转移，写仍单主）；要写扩展选改源码的 Postgres-XL |
+| [pgpool 容灾怎么防脑裂](/postgresql/intermediate/ha/02-pgpool-dr/) | 多 pgpool 互为 watchdog，quorum 多数派决策——只有拿到多数票的才持有 VIP 并执行 failover |
+| [PG 表膨胀的根因与治理](/postgresql/advanced/performance/01-tuning/) | MVCC 死元组 + VACUUM 跟不上——调小 autovacuum_vacuum_scale_factor、清掉阻止清理的长事务与废弃复制槽；VACUUM FULL 拿排他锁慎用 |
+
 ## Redis
 
 | 问题 | 一句话答案 |
@@ -120,6 +129,8 @@ description: 全站高频面试八股的一句话答案索引——Java、MySQL�
 | [RocketMQ 事务消息](/rocketmq/advanced/core/01-rocketmq-features/) | 半消息先落库 + 本地事务 + 回查补偿——分布式事务的 MQ 解 |
 | [消息积压怎么处理](/rocketmq/advanced/core/03-backlog/) | 先定位瓶颈（生产/存储/消费）再扩容消费组，空跑跳过 + 新 topic 换道是紧急手段 |
 | [死信队列与延迟消息](/rabbitmq/intermediate/usage/01-deadletter-delay/) | 重试耗尽进死信人工兜底；延迟用死信 TTL 或延时插件（订单超时关单标准解） |
+| [MQTT 为什么轻量](/mqtt/basic/core/01-mqtt-protocol/) | 发布订阅 + Broker 居中转发，PUBLISH 固定头最小 2 字节、剩余长度 1~4 字节变长编码 |
+| [MQTT QoS 三档怎么选](/mqtt/basic/core/02-qos-session/) | 默认 QoS 1 + 下游幂等兜重复；可丢的高频遥测用 QoS 0；四段握手的 QoS 2 只在无法幂等且带宽充裕时用 |
 
 ## 检索与文档存储
 
@@ -140,6 +151,31 @@ description: 全站高频面试八股的一句话答案索引——Java、MySQL�
 | [systemd 服务管理](/linux/intermediate/system/03-system-service/) | unit 文件声明依赖与重启策略，journalctl 看日志——服务自愈的基础 |
 | [文本三件套](/tools/basic/cli/01-grep-sed-awk/) | grep 找、sed 改、awk 按列算——日志统计的瑞士军刀 |
 
+## Docker 与容器
+
+| 问题 | 一句话答案 |
+|---|---|
+| [容器和虚拟机的区别](/docker/basic/fundamentals/01-concepts/) | 容器是共享宿主内核的进程级隔离，秒级启动、MB 级体积——容器是带隔离的进程，不是轻量虚拟机 |
+| [容器的底层本质](/docker/advanced/orchestration/02-principles/) | Namespace 隔离「看得见什么」+ Cgroups 限制「能用多少」+ overlay2 分层文件系统上的普通宿主进程 |
+| [Dockerfile 依赖为什么要先于代码 COPY](/docker/intermediate/practice/01-dockerfile/) | 构建缓存逐层检查、某层失效其下全部重建——依赖层在前，改业务代码不触发重装依赖 |
+| [容器之间怎么互访](/docker/intermediate/practice/03-network/) | 放进同一自定义 bridge 用容器名互访（内置 DNS）；默认 bridge 不支持按名互访，容器 IP 重启会变别写死 |
+
+## Nginx
+
+| 问题 | 一句话答案 |
+|---|---|
+| [Nginx 为什么能扛高并发](/nginx/basic/config/01-working-model/) | master + 多 worker 事件驱动——每个 worker 单线程跑 epoll 事件循环、从不干等 IO，worker 数等于 CPU 核数 |
+| [proxy_pass 尾斜杠的区别](/nginx/intermediate/proxy/01-reverse-proxy-lb/) | 只看 proxy_pass 带不带 URI/尾斜杠：带了就替换 location 前缀，不带则原始 URI 原样转发 |
+| [HTTPS 证书为什么配在 Nginx 就够](/nginx/intermediate/proxy/02-https-cache-ratelimit/) | Nginx 做 TLS 终止——对外加密、对内网走 HTTP，证书一处维护，后端不用各自配 |
+
+## Git
+
+| 问题 | 一句话答案 |
+|---|---|
+| [Git 分支为什么零成本](/git/basic/foundations/01-core-model/) | 分支只是一个 40 字节、内容为 commit 哈希的指针文件，创建/切换/删除都是 O(1) |
+| [什么时候绝对不能 rebase](/git/intermediate/collaboration/01-branch-merge/) | 已推送到公共分支的提交——rebase 重写历史、哈希全变；惯例：自己分支 rebase，合入 main 用 merge |
+| [公共分支的错误提交怎么撤](/git/intermediate/collaboration/03-undo-recovery/) | 用 revert 生成反向提交抵消——reset 改历史，只能用于私有分支 |
+
 ## 算法
 
 | 问题 | 一句话答案 |
@@ -150,6 +186,24 @@ description: 全站高频面试八股的一句话答案索引——Java、MySQL�
 | [动态规划三步](/algorithm/intermediate/dp/01-climbing-stairs/) | 定义状态 → 写转移方程 → 定初始化与遍历顺序，全部 DP 都是这三步 |
 | [回溯模板](/algorithm/intermediate/backtracking/01-subsets/) | 路径 + 选择列表 + 撤销选择；子集/排列/组合只差剪枝与去重的位置 |
 | [复杂度与时空权衡](/algorithm/advanced/principles/01-time-space-tradeoff/) | 先给暴力解再优化——用空间换时间（哈希/前缀和/缓存）是最常见的降维路径 |
+
+## Python
+
+| 问题 | 一句话答案 |
+|---|---|
+| [is 和 == 的区别](/python/basic/syntax/01-objects/) | is 比对象身份、== 比值（除 `x is None` 外别用 is 比值）；重写 `__eq__` 会把 `__hash__` 置为 None，必须成对重写 |
+| [GIL 到底锁住了什么](/python/advanced/internals/01-gil/) | 只锁 CPython 字节码执行——IO 与 numpy 等 C 扩展会释放它，IO 密集多线程有效、CPU 密集换多进程 |
+| [@ 装饰器做了什么](/python/basic/functions/03-decorators/) | 就是 `f = 装饰器(原函数)` 的一次调用加重绑定——必备 functools.wraps 与 `*args, **kwargs` 透传，带参装饰器三层嵌套 |
+| [调用含 yield 的函数会发生什么](/python/basic/functions/02-iterators-generators/) | 不执行任何代码、只返回生成器对象；每次 next() 跑到 yield 暂停吐值，惰性 O(1) 内存且单次消费 |
+
+## AI 与大模型
+
+| 问题 | 一句话答案 |
+|---|---|
+| [基座模型和聊天模型差在哪](/ai/intermediate/llm/01-llm/) | SFT 用指令-答案对教模型听懂人话，RLHF 按人类偏好教它说人爱听的话——两步对齐补上差距 |
+| [RAG 和微调怎么选](/ai/intermediate/agent/06-rag/) | 解决「模型不知道」（新知识/私有知识/要引用来源）选 RAG；解决「模型不按你的方式做事」（风格/格式）选微调 |
+| [MCP 解决了什么问题](/ai/intermediate/agent/08-mcp/) | AI 应用的 USB-C 开放标准——把 M×N 私有集成降为 M+N，工具从硬编码注册变运行时发现 |
+| [Agent Loop 的本质](/ai/basic/agent/01-agent-loop/) | 一个 while 循环：模型只决策要不要调工具，真正执行的是 Harness，tool_result 追加回 messages 直到不再调工具 |
 
 ## 分布式与集群
 
@@ -181,6 +235,8 @@ description: 全站高频面试八股的一句话答案索引——Java、MySQL�
 | [容灾 RTO/RPO](/distributed/advanced/availability/01-dr-multi-active/) | RTO 定恢复时长、RPO 定丢数据容忍，预案必须演练验证 |
 | [混沌工程](/distributed/advanced/availability/05-chaos-engineering/) | 稳态假设 + 受控注入 + 自动终止；没有预案的故障不注入 |
 | [单元化 set 化](/distributed/advanced/availability/06-cell-based/) | 分片基因贯穿流量/数据/应用，单元内闭环多活，切流先停写追平 |
+| [Seata AT 为什么无侵入](/seata/basic/core/01-seata-core/) | 一阶段执行 SQL 时自动记前后镜像 undo log 并直接提交本地事务，失败按 beforeImage 反向补偿 |
+| [AT 模式是什么隔离级别](/seata/basic/core/02-seata-deep-dive/) | 默认读未提交，写隔离靠提交前向 TC 申请行级全局锁；热点行退化串行，应换 TCC/消息最终一致 |
 
 ## 系统设计
 
@@ -197,5 +253,5 @@ description: 全站高频面试八股的一句话答案索引——Java、MySQL�
 - 冲刺模式：每天过 2~3 组，卡壳的条目点进完整笔记重读推导。
 - 面试现场：先给一句话核心，再按追问展开——与各篇笔记
   "先结论后论证"的结构一致。
-- 本手册聚焦后端面试高频区；AI、Python、前端等方向请直接走
+- 本手册覆盖全站方向并持续补充；尚未收录的主题请直接走
   各方向学习路线页。

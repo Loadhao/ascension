@@ -1,0 +1,69 @@
+{
+  "questions": [
+    {
+      "id": "pg-mvcc-001",
+      "noteId": "postgresql/basic/core/01-pg-vs-mysql",
+      "type": "single",
+      "q": "从 MySQL 迁到 PostgreSQL 后，写入量大的表出现表和索引占用持续增长、查询变慢。按两者 MVCC 实现的差异，最可能的根因是？",
+      "options": [
+        "PG 的 MVCC 把旧版本放 undo log，purge 线程清理不及",
+        "PG 的 UPDATE 是写新元组+留旧元组，死元组靠 VACUUM 回收，清理跟不上就表膨胀",
+        "PG 没有 redo log，脏页直接写表导致页数增长",
+        "PG 的 WAL 是逻辑日志，空间回收依赖备库回放"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "「旧版本放 undo log、purge 清理」恰恰是 InnoDB 的做法，PG 是表内多版本共存、靠 VACUUM 回收；WAL 是物理日志且与表膨胀无关——两个干扰项都是用 MySQL 视角制造的错觉。"
+    },
+    {
+      "id": "pg-pgpool-002",
+      "noteId": "postgresql/intermediate/ha/01-pgpool-postgres-xl",
+      "type": "judge",
+      "q": "Pgpool-II 的复制负载均衡对写请求同样有效，写操作也可以按权重分发到备库。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "负载均衡只对读有效，写永远只走主库——Pgpool-II 本质是代理，不改变单主写架构，这正是它与 Postgres-XL（写可水平扩展）的本质分界。"
+    },
+    {
+      "id": "pg-sync-003",
+      "noteId": "postgresql/intermediate/ha/02-pgpool-dr",
+      "type": "single",
+      "q": "流复制场景下，业务要求事务提交返回时「备库已把 WAL 回放完成、可立即对外查询」，synchronous_commit 应设为哪一档？",
+      "options": [
+        "local",
+        "remote_write",
+        "on",
+        "remote_apply"
+      ],
+      "answer": [
+        3
+      ],
+      "hint": "local 只保证主库本地持久化；remote_write 只到备库 OS 缓存（未 fsync）；on 等的是备库 WAL 持久化而不是回放完成——只差「已落盘」和「已可查」这一步，最容易错选 on。"
+    },
+    {
+      "id": "pg-vacuum-004",
+      "noteId": "postgresql/advanced/performance/01-tuning",
+      "type": "multiple",
+      "q": "关于 PostgreSQL 的 VACUUM 与表膨胀，下列说法正确的有？（多选）",
+      "options": [
+        "VACUUM FULL 整表重写、彻底收缩，但拿排他锁，线上要慎用",
+        "普通 VACUUM 回收的死元组空间可复用，但不归还操作系统",
+        "长事务和废弃复制槽持有旧快照，会阻止 VACUUM 清理，是膨胀的常见元凶",
+        "ANALYZE 负责回收死元组空间，autovacuum 负责更新统计信息",
+        "autovacuum_vacuum_scale_factor 调得越大，清理触发得越频繁"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "第 4 项把分工说反了——ANALYZE 只更新统计信息、不做空间回收；第 5 项方向反了，scale_factor 是死元组占比的触发阈值，大表要调小到 0.01~0.05 才清得更勤。"
+    }
+  ]
+}

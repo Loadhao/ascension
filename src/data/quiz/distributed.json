@@ -1,0 +1,66 @@
+{
+  "questions": [
+    {
+      "id": "dist-cap-001",
+      "noteId": "distributed/basic/theory/01-cap-base",
+      "type": "single",
+      "q": "关于 CAP 定理，下列理解正确的是？",
+      "options": [
+        "分布式系统必须在 C、A、P 三者中任意放弃两个才能工作",
+        "P 是前提，真实取舍是分区发生时保 C 还是保 A；ZooKeeper 挂掉过半节点后会拒绝所有写请求（CP）",
+        "CAP 里的 A 指系统可用率达到 99.9% 以上",
+        "AP 系统就是不要一致性，数据永远无法收敛"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "「三选二」是最大误区——P 不是可选项，放弃 P 意味着分区时直接停服；CAP 的 A 指每个请求都得到非错误响应，不是 SLA 可用率；BASE 放弃的是实时强一致，最终仍收敛。"
+    },
+    {
+      "id": "dist-raft-002",
+      "noteId": "distributed/intermediate/consensus/01-paxos-raft",
+      "type": "single",
+      "q": "5 节点 Raft 集群被网络分区劈成 3+2 两边，两侧行为是？",
+      "options": [
+        "2 节点一侧的旧主靠任期更高仍能提交写入，3 节点一侧反而阻塞",
+        "3 节点一侧能选出新主并提交写入；2 节点一侧旧主凑不齐过半，最多服务只读",
+        "两边各自选主并行写入，分区恢复后靠时间戳 LWW 合并",
+        "整个集群立即整体不可用，直到分区恢复"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "提交必须过半确认——少数派一侧任期再高也写不进；多数派一侧照常服务，不必整体不可用；恢复后少数派日志被新主覆盖对齐，一致性无伤。"
+    },
+    {
+      "id": "dist-tcc-003",
+      "noteId": "distributed/intermediate/transaction/01-distributed-transaction",
+      "type": "single",
+      "q": "TCC 场景中 Cancel 先执行完，之后迟到的 Try 才到达——这属于哪个问题，正确处理是？",
+      "options": [
+        "空回滚：说明 Try 已丢失，Cancel 报错并终止事务",
+        "悬挂：Try 要查事务控制表发现已 Cancel，拒绝执行",
+        "幂等：属于重复调用场景，Confirm 重试即可覆盖",
+        "数据不一致：说明本地事务没提交成功，应回滚订单库"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "空回滚与悬挂是一对高频混淆：空回滚说的是「Cancel 先到时 Cancel 怎么办」（识别没 Try 过、不报错），题干问的是迟到的 Try 怎么办——检查「已 Cancel」并拒绝执行，这就是悬挂。"
+    },
+    {
+      "id": "dist-quorum-004",
+      "noteId": "distributed/advanced/availability/02-split-brain",
+      "type": "judge",
+      "q": "集群节点从 3 个扩到 4 个后，容错能力随之提升到可以容忍 2 台故障。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "容忍度按过半算：4 节点过半是 3，仍只容忍 1 台——第 4 台只增加同步开销不加容错；想容 2 台得按 2F+1 上 5 节点，这就是集群要奇数的原因。"
+    }
+  ]
+}
