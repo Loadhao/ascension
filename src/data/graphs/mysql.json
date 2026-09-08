@@ -8,7 +8,8 @@
     { "id": "locks", "label": "锁机制", "href": "/mysql/intermediate/transaction-lock/02-locks/", "group": "事务与锁" },
     { "id": "logs", "label": "三大日志", "href": "/mysql/intermediate/transaction-lock/03-redo-undo-binlog/", "group": "事务与锁" },
     { "id": "optimization", "label": "SQL 优化", "href": "/mysql/advanced/performance-ha/01-optimization/", "group": "性能与高可用" },
-    { "id": "replication", "label": "复制与分片", "href": "/mysql/advanced/performance-ha/02-replication-sharding/", "group": "性能与高可用" }
+    { "id": "replication", "label": "复制与分片", "href": "/mysql/advanced/performance-ha/02-replication-sharding/", "group": "性能与高可用" },
+    { "id": "onlineddl", "label": "大表 Online DDL", "href": "/mysql/advanced/performance-ha/03-online-ddl/", "group": "性能与高可用" }
   ],
   "edges": [
     { "source": "root", "target": "sqlexec" },
@@ -21,6 +22,8 @@
     { "source": "mvcc", "target": "logs", "label": "undo 版本链" },
     { "source": "index", "target": "optimization", "label": "explain 排查" },
     { "source": "optimization", "target": "replication", "label": "优化到头再分片" },
-    { "source": "logs", "target": "replication", "label": "binlog 复制" }
+    { "source": "logs", "target": "replication", "label": "binlog 复制" },
+    { "source": "replication", "target": "onlineddl", "label": "gh-ost 限速看复制延迟" },
+    { "source": "locks", "target": "onlineddl", "label": "MDL 锁卡 DDL" }
   ]
 }

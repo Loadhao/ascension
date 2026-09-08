@@ -3,6 +3,9 @@
     { "id": "root", "label": "Redis", "group": "核心" },
     { "id": "redisdata", "label": "数据结构与编码", "href": "/redis/basic/core/01-data-structures/", "group": "核心" },
     { "id": "persistence", "label": "持久化", "href": "/redis/basic/core/02-persistence/", "group": "核心" },
+    { "id": "threadmodel", "label": "线程模型", "href": "/redis/basic/core/03-thread-model/", "group": "核心" },
+    { "id": "pipelinelua", "label": "管道事务与 Lua", "href": "/redis/intermediate/usage/05-pipeline-transaction-lua/", "group": "使用进阶" },
+    { "id": "bigkey", "label": "大 key 与热 key", "href": "/redis/intermediate/usage/06-bigkey-hotkey/", "group": "使用进阶" },
     { "id": "eviction", "label": "过期与淘汰", "href": "/redis/intermediate/usage/01-expiration-eviction/", "group": "使用进阶" },
     { "id": "cacheproblems", "label": "缓存三兄弟", "href": "/redis/intermediate/usage/02-cache-problems/", "group": "使用进阶" },
     { "id": "cachepatterns", "label": "缓存架构模式", "href": "/redis/intermediate/usage/04-cache-patterns/", "group": "使用进阶" },
@@ -18,6 +21,11 @@
     { "source": "eviction", "target": "cacheproblems", "label": "缓存使用姿势" },
     { "source": "cacheproblems", "target": "cachepatterns", "label": "出问题的表象 vs 不出问题的底子" },
     { "source": "cachepatterns", "target": "distlock", "label": "互斥重建进阶" },
-    { "source": "distlock", "target": "ha", "label": "主从切换丢锁" }
+    { "source": "distlock", "target": "ha", "label": "主从切换丢锁" },
+    { "source": "root", "target": "threadmodel", "label": "单线程公理" },
+    { "source": "threadmodel", "target": "bigkey", "label": "阻塞事故的根源" },
+    { "source": "threadmodel", "target": "pipelinelua", "label": "原子性的边界" },
+    { "source": "pipelinelua", "target": "distlock", "label": "Lua 原子脚本落地" },
+    { "source": "bigkey", "target": "eviction", "label": "过期删除的代价" }
   ]
 }
