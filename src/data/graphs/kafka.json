@@ -5,7 +5,8 @@
     { "id": "arch", "label": "架构与存储", "href": "/kafka/intermediate/core/01-kafka-architecture/", "group": "核心机制" },
     { "id": "isr", "label": "副本与 ISR", "href": "/kafka/intermediate/core/02-replica-isr/", "group": "核心机制" },
     { "id": "reliability", "label": "可靠性与幂等", "href": "/kafka/intermediate/core/03-reliability-idempotent/", "group": "核心机制" },
-    { "id": "throughput", "label": "高吞吐机制", "href": "/kafka/intermediate/core/04-high-throughput/", "group": "核心机制" }
+    { "id": "throughput", "label": "高吞吐机制", "href": "/kafka/intermediate/core/04-high-throughput/", "group": "核心机制" },
+    { "id": "rebalance", "label": "Rebalance", "href": "/kafka/intermediate/core/05-rebalance/", "group": "核心机制" }
   ],
   "edges": [
     { "source": "root", "target": "whymq" },
@@ -14,6 +15,8 @@
     { "source": "root", "target": "throughput" },
     { "source": "arch", "target": "isr", "label": "多副本高可用" },
     { "source": "isr", "target": "reliability", "label": "acks 联动" },
-    { "source": "throughput", "target": "reliability", "label": "acks 权衡" }
+    { "source": "throughput", "target": "reliability", "label": "acks 权衡" },
+    { "source": "arch", "target": "rebalance", "label": "消费组运作" },
+    { "source": "rebalance", "target": "reliability", "label": "重复消费来源" }
   ]
 }
