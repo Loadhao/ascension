@@ -1,0 +1,40 @@
+src/content/docs/java/advanced/jvm/09-bytecode.md
+  h_9324126a55eff3 1-103
+src/content/docs/java/basic/collection/06-copyonwritearraylist.md
+  h_9324126a55eff3 1-104
+src/content/docs/java/basic/io/03-tcp-sticky-packets.md
+  h_9324126a55eff3 1-87
+src/content/docs/java/basic/syntax/10-spi.md
+  h_9324126a55eff3 1-102
+src/content/docs/java/intermediate/design-pattern/05-adapter.md
+  h_9324126a55eff3 1-122
+src/content/docs/java/intermediate/design-pattern/06-proxy.md
+  h_9324126a55eff3 1-148
+src/content/docs/java/intermediate/design-pattern/07-decorator.md
+  h_9324126a55eff3 1-98
+src/content/docs/java/intermediate/design-pattern/09-strategy.md
+  h_9324126a55eff3 1-110
+src/content/docs/java/intermediate/design-pattern/10-template-method.md
+  h_9324126a55eff3 1-105
+src/content/docs/java/intermediate/design-pattern/11-observer.md
+  h_9324126a55eff3 1-107
+src/content/docs/java/intermediate/design-pattern/12-chain-of-responsibility.md
+  h_9324126a55eff3 1-95
+src/content/docs/java/intermediate/design-pattern/14-visitor-mediator.md
+  h_9324126a55eff3 1-108
+src/content/docs/java/intermediate/spring/10-extension-points.md
+  h_9324126a55eff3 1-109
+src/data/graphs/java.json
+  h_9324126a55eff3 49-53,82-89,159-168,200-210
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "d263d6e5a918f66268bc01cea1afd7861aaf8f7f",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
