@@ -1,0 +1,30 @@
+astro.config.mjs
+  h_9324126a55eff3 260-261,341-343,889-896,931-939,964
+src/content/docs/distributed/advanced/availability/03-release-strategies.md
+  h_9324126a55eff3 1-102
+src/content/docs/distributed/index.mdx
+  h_9324126a55eff3 16-22
+src/content/docs/distributed/intermediate/case-studies/01-flash-sale.md
+  h_9324126a55eff3 1-110
+src/content/docs/distributed/intermediate/case-studies/02-short-url.md
+  h_9324126a55eff3 1-88
+src/content/docs/distributed/intermediate/case-studies/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/distributed/intermediate/sharding/01-sharding-methods.md
+  h_9324126a55eff3 1-122
+src/content/docs/distributed/intermediate/sharding/index.mdx
+  h_9324126a55eff3 1-14
+src/data/graphs/distributed.json
+  h_9324126a55eff3 19-21,28,66-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "1222a9fc8b239968d903181f750e6cee7f534ce8",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
