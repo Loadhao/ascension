@@ -126,8 +126,6 @@ sequenceDiagram
     C2->>S: 写入 (token=34)
     C1-->>S: 醒来写入 (token=33)
     S-->>C1: 拒绝！33 < 34
-    class S good
-    classDef good stroke-width:1.5px
 ```
 
 token 由锁服务**单调递增**发放，存储层记录见过的最大 token，

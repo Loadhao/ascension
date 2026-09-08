@@ -24,7 +24,7 @@ docker run --mount type=bind,source=$(pwd)/conf,target=/etc/nginx/conf.d nginx
 
 ```mermaid
 flowchart TD
-    A[需要持久化数据?] --> -- 否 --> B[tmpfs 或不挂载]
+    A -->|否| B["tmpfs 或不挂载"]
     A -- 是 --> C{宿主直接编辑文件?}
     C -- 是：配置/代码热更 --> D[bind mount]
     C -- 否：数据库/制品 --> E[具名卷<br/>性能好、可备份、跨平台]

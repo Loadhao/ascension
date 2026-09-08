@@ -100,7 +100,7 @@ flowchart LR
     end
     subgraph GOOD["倒置后"]
         C["OrderService"] -->|"依赖"| I["«interface» OrderDao"]
-        I -.->|"实现".-> D1["MySqlOrderDao"]
+        I -.->|"实现"| D1["MySqlOrderDao"]
         I -.-> D2["MongoOrderDao"]
     end
 

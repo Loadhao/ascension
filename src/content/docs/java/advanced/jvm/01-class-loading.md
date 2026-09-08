@@ -85,7 +85,7 @@ protected Class<?> loadClass(String name, boolean resolve) {
 
 ```mermaid
 flowchart LR
-    REQ["loadClass(\"com.demo.App\")"] --> APP["Application"]
+    REQ["loadClass(#quot;com.demo.App#quot;)"] --> APP["Application"]
     APP -->|"①先委派"| PLAT["Platform"]
     PLAT -->|"②再委派"| BOOT["Bootstrap"]
     BOOT -->|"③java.* 找得到<br/>rt.jar 里的类在这收尾"| OK["返回 Class"]
