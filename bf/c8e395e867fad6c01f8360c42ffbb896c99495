@@ -1,0 +1,20 @@
+src/styles/custom.css
+  s_f2ade91cb577a8::t_b97170204dc46e 446-448
+  s_f2ade91cb577a8::t_a27ffdc8ecf523 56-64,449
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "bfc8e395e867fad6c01f8360c42ffbb896c99495",
+  "prompts": {},
+  "sessions": {
+    "s_f2ade91cb577a8": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "77371b6d-c9d7-49be-b3ba-1951b5c82487",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
