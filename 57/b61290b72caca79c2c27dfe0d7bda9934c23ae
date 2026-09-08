@@ -1,0 +1,16 @@
+public/scripts/sidebar-tree.js
+  h_9324126a55eff3 70-71,73
+src/styles/custom.css
+  h_9324126a55eff3 219-221,223-225,229-232
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "57b61290b72caca79c2c27dfe0d7bda9934c23ae",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
