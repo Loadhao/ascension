@@ -1196,6 +1196,20 @@ export default defineConfig({
               items: [
                 { label: '学习路线', link: '/kafka/' },
                 {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '消息队列基础',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/kafka/basic/core/' },
+                        { label: '消息队列三问：是什么、为什么、代价是什么', link: '/kafka/basic/core/01-why-mq/' },
+                      ],
+                    },
+                  ],
+                },
+                {
                   label: '中级',
                   collapsed: true,
                   items: [
