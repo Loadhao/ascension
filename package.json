@@ -8,7 +8,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "verify:docs": "node scripts/consistency-verify.mjs && node scripts/mermaid-syntax-verify.mjs",
+    "verify:contrast": "node scripts/mermaid-contrast-verify.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.0",
