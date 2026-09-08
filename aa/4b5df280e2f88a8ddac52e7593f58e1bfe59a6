@@ -1,0 +1,14 @@
+src/content/docs/guide/quiz.mdx
+  h_9324126a55eff3 9-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "aa4b5df280e2f88a8ddac52e7593f58e1bfe59a6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
