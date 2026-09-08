@@ -1,0 +1,13 @@
+---
+title: 索引与执行计划
+description: B-tree / GIN / GiST / BRIN 怎么选、EXPLAIN 里 Seq Scan 与 Bitmap 的含义——先选对索引类型再谈调参
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+差异地图把「PG 索引家族碾压 MySQL」写成选型理由；调优篇从慢 SQL
+切入 EXPLAIN。本分类把两者中间那层补上：**哪种类型解决哪类谓词、
+执行计划节点怎么读**。不涉及 `random_page_cost` 这类旋钮（见高级
+调优）。点击右侧圆点可标记学习状态（未学 → 学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="postgresql/intermediate/indexes" />

@@ -2,10 +2,15 @@
   "nodes": [
     { "id": "root", "label": "Seata", "group": "核心" },
     { "id": "core", "label": "核心机制", "href": "/seata/basic/core/01-seata-core/", "group": "核心机制" },
-    { "id": "deep", "label": "高频追问", "href": "/seata/basic/core/02-seata-deep-dive/", "group": "核心机制" }
+    { "id": "deep", "label": "高频追问", "href": "/seata/basic/core/02-seata-deep-dive/", "group": "核心机制" },
+    { "id": "modes", "label": "AT/TCC/Saga 选型", "href": "/seata/intermediate/modes/01-at-tcc-saga/", "group": "事务模式" },
+    { "id": "undo", "label": "undo_log 与本地事务", "href": "/seata/intermediate/modes/02-undo-local-tx/", "group": "事务模式" }
   ],
   "edges": [
     { "source": "root", "target": "core" },
-    { "source": "core", "target": "deep", "label": "全局锁与失效" }
+    { "source": "core", "target": "deep", "label": "全局锁与失效" },
+    { "source": "core", "target": "modes", "label": "AT 不够用时换模式" },
+    { "source": "deep", "target": "undo", "label": "脏写的校验边界" },
+    { "source": "modes", "target": "undo", "label": "选了 AT 就要守契约" }
   ]
 }

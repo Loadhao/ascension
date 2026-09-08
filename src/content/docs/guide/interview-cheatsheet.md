@@ -162,6 +162,12 @@ Docker、Nginx、Git 等全站方向。
 | 问题 | 一句话答案 |
 |---|---|
 | [PG 与 MySQL 的 MVCC 差异](/postgresql/basic/core/01-pg-vs-mysql/) | PG 的 UPDATE 写新元组、旧元组留在表内等 VACUUM 回收（会表膨胀），InnoDB 旧版本放 undo log 由 purge 清理 |
+| [PG 默认隔离级别](/postgresql/basic/core/02-mvcc-isolation/) | 默认 RC：每条 SQL 一张新快照；RU 在 PG 等同 RC 不脏读；RR/Serializable 才是事务级快照，写冲突 serialization failure 重试 |
+| [PG 的 xmin/xmax](/postgresql/basic/core/02-mvcc-isolation/) | xmin 插入事务、xmax 删除/更新事务；可见性看快照里插入者已定局、删除者尚未定局 |
+| [PG 索引类型怎么选](/postgresql/intermediate/indexes/01-index-types-explain/) | 等值范围 B-tree，JSONB/数组/全文 GIN，GIS/范围 GiST，物理有序大时序表 BRIN |
+| [EXPLAIN 里 Bitmap Heap Scan](/postgresql/intermediate/indexes/01-index-types-explain/) | 中等选择性的正常计划：tid 先在内存建位图再按页回表，不是「没走索引」 |
+| [PG WAL 是什么](/postgresql/intermediate/wal/01-wal/) | 物理预写日志，提交成功=日志落盘；崩溃从 checkpoint 重放；full_page_writes 防半页写 |
+| [PITR 要两样东西](/postgresql/intermediate/wal/01-wal/) | 基础备份 + 之后连续的 WAL 归档；缺一段只能恢复到缺口，废弃复制槽会把盘写满 |
 | [Pgpool-II 与 Postgres-XL 怎么选](/postgresql/intermediate/ha/01-pgpool-postgres-xl/) | 要容灾与读扩展选零侵入中间件 Pgpool-II（连接池+读负载均衡+故障转移，写仍单主）；要写扩展选改源码的 Postgres-XL |
 | [pgpool 容灾怎么防脑裂](/postgresql/intermediate/ha/02-pgpool-dr/) | 多 pgpool 互为 watchdog，quorum 多数派决策——只有拿到多数票的才持有 VIP 并执行 failover |
 | [PG 表膨胀的根因与治理](/postgresql/advanced/performance/01-tuning/) | MVCC 死元组 + VACUUM 跟不上——调小 autovacuum_vacuum_scale_factor、清掉阻止清理的长事务与废弃复制槽；VACUUM FULL 拿排他锁慎用 |
@@ -232,6 +238,9 @@ Docker、Nginx、Git 等全站方向。
 | [RabbitMQ 可靠投递](/rabbitmq/basic/core/02-reliable-delivery/) | confirm + 实体 durable + 消息持久化 + 手动 ack；毒消息进死信别反复 requeue |
 | [RabbitMQ 集群](/rabbitmq/intermediate/usage/02-cluster-ha/) | 默认只同步元数据，普通队列消息只在声明节点；要 HA 用仲裁队列 |
 | [NameServer 为何无中心](/rocketmq/basic/core/01-rocketmq-architecture/) | 路由粒度粗、稍旧可重试，取 AP 即可，不值得为路由上共识 |
+| [Tag 过滤为什么便宜](/rocketmq/intermediate/core/01-tag-sql92/) | ConsumeQueue 带 tag hash，Broker 可比 hash 跳过不读体；同消费组订阅必须一致，过滤不减少写入 |
+| [SQL92 和 Tag 怎么选](/rocketmq/intermediate/core/01-tag-sql92/) | 少数离散类别用 Tag；多维度/范围才用 SQL92（几乎必读属性，吞吐差一档） |
+| [Broker 挂了为何还往它发](/rocketmq/intermediate/core/02-nameserver-route/) | NameServer 约 120s 无心跳才摘除，客户端还有 ~30s 本地缓存，失败重试并刷新路由 |
 | [集群消费 vs 广播](/rocketmq/basic/core/02-consumer-semantics/) | 集群：组内一人消费、进度在 Broker、有 %RETRY%；广播全量、进度在本地、无重试 |
 | [send() 返回成功就落盘了吗](/kafka/basic/core/03-producer-path/) | 不——只代表进了累加器；确认要 get() 拿 Future 或回调，「发完就忘」是丢消息的高发姿势 |
 | [RocketMQ 消费失败会阻塞吗](/rocketmq/basic/core/02-consumer-semantics/) | 不会——失败进 %RETRY% 按延迟级别递增重试 16 次，仍失败进 %DLQ% 死信，新消息继续消费 |
@@ -465,6 +474,10 @@ Docker、Nginx、Git 等全站方向。
 | [分库分表什么时候做](/distributed/intermediate/sharding/01-sharding-methods/) | 先调优再分片；分片键让高频查询单片命中，基因法补多维度 |
 | [定时任务多实例防重](/distributed/intermediate/coordination/03-distributed-scheduler/) | 锁兜底 → 选主单跑 → 分片广播并行，幂等贯穿所有层 |
 | [ZAB 和 2PC 区别](/zookeeper/basic/core/02-zk-deep-dive/) | ZAB 过半即提交、失败重选主不回滚——根治 2PC 阻塞与单点 |
+| [ZK 选主如何避免羊群](/zookeeper/intermediate/coordination/01-ephemeral-election/) | 临时顺序节点 + 只 Watch 前驱，每次只叫醒一个后继；算法不管半死会话，下游仍要 fencing |
+| [ZK 集合为什么是 3/5](/zookeeper/intermediate/ops/01-zab-production/) | 奇数保证过半容错；偶数不增加可挂台数还抬高写延迟；读扩展加 Observer 不进 quorum |
+| [etcd 为什么突然只读](/etcd/intermediate/ops/01-quota-compaction-defrag/) | 默认 2GiB 配额打满触发 NOSPACE；须 compact + defrag 再 disarm，只解告警会立刻再炸 |
+| [etcd Leader 一抖读也挂](/etcd/intermediate/ops/02-leader-failover/) | 默认线性读要 ReadIndex 找 Leader；空窗内写和线性读一起失败，serializable 读才能扛 |
 | [ZK 是什么](/zookeeper/basic/core/01-zookeeper-core/) | 强一致协调服务：znode 树 + 临时节点 + Watch，写走 Leader 再 ZAB 广播 |
 | [ZK 分布式锁为什么用临时顺序节点](/zookeeper/basic/core/01-zookeeper-core/) | 临时节点随会话断开自动删除防死锁，顺序节点单调递增序号让最小者持锁——选主与注册中心同理 |
 | [etcd Watch 的优势](/etcd/basic/core/02-etcd-lease-txn-watch/) | 按 revision 续传断线不丢事件，撞 compaction 要全量重拉 |
@@ -474,6 +487,9 @@ Docker、Nginx、Git 等全站方向。
 | [单元化 set 化](/distributed/advanced/availability/06-cell-based/) | 分片基因贯穿流量/数据/应用，单元内闭环多活，切流先停写追平 |
 | [Seata AT 为什么无侵入](/seata/basic/core/01-seata-core/) | 一阶段执行 SQL 时自动记前后镜像 undo log 并直接提交本地事务，失败按 beforeImage 反向补偿 |
 | [AT 模式是什么隔离级别](/seata/basic/core/02-seata-deep-dive/) | 默认读未提交，写隔离靠提交前向 TC 申请行级全局锁；热点行退化串行，应换 TCC/消息最终一致 |
+| [AT/TCC/Saga 怎么选](/seata/intermediate/modes/01-at-tcc-saga/) | 可逆短链路用 AT，热点预留用 TCC，长流程补偿用 Saga；不要按哪个注解好写倒推 |
+| [AT 脏写是什么](/seata/intermediate/modes/02-undo-local-tx/) | 回滚时当前行 ≠ afterImage，自动补偿拒绝；旁路本地事务/直连 SQL 不抢全局锁是主入口 |
+| [AT 里能不能 REQUIRES_NEW](/seata/intermediate/modes/02-undo-local-tx/) | 不能——undo_log 必须与业务 SQL 同一本地事务提交，独立提交会拆掉镜像契约 |
 | [etcd 写路径](/etcd/basic/core/01-etcd-core/) | 只有 Leader 处理写，Raft 日志过半提交；Lease 到期自动删挂在其上的 key |
 | [etcd 凭什么当 K8s 的存储](/etcd/basic/core/01-etcd-core/) | Raft 强一致 KV + MVCC revision 可回溯 + Watch 前缀订阅——K8s 控制循环的数据底座 |
 | [ZK Watcher](/zookeeper/basic/core/02-zk-deep-dive/) | 一次性触发，重注册间隙会丢变更——靠版本号补拉；半死 session 需 fencing 自保 |

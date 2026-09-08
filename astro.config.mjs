@@ -812,6 +812,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/postgresql/basic/core/' },
                         { label: 'PostgreSQL 与 MySQL：一张差异地图', link: '/postgresql/basic/core/01-pg-vs-mysql/' },
+                        { label: '事务隔离与 MVCC', link: '/postgresql/basic/core/02-mvcc-isolation/' },
                       ],
                     },
                   ],
@@ -827,6 +828,22 @@ export default defineConfig({
                         { label: '概览', link: '/postgresql/intermediate/ha/' },
                         { label: 'Pgpool-II 与 Postgres-XL', link: '/postgresql/intermediate/ha/01-pgpool-postgres-xl/' },
                         { label: 'pgpool 容灾高可用', link: '/postgresql/intermediate/ha/02-pgpool-dr/' },
+                      ],
+                    },
+                    {
+                      label: '索引与执行计划',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/postgresql/intermediate/indexes/' },
+                        { label: '索引类型与 EXPLAIN', link: '/postgresql/intermediate/indexes/01-index-types-explain/' },
+                      ],
+                    },
+                    {
+                      label: 'WAL 与持久化',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/postgresql/intermediate/wal/' },
+                        { label: 'WAL、checkpoint 与时间点恢复', link: '/postgresql/intermediate/wal/01-wal/' },
                       ],
                     },
                   ],
@@ -1184,6 +1201,28 @@ export default defineConfig({
                     },
                   ],
                 },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '协调配方',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/zookeeper/intermediate/coordination/' },
+                        { label: '临时顺序节点与选主', link: '/zookeeper/intermediate/coordination/01-ephemeral-election/' },
+                      ],
+                    },
+                    {
+                      label: '生产注意点',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/zookeeper/intermediate/ops/' },
+                        { label: 'ZAB 生产注意点', link: '/zookeeper/intermediate/ops/01-zab-production/' },
+                      ],
+                    },
+                  ],
+                },
               ],
             },
             {
@@ -1206,6 +1245,21 @@ export default defineConfig({
                     },
                   ],
                 },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '运维与故障',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/etcd/intermediate/ops/' },
+                        { label: '空间配额、Compaction 与 Defrag', link: '/etcd/intermediate/ops/01-quota-compaction-defrag/' },
+                        { label: 'Leader 切换对客户端的影响', link: '/etcd/intermediate/ops/02-leader-failover/' },
+                      ],
+                    },
+                  ],
+                },
               ],
             },
             {
@@ -1224,6 +1278,21 @@ export default defineConfig({
                         { label: '概览', link: '/seata/basic/core/' },
                         { label: 'Seata 核心机制', link: '/seata/basic/core/01-seata-core/' },
                         { label: '高频追问：全局锁与失效场景', link: '/seata/basic/core/02-seata-deep-dive/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '事务模式',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/seata/intermediate/modes/' },
+                        { label: 'AT、TCC、Saga 怎么选', link: '/seata/intermediate/modes/01-at-tcc-saga/' },
+                        { label: 'undo_log 脏写边界与本地事务陷阱', link: '/seata/intermediate/modes/02-undo-local-tx/' },
                       ],
                     },
                   ],
@@ -1323,6 +1392,21 @@ export default defineConfig({
                         { label: '概览', link: '/rocketmq/basic/core/' },
                         { label: 'RocketMQ 架构与消息模型', link: '/rocketmq/basic/core/01-rocketmq-architecture/' },
                         { label: '消费语义：模式、重试与位移', link: '/rocketmq/basic/core/02-consumer-semantics/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '过滤与路由',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/rocketmq/intermediate/core/' },
+                        { label: 'Tag 与 SQL92 过滤', link: '/rocketmq/intermediate/core/01-tag-sql92/' },
+                        { label: 'NameServer 路由与队列选择', link: '/rocketmq/intermediate/core/02-nameserver-route/' },
                       ],
                     },
                   ],

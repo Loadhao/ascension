@@ -3,6 +3,8 @@
     { "id": "root", "label": "RocketMQ", "group": "核心" },
     { "id": "arch", "label": "架构与消息模型", "href": "/rocketmq/basic/core/01-rocketmq-architecture/", "group": "基础" },
     { "id": "consumer", "label": "消费语义", "href": "/rocketmq/basic/core/02-consumer-semantics/", "group": "基础" },
+    { "id": "tag", "label": "Tag 与 SQL92", "href": "/rocketmq/intermediate/core/01-tag-sql92/", "group": "过滤与路由" },
+    { "id": "route", "label": "NameServer 路由", "href": "/rocketmq/intermediate/core/02-nameserver-route/", "group": "过滤与路由" },
     { "id": "rocketmq", "label": "核心特性", "href": "/rocketmq/advanced/core/01-rocketmq-features/", "group": "核心专题" },
     { "id": "order", "label": "顺序与高性能", "href": "/rocketmq/advanced/core/02-order-performance/", "group": "核心专题" },
     { "id": "backlog", "label": "积压治理", "href": "/rocketmq/advanced/core/03-backlog/", "group": "核心专题" }
@@ -10,9 +12,14 @@
   "edges": [
     { "source": "root", "target": "arch" },
     { "source": "arch", "target": "consumer", "label": "消费端展开" },
+    { "source": "arch", "target": "tag", "label": "ConsumeQueue 带 tag hash" },
+    { "source": "arch", "target": "route", "label": "路由表怎么用" },
+    { "source": "route", "target": "rocketmq", "label": "主从与切主后重注册" },
     { "source": "consumer", "target": "rocketmq", "label": "重试与事务互补" },
     { "source": "arch", "target": "rocketmq", "label": "特性挂靠骨架" },
+    { "source": "tag", "target": "consumer", "label": "同组订阅必须一致" },
     { "source": "rocketmq", "target": "order", "label": "顺序消息实现" },
+    { "source": "route", "target": "order", "label": "顺序靠固定队列" },
     { "source": "order", "target": "backlog", "label": "消费不动了" }
   ]
 }

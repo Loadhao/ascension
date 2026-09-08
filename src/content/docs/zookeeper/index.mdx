@@ -13,8 +13,9 @@ import graph from '../../../data/graphs/zookeeper.json';
 
 当前覆盖**核心机制**：ZooKeeper 的数据模型、ZAB 一致性协议与典型
 应用场景，以及面试高频追问篇——ZAB 选举与广播细节、Watcher 一次性
-触发的陷阱、Session 过期与"半死"状态。横向的共识算法（Paxos/Raft）
-见「分布式」方向。
+触发的陷阱、Session 过期与"半死"状态；中级补上**选主/锁的标准算法**
+（临时顺序节点 + Watch 前驱）和 **ZAB 生产约束**（奇数集合、Observer、
+fsync）。横向的共识算法（Paxos/Raft）见「分布式」方向。
 
 <RoadmapIsland directionId="zookeeper" />
 

@@ -1,0 +1,14 @@
+---
+title: 事务模式
+description: AT / TCC / Saga 怎么选、undo_log 与本地事务如何嵌套——Seata 从「会用注解」到「选对模式」
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+基础篇把 AT 的三角色、全局锁和注解失效讲透了。中级回答下一问：
+**AT 不够用时换哪一种、三种模式的隔离与侵入差在哪，以及 undo_log
+怎样和 Spring 本地事务咬合**。理论档位对照见「分布式」方向的五种
+方案；这里只讲 Seata 落地时的选择与陷阱。点击右侧圆点可标记学习
+状态（未学 → 学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="seata/intermediate/modes" />

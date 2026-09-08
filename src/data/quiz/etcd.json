@@ -84,6 +84,61 @@
         1
       ],
       "hint": "compacted 不是抖动重试能解决的——压缩点之前的版本数据已被删，续传位点永远追不上；K8s informer 的 List+Watch+resync 就是标准兜底套路。"
+    },
+    {
+      "id": "etcd-quota-005",
+      "noteId": "etcd/intermediate/ops/01-quota-compaction-defrag",
+      "type": "single",
+      "difficulty": 4,
+      "q": "etcd 触发 NOSPACE 告警、集群拒绝写入，最准确的理解与处置是？",
+      "options": [
+        "操作系统磁盘已满，扩容数据盘后写会自动恢复",
+        "bbolt 后端达到配额（默认 2GiB），须 compact + defrag 后再 alarm disarm，只 disarm 会立刻再次超限",
+        "只要调大 --quota-backend-bytes 到 0（不限制）即可一劳永逸",
+        "compact 会同时缩小 db 文件，因此不必 defrag"
+      ],
+      "answer": [1],
+      "hint": "NOSPACE 是 etcd 自己的配额闸，不是 OS 磁盘满；compact 只删历史版本、文件体积几乎不变，defrag 才收空洞。调大配额只能推迟爆炸，还要开自动压缩。"
+    },
+    {
+      "id": "etcd-defrag-006",
+      "noteId": "etcd/intermediate/ops/01-quota-compaction-defrag",
+      "type": "judge",
+      "difficulty": 3,
+      "q": "对 Leader 做 defrag 会阻塞该成员一段时间，生产应先对 follower 逐台整理，必要时先 transfer-leadership。",
+      "options": ["正确", "错误"],
+      "answer": [0],
+      "hint": "三台同时 defrag 等于人为制造多数派丢失；看对指标：in_use 在 compact 后下降，文件实际大小在 defrag 后才下降。"
+    },
+    {
+      "id": "etcd-leader-007",
+      "noteId": "etcd/intermediate/ops/02-leader-failover",
+      "type": "single",
+      "difficulty": 4,
+      "q": "etcd Leader 选举窗口内，下列哪项仍然可用？",
+      "options": [
+        "普通写和 txn",
+        "默认的 linearizable 读",
+        "serializable 读（读本机状态机）",
+        "Lease KeepAlive 续租"
+      ],
+      "answer": [2],
+      "hint": "默认线性读要走 ReadIndex 向 Leader 证明『我还是主』，选举空窗里写和线性读一起失败；serializable 才不经过 Leader。"
+    },
+    {
+      "id": "etcd-learner-008",
+      "noteId": "etcd/intermediate/ops/02-leader-failover",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 etcd 客户端扛过 Leader 切换与 Learner，正确的有？（多选）",
+      "options": [
+        "客户端应配置全体成员 endpoint，只配当前 Leader 地址会在切换后硬超时",
+        "请求超时宜覆盖 2~3 倍 election timeout，否则会把『正在选主』误判成集群挂了",
+        "加节点应先加 Learner 再提升为投票者，直接加投票者会立刻改变 quorum 分母",
+        "Learner 可以当选 Leader，因此可单独作为写入口"
+      ],
+      "answer": [0, 1, 2],
+      "hint": "Learner 只复制不投票、不能当 Leader；线性读和写打到纯 Learner 会失败或被转发。"
     }
   ]
 }

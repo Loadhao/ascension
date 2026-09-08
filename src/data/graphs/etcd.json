@@ -2,10 +2,15 @@
   "nodes": [
     { "id": "root", "label": "etcd", "group": "核心" },
     { "id": "core", "label": "核心机制", "href": "/etcd/basic/core/01-etcd-core/", "group": "核心机制" },
-    { "id": "deep", "label": "Lease/txn/Watch", "href": "/etcd/basic/core/02-etcd-lease-txn-watch/", "group": "核心机制" }
+    { "id": "deep", "label": "Lease/txn/Watch", "href": "/etcd/basic/core/02-etcd-lease-txn-watch/", "group": "核心机制" },
+    { "id": "quota", "label": "配额与压缩整理", "href": "/etcd/intermediate/ops/01-quota-compaction-defrag/", "group": "运维与故障" },
+    { "id": "failover", "label": "Leader 切换", "href": "/etcd/intermediate/ops/02-leader-failover/", "group": "运维与故障" }
   ],
   "edges": [
     { "source": "root", "target": "core" },
-    { "source": "core", "target": "deep", "label": "协调三件套" }
+    { "source": "core", "target": "deep", "label": "协调三件套" },
+    { "source": "deep", "target": "quota", "label": "MVCC 历史要压" },
+    { "source": "core", "target": "failover", "label": "写与线性读都走 Leader" },
+    { "source": "quota", "target": "failover", "label": "defrag 前先迁 Leader" }
   ]
 }

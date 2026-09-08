@@ -37,6 +37,61 @@
         3
       ],
       "hint": "失效四坑与 @Transactional 同源：自调用、吞异常、非 public、数据源未代理；其中数据源未代理会连 undo log 都不生成，快速排查看 undo_log 表和 TC 三张表有无记录。"
+    },
+    {
+      "id": "seata-mode-003",
+      "noteId": "seata/intermediate/modes/01-at-tcc-saga",
+      "type": "single",
+      "difficulty": 4,
+      "q": "秒杀库存这种热点行，Seata 三种模式里更合适的是？",
+      "options": [
+        "AT：全局锁把同一行串行到全局事务结束，最正确",
+        "TCC：Try 用预留/条件更新消化冲突，不持有 TC 全局锁到二阶段结束",
+        "Saga：无隔离，但补偿能自动把库存加回去，适合强互斥",
+        "三种等价，只是注解不同"
+      ],
+      "answer": [1],
+      "hint": "AT 热点行退化为串行；Saga 中间态对外可见且不提供互斥。TCC 把隔离做成业务预留，Confirm/Cancel 必须幂等并处理空回滚。"
+    },
+    {
+      "id": "seata-tcc-004",
+      "noteId": "seata/intermediate/modes/01-at-tcc-saga",
+      "type": "multiple",
+      "difficulty": 3,
+      "q": "关于 AT / TCC / Saga 的失败语义，正确的有？（多选）",
+      "options": [
+        "AT 二阶段失败按 beforeImage 自动补偿，前提是 SQL 能生成镜像且 afterImage 仍匹配",
+        "TCC 的 Cancel 可能先于 Try 到达，必须记下空回滚，后到的 Try 应拒绝",
+        "Saga 正向步骤已提交，失败按相反顺序调补偿，不承诺强一致",
+        "Saga 是长事务版 AT，同样靠 undo_log 回滚"
+      ],
+      "answer": [0, 1, 2],
+      "hint": "Saga 没有 Try 预留也没有 undo_log，把长流程说成 AT 是错的。"
+    },
+    {
+      "id": "seata-dirty-005",
+      "noteId": "seata/intermediate/modes/02-undo-local-tx",
+      "type": "single",
+      "difficulty": 5,
+      "q": "AT 全局回滚抛出脏写，含义是？",
+      "options": [
+        "读到了别的全局事务未提交的数据",
+        "当前行已不等于 undo_log 的 afterImage，自动补偿会覆盖别人的提交，因此拒绝回滚",
+        "undo_log 表被 VACUUM 清掉了",
+        "TC 的全局锁超时，可以原样重试补偿"
+      ],
+      "answer": [1],
+      "hint": "脏写 ≠ 脏读。全局锁是预防，afterImage 校验是发现；发现后只能人工。旁路 @Transactional / 直连 SQL 不申请全局锁，是脏写主入口。"
+    },
+    {
+      "id": "seata-requires-new-006",
+      "noteId": "seata/intermediate/modes/02-undo-local-tx",
+      "type": "judge",
+      "difficulty": 4,
+      "q": "AT 分支内对业务方法使用 @Transactional(REQUIRES_NEW) 是推荐写法，因为本地事务先提交更短、锁更少。",
+      "options": ["正确", "错误"],
+      "answer": [1],
+      "hint": "undo_log 必须与业务 SQL 同一本地事务提交。REQUIRES_NEW 会把业务行先独立提交，拆掉这条契约，全局回滚时镜像失效或无归属。"
     }
   ]
 }
