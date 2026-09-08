@@ -334,6 +334,17 @@ export default defineConfig({
                         { label: '框架源码中的模式地图', link: '/java/intermediate/design-pattern/05-patterns-in-frameworks/' },
                       ],
                     },
+                    {
+                      label: 'Java 版本演进',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/java/intermediate/version/' },
+                        { label: 'Java 8：函数式革命的起点', link: '/java/intermediate/version/01-java8/' },
+                        { label: 'Java 9~11：模块化与语法糖', link: '/java/intermediate/version/02-java9-11/' },
+                        { label: 'Java 14~17：语言现代化', link: '/java/intermediate/version/03-java14-17/' },
+                        { label: 'Java 18~21：虚拟线程时代', link: '/java/intermediate/version/04-java18-21/' },
+                      ],
+                    },
                   ],
                 },
                 {
@@ -349,6 +360,10 @@ export default defineConfig({
                         { label: '运行时数据区', link: '/java/advanced/jvm/02-memory/' },
                         { label: '垃圾回收算法与收集器', link: '/java/advanced/jvm/03-garbage-collection/' },
                         { label: '四种引用：强、软、弱、虚', link: '/java/advanced/jvm/04-references/' },
+                        { label: '对象内存布局与指针压缩', link: '/java/advanced/jvm/05-object-layout/' },
+                        { label: 'JIT 即时编译与逃逸分析', link: '/java/advanced/jvm/06-jit/' },
+                        { label: 'JVM 参数与调优', link: '/java/advanced/jvm/07-tuning/' },
+                        { label: '线上故障排查实战', link: '/java/advanced/jvm/08-troubleshooting/' },
                       ],
                     },
                     {
