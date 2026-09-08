@@ -90,9 +90,39 @@ const mermaidStyle = {
   },
 };
 
+// 站点部署在 base 子路径下，Markdown/MDX 正文里以 / 开头的站内链接不会被
+// 自动补 base 前缀，构建后原样输出导致线上 404（侧边栏等组件链接不受影响）。
+// 统一在 mdast 阶段改写：跳过 // 开头的外链、# 锚点与已带 base 的路径。
+const SITE_BASE = '/ascension/';
+
+function remarkPrefixBase(base) {
+  const bareBase = base.replace(/\/$/, '');
+  const visit = (node) => {
+    if (Array.isArray(node)) {
+      node.forEach(visit);
+      return;
+    }
+    if (!node || typeof node !== 'object') return;
+    if (
+      (node.type === 'link' || node.type === 'image' || node.type === 'definition') &&
+      typeof node.url === 'string' &&
+      node.url.startsWith('/') &&
+      !node.url.startsWith('//') &&
+      !node.url.startsWith(bareBase + '/') &&
+      node.url !== bareBase
+    ) {
+      node.url = bareBase + node.url;
+    }
+    for (const child of Object.values(node)) {
+      if (child && typeof child === 'object') visit(child);
+    }
+  };
+  return () => (tree) => visit(tree);
+}
+
 export default defineConfig({
   site: 'https://loadhao.github.io',
-  base: '/ascension/',
+  base: SITE_BASE,
   integrations: [
     react(),
     starlight({
@@ -1800,7 +1830,10 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    processor: unified({ rehypePlugins: [[rehypeMermaid, { mermaidConfig: mermaidStyle }]] }),
+    processor: unified({
+      remarkPlugins: [remarkPrefixBase(SITE_BASE)],
+      rehypePlugins: [[rehypeMermaid, { mermaidConfig: mermaidStyle }]],
+    }),
     // 代码块双主题：跟随站点明暗切换（github-light / github-dark）
     syntaxHighlight: {
       type: 'shiki',
