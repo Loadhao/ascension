@@ -294,6 +294,17 @@ main:has(.kg-fullbleed) {
   justify-content: flex-end;
   gap: 0.875rem;
 }
+.sl-search-status {
+  margin-inline-end: auto;
+  align-self: center;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: var(--sl-color-gray-3);
+}
+/* display 会压过 UA 的 [hidden] 规则，显式补上 */
+.sl-search-status[hidden] {
+  display: none;
+}
 .sl-sidebar-actions button {
   font-size: 0.6875rem;
   line-height: 1.4;
@@ -337,6 +348,10 @@ main:has(.kg-fullbleed) {
   /* 归零左栏让位：.main-frame 的 padding 与页头网格都消费该变量 */
   :root[data-sidebar-tree='collapsed'] {
     --sl-content-inline-start: 0rem;
+  }
+  /* 收起后正文列放宽（挂 .main-pane 作用域，避免波及页头网格的同名变量） */
+  :root[data-sidebar-tree='collapsed'] .main-pane {
+    --sl-content-width: 60rem;
   }
 }
 

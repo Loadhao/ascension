@@ -136,14 +136,21 @@ if (root) {
   // 目录过滤搜索：按笔记/分组标题匹配，命中项保留并展开祖先链，其余隐藏；清词还原
   const searchInput = root.querySelector('.sl-sidebar-search input');
   const searchClear = root.querySelector('.sl-search-clear');
+  const searchStatus = root.querySelector('.sl-search-status');
   if (searchInput && searchClear) {
     const lis = [...root.querySelectorAll('li')];
+    const setStatus = (q, matches) => {
+      if (!searchStatus) return;
+      searchStatus.hidden = !q;
+      searchStatus.textContent = q ? (matches > 0 ? `${matches} 条匹配` : '无匹配结果') : '';
+    };
     const applyFilter = () => {
       const q = searchInput.value.trim().toLowerCase();
       searchClear.hidden = !q;
       filtering = !!q;
       if (!q) {
         for (const li of lis) li.hidden = false;
+        setStatus('', 0);
         restoreState();
         return;
       }
@@ -169,6 +176,8 @@ if (root) {
           el.open = true;
         }
       }
+      const matches = lis.filter((li) => !li.hidden && li.querySelector(':scope > a')).length;
+      setStatus(q, matches);
     };
     let filterTimer = 0;
     searchInput.addEventListener('input', () => {
