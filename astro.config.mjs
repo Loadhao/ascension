@@ -1050,6 +1050,8 @@ export default defineConfig({
                         { label: '脑裂与仲裁：quorum 与 fencing', link: '/distributed/advanced/availability/02-split-brain/' },
                         { label: '发布策略：滚动、蓝绿与金丝雀', link: '/distributed/advanced/availability/03-release-strategies/' },
                         { label: '全链路灰度：泳道与流量染色', link: '/distributed/advanced/availability/04-full-link-gray/' },
+                        { label: '混沌工程：主动制造故障', link: '/distributed/advanced/availability/05-chaos-engineering/' },
+                        { label: '单元化部署：异地多活的终态', link: '/distributed/advanced/availability/06-cell-based/' },
                       ],
                     },
                     {
