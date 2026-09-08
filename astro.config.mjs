@@ -824,6 +824,7 @@ export default defineConfig({
                         { label: '概览', link: '/distributed/basic/theory/' },
                         { label: 'CAP 与 BASE', link: '/distributed/basic/theory/01-cap-base/' },
                         { label: '一致性哈希', link: '/distributed/basic/theory/02-consistent-hashing/' },
+                        { label: '集群与分布式：概念与形态', link: '/distributed/basic/theory/03-cluster-vs-distributed/' },
                       ],
                     },
                   ],
@@ -858,6 +859,24 @@ export default defineConfig({
                         { label: '分布式 ID', link: '/distributed/intermediate/transaction/02-distributed-id/' },
                       ],
                     },
+                    {
+                      label: '集群架构',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/distributed/intermediate/cluster/' },
+                        { label: '负载均衡：从 DNS 到四层七层', link: '/distributed/intermediate/cluster/01-load-balancing/' },
+                        { label: '分布式会话：集群下的登录态', link: '/distributed/intermediate/cluster/02-session-sharing/' },
+                      ],
+                    },
+                    {
+                      label: '分布式协调',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/distributed/intermediate/coordination/' },
+                        { label: '分布式锁选型：Redis / ZooKeeper / etcd / 数据库', link: '/distributed/intermediate/coordination/01-distributed-lock-compare/' },
+                        { label: '接口幂等性设计', link: '/distributed/intermediate/coordination/02-idempotency/' },
+                      ],
+                    },
                   ],
                 },
                 {
@@ -870,6 +889,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/distributed/advanced/consistency/' },
                         { label: '数据一致性：从强一致到最终一致', link: '/distributed/advanced/consistency/01-consistency-patterns/' },
+                        { label: '缓存与数据库双写一致性', link: '/distributed/advanced/consistency/02-cache-consistency/' },
                       ],
                     },
                     {
@@ -878,6 +898,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/distributed/advanced/availability/' },
                         { label: '容灾与多活：RTO/RPO 与切换策略', link: '/distributed/advanced/availability/01-dr-multi-active/' },
+                        { label: '脑裂与仲裁：quorum 与 fencing', link: '/distributed/advanced/availability/02-split-brain/' },
                       ],
                     },
                     {

@@ -1,0 +1,14 @@
+---
+title: 分布式协调
+description: 分布式锁选型与接口幂等——多实例环境下"别重复干活"的两层防线
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+服务一拆多，单机内的 `synchronized` 就管不住别人家的实例了。这一
+分类讲多实例协作的两件必修课：**互斥**（同一时刻只让一个实例干活，
+分布式锁）与**防重**（同一操作重复执行也安全，幂等设计）。两者是
+面试高频区，也常被混为一谈——锁防并发，幂等防重放，互为补充。
+点击右侧圆点可标记学习状态（未学 → 学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="distributed/intermediate/coordination" />
