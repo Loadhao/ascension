@@ -105,6 +105,40 @@
 - 新证据与经验：①分类页导读质量整体很高（128/129 有实质简介），仅并行提交潮中遗漏一处；②体检维度清单扩至四项：一致性（侧边栏/图谱/覆盖率/内链）、Mermaid 对比度、frontmatter/level、分类页导读。
 - 下一轮入口：第三次启动候选——继续三件套模式补薄弱方向内容（推荐顺序：kafka basic 等级入门篇 → rocketmq/zookeeper 高频篇）；每轮开工先跑四项体检确认基线。
 
+### 第 7 轮（2026-09-08，第三次启动）
+
+- 选择：kafka basic 等级入门篇（状态文件既定入口）。
+- 依据：体检基线全绿（473 link/344 篇/覆盖率 100%/零断链/零空壳）；kafka 是方向密度表中薄弱且面试高频度最高的方向；工作区首次完全干净，无并行冲突风险。
+- 交付：新建 `kafka/basic/core/` 分类（对齐 rabbitmq 命名）——`01-why-mq.md`「消息队列三问」（同步/异步对比图、解耦削峰异步、代价三件、何时不用 MQ）+ 分类页 index.mdx 导读；侧边栏加"基础"分组；图谱加 whymq 节点与两条边。
+- 验证：`pnpm build` 480 页通过；新图表双主题对比度审计通过（244 页全绿）；提交 7970e4e 已推送（4 文件）。
+- 结论：补功能。
+- 新证据与经验：①rocketmq 只有 advanced/core 3 篇（特性/顺序性能/积压），**缺架构模型基础**——NameServer/Broker 主从/消息模型是 RocketMQ 面试最高频题；②zookeeper 仅 2 篇待勘察；③kafka 现覆盖 basic(1)/intermediate(4)，下一个 kafka 缺口是消费组 Rebalance 深挖（01 只有清单式小节）。
+- 下一轮入口：rocketmq basic 架构篇（先读现有 3 篇大纲避重叠）；zookeeper 高频篇作第 9 轮候选。
+
+### 第 8 轮（2026-09-08，第三次启动）
+
+- 选择：rocketmq basic 架构篇（既定入口；勘察确认 zookeeper 2 篇覆盖尚可而 rocketmq 缺架构骨架）。
+- 交付：新建 `rocketmq/basic/core/` 分类——`01-rocketmq-architecture.md`（四角色与 NameServer 无中心路由的 AP 取舍、Topic/Queue/消费组、CommitLog 集中存储与 Kafka 对比表）+ 分类页导读；侧边栏加"基础"分组；图谱加 arch 节点与两条边。
+- 验证：`pnpm build` 482 页通过；新图表双主题对比度审计通过（245 页全绿）；提交 e6b80e3 已推送（4 文件）。
+- 结论：补功能。
+- 新证据与经验：①过程小错即改：分类页组件名误写成 CategoryIsland，Write 后立即自查修正为 CategoryNotesIsland（import 路径五级回退 `../../../../../components/`）——新分类页应直接复制既有分类页模板改参数；②rocketmq 现覆盖 basic(1)/advanced(3)，下一个缺口是消费端语义（重平衡/offset 管理）。
+- 下一轮入口：kafka Rebalance 深挖篇（`kafka/intermediate/core/05-rebalance.md`，第 7 轮记录的缺口），补完 kafka 面试主线。
+
+### 第 9 轮（2026-09-08，第三次启动）
+
+- 选择：kafka Rebalance 深挖篇（既定入口；01 篇该小节仅"是什么+治理表格"，协议流程与参数陷阱是空白，互补明确）。
+- 交付：`kafka/intermediate/core/05-rebalance.md`（触发三来源、JoinGroup/SyncGroup 两阶段时序图、Generation 防僵尸、Eager 全组停摆原理、静态成员与增量协作重平衡、session/max.poll 超时陷阱表、高频追问）+ 侧边栏注册 + 图谱 rebalance 节点与两条边（arch→rebalance、rebalance→reliability）。
+- 验证：`pnpm build` 483 页通过；新图表双主题对比度审计通过（245 页全绿）；kafka.json JSON 校验合法；提交 343d270 已推送（3 文件）。
+- 结论：补功能。
+- 新证据与经验：①kafka 面试主线已成体系：basic 三问(1) + 架构/ISR/可靠性/高吞吐/Rebalance(5)，共 6 篇；②编辑教训：多轮往同一 JSON 追加节点时，old_string 必须基于最近一次 Read 的完整内容重建，凭记忆拼接会漏前轮插入的行（本轮 Edit 一次失败后 Read 核对即成功）；③时序图（sequenceDiagram）在 mermaid 主题接管下审计通过，可用于协议类内容。
+- 下一轮入口：第四次启动候选——①kafka basic 再补 offset 语义/选型对比等入门篇；②rocketmq 消费端语义（重平衡/offset）；③postgresql/mongodb 等其他薄弱方向；每轮先跑四项体检基线。
+
+## 经验与判断沉淀（第三次启动增补）
+
+- 新分类页不要手写模板：直接复制既有分类页（如 rabbitmq/basic/core/index.mdx）改 title/description/简介/categoryId 四处，本轮因手写把组件名写错（CategoryIsland），自查即改但可避免。
+- 多轮追加同一图谱 JSON：每次 Edit 前以最近一次 Read 内容为准重建 old_string；提交前 node -e JSON.parse 校验。
+- 时序图已进入本站图表语汇（Rebalance 篇首用，审计通过）；协议/流程类八股可用 sequenceDiagram 代替纯 flowchart。
+
 ## 经验与判断沉淀（第二次启动增补）
 
 - 四项体检每轮例行：①一致性体检（侧边栏/图谱/覆盖率/笔记内链）；②Mermaid 双主题对比度审计（`scripts/mermaid-contrast-verify.mjs` + `pnpm preview`，图表改动后必跑）；③frontmatter/level 体检；④分类页导读体检。前两项本日已全绿。
