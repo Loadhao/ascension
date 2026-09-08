@@ -257,6 +257,8 @@ export default defineConfig({
                         { label: '位运算与原码、反码、补码', link: '/java/basic/syntax/07-bit-operations/' },
                         { label: '序列化与 serialVersionUID', link: '/java/basic/syntax/08-serialization/' },
                         { label: '深浅拷贝与包装类型缓存', link: '/java/basic/syntax/09-object-copy/' },
+                        { label: '常用接口与抽象类地图', link: '/java/basic/syntax/10-common-interfaces/' },
+                        { label: 'JNI 与 JNDI：本地调用与命名查找', link: '/java/basic/syntax/11-jni-jndi/' },
                       ],
                     },
                     {
@@ -336,6 +338,9 @@ export default defineConfig({
                         { label: '认证与单点登录：JWT/OAuth2/SSO/CAS', link: '/java/intermediate/spring/07-auth-sso/' },
                         { label: '统一异常处理：@RestControllerAdvice', link: '/java/intermediate/spring/08-exception-advice/' },
                         { label: 'Spring MVC 请求处理全流程', link: '/java/intermediate/spring/09-springmvc-flow/' },
+                        { label: 'ApplicationContext：容器体系与内置组件', link: '/java/intermediate/spring/10-application-context/' },
+                        { label: '常用注解地图：Java / Spring / Spring Boot', link: '/java/intermediate/spring/11-annotations-map/' },
+                        { label: 'Spring 扩展点：常用接口与回调', link: '/java/intermediate/spring/12-extension-points/' },
                       ],
                     },
                     {
@@ -882,6 +887,14 @@ export default defineConfig({
                       ],
                     },
                     {
+                      label: '数据分片',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/distributed/intermediate/sharding/' },
+                        { label: '分库分表方法论：路由、扩容与不停机迁移', link: '/distributed/intermediate/sharding/01-sharding-methods/' },
+                      ],
+                    },
+                    {
                       label: '集群架构',
                       collapsed: false,
                       items: [
@@ -915,6 +928,15 @@ export default defineConfig({
                         { label: '分布式限流：从单机到全局', link: '/distributed/intermediate/traffic/01-distributed-rate-limiting/' },
                       ],
                     },
+                    {
+                      label: '综合设计',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/distributed/intermediate/case-studies/' },
+                        { label: '秒杀系统设计', link: '/distributed/intermediate/case-studies/01-flash-sale/' },
+                        { label: '短链接系统设计', link: '/distributed/intermediate/case-studies/02-short-url/' },
+                      ],
+                    },
                   ],
                 },
                 {
@@ -939,6 +961,7 @@ export default defineConfig({
                         { label: '概览', link: '/distributed/advanced/availability/' },
                         { label: '容灾与多活：RTO/RPO 与切换策略', link: '/distributed/advanced/availability/01-dr-multi-active/' },
                         { label: '脑裂与仲裁：quorum 与 fencing', link: '/distributed/advanced/availability/02-split-brain/' },
+                        { label: '发布策略：滚动、蓝绿与金丝雀', link: '/distributed/advanced/availability/03-release-strategies/' },
                       ],
                     },
                     {
