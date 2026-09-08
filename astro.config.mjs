@@ -924,6 +924,7 @@ export default defineConfig({
                         { label: '概览', link: '/distributed/intermediate/coordination/' },
                         { label: '分布式锁选型：Redis / ZooKeeper / etcd / 数据库', link: '/distributed/intermediate/coordination/01-distributed-lock-compare/' },
                         { label: '接口幂等性设计', link: '/distributed/intermediate/coordination/02-idempotency/' },
+                        { label: '分布式定时任务：从单机 cron 到分片调度', link: '/distributed/intermediate/coordination/03-distributed-scheduler/' },
                       ],
                     },
                     {
@@ -950,6 +951,7 @@ export default defineConfig({
                         { label: '概览', link: '/distributed/intermediate/case-studies/' },
                         { label: '秒杀系统设计', link: '/distributed/intermediate/case-studies/01-flash-sale/' },
                         { label: '短链接系统设计', link: '/distributed/intermediate/case-studies/02-short-url/' },
+                        { label: 'Feed 流设计：推模式、拉模式与推拉结合', link: '/distributed/intermediate/case-studies/03-feed-stream/' },
                       ],
                     },
                   ],
@@ -985,6 +987,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/distributed/advanced/observability/' },
                         { label: '分布式链路追踪', link: '/distributed/advanced/observability/01-distributed-tracing/' },
+                        { label: '可观测性三支柱与告警设计', link: '/distributed/advanced/observability/02-metrics-alerting/' },
                       ],
                     },
                   ],
@@ -1028,6 +1031,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/etcd/basic/core/' },
                         { label: 'etcd 核心机制', link: '/etcd/basic/core/01-etcd-core/' },
+                        { label: '深入：Lease、事务与一致性读', link: '/etcd/basic/core/02-etcd-lease-txn-watch/' },
                       ],
                     },
                   ],
