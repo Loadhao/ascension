@@ -15,7 +15,7 @@ import {
 // ===== 自测作答岛屿（/guide/quiz）=====
 // 出题与判定规则：
 // - 新一轮只从选题范围内「未刷过」的题里出（随机打乱不重复 / 按顺序），刷完即止；
-// - 错题本 = 还没答对过的错题（任意一轮答对即移出）；收藏本随时 ☆ 切换；
+// - 错题本 = 还没答对过的错题（任意一轮答对即移出）；收藏本随时 ⚑ 切换；
 // - 进行中的轮次、刷题进度、错题/收藏全部写穿 localStorage（quiz-store），
 //   刷新或下次进入自动恢复，上一题可回看历史作答。
 
@@ -477,11 +477,13 @@ export default function Quiz({ directions, banks }: Props) {
           <DifficultyChip value={q.difficulty} />
           <button
             type="button"
-            className={`quiz-star-btn ${starred ? 'is-on' : ''}`}
+            className={`quiz-flag-btn ${starred ? 'is-on' : ''}`}
             onClick={() => toggleStar(q.id)}
             title={starred ? '取消收藏' : '收藏本题'}
+            aria-label={starred ? '取消收藏' : '收藏本题'}
+            aria-pressed={starred}
           >
-            {starred ? '★ 已收藏' : '☆ 收藏'}
+            {starred ? '⚑ 已收藏' : '⚐ 收藏'}
           </button>
           <button type="button" className="quiz-quiet-btn" onClick={() => setView('setup')}>
             退出
@@ -690,7 +692,7 @@ export default function Quiz({ directions, banks }: Props) {
         <div className="quiz-vault-row">
           <span className="quiz-vault-name">收藏本</span>
           <span className="quiz-vault-count">
-            {starredPool.length > 0 ? `${starredPool.length} 题` : '暂无收藏，作答时点 ☆ 收藏'}
+            {starredPool.length > 0 ? `${starredPool.length} 题` : '暂无收藏，作答时点 ⚑ 收藏'}
           </span>
           <button
             type="button"

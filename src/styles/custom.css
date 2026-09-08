@@ -1950,6 +1950,8 @@ html.mmd-viewer-open {
   --quiz-ok-border: #6d7f4c;
   --quiz-no: #c98273;
   --quiz-no-border: #96574a;
+  --quiz-flag: #c45c50;
+  --quiz-flag-border: #a04a42;
 }
 
 :root[data-theme='light'] {
@@ -1957,6 +1959,8 @@ html.mmd-viewer-open {
   --quiz-ok-border: #7a8f4d;
   --quiz-no: #a04a38;
   --quiz-no-border: #b06a58;
+  --quiz-flag: #b03a2e;
+  --quiz-flag-border: #c45c50;
 }
 
 .quiz-app {
@@ -2090,8 +2094,11 @@ html.mmd-viewer-open {
   font-size: 13px;
 }
 
-/* —— 作答页星标与页脚 —— */
-.quiz-star-btn {
+/* —— 作答页收藏旗标与页脚 —— */
+.quiz-flag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   padding: 2px 10px;
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 999px;
@@ -2102,13 +2109,13 @@ html.mmd-viewer-open {
   cursor: pointer;
 }
 
-.quiz-star-btn:hover {
+.quiz-flag-btn:hover {
   border-color: var(--sl-color-gray-3);
 }
 
-.quiz-star-btn.is-on {
-  border-color: var(--sl-color-gray-3);
-  color: var(--sl-color-white);
+.quiz-flag-btn.is-on {
+  border-color: var(--quiz-flag-border);
+  color: var(--quiz-flag);
 }
 
 .quiz-nav {
@@ -2154,7 +2161,7 @@ html.mmd-viewer-open {
 }
 
 /* Starlight 正文会给相邻 button 注入 margin-block-start，单类选择器压不过 */
-.quiz-app :is(.quiz-quiet-btn, .quiz-btn, .quiz-star-btn) {
+.quiz-app :is(.quiz-quiet-btn, .quiz-btn, .quiz-flag-btn) {
   margin: 0;
 }
 
