@@ -1,0 +1,24 @@
+---
+import Quiz, { type QuizQuestion } from './Quiz';
+import { getSiteData, toNavSiteData } from '../../lib/notes';
+
+// 聚合 src/data/quiz/<方向>.json 为题库（文件名即方向 slug），
+// 方向标题与顺序交给 Quiz 组件按 notes.ts 聚合结果对齐
+const modules = import.meta.glob('../../data/quiz/*.json', { eager: true }) as Record<
+  string,
+  { default?: { questions?: QuizQuestion[] }; questions?: QuizQuestion[] }
+>;
+
+const banks = Object.entries(modules).map(([path, mod]) => {
+  const raw = mod.default ?? mod;
+  return {
+    directionId: path.split('/')!.pop()!.replace(/\.json$/, ''),
+    questions: raw.questions ?? [],
+  };
+});
+
+const site = await getSiteData();
+const nav = toNavSiteData(site);
+---
+
+<Quiz client:load directions={nav.directions} banks={banks} />

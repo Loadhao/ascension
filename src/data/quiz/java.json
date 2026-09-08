@@ -1,0 +1,129 @@
+{
+  "questions": [
+    {
+      "id": "java-thread-pool-001",
+      "noteId": "java/intermediate/concurrent/02-thread-pool",
+      "type": "single",
+      "q": "向线程池提交任务且核心线程已满时，任务接下来会？",
+      "options": [
+        "立即创建非核心线程执行",
+        "先进入阻塞队列排队",
+        "直接触发拒绝策略",
+        "抛出异常由调用方处理"
+      ],
+      "answer": [1],
+      "hint": "执行顺序是：核心线程 → 队列 → 非核心线程 → 拒绝策略。队列没满之前不会开非核心线程；拒绝只在队列和非核心线程都满时发生。"
+    },
+    {
+      "id": "java-volatile-002",
+      "noteId": "java/intermediate/concurrent/03-volatile",
+      "type": "judge",
+      "q": "用 volatile 修饰计数变量后，多线程 i++ 就是线程安全的。",
+      "options": ["正确", "错误"],
+      "answer": [1],
+      "hint": "volatile 只保证可见性与禁止指令重排，不保证原子性；i++ 是读-改-写三步，需要 AtomicInteger 或加锁。"
+    },
+    {
+      "id": "java-sync-003",
+      "noteId": "java/intermediate/concurrent/04-synchronized",
+      "type": "single",
+      "q": "synchronized 锁升级的正确顺序是？",
+      "options": [
+        "无锁 → 偏向锁 → 轻量级锁 → 重量级锁",
+        "无锁 → 轻量级锁 → 偏向锁 → 重量级锁",
+        "偏向锁 → 无锁 → 重量级锁 → 轻量级锁",
+        "轻量级锁 → 偏向锁 → 无锁 → 重量级锁"
+      ],
+      "answer": [0],
+      "hint": "按竞争激烈程度逐级膨胀：几乎无竞争用偏向锁，短暂自旋用轻量级，竞争加剧才膨胀到依赖操作系统 mutex 的重量级锁。"
+    },
+    {
+      "id": "java-threadlocal-004",
+      "noteId": "java/intermediate/concurrent/06-threadlocal",
+      "type": "multiple",
+      "q": "ThreadLocal 内存泄漏的成因涉及哪些？（多选）",
+      "options": [
+        "Entry 的 key 是弱引用，GC 后 key 变为 null",
+        "value 是强引用，线程不结束就回收不掉",
+        "线程池的核心线程长期存活，放大了残留",
+        "每次调用 get() 都会完整清理该线程的所有过期 Entry"
+      ],
+      "answer": [0, 1, 2],
+      "hint": "泄漏根源是 key 被回收后 value 仍被强引用链持有，线程池线程长存让残留持续积累；get/set 只顺带清理碰到的过期项，根治是用完 finally remove()。"
+    },
+    {
+      "id": "java-cas-005",
+      "noteId": "java/intermediate/concurrent/09-cas-atomics",
+      "type": "single",
+      "q": "解决 CAS 的 ABA 问题的标准方案是？",
+      "options": [
+        "改用 synchronized 加锁",
+        "带版本号的 AtomicStampedReference",
+        "限制自旋次数后重试",
+        "把变量声明为 volatile"
+      ],
+      "answer": [1],
+      "hint": "ABA 的本质是「值变回来了」被误判为没变过；附加上版本号或时间戳后，每次修改都能被识别出来。"
+    },
+    {
+      "id": "java-hashmap-006",
+      "noteId": "java/basic/collection/02-hashmap",
+      "type": "judge",
+      "q": "JDK 1.8 的 HashMap 改用头插法，解决了并发扩容的链表成环问题。",
+      "options": ["正确", "错误"],
+      "answer": [1],
+      "hint": "方向反了：1.7 是头插才会在并发扩容时成环，1.8 改为尾插解决了问题。HashMap 本就不是线程安全的，并发场景应换 ConcurrentHashMap。"
+    },
+    {
+      "id": "java-chm-007",
+      "noteId": "java/basic/collection/03-concurrenthashmap",
+      "type": "single",
+      "q": "JDK 1.8 的 ConcurrentHashMap 主要靠什么保证并发安全？",
+      "options": [
+        "分段锁，每段一把 ReentrantLock",
+        "对整个 table 加全局锁",
+        "CAS 初始化/扩容 + synchronized 锁单个桶头",
+        "读写锁分离"
+      ],
+      "answer": [2],
+      "hint": "分段锁是 1.7 的方案；1.8 取消 Segment，粒度细化到桶——空桶 CAS 插入，非空桶 synchronized 锁桶头，size 用 CounterCell 分散计数。"
+    },
+    {
+      "id": "java-deadlock-008",
+      "noteId": "java/intermediate/concurrent/12-deadlock",
+      "type": "multiple",
+      "q": "下列属于死锁四个必要条件的是？（多选）",
+      "options": ["互斥", "持有并等待", "不可剥夺", "循环等待", "可重入"],
+      "answer": [0, 1, 2, 3],
+      "hint": "互斥、持有并等待、不可剥夺、循环等待四者缺一不可，破坏任意一条即可预防死锁（如一次性申请所有资源破坏持有等待）；可重入与死锁条件无关。"
+    },
+    {
+      "id": "java-aqs-009",
+      "noteId": "java/intermediate/concurrent/05-aqs",
+      "type": "single",
+      "q": "AQS（AbstractQueuedSynchronizer）的核心骨架是？",
+      "options": [
+        "volatile state + CLH 变体等待队列",
+        "synchronized + 对象监视器",
+        "分段的 ReentrantLock 数组",
+        "无锁的 CAS 链表"
+      ],
+      "answer": [0],
+      "hint": "volatile int state 表示同步状态，获取失败的线程进入 CLH 变体的 FIFO 队列排队；独占/共享两种模板，ReentrantLock、信号量、CountDownLatch 都基于它。"
+    },
+    {
+      "id": "java-g1-010",
+      "noteId": "java/advanced/jvm/03-garbage-collection",
+      "type": "single",
+      "q": "G1 收集器相对传统收集器的核心设计取舍是？",
+      "options": [
+        "用复制算法彻底消除了内存碎片",
+        "Region 化堆 + 按停顿目标优先回收价值最高的区域",
+        "全堆标记整理，停顿时间最短",
+        "单线程回收，避免线程竞争"
+      ],
+      "answer": [1],
+      "hint": "G1 把堆划成等大的 Region，按 MaxGCPauseMillis 停顿目标对区域做垃圾价值排序，优先回收「性价比」最高的区域——用可预测停顿换整体吞吐。"
+    }
+  ]
+}

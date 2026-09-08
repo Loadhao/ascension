@@ -1,0 +1,78 @@
+{
+  "questions": [
+    {
+      "id": "kafka-offset-001",
+      "noteId": "kafka/basic/core/02-offset",
+      "type": "single",
+      "q": "哪种位移提交时机可能导致消息丢失（重启后跳过未处理的消息）？",
+      "options": [
+        "先处理消息，后提交位移",
+        "先提交位移，后处理消息",
+        "异步提交 + 关闭前同步提交兜底",
+        "手动 commitSync 逐批提交"
+      ],
+      "answer": [1],
+      "hint": "先提交后处理 = 至多一次：提交完还没处理就崩溃，重启会从已提交位移之后继续，未处理的被跳过；先处理后提交最多重复，不会丢。"
+    },
+    {
+      "id": "kafka-offset-002",
+      "noteId": "kafka/basic/core/02-offset",
+      "type": "judge",
+      "q": "消费者提交的位移含义是「最后一条已处理消息的 offset」。",
+      "options": ["正确", "错误"],
+      "answer": [1],
+      "hint": "提交的位移语义是「下一条要读的 offset」。手写提交时偏一格就是丢一条或重一条，这是最容易犯的边界错。"
+    },
+    {
+      "id": "kafka-arch-003",
+      "noteId": "kafka/intermediate/core/01-kafka-architecture",
+      "type": "multiple",
+      "q": "Kafka 高吞吐的来源包括哪些？（多选）",
+      "options": [
+        "分区并行扩展",
+        "顺序写磁盘",
+        "零拷贝传输",
+        "每条消息独立 fsync 刷盘"
+      ],
+      "answer": [0, 1, 2],
+      "hint": "逐条 fsync 恰恰是吞吐杀手——Kafka 依赖批量写入与操作系统页缓存，配合批量压缩与零拷贝把吞吐拉满。"
+    },
+    {
+      "id": "kafka-isr-004",
+      "noteId": "kafka/intermediate/core/02-replica-isr",
+      "type": "judge",
+      "q": "只要配置了 acks=all，即使 ISR 收缩到只剩 leader 自己，消息也不会丢。",
+      "options": ["正确", "错误"],
+      "answer": [1],
+      "hint": "acks=all 只等 ISR 内副本确认，而 ISR 可以收缩到只剩 leader，此时等价于 acks=1，leader 宕机照样丢；要配 min.insync.replicas ≥ 2 用可用性换可靠。"
+    },
+    {
+      "id": "kafka-rebalance-005",
+      "noteId": "kafka/intermediate/core/05-rebalance",
+      "type": "single",
+      "q": "消费者线程活着但单批处理太慢，被踢出消费组，正确的调整是？",
+      "options": [
+        "调大 session.timeout.ms",
+        "加快 heartbeat.interval.ms",
+        "调大 max.poll.interval.ms 或调小 max.poll.records",
+        "重启 Broker 触发重新协调"
+      ],
+      "answer": [2],
+      "hint": "两个超时管两件事：session.timeout.ms 靠心跳判「死没死」，max.poll.interval.ms 管两次 poll 的间隔。处理慢被踢看后者，调 session 超时无效。"
+    },
+    {
+      "id": "kafka-reliability-006",
+      "noteId": "kafka/intermediate/core/03-reliability-idempotent",
+      "type": "single",
+      "q": "至少一次语义下重复消费不可避免，根治重复的办法是？",
+      "options": [
+        "生产端开启 acks=all",
+        "增加副本数与 min.insync.replicas",
+        "关闭自动提交，改为手动提交",
+        "消费端按业务唯一键做幂等"
+      ],
+      "answer": [3],
+      "hint": "acks、副本数、提交时机解决的是「丢不丢」；重复来自重平衡与崩溃重试，唯一可靠的解法是消费端幂等（唯一键去重、版本号、状态机）。"
+    }
+  ]
+}

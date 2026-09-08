@@ -1,0 +1,603 @@
+import { useEffect, useMemo, useState } from 'react';
+import { withBase } from '../../lib/learn';
+import type { NavDirection } from '../../lib/notes';
+import {
+  emptyQuizState,
+  loadQuizState,
+  saveQuizState,
+  type QuizPersist,
+  type RoundKind,
+  type RoundState,
+} from '../../lib/quiz-store';
+
+// ===== 自测作答岛屿（/guide/quiz）=====
+// 出题与判定规则：
+// - 新一轮只从选题范围内「未刷过」的题里出（随机打乱不重复 / 按顺序），刷完即止；
+// - 错题本 = 还没答对过的错题（任意一轮答对即移出）；收藏本随时 ☆ 切换；
+// - 进行中的轮次、刷题进度、错题/收藏全部写穿 localStorage（quiz-store），
+//   刷新或下次进入自动恢复，上一题可回看历史作答。
+
+export type QuizType = 'single' | 'multiple' | 'judge';
+
+export interface QuizQuestion {
+  id: string;
+  /** 关联笔记的内容集合 entry id，答错后链回完整笔记 */
+  noteId: string;
+  type: QuizType;
+  q: string;
+  options: string[];
+  /** 正确选项下标数组（判断题固定两项：正确 / 错误） */
+  answer: number[];
+  /** 答错时的提示 */
+  hint: string;
+}
+
+export interface QuizBank {
+  directionId: string;
+  questions: QuizQuestion[];
+}
+
+interface Props {
+  directions: NavDirection[];
+  banks: QuizBank[];
+}
+
+const TYPE_LABELS: Record<QuizType, string> = {
+  single: '单选',
+  multiple: '多选',
+  judge: '判断',
+};
+
+const ROUND_LABELS: Record<RoundKind, string> = {
+  scope: '范围刷题',
+  wrong: '错题本',
+  starred: '收藏本',
+};
+
+const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+/** 完成页的轮次摘要（只活在会话内，不持久化） */
+interface RoundSummary {
+  kind: RoundKind;
+  queue: string[];
+  wrongQueue: string[];
+}
+
+function shuffled<T>(list: T[]): T[] {
+  const arr = [...list];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j]!, arr[i]!];
+  }
+  return arr;
+}
+
+function sameSet(a: number[], b: number[]): boolean {
+  return a.length === b.length && a.every((x) => b.includes(x));
+}
+
+function filterKeys<T>(record: Record<string, T>, valid: Set<string>): Record<string, T> {
+  const out: Record<string, T> = {};
+  for (const [key, value] of Object.entries(record)) if (valid.has(key)) out[key] = value;
+  return out;
+}
+
+export default function Quiz({ directions, banks }: Props) {
+  const [quiz, setQuiz] = useState<QuizPersist>(emptyQuizState);
+  const [view, setView] = useState<'setup' | 'quiz'>('setup');
+  const [summary, setSummary] = useState<RoundSummary | null>(null);
+  // 当前题未确认的临时勾选（多选）
+  const [picked, setPicked] = useState<number[]>([]);
+
+  // 方向顺序与标题以 notes.ts 聚合为准（= 侧边栏顺序）；没有题库的方向不出现
+  const orderedBanks = useMemo(() => {
+    const rank = new Map(directions.map((d, i) => [d.id, i]));
+    return [...banks].sort(
+      (a, b) =>
+        (rank.get(a.directionId) ?? directions.length) - (rank.get(b.directionId) ?? directions.length) ||
+        a.directionId.localeCompare(b.directionId),
+    );
+  }, [directions, banks]);
+
+  const allQuestions = useMemo(() => orderedBanks.flatMap((b) => b.questions), [orderedBanks]);
+  const questionById = useMemo(
+    () => new Map(allQuestions.map((q) => [q.id, q])),
+    [allQuestions],
+  );
+  const directionOfQuestion = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const bank of banks) for (const q of bank.questions) map.set(q.id, bank.directionId);
+    return map;
+  }, [banks]);
+  const titleOf = useMemo(() => {
+    const titles = new Map(directions.map((d) => [d.id, d.title]));
+    return (id: string) => titles.get(id) ?? id;
+  }, [directions]);
+
+  // 挂载后恢复本地状态：过滤题库中已不存在的题，有进行中轮次则直接回到作答
+  useEffect(() => {
+    const validIds = new Set(allQuestions.map((q) => q.id));
+    const loaded = loadQuizState();
+    let round = loaded.round;
+    if (round) {
+      const queue = round.queue.filter((id) => validIds.has(id));
+      if (queue.length === 0) {
+        round = null;
+      } else {
+        const validQueue = new Set(queue);
+        round = {
+          ...round,
+          queue,
+          answers: filterKeys(round.answers, validQueue),
+          index: Math.min(Math.max(round.index, 0), queue.length - 1),
+        };
+      }
+    }
+    setQuiz({ ...loaded, round });
+    if (round) setView('quiz');
+  }, [allQuestions]);
+
+  function update(next: QuizPersist): void {
+    setQuiz(next);
+    saveQuizState(next);
+  }
+
+  // ===== 选题范围（scope.checked 为 null 时视为全选） =====
+  const scopeIds = useMemo(() => {
+    const all = new Set(orderedBanks.map((b) => b.directionId));
+    if (quiz.scope.checked === null) return all;
+    return new Set(quiz.scope.checked.filter((id) => all.has(id)));
+  }, [orderedBanks, quiz.scope.checked]);
+
+  const scopeQuestions = useMemo(
+    () => orderedBanks.filter((b) => scopeIds.has(b.directionId)).flatMap((b) => b.questions),
+    [orderedBanks, scopeIds],
+  );
+  const scopeRemaining = useMemo(
+    () => scopeQuestions.filter((q) => quiz.done[q.id] === undefined),
+    [scopeQuestions, quiz.done],
+  );
+
+  function toggleDirection(id: string): void {
+    const next = new Set(scopeIds);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    update({ ...quiz, scope: { ...quiz.scope, checked: [...next] } });
+  }
+
+  function setAllDirections(value: boolean): void {
+    const next = value ? new Set(orderedBanks.map((b) => b.directionId)) : new Set<string>();
+    update({ ...quiz, scope: { ...quiz.scope, checked: [...next] } });
+  }
+
+  function toggleRandom(): void {
+    update({ ...quiz, scope: { ...quiz.scope, random: !quiz.scope.random } });
+  }
+
+  // ===== 轮次 =====
+  function startQueueRound(kind: RoundKind, pool: QuizQuestion[], random: boolean): void {
+    if (pool.length === 0) return;
+    const round: RoundState = {
+      kind,
+      directionIds: kind === 'scope' ? [...scopeIds] : [],
+      random,
+      queue: (random ? shuffled(pool) : pool).map((q) => q.id),
+      index: 0,
+      answers: {},
+    };
+    setPicked([]);
+    setSummary(null);
+    update({ ...quiz, round });
+    setView('quiz');
+  }
+
+  function startScopeRound(resetDone: boolean): void {
+    const done = { ...quiz.done };
+    if (resetDone) for (const q of scopeQuestions) delete done[q.id];
+    const pool = scopeQuestions.filter((q) => done[q.id] === undefined);
+    const round: RoundState = {
+      kind: 'scope',
+      directionIds: [...scopeIds],
+      random: quiz.scope.random,
+      queue: (quiz.scope.random ? shuffled(pool) : pool).map((q) => q.id),
+      index: 0,
+      answers: {},
+    };
+    setPicked([]);
+    setSummary(null);
+    update({ ...quiz, done, round });
+    setView('quiz');
+  }
+
+  function vaultQuestions(kind: 'wrong' | 'starred'): QuizQuestion[] {
+    const source = kind === 'wrong' ? quiz.wrong : quiz.starred;
+    return allQuestions.filter((q) => source[q.id] !== undefined);
+  }
+
+  function submitAnswer(pickedNow: number[]): void {
+    const round = quiz.round;
+    if (!round) return;
+    const q = questionById.get(round.queue[round.index]!);
+    if (!q || round.answers[q.id]) return;
+    const correct = sameSet(pickedNow, q.answer);
+    const wrong = { ...quiz.wrong };
+    if (correct) delete wrong[q.id];
+    else {
+      const prev = wrong[q.id];
+      wrong[q.id] = { ts: Date.now(), count: (prev?.count ?? 0) + 1 };
+    }
+    setPicked([]);
+    update({
+      ...quiz,
+      done: { ...quiz.done, [q.id]: Date.now() },
+      wrong,
+      round: {
+        ...round,
+        answers: { ...round.answers, [q.id]: { picked: pickedNow, correct } },
+      },
+    });
+  }
+
+  function pickOption(i: number): void {
+    const round = quiz.round;
+    if (!round) return;
+    const q = questionById.get(round.queue[round.index]!);
+    if (!q || round.answers[q.id]) return;
+    if (q.type === 'multiple') {
+      setPicked((prev) => (prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]));
+    } else {
+      submitAnswer([i]);
+    }
+  }
+
+  function toggleStar(qid: string): void {
+    const starred = { ...quiz.starred };
+    if (starred[qid] !== undefined) delete starred[qid];
+    else starred[qid] = Date.now();
+    update({ ...quiz, starred });
+  }
+
+  function go(delta: number): void {
+    const round = quiz.round;
+    if (!round) return;
+    const index = Math.min(Math.max(round.index + delta, 0), round.queue.length - 1);
+    if (index === round.index) return;
+    setPicked([]);
+    update({ ...quiz, round: { ...round, index } });
+  }
+
+  function finishRound(): void {
+    const round = quiz.round;
+    if (!round) return;
+    const wrongQueue = round.queue.filter((id) => round.answers[id]?.correct === false);
+    setSummary({ kind: round.kind, queue: round.queue, wrongQueue });
+    update({ ...quiz, round: null });
+  }
+
+  function abandonRound(): void {
+    setSummary(null);
+    update({ ...quiz, round: null });
+  }
+
+  function clearVault(kind: 'wrong' | 'starred'): void {
+    const label = kind === 'wrong' ? '错题本' : '收藏本';
+    if (!window.confirm(`确定清空${label}吗？`)) return;
+    if (kind === 'wrong') update({ ...quiz, wrong: {} });
+    else update({ ...quiz, starred: {} });
+  }
+
+  function resetProgress(): void {
+    if (!window.confirm('重置会清空全部刷题进度（错题本与收藏保留），所有题重新可刷。确定？')) return;
+    update({ ...quiz, done: {} });
+  }
+
+  if (banks.length === 0) {
+    return <div className="learn-empty">题库整理中，先到各方向学习路线页看笔记。</div>;
+  }
+
+  const round = quiz.round;
+  const showDone = summary !== null;
+  const showQuiz = summary === null && view === 'quiz' && round !== null;
+
+  // ===== 完成页 =====
+  if (showDone && summary) {
+    const total = summary.queue.length;
+    const wrongCount = summary.wrongQueue.length;
+    const kindLabel = ROUND_LABELS[summary.kind];
+    return (
+      <div className="quiz-app">
+        <div className="quiz-done">
+          <div className="quiz-done-title">本轮完成 · {kindLabel}</div>
+          <p className="quiz-done-sum">
+            共作答 {total} 题，答错 {wrongCount} 题
+            {wrongCount > 0 ? '，错题已记入错题本，可立即重刷。' : '，全部答对。'}
+          </p>
+          <div className="quiz-actions">
+            {wrongCount > 0 && (
+              <button
+                type="button"
+                className="quiz-btn quiz-btn-primary"
+                onClick={() =>
+                  startQueueRound(
+                    'wrong',
+                    summary.wrongQueue
+                      .map((id) => questionById.get(id))
+                      .filter((q): q is QuizQuestion => q !== undefined),
+                    false,
+                  )
+                }
+              >
+                只重刷本轮错题（{wrongCount} 题）
+              </button>
+            )}
+            <button
+              type="button"
+              className="quiz-btn"
+              onClick={() =>
+                startQueueRound(
+                  summary.kind,
+                  summary.queue
+                    .map((id) => questionById.get(id))
+                    .filter((q): q is QuizQuestion => q !== undefined),
+                  false,
+                )
+              }
+            >
+              再刷一遍本轮
+            </button>
+            <button type="button" className="quiz-btn" onClick={() => setSummary(null)}>
+              回到选题
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ===== 作答页（含上一题历史回看） =====
+  if (showQuiz && round) {
+    const q = questionById.get(round.queue[round.index]!);
+    if (!q) {
+      return (
+        <div className="quiz-app">
+          <div className="learn-empty">题目数据缺失，请退出本轮重新开始。</div>
+        </div>
+      );
+    }
+    const answered = round.answers[q.id];
+    const ok = answered?.correct === true;
+    const isLast = round.index + 1 >= round.queue.length;
+    const starred = quiz.starred[q.id] !== undefined;
+    const effectivePicked = answered ? answered.picked : picked;
+
+    return (
+      <div className="quiz-app">
+        <div className="quiz-top">
+          <span className="quiz-progress">
+            {round.index + 1} / {round.queue.length}
+          </span>
+          <span className="quiz-chip">{titleOf(directionOfQuestion.get(q.id) ?? '')}</span>
+          <span className="quiz-chip">{TYPE_LABELS[q.type]}</span>
+          <button
+            type="button"
+            className={`quiz-star-btn ${starred ? 'is-on' : ''}`}
+            onClick={() => toggleStar(q.id)}
+            title={starred ? '取消收藏' : '收藏本题'}
+          >
+            {starred ? '★ 已收藏' : '☆ 收藏'}
+          </button>
+          <button type="button" className="quiz-quiet-btn" onClick={() => setView('setup')}>
+            退出
+          </button>
+        </div>
+        <div className="quiz-question">{q.q}</div>
+        <div className="quiz-opts">
+          {q.options.map((opt, i) => {
+            let state = '';
+            let mark = q.type === 'judge' ? '' : (OPTION_LETTERS[i] ?? '');
+            if (answered) {
+              if (q.answer.includes(i)) {
+                state = 'is-correct';
+                mark = '✓';
+              } else if (answered.picked.includes(i)) {
+                state = 'is-wrong';
+                mark = '✗';
+              } else {
+                state = 'is-dim';
+              }
+            } else if (picked.includes(i)) {
+              state = 'is-selected';
+            }
+            return (
+              <button
+                type="button"
+                key={i}
+                className={`quiz-opt ${state}`}
+                disabled={answered !== undefined}
+                onClick={() => pickOption(i)}
+              >
+                <span className="quiz-opt-mark">{mark}</span>
+                <span className="quiz-opt-text">{opt}</span>
+              </button>
+            );
+          })}
+        </div>
+        {!answered && q.type === 'multiple' && (
+          <div className="quiz-actions">
+            <button
+              type="button"
+              className="quiz-btn quiz-btn-primary"
+              disabled={picked.length === 0}
+              onClick={() => submitAnswer(picked)}
+            >
+              确认作答
+            </button>
+          </div>
+        )}
+        {answered && (
+          <>
+            <div className={`quiz-verdict ${ok ? 'is-ok' : 'is-no'}`}>
+              <span>{ok ? '✓ 回答正确' : '✗ 回答错误'}</span>
+              {!ok && <span className="quiz-hint">{q.hint}</span>}
+            </div>
+            <div className="quiz-actions quiz-nav">
+              {round.index > 0 && (
+                <button type="button" className="quiz-btn" onClick={() => go(-1)}>
+                  ← 上一题
+                </button>
+              )}
+              <a className="quiz-btn" href={withBase(`/${q.noteId}/`)}>
+                查看完整笔记
+              </a>
+              {isLast ? (
+                <button type="button" className="quiz-btn quiz-btn-primary" onClick={finishRound}>
+                  完成
+                </button>
+              ) : (
+                <button type="button" className="quiz-btn quiz-btn-primary" onClick={() => go(1)}>
+                  下一题 →
+                </button>
+              )}
+            </div>
+          </>
+        )}
+        {!answered && round.index > 0 && (
+          <div className="quiz-actions quiz-nav">
+            <button type="button" className="quiz-btn" onClick={() => go(-1)}>
+              ← 上一题
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // ===== 选题页 =====
+  const allScopeDone = scopeQuestions.length > 0 && scopeRemaining.length === 0;
+  const wrongPool = vaultQuestions('wrong');
+  const starredPool = vaultQuestions('starred');
+
+  return (
+    <div className="quiz-app">
+      {round && (
+        <div className="quiz-continue">
+          <span className="quiz-continue-text">
+            上次作答未完成：{ROUND_LABELS[round.kind]} · 第 {round.index + 1} / {round.queue.length} 题
+          </span>
+          <span className="quiz-continue-ops">
+            <button type="button" className="quiz-btn quiz-btn-primary" onClick={() => setView('quiz')}>
+              继续作答
+            </button>
+            <button type="button" className="quiz-quiet-btn" onClick={abandonRound}>
+              放弃本轮
+            </button>
+          </span>
+        </div>
+      )}
+      <div className="quiz-setup">
+        <div className="quiz-setup-head">
+          <span className="quiz-setup-title">选择作答范围</span>
+          <span className="quiz-setup-ops">
+            <button type="button" className="quiz-quiet-btn" onClick={() => setAllDirections(true)}>
+              全选
+            </button>
+            <button type="button" className="quiz-quiet-btn" onClick={() => setAllDirections(false)}>
+              全不选
+            </button>
+          </span>
+        </div>
+        <ul className="quiz-dir-list">
+          {orderedBanks.map((b) => (
+            <li key={b.directionId}>
+              <label className="quiz-dir-row">
+                <input
+                  type="checkbox"
+                  checked={scopeIds.has(b.directionId)}
+                  onChange={() => toggleDirection(b.directionId)}
+                />
+                <span className="quiz-dir-name">{titleOf(b.directionId)}</span>
+                <span className="quiz-dir-count">{b.questions.length} 题</span>
+              </label>
+            </li>
+          ))}
+        </ul>
+        <div className="quiz-setup-foot">
+          <label className="quiz-shuffle">
+            <input type="checkbox" checked={quiz.scope.random} onChange={toggleRandom} />
+            随机不重复出题
+          </label>
+          <span className="quiz-setup-sum">
+            已选 {scopeIds.size} 个方向 · 未刷 {scopeRemaining.length} / {scopeQuestions.length} 题
+            {allScopeDone
+              ? '，本范围已全部刷完，可整范围重刷'
+              : quiz.scope.random
+                ? '，随机打乱逐题作答'
+                : '，按方向与笔记顺序逐题推进'}
+          </span>
+          <button
+            type="button"
+            className="quiz-btn quiz-btn-primary"
+            disabled={scopeQuestions.length === 0}
+            onClick={() => startScopeRound(allScopeDone)}
+          >
+            {allScopeDone ? '重刷本范围' : '开始新一轮'}
+          </button>
+        </div>
+      </div>
+      <div className="quiz-vaults">
+        <div className="quiz-vault-row">
+          <span className="quiz-vault-name">错题本</span>
+          <span className="quiz-vault-count">
+            {wrongPool.length > 0 ? `${wrongPool.length} 题（答对任意一次自动移出）` : '暂无错题'}
+          </span>
+          <button
+            type="button"
+            className="quiz-btn"
+            disabled={wrongPool.length === 0}
+            onClick={() => startQueueRound('wrong', wrongPool, quiz.scope.random)}
+          >
+            去刷错题
+          </button>
+          <button
+            type="button"
+            className="quiz-quiet-btn"
+            disabled={wrongPool.length === 0}
+            onClick={() => clearVault('wrong')}
+          >
+            清空
+          </button>
+        </div>
+        <div className="quiz-vault-row">
+          <span className="quiz-vault-name">收藏本</span>
+          <span className="quiz-vault-count">
+            {starredPool.length > 0 ? `${starredPool.length} 题` : '暂无收藏，作答时点 ☆ 收藏'}
+          </span>
+          <button
+            type="button"
+            className="quiz-btn"
+            disabled={starredPool.length === 0}
+            onClick={() => startQueueRound('starred', starredPool, quiz.scope.random)}
+          >
+            去刷收藏
+          </button>
+          <button
+            type="button"
+            className="quiz-quiet-btn"
+            disabled={starredPool.length === 0}
+            onClick={() => clearVault('starred')}
+          >
+            清空
+          </button>
+        </div>
+      </div>
+      <div className="quiz-foot-links">
+        <button type="button" className="quiz-quiet-btn" onClick={resetProgress}>
+          重置刷题进度
+        </button>
+        <a className="quiz-more-link" href={withBase('/guide/interview-cheatsheet/')}>
+          想先过一遍答案？去看速答手册 →
+        </a>
+      </div>
+    </div>
+  );
+}
