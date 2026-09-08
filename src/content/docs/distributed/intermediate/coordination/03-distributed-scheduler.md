@@ -40,7 +40,7 @@ flowchart TB
   切换瞬间。
 - 依然是**单点吞吐**：任务大到一个实例跑不完就没救。
 - ZK 临时节点/etcd Lease 是选主的底座（见
-  [etcd Lease](/etcd/basic/core/02-etcd-lease-txn-watch.md/)）。
+  [etcd Lease](/etcd/basic/core/02-etcd-lease-txn-watch/)）。
 
 ## 第三层：分片广播（生产标准）
 
