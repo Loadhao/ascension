@@ -446,7 +446,8 @@
       "answer": [
         0
       ],
-      "hint": "并行 Agent 需要隔离文件系统，如同需要隔离对话。认领时才切 cwd；Keep 留给人工 review 后合并。"
+      "hint": "并行 Agent 需要隔离文件系统，如同需要隔离对话。认领时才切 cwd；Keep 留给人工 review 后合并。",
+      "difficulty": 4
     },
     {
       "id": "ai-harness-028",
@@ -460,7 +461,8 @@
       "answer": [
         1
       ],
-      "hint": "机制很多，循环一个。变化的是循环周围的 hooks/权限/压缩/MCP，内核仍是 while True：有 tool_use 就执行并回写，没有就 Stop hooks 返回。"
+      "hint": "机制很多，循环一个。变化的是循环周围的 hooks/权限/压缩/MCP，内核仍是 while True：有 tool_use 就执行并回写，没有就 Stop hooks 返回。",
+      "difficulty": 3
     },
     {
       "id": "ai-openclaw-029",
@@ -476,7 +478,8 @@
       "answer": [
         0
       ],
-      "hint": "三层：Channels 接入 + 唯一 Gateway 收口（默认 18789）+ Workspace 隔离。数据全在自己机器，技能执行前受权限约束。"
+      "hint": "三层：Channels 接入 + 唯一 Gateway 收口（默认 18789）+ Workspace 隔离。数据全在自己机器，技能执行前受权限约束。",
+      "difficulty": 3
     }
   ]
 }

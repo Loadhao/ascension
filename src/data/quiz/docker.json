@@ -156,6 +156,23 @@
         1
       ],
       "hint": "记住「宿主:容器」。pull 拉的是只读层，run 在上面叠可写层才成为容器。docker ps 默认只看运行中，-a 才含已停止。"
+    },
+    {
+      "id": "docker-pid1-003",
+      "noteId": "docker/advanced/orchestration/02-principles",
+      "type": "single",
+      "q": "容器内 PID 1 未正确处理信号会导致什么问题？笔记给出的兜底方案是？",
+      "options": [
+        "docker stop 发的 SIGTERM 无人处理，等超时后被 SIGKILL 强杀（可能丢数据）；官方镜像多用 tini 或 --init 兜底",
+        "PID 1 缺失会导致容器根本无法启动",
+        "docker exec 会自动补发信号，无需应用处理",
+        "内核会替 PID 1 回收僵尸进程，不需要应用关心"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "PID 1 的两个职责——转发信号、回收僵尸进程：漏了前者 stop 超时强杀、后者僵尸堆积。另记：容器共享宿主内核（所以 Windows 容器跑不了 Linux 镜像），--privileged 等于放弃 Namespace 隔离仅调试用。"
     }
   ]
 }

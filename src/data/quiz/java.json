@@ -1255,7 +1255,8 @@
       "answer": [
         0
       ],
-      "hint": "-2 的 32 位补码是 111...1110；`>>>` 高位补 0 得到 0111...1111 = 2147483647。`>>` 才会补符号位得到 -1。"
+      "hint": "-2 的 32 位补码是 111...1110；`>>>` 高位补 0 得到 0111...1111 = 2147483647。`>>` 才会补符号位得到 -1。",
+      "difficulty": 4
     },
     {
       "id": "java-serial-075",
@@ -1271,7 +1272,8 @@
       "answer": [
         0
       ],
-      "hint": "最佳实践是显式声明；结构兼容改动不 bump，破坏性改动才改号。JSON 无此机制，靠字段名匹配。"
+      "hint": "最佳实践是显式声明；结构兼容改动不 bump，破坏性改动才改号。JSON 无此机制，靠字段名匹配。",
+      "difficulty": 5
     },
     {
       "id": "java-intcache-076",
@@ -1285,7 +1287,8 @@
       "answer": [
         1
       ],
-      "hint": "缓存池只覆盖 -128~127（可用 AutoBoxCacheMax 调 Integer 上限）；128 各自 new。包装类型比较必须 equals；clone 默认还是浅拷贝。"
+      "hint": "缓存池只覆盖 -128~127（可用 AutoBoxCacheMax 调 Integer 上限）；128 各自 new。包装类型比较必须 equals；clone 默认还是浅拷贝。",
+      "difficulty": 4
     },
     {
       "id": "java-comparable-077",
@@ -1301,7 +1304,8 @@
       "answer": [
         0
       ],
-      "hint": "compareTo 与 equals 最好保持一致。Comparable 是类内自然顺序，Comparator 是类外规则。"
+      "hint": "compareTo 与 equals 最好保持一致。Comparable 是类内自然顺序，Comparator 是类外规则。",
+      "difficulty": 4
     },
     {
       "id": "java-jndi-078",
@@ -1317,7 +1321,8 @@
       "answer": [
         0
       ],
-      "hint": "永远不要把不可信字符串交给 lookup / 日志的 JNDI 解析；JDK 8u191+ 默认关掉远程 codebase 加载。"
+      "hint": "永远不要把不可信字符串交给 lookup / 日志的 JNDI 解析；JDK 8u191+ 默认关掉远程 codebase 加载。",
+      "difficulty": 5
     },
     {
       "id": "java-lombok-079",
@@ -1333,7 +1338,8 @@
       "answer": [
         0
       ],
-      "hint": "经典三连 @Builder + @NoArgsConstructor + @AllArgsConstructor。Lombok 走 SOURCE + 改语法树；@Data 上 JPA 实体另有 hashCode/懒加载坑。"
+      "hint": "经典三连 @Builder + @NoArgsConstructor + @AllArgsConstructor。Lombok 走 SOURCE + 改语法树；@Data 上 JPA 实体另有 hashCode/懒加载坑。",
+      "difficulty": 4
     },
     {
       "id": "java-servlet-080",
@@ -1349,7 +1355,8 @@
       "answer": [
         0
       ],
-      "hint": "DispatcherServlet 本身就是一个 Servlet；Boot 把容器嵌进应用进程，从平台退化为库。"
+      "hint": "DispatcherServlet 本身就是一个 Servlet；Boot 把容器嵌进应用进程，从平台退化为库。",
+      "difficulty": 2
     },
     {
       "id": "java-jetty-081",
@@ -1365,7 +1372,8 @@
       "answer": [
         0
       ],
-      "hint": "Jetty = Connector + Handler + 一个全局线程池，无 Service 概念；定位是轻量可嵌入 vs Tomcat 独立部署稳健。"
+      "hint": "Jetty = Connector + Handler + 一个全局线程池，无 Service 概念；定位是轻量可嵌入 vs Tomcat 独立部署稳健。",
+      "difficulty": 3
     },
     {
       "id": "java-factory-082",
@@ -1381,7 +1389,8 @@
       "answer": [
         0
       ],
-      "hint": "简单工厂不是 GoF 23。BeanFactory 是容器本身，FactoryBean 是让你手写复杂对象工厂的扩展点（getObject() 才是真正暴露的 Bean）。"
+      "hint": "简单工厂不是 GoF 23。BeanFactory 是容器本身，FactoryBean 是让你手写复杂对象工厂的扩展点（getObject() 才是真正暴露的 Bean）。",
+      "difficulty": 3
     },
     {
       "id": "java-builder-083",
@@ -1395,7 +1404,8 @@
       "answer": [
         1
       ],
-      "hint": "同名不同义——prototype scope 是每次新建，与克隆无关。原型模式才是复制现成对象；工程上优先拷贝构造，慎用 Cloneable。"
+      "hint": "同名不同义——prototype scope 是每次新建，与克隆无关。原型模式才是复制现成对象；工程上优先拷贝构造，慎用 Cloneable。",
+      "difficulty": 3
     },
     {
       "id": "java-adapter-084",
@@ -1411,7 +1421,8 @@
       "answer": [
         0
       ],
-      "hint": "适配器的前提是老代码改不了；写法永远选组合（对象适配器）。HandlerAdapter 是 Spring MVC 最值得记的现场。"
+      "hint": "适配器的前提是老代码改不了；写法永远选组合（对象适配器）。HandlerAdapter 是 Spring MVC 最值得记的现场。",
+      "difficulty": 3
     },
     {
       "id": "java-decorator-085",
@@ -1427,7 +1438,8 @@
       "answer": [
         0
       ],
-      "hint": "装饰器是运行期自由拼装，调用方主动选择怎么包；顺序敏感，反包语义会变。Collections.unmodifiableList 是最短现场。"
+      "hint": "装饰器是运行期自由拼装，调用方主动选择怎么包；顺序敏感，反包语义会变。Collections.unmodifiableList 是最短现场。",
+      "difficulty": 3
     },
     {
       "id": "java-flyweight-086",
@@ -1443,7 +1455,8 @@
       "answer": [
         0
       ],
-      "hint": "享元把状态拆成内部（可共享）与外部（调用时传入）。桥接的教科书现场是 JDBC：DriverManager 与 Driver 经 Connection 解耦。"
+      "hint": "享元把状态拆成内部（可共享）与外部（调用时传入）。桥接的教科书现场是 JDBC：DriverManager 与 Driver 经 Connection 解耦。",
+      "difficulty": 4
     },
     {
       "id": "java-template-087",
@@ -1459,7 +1472,8 @@
       "answer": [
         0
       ],
-      "hint": "AQS 的 acquire() 骨架写死，tryAcquire 留给子类。与策略的边界是「变一步 vs 变全套」。"
+      "hint": "AQS 的 acquire() 骨架写死，tryAcquire 留给子类。与策略的边界是「变一步 vs 变全套」。",
+      "difficulty": 3
     },
     {
       "id": "java-chain-088",
@@ -1475,7 +1489,8 @@
       "answer": [
         0
       ],
-      "hint": "责任链接力、节点自决拦截；观察者才是广播。「要不要走完」是两者的试金石。"
+      "hint": "责任链接力、节点自决拦截；观察者才是广播。「要不要走完」是两者的试金石。",
+      "difficulty": 4
     },
     {
       "id": "java-failfast-089",
@@ -1491,7 +1506,8 @@
       "answer": [
         0
       ],
-      "hint": "fail-fast 是尽力而为的 early-warning，没有并发保证。状态模式与策略同构，分界在谁决定切换。"
+      "hint": "fail-fast 是尽力而为的 early-warning，没有并发保证。状态模式与策略同构，分界在谁决定切换。",
+      "difficulty": 3
     },
     {
       "id": "java-visitor-090",
@@ -1507,7 +1523,8 @@
       "answer": [
         0
       ],
-      "hint": "双分派：accept 按对象实际类型、visit 按访问者重载。Files.walkFileTree、ASM Visitor 都是此现场。中介者把 N² 交互收成星状。"
+      "hint": "双分派：accept 按对象实际类型、visit 按访问者重载。Files.walkFileTree、ASM Visitor 都是此现场。中介者把 N² 交互收成星状。",
+      "difficulty": 4
     },
     {
       "id": "java-slf4j-091",
@@ -1523,7 +1540,8 @@
       "answer": [
         0
       ],
-      "hint": "Multiple bindings = 实现不唯一；一个实现都没有则进 NOPLogger 静默丢日志。占位符 `{}` 代替字符串拼接。"
+      "hint": "Multiple bindings = 实现不唯一；一个实现都没有则进 NOPLogger 静默丢日志。占位符 `{}` 代替字符串拼接。",
+      "difficulty": 4
     },
     {
       "id": "java-family-092",
@@ -1537,7 +1555,8 @@
       "answer": [
         1
       ],
-      "hint": "Boot 只是自动装配 + 内嵌容器的脚手架，内核仍是 Framework。依赖单向叠加：Framework→MVC→Boot→Cloud；Boot 3.x = JDK 17 + jakarta。"
+      "hint": "Boot 只是自动装配 + 内嵌容器的脚手架，内核仍是 Framework。依赖单向叠加：Framework→MVC→Boot→Cloud；Boot 3.x = JDK 17 + jakarta。",
+      "difficulty": 2
     },
     {
       "id": "java-junit-093",
@@ -1553,7 +1572,8 @@
       "answer": [
         0
       ],
-      "hint": "默认每个测试方法新建实例以隔离状态。异常用 assertThrows 拿对象再断言，替代老的 @Test(expected=...)。"
+      "hint": "默认每个测试方法新建实例以隔离状态。异常用 assertThrows 拿对象再断言，替代老的 @Test(expected=...)。",
+      "difficulty": 3
     },
     {
       "id": "java-spy-094",
@@ -1569,7 +1589,8 @@
       "answer": [
         0
       ],
-      "hint": "mock 全假、spy 半真。匹配器要么全用要么全不用；打桩困难往往是被测代码把依赖藏太深。"
+      "hint": "mock 全假、spy 半真。匹配器要么全用要么全不用；打桩困难往往是被测代码把依赖藏太深。",
+      "difficulty": 4
     },
     {
       "id": "java-webmvctest-095",
@@ -1585,7 +1606,8 @@
       "answer": [
         0
       ],
-      "hint": "@MockBean 会替换容器 Bean 并可能重建上下文，同一 Bean 反复替换是 CI 慢的常见根源。"
+      "hint": "@MockBean 会替换容器 Bean 并可能重建上下文，同一 Bean 反复替换是 CI 慢的常见根源。",
+      "difficulty": 4
     }
   ]
 }

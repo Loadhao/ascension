@@ -528,7 +528,8 @@
       "answer": [
         0
       ],
-      "hint": "被 break 打断就不进 else。match-case 主场是解构嵌套结构，简单值比较仍用 if-elif。"
+      "hint": "被 break 打断就不进 else。match-case 主场是解构嵌套结构，简单值比较仍用 if-elif。",
+      "difficulty": 2
     },
     {
       "id": "py-join-032",
@@ -544,7 +545,8 @@
       "answer": [
         0
       ],
-      "hint": "少量几次 += 无所谓。乱码九成来自 encode/decode 编码不一致，文件 IO 永远显式 encoding=\"utf-8\"。"
+      "hint": "少量几次 += 无所谓。乱码九成来自 encode/decode 编码不一致，文件 IO 永远显式 encoding=\"utf-8\"。",
+      "difficulty": 3
     },
     {
       "id": "py-json-033",
@@ -564,7 +566,8 @@
         2,
         3
       ],
-      "hint": "结构化校验是 Pydantic 的主场。选型：机器之间 JSON，人看的表格 CSV，人写的配置 TOML/YAML。"
+      "hint": "结构化校验是 Pydantic 的主场。选型：机器之间 JSON，人看的表格 CSV，人写的配置 TOML/YAML。",
+      "difficulty": 3
     },
     {
       "id": "py-timeout-034",
@@ -580,7 +583,8 @@
       "answer": [
         0
       ],
-      "hint": "异步代码禁用同步 HTTP 客户端，应换 httpx.AsyncClient。重试只给幂等方法 + 明确可重试状态码，配指数退避。"
+      "hint": "异步代码禁用同步 HTTP 客户端，应换 httpx.AsyncClient。重试只给幂等方法 + 明确可重试状态码，配指数退避。",
+      "difficulty": 4
     },
     {
       "id": "py-with-035",
@@ -596,7 +600,8 @@
       "answer": [
         0
       ],
-      "hint": "with 的 __exit__ 无论是否异常都会执行。read_text/write_text 适合小文件；大文件仍要流式读。"
+      "hint": "with 的 __exit__ 无论是否异常都会执行。read_text/write_text 适合小文件；大文件仍要流式读。",
+      "difficulty": 3
     },
     {
       "id": "py-naive-036",
@@ -612,7 +617,8 @@
       "answer": [
         0
       ],
-      "hint": "naive 和 aware 混合比较直接 TypeError。对外传输一律 isoformat；对接 Java 注意秒 vs 毫秒差三个数量级。"
+      "hint": "naive 和 aware 混合比较直接 TypeError。对外传输一律 isoformat；对接 Java 注意秒 vs 毫秒差三个数量级。",
+      "difficulty": 4
     },
     {
       "id": "py-wheel-037",
@@ -626,7 +632,25 @@
       "answer": [
         1
       ],
-      "hint": "wheel 不打包依赖，只描述需要什么；安装环境按 lockfile 解决。Docker 应先拷 pyproject+uv.lock，再 uv sync --frozen。"
+      "hint": "wheel 不打包依赖，只描述需要什么；安装环境按 lockfile 解决。Docker 应先拷 pyproject+uv.lock，再 uv sync --frozen。",
+      "difficulty": 3
+    },
+    {
+      "id": "py-freethread-031",
+      "noteId": "python/advanced/internals/01-gil",
+      "type": "single",
+      "q": "关于 free-threaded Python（PEP 703，3.13 起实验性），笔记的结论是？",
+      "options": [
+        "引用计数改为分片计数 + 延迟回收，现有多线程代码的锁/队列纪律不需要为它改写，但 C 扩展生态需要适配",
+        "关闭 GIL 后引用计数机制完全不变，所有 C 扩展无需改动即可享受多核",
+        "free-threaded 已是 3.13 的默认构建，所有项目应立即切换",
+        "现有多线程代码必须整体重写才能在 free-threaded 构建下运行"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "free-threaded 不是免费多核——单线程有原子计数的额外开销、C 扩展要等生态跟进；它改的是实现（分片计数+延迟回收）而不是并发语义，成熟前多核正路仍是多进程。"
     }
   ]
 }

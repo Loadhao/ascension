@@ -81,7 +81,9 @@
         "默认 Read Uncommitted，因此可以脏读",
         "默认 Serializable，写冲突排队等待"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "和 MySQL 默认 RR 正好反着。PG 的 RR/Serializable 才是事务级快照，写冲突以 serialization failure 重试收场，不是排队。"
     },
     {
@@ -96,7 +98,11 @@
         "xid 是 32 位，freeze 被长事务或废弃复制槽挡住时，库可能拒绝新写以防回卷",
         "旧版本存放在 undo log 里，由 purge 线程清理"
       ],
-      "answer": [0, 1, 2],
+      "answer": [
+        0,
+        1,
+        2
+      ],
       "hint": "undo log + purge 是 InnoDB 的模型，不要把 MySQL 答案搬过来。"
     },
     {
@@ -111,7 +117,9 @@
         "BRIN，因为它最小",
         "Hash，只服务等值所以最快"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "BRIN 要求堆物理顺序与列值相关，适合时序追加表，不适合 JSON 包含。Hash 只有 =。"
     },
     {
@@ -120,8 +128,13 @@
       "type": "judge",
       "difficulty": 3,
       "q": "EXPLAIN 里出现 Bitmap Index Scan → Bitmap Heap Scan，说明没走索引、应该改成强制 Index Scan。",
-      "options": ["正确", "错误"],
-      "answer": [1],
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
       "hint": "Bitmap 路径是中等选择性或多条件 OR/AND 的正常计划：先在内存里按 tid 建位图，再按页顺序回表，往往比随机 Index Scan 更便宜。"
     },
     {
@@ -136,7 +149,9 @@
         "替代 synchronous_commit，客户端提交不必等 WAL fsync",
         "压缩 WAL，降低归档体积"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "半页写会让『只记字节增量』的重放越放越错。提交成功靠 WAL fsync，checkpoint 只决定崩溃后从哪重放、要重放多久。"
     },
     {
@@ -145,9 +160,35 @@
       "type": "judge",
       "difficulty": 3,
       "q": "时间点恢复只需要一份 PGDATA 目录拷贝，不必连续归档 WAL。",
-      "options": ["正确", "错误"],
-      "answer": [1],
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
       "hint": "PITR = 基础备份 + 备份点之后连续的 WAL 归档；缺一段就只能恢复到缺口。废弃复制槽会夹住 WAL 把盘写满。"
+    },
+    {
+      "id": "pg-index-002",
+      "noteId": "postgresql/basic/core/01-pg-vs-mysql",
+      "type": "multiple",
+      "q": "关于 PostgreSQL 与 MySQL 的索引能力差异，下列说法正确的有？（多选）",
+      "options": [
+        "InnoDB 实际只有 B+tree（和自适应哈希）一种索引结构",
+        "PG 的 GIN 是倒排索引，是 JSONB、全文检索、数组字段的标配",
+        "PG 的 GiST 支撑地理空间（PostGIS 建在它上面）与范围类型",
+        "PG 的 BRIN 是块级范围索引，适合时序大表的最小代价方案",
+        "PG 不支持部分索引，必须全表统一索引结构"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": 3,
+      "difficulty": "末项反了——PG 支持 Hash/部分索引/表达式索引按需创建（如只给未归档订单建部分索引）；索引家族是笔记总结的 PG 对 MySQL 四大差异中的碾压项。"
     }
   ]
 }
