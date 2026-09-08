@@ -79,6 +79,52 @@
         1
       ],
       "hint": "复制集默认 3 副本先 ×3；索引放大最常被漏；压缩会让占用低于原始数据，不是必然翻倍。"
+    },
+    {
+      "id": "mongo-model-001",
+      "noteId": "mongodb/basic/core/01-document-model",
+      "type": "single",
+      "q": "订单与其「无上限增长的评论/日志类子实体」该如何建模，符合笔记建议的做法是？",
+      "options": [
+        "全部内嵌进订单文档，一次读取拿全",
+        "全部引用，订单文档内不保留任何子实体概要",
+        "无界增长的部分拆成引用集合独立存，可对有限条数（如最近 N 条概要）做内嵌",
+        "内嵌到接近 16MB 后 MongoDB 会自动拆分文档"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "全内嵌会撞 16MB 上限且更新膨胀，「多到没边」的子实体正是引用的适用场景；MongoDB 不会自动拆文档，超限就是报错；实际建模是「有限内嵌 + 无界引用」的混合。"
+    },
+    {
+      "id": "mongo-majority-002",
+      "noteId": "mongodb/intermediate/replication/01-replication-set",
+      "type": "single",
+      "q": "一个 MongoDB 复制集有 4 个投票成员，其中 2 个同时宕机，此时复制集会怎样？",
+      "options": [
+        "剩余 2 个存活节点直接选出新 Primary，继续正常读写",
+        "存活成员不足 majority（4 人需 3），选不出 Primary，整个复制集只读",
+        "自动降级为单机模式，继续接受写请求",
+        "Arbiter 会被提升为 Primary 补足多数派"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "majority = 投票成员数/2 + 1，4 个投票成员需要 3 个存活，容错上限是 1；设计取舍是「宁可不可写，不可出现双主」；Arbiter 只投票不存数据，没有资格当主。"
+    },
+    {
+      "id": "mongo-tune-003",
+      "noteId": "mongodb/advanced/operations/02-performance",
+      "type": "judge",
+      "q": "MongoDB 性能出问题时，应优先微调 WiredTiger 的 eviction 等内部参数，这是收益最大的一步。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "调参顺序永远是先修索引与模型（收益最大）、再对齐工作集与内存、最后才是参数微调；eviction 等内部参数默认值已近最优，乱调反而引入不可解释的行为。"
     }
   ]
 }

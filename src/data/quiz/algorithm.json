@@ -185,6 +185,68 @@
         0
       ],
       "hint": "比较排序的下界来自决策树；计数排序走「值即地址」，耗时 O(n+k)，k 是值域——值域巨大时并不划算。"
+    },
+    {
+      "id": "algo-bin-001",
+      "noteId": "algorithm/basic/searching/01-binary-search",
+      "type": "single",
+      "q": "关于二分查找的实现细节，下列说法正确的是？",
+      "options": [
+        "mid = (low + high) / 2 与 low + (high - low) / 2 完全等价，任选其一即可",
+        "闭区间 [low, high] 写法应使用循环条件 low < high，否则会死循环",
+        "找左边界（lower_bound）时若 a[mid] >= target，应执行 high = mid，因为 mid 可能就是答案不能跳过",
+        "Arrays.binarySearch 找不到目标时返回 -1，便于调用方统一判断"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "两端接近整型上限时 low+high 会先加法溢出（JDK 都踩过这个 bug）；闭区间用 <=、左闭右开才用 <；找不到时返回的是 -(插入点)-1，不是 -1。"
+    },
+    {
+      "id": "algo-stack-002",
+      "noteId": "algorithm/basic/techniques/03-monotonic-stack",
+      "type": "single",
+      "q": "关于单调栈求「每个元素右边第一个更大元素」，下列说法正确的是？",
+      "options": [
+        "虽然写法上是两层循环，但每个下标至多入栈一次、出栈一次，总操作数不超过 2n，均摊 O(n)",
+        "栈里应该直接存元素值，这样弹出时能立刻拿到比较用的值",
+        "从左往右扫时，栈内下标对应的值应保持从底到顶递增",
+        "新元素比栈顶小时，应把栈顶弹出并记录它的答案"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "存下标是因为多数题要返回下标或距离（温度题的 j - i），值可随时反查；「下一个更大」从左扫时栈是递减的；触发弹栈的是比栈顶大的新元素，比栈顶小的直接入栈继续等。"
+    },
+    {
+      "id": "algo-prefix-003",
+      "noteId": "algorithm/basic/techniques/01-prefix-sum",
+      "type": "judge",
+      "q": "使用前缀和数组 P（含 P[0]=0 哨兵）后，若对原数组某元素 a[i] 做单点修改，只需把 P[i] 更新为新值即可恢复所有区间和查询。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "前缀和没法局部更新——a[i] 一变，它之后的每个前缀值都含这一项，P[i..n] 全部失效，只能 O(n) 重建；需要「边改边查」应选树状数组/线段树。"
+    },
+    {
+      "id": "algo-kadane-005",
+      "noteId": "algorithm/intermediate/dp/03-max-subarray",
+      "type": "single",
+      "q": "对全负数组 {-3, -1} 跑 Kadane，若实现写成 int cur = 0, best = 0，循环内 cur = Math.max(nums[i], cur + nums[i])、best = Math.max(best, cur)，最终返回值是？",
+      "options": [
+        "正确返回 -1，循环内的 Math.max 会自动修正错误的初始值",
+        "错误返回 0，因为 best 初始化为 0 后不会被任何负数更新；正确做法是 cur、best 都初始化为 nums[0]",
+        "错误返回 -4，因为 cur 永远不会丢弃重开，只能累加整个数组",
+        "抛出数组越界异常，因为初始化少算了一个元素"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "best 初始 0 等于默认「答案至少为 0」，而最大子数组至少含一个元素、全负时答案是 -1，永远小于 0 根本进不了 best；「丢弃重开」逻辑本身没问题，根因全在初始化。"
     }
   ]
 }

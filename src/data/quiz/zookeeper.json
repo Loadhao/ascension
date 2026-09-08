@@ -47,6 +47,22 @@
         0
       ],
       "hint": "一次性是刻意简化；对比 etcd Watch 按 revision 续传。Session「半死」时临时节点可能已删，客户端还以为自己持锁。"
+    },
+    {
+      "id": "zk-model-004",
+      "noteId": "zookeeper/basic/core/01-zookeeper-core",
+      "type": "single",
+      "q": "关于 ZooKeeper 的数据模型与 Watch 机制，下列说法正确的是？",
+      "options": [
+        "每个 znode 默认可存 1GB 数据，因此适合当消息队列存储海量消息",
+        "全量数据持久存在磁盘上，每次读取都要先从磁盘加载",
+        "znode 数据默认存内存、单个 znode 默认上限 1MB，适合存配置和状态等小数据",
+        "Watch 触发后会持续推送该节点的后续所有变更，无需重新注册"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "1MB 上限 + 全量内存恰恰是「ZK 不适合存大量数据」的依据；Watch 是一次性通知，触发后必须重新注册。"
     }
   ]
 }

@@ -79,6 +79,52 @@
         1
       ],
       "hint": "curl -v 能打印 DNS、TCP、TLS、头；ping 不通先查链路/ICMP，DNS 错用 dig。不要从应用层盲猜。"
+    },
+    {
+      "id": "tools-jq-001",
+      "noteId": "tools/basic/cli/03-jq",
+      "type": "single",
+      "q": "执行 echo '[1,2,3]' | jq '.[]' 的输出是？",
+      "options": [
+        "一行：[1,2,3]",
+        "三行：1、2、3 各占一行",
+        "一行：\"1,2,3\"",
+        "报错：Cannot iterate"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": ".[] 的语义是「展开成流」——每个元素各自走一遍过滤器、各占一行；想整体当一个值输出一行就去掉 [] 用 .，Cannot iterate 是对非数组用 [] 才会报的错。"
+    },
+    {
+      "id": "tools-curl-006",
+      "noteId": "tools/basic/cli/02-curl",
+      "type": "single",
+      "q": "curl -v 的输出中，以 > 和 < 开头的行分别表示？",
+      "options": [
+        "> 是服务端发来的，< 是客户端发出的",
+        "> 是客户端发出的请求，< 是服务端回来的响应",
+        "两者都是响应头，只是分组不同",
+        "> 表示错误信息，< 表示正常信息"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "记「左手 > 右手 <」，箭头方向就是数据流向；发出的请求（>）之后一直没有 < 开头的行，多半是服务端没回，而不是本机没发出去。"
+    },
+    {
+      "id": "tools-curlhead-003",
+      "noteId": "tools/basic/efficiency/04-network-debug",
+      "type": "judge",
+      "q": "curl -I https://example.com 发送的是 HEAD 请求，只取回响应头。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "别把 -I 和 -i 混为一谈——小写 -i 是在完整响应前面显示响应头，大写 -I 是直接改发 HEAD 请求、压根不取 body。"
     }
   ]
 }

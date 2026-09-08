@@ -158,6 +158,8 @@ Docker、Nginx、Git 等全站方向。
 | [RabbitMQ 集群](/rabbitmq/intermediate/usage/02-cluster-ha/) | 默认只同步元数据，普通队列消息只在声明节点；要 HA 用仲裁队列 |
 | [NameServer 为何无中心](/rocketmq/basic/core/01-rocketmq-architecture/) | 路由粒度粗、稍旧可重试，取 AP 即可，不值得为路由上共识 |
 | [集群消费 vs 广播](/rocketmq/basic/core/02-consumer-semantics/) | 集群：组内一人消费、进度在 Broker、有 %RETRY%；广播全量、进度在本地、无重试 |
+| [RocketMQ 消费失败会阻塞吗](/rocketmq/basic/core/02-consumer-semantics/) | 不会——失败进 %RETRY% 按延迟级别递增重试 16 次，仍失败进 %DLQ% 死信，新消息继续消费 |
+| [消息队列高性能靠什么](/rocketmq/advanced/core/02-order-performance/) | 顺序写 × 零拷贝（sendfile 管消费、mmap 管生产）× 批量压缩——linger.ms 是延迟换吞吐的旋钮 |
 | [MQTT 保活](/mqtt/intermediate/usage/02-keepalive-reconnect/) | keepalive 间隔内无报文则 PINGREQ 探活；别设太小，重连用指数退避加抖动 |
 
 ## 检索与文档存储
@@ -171,8 +173,11 @@ Docker、Nginx、Git 等全站方向。
 | [MongoDB 分片集群](/mongodb/advanced/sharding/01-sharding-cluster/) | mongos 路由 + config 元数据 + shard 分片；复制集只解决可用性，写扩展靠分片 |
 | [文档模型怎么选](/mongodb/basic/core/01-document-model/) | BSON 结构长在文档里；第一决策是内嵌还是引用，不是「没有 schema」 |
 | [explain 看什么](/mongodb/advanced/operations/02-performance/) | keys/docs/returned 接近 1:1:1；COLLSCAN 就是没走到索引 |
+| [ES terms 聚合为什么会丢桶](/elasticsearch/intermediate/usage/02-aggregation/) | 各分片只交局部 top-N 再合并，size 太小高频词落选——聚合字段一律 keyword，size 要设够大 |
 | [ES match 与 term](/elasticsearch/intermediate/usage/01-query-dsl/) | 含某词用 match 查 text；精确等于用 term 且字段得是 keyword |
+| [ES 的 filter 和 must 怎么选](/elasticsearch/intermediate/usage/01-query-dsl/) | 纯过滤放 filter——不打分、可走缓存；must 留给需要参与相关度打分的条件 |
 | [ES 健康色与脑裂](/elasticsearch/intermediate/cluster/01-cluster-split-brain/) | yellow 副本缺失仍可读，red 才有主分片丢；7.x quorum 内建防脑裂 |
+| [ES 集群怎么防脑裂](/elasticsearch/intermediate/cluster/01-cluster-split-brain/) | quorum 结构性排除双主——只有多数派分区能选主；master 缺位只挡元数据变更，读写照常 |
 
 ## Linux 与工具
 
@@ -182,11 +187,16 @@ Docker、Nginx、Git 等全站方向。
 | [文件权限体系](/linux/basic/permission/01-users-permissions/) | 属主/属组/其他 × 读4写2执1，chmod/umask 控制默认权限 |
 | [systemd 服务管理](/linux/intermediate/system/03-system-service/) | unit 文件声明依赖与重启策略，journalctl 看日志——服务自愈的基础 |
 | [文本三件套](/tools/basic/cli/01-grep-sed-awk/) | grep 找、sed 改、awk 按列算——日志统计的瑞士军刀 |
+| [Linux 挂载与目录树](/linux/basic/filesystem/01-filesystem/) | 单一根目录 /，分区 mount 到目录接入目录树；磁盘满三件套：df -h / df -i / lsof +L1 查已删未释放 |
+| [Bash 脚本严格模式](/linux/intermediate/system/01-shell-script/) | 开头 set -euo pipefail：遇错退出、未定义变量报错、管道失败传播；赋值等号两边不能有空格 |
 | [inode 与改名](/linux/basic/commands/01-file-ops/) | 名字在 dentry、数据在 inode；同盘 mv 只改指向，硬链接是两个名字指向同一 inode |
 | [僵尸进程](/linux/intermediate/system/02-process-management/) | 子进程退出后父进程未 wait，尸体不占 CPU/内存，堆积说明父进程没回收 |
+| [kill 与 kill -9 的区别](/linux/intermediate/system/02-process-management/) | kill 默认 SIGTERM(15) 优雅退出，kill -9 是 SIGKILL 强杀、无法捕获忽略可能丢数据，只作最后手段 |
 | [Linux 网络速判](/linux/intermediate/system/04-network/) | ping 通≠端口通；解析失败查 DNS，能解析连不上查路由 |
 | [curl 调接口](/tools/basic/cli/02-curl/) | -v 看握手与状态码，-H/-d 带头带体，管道接 jq 拆 JSON |
+| [curl -v 的五个阶段](/tools/basic/cli/02-curl/) | `>` 是发出去的请求、`<` 是回来的响应，对照连接/TLS/请求/响应/关闭定位卡点 |
 | [jq 与 -r](/tools/basic/cli/03-jq/) | 把 JSON 当值流过滤；字符串默认带引号，接到 shell 要 -r |
+| [jq 的流式心智](/tools/basic/cli/03-jq/) | `.[]` 把数组展开成值流每元素一行，`.` 整体一个值；Cannot iterate 是对非数组用 [] |
 | [正则贪婪](/tools/basic/efficiency/03-regex/) | 默认吃最多，量词后加 ? 变非贪婪——解析引号内容几乎总要用 |
 
 ## Docker 与容器
@@ -303,13 +313,16 @@ Docker、Nginx、Git 等全站方向。
 | [定时任务多实例防重](/distributed/intermediate/coordination/03-distributed-scheduler/) | 锁兜底 → 选主单跑 → 分片广播并行，幂等贯穿所有层 |
 | [ZAB 和 2PC 区别](/zookeeper/basic/core/02-zk-deep-dive/) | ZAB 过半即提交、失败重选主不回滚——根治 2PC 阻塞与单点 |
 | [ZK 是什么](/zookeeper/basic/core/01-zookeeper-core/) | 强一致协调服务：znode 树 + 临时节点 + Watch，写走 Leader 再 ZAB 广播 |
+| [ZK 分布式锁为什么用临时顺序节点](/zookeeper/basic/core/01-zookeeper-core/) | 临时节点随会话断开自动删除防死锁，顺序节点单调递增序号让最小者持锁——选主与注册中心同理 |
 | [etcd Watch 的优势](/etcd/basic/core/02-etcd-lease-txn-watch/) | 按 revision 续传断线不丢事件，撞 compaction 要全量重拉 |
+| [etcd 默认读要不要过半](/etcd/basic/core/02-etcd-lease-txn-watch/) | linearizable（默认）过半走 Raft 读最新已提交，serializable 读本地快照换极低延迟——CAP 取舍的旋钮 |
 | [容灾 RTO/RPO](/distributed/advanced/availability/01-dr-multi-active/) | RTO 定恢复时长、RPO 定丢数据容忍，预案必须演练验证 |
 | [混沌工程](/distributed/advanced/availability/05-chaos-engineering/) | 稳态假设 + 受控注入 + 自动终止；没有预案的故障不注入 |
 | [单元化 set 化](/distributed/advanced/availability/06-cell-based/) | 分片基因贯穿流量/数据/应用，单元内闭环多活，切流先停写追平 |
 | [Seata AT 为什么无侵入](/seata/basic/core/01-seata-core/) | 一阶段执行 SQL 时自动记前后镜像 undo log 并直接提交本地事务，失败按 beforeImage 反向补偿 |
 | [AT 模式是什么隔离级别](/seata/basic/core/02-seata-deep-dive/) | 默认读未提交，写隔离靠提交前向 TC 申请行级全局锁；热点行退化串行，应换 TCC/消息最终一致 |
 | [etcd 写路径](/etcd/basic/core/01-etcd-core/) | 只有 Leader 处理写，Raft 日志过半提交；Lease 到期自动删挂在其上的 key |
+| [etcd 凭什么当 K8s 的存储](/etcd/basic/core/01-etcd-core/) | Raft 强一致 KV + MVCC revision 可回溯 + Watch 前缀订阅——K8s 控制循环的数据底座 |
 | [ZK Watcher](/zookeeper/basic/core/02-zk-deep-dive/) | 一次性触发，重注册间隙会丢变更——靠版本号补拉；半死 session 需 fencing 自保 |
 | [Gossip](/distributed/intermediate/consensus/02-gossip/) | 无中心时随机交换状态，O(log N) 轮收敛；适合元数据扩散，不能替代 Raft 提交 |
 | [分布式 ID](/distributed/intermediate/transaction/02-distributed-id/) | 分库后自增会撞号；工程默认雪花（小心时钟回拨），严格连续用号段 |

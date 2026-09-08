@@ -63,6 +63,54 @@
         1
       ],
       "hint": "集群默认只同步元数据；普通队列消息只落在声明它的节点。要扛单点得用镜像/仲裁队列（新项目用 quorum）。"
+    },
+    {
+      "id": "rmq-topic-001",
+      "noteId": "rabbitmq/basic/core/01-amqp-model",
+      "type": "single",
+      "q": "生产者以路由键 order.paid.1024 向 topic 交换机发消息，交换机绑定了队列 A（order.created.#）、队列 B（order.paid.#）、队列 C（order.#），消息会进入哪些队列？",
+      "options": [
+        "只进队列 B",
+        "只进队列 C",
+        "进队列 B 和队列 C",
+        "三个队列都进"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "topic 的 # 匹配多段：order.paid.1024 命中 order.paid.# 和 order.#，但不命中 order.created.#；一条消息可匹配多条绑定、同时进多个队列，所以不是「只进一个」。"
+    },
+    {
+      "id": "rmq-ack-002",
+      "noteId": "rabbitmq/basic/core/02-reliable-delivery",
+      "type": "single",
+      "q": "消费者处理消息失败后执行 basicNack(requeue=true) 反复重试，会有什么问题、更稳的做法是什么？",
+      "options": [
+        "消息会被 broker 立即删除，应改用自动 ACK 避免",
+        "反复 requeue 会原样死循环，更稳的是丢进死信队列",
+        "broker 会限制 requeue 次数，超过后自动进死信，无需处理",
+        "会阻塞 broker 上其他队列的正常投递"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "requeue 是把消息原样塞回队列，处理逻辑不变就会无限循环；broker 既不会替你删消息、也不会自动限制重试次数；改自动 ACK 只是掩盖失败，失败消息照样丢。"
+    },
+    {
+      "id": "rmq-quorum-003",
+      "noteId": "rabbitmq/intermediate/usage/02-cluster-ha",
+      "type": "single",
+      "q": "新项目要在 RabbitMQ 上扛单点故障、优先保证不丢数据，按笔记的选型建议应该用？",
+      "options": [
+        "经典镜像队列，异步镜像延迟低",
+        "仲裁队列（x-queue-type=quorum），基于 Raft 在多副本间保持强一致",
+        "普通队列 + 增加更多集群节点即可",
+        "headers 交换机 + 消息持久化"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "经典镜像队列是异步镜像，主节点挂掉可能丢「镜像未同步」的数据；普通队列消息只落声明节点，加节点不解决单点问题；这与交换机类型无关，是队列类型的选型。"
     }
   ]
 }

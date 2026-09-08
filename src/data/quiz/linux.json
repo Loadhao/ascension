@@ -93,6 +93,52 @@
         0
       ],
       "hint": "根是 /，磁盘是「挂上来的子树」；把 Linux 理解成 C/D 盘是跨系统最大的心智错位。"
+    },
+    {
+      "id": "linux-shell-002",
+      "noteId": "linux/intermediate/system/01-shell-script",
+      "type": "judge",
+      "q": "在 Bash 脚本中写 count = 5（等号两侧有空格）来给变量 count 赋值，是合法的。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "赋值语句里等号必须紧贴变量名和值——写成 count = 5 时 Bash 会把 count 当作要执行的命令、= 5 当作它的参数；同类细节还有引用变量要加双引号。"
+    },
+    {
+      "id": "linux-kill-003",
+      "noteId": "linux/intermediate/system/02-process-management",
+      "type": "single",
+      "q": "执行 kill <PID>（不带信号参数）时，默认发送的信号是？",
+      "options": [
+        "SIGKILL(9)，立即强杀",
+        "SIGTERM(15)，请求优雅终止",
+        "SIGINT(2)，等同 Ctrl+C",
+        "SIGSTOP，暂停进程"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "默认走的是「有商量的」那条路——给程序释放资源、落盘数据的机会；无法被捕获忽略的强杀需要显式 -9，是最后手段而不是默认行为。"
+    },
+    {
+      "id": "linux-net-004",
+      "noteId": "linux/intermediate/system/04-network",
+      "type": "single",
+      "q": "服务器 ping 得通，但 nc -zv host 8080 连不上，最可能的原因是？",
+      "options": [
+        "DNS 解析失败，域名没变出 IP",
+        "默认网关/路由不可达",
+        "防火墙没放行或服务根本没在监听",
+        "本机网卡没起、没拿到 IP"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "ping 走 ICMP 且已通，说明 IP、链路、路由这些下层都没问题——卡点收窄到传输层端口，先 ss -tlnp 确认监听再查防火墙，而不是回去查 DNS 或网卡。"
     }
   ]
 }

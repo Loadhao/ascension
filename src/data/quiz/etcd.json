@@ -47,6 +47,38 @@
         0
       ],
       "hint": "选主、抢锁都靠这条迷你 CAS；若拆成先 get 再 put，中间必有窗口。"
+    },
+    {
+      "id": "etcd-raft-004",
+      "noteId": "etcd/basic/core/01-etcd-core",
+      "type": "single",
+      "q": "关于 etcd 的 Raft 共识落地，下列说法正确的是？",
+      "options": [
+        "所有节点都可以直接处理写请求，无需经过 Leader",
+        "任期（term）用于区分数据分片，与领袖更替无关",
+        "只有 Leader 处理写，写操作追加为日志同步到多数派后才提交；任期（term）用于区分领袖更替",
+        "5 节点的 etcd 集群可以容忍 3 个节点同时故障"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "写必须走 Leader 并复制到多数派；term 正是领袖更替的任期编号；按 2f+1 容 f，5 节点只能容忍 (5-1)/2=2 个故障。"
+    },
+    {
+      "id": "etcd-watch-002",
+      "noteId": "etcd/basic/core/02-etcd-lease-txn-watch",
+      "type": "single",
+      "q": "客户端断线较久后带上次的 revision 重新发起 etcd Watch，收到了 compacted 错误，正确的理解与处置是？",
+      "options": [
+        "服务端网络抖动，原样重试即可恢复",
+        "MVCC 历史被压缩，压缩点之前的 revision 无法再 watch，应全量 list 后重新 watch 兜底",
+        "revision 不合法，应从 0 开始重新订阅全部事件",
+        "应放弃 Watch 改用 serializable 读轮询替代"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "compacted 不是抖动重试能解决的——压缩点之前的版本数据已被删，续传位点永远追不上；K8s informer 的 List+Watch+resync 就是标准兜底套路。"
     }
   ]
 }

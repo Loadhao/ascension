@@ -79,6 +79,52 @@
         1
       ],
       "hint": "分区数 = 消费并行度上限，队列不够时加消费者没用；先定位瓶颈（生产/存储/消费），多数积压其实是同步慢 IO。"
+    },
+    {
+      "id": "rocketmq-log-001",
+      "noteId": "rocketmq/basic/core/01-rocketmq-architecture",
+      "type": "single",
+      "q": "关于 RocketMQ 与 Kafka 在消息存储上的差异，正确的是？",
+      "options": [
+        "RocketMQ 每个 Topic 一个独立日志文件，互不干扰",
+        "Kafka 把所有 Topic 的消息混写进同一个日志文件",
+        "RocketMQ 所有 Topic 的消息混写进同一个 CommitLog 顺序追加，再异步分发到各 Topic 的 ConsumeQueue 索引",
+        "两者存储结构完全相同，只是文件命名不同"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "最容易把两者记反——Kafka 是每分区独立日志段（少而大的 Topic 快），RocketMQ 是单 CommitLog 集中顺序写（多 Topic 时文件句柄与随机 IO 不恶化，更稳）。"
+    },
+    {
+      "id": "rocketmq-retry-002",
+      "noteId": "rocketmq/basic/core/02-consumer-semantics",
+      "type": "judge",
+      "q": "RocketMQ 集群消费模式下，消费进度存储在消费者本地文件中。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "两种模式的进度存储记反了——集群消费进度在 Broker 端；只有广播消费因「每个消费者进度各不相同」才存本地文件，且代价是本地文件丢失就丢进度。"
+    },
+    {
+      "id": "rocketmq-sendfile-003",
+      "noteId": "rocketmq/advanced/core/02-order-performance",
+      "type": "single",
+      "q": "消费路径用 sendfile 零拷贝，它快在哪里？",
+      "options": [
+        "数据跳过页缓存，直接从磁盘写入网卡",
+        "数据完全不进用户空间，由内核从页缓存直接转发到网卡，2 次拷贝、0 次多余切换",
+        "用多线程并行拷贝，把拷贝次数摊薄了",
+        "先压缩文件再传输，网络传输量变小"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "零拷贝不是「没有页缓存」也不是「并发拷贝」——传统路径本是 4 次拷贝 4 次切换，省掉的是用户空间与内核之间的来回搬运；生产路径用的是 mmap，不是 sendfile。"
     }
   ]
 }

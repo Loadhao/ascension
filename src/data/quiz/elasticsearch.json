@@ -93,6 +93,54 @@
         0
       ],
       "hint": "对 text 做 terms 会按词项零散分组，结果没有业务含义；度量/桶/管道三大家族也不要和 query 打分混为一谈。"
+    },
+    {
+      "id": "es-quorum-001",
+      "noteId": "elasticsearch/intermediate/cluster/01-cluster-split-brain",
+      "type": "single",
+      "q": "7 个 master-eligible 节点的 ES 集群发生网络分区，分裂为 4 台和 3 台两侧，以下描述正确的是？",
+      "options": [
+        "两个分区各自选出 master，网络恢复后数据自动合并",
+        "只有 4 台的多数派分区能选出 master，3 台分区凑不够 quorum 拒绝选主、只读等待恢复",
+        "3 台分区也能选出 master，因为 7.x 的 minimum_master_nodes 默认值就是 3",
+        "两边都选不出 master，整个集群停止读写"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "quorum 保证至多一个分区在当主；master 缺位只挡元数据变更、读写照常，不会全停；7.x 已内建自动计算，不存在默认配 3 的手配项。"
+    },
+    {
+      "id": "es-term-002",
+      "noteId": "elasticsearch/intermediate/usage/01-query-dsl",
+      "type": "single",
+      "q": "用 term 查询去查一个 text 类型的 title 字段，几乎搜不到结果，最可能的原因是？",
+      "options": [
+        "text 字段没有建倒排索引，只有 keyword 字段才有",
+        "term 查询性能太差，被 ES 默认限流拒绝了",
+        "text 已被分词成多个词项，而 term 要求整个字段值等于某词项，所以几乎匹配不上",
+        "term 查询默认只返回第一页数据，需要加分页参数"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "根因是分词：text 存的是词项列表，term 是整值精确等于——想「包含某词」用 match，想精确等于得 term 且字段是 keyword。"
+    },
+    {
+      "id": "es-terms-003",
+      "noteId": "elasticsearch/intermediate/usage/02-aggregation",
+      "type": "single",
+      "q": "关于 ES terms 聚合的精确度，正确的是？",
+      "options": [
+        "terms 聚合和 SQL 的 GROUP BY 一样绝对精确，不会丢桶",
+        "terms 桶在每个分片上独立算局部 top-N 再合并，size 太小时高频词可能落选被丢，属近似 top-N",
+        "把 size 设为 1 反而能拿到全局最准确的桶",
+        "terms 聚合的精确度只与集群节点数有关，与 size 无关"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "别把聚合当绝对精确的 GROUP BY——分片只交局部 top-N，size 越小合并越容易丢全局高频桶；size=1 只会让丢桶更严重；聚合字段要用 keyword。"
     }
   ]
 }

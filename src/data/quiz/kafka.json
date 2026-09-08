@@ -127,6 +127,38 @@
         1
       ],
       "hint": "可靠性靠 ISR 与 acks，不是逐条 fsync；把数据库的同步刷盘直觉套到 Kafka 会毁吞吐。"
+    },
+    {
+      "id": "kafka-offset-009",
+      "noteId": "kafka/basic/core/02-offset",
+      "type": "single",
+      "q": "关于 Kafka 的自动位移提交（enable.auto.commit=true，默认每 5 秒），下列说法正确的是？",
+      "options": [
+        "自动提交保证消息既不丢也不重，生产可放心使用",
+        "自动提交发生在 poll 返回时，既可能丢消息也可能重复消费，排查事故像开盲盒",
+        "自动提交只在消费者正常关闭时触发一次",
+        "自动提交的位移语义是「本批最后一条已处理消息的 offset」"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "自动提交两头不讨好——先处理后提交的间隙宕机会重、先提交后处理的间隙宕机会丢；生产建议关闭自动提交、处理完手动提交（异步提交 + 关闭前同步兜底）；提交的位移是「下一条要读的 offset」。"
+    },
+    {
+      "id": "kafka-rebalance-010",
+      "noteId": "kafka/intermediate/core/05-rebalance",
+      "type": "single",
+      "q": "关于 Kafka 消费组重平衡的分配方案，下列说法正确的是？",
+      "options": [
+        "分区分配方案由 GroupCoordinator 计算并下发到所有成员",
+        "分配方案由消费组 Leader 成员计算，Coordinator 只负责收集与下发",
+        "每个消费者独立计算自己的分配，无需协调",
+        "分配方案由 Broker 端控制器统一计算"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "两阶段协议里 Coordinator 只负责收名片（JoinGroup 选出 Leader）与发通知（SyncGroup），真正定方案的是 Leader 成员——把两者分工记混是高频误区。"
     }
   ]
 }
