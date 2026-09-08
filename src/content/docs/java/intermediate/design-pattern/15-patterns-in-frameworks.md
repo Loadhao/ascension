@@ -54,6 +54,9 @@ static Object wrap(Object target) {
 | 观察者 | `PropertyChangeListener` | 属性变化通知 |
 | 原型 | `Object.clone()` / 拷贝构造 | 克隆代替重构造 |
 | 单例 | `Runtime.getRuntime()` | 进程内唯一 |
+| 桥接 | JDBC `DriverManager` × 各数据库 `Driver` | 抽象与实现两维度独立演化 |
+| 享元 | `Integer.valueOf` 缓存、String 常量池 | 内部状态共享、外部状态传参 |
+| 命令 | `Runnable/Callable`、线程池提交 | 请求对象化，可排队/撤销/重放 |
 | 状态 | `Thread.State`（线程状态机的语义载体） | 状态决定行为合法迁移 |
 | 代理 | 动态代理 `Proxy`/`InvocationHandler`（反射篇） | 运行期生成代理类 |
 
@@ -92,7 +95,7 @@ flowchart TB
    优秀框架的共性**）。
 
 4. **Spring 事件 = 观察者**：`ApplicationEventPublisher` +
-   `@EventListener`（行为型篇的代码）——进程内解耦的官方姿势。
+   `@EventListener`（观察者篇的代码）——进程内解耦的官方姿势。
 
 5. **Gateway 过滤器链 = 责任链**：`GatewayFilterChain.filter(exchange)`
    每个节点"处理 + 放行"（网关篇的 AuthGlobalFilter）——与 OkHttp

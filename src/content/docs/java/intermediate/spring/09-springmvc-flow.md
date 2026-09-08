@@ -42,7 +42,7 @@ flowchart TB
 - **HandlerAdapter**：处理器形态五花八门（`@RequestMapping` 方法、
   函数式 Endpoint、`@ControllerAdvice` 兜底），适配器让
   DispatcherServlet 用统一姿势调用它们——**适配器模式的教科书现场**
-  （模式地图见[框架源码中的模式地图](/java/intermediate/design-pattern/05-patterns-in-frameworks/)）。
+  （模式地图见[框架源码中的模式地图](/java/intermediate/design-pattern/15-patterns-in-frameworks/)）。
 
 ## 参数解析与消息转换
 
