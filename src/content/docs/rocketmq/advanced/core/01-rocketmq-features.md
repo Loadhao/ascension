@@ -2,6 +2,7 @@
 title: RocketMQ 核心特性
 description: NameServer 无状态架构、事务消息与回查、延迟消息的定时轮实现、Push 长轮询
 level: advanced
+core: true
 ---
 
 ## 架构：无中心元数据

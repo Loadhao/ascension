@@ -2,6 +2,7 @@
 title: 可观测性三支柱与告警设计
 description: Metrics、Logging、Tracing 的分工与协同，Prometheus 四类指标与黄金四信号，告警分级与疲劳治理，线上问题排查的标准路径
 level: advanced
+core: true
 ---
 
 ## 三支柱：发现、定位、归因的分工

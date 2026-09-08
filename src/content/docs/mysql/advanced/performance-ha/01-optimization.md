@@ -2,6 +2,7 @@
 title: SQL 优化与执行计划
 description: 慢日志定位、explain 关键列解读、深分页、count 与 join 优化
 level: advanced
+core: true
 ---
 
 ## 第一步：找到慢 SQL
