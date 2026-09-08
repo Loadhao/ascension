@@ -1,0 +1,74 @@
+astro.config.mjs
+  h_9324126a55eff3 135-142
+src/content/docs/ai/basic/agent/index.mdx
+  h_9324126a55eff3 30
+src/content/docs/ai/index.mdx
+  h_9324126a55eff3 18
+src/content/docs/ai/intermediate/agent/index.mdx
+  h_9324126a55eff3 37
+src/content/docs/algorithm/index.mdx
+  h_9324126a55eff3 18
+src/content/docs/distributed/index.mdx
+  h_9324126a55eff3 29
+src/content/docs/docker/index.mdx
+  h_9324126a55eff3 18
+src/content/docs/elasticsearch/index.mdx
+  h_9324126a55eff3 22
+src/content/docs/etcd/index.mdx
+  h_9324126a55eff3 23
+src/content/docs/git/index.mdx
+  h_9324126a55eff3 18
+src/content/docs/guide/interview-cheatsheet.md
+  h_9324126a55eff3 2
+src/content/docs/guide/resources.mdx
+  h_9324126a55eff3 2
+src/content/docs/java/index.mdx
+  h_9324126a55eff3 18
+src/content/docs/js/index.mdx
+  h_9324126a55eff3 18
+src/content/docs/kafka/index.mdx
+  h_9324126a55eff3 22
+src/content/docs/linux/index.mdx
+  h_9324126a55eff3 18
+src/content/docs/middleware/index.mdx
+  h_9324126a55eff3 24
+src/content/docs/mongodb/index.mdx
+  h_9324126a55eff3 22
+src/content/docs/mqtt/index.mdx
+  h_9324126a55eff3 22
+src/content/docs/mysql/index.mdx
+  h_9324126a55eff3 22
+src/content/docs/network/index.mdx
+  h_9324126a55eff3 19
+src/content/docs/nginx/index.mdx
+  h_9324126a55eff3 22
+src/content/docs/panorama/index.mdx
+  h_9324126a55eff3 17
+src/content/docs/postgresql/index.mdx
+  h_9324126a55eff3 23
+src/content/docs/python/index.mdx
+  h_9324126a55eff3 18
+src/content/docs/rabbitmq/index.mdx
+  h_9324126a55eff3 22
+src/content/docs/redis/index.mdx
+  h_9324126a55eff3 22
+src/content/docs/rocketmq/index.mdx
+  h_9324126a55eff3 22
+src/content/docs/seata/index.mdx
+  h_9324126a55eff3 23
+src/content/docs/tools/index.mdx
+  h_9324126a55eff3 21
+src/content/docs/zookeeper/index.mdx
+  h_9324126a55eff3 23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "5fafac5caa31746aee5f852b78ec261879a60960",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
