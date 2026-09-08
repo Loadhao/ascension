@@ -356,6 +356,11 @@ main:has(.kg-fullbleed) {
 }
 
 /* ===== 右侧篇章目录收窄 + 正文在剩余空间居中（≥72rem 覆盖 Starlight 布局公式） ===== */
+/* 正文列全宽度居中：Starlight core 只在 ≥72rem 给 .sl-container 加 auto 边距，
+   50–72rem 区间正文贴左，这里统一接管（层叠优先级高于 core 的 @layer 规则） */
+.content-panel .sl-container {
+  margin-inline: auto;
+}
 @media (min-width: 72rem) {
   .right-sidebar-container {
     width: 16rem;
