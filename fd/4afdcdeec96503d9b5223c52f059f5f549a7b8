@@ -1,0 +1,14 @@
+scripts/consistency-verify.mjs
+  h_9324126a55eff3 41-44,47,49-51,56-62,67-68,114-117
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "fd4afdcdeec96503d9b5223c52f059f5f549a7b8",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
