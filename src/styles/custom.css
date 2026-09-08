@@ -374,6 +374,49 @@ main:has(.kg-fullbleed) {
     width: 100%;
   }
 }
+
+/* ===== 50–72rem：右侧目录保持桌面列布局 =====
+   Starlight core 到 72rem（1152px）才启用右侧目录列，更窄的桌面窗口只剩顶部
+   细条，目录「消失」。此处把桌面列布局下延到 50rem，并同步收窄两侧栏位保正文：
+   左栏 18.75→16rem、右侧目录列 14rem，窄窗口下嫌挤可用页头按钮收起左栏。 */
+@media (min-width: 50rem) and (max-width: 71.99rem) {
+  :root {
+    --sl-sidebar-width: 16rem;
+    --sl-mobile-toc-height: 0rem;
+  }
+  mobile-starlight-toc {
+    display: none;
+  }
+  .lg\:sl-flex {
+    display: flex;
+  }
+  aside.right-sidebar-container {
+    order: 2;
+    position: relative;
+    width: 14rem;
+  }
+  .right-sidebar {
+    position: fixed;
+    top: 0;
+    border-inline-start: 1px solid var(--sl-color-hairline);
+    padding-top: var(--sl-nav-height);
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  /* 压过 sl-hidden 工具类（<72rem 下它把面板藏掉） */
+  aside.right-sidebar-container .right-sidebar-panel {
+    display: block;
+  }
+  .right-sidebar-panel .sl-container {
+    width: 100%;
+  }
+  .main-pane {
+    order: 1;
+    width: calc(100% - 14rem);
+  }
+}
 summary .sl-tree-toggle {
   flex-shrink: 0;
   display: inline-flex;
