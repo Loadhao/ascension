@@ -1167,6 +1167,352 @@
         0
       ],
       "hint": "ForkJoinPool 不补偿阻塞等待，调大参数治标不治本；共享意味着互相影响，阻塞任务必须隔离。"
+    },
+    {
+      "id": "java-bit-074",
+      "noteId": "java/basic/syntax/07-bit-operations",
+      "type": "single",
+      "q": "`-2 >>> 1` 为什么得到 2147483647 而不是 -1？",
+      "options": [
+        "无符号右移高位补 0，符号位被移没，补码被当成纯比特串，结果是 2³¹-1",
+        "无符号右移和补符号位的 `>>` 对负数结果相同，都应得到 -1",
+        "补码下右移 1 位等价于除以 2 向负无穷取整，所以这是 JVM 的 bug",
+        "`>>>` 只对正数有定义，负数会先取绝对值再移位"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "-2 的 32 位补码是 111...1110；`>>>` 高位补 0 得到 0111...1111 = 2147483647。`>>` 才会补符号位得到 -1。"
+    },
+    {
+      "id": "java-serial-075",
+      "noteId": "java/basic/syntax/08-serialization",
+      "type": "single",
+      "q": "实现 Serializable 却不显式声明 serialVersionUID，滚动升级时最典型的事故是？",
+      "options": [
+        "JVM 按类结构自动哈希版本号，加字段/改方法签名就会变号，旧字节流反序列化抛 InvalidClassException",
+        "没有版本号就无法序列化，编译期直接报错",
+        "反序列化会静默丢掉不认识的字段，不会抛异常",
+        "JSON 序列化同样依赖 serialVersionUID，Jackson 也会因此失败"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "最佳实践是显式声明；结构兼容改动不 bump，破坏性改动才改号。JSON 无此机制，靠字段名匹配。"
+    },
+    {
+      "id": "java-intcache-076",
+      "noteId": "java/basic/syntax/09-object-copy",
+      "type": "judge",
+      "q": "`Integer a = 128; Integer b = 128;` 之后 `a == b` 为 true，因为自动装箱总是返回同一缓存对象。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "缓存池只覆盖 -128~127（可用 AutoBoxCacheMax 调 Integer 上限）；128 各自 new。包装类型比较必须 equals；clone 默认还是浅拷贝。"
+    },
+    {
+      "id": "java-comparable-077",
+      "noteId": "java/basic/syntax/11-common-interfaces",
+      "type": "single",
+      "q": "`BigDecimal(\"1.0\")` 和 `BigDecimal(\"1.00\")` 放进 TreeSet 只会留下一个，原因是？",
+      "options": [
+        "TreeSet/TreeMap 去重只看 compareTo；两者 equals 为 false 但 compareTo 为 0",
+        "HashSet 同样只会留一个，因为它们 hashCode 相同",
+        "TreeSet 内部转成 HashSet 再按 equals 去重",
+        "BigDecimal 覆写了 hashCode 使两者被视为同一对象"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "compareTo 与 equals 最好保持一致。Comparable 是类内自然顺序，Comparator 是类外规则。"
+    },
+    {
+      "id": "java-jndi-078",
+      "noteId": "java/basic/syntax/12-jni-jndi",
+      "type": "single",
+      "q": "Log4Shell（CVE-2021-44228）能打到任意代码执行，关键链路是？",
+      "options": [
+        "日志内容里的 `${jndi:...}` 被解析后触发 JNDI lookup，旧 JDK 按 Reference 下载远程类并实例化",
+        "JNI 的 native 方法被恶意 so 替换导致段错误",
+        "SLF4J 桥接包把日志转发到远程 syslog",
+        "Tomcat 的 JNDI 数据源默认允许远程 codebase"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "永远不要把不可信字符串交给 lookup / 日志的 JNDI 解析；JDK 8u191+ 默认关掉远程 codebase 加载。"
+    },
+    {
+      "id": "java-lombok-079",
+      "noteId": "java/basic/syntax/13-lombok-apt",
+      "type": "single",
+      "q": "给类加了 `@Builder` 后 Jackson/JPA 反序列化失败，最常见原因与解法是？",
+      "options": [
+        "@Builder 生成全参构造并吞掉默认无参构造，需再标 @NoArgsConstructor + @AllArgsConstructor",
+        "@Builder 是 RUNTIME 注解，运行期反射看不到 builder 方法",
+        "Lombok 改的是新文件而不是原类，Jackson 找错了 Class",
+        "必须把 @Builder 改成 @Data 才能反序列化"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "经典三连 @Builder + @NoArgsConstructor + @AllArgsConstructor。Lombok 走 SOURCE + 改语法树；@Data 上 JPA 实体另有 hashCode/懒加载坑。"
+    },
+    {
+      "id": "java-servlet-080",
+      "noteId": "java/basic/tomcat/01-web-container",
+      "type": "single",
+      "q": "关于 Web 容器与 Servlet，正确的是？",
+      "options": [
+        "Servlet 没有 main 方法，靠容器回调 init/service/destroy；Web 容器 = HTTP 服务器 + Servlet 容器",
+        "Servlet 自己 listen 端口解析 HTTP，Tomcat 只负责加载 class",
+        "SpringMVC 绕过了 Servlet，直接对接 Netty",
+        "微服务时代必须用外置 Tomcat 才能跑多个 war"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "DispatcherServlet 本身就是一个 Servlet；Boot 把容器嵌进应用进程，从平台退化为库。"
+    },
+    {
+      "id": "java-jetty-081",
+      "noteId": "java/basic/tomcat/02-jetty-architecture",
+      "type": "single",
+      "q": "Jetty 与 Tomcat 在线程模型上的核心分野是？",
+      "options": [
+        "Jetty 所有 Connector 共享一个全局线程池更省资源；Tomcat 每个 Connector 自带线程池隔离性更好",
+        "Jetty 每个 Connector 独立线程池，Tomcat 才是全局共享",
+        "Jetty 9 仍以 BIO 为主，Tomcat 才全面 NIO",
+        "两者都没有 Acceptor，连接直接由业务线程 accept"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Jetty = Connector + Handler + 一个全局线程池，无 Service 概念；定位是轻量可嵌入 vs Tomcat 独立部署稳健。"
+    },
+    {
+      "id": "java-factory-082",
+      "noteId": "java/intermediate/design-pattern/03-factory",
+      "type": "single",
+      "q": "工厂三件套的选型口诀是？",
+      "options": [
+        "先问加产品的频率：稳定用简单工厂（改方法），独立扩展用工厂方法（加工厂类），成套匹配才上抽象工厂",
+        "永远用抽象工厂，因为它最符合开闭原则",
+        "简单工厂是 GoF 23 之一，工厂方法反而不是",
+        "BeanFactory 和 FactoryBean 是同一个东西的两个名字"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "简单工厂不是 GoF 23。BeanFactory 是容器本身，FactoryBean 是让你手写复杂对象工厂的扩展点（getObject() 才是真正暴露的 Bean）。"
+    },
+    {
+      "id": "java-builder-083",
+      "noteId": "java/intermediate/design-pattern/04-creational",
+      "type": "judge",
+      "q": "Spring 的 prototype scope 就是原型模式：每次 getBean 都 clone 已有实例。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "同名不同义——prototype scope 是每次新建，与克隆无关。原型模式才是复制现成对象；工程上优先拷贝构造，慎用 Cloneable。"
+    },
+    {
+      "id": "java-adapter-084",
+      "noteId": "java/intermediate/design-pattern/05-adapter",
+      "type": "single",
+      "q": "适配器、装饰器、代理、外观的分界，正确的是？",
+      "options": [
+        "适配器换接口让不兼容的合作；装饰器同接口叠加能力；代理同接口控制访问；外观把多接口捏成一个粗入口",
+        "四个都换接口，只是类名不同",
+        "适配器同接口转发，装饰器换接口",
+        "外观控制访问，代理只负责翻译"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "适配器的前提是老代码改不了；写法永远选组合（对象适配器）。HandlerAdapter 是 Spring MVC 最值得记的现场。"
+    },
+    {
+      "id": "java-decorator-085",
+      "noteId": "java/intermediate/design-pattern/07-decorator",
+      "type": "single",
+      "q": "Java IO 的 BufferedReader 包 InputStreamReader 包 FileInputStream，这是什么模式？它和代理的差别是？",
+      "options": [
+        "装饰器：同接口持有同接口并附加能力；与代理结构相同但意图相反——穿衣服 vs 把门",
+        "适配器：三层都在换接口",
+        "责任链：每一层决定放行或拦截",
+        "桥接：把字节流和字符流拆成两个独立维度"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "装饰器是运行期自由拼装，调用方主动选择怎么包；顺序敏感，反包语义会变。Collections.unmodifiableList 是最短现场。"
+    },
+    {
+      "id": "java-flyweight-086",
+      "noteId": "java/intermediate/design-pattern/08-structural",
+      "type": "single",
+      "q": "Integer.valueOf(-128~127) 是享元，线程池是池化。两者差在哪？",
+      "options": [
+        "享元复用的是对象本身（大家共用同一份）；池化复用的是昂贵资源的占用权（用完归还）",
+        "两者完全等价，都是对象池",
+        "线程池是享元，Integer 缓存是对象池",
+        "享元必须配合线程池才能省内存"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "享元把状态拆成内部（可共享）与外部（调用时传入）。桥接的教科书现场是 JDBC：DriverManager 与 Driver 经 Connection 解耦。"
+    },
+    {
+      "id": "java-template-087",
+      "noteId": "java/intermediate/design-pattern/10-template-method",
+      "type": "single",
+      "q": "关于模板方法，下列哪项正确？",
+      "options": [
+        "骨架方法加 final 防子类改流程，钩子用 protected；JdbcTemplate 把「继承填空」进化成「回调/lambda 填空」",
+        "钩子必须 public，否则子类无法调用",
+        "模板方法与策略模式没有区别，都是整体替换算法",
+        "AQS 的 acquire 是钩子，tryAcquire 才是骨架"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "AQS 的 acquire() 骨架写死，tryAcquire 留给子类。与策略的边界是「变一步 vs 变全套」。"
+    },
+    {
+      "id": "java-chain-088",
+      "noteId": "java/intermediate/design-pattern/12-chain-of-responsibility",
+      "type": "single",
+      "q": "Spring Cloud Gateway 过滤器里 `chain.filter(exchange)` 之后写的 post 逻辑，执行顺序是？",
+      "options": [
+        "后写的 post 先执行——递归进、逆序出的栈式回溯，Netty 出站、OkHttp 响应回传同理",
+        "后写的 post 后执行，与 Servlet Filter 正向完全一致",
+        "post 逻辑在独立线程并行跑，无顺序",
+        "Gateway 没有 post 阶段，then() 会被忽略"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "责任链接力、节点自决拦截；观察者才是广播。「要不要走完」是两者的试金石。"
+    },
+    {
+      "id": "java-failfast-089",
+      "noteId": "java/intermediate/design-pattern/13-behavioral",
+      "type": "single",
+      "q": "增强 for 循环里对 ArrayList 调用 `list.remove(u)` 为什么会 ConcurrentModificationException？正确写法是？",
+      "options": [
+        "fail-fast 迭代器靠 modCount 校验结构改动；应改用 iterator.remove() 或 removeIf",
+        "单线程不可能 CME，一定是并发写",
+        "把 ArrayList 换成 LinkedList 就不会 CME",
+        "CME 只在多线程下出现，单线程 remove 是合法的"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "fail-fast 是尽力而为的 early-warning，没有并发保证。状态模式与策略同构，分界在谁决定切换。"
+    },
+    {
+      "id": "java-visitor-090",
+      "noteId": "java/intermediate/design-pattern/14-visitor-mediator",
+      "type": "single",
+      "q": "访问者模式赌的是什么？赌反了会怎样？",
+      "options": [
+        "结构稳定、操作常变；一旦新加一种元素类型，所有访问者都要加 visit 方法",
+        "操作稳定、结构常变；加新类型只需改一处",
+        "与策略完全相同，都是整体替换算法",
+        "双分派让 Java 变成多方法语言，没有适用边界"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "双分派：accept 按对象实际类型、visit 按访问者重载。Files.walkFileTree、ASM Visitor 都是此现场。中介者把 N² 交互收成星状。"
+    },
+    {
+      "id": "java-slf4j-091",
+      "noteId": "java/intermediate/log/01-logging-system",
+      "type": "single",
+      "q": "用 MDC 往日志里打 traceId，线程池场景最容易踩的坑是？",
+      "options": [
+        "MDC 基于 ThreadLocal，入口 put 后必须 finally remove，否则线程复用会串到下一个请求；跨线程还要 TaskDecorator 透传",
+        "MDC 是进程级全局 Map，不存在串请求问题",
+        "只要用 AsyncAppender 就会自动继承父线程 MDC",
+        "SLF4J 门面自带分布式追踪，不必自己 put"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Multiple bindings = 实现不唯一；一个实现都没有则进 NOPLogger 静默丢日志。占位符 `{}` 代替字符串拼接。"
+    },
+    {
+      "id": "java-family-092",
+      "noteId": "java/intermediate/spring/00-family-map",
+      "type": "judge",
+      "q": "Spring Boot 已经取代了 Spring Framework，学 IoC/AOP/事务在 Boot 3 时代不再是核心面试题。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "Boot 只是自动装配 + 内嵌容器的脚手架，内核仍是 Framework。依赖单向叠加：Framework→MVC→Boot→Cloud；Boot 3.x = JDK 17 + jakarta。"
+    },
+    {
+      "id": "java-junit-093",
+      "noteId": "java/intermediate/test/01-junit5",
+      "type": "single",
+      "q": "JUnit 5 的 `@BeforeAll` 默认必须 static，什么情况下可以写成实例方法？",
+      "options": [
+        "加 `@TestInstance(Lifecycle.PER_CLASS)` 后全类共用一个测试实例，@BeforeAll 不再要求 static",
+        "永远必须 static，没有任何例外",
+        "把方法改成 package-private 即可",
+        "只有配合 @ParameterizedTest 才能用实例 @BeforeAll"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "默认每个测试方法新建实例以隔离状态。异常用 assertThrows 拿对象再断言，替代老的 @Test(expected=...)。"
+    },
+    {
+      "id": "java-spy-094",
+      "noteId": "java/intermediate/test/02-mockito",
+      "type": "single",
+      "q": "对 spy 对象写 `when(spyList.get(0)).thenReturn(x)` 可能直接炸掉，原因和正确写法？",
+      "options": [
+        "when() 会先真实执行 get(0) 再打桩；spy 上应改用 `doReturn(x).when(spy).get(0)`",
+        "spy 不能打桩，只能用 mock",
+        "必须先 @InjectMocks 才能 spy",
+        "Mockito 5 起 when 对 spy 非法，只能 mockStatic"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "mock 全假、spy 半真。匹配器要么全用要么全不用；打桩困难往往是被测代码把依赖藏太深。"
+    },
+    {
+      "id": "java-webmvctest-095",
+      "noteId": "java/intermediate/test/03-springboot-test",
+      "type": "single",
+      "q": "Spring Boot 测试的成本阶梯，正确策略是？",
+      "options": [
+        "绝大多数行为用纯单测；@WebMvcTest/@DataJpaTest 只验证框架接线；@SpringBootTest 只留关键路径",
+        "每个类都配 @SpringBootTest 才能保证正确",
+        "@MockBean 可以随便反复替换同一 Bean，不会拖慢 CI",
+        "@WebMvcTest 会装载全部业务 Bean，不必再 @MockBean"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "@MockBean 会替换容器 Bean 并可能重建上下文，同一 Bean 反复替换是 CI 慢的常见根源。"
     }
   ]
 }

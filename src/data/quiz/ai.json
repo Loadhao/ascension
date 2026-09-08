@@ -405,6 +405,52 @@
         1
       ],
       "hint": "match_response 先做类型校验（state.type 与 response_type 必须对应），再做幂等校验（已 resolved 的请求跳过重复回复）——一个 shutdown_response 不会意外 approve 一个 plan_approval 请求。"
+    },
+    {
+      "id": "ai-worktree-027",
+      "noteId": "ai/advanced/agent/08-worktree-isolation",
+      "type": "single",
+      "q": "给任务 bind_task_to_worktree 之后，任务状态如何变化？删除有未提交改动的 worktree 呢？",
+      "options": [
+        "绑定只写 worktree 字段、状态仍 pending；有改动时 remove 默认拒绝，需 discard_changes 或 keep 留审",
+        "绑定会立刻把任务标成 in_progress 并 chdir",
+        "绑定失败，因为一个任务不能绑 worktree",
+        "Git worktree 有改动时会自动 stash 再删除"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "并行 Agent 需要隔离文件系统，如同需要隔离对话。认领时才切 cwd；Keep 留给人工 review 后合并。"
+    },
+    {
+      "id": "ai-harness-028",
+      "noteId": "ai/advanced/agent/09-comprehensive-agent",
+      "type": "judge",
+      "q": "综合 Harness 把前十九章机制堆起来后，Agent 循环从「模型→工具→回写」改成了多循环状态机。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "机制很多，循环一个。变化的是循环周围的 hooks/权限/压缩/MCP，内核仍是 while True：有 tool_use 就执行并回写，没有就 Stop hooks 返回。"
+    },
+    {
+      "id": "ai-openclaw-029",
+      "noteId": "ai/advanced/agent/11-openclaw",
+      "type": "single",
+      "q": "OpenClaw 为什么强调 Gateway 是唯一进程？",
+      "options": [
+        "所有消息进出都过 Gateway 做认证/路由/审计，LLM 不直连 WhatsApp/Telegram 等通道",
+        "Gateway 就是 LLM 本身，通道直连模型更低延迟",
+        "每个 Channel 自己跑一个 Gateway，Workspace 只是别名",
+        "技能默认拥有 system 权限，Gateway 只做负载均衡"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "三层：Channels 接入 + 唯一 Gateway 收口（默认 18789）+ Workspace 隔离。数据全在自己机器，技能执行前受权限约束。"
     }
   ]
 }
