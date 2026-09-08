@@ -4,6 +4,7 @@
       "id": "tools-gsa-001",
       "noteId": "tools/basic/cli/01-grep-sed-awk",
       "type": "single",
+      "difficulty": 1,
       "q": "文本三件套的分工，下列哪项最准确？",
       "options": [
         "grep 按列统计、sed 做过滤、awk 做替换",
@@ -20,6 +21,7 @@
       "id": "tools-curl-002",
       "noteId": "tools/basic/cli/02-curl",
       "type": "multiple",
+      "difficulty": 2,
       "q": "用 curl 调试接口时，下列用法正确的有？（多选）",
       "options": [
         "-d 带请求体，-H 加 header",
@@ -38,6 +40,7 @@
       "id": "tools-jq-003",
       "noteId": "tools/basic/cli/03-jq",
       "type": "judge",
+      "difficulty": 2,
       "q": "jq 的过滤器 `.name` 取出的字符串结果默认带引号；若要纯原始值应加 -r。",
       "options": [
         "正确",
@@ -52,6 +55,7 @@
       "id": "tools-regex-004",
       "noteId": "tools/basic/efficiency/03-regex",
       "type": "single",
+      "difficulty": 2,
       "q": "正则默认是贪婪匹配，若要「吃最少」应如何？",
       "options": [
         "把量词后面加 ?，如 .*? ",
@@ -68,6 +72,7 @@
       "id": "tools-netdbg-005",
       "noteId": "tools/basic/efficiency/04-network-debug",
       "type": "single",
+      "difficulty": 2,
       "q": "网络排障应采用的层次顺序是？",
       "options": [
         "先抓应用日志，再回头看 DNS",
@@ -84,6 +89,7 @@
       "id": "tools-jq-001",
       "noteId": "tools/basic/cli/03-jq",
       "type": "single",
+      "difficulty": 3,
       "q": "执行 echo '[1,2,3]' | jq '.[]' 的输出是？",
       "options": [
         "一行：[1,2,3]",
@@ -100,6 +106,7 @@
       "id": "tools-curl-006",
       "noteId": "tools/basic/cli/02-curl",
       "type": "single",
+      "difficulty": 1,
       "q": "curl -v 的输出中，以 > 和 < 开头的行分别表示？",
       "options": [
         "> 是服务端发来的，< 是客户端发出的",
@@ -116,6 +123,7 @@
       "id": "tools-curlhead-003",
       "noteId": "tools/basic/efficiency/04-network-debug",
       "type": "judge",
+      "difficulty": 2,
       "q": "curl -I https://example.com 发送的是 HEAD 请求，只取回响应头。",
       "options": [
         "正确",
@@ -130,6 +138,7 @@
       "id": "tools-ide-007",
       "noteId": "tools/basic/efficiency/01-editor-ide",
       "type": "single",
+      "difficulty": 1,
       "q": "把「写过三次以上的样板代码」固化下来，笔记推荐的手段是？",
       "options": [
         "多装几个主题扩展，启动时自动生成模板",
@@ -146,6 +155,7 @@
       "id": "tools-term-008",
       "noteId": "tools/basic/efficiency/02-terminal",
       "type": "single",
+      "difficulty": 1,
       "q": "bash/zsh 里召回很久以前一条长命令，性价比最高的做法是？",
       "options": [
         "history 全打出来用鼠标翻",

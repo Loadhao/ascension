@@ -4,6 +4,7 @@
       "id": "ai-sft-001",
       "noteId": "ai/intermediate/llm/01-llm",
       "type": "judge",
+      "difficulty": 2,
       "q": "基座模型（Base Model）不能直接当助手用，是因为它没经过对齐微调，对话时会「接话续写」而不是「按指令回答」。",
       "options": [
         "正确",
@@ -18,6 +19,7 @@
       "id": "ai-rag-002",
       "noteId": "ai/intermediate/agent/06-rag",
       "type": "single",
+      "difficulty": 4,
       "q": "企业知识库项目中，哪种情况应优先考虑微调而不是 RAG？",
       "options": [
         "知识库文档每周更新，答案必须标注引用来源",
@@ -34,6 +36,7 @@
       "id": "ai-mcp-003",
       "noteId": "ai/intermediate/agent/08-mcp",
       "type": "multiple",
+      "difficulty": 3,
       "q": "下列关于 MCP 的说法，哪些正确？（多选）",
       "options": [
         "让 M 个 AI 应用对接 N 个外部系统，从 M×N 种私有集成变为 M+N 的标准集成",
@@ -54,6 +57,7 @@
       "id": "ai-loop-004",
       "noteId": "ai/basic/agent/01-agent-loop",
       "type": "judge",
+      "difficulty": 2,
       "q": "在 Agent Loop 中，模型输出的工具调用由模型自身执行完毕后，再把结果返回给用户。",
       "options": [
         "正确",
@@ -68,6 +72,7 @@
       "id": "ai-prompt-005",
       "noteId": "ai/intermediate/llm/02-prompt-engineering",
       "type": "single",
+      "difficulty": 3,
       "q": "提示工程相对改权重/微调，本质差异是？",
       "options": [
         "通过设计输入引导输出，不改任何权重",
@@ -84,6 +89,7 @@
       "id": "ai-perm-006",
       "noteId": "ai/basic/agent/03-permission",
       "type": "single",
+      "difficulty": 3,
       "q": "Agent 权限管线三道闸门的顺序是？",
       "options": [
         "用户审批 → 规则匹配 → 硬拒绝",
@@ -100,6 +106,7 @@
       "id": "ai-ml-007",
       "noteId": "ai/basic/foundation/01-machine-learning",
       "type": "judge",
+      "difficulty": 1,
       "q": "机器学习相对传统编程，范式从「数据 + 规则 → 答案」变成「数据 + 答案 → 规则」。",
       "options": [
         "正确",
@@ -114,6 +121,7 @@
       "id": "ai-ctx-008",
       "noteId": "ai/intermediate/agent/03-context-engineering",
       "type": "single",
+      "difficulty": 3,
       "q": "上下文工程要解决的核心问题是？",
       "options": [
         "把模型参数量化到 4bit",
@@ -130,6 +138,7 @@
       "id": "ai-subagent-009",
       "noteId": "ai/intermediate/agent/09-subagent",
       "type": "judge",
+      "difficulty": 2,
       "q": "子智能体的价值是给子任务独立 messages，只把结论回传主循环，避免追踪细节挤爆主上下文。",
       "options": [
         "正确",
@@ -144,6 +153,7 @@
       "id": "ai-tool-010",
       "noteId": "ai/basic/agent/02-tool-use",
       "type": "single",
+      "difficulty": 3,
       "q": "给 Agent 提供 read_file 等专用工具，而不是只留一个 bash，主要是为了？",
       "options": [
         "让模型在 shell 里可以 rm -rf",
@@ -160,6 +170,7 @@
       "id": "ai-dl-011",
       "noteId": "ai/basic/foundation/02-deep-learning",
       "type": "single",
+      "difficulty": 2,
       "q": "深度学习相对传统机器学习最关键的一步是？",
       "options": [
         "不再需要训练数据",
@@ -176,6 +187,7 @@
       "id": "ai-memory-012",
       "noteId": "ai/intermediate/agent/04-memory",
       "type": "judge",
+      "difficulty": 3,
       "q": "上下文压缩后细节会丢失，且新会话连摘要都没有，所以需要文件仓库这类跨压缩、跨会话仍在的记忆层。",
       "options": [
         "正确",
@@ -190,6 +202,7 @@
       "id": "ai-multi-013",
       "noteId": "ai/advanced/agent/01-multi-agent",
       "type": "single",
+      "difficulty": 4,
       "q": "引入多 Agent 的第一动机应当是？",
       "options": [
         "堆更多模型调用次数，用算力硬提准确率",
@@ -206,6 +219,7 @@
       "id": "ai-task-014",
       "noteId": "ai/advanced/agent/02-task-system",
       "type": "single",
+      "difficulty": 4,
       "q": "Task System 相对 TodoWrite，关键升级是什么？blockedBy 的语义？",
       "options": [
         "只是换了个文件名；blockedBy 里全部完成才能开始，缺依赖视为可做",
@@ -222,6 +236,7 @@
       "id": "ai-bg-015",
       "noteId": "ai/advanced/agent/03-background-tasks",
       "type": "single",
+      "difficulty": 4,
       "q": "把慢工具丢到后台后，tool_use 与结果如何对应？",
       "options": [
         "一个 tool_use 可以对应多次 tool_result，完成后追加第二条",
@@ -238,6 +253,7 @@
       "id": "ai-team-016",
       "noteId": "ai/advanced/agent/05-agent-teams",
       "type": "judge",
+      "difficulty": 4,
       "q": "Agent 团队的协调本质是共享内存里的对象锁；没有共享堆就无法组队。",
       "options": [
         "正确",
@@ -252,6 +268,7 @@
       "id": "ai-auto-017",
       "noteId": "ai/advanced/agent/07-autonomous-agents",
       "type": "single",
+      "difficulty": 4,
       "q": "自主智能体「自己看板自己认领」，空闲时为什么 inbox 要优先于任务板？",
       "options": [
         "任务板上的新任务永远比协议消息重要",
@@ -268,6 +285,7 @@
       "id": "ai-fw-018",
       "noteId": "ai/advanced/agent/10-agent-frameworks",
       "type": "single",
+      "difficulty": 3,
       "q": "评估 Agent 框架时，笔记认为应先看的是？",
       "options": [
         "模型本身会不会推理、基准分数高不高",
@@ -284,6 +302,7 @@
       "id": "ai-eval-019",
       "noteId": "ai/advanced/eval/01-evaluation-align",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于评测与对齐，下列正确的有？（多选）",
       "options": [
         "评测盯能力，对齐盯价值与安全，两者互补",
@@ -302,6 +321,7 @@
       "id": "ai-todo-020",
       "noteId": "ai/intermediate/agent/01-todo-planning",
       "type": "single",
+      "difficulty": 3,
       "q": "长任务里 TodoWrite 要对抗的核心问题是？reminder 该由谁负责？",
       "options": [
         "磁盘不够；模型自觉记得更新计划即可",
@@ -318,6 +338,7 @@
       "id": "ai-sys-021",
       "noteId": "ai/intermediate/agent/02-system-prompt",
       "type": "single",
+      "difficulty": 5,
       "q": "system prompt 在生产级 Agent 里通常是？缓存 key 为什么不能用进程内 hash()？",
       "options": [
         "写死在仓库里的一整段字符串；hash() 稳定可跨进程",
@@ -334,6 +355,7 @@
       "id": "ai-skill-022",
       "noteId": "ai/intermediate/agent/05-skill-loading",
       "type": "single",
+      "difficulty": 4,
       "q": "技能按需加载的 token 经济学是？",
       "options": [
         "目录和内容都塞进 system prompt，省一次 tool 调用",
@@ -350,6 +372,7 @@
       "id": "ai-hooks-023",
       "noteId": "ai/basic/agent/04-hooks",
       "type": "judge",
+      "difficulty": 2,
       "q": "PreToolUse hook 的某个回调返回了非 None 值时，本次工具执行将被阻止。",
       "options": [
         "正确",
@@ -364,6 +387,7 @@
       "id": "ai-recovery-024",
       "noteId": "ai/intermediate/agent/07-error-recovery",
       "type": "single",
+      "difficulty": 5,
       "q": "Agent 第一次遇到 max_tokens 输出截断，正确的第一个恢复动作是？",
       "options": [
         "立即保存截断输出并注入续写提示，让模型接着说",
@@ -380,6 +404,7 @@
       "id": "ai-cron-025",
       "noteId": "ai/advanced/agent/04-cron-scheduler",
       "type": "judge",
+      "difficulty": 4,
       "q": "durable=True 的 cron 任务在 Agent 进程关闭后，到点仍会由调度线程自动触发。",
       "options": [
         "正确",
@@ -394,6 +419,7 @@
       "id": "ai-protocol-026",
       "noteId": "ai/advanced/agent/06-team-protocols",
       "type": "single",
+      "difficulty": 5,
       "q": "Lead 收到一条 shutdown_response，其 request_id 指向一个 plan_approval 类型的请求，match_response 会怎么处理？",
       "options": [
         "按 approve 值把该请求状态更新为 approved/rejected",

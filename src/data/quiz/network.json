@@ -4,6 +4,7 @@
       "id": "net-timewait-001",
       "noteId": "network/basic/tcp/01-three-way-handshake",
       "type": "single",
+      "difficulty": 4,
       "q": "某网关机器出现大量 TIME_WAIT，正确的处理思路是？",
       "options": [
         "调大 backlog 并开启 syncookies",
@@ -20,6 +21,7 @@
       "id": "net-cwnd-002",
       "noteId": "network/basic/tcp/02-reliable-transfer",
       "type": "judge",
+      "difficulty": 3,
       "q": "TCP 发送方的实际发送量由拥塞窗口 cwnd 单独决定，与接收方通告的 rwnd 无关。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "net-tls13-003",
       "noteId": "network/basic/http/02-https-tls",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 TLS 1.3 相比 TLS 1.2 的变化，下列说法正确的是？",
       "options": [
         "握手从 2-RTT 降到 1-RTT，且只保留前向安全的 ECDHE 系密钥交换",
@@ -50,6 +53,7 @@
       "id": "net-udp-004",
       "noteId": "network/basic/tcp/03-tcp-vs-udp",
       "type": "single",
+      "difficulty": 2,
       "q": "TCP 与 UDP 的本质差异是？",
       "options": [
         "UDP 面向连接，TCP 无连接",
@@ -66,6 +70,7 @@
       "id": "net-dns-005",
       "noteId": "network/basic/foundation/02-dns",
       "type": "judge",
+      "difficulty": 1,
       "q": "域名解析顺序大致是：浏览器缓存 → hosts → 本地 DNS 递归 → 根/顶级/权威迭代，且层层都有缓存。",
       "options": [
         "正确",
@@ -80,6 +85,7 @@
       "id": "net-http3-006",
       "noteId": "network/basic/http/03-http-evolution",
       "type": "single",
+      "difficulty": 4,
       "q": "HTTP/2 仍可能队头阻塞，根因在哪一层？HTTP/3 如何绕开？",
       "options": [
         "应用层帧阻塞；HTTP/3 改回 HTTP/1.1 长连接",
@@ -96,6 +102,7 @@
       "id": "net-url-007",
       "noteId": "network/basic/foundation/03-from-url-to-page",
       "type": "multiple",
+      "difficulty": 2,
       "q": "从输入 URL 到页面呈现，顺序中应包含？（多选）",
       "options": [
         "DNS 解析",
@@ -114,6 +121,7 @@
       "id": "net-osi-008",
       "noteId": "network/basic/foundation/01-osi-tcpip",
       "type": "single",
+      "difficulty": 2,
       "q": "「能 ping 通却连不上 3306」按分层排障，问题最可能落在哪一层？",
       "options": [
         "物理层：网线没插好，ICMP 与 TCP 会一起失败",
@@ -130,6 +138,7 @@
       "id": "net-http-009",
       "noteId": "network/basic/http/01-http-basics",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于 HTTP 方法幂等与状态码，下列正确的有？（多选）",
       "options": [
         "GET/PUT/DELETE 幂等，POST 不幂等——网关敢不敢自动重试看的就是这个",

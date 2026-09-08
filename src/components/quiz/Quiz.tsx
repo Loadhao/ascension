@@ -21,17 +21,40 @@ import {
 
 export type QuizType = 'single' | 'multiple' | 'judge';
 
+/** 五档难度：1 概念识别 … 5 深挖原理/边界/生产权衡 */
+export type QuizDifficulty = 1 | 2 | 3 | 4 | 5;
+
 export interface QuizQuestion {
   id: string;
   /** 关联笔记的内容集合 entry id，答错后链回完整笔记 */
   noteId: string;
   type: QuizType;
+  /** 题目难度 1–5；缺字段时运行时兜底为 3 */
+  difficulty?: QuizDifficulty | number;
   q: string;
   options: string[];
   /** 正确选项下标数组（判断题固定两项：正确 / 错误） */
   answer: number[];
   /** 答错时的提示 */
   hint: string;
+}
+
+function clampDifficulty(value: unknown): QuizDifficulty {
+  const n = typeof value === 'number' && Number.isFinite(value) ? Math.round(value) : 3;
+  return Math.min(5, Math.max(1, n)) as QuizDifficulty;
+}
+
+function DifficultyChip({ value }: { value: unknown }) {
+  const n = clampDifficulty(value);
+  return (
+    <span className="quiz-chip quiz-diff" title={`难度 ${n}/5`} aria-label={`难度 ${n} 星`}>
+      <span className="quiz-diff-stars" aria-hidden="true">
+        <span className="quiz-diff-on">{'★'.repeat(n)}</span>
+        <span className="quiz-diff-off">{'☆'.repeat(5 - n)}</span>
+      </span>
+      <span className="quiz-diff-word">难</span>
+    </span>
+  );
 }
 
 export interface QuizBank {
@@ -451,6 +474,7 @@ export default function Quiz({ directions, banks }: Props) {
           </span>
           <span className="quiz-chip">{titleOf(directionOfQuestion.get(q.id) ?? '')}</span>
           <span className="quiz-chip">{TYPE_LABELS[q.type]}</span>
+          <DifficultyChip value={q.difficulty} />
           <button
             type="button"
             className={`quiz-star-btn ${starred ? 'is-on' : ''}`}

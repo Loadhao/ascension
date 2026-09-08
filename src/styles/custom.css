@@ -2264,6 +2264,7 @@ html.mmd-viewer-open {
 /* —— 作答页眉 —— */
 .quiz-top {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 }
@@ -2280,6 +2281,33 @@ html.mmd-viewer-open {
   border-radius: 999px;
   color: var(--sl-color-gray-3);
   font-size: 12px;
+}
+
+/* 难度星标：与方向/题型 chip 同形，★ 实心 / ☆ 空心，勿与收藏按钮混淆 */
+.quiz-chip.quiz-diff {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quiz-diff-stars {
+  display: inline-flex;
+  letter-spacing: 0.04em;
+  font-size: 11px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.quiz-diff-on {
+  color: var(--sl-color-white);
+}
+
+.quiz-diff-off {
+  color: var(--sl-color-gray-4);
+}
+
+.quiz-diff-word {
+  color: var(--sl-color-gray-3);
 }
 
 .quiz-top .quiz-quiet-btn {

@@ -4,6 +4,7 @@
       "id": "rmq-arch-001",
       "noteId": "rocketmq/basic/core/01-rocketmq-architecture",
       "type": "single",
+      "difficulty": 4,
       "q": "RocketMQ 的 NameServer 敢做成无状态、节点间不通信，是因为？",
       "options": [
         "路由表强一致，丢了集群就不可用，所以反而要简单",
@@ -20,6 +21,7 @@
       "id": "rmq-consume-002",
       "noteId": "rocketmq/basic/core/02-consumer-semantics",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于集群消费与广播消费，下列正确的有？（多选）",
       "options": [
         "集群消费：组内一个实例消费一条消息，进度存在 Broker",
@@ -38,6 +40,7 @@
       "id": "rmq-tx-003",
       "noteId": "rocketmq/advanced/core/01-rocketmq-features",
       "type": "single",
+      "difficulty": 4,
       "q": "RocketMQ 事务消息保证本地事务与发消息最终一致，靠的是？",
       "options": [
         "2PC 锁住所有下游表直到全部提交",
@@ -54,6 +57,7 @@
       "id": "rmq-order-004",
       "noteId": "rocketmq/advanced/core/02-order-performance",
       "type": "single",
+      "difficulty": 4,
       "q": "生产端已按 key 哈希进同一队列，消费仍乱序，最常见原因是？",
       "options": [
         "CommitLog 是随机写",
@@ -70,6 +74,7 @@
       "id": "rmq-backlog-005",
       "noteId": "rocketmq/advanced/core/03-backlog",
       "type": "judge",
+      "difficulty": 3,
       "q": "发现积压后应先加消费者实例；即使分区/队列数不够，加实例也能提高并行度。",
       "options": [
         "正确",
@@ -84,6 +89,7 @@
       "id": "rocketmq-log-001",
       "noteId": "rocketmq/basic/core/01-rocketmq-architecture",
       "type": "single",
+      "difficulty": 4,
       "q": "关于 RocketMQ 与 Kafka 在消息存储上的差异，正确的是？",
       "options": [
         "RocketMQ 每个 Topic 一个独立日志文件，互不干扰",
@@ -100,6 +106,7 @@
       "id": "rocketmq-retry-002",
       "noteId": "rocketmq/basic/core/02-consumer-semantics",
       "type": "judge",
+      "difficulty": 3,
       "q": "RocketMQ 集群消费模式下，消费进度存储在消费者本地文件中。",
       "options": [
         "正确",
@@ -114,6 +121,7 @@
       "id": "rocketmq-sendfile-003",
       "noteId": "rocketmq/advanced/core/02-order-performance",
       "type": "single",
+      "difficulty": 5,
       "q": "消费路径用 sendfile 零拷贝，它快在哪里？",
       "options": [
         "数据跳过页缓存，直接从磁盘写入网卡",

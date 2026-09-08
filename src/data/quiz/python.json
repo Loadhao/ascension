@@ -4,6 +4,7 @@
       "id": "py-copy-001",
       "noteId": "python/basic/syntax/01-objects",
       "type": "single",
+      "difficulty": 2,
       "q": "a = [[1, 2], [3, 4]]，执行 b = a.copy() 后再执行 b[0].append(99)，此时 a 的值是？",
       "options": [
         "[[1, 2], [3, 4]]",
@@ -20,6 +21,7 @@
       "id": "py-gil-002",
       "noteId": "python/advanced/internals/01-gil",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 CPython 的 GIL，下列说法正确的有？（多选）",
       "options": [
         "GIL 是 Python 语言规范的一部分，任何 Python 实现都必须有",
@@ -39,6 +41,7 @@
       "id": "py-deco-003",
       "noteId": "python/basic/functions/03-decorators",
       "type": "single",
+      "difficulty": 3,
       "q": "写下 @timer 去装饰 def train(): ... 后，下列说法正确的是？",
       "options": [
         "它完全等价于先定义 train，再执行 train = timer(train)，把返回值重新绑定到名字 train",
@@ -55,6 +58,7 @@
       "id": "py-gen-004",
       "noteId": "python/basic/functions/02-iterators-generators",
       "type": "judge",
+      "difficulty": 2,
       "q": "调用含 yield 的函数（如 g = countdown(3)）时，函数体会立即开始执行，直到运行到第一个 yield 才暂停。",
       "options": [
         "正确",
@@ -69,6 +73,7 @@
       "id": "py-default-005",
       "noteId": "python/basic/functions/01-functions-closures",
       "type": "single",
+      "difficulty": 3,
       "q": "def add_item(item, items=[]): items.append(item); return items 连续两次 add_item(1)、add_item(2)，第二次返回？",
       "options": [
         "[2]",
@@ -85,6 +90,7 @@
       "id": "py-gc-006",
       "noteId": "python/advanced/internals/02-memory-gc",
       "type": "judge",
+      "difficulty": 3,
       "q": "CPython 的分代 GC 是内存回收的主力，引用计数只在循环引用时才启用。",
       "options": [
         "正确",
@@ -99,6 +105,7 @@
       "id": "py-asyncio-007",
       "noteId": "python/intermediate/concurrency/02-asyncio",
       "type": "single",
+      "difficulty": 3,
       "q": "调用 async def fetch(): ... 而不 await，会发生什么？",
       "options": [
         "函数体立即执行完毕并返回结果",
@@ -115,6 +122,7 @@
       "id": "py-mro-008",
       "noteId": "python/basic/oop/02-inheritance-mro",
       "type": "single",
+      "difficulty": 4,
       "q": "Python 多继承里 super() 的含义是？",
       "options": [
         "一定调用直接父类的同名方法",
@@ -131,6 +139,7 @@
       "id": "py-dict-009",
       "noteId": "python/basic/data-structures/02-dict-set",
       "type": "judge",
+      "difficulty": 3,
       "q": "CPython dict 用开放寻址解决冲突，装载因子超过约 2/3 就 resize；3.7+ 的插入有序是紧凑 dict 的实现效果。",
       "options": [
         "正确",
@@ -145,6 +154,7 @@
       "id": "py-type-010",
       "noteId": "python/intermediate/stdlib/04-typing",
       "type": "single",
+      "difficulty": 2,
       "q": "Python 类型标注在运行时的行为是？",
       "options": [
         "解释器强制检查，不符就 TypeError",
@@ -161,6 +171,7 @@
       "id": "py-pydantic-011",
       "noteId": "python/intermediate/libs/02-pydantic",
       "type": "judge",
+      "difficulty": 2,
       "q": "Pydantic 把类型标注升级为运行时强制执行，适合校验 HTTP 请求体、配置和第三方 JSON。",
       "options": [
         "正确",
@@ -175,6 +186,7 @@
       "id": "py-mp-012",
       "noteId": "python/intermediate/concurrency/03-multiprocessing",
       "type": "single",
+      "difficulty": 3,
       "q": "CPU 密集任务要利用多核，CPython 的正路是？",
       "options": [
         "开更多线程抢 GIL",
@@ -191,6 +203,7 @@
       "id": "py-uv-013",
       "noteId": "python/advanced/eng/01-venv-uv",
       "type": "single",
+      "difficulty": 2,
       "q": "应用项目用 uv 管理依赖，锁文件与声明应如何分工？",
       "options": [
         "库和应用都只声明宽松下限，不要 lock，方便随时升级",
@@ -207,6 +220,7 @@
       "id": "py-pytest-014",
       "noteId": "python/advanced/eng/02-pytest",
       "type": "multiple",
+      "difficulty": 2,
       "q": "关于 pytest，下列正确的有？（多选）",
       "options": [
         "裸 assert 失败时中间值会自动展开，不必手写一长串 assertEqual",
@@ -225,6 +239,7 @@
       "id": "py-ruff-015",
       "noteId": "python/advanced/eng/03-ruff-mypy",
       "type": "single",
+      "difficulty": 3,
       "q": "ruff 与 mypy 在质量门禁里的角色，笔记推荐的渐进策略是？",
       "options": [
         "ruff 只做 format，类型检查交给运行时",
@@ -241,6 +256,7 @@
       "id": "py-desc-016",
       "noteId": "python/advanced/internals/03-descriptors-metaclass",
       "type": "single",
+      "difficulty": 5,
       "q": "property 与 ORM 字段的底层协议是？力量层级上元类应处于？",
       "options": [
         "装饰器语法糖而已，与属性访问无关；元类是第一选择",
@@ -257,6 +273,7 @@
       "id": "py-list-017",
       "noteId": "python/basic/data-structures/01-list-tuple",
       "type": "multiple",
+      "difficulty": 1,
       "q": "关于 list 与 tuple，下列正确的有？（多选）",
       "options": [
         "list 是过度分配的指针数组，索引 O(1)，append 均摊 O(1)，头插头删 O(n)",
@@ -275,6 +292,7 @@
       "id": "py-import-018",
       "noteId": "python/basic/modules/01-modules-import",
       "type": "single",
+      "difficulty": 2,
       "q": "同一进程里两次 import mymod，模块顶层代码会执行几次？循环导入优先怎么解？",
       "options": [
         "每次都执行；用多线程 import 即可",
@@ -291,6 +309,7 @@
       "id": "py-pkg-019",
       "noteId": "python/basic/modules/02-packages-layout",
       "type": "single",
+      "difficulty": 3,
       "q": "包内相对导入在「直接 python path/to/mod.py」时容易挂，推荐怎么跑？",
       "options": [
         "改用绝对磁盘路径 import",
@@ -307,6 +326,7 @@
       "id": "py-oop-020",
       "noteId": "python/basic/oop/01-class-basics",
       "type": "single",
+      "difficulty": 3,
       "q": "__new__ 与 __init__ 的分工，以及可变默认值性质的类属性应放哪？",
       "options": [
         "__init__ 造实例、__new__ 填内容；可变列表可以安全写在类体里共享",
@@ -323,6 +343,7 @@
       "id": "py-dc-021",
       "noteId": "python/basic/oop/03-dataclass-slots",
       "type": "single",
+      "difficulty": 3,
       "q": "dataclass 里可变默认值（如空列表）正确写法，以及百万级实例为何加 slots=True？",
       "options": [
         "default=[] 即可；slots 让实例能动态加属性所以更省",
@@ -339,6 +360,7 @@
       "id": "py-th-022",
       "noteId": "python/intermediate/concurrency/01-threading",
       "type": "single",
+      "difficulty": 3,
       "q": "CPython 多线程适合哪类负载？共享状态更推荐什么而不是满地 lock？",
       "options": [
         "CPU 密集数值计算；靠 GIL 保证 += 原子",
@@ -355,6 +377,7 @@
       "id": "py-fastapi-023",
       "noteId": "python/intermediate/libs/03-fastapi",
       "type": "single",
+      "difficulty": 4,
       "q": "在 FastAPI 中编写 CPU 密集型路由（如重计算报告）的正确姿势是？",
       "options": [
         "声明为 async def，内部 await 计算函数",
@@ -371,6 +394,7 @@
       "id": "py-sqlalchemy-024",
       "noteId": "python/intermediate/libs/04-sqlalchemy",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 SQLAlchemy 的 Session、懒加载与建表，下列说法正确的有？（多选）",
       "options": [
         "Engine 应全局创建一次供所有会话共享，Session 按请求创建",
@@ -391,6 +415,7 @@
       "id": "py-collections-025",
       "noteId": "python/intermediate/stdlib/01-collections",
       "type": "single",
+      "difficulty": 2,
       "q": "list.pop(0) 与 deque.popleft() 的复杂度分别是？",
       "options": [
         "都是 O(1)",
@@ -407,6 +432,7 @@
       "id": "py-groupby-026",
       "noteId": "python/intermediate/stdlib/02-functools-itertools",
       "type": "judge",
+      "difficulty": 3,
       "q": "itertools.groupby 可以直接对未排序的日志列表按 level 分组，不必先排序。",
       "options": [
         "正确",
@@ -421,6 +447,7 @@
       "id": "py-findall-027",
       "noteId": "python/intermediate/data/01-re-regex",
       "type": "single",
+      "difficulty": 4,
       "q": "re.findall(r\"(\\d{4})-(\\d{2})\", \"a 2026-09 b 2026-10\") 的返回值是？",
       "options": [
         "['2026-09', '2026-10']",
@@ -437,6 +464,7 @@
       "id": "py-logging-028",
       "noteId": "python/intermediate/data/03-logging",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于 logging 的使用纪律，下列说法正确的有？（多选）",
       "options": [
         "库代码只 getLogger(__name__) 打日志，不加 handler、不 setLevel",
@@ -456,6 +484,7 @@
       "id": "py-except-029",
       "noteId": "python/basic/syntax/04-exceptions",
       "type": "single",
+      "difficulty": 2,
       "q": "为什么多个 except 分支必须从窄到宽排列（子类异常放前面）？",
       "options": [
         "排列顺序不影响行为，Python 会自动挑最匹配的分支",
@@ -472,6 +501,7 @@
       "id": "py-profile-030",
       "noteId": "python/advanced/internals/04-profiling",
       "type": "single",
+      "difficulty": 3,
       "q": "cProfile 输出中 tottime 和 cumtime 的含义分别是？",
       "options": [
         "tottime 是含子调用的总耗时，cumtime 是函数自身耗时",

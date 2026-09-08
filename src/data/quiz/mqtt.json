@@ -4,6 +4,7 @@
       "id": "mqtt-wildcard-001",
       "noteId": "mqtt/basic/core/01-mqtt-protocol",
       "type": "judge",
+      "difficulty": 1,
       "q": "MQTT 订阅时，多层通配符 # 可以放在主题过滤器的任意层级，例如 sensors/#/temp 是合法订阅。",
       "options": [
         "正确",
@@ -18,6 +19,7 @@
       "id": "mqtt-qos0-002",
       "noteId": "mqtt/basic/core/02-qos-session",
       "type": "judge",
+      "difficulty": 3,
       "q": "使用持久会话（cleanSession=false）时，Broker 也会为离线客户端缓存 QoS 0 消息，重连后统一补发。",
       "options": [
         "正确",
@@ -32,6 +34,7 @@
       "id": "mqtt-qos2-003",
       "noteId": "mqtt/basic/core/02-qos-session",
       "type": "single",
+      "difficulty": 4,
       "q": "MQTT QoS 2 能做到「恰好一次」（不重不丢），靠的关键机制是？",
       "options": [
         "接收方对 PUBREC 过的 message id 记账，重复报文只回 ACK 不再投递；发送方未收到 PUBCOMP 时重发的是 PUBREL 而非 PUBLISH",
@@ -48,6 +51,7 @@
       "id": "mqtt-ka-004",
       "noteId": "mqtt/intermediate/usage/02-keepalive-reconnect",
       "type": "single",
+      "difficulty": 2,
       "q": "MQTT Keep Alive 的作用是？",
       "options": [
         "保证 QoS 2 恰好一次",
@@ -64,6 +68,7 @@
       "id": "mqtt-emqx-005",
       "noteId": "mqtt/intermediate/usage/01-broker-emqx",
       "type": "judge",
+      "difficulty": 3,
       "q": "EMQX 这类 Broker 把海量长连接和主题路由从业务进程里拆出去，设备侧仍用轻量 MQTT，后端再用桥接进 Kafka 等管道。",
       "options": [
         "正确",

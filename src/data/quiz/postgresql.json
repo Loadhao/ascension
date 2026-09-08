@@ -4,6 +4,7 @@
       "id": "pg-mvcc-001",
       "noteId": "postgresql/basic/core/01-pg-vs-mysql",
       "type": "single",
+      "difficulty": 5,
       "q": "从 MySQL 迁到 PostgreSQL 后，写入量大的表出现表和索引占用持续增长、查询变慢。按两者 MVCC 实现的差异，最可能的根因是？",
       "options": [
         "PG 的 MVCC 把旧版本放 undo log，purge 线程清理不及",
@@ -20,6 +21,7 @@
       "id": "pg-pgpool-002",
       "noteId": "postgresql/intermediate/ha/01-pgpool-postgres-xl",
       "type": "judge",
+      "difficulty": 3,
       "q": "Pgpool-II 的复制负载均衡对写请求同样有效，写操作也可以按权重分发到备库。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "pg-sync-003",
       "noteId": "postgresql/intermediate/ha/02-pgpool-dr",
       "type": "single",
+      "difficulty": 5,
       "q": "流复制场景下，业务要求事务提交返回时「备库已把 WAL 回放完成、可立即对外查询」，synchronous_commit 应设为哪一档？",
       "options": [
         "local",
@@ -50,6 +53,7 @@
       "id": "pg-vacuum-004",
       "noteId": "postgresql/advanced/performance/01-tuning",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 PostgreSQL 的 VACUUM 与表膨胀，下列说法正确的有？（多选）",
       "options": [
         "VACUUM FULL 整表重写、彻底收缩，但拿排他锁，线上要慎用",
