@@ -226,6 +226,18 @@
       "label": "二分答案",
       "href": "/algorithm/advanced/binary-answer/01-koko-eating-bananas/",
       "group": "二分答案"
+    },
+    {
+      "id": "tradeoff",
+      "label": "时间与空间的交换",
+      "href": "/algorithm/advanced/principles/01-time-space-tradeoff/",
+      "group": "设计思想"
+    },
+    {
+      "id": "landscape",
+      "label": "算法思想全景",
+      "href": "/algorithm/advanced/principles/02-paradigm-landscape/",
+      "group": "设计思想"
     }
   ],
   "edges": [
@@ -561,6 +573,69 @@
       "source": "kadane",
       "target": "jump-game",
       "label": "同为一遍扫描的 O(n)"
+    },
+    {
+      "source": "root",
+      "target": "tradeoff"
+    },
+    {
+      "source": "root",
+      "target": "landscape"
+    },
+    {
+      "source": "tradeoff",
+      "target": "landscape",
+      "label": "同一张地图的两个视角"
+    },
+    {
+      "source": "prefix",
+      "target": "tradeoff",
+      "label": "预处理 = 空间买时间"
+    },
+    {
+      "source": "min-stack",
+      "target": "tradeoff",
+      "label": "辅助结构 = 空间买信息"
+    },
+    {
+      "source": "counting",
+      "target": "tradeoff",
+      "label": "值即地址绕开比较下界"
+    },
+    {
+      "source": "quick",
+      "target": "tradeoff",
+      "label": "原地 = 时间换空间"
+    },
+    {
+      "source": "lcs",
+      "target": "tradeoff",
+      "label": "滚动行牺牲可回溯性"
+    },
+    {
+      "source": "two-stack-queue",
+      "target": "tradeoff",
+      "label": "均摊 = 分期付款"
+    },
+    {
+      "source": "landscape",
+      "target": "quick",
+      "label": "分治代表"
+    },
+    {
+      "source": "landscape",
+      "target": "climb",
+      "label": "DP 入门"
+    },
+    {
+      "source": "landscape",
+      "target": "jump-game",
+      "label": "贪心代表"
+    },
+    {
+      "source": "landscape",
+      "target": "subsets",
+      "label": "回溯代表"
     }
   ]
 }

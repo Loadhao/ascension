@@ -228,49 +228,7 @@ export default defineConfig({
                 },
               ],
             },
-            {
-              label: '网络',
-              collapsed: true,
-              items: [
-                { label: '学习路线', link: '/network/' },
-                {
-                  label: '基础',
-                  collapsed: true,
-                  items: [
-                    {
-                      label: '网络基础',
-                      collapsed: false,
-                      items: [
-                        { label: '概览', link: '/network/basic/foundation/' },
-                        { label: 'OSI 七层与 TCP/IP 四层', link: '/network/basic/foundation/01-osi-tcpip/' },
-                        { label: 'DNS 解析全过程', link: '/network/basic/foundation/02-dns/' },
-                        { label: '从输入 URL 到页面展示', link: '/network/basic/foundation/03-from-url-to-page/' },
-                      ],
-                    },
-                    {
-                      label: 'TCP 协议',
-                      collapsed: false,
-                      items: [
-                        { label: '概览', link: '/network/basic/tcp/' },
-                        { label: '三次握手与四次挥手', link: '/network/basic/tcp/01-three-way-handshake/' },
-                        { label: 'TCP 可靠传输四件套', link: '/network/basic/tcp/02-reliable-transfer/' },
-                        { label: 'TCP 与 UDP 对比', link: '/network/basic/tcp/03-tcp-vs-udp/' },
-                      ],
-                    },
-                    {
-                      label: 'HTTP 协议',
-                      collapsed: false,
-                      items: [
-                        { label: '概览', link: '/network/basic/http/' },
-                        { label: 'HTTP 基础：报文、方法与状态码', link: '/network/basic/http/01-http-basics/' },
-                        { label: 'HTTPS 与 TLS 握手', link: '/network/basic/http/02-https-tls/' },
-                        { label: 'HTTP 演进：1.0 / 1.1 / 2 / 3', link: '/network/basic/http/03-http-evolution/' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
+            ,
           ],
         },
         {
