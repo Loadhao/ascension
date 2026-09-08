@@ -1,0 +1,30 @@
+astro.config.mjs
+  h_9324126a55eff3 261-262,345-346,890,942,1008,1051
+src/content/docs/java/basic/syntax/06-reflection-annotation.md
+  h_9324126a55eff3 59-60,138-163,174-176
+src/content/docs/java/basic/syntax/11-common-interfaces.md
+  h_9324126a55eff3 1-136
+src/content/docs/java/basic/syntax/12-jni-jndi.md
+  h_9324126a55eff3 1-117
+src/content/docs/java/intermediate/spring/02-aop.md
+  h_9324126a55eff3 124-156,162-163
+src/content/docs/java/intermediate/spring/10-extension-points.md
+  h_9324126a55eff3 101-136,142-143,147
+src/content/docs/java/intermediate/spring/11-application-context.md
+  h_9324126a55eff3 1-139
+src/content/docs/java/intermediate/spring/12-annotations-map.md
+  h_9324126a55eff3 1-127
+src/data/graphs/java.json
+  h_9324126a55eff3 50-53,169-175
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "b7a1e0b3127433e5b80fc35d97903fb9c65aae39",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
