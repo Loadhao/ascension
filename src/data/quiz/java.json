@@ -11,7 +11,9 @@
         "直接触发拒绝策略",
         "抛出异常由调用方处理"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "执行顺序是：核心线程 → 队列 → 非核心线程 → 拒绝策略。队列没满之前不会开非核心线程；拒绝只在队列和非核心线程都满时发生。"
     },
     {
@@ -19,8 +21,13 @@
       "noteId": "java/intermediate/concurrent/03-volatile",
       "type": "judge",
       "q": "用 volatile 修饰计数变量后，多线程 i++ 就是线程安全的。",
-      "options": ["正确", "错误"],
-      "answer": [1],
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
       "hint": "volatile 只保证可见性与禁止指令重排，不保证原子性；i++ 是读-改-写三步，需要 AtomicInteger 或加锁。"
     },
     {
@@ -34,7 +41,9 @@
         "偏向锁 → 无锁 → 重量级锁 → 轻量级锁",
         "轻量级锁 → 偏向锁 → 无锁 → 重量级锁"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "按竞争激烈程度逐级膨胀：几乎无竞争用偏向锁，短暂自旋用轻量级，竞争加剧才膨胀到依赖操作系统 mutex 的重量级锁。"
     },
     {
@@ -48,7 +57,11 @@
         "线程池的核心线程长期存活，放大了残留",
         "每次调用 get() 都会完整清理该线程的所有过期 Entry"
       ],
-      "answer": [0, 1, 2],
+      "answer": [
+        0,
+        1,
+        2
+      ],
       "hint": "泄漏根源是 key 被回收后 value 仍被强引用链持有，线程池线程长存让残留持续积累；get/set 只顺带清理碰到的过期项，根治是用完 finally remove()。"
     },
     {
@@ -62,7 +75,9 @@
         "限制自旋次数后重试",
         "把变量声明为 volatile"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "ABA 的本质是「值变回来了」被误判为没变过；附加上版本号或时间戳后，每次修改都能被识别出来。"
     },
     {
@@ -70,8 +85,13 @@
       "noteId": "java/basic/collection/02-hashmap",
       "type": "judge",
       "q": "JDK 1.8 的 HashMap 改用头插法，解决了并发扩容的链表成环问题。",
-      "options": ["正确", "错误"],
-      "answer": [1],
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
       "hint": "方向反了：1.7 是头插才会在并发扩容时成环，1.8 改为尾插解决了问题。HashMap 本就不是线程安全的，并发场景应换 ConcurrentHashMap。"
     },
     {
@@ -85,7 +105,9 @@
         "CAS 初始化/扩容 + synchronized 锁单个桶头",
         "读写锁分离"
       ],
-      "answer": [2],
+      "answer": [
+        2
+      ],
       "hint": "分段锁是 1.7 的方案；1.8 取消 Segment，粒度细化到桶——空桶 CAS 插入，非空桶 synchronized 锁桶头，size 用 CounterCell 分散计数。"
     },
     {
@@ -93,8 +115,19 @@
       "noteId": "java/intermediate/concurrent/12-deadlock",
       "type": "multiple",
       "q": "下列属于死锁四个必要条件的是？（多选）",
-      "options": ["互斥", "持有并等待", "不可剥夺", "循环等待", "可重入"],
-      "answer": [0, 1, 2, 3],
+      "options": [
+        "互斥",
+        "持有并等待",
+        "不可剥夺",
+        "循环等待",
+        "可重入"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
       "hint": "互斥、持有并等待、不可剥夺、循环等待四者缺一不可，破坏任意一条即可预防死锁（如一次性申请所有资源破坏持有等待）；可重入与死锁条件无关。"
     },
     {
@@ -108,7 +141,9 @@
         "分段的 ReentrantLock 数组",
         "无锁的 CAS 链表"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "volatile int state 表示同步状态，获取失败的线程进入 CLH 变体的 FIFO 队列排队；独占/共享两种模板，ReentrantLock、信号量、CountDownLatch 都基于它。"
     },
     {
@@ -122,8 +157,166 @@
         "全堆标记整理，停顿时间最短",
         "单线程回收，避免线程竞争"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "G1 把堆划成等大的 Region，按 MaxGCPauseMillis 停顿目标对区域做垃圾价值排序，优先回收「性价比」最高的区域——用可预测停顿换整体吞吐。"
+    },
+    {
+      "id": "java-lru-011",
+      "noteId": "java/basic/collection/05-linkedhashmap-lru",
+      "type": "single",
+      "q": "用 LinkedHashMap 做 LRU，关键开关与淘汰位置是？",
+      "options": [
+        "accessOrder=true，最近访问移到链表尾，最久未用在头，配合 removeEldestEntry",
+        "默认插入序即可，容量满时删最后一个",
+        "必须改成红黑树才能按时间排序",
+        "accessOrder=false 时 get 也会把节点移到尾部"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "哈希表 O(1) 定位 + 独立双向链表记顺序；默认插入序不会因 get 改变位置。"
+    },
+    {
+      "id": "java-cow-012",
+      "noteId": "java/basic/collection/06-copyonwritearraylist",
+      "type": "judge",
+      "q": "CopyOnWriteArrayList 读路径不加锁，写时复制整份数组再换 volatile 引用，适合读多写少；迭代器看到的是创建时的快照。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "写写仍互斥；写极多时复制成本不可接受。快照迭代器不会 ConcurrentModificationException，但也不反映迭代期间的新写。"
+    },
+    {
+      "id": "java-generic-013",
+      "noteId": "java/basic/syntax/04-generics",
+      "type": "single",
+      "q": "Java 泛型类型擦除的直接证据是？",
+      "options": [
+        "List<String> 与 List<Integer> 的 Class 对象相同，运行期字节码里只剩裸 List",
+        "泛型参数会写入对象头，可用 instanceof List<String> 判断",
+        "擦除后每个 get 都不再做任何转换",
+        "只有数组保留泛型，集合不擦除"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "编译期检查 + 插入转换；反射能往 List<String> 里塞 Integer。不要用 instanceof 带泛型参数。"
+    },
+    {
+      "id": "java-string-014",
+      "noteId": "java/basic/syntax/02-string",
+      "type": "judge",
+      "q": "String 不可变是因为 final 类 + 内部字符序列不可改，常量池可复用，拼接大量字符串应改用 StringBuilder。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "不可变带来线程安全与哈希缓存；循环里用 + 仍会反复造中间对象。"
+    },
+    {
+      "id": "java-spi-015",
+      "noteId": "java/basic/syntax/10-spi",
+      "type": "single",
+      "q": "Java SPI 的加载方式是？",
+      "options": [
+        "编译期把实现类名写进调用方字节码",
+        "ServiceLoader 读 META-INF/services 下按接口名列出的实现",
+        "必须通过 Spring 容器才能发现扩展",
+        "靠 JNI 在本地库里注册实现"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "这是 Dubbo/Spring Boot 自动配置的源头思路；SPI 本身不依赖 Spring。"
+    },
+    {
+      "id": "java-tx-016",
+      "noteId": "java/intermediate/spring/04-transaction",
+      "type": "multiple",
+      "q": "@Transactional 失效的常见原因有？（多选）",
+      "options": [
+        "同类自调用，没走代理",
+        "异常被 catch 吞掉，代理认为成功",
+        "方法不是 public，CGLIB/JDK 代理拦不到",
+        "只要加了注解，传播行为怎么配都不会失效"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "本质都是代理没拦到或没按预期回滚；传播行为误配也会让事务边界错位。"
+    },
+    {
+      "id": "java-circ-017",
+      "noteId": "java/intermediate/spring/03-circular-dependency",
+      "type": "single",
+      "q": "Spring 三级缓存能解决的循环依赖是？",
+      "options": [
+        "构造器注入循环，靠提前暴露半成品",
+        "setter/字段注入循环，靠提前暴露早期引用；构造器循环仍无解",
+        "任意循环，包括 prototype 作用域",
+        "只有 @Lazy 才能解，三级缓存是过时设计"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "构造还没完成就无法把「自己」让别人注入；setter 可以先实例化再填充。"
+    },
+    {
+      "id": "java-bean-018",
+      "noteId": "java/intermediate/spring/01-ioc-bean-lifecycle",
+      "type": "single",
+      "q": "Bean 生命周期中，BeanPostProcessor 的前后置处理发生在？",
+      "options": [
+        "实例化之前，用于替换构造器",
+        "属性填充与 Aware 回调之后、自定义 init 前后",
+        "销毁之后做额外清理",
+        "只在 prototype bean 第一次 get 时"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "实例化 → 属性填充 → Aware → BPP 前置 → init → BPP 后置 → 销毁；AOP 代理常在后置里换掉原始对象。"
+    },
+    {
+      "id": "java-longadder-019",
+      "noteId": "java/intermediate/concurrent/07-longadder",
+      "type": "judge",
+      "q": "LongAdder 用分段 Cell 分散热点写，sum 是弱一致的——高并发写计数场景通常比 AtomicLong 更合适。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "要的是精确瞬时值且写不多，AtomicLong 更简单；写极多时才需要分段。"
+    },
+    {
+      "id": "java-cf-020",
+      "noteId": "java/intermediate/concurrent/11-completablefuture",
+      "type": "single",
+      "q": "CompletableFuture 中 thenCompose 与 thenCombine 的分工是？",
+      "options": [
+        "thenCompose 并行两个独立 Future，thenCombine 把结果展平",
+        "thenCompose 用于依赖上一步结果的串行（返回 Future 会展平），thenCombine 组合两个独立异步结果",
+        "两者等价，只是别名",
+        "thenCombine 只能用于异常恢复"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "thenApply 映射值、thenCompose 平铺 Future，避免 CF<CF<T>>；allOf 才是多任务汇聚等待。"
     }
   ]
 }

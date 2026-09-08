@@ -1,0 +1,84 @@
+{
+  "questions": [
+    {
+      "id": "tools-gsa-001",
+      "noteId": "tools/basic/cli/01-grep-sed-awk",
+      "type": "single",
+      "q": "文本三件套的分工，下列哪项最准确？",
+      "options": [
+        "grep 按列统计、sed 做过滤、awk 做替换",
+        "grep 找行内匹配、sed 流式逐行改、awk 按列取数与跨行累计",
+        "三者都能改原文件，默认就写回磁盘",
+        "awk 只适合 CSV，处理日志应只用 grep"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "sed 默认打印到输出，改原文件才加 -i；grep 不做替换、不切列。共享心智是「逐行流，现用现丢」。"
+    },
+    {
+      "id": "tools-curl-002",
+      "noteId": "tools/basic/cli/02-curl",
+      "type": "multiple",
+      "q": "用 curl 调试接口时，下列用法正确的有？（多选）",
+      "options": [
+        "-d 带请求体，-H 加 header",
+        "-v 看握手与状态码，先排除网络/证书问题",
+        "-i 只发送请求不接收响应",
+        "后续管道接 jq 解析 JSON 响应"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "-i 是把响应头一并打印，不是不接收响应；调试三板斧是通不通、带上头、再看 body。"
+    },
+    {
+      "id": "tools-jq-003",
+      "noteId": "tools/basic/cli/03-jq",
+      "type": "judge",
+      "q": "jq 的过滤器 `.name` 取出的字符串结果默认带引号；若要纯原始值应加 -r。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "jq 默认输出 JSON 值（字符串带引号）；接到 bash 变量或再管道时通常要 -r。"
+    },
+    {
+      "id": "tools-regex-004",
+      "noteId": "tools/basic/efficiency/03-regex",
+      "type": "single",
+      "q": "正则默认是贪婪匹配，若要「吃最少」应如何？",
+      "options": [
+        "把量词后面加 ?，如 .*? ",
+        "把模式写成大写",
+        "在模式前加 \\A 锚定",
+        "改用 grep -v"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "默认吃最多，加 ? 变非贪婪；解析引号/HTML 内容几乎总要用非贪婪，否则会跨段吞到最后一个结束符。"
+    },
+    {
+      "id": "tools-netdbg-005",
+      "noteId": "tools/basic/efficiency/04-network-debug",
+      "type": "single",
+      "q": "网络排障应采用的层次顺序是？",
+      "options": [
+        "先抓应用日志，再回头看 DNS",
+        "自下而上：链路/IP → DNS → 端口 → HTTP（curl -v）",
+        "先重启网卡，再逐层看",
+        "只 ping 通即可认定应用层正常"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "curl -v 能打印 DNS、TCP、TLS、头；ping 不通先查链路/ICMP，DNS 错用 dig。不要从应用层盲猜。"
+    }
+  ]
+}

@@ -47,6 +47,36 @@
         3
       ],
       "hint": "nodelay 的语义说反了——nodelay 是「积压也立刻放」（消耗 burst 配额），去掉 nodelay 才是排队限速流出。"
+    },
+    {
+      "id": "nginx-static-004",
+      "noteId": "nginx/basic/config/02-static-server",
+      "type": "single",
+      "q": "location /static/ 配 alias /opt/assets/ 时，请求 /static/a.png 会落到？与 root 的差别是？",
+      "options": [
+        "/opt/assets/static/a.png，因为 alias 和 root 一样拼完整 URI",
+        "/opt/assets/a.png：alias 替换 location 前缀；root 则是根路径拼上完整 URI",
+        "/var/www/site/a.png，alias 被 root 覆盖",
+        "只能用 try_files，alias 不能配静态目录"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "root 追加完整 URI，alias 剥掉前缀再替换——混用是静态 404 的第一嫌疑。SPA 刷新还要靠 try_files 回退 index.html。"
+    },
+    {
+      "id": "nginx-cdn-005",
+      "noteId": "nginx/intermediate/proxy/04-cdn",
+      "type": "judge",
+      "q": "CDN 把静态内容缓存在边缘节点，回源只在未命中时发生；动态 API 默认不该整站交给 CDN 当源站缓存。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "缓存键和 Cache-Control 决定能不能缓存；把带 Cookie 的个性化接口缓在边缘会串数据。"
     }
   ]
 }

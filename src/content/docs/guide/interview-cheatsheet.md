@@ -1,11 +1,12 @@
 ---
 title: 速答手册
-description: 全站高频面试八股的一句话答案索引——覆盖 Java、数据库、消息队列、网络、分布式、算法、Python、AI 等全站方向，每条链回完整笔记
+description: 全站高频面试八股的一句话答案索引——覆盖 Java、JS、数据库、消息队列、网络、分布式、算法、Python、AI、Linux/容器等全站方向，每条链回完整笔记
 ---
 
 按主题分组的高频问题速答索引，每条一句话抓核心，点链接进完整
-笔记（含推导、图解与追问）。覆盖 Java、MySQL、PostgreSQL、Redis、
-网络、消息队列、分布式、算法、Python、AI 等全站方向。
+笔记（含推导、图解与追问）。覆盖 Java、JavaScript、MySQL、PostgreSQL、
+Redis、网络、消息队列、检索存储、分布式、算法、Python、AI、Linux、
+Docker、Nginx、Git 等全站方向。
 
 :::tip[先看后测]
 过完速答想检验记忆？到[自测作答](/guide/quiz/)勾选方向逐题作答：
@@ -19,6 +20,9 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [HashMap 原理与 1.8 变化](/java/basic/collection/02-hashmap/) | 数组 + 链表 + 红黑树，负载因子 0.75 扩容翻倍；1.8 头插改尾插解决并发成环 |
 | [ConcurrentHashMap 怎么保证并发](/java/basic/collection/03-concurrenthashmap/) | 1.8 放弃分段锁：CAS 初始化 + synchronized 锁桶头，size 用 CounterCell 分散计数 |
 | [ArrayList 与 LinkedList](/java/basic/collection/01-arraylist/) | 动态数组随机读 O(1)、扩容 1.5 倍；链表头尾插 O(1) 但随机访问 O(n) |
+| [LinkedHashMap 做 LRU](/java/basic/collection/05-linkedhashmap-lru/) | 哈希定位 + 独立双向链表记顺序；accessOrder=true 时最近访问移到尾，头上淘汰 |
+| [CopyOnWriteArrayList](/java/basic/collection/06-copyonwritearraylist/) | 读不加锁、写时复制整数组再换引用——读多写少；迭代器是快照 |
+| [泛型与类型擦除](/java/basic/syntax/04-generics/) | 泛型只活在编译期，运行期 List\<String\> 与 List\<Integer\> 是同一个 Class |
 | [equals 与 hashCode 约定](/java/basic/syntax/03-equals-hashcode/) | 重写 equals 必须重写 hashCode，否则 HashMap/HashSet 语义失效 |
 | [String 为什么不可变](/java/basic/syntax/02-string/) | final 存储 + 常量池复用 + 天然线程安全，拼接大量字符串用 StringBuilder |
 | [SPI 机制](/java/basic/syntax/10-spi/) | ServiceLoader 从 META-INF/services 按接口加载实现——Dubbo/Spring 扩展体系的源头 |
@@ -39,6 +43,7 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [LongAdder 为什么快](/java/intermediate/concurrent/07-longadder/) | 分段 Cell 分散热点计数，sum 弱一致——高并发写场景胜过 AtomicLong |
 | [CompletableFuture 编排](/java/intermediate/concurrent/11-completablefuture/) | thenApply/thenCompose 串行、thenCombine 并行、allOf 汇聚，异常沿链传播 |
 | [死锁的四个必要条件](/java/intermediate/concurrent/12-deadlock/) | 互斥、持有等待、不可剥夺、循环等待——破坏任意一条即可预防 |
+| [阻塞队列](/java/intermediate/concurrent/08-blocking-queue/) | put/take 在空/满时阻塞，是生产者-消费者与线程池工作队列的底座 |
 
 ## JVM
 
@@ -65,6 +70,8 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [注册中心 Nacos](/java/advanced/springcloud/02-registry/) | 临时实例 AP（Distro）、持久实例 CP（Raft）可切换；心跳剔除 + 客户端缓存兜底 |
 | [Sentinel 熔断限流](/java/advanced/springcloud/05-sentinel/) | 滑动窗口统计，熔断器三态循环（关闭→打开→半开），失败率/慢调用触发 |
 | [网关的职责](/java/advanced/springcloud/03-gateway/) | 统一入口做路由、鉴权、限流、灰度——业务无关的横切关注点上收 |
+| [单例模式](/java/intermediate/design-pattern/02-singleton/) | 进程内真唯一：饿汉/枚举/静态内部类/DCL；难点是并发、反射、序列化围攻下仍唯一 |
+| [Stream 延迟求值](/java/intermediate/stream/01-stream-principle/) | 不存数据、中间操作惰性串联，终止操作才触发；并行流走 ForkJoinPool 工作窃取 |
 
 ## MySQL
 
@@ -117,6 +124,19 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [从 URL 到页面](/network/basic/foundation/03-from-url-to-page/) | DNS → TCP 握手 → TLS → 发请求 → 响应解析渲染——一道题串起整个网络栈 |
 | [跨域与 CORS](/js/intermediate/web/02-cors/) | 浏览器同源策略的安全约束，CORS 靠响应头放行，复杂请求先 OPTIONS 预检 |
 
+## JavaScript
+
+| 问题 | 一句话答案 |
+|---|---|
+| [类型与 ===](/js/basic/core/01-js-fundamentals/) | typeof null 是历史 bug；工程永远用 ===，隐式转换只用来读题 |
+| [作用域与闭包](/js/basic/core/02-scope-closure/) | 词法作用域在定义时锁定；var 循环回调共享同一个 i，用 let 或 IIFE 修复 |
+| [原型链](/js/basic/core/03-prototype-class/) | __proto__ 在实例上找原型，prototype 在函数上给实例挂原型；class 是语法糖 |
+| [this 绑定优先级](/js/basic/core/04-this-binding/) | new > call/apply/bind > obj.fn() > 独立调用；箭头函数没有 this |
+| [事件循环](/js/basic/core/05-event-loop/) | 每个宏任务结束后清空整个微任务队列，所以 Promise.then 快于 setTimeout(0) |
+| [WebSocket](/js/intermediate/web/01-websocket/) | HTTP 101 升级后同一条 TCP 全双工互发帧，绕开请求-响应 |
+| [DOM 事件委托](/js/intermediate/web/03-dom-events/) | 捕获→目标→冒泡；监听挂父元素靠 target 分辨，不冒泡的事件委托不了 |
+| [Node 内存](/js/intermediate/node/01-node-gc-memory/) | heapUsed 只是 V8 堆；RSS 涨而堆不涨先怀疑 Buffer 等堆外 |
+
 ## 消息队列
 
 | 问题 | 一句话答案 |
@@ -126,11 +146,19 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [消息不丢/不重/不乱序](/middleware/intermediate/reliability/01-message-reliability/) | 生产确认 + Broker 持久化副本 + 手动 ack 三段防丢；至少一次 + 消费幂等防重；按 key 分区保序 |
 | [Kafka 架构与高性能](/kafka/intermediate/core/01-kafka-architecture/) | 分区并行 + 顺序写 + 零拷贝 + 批量压缩——为吞吐而生 |
 | [ISR 机制](/kafka/intermediate/core/02-replica-isr/) | 与 leader 保持同步的副本集合；acks=all + min.insync.replicas 用可用性换可靠 |
+| [offset 提交语义](/kafka/basic/core/02-offset/) | 提交的是「下一条要读的 offset」；先提交后处理会丢，先处理后提交可能重复 |
+| [Rebalance](/kafka/intermediate/core/05-rebalance/) | 成员/订阅/分区变化触发，代价是全组停消费；处理慢被踢调 max.poll.interval.ms |
 | [RocketMQ 事务消息](/rocketmq/advanced/core/01-rocketmq-features/) | 半消息先落库 + 本地事务 + 回查补偿——分布式事务的 MQ 解 |
 | [消息积压怎么处理](/rocketmq/advanced/core/03-backlog/) | 先定位瓶颈（生产/存储/消费）再扩容消费组，空跑跳过 + 新 topic 换道是紧急手段 |
 | [死信队列与延迟消息](/rabbitmq/intermediate/usage/01-deadletter-delay/) | 重试耗尽进死信人工兜底；延迟用死信 TTL 或延时插件（订单超时关单标准解） |
 | [MQTT 为什么轻量](/mqtt/basic/core/01-mqtt-protocol/) | 发布订阅 + Broker 居中转发，PUBLISH 固定头最小 2 字节、剩余长度 1~4 字节变长编码 |
 | [MQTT QoS 三档怎么选](/mqtt/basic/core/02-qos-session/) | 默认 QoS 1 + 下游幂等兜重复；可丢的高频遥测用 QoS 0；四段握手的 QoS 2 只在无法幂等且带宽充裕时用 |
+| [AMQP 模型](/rabbitmq/basic/core/01-amqp-model/) | 生产者只交交换机，绑定决定进哪些队列——分发逻辑不在交换机或队列实体里 |
+| [RabbitMQ 可靠投递](/rabbitmq/basic/core/02-reliable-delivery/) | confirm + 实体 durable + 消息持久化 + 手动 ack；毒消息进死信别反复 requeue |
+| [RabbitMQ 集群](/rabbitmq/intermediate/usage/02-cluster-ha/) | 默认只同步元数据，普通队列消息只在声明节点；要 HA 用仲裁队列 |
+| [NameServer 为何无中心](/rocketmq/basic/core/01-rocketmq-architecture/) | 路由粒度粗、稍旧可重试，取 AP 即可，不值得为路由上共识 |
+| [集群消费 vs 广播](/rocketmq/basic/core/02-consumer-semantics/) | 集群：组内一人消费、进度在 Broker、有 %RETRY%；广播全量、进度在本地、无重试 |
+| [MQTT 保活](/mqtt/intermediate/usage/02-keepalive-reconnect/) | keepalive 间隔内无报文则 PINGREQ 探活；别设太小，重连用指数退避加抖动 |
 
 ## 检索与文档存储
 
@@ -140,7 +168,11 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [ES 分片与副本](/elasticsearch/basic/core/02-shard-replica/) | 主分片数建索引时定死（扩容要 reindex），副本分片扛读与容错 |
 | [ES 深翻页](/elasticsearch/intermediate/usage/03-pagination/) | from+size 翻页深了协调节点归并爆炸——用 search_after / scroll |
 | [MongoDB 复制集](/mongodb/intermediate/replication/01-replication-set/) | 一主多从 + 选举（Raft 族），oplog 增量同步，读写分离与自动故障转移 |
-| [MongoDB 分片集群](/mongodb/advanced/sharding/01-sharding-cluster/) | mongos 路由 + config 元数据 + shard 分片，分片键选择决定均衡与查询隔离 |
+| [MongoDB 分片集群](/mongodb/advanced/sharding/01-sharding-cluster/) | mongos 路由 + config 元数据 + shard 分片；复制集只解决可用性，写扩展靠分片 |
+| [文档模型怎么选](/mongodb/basic/core/01-document-model/) | BSON 结构长在文档里；第一决策是内嵌还是引用，不是「没有 schema」 |
+| [explain 看什么](/mongodb/advanced/operations/02-performance/) | keys/docs/returned 接近 1:1:1；COLLSCAN 就是没走到索引 |
+| [ES match 与 term](/elasticsearch/intermediate/usage/01-query-dsl/) | 含某词用 match 查 text；精确等于用 term 且字段得是 keyword |
+| [ES 健康色与脑裂](/elasticsearch/intermediate/cluster/01-cluster-split-brain/) | yellow 副本缺失仍可读，red 才有主分片丢；7.x quorum 内建防脑裂 |
 
 ## Linux 与工具
 
@@ -150,6 +182,12 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [文件权限体系](/linux/basic/permission/01-users-permissions/) | 属主/属组/其他 × 读4写2执1，chmod/umask 控制默认权限 |
 | [systemd 服务管理](/linux/intermediate/system/03-system-service/) | unit 文件声明依赖与重启策略，journalctl 看日志——服务自愈的基础 |
 | [文本三件套](/tools/basic/cli/01-grep-sed-awk/) | grep 找、sed 改、awk 按列算——日志统计的瑞士军刀 |
+| [inode 与改名](/linux/basic/commands/01-file-ops/) | 名字在 dentry、数据在 inode；同盘 mv 只改指向，硬链接是两个名字指向同一 inode |
+| [僵尸进程](/linux/intermediate/system/02-process-management/) | 子进程退出后父进程未 wait，尸体不占 CPU/内存，堆积说明父进程没回收 |
+| [Linux 网络速判](/linux/intermediate/system/04-network/) | ping 通≠端口通；解析失败查 DNS，能解析连不上查路由 |
+| [curl 调接口](/tools/basic/cli/02-curl/) | -v 看握手与状态码，-H/-d 带头带体，管道接 jq 拆 JSON |
+| [jq 与 -r](/tools/basic/cli/03-jq/) | 把 JSON 当值流过滤；字符串默认带引号，接到 shell 要 -r |
+| [正则贪婪](/tools/basic/efficiency/03-regex/) | 默认吃最多，量词后加 ? 变非贪婪——解析引号内容几乎总要用 |
 
 ## Docker 与容器
 
@@ -159,6 +197,8 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [容器的底层本质](/docker/advanced/orchestration/02-principles/) | Namespace 隔离「看得见什么」+ Cgroups 限制「能用多少」+ overlay2 分层文件系统上的普通宿主进程 |
 | [Dockerfile 依赖为什么要先于代码 COPY](/docker/intermediate/practice/01-dockerfile/) | 构建缓存逐层检查、某层失效其下全部重建——依赖层在前，改业务代码不触发重装依赖 |
 | [容器之间怎么互访](/docker/intermediate/practice/03-network/) | 放进同一自定义 bridge 用容器名互访（内置 DNS）；默认 bridge 不支持按名互访，容器 IP 重启会变别写死 |
+| [数据必须挂卷](/docker/intermediate/practice/02-volume/) | 可写层随容器删除丢失；生产用具名卷，开发热加载才 bind |
+| [容器生死](/docker/basic/fundamentals/03-lifecycle/) | 主进程退出容器即退出；stop 先 SIGTERM 再 SIGKILL，137 是被 SIGKILL |
 
 ## Nginx
 
@@ -167,6 +207,8 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [Nginx 为什么能扛高并发](/nginx/basic/config/01-working-model/) | master + 多 worker 事件驱动——每个 worker 单线程跑 epoll 事件循环、从不干等 IO，worker 数等于 CPU 核数 |
 | [proxy_pass 尾斜杠的区别](/nginx/intermediate/proxy/01-reverse-proxy-lb/) | 只看 proxy_pass 带不带 URI/尾斜杠：带了就替换 location 前缀，不带则原始 URI 原样转发 |
 | [HTTPS 证书为什么配在 Nginx 就够](/nginx/intermediate/proxy/02-https-cache-ratelimit/) | Nginx 做 TLS 终止——对外加密、对内网走 HTTP，证书一处维护，后端不用各自配 |
+| [root 与 alias](/nginx/basic/config/02-static-server/) | root 拼完整 URI，alias 剥前缀再替换；SPA 刷新靠 try_files 回退 index.html |
+| [CDN 动静态](/nginx/intermediate/proxy/04-cdn/) | 静态靠边缘缓存，动态无法缓存只做选路；命中率是生命线，回源是兜底 |
 
 ## Git
 
@@ -175,6 +217,8 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [Git 分支为什么零成本](/git/basic/foundations/01-core-model/) | 分支只是一个 40 字节、内容为 commit 哈希的指针文件，创建/切换/删除都是 O(1) |
 | [什么时候绝对不能 rebase](/git/intermediate/collaboration/01-branch-merge/) | 已推送到公共分支的提交——rebase 重写历史、哈希全变；惯例：自己分支 rebase，合入 main 用 merge |
 | [公共分支的错误提交怎么撤](/git/intermediate/collaboration/03-undo-recovery/) | 用 revert 生成反向提交抵消——reset 改历史，只能用于私有分支 |
+| [fetch 与 pull](/git/intermediate/collaboration/02-remote-collab/) | fetch 只更新远端快照不动工作区；pull = fetch + merge（或 rebase） |
+| [什么时候可以改历史](/git/advanced/workflow/01-history-rewrite/) | 只改尚未推到公共分支的提交；rebase 是重放新哈希，不是原地修改 |
 
 ## 算法
 
@@ -186,6 +230,17 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [动态规划三步](/algorithm/intermediate/dp/01-climbing-stairs/) | 定义状态 → 写转移方程 → 定初始化与遍历顺序，全部 DP 都是这三步 |
 | [回溯模板](/algorithm/intermediate/backtracking/01-subsets/) | 路径 + 选择列表 + 撤销选择；子集/排列/组合只差剪枝与去重的位置 |
 | [复杂度与时空权衡](/algorithm/advanced/principles/01-time-space-tradeoff/) | 先给暴力解再优化——用空间换时间（哈希/前缀和/缓存）是最常见的降维路径 |
+| [对撞双指针](/algorithm/basic/searching/02-two-pointers/) | 有序数组两端按和的大小移动一端，每步排除一批不可能的解，O(n) |
+| [前缀和](/algorithm/basic/techniques/01-prefix-sum/) | O(n) 预处理后区间和 = P[r+1]-P[l]，查询 O(1) |
+| [差分数组](/algorithm/basic/techniques/02-difference-array/) | 区间加 v 只改两端点，最后一趟前缀和还原 |
+| [单调栈](/algorithm/basic/techniques/03-monotonic-stack/) | 栈内保持单调，弹出时「下一个更大/更小」当场确定，整体 O(n) |
+| [快速选择](/algorithm/basic/searching/04-quickselect/) | 借快排分区只递归含答案的一侧，期望 O(n) 找第 K 小 |
+| [归并排序](/algorithm/basic/sorting/05-merge-sort/) | 先拆后合，最坏也 O(n log n) 且稳定，代价是 O(n) 辅助数组 |
+| [计数排序](/algorithm/basic/sorting/08-counting-sort/) | 值即下标、不比较，突破 Ω(n log n)，耗时 O(n+k) |
+| [Floyd 判环](/algorithm/intermediate/linked-list/02-cycle-detection/) | 快慢相遇证有环；slow 回 head 同速再走，再遇即入口 |
+| [拓扑排序](/algorithm/advanced/graph/02-topological-sort/) | Kahn：入度 0 即可执行；输出不足总结点数则有环 |
+| [二分答案](/algorithm/advanced/binary-answer/01-koko-eating-bananas/) | 「最小的最大」对 k 本身二分，前提是判定单调 |
+| [Kadane](/algorithm/intermediate/dp/03-max-subarray/) | 前面累计是负资产就丢弃重开，O(n) 求最大子数组和 |
 
 ## Python
 
@@ -195,6 +250,14 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [GIL 到底锁住了什么](/python/advanced/internals/01-gil/) | 只锁 CPython 字节码执行——IO 与 numpy 等 C 扩展会释放它，IO 密集多线程有效、CPU 密集换多进程 |
 | [@ 装饰器做了什么](/python/basic/functions/03-decorators/) | 就是 `f = 装饰器(原函数)` 的一次调用加重绑定——必备 functools.wraps 与 `*args, **kwargs` 透传，带参装饰器三层嵌套 |
 | [调用含 yield 的函数会发生什么](/python/basic/functions/02-iterators-generators/) | 不执行任何代码、只返回生成器对象；每次 next() 跑到 yield 暂停吐值，惰性 O(1) 内存且单次消费 |
+| [可变默认值](/python/basic/functions/01-functions-closures/) | 默认值在 def 时求值一次并被所有调用共享——可变对象用 None 哨兵 |
+| [引用计数与循环 GC](/python/advanced/internals/02-memory-gc/) | 计数归零立即释放是主力；分代 GC 只兜循环引用 |
+| [asyncio](/python/intermediate/concurrency/02-asyncio/) | 调用 async def 只返回协程对象；await 在 IO 时让出，单线程撑起高并发连接 |
+| [CPU 密集用进程](/python/intermediate/concurrency/03-multiprocessing/) | 线程绕不开 GIL；进程各有解释器才能用多核，通信要序列化 |
+| [MRO 与 super](/python/basic/oop/02-inheritance-mro/) | super() 是 C3 线性化的下一站，不是「直接父类」的别名 |
+| [dict 实现](/python/basic/data-structures/02-dict-set/) | 开放寻址、装载因子约 2/3 扩容；3.7+ 语言保证插入有序 |
+| [typing 运行时不强制](/python/intermediate/stdlib/04-typing/) | 标注给 IDE/mypy 看，解释器不检查；边界脏数据要运行时校验 |
+| [Pydantic](/python/intermediate/libs/02-pydantic/) | 把类型标注变成运行时强制，拦 HTTP/配置/第三方 JSON |
 
 ## AI 与大模型
 
@@ -204,6 +267,14 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [RAG 和微调怎么选](/ai/intermediate/agent/06-rag/) | 解决「模型不知道」（新知识/私有知识/要引用来源）选 RAG；解决「模型不按你的方式做事」（风格/格式）选微调 |
 | [MCP 解决了什么问题](/ai/intermediate/agent/08-mcp/) | AI 应用的 USB-C 开放标准——把 M×N 私有集成降为 M+N，工具从硬编码注册变运行时发现 |
 | [Agent Loop 的本质](/ai/basic/agent/01-agent-loop/) | 一个 while 循环：模型只决策要不要调工具，真正执行的是 Harness，tool_result 追加回 messages 直到不再调工具 |
+| [提示工程](/ai/intermediate/llm/02-prompt-engineering/) | 不改权重只改问法：零样本/少样本/CoT；结构化提示 = 角色+任务+约束+格式 |
+| [权限三道闸](/ai/basic/agent/03-permission/) | 安全靠代码不靠信任模型：硬拒绝 → 规则询问 → 默认放行 |
+| [专用工具](/ai/basic/agent/02-tool-use/) | 循环不变、能力进 dispatch table；让模型直接表达意图，少一层 bash 翻译 |
+| [上下文工程](/ai/intermediate/agent/03-context-engineering/) | 模型只基于当次看到的信息决策，窗口治理决定能力上限 |
+| [记忆层](/ai/intermediate/agent/04-memory/) | 压缩有损、新会话无摘要，细节要落到跨会话仍在的文件仓库再按需加载 |
+| [子智能体](/ai/intermediate/agent/09-subagent/) | 子任务用独立 messages，只把结论回传，避免中间过程挤爆主上下文 |
+| [机器学习范式](/ai/basic/foundation/01-machine-learning/) | 从「数据+规则→答案」变成「数据+答案→规则」；监督/无监督/强化学习三种信号 |
+| [深度学习](/ai/basic/foundation/02-deep-learning/) | 多层网络自动提取特征，把原先靠人做的特征工程交给模型 |
 
 ## 分布式与集群
 
@@ -231,12 +302,19 @@ description: 全站高频面试八股的一句话答案索引——覆盖 Java�
 | [分库分表什么时候做](/distributed/intermediate/sharding/01-sharding-methods/) | 先调优再分片；分片键让高频查询单片命中，基因法补多维度 |
 | [定时任务多实例防重](/distributed/intermediate/coordination/03-distributed-scheduler/) | 锁兜底 → 选主单跑 → 分片广播并行，幂等贯穿所有层 |
 | [ZAB 和 2PC 区别](/zookeeper/basic/core/02-zk-deep-dive/) | ZAB 过半即提交、失败重选主不回滚——根治 2PC 阻塞与单点 |
+| [ZK 是什么](/zookeeper/basic/core/01-zookeeper-core/) | 强一致协调服务：znode 树 + 临时节点 + Watch，写走 Leader 再 ZAB 广播 |
 | [etcd Watch 的优势](/etcd/basic/core/02-etcd-lease-txn-watch/) | 按 revision 续传断线不丢事件，撞 compaction 要全量重拉 |
 | [容灾 RTO/RPO](/distributed/advanced/availability/01-dr-multi-active/) | RTO 定恢复时长、RPO 定丢数据容忍，预案必须演练验证 |
 | [混沌工程](/distributed/advanced/availability/05-chaos-engineering/) | 稳态假设 + 受控注入 + 自动终止；没有预案的故障不注入 |
 | [单元化 set 化](/distributed/advanced/availability/06-cell-based/) | 分片基因贯穿流量/数据/应用，单元内闭环多活，切流先停写追平 |
 | [Seata AT 为什么无侵入](/seata/basic/core/01-seata-core/) | 一阶段执行 SQL 时自动记前后镜像 undo log 并直接提交本地事务，失败按 beforeImage 反向补偿 |
 | [AT 模式是什么隔离级别](/seata/basic/core/02-seata-deep-dive/) | 默认读未提交，写隔离靠提交前向 TC 申请行级全局锁；热点行退化串行，应换 TCC/消息最终一致 |
+| [etcd 写路径](/etcd/basic/core/01-etcd-core/) | 只有 Leader 处理写，Raft 日志过半提交；Lease 到期自动删挂在其上的 key |
+| [ZK Watcher](/zookeeper/basic/core/02-zk-deep-dive/) | 一次性触发，重注册间隙会丢变更——靠版本号补拉；半死 session 需 fencing 自保 |
+| [Gossip](/distributed/intermediate/consensus/02-gossip/) | 无中心时随机交换状态，O(log N) 轮收敛；适合元数据扩散，不能替代 Raft 提交 |
+| [分布式 ID](/distributed/intermediate/transaction/02-distributed-id/) | 分库后自增会撞号；工程默认雪花（小心时钟回拨），严格连续用号段 |
+| [超时与重试](/distributed/intermediate/traffic/02-timeout-retry/) | 上层超时 > 下层之和；重试三门槛：幂等、可重试错误、退避加抖动 |
+| [链路追踪](/distributed/advanced/observability/01-distributed-tracing/) | traceId 贯穿、span 成树；透传 context 才能画出瀑布图 |
 
 ## 系统设计
 

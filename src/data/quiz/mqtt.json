@@ -43,6 +43,36 @@
         0
       ],
       "hint": "把传输层可靠等同于消息层恰好一次是常见误区——重发仍会造成应用层重复；消重靠「中间态记账」：接收方按 message id 去重，发送方只重发确认报文、不重发数据。"
+    },
+    {
+      "id": "mqtt-ka-004",
+      "noteId": "mqtt/intermediate/usage/02-keepalive-reconnect",
+      "type": "single",
+      "q": "MQTT Keep Alive 的作用是？",
+      "options": [
+        "保证 QoS 2 恰好一次",
+        "CONNECT 声明的间隔内若无任何报文，Broker 发 PINGREQ 探活，失败则判定掉线并触发遗嘱",
+        "把 QoS 0 消息缓存在 Broker 直到客户端上线",
+        "替代 TLS 做加密"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "Keep Alive 管活着，不管投递语义；离线缓存仍看 QoS 与会话。"
+    },
+    {
+      "id": "mqtt-emqx-005",
+      "noteId": "mqtt/intermediate/usage/01-broker-emqx",
+      "type": "judge",
+      "q": "EMQX 这类 Broker 把海量长连接和主题路由从业务进程里拆出去，设备侧仍用轻量 MQTT，后端再用桥接进 Kafka 等管道。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "不要让业务 JVM 直接扛百万设备连接；Broker 是连接面，消息总线是数据面。"
     }
   ]
 }

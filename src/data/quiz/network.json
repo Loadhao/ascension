@@ -45,6 +45,70 @@
         0
       ],
       "hint": "砍掉的是 RSA 密钥交换这类弱算法，密钥交换仍要非对称（ECDHE）；证书验证是签发链追到本机信任的根 CA；前向安全的意义恰恰是私钥泄露也解不开历史流量。"
+    },
+    {
+      "id": "net-udp-004",
+      "noteId": "network/basic/tcp/03-tcp-vs-udp",
+      "type": "single",
+      "q": "TCP 与 UDP 的本质差异是？",
+      "options": [
+        "UDP 面向连接，TCP 无连接",
+        "TCP 面向连接的可靠字节流，UDP 无连接不可靠报文；实时场景常在 UDP 上自补可靠性（如 QUIC）",
+        "两者都提供消息边界，区别只在是否加密",
+        "HTTP/3 仍跑在 TCP 上"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "TCP 没有消息边界（粘包拆包来源）；HTTP/3 基于 QUIC/UDP。"
+    },
+    {
+      "id": "net-dns-005",
+      "noteId": "network/basic/foundation/02-dns",
+      "type": "judge",
+      "q": "域名解析顺序大致是：浏览器缓存 → hosts → 本地 DNS 递归 → 根/顶级/权威迭代，且层层都有缓存。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "hosts 在本地 DNS 之前；不要一上来就怪权威服务器。"
+    },
+    {
+      "id": "net-http3-006",
+      "noteId": "network/basic/http/03-http-evolution",
+      "type": "single",
+      "q": "HTTP/2 仍可能队头阻塞，根因在哪一层？HTTP/3 如何绕开？",
+      "options": [
+        "应用层帧阻塞；HTTP/3 改回 HTTP/1.1 长连接",
+        "队头阻塞在 TCP 层（丢包整连接停）；HTTP/3 用 QUIC/UDP 让流独立",
+        "只是浏览器 bug，升级 Chrome 即可",
+        "TLS 握手造成，关掉 HTTPS 就没有阻塞"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "HTTP/2 二进制分帧解决了 HTTP 层队头阻塞，但 TCP 丢一个包仍卡住所有流。"
+    },
+    {
+      "id": "net-url-007",
+      "noteId": "network/basic/foundation/03-from-url-to-page",
+      "type": "multiple",
+      "q": "从输入 URL 到页面呈现，顺序中应包含？（多选）",
+      "options": [
+        "DNS 解析",
+        "TCP 握手（HTTPS 还要 TLS）",
+        "发 HTTP 请求并接收响应",
+        "先渲染再建立连接以降低白屏"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "没有连接就没有响应体，渲染一定在拿到资源之后（当然浏览器会流水线化，但因果不能颠倒）。"
     }
   ]
 }

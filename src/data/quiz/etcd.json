@@ -1,0 +1,52 @@
+{
+  "questions": [
+    {
+      "id": "etcd-raft-001",
+      "noteId": "etcd/basic/core/01-etcd-core",
+      "type": "single",
+      "q": "etcd 作为分布式强一致 KV，写请求的提交条件是？",
+      "options": [
+        "任意 follower 本地落盘即可",
+        "只有 Leader 处理写，日志复制到多数派后才提交",
+        "所有节点必须 ack，否则回滚（2PC）",
+        "客户端直接写任意节点，异步同步"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "etcd 是 Raft 的著名落地：任期区分领袖、过半提交；不要把它说成 2PC 全员 ack。"
+    },
+    {
+      "id": "etcd-lease-002",
+      "noteId": "etcd/basic/core/02-etcd-lease-txn-watch",
+      "type": "multiple",
+      "q": "关于 etcd Lease / Watch / 一致性读，下列正确的有？（多选）",
+      "options": [
+        "一个 Lease 可挂多个 key，TTL 到期则这些 key 一并删除",
+        "KeepAlive 由客户端主动续租，服务端不代劳",
+        "Watch 可按 start_revision 续传，断线默认不丢事件",
+        "linearizable 读直接读 follower 本地快照，延迟最低"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "linearizable（默认）要走 Raft 确认读到最新；serializable 才读本地快照。Watch 撞 compaction 则必须全量重拉。"
+    },
+    {
+      "id": "etcd-txn-003",
+      "noteId": "etcd/basic/core/02-etcd-lease-txn-watch",
+      "type": "judge",
+      "q": "etcd 的 Txn 把多个 Compare 与 then/else 压成一条 Raft 日志，因此 check-then-act 是原子的。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "选主、抢锁都靠这条迷你 CAS；若拆成先 get 再 put，中间必有窗口。"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "questions": [
+    {
+      "id": "js-typeof-001",
+      "noteId": "js/basic/core/01-js-fundamentals",
+      "type": "multiple",
+      "q": "关于 JS 类型与比较，下列说法正确的有？（多选）",
+      "options": [
+        "typeof null === 'object' 是历史 bug，判 null 应用 ===",
+        "NaN === NaN 为 true，可直接用 === 判 NaN",
+        "工程上应永远用 ===，隐式转换只用来读题",
+        "== 时 null 与 undefined 互相相等且不转型"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "NaN 不等于自身，判 NaN 用 Number.isNaN()；== 的 null/undefined 特例和其余转数字比，是隐式转换的高频坑。"
+    },
+    {
+      "id": "js-closure-002",
+      "noteId": "js/basic/core/02-scope-closure",
+      "type": "single",
+      "q": "for (var i = 0; i < 3; i++) { setTimeout(() => console.log(i)); } 会打印三个 3，根因是？",
+      "options": [
+        "setTimeout 把回调放到微任务队列，循环还没结束",
+        "var 只有一个函数级 i，回调执行时循环已结束，三个回调共享同一个 i",
+        "箭头函数没有自己的 i，只能读到 3",
+        "事件循环会合并相同回调，只执行最后一次"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "用 let 每轮新绑定，或 IIFE 捕获当轮值即可修复；箭头函数与宏/微任务不是这道题的原因。"
+    },
+    {
+      "id": "js-proto-003",
+      "noteId": "js/basic/core/03-prototype-class",
+      "type": "single",
+      "q": "关于 __proto__ 与 prototype，下列说法正确的是？",
+      "options": [
+        "prototype 在每个对象上，指向它的原型对象",
+        "__proto__ 在每个函数上，指向用它 new 出来的实例",
+        "__proto__ 在每个对象上指向原型；prototype 在每个函数上，是 new 出来实例的原型",
+        "class extends 不再使用原型链"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "两根指针方向最容易反：实例靠 [[Prototype]]/__proto__ 找原型，函数的 prototype 才是给实例挂的那张原型对象；class 只是语法糖。"
+    },
+    {
+      "id": "js-this-004",
+      "noteId": "js/basic/core/04-this-binding",
+      "type": "single",
+      "q": "普通函数 this 绑定的优先级从高到低是？",
+      "options": [
+        "new > call/apply/bind > obj.fn() > 独立调用",
+        "call/apply/bind > new > obj.fn() > 独立调用",
+        "obj.fn() > new > bind > 独立调用",
+        "箭头函数的 this 也按这四条在调用时确定"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "硬绑定后再 new，new 仍然优先；箭头函数没有 this，沿词法作用域取外层，不走这张表。"
+    },
+    {
+      "id": "js-eventloop-005",
+      "noteId": "js/basic/core/05-event-loop",
+      "type": "single",
+      "q": "setTimeout(() => console.log(1)); Promise.resolve().then(() => console.log(2)); console.log(3); 输出顺序是？",
+      "options": [
+        "1 2 3",
+        "3 1 2",
+        "3 2 1",
+        "2 3 1"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "同步代码先跑完（3），当前宏任务结束后清空整个微任务队列（2），然后才轮到 setTimeout 宏任务（1）。"
+    },
+    {
+      "id": "js-cors-006",
+      "noteId": "js/intermediate/web/02-cors",
+      "type": "judge",
+      "q": "浏览器同源策略会阻止跨域 AJAX 请求发出去，所以服务端收不到这类请求，CSRF 因此被天然防住。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "请求其实发出去了，被拦的是「读取响应」；表单跨域提交、CSRF 正是因为发送没被禁止。"
+    },
+    {
+      "id": "js-ws-007",
+      "noteId": "js/intermediate/web/01-websocket",
+      "type": "single",
+      "q": "WebSocket 握手成功的标志与之后的传输模型是？",
+      "options": [
+        "HTTP 200 后仍按请求-响应模型推消息",
+        "HTTP 101 Switching Protocols 后，同一条 TCP 上全双工互发帧",
+        "改用 UDP，不再需要握手",
+        "服务端返回 301 把协议升级到 wss"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "只在握手阶段借用 HTTP；101 之后这条连接上跑的是 WebSocket 帧，双方随时互发，不是再套一层 HTTP 响应。"
+    },
+    {
+      "id": "js-event-008",
+      "noteId": "js/intermediate/web/03-dom-events",
+      "type": "multiple",
+      "q": "关于 DOM 事件流与委托，下列说法正确的有？（多选）",
+      "options": [
+        "完整事件流是捕获 → 目标 → 冒泡",
+        "addEventListener 默认挂在捕获段",
+        "事件委托把监听挂到父元素，靠 event.target 分辨来源",
+        "focus/blur 等不冒泡的事件也可以直接委托"
+      ],
+      "answer": [
+        0,
+        2
+      ],
+      "hint": "默认 useCapture 为 false，挂在冒泡段；没有冒泡的事件委托不了，这是委托的边界。"
+    },
+    {
+      "id": "js-gc-009",
+      "noteId": "js/intermediate/node/01-node-gc-memory",
+      "type": "judge",
+      "q": "process.memoryUsage() 的 heapUsed 上涨才代表泄漏；RSS 涨而 heapUsed 不涨，应先怀疑堆外（Buffer/内存映射）。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Node 进程内存 ≠ V8 堆；只盯 heapUsed 会漏掉 C++ Buffer 和 libuv 占用。"
+    }
+  ]
+}

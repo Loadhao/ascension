@@ -1,0 +1,52 @@
+{
+  "questions": [
+    {
+      "id": "zk-model-001",
+      "noteId": "zookeeper/basic/core/01-zookeeper-core",
+      "type": "single",
+      "q": "ZooKeeper 的数据模型与写路径，下列正确的是？",
+      "options": [
+        "关系表 + 任意节点可写，异步复制",
+        "文件系统式 znode 树；只有 Leader 处理写，再按 ZAB 广播",
+        "无序 KV，用 Gossip 传播",
+        "日志分段存储，消费者自己管理 offset"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "ZK 是协调服务不是 MQ/DB；树形 znode + 临时节点 + Watch 才是它的产品形态。"
+    },
+    {
+      "id": "zk-zab-002",
+      "noteId": "zookeeper/basic/core/02-zk-deep-dive",
+      "type": "multiple",
+      "q": "ZAB 广播相对 2PC 的关键差异有？（多选）",
+      "options": [
+        "过半 ack 即提交，不必全员",
+        "失败不回滚，放弃提议并在崩溃后重选主对齐日志",
+        "参与者必须锁资源干等协调者",
+        "选举比较 (epoch, zxid, myid)，优先数据最新者"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "2PC 的阻塞与单点正是 ZAB 要根治的；少数派掉线不影响过半提交。"
+    },
+    {
+      "id": "zk-watch-003",
+      "noteId": "zookeeper/basic/core/02-zk-deep-dive",
+      "type": "judge",
+      "q": "Watcher 触发一次即失效，重注册间隙里发生的变更客户端收不到，需要靠版本号补拉或定时对账。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "一次性是刻意简化；对比 etcd Watch 按 revision 续传。Session「半死」时临时节点可能已删，客户端还以为自己持锁。"
+    }
+  ]
+}
