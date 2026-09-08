@@ -1,0 +1,28 @@
+docs/coverage-deepening.md
+  h_9324126a55eff3 1-37
+src/data/quiz/ai.json
+  h_9324126a55eff3 449-450,464-465,481-482
+src/data/quiz/algorithm.json
+  h_9324126a55eff3 647-648,664-665,681-682,698-699,715-716
+src/data/quiz/distributed.json
+  h_9324126a55eff3 597-598
+src/data/quiz/docker.json
+  h_9324126a55eff3 159-175
+src/data/quiz/java.json
+  h_9324126a55eff3 1258-1259,1275-1276,1290-1291,1307-1308,1324-1325,1341-1342,1358-1359,1375-1376,1392-1393,1407-1408,1424-1425,1441-1442,1458-1459,1475-1476,1492-1493,1509-1510,1526-1527,1543-1544,1558-1559,1575-1576,1592-1593,1609-1610
+src/data/quiz/postgresql.json
+  h_9324126a55eff3 84-86,101-105,120-122,131-137,152-154,163-169,171-191
+src/data/quiz/python.json
+  h_9324126a55eff3 531-532,548-549,569-570,586-587,603-604,620-621,635-653
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "363c6e95144c18950573ea352b4365fc0df1605c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
