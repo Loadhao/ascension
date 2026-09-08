@@ -375,6 +375,13 @@ main:has(.kg-fullbleed) {
   .right-sidebar-container {
     width: 16rem;
   }
+  /* 右栏收窄后，core 内层容器仍按 18.75rem 栏宽算（16.75rem），超出列宽；
+     且它是 fixed 全宽父级内的百分比宽度，写 100% 会解析成视口宽。
+     固定为列内宽 14rem；条目整体右移：左内边距 3rem / 右 0.5rem */
+  .right-sidebar-panel .sl-container {
+    width: 14rem;
+    padding-inline: 3rem 0.5rem;
+  }
   [data-has-sidebar][data-has-toc] .main-pane {
     width: calc(100% - 16rem);
     --sl-content-margin-inline: auto;
@@ -419,8 +426,9 @@ main:has(.kg-fullbleed) {
   aside.right-sidebar-container .right-sidebar-panel {
     display: block;
   }
+  /* fixed 全宽父级内的百分比宽会解析成视口宽，固定为列内可用宽（14rem - 面板左右内边距） */
   .right-sidebar-panel .sl-container {
-    width: 100%;
+    width: 12rem;
   }
   .main-pane {
     order: 1;
