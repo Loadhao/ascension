@@ -1283,6 +1283,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/rocketmq/basic/core/' },
                         { label: 'RocketMQ 架构与消息模型', link: '/rocketmq/basic/core/01-rocketmq-architecture/' },
+                        { label: '消费语义：模式、重试与位移', link: '/rocketmq/basic/core/02-consumer-semantics/' },
                       ],
                     },
                   ],
