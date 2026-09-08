@@ -4,6 +4,7 @@
       "id": "redis-ds-001",
       "noteId": "redis/basic/core/01-data-structures",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 Redis 底层数据结构，下列说法正确的有？（多选）",
       "options": [
         "ZSet 大数据时 skiplist 与 dict 并存：按 member 查分数走 dict O(1)，按分数范围查走跳表",
@@ -22,6 +23,7 @@
       "id": "redis-rdb-002",
       "noteId": "redis/basic/core/02-persistence",
       "type": "single",
+      "difficulty": 4,
       "q": "bgsave 期间主进程仍持续处理写请求，子进程却能拍到「一致」的快照，靠的是什么机制？",
       "options": [
         "主进程在快照期间暂停所有写操作，写请求排队",
@@ -38,6 +40,7 @@
       "id": "redis-aof-003",
       "noteId": "redis/basic/core/02-persistence",
       "type": "judge",
+      "difficulty": 4,
       "q": "AOF 重写（bgrewriteaof）是对旧 AOF 文件里的命令逐条压缩合并，生成更短的命令序列。",
       "options": [
         "正确",
@@ -52,6 +55,7 @@
       "id": "redis-bloom-004",
       "noteId": "redis/intermediate/usage/02-cache-problems",
       "type": "single",
+      "difficulty": 3,
       "q": "布隆过滤器「判不存在绝对可靠、判存在有误判率」的性质，为什么恰好适合防缓存穿透？",
       "options": [
         "穿透请求查的都是不存在的数据，判不存在绝对可靠能全部挡下，误判放行的极少数走正常链路兜底",
@@ -68,6 +72,7 @@
       "id": "redis-thread-005",
       "noteId": "redis/basic/core/03-thread-model",
       "type": "single",
+      "difficulty": 3,
       "q": "Redis 6.0 开启 IO 多线程后，命令执行的线程模型是？",
       "options": [
         "多条命令在 IO 线程并行执行，原子性不再保证",
@@ -84,6 +89,7 @@
       "id": "redis-expire-006",
       "noteId": "redis/intermediate/usage/01-expiration-eviction",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于过期删除与内存淘汰，下列正确的有？（多选）",
       "options": [
         "过期采用惰性删除 + 定期删除，不是到点立刻删",
@@ -102,6 +108,7 @@
       "id": "redis-lock-007",
       "noteId": "redis/intermediate/usage/03-distributed-lock",
       "type": "single",
+      "difficulty": 3,
       "q": "setnx 成功后再单独 expire，最大的风险是？",
       "options": [
         "expire 会覆盖已有 TTL 导致锁永不过期？相反：两步不原子，崩溃在中间会死锁",
@@ -118,6 +125,7 @@
       "id": "redis-repl-008",
       "noteId": "redis/advanced/ha/01-replication-sentinel-cluster",
       "type": "single",
+      "difficulty": 2,
       "q": "Redis 高可用三层递进，正确对应是？",
       "options": [
         "主从复制冗余 → 哨兵自动故障转移 → Cluster 16384 槽分片",
@@ -134,6 +142,7 @@
       "id": "redis-pattern-009",
       "noteId": "redis/intermediate/usage/04-cache-patterns",
       "type": "single",
+      "difficulty": 5,
       "q": "Cache Aside 写路径的主流顺序是「先更新 DB 再删缓存」。若改成「先删缓存再更新 DB」，最典型的脏数据窗口是？",
       "options": [
         "删缓存失败会导致 DB 永久写不进去",
@@ -150,6 +159,7 @@
       "id": "redis-pipe-010",
       "noteId": "redis/intermediate/usage/05-pipeline-transaction-lua",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 Pipeline、MULTI/EXEC 与 Lua，下列正确的有？（多选）",
       "options": [
         "Pipeline 把多条命令打包往返，服务端仍逐条执行，中间可能被其他客户端插队",
@@ -168,6 +178,7 @@
       "id": "redis-bigkey-011",
       "noteId": "redis/intermediate/usage/06-bigkey-hotkey",
       "type": "single",
+      "difficulty": 4,
       "q": "线上要找大 key，为什么生产环境几乎禁止用 MONITOR，而推荐 redis-cli --bigkeys 或离线分析 RDB？",
       "options": [
         "MONITOR 只能看过期键，看不到大 value",

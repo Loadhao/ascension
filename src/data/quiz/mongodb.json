@@ -4,6 +4,7 @@
       "id": "mongo-doc-001",
       "noteId": "mongodb/basic/core/01-document-model",
       "type": "single",
+      "difficulty": 1,
       "q": "关于 MongoDB 文档模型，下列理解正确的是？",
       "options": [
         "「无 schema」意味着文档可以没有任何结构，字段名随机即可",
@@ -20,6 +21,7 @@
       "id": "mongo-repl-002",
       "noteId": "mongodb/intermediate/replication/01-replication-set",
       "type": "multiple",
+      "difficulty": 3,
       "q": "复制集一次能拿到哪些能力？（多选）",
       "options": [
         "多副本数据冗余",
@@ -38,6 +40,7 @@
       "id": "mongo-shard-003",
       "noteId": "mongodb/advanced/sharding/01-sharding-cluster",
       "type": "single",
+      "difficulty": 3,
       "q": "MongoDB 分片集群的三组件分工是？",
       "options": [
         "mongos 存数据、config 路由、shard 只做备份",
@@ -54,6 +57,7 @@
       "id": "mongo-perf-004",
       "noteId": "mongodb/advanced/operations/02-performance",
       "type": "judge",
+      "difficulty": 2,
       "q": "explain 里理想的 totalKeysExamined : totalDocsExamined : nReturned 约为 1:1:1；出现 COLLSCAN 说明走了全集合扫描。",
       "options": [
         "正确",
@@ -68,6 +72,7 @@
       "id": "mongo-cap-005",
       "noteId": "mongodb/advanced/operations/01-capacity-planning",
       "type": "single",
+      "difficulty": 3,
       "q": "容量规划时「原始数据量 ≠ 磁盘需求」，常被低估的放大因素是？",
       "options": [
         "只有 oplog，大约再加 1%",
@@ -84,6 +89,7 @@
       "id": "mongo-model-001",
       "noteId": "mongodb/basic/core/01-document-model",
       "type": "single",
+      "difficulty": 4,
       "q": "订单与其「无上限增长的评论/日志类子实体」该如何建模，符合笔记建议的做法是？",
       "options": [
         "全部内嵌进订单文档，一次读取拿全",
@@ -100,6 +106,7 @@
       "id": "mongo-majority-002",
       "noteId": "mongodb/intermediate/replication/01-replication-set",
       "type": "single",
+      "difficulty": 4,
       "q": "一个 MongoDB 复制集有 4 个投票成员，其中 2 个同时宕机，此时复制集会怎样？",
       "options": [
         "剩余 2 个存活节点直接选出新 Primary，继续正常读写",
@@ -116,6 +123,7 @@
       "id": "mongo-tune-003",
       "noteId": "mongodb/advanced/operations/02-performance",
       "type": "judge",
+      "difficulty": 3,
       "q": "MongoDB 性能出问题时，应优先微调 WiredTiger 的 eviction 等内部参数，这是收益最大的一步。",
       "options": [
         "正确",

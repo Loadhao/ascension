@@ -4,6 +4,7 @@
       "id": "zk-model-001",
       "noteId": "zookeeper/basic/core/01-zookeeper-core",
       "type": "single",
+      "difficulty": 2,
       "q": "ZooKeeper 的数据模型与写路径，下列正确的是？",
       "options": [
         "关系表 + 任意节点可写，异步复制",
@@ -20,6 +21,7 @@
       "id": "zk-zab-002",
       "noteId": "zookeeper/basic/core/02-zk-deep-dive",
       "type": "multiple",
+      "difficulty": 4,
       "q": "ZAB 广播相对 2PC 的关键差异有？（多选）",
       "options": [
         "过半 ack 即提交，不必全员",
@@ -38,6 +40,7 @@
       "id": "zk-watch-003",
       "noteId": "zookeeper/basic/core/02-zk-deep-dive",
       "type": "judge",
+      "difficulty": 3,
       "q": "Watcher 触发一次即失效，重注册间隙里发生的变更客户端收不到，需要靠版本号补拉或定时对账。",
       "options": [
         "正确",
@@ -52,6 +55,7 @@
       "id": "zk-model-004",
       "noteId": "zookeeper/basic/core/01-zookeeper-core",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 ZooKeeper 的数据模型与 Watch 机制，下列说法正确的是？",
       "options": [
         "每个 znode 默认可存 1GB 数据，因此适合当消息队列存储海量消息",

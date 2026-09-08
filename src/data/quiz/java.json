@@ -4,6 +4,7 @@
       "id": "java-thread-pool-001",
       "noteId": "java/intermediate/concurrent/02-thread-pool",
       "type": "single",
+      "difficulty": 3,
       "q": "向线程池提交任务且核心线程已满时，任务接下来会？",
       "options": [
         "立即创建非核心线程执行",
@@ -20,6 +21,7 @@
       "id": "java-volatile-002",
       "noteId": "java/intermediate/concurrent/03-volatile",
       "type": "judge",
+      "difficulty": 2,
       "q": "用 volatile 修饰计数变量后，多线程 i++ 就是线程安全的。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "java-sync-003",
       "noteId": "java/intermediate/concurrent/04-synchronized",
       "type": "single",
+      "difficulty": 3,
       "q": "synchronized 锁升级的正确顺序是？",
       "options": [
         "无锁 → 偏向锁 → 轻量级锁 → 重量级锁",
@@ -50,6 +53,7 @@
       "id": "java-threadlocal-004",
       "noteId": "java/intermediate/concurrent/06-threadlocal",
       "type": "multiple",
+      "difficulty": 4,
       "q": "ThreadLocal 内存泄漏的成因涉及哪些？（多选）",
       "options": [
         "Entry 的 key 是弱引用，GC 后 key 变为 null",
@@ -68,6 +72,7 @@
       "id": "java-cas-005",
       "noteId": "java/intermediate/concurrent/09-cas-atomics",
       "type": "single",
+      "difficulty": 3,
       "q": "解决 CAS 的 ABA 问题的标准方案是？",
       "options": [
         "改用 synchronized 加锁",
@@ -84,6 +89,7 @@
       "id": "java-hashmap-006",
       "noteId": "java/basic/collection/02-hashmap",
       "type": "judge",
+      "difficulty": 3,
       "q": "JDK 1.8 的 HashMap 改用头插法，解决了并发扩容的链表成环问题。",
       "options": [
         "正确",
@@ -98,6 +104,7 @@
       "id": "java-chm-007",
       "noteId": "java/basic/collection/03-concurrenthashmap",
       "type": "single",
+      "difficulty": 3,
       "q": "JDK 1.8 的 ConcurrentHashMap 主要靠什么保证并发安全？",
       "options": [
         "分段锁，每段一把 ReentrantLock",
@@ -114,6 +121,7 @@
       "id": "java-deadlock-008",
       "noteId": "java/intermediate/concurrent/12-deadlock",
       "type": "multiple",
+      "difficulty": 2,
       "q": "下列属于死锁四个必要条件的是？（多选）",
       "options": [
         "互斥",
@@ -134,6 +142,7 @@
       "id": "java-aqs-009",
       "noteId": "java/intermediate/concurrent/05-aqs",
       "type": "single",
+      "difficulty": 4,
       "q": "AQS（AbstractQueuedSynchronizer）的核心骨架是？",
       "options": [
         "volatile state + CLH 变体等待队列",
@@ -150,6 +159,7 @@
       "id": "java-g1-010",
       "noteId": "java/advanced/jvm/03-garbage-collection",
       "type": "single",
+      "difficulty": 4,
       "q": "G1 收集器相对传统收集器的核心设计取舍是？",
       "options": [
         "用复制算法彻底消除了内存碎片",
@@ -166,6 +176,7 @@
       "id": "java-lru-011",
       "noteId": "java/basic/collection/05-linkedhashmap-lru",
       "type": "single",
+      "difficulty": 3,
       "q": "用 LinkedHashMap 做 LRU，关键开关与淘汰位置是？",
       "options": [
         "accessOrder=true，最近访问移到链表尾，最久未用在头，配合 removeEldestEntry",
@@ -182,6 +193,7 @@
       "id": "java-cow-012",
       "noteId": "java/basic/collection/06-copyonwritearraylist",
       "type": "judge",
+      "difficulty": 3,
       "q": "CopyOnWriteArrayList 读路径不加锁，写时复制整份数组再换 volatile 引用，适合读多写少；迭代器看到的是创建时的快照。",
       "options": [
         "正确",
@@ -196,6 +208,7 @@
       "id": "java-generic-013",
       "noteId": "java/basic/syntax/04-generics",
       "type": "single",
+      "difficulty": 3,
       "q": "Java 泛型类型擦除的直接证据是？",
       "options": [
         "List<String> 与 List<Integer> 的 Class 对象相同，运行期字节码里只剩裸 List",
@@ -212,6 +225,7 @@
       "id": "java-string-014",
       "noteId": "java/basic/syntax/02-string",
       "type": "judge",
+      "difficulty": 1,
       "q": "String 不可变是因为 final 类 + 内部字符序列不可改，常量池可复用，拼接大量字符串应改用 StringBuilder。",
       "options": [
         "正确",
@@ -226,6 +240,7 @@
       "id": "java-spi-015",
       "noteId": "java/basic/syntax/10-spi",
       "type": "single",
+      "difficulty": 2,
       "q": "Java SPI 的加载方式是？",
       "options": [
         "编译期把实现类名写进调用方字节码",
@@ -242,6 +257,7 @@
       "id": "java-tx-016",
       "noteId": "java/intermediate/spring/04-transaction",
       "type": "multiple",
+      "difficulty": 4,
       "q": "@Transactional 失效的常见原因有？（多选）",
       "options": [
         "同类自调用，没走代理",
@@ -260,6 +276,7 @@
       "id": "java-circ-017",
       "noteId": "java/intermediate/spring/03-circular-dependency",
       "type": "single",
+      "difficulty": 4,
       "q": "Spring 三级缓存能解决的循环依赖是？",
       "options": [
         "构造器注入循环，靠提前暴露半成品",
@@ -276,6 +293,7 @@
       "id": "java-bean-018",
       "noteId": "java/intermediate/spring/01-ioc-bean-lifecycle",
       "type": "single",
+      "difficulty": 3,
       "q": "Bean 生命周期中，BeanPostProcessor 的前后置处理发生在？",
       "options": [
         "实例化之前，用于替换构造器",
@@ -292,6 +310,7 @@
       "id": "java-longadder-019",
       "noteId": "java/intermediate/concurrent/07-longadder",
       "type": "judge",
+      "difficulty": 3,
       "q": "LongAdder 用分段 Cell 分散热点写，sum 是弱一致的——高并发写计数场景通常比 AtomicLong 更合适。",
       "options": [
         "正确",
@@ -306,6 +325,7 @@
       "id": "java-cf-020",
       "noteId": "java/intermediate/concurrent/11-completablefuture",
       "type": "single",
+      "difficulty": 3,
       "q": "CompletableFuture 中 thenCompose 与 thenCombine 的分工是？",
       "options": [
         "thenCompose 并行两个独立 Future，thenCombine 把结果展平",
@@ -322,6 +342,7 @@
       "id": "java-layout-021",
       "noteId": "java/advanced/jvm/05-object-layout",
       "type": "single",
+      "difficulty": 5,
       "q": "64 位 JVM 开启压缩指针时，堆一旦大于约 32G 会怎样？对象三段式是？",
       "options": [
         "自动换成 128 位指针；对象只有实例数据没有头",
@@ -338,6 +359,7 @@
       "id": "java-tuning-022",
       "noteId": "java/advanced/jvm/07-tuning",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 JVM 内存账本与容器姿势，下列正确的有？（多选）",
       "options": [
         "进程占用 ≠ -Xmx，还要加元空间、栈×线程、直接内存、JVM 自身",
@@ -356,6 +378,7 @@
       "id": "java-bc-023",
       "noteId": "java/advanced/jvm/09-bytecode",
       "type": "single",
+      "difficulty": 4,
       "q": "低版本 JVM 加载高版本 class 报 UnsupportedClassVersionError，直接原因是？invokevirtual 与 invokestatic 的分派时机？",
       "options": [
         "常量池损坏；两者都是运行期动态绑定",
@@ -372,6 +395,7 @@
       "id": "java-ms-024",
       "noteId": "java/advanced/springcloud/01-microservices-overview",
       "type": "single",
+      "difficulty": 3,
       "q": "微服务用什么换什么？小团队硬拆的典型后果？",
       "options": [
         "用运维/分布式复杂度换并行研发与按热点精准扩容；小团队硬拆等于给自己上刑",
@@ -388,6 +412,7 @@
       "id": "java-feign-025",
       "noteId": "java/advanced/springcloud/04-openfeign-loadbalancer",
       "type": "single",
+      "difficulty": 3,
       "q": "OpenFeign 让远程调用看起来像本地方法，底层关键三步是？重试的边界？",
       "options": [
         "字节码增强改写 JDK；任何请求都可以无限重试",
@@ -404,6 +429,7 @@
       "id": "java-cfg-026",
       "noteId": "java/advanced/springcloud/06-config-center",
       "type": "single",
+      "difficulty": 3,
       "q": "Nacos 配置热更新不生效，应优先核对的关键注解/机制是？",
       "options": [
         "只重启 Nacos 即可，客户端没有刷新概念",
@@ -420,6 +446,7 @@
       "id": "java-trace-027",
       "noteId": "java/advanced/springcloud/08-tracing",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于跨服务链路追踪，下列正确的有？（多选）",
       "options": [
         "单机 MDC 的 traceId 出了进程边界就对不上，必须把上下文塞进请求头往下传",
@@ -438,6 +465,7 @@
       "id": "java-oop-028",
       "noteId": "java/basic/syntax/01-oop",
       "type": "single",
+      "difficulty": 2,
       "q": "重载与重写的绑定时机差异，以及 Stack extends Vector 被批评的原因？",
       "options": [
         "两者都是运行期动态绑定；继承总能保持子类不变量",
@@ -454,6 +482,7 @@
       "id": "java-ex-029",
       "noteId": "java/basic/syntax/05-exception",
       "type": "single",
+      "difficulty": 3,
       "q": "try 里 return 1，finally 里 return 2，方法实际返回？资源关闭为什么优先 try-with-resources？",
       "options": [
         "1，finally 不能改变返回值；手动 close 更可控",
@@ -470,6 +499,7 @@
       "id": "java-thb-030",
       "noteId": "java/intermediate/concurrent/01-thread-basics",
       "type": "multiple",
+      "difficulty": 2,
       "q": "关于 Java 线程，下列正确的有？（多选）",
       "options": [
         "严格来说创建线程只有 new Thread().start()，Runnable/线程池都是使用方式",
@@ -488,6 +518,7 @@
       "id": "java-ext-031",
       "noteId": "java/intermediate/spring/06-extension-points",
       "type": "single",
+      "difficulty": 4,
       "q": "BeanFactoryPostProcessor 与 BeanPostProcessor 的分水岭？AOP 代理通常在哪一环织入？",
       "options": [
         "两者都改成品实例；AOP 在实例化之前",
@@ -504,6 +535,7 @@
       "id": "java-prepare-032",
       "noteId": "java/advanced/jvm/01-class-loading",
       "type": "single",
+      "difficulty": 4,
       "q": "类加载准备阶段结束后，static int a = 1; 与 static final int B = 2; 的值分别是？",
       "options": [
         "a=0，B=2（B 因 ConstantValue 属性在准备期直接赋值）",
@@ -520,6 +552,7 @@
       "id": "java-direct-mem-033",
       "noteId": "java/advanced/jvm/02-memory",
       "type": "judge",
+      "difficulty": 3,
       "q": "直接内存不足时抛出的 OutOfMemoryError 不带 \"Java heap space\" 字样，且该内存不占用 -Xmx 设定的堆空间。",
       "options": [
         "正确",
@@ -534,6 +567,7 @@
       "id": "java-ref-034",
       "noteId": "java/advanced/jvm/04-references",
       "type": "single",
+      "difficulty": 3,
       "q": "关于四种引用的回收时机，正确的是？",
       "options": [
         "软引用只要发生 GC 就被回收，与内存是否充足无关",
@@ -550,6 +584,7 @@
       "id": "java-escape-035",
       "noteId": "java/advanced/jvm/06-jit",
       "type": "single",
+      "difficulty": 5,
       "q": "关于 JIT 逃逸分析与标量替换，正确的是？",
       "options": [
         "标量替换把整个对象从堆搬到线程栈上存放，属于教科书式栈上分配",
@@ -566,6 +601,7 @@
       "id": "java-cpu-036",
       "noteId": "java/advanced/jvm/08-troubleshooting",
       "type": "single",
+      "difficulty": 4,
       "q": "线上 Java 进程 CPU 100%，要快速定位到代码行，标准四步链是？",
       "options": [
         "jmap dump → MAT 支配树 → 找大对象 → 优化持有链",
@@ -582,6 +618,7 @@
       "id": "java-bq-037",
       "noteId": "java/intermediate/concurrent/08-blocking-queue",
       "type": "single",
+      "difficulty": 5,
       "q": "ArrayBlockingQueue 的 put 方法判断队列已满用 while (count == items.length) 而不是 if，原因是？",
       "options": [
         "while 能减少加锁次数，提升整体吞吐",
@@ -598,6 +635,7 @@
       "id": "java-rwlock-038",
       "noteId": "java/intermediate/concurrent/10-concurrent-tools",
       "type": "single",
+      "difficulty": 5,
       "q": "关于 ReentrantReadWriteLock 的锁降级与升级，正确的是？",
       "options": [
         "支持读锁升级为写锁，写锁降级为读锁不被允许",
@@ -614,6 +652,7 @@
       "id": "java-arraylist-039",
       "noteId": "java/basic/collection/01-arraylist",
       "type": "single",
+      "difficulty": 4,
       "q": "ArrayList 把 elementData 声明为 transient 并自定义 writeObject，目的是？",
       "options": [
         "避免迭代器在序列化过程中检测到 modCount 变化而抛异常",
@@ -630,6 +669,7 @@
       "id": "java-rbt-040",
       "noteId": "java/basic/collection/04-red-black-tree",
       "type": "single",
+      "difficulty": 5,
       "q": "红黑树「最长路径不超过最短路径 2 倍」的近似平衡，直接依赖哪两条性质推出？",
       "options": [
         "根节点是黑色 + 叶子（NIL）是黑色",
@@ -646,6 +686,7 @@
       "id": "java-rbt-041",
       "noteId": "java/basic/collection/04-red-black-tree",
       "type": "single",
+      "difficulty": 4,
       "q": "HashMap 桶内树化选红黑树而不是 AVL 树，原因是？",
       "options": [
         "AVL 树不是自平衡结构，无法保证查找 O(log n)",
@@ -662,6 +703,7 @@
       "id": "java-epoll-042",
       "noteId": "java/basic/io/01-io-model",
       "type": "single",
+      "difficulty": 4,
       "q": "关于 select / poll / epoll 三代多路复用实现，正确的是？",
       "options": [
         "poll 仍受 1024 个 fd 上限约束，epoll 用链表解除了该限制",
@@ -678,6 +720,7 @@
       "id": "java-zerocopy-043",
       "noteId": "java/basic/io/02-zero-copy",
       "type": "judge",
+      "difficulty": 4,
       "q": "零拷贝指数据从磁盘到网卡全程一次拷贝都没有发生，连 DMA 拷贝也被消除了。",
       "options": [
         "正确",
@@ -692,6 +735,7 @@
       "id": "java-sticky-044",
       "noteId": "java/basic/io/03-tcp-sticky-packets",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 TCP 粘包拆包，正确的是？",
       "options": [
         "粘包是 TCP 协议实现的缺陷，新版本内核已经修复",
@@ -708,6 +752,7 @@
       "id": "java-equals-045",
       "noteId": "java/basic/syntax/03-equals-hashcode",
       "type": "single",
+      "difficulty": 4,
       "q": "一个类重写了 equals 但没有重写 hashCode，以它为 key put 进 HashMap 后，再用一个 equals 相等的新对象去 get，结果与原因是？",
       "options": [
         "能取到：HashMap 的 get 最终靠 equals 匹配 key",
@@ -724,6 +769,7 @@
       "id": "java-proxy-046",
       "noteId": "java/basic/syntax/06-reflection-annotation",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 JDK 动态代理与 CGLIB 的机制，正确的是？",
       "options": [
         "JDK 动态代理基于继承生成子类，CGLIB 基于接口实现代理",
@@ -740,6 +786,7 @@
       "id": "java-aop-self-047",
       "noteId": "java/intermediate/spring/02-aop",
       "type": "single",
+      "difficulty": 4,
       "q": "createOrder() 内部 this.validate() 调用本类 @Transactional 方法，事务不生效，原因与最干净的解法是？",
       "options": [
         "this 是原始对象没走代理，把方法拆到另一个 Bean 最干净",
@@ -756,6 +803,7 @@
       "id": "java-sqlsession-048",
       "noteId": "java/intermediate/spring/05-mybatis-sqlsession",
       "type": "single",
+      "difficulty": 5,
       "q": "SqlSessionTemplate 为什么能注册成全局单例被 N 个请求线程共用？",
       "options": [
         "DefaultSqlSession 内部对 Executor 加了同步锁",
@@ -772,6 +820,7 @@
       "id": "java-refresh-049",
       "noteId": "java/intermediate/spring/07-application-context",
       "type": "single",
+      "difficulty": 4,
       "q": "关于 refresh() 启动流程，下列说法正确的是？",
       "options": [
         "建厂段就会实例化所有非懒加载单例",
@@ -788,6 +837,7 @@
       "id": "java-anno-050",
       "noteId": "java/intermediate/spring/08-annotations-map",
       "type": "single",
+      "difficulty": 4,
       "q": "下列注解机制的说法正确的是？",
       "options": [
         "getAnnotation 能读到组合注解里的元注解属性",
@@ -804,6 +854,7 @@
       "id": "java-autoconfig-051",
       "noteId": "java/intermediate/spring-boot/01-autoconfig",
       "type": "multiple",
+      "difficulty": 4,
       "q": "引入 starter 后 @Autowired SmsClient 报 NoSuchBeanDefinition，可能的原因有哪些？（多选）",
       "options": [
         "yml 忘了写 @ConditionalOnProperty 要求的开关项（如 sms.enabled=true）",
@@ -824,6 +875,7 @@
       "id": "java-oauth-052",
       "noteId": "java/intermediate/spring-boot/02-auth-sso",
       "type": "single",
+      "difficulty": 4,
       "q": "OAuth2 授权码模式为什么要先回传短命 code，再由服务端拿 code 换 access_token？",
       "options": [
         "为了减少一次网络请求",
@@ -840,6 +892,7 @@
       "id": "java-refreshscope-053",
       "noteId": "java/intermediate/spring-boot/03-configuration",
       "type": "judge",
+      "difficulty": 3,
       "q": "配置中心已推送新值，即使 Bean 没标 @RefreshScope，里面已注入的配置字段也会自动更新。",
       "options": [
         "正确",
@@ -854,6 +907,7 @@
       "id": "java-fatjar-054",
       "noteId": "java/intermediate/spring-boot/04-embedded-deploy",
       "type": "single",
+      "difficulty": 4,
       "q": "fat jar 里为什么需要 JarLauncher + LaunchedURLClassLoader 才能直接 java -jar？",
       "options": [
         "为了压缩体积、减小 jar 包大小",
@@ -870,6 +924,7 @@
       "id": "java-actuator-055",
       "noteId": "java/intermediate/spring-boot/05-actuator",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 Actuator 的暴露面与安全，下列说法正确的是？",
       "options": [
         "Web 环境默认暴露所有端点方便排查",
@@ -886,6 +941,7 @@
       "id": "java-prehandle-056",
       "noteId": "java/intermediate/spring-mvc/01-springmvc-flow",
       "type": "judge",
+      "difficulty": 4,
       "q": "拦截器 preHandle 返回 false 时，Controller 与 postHandle 被跳过，但已执行的那些 preHandle 对应的 afterCompletion 仍会倒序补偿执行。",
       "options": [
         "正确",
@@ -900,6 +956,7 @@
       "id": "java-exception-057",
       "noteId": "java/intermediate/spring-mvc/02-exception-advice",
       "type": "single",
+      "difficulty": 3,
       "q": "@ExceptionHandler 的匹配规则，下列正确的是？",
       "options": [
         "全局 @ControllerAdvice 永远优先于 Controller 本地的 @ExceptionHandler",
@@ -916,6 +973,7 @@
       "id": "java-valid-058",
       "noteId": "java/intermediate/spring-mvc/03-validation",
       "type": "single",
+      "difficulty": 3,
       "q": "校验失败抛出的异常对应关系，正确的是？",
       "options": [
         "@RequestBody @Valid 失败抛 ConstraintViolationException",
@@ -932,6 +990,7 @@
       "id": "java-eureka-059",
       "noteId": "java/advanced/springcloud/02-registry",
       "type": "judge",
+      "difficulty": 3,
       "q": "Eureka 进入自我保护（心跳续约数低于阈值）后，会停止剔除所有实例、保留可能已死的条目，把「不存在但还在表里」的问题交给调用方的重试与熔断处理。",
       "options": [
         "正确",
@@ -946,6 +1005,7 @@
       "id": "java-gateway-060",
       "noteId": "java/advanced/springcloud/03-gateway",
       "type": "single",
+      "difficulty": 5,
       "q": "在 GlobalFilter 里 return chain.filter(exchange) 之后直接打印耗时，得到的是？",
       "options": [
         "请求完整处理完的真实耗时",
@@ -962,6 +1022,7 @@
       "id": "java-sentinel-061",
       "noteId": "java/advanced/springcloud/05-sentinel",
       "type": "single",
+      "difficulty": 3,
       "q": "固定窗口计数限流算法的主要问题是什么？",
       "options": [
         "统计开销太高，需要 O(n) 遍历",
@@ -978,6 +1039,7 @@
       "id": "java-stream-binder-062",
       "noteId": "java/advanced/springcloud/07-stream",
       "type": "judge",
+      "difficulty": 4,
       "q": "配置了 Kafka Binder 的手动 ack（ackMode: MANUAL）之后，就能保证消息不重复消费。",
       "options": [
         "正确",
@@ -992,6 +1054,7 @@
       "id": "java-lsp-063",
       "noteId": "java/intermediate/design-pattern/01-principles",
       "type": "multiple",
+      "difficulty": 3,
       "q": "依据里氏替换原则（LSP），下列哪些是「违反 LSP」的信号？（多选）",
       "options": [
         "子类抛出父类没声明过的异常",
@@ -1010,6 +1073,7 @@
       "id": "java-spring-singleton-064",
       "noteId": "java/intermediate/design-pattern/02-singleton",
       "type": "single",
+      "difficulty": 4,
       "q": "关于 Spring 的 singleton scope 与单例模式的关系，笔记的结论是哪一项？",
       "options": [
         "二者等同，Spring singleton 就是类级唯一的单例模式",
@@ -1026,6 +1090,7 @@
       "id": "java-proxy-self-065",
       "noteId": "java/intermediate/design-pattern/06-proxy",
       "type": "judge",
+      "difficulty": 3,
       "q": "Spring AOP 自调用失效（同类内 this 调用 @Transactional 方法事务不生效）的根因是：代理只拦截「从外部进入对象」的调用，对象内部 this 直达原始对象、不经过代理。",
       "options": [
         "正确",
@@ -1040,6 +1105,7 @@
       "id": "java-strategy-066",
       "noteId": "java/intermediate/design-pattern/09-strategy",
       "type": "single",
+      "difficulty": 4,
       "q": "策略模式与状态模式结构完全同构（接口+一组实现+上下文），两者的分界在哪里？",
       "options": [
         "结构不同：策略需要上下文类，状态模式不需要",
@@ -1056,6 +1122,7 @@
       "id": "java-observer-067",
       "noteId": "java/intermediate/design-pattern/11-observer",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于 Spring 事件，正确的说法有哪些？（多选）",
       "options": [
         "@EventListener 默认同步，在发布线程里执行",
@@ -1074,6 +1141,7 @@
       "id": "java-tmpl-068",
       "noteId": "java/intermediate/design-pattern/15-patterns-in-frameworks",
       "type": "single",
+      "difficulty": 3,
       "q": "Bean 生命周期（doCreateBean 定骨架、BeanPostProcessor 当钩子）与 AQS 的 acquire+tryAcquire 被笔记归为完全同构，它们体现的是哪个模式？",
       "options": [
         "模板方法——骨架稳定 + 钩子开放",
@@ -1090,6 +1158,7 @@
       "id": "java-lambda-069",
       "noteId": "java/intermediate/version/01-java8",
       "type": "single",
+      "difficulty": 3,
       "q": "Lambda 为什么比匿名内部类轻？",
       "options": [
         "匿名内部类编译后是真实 class 文件、运行时真加载一个类；Lambda 编译成私有静态方法 + invokedynamic，多数情况不生成新类",
@@ -1106,6 +1175,7 @@
       "id": "java-var-070",
       "noteId": "java/intermediate/version/02-java9-11",
       "type": "single",
+      "difficulty": 2,
       "q": "Java 10 引入的 var 类型推断，用法正确的是哪一项？",
       "options": [
         "可用于字段、方法参数与方法返回值",
@@ -1122,6 +1192,7 @@
       "id": "java-record-071",
       "noteId": "java/intermediate/version/03-java14-17",
       "type": "multiple",
+      "difficulty": 2,
       "q": "关于 record 记录类的说法正确的有哪些？（多选）",
       "options": [
         "访问器不带 get 前缀，字段 x 的访问器就是 x()",
@@ -1140,6 +1211,7 @@
       "id": "java-vthread-072",
       "noteId": "java/intermediate/version/04-java18-21",
       "type": "single",
+      "difficulty": 5,
       "q": "关于虚拟线程的 pin（钉住载体）问题，正确的是哪一项？",
       "options": [
         "虚拟线程在 synchronized 块/方法内阻塞时无法让出载体，载体被占着干等，热点路径应改用 ReentrantLock",
@@ -1156,6 +1228,7 @@
       "id": "java-commonpool-073",
       "noteId": "java/intermediate/stream/01-stream-principle",
       "type": "single",
+      "difficulty": 5,
       "q": "并行流里做阻塞 HTTP 调用导致全 JVM 卡死，事故机理与对策是？",
       "options": [
         "parallelStream 共享 commonPool（默认线程数=CPU 核数），worker 全卡在等响应耗光线程，所有并行流/parallelSort 一起陪葬；这类任务应换独立线程池或异步化",

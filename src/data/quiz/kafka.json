@@ -4,6 +4,7 @@
       "id": "kafka-offset-001",
       "noteId": "kafka/basic/core/02-offset",
       "type": "single",
+      "difficulty": 3,
       "q": "哪种位移提交时机可能导致消息丢失（重启后跳过未处理的消息）？",
       "options": [
         "先处理消息，后提交位移",
@@ -20,6 +21,7 @@
       "id": "kafka-offset-002",
       "noteId": "kafka/basic/core/02-offset",
       "type": "judge",
+      "difficulty": 3,
       "q": "消费者提交的位移含义是「最后一条已处理消息的 offset」。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "kafka-arch-003",
       "noteId": "kafka/intermediate/core/01-kafka-architecture",
       "type": "multiple",
+      "difficulty": 3,
       "q": "Kafka 高吞吐的来源包括哪些？（多选）",
       "options": [
         "分区并行扩展",
@@ -52,6 +55,7 @@
       "id": "kafka-isr-004",
       "noteId": "kafka/intermediate/core/02-replica-isr",
       "type": "judge",
+      "difficulty": 5,
       "q": "只要配置了 acks=all，即使 ISR 收缩到只剩 leader 自己，消息也不会丢。",
       "options": [
         "正确",
@@ -66,6 +70,7 @@
       "id": "kafka-rebalance-005",
       "noteId": "kafka/intermediate/core/05-rebalance",
       "type": "single",
+      "difficulty": 4,
       "q": "消费者线程活着但单批处理太慢，被踢出消费组，正确的调整是？",
       "options": [
         "调大 session.timeout.ms",
@@ -82,6 +87,7 @@
       "id": "kafka-reliability-006",
       "noteId": "kafka/intermediate/core/03-reliability-idempotent",
       "type": "single",
+      "difficulty": 3,
       "q": "至少一次语义下重复消费不可避免，根治重复的办法是？",
       "options": [
         "生产端开启 acks=all",
@@ -98,6 +104,7 @@
       "id": "kafka-why-007",
       "noteId": "kafka/basic/core/01-why-mq",
       "type": "multiple",
+      "difficulty": 2,
       "q": "引入 MQ 的三大价值与必须承认的代价，下列对应正确的有？（多选）",
       "options": [
         "价值：解耦、削峰、异步",
@@ -116,6 +123,7 @@
       "id": "kafka-tp-008",
       "noteId": "kafka/intermediate/core/04-high-throughput",
       "type": "single",
+      "difficulty": 3,
       "q": "Kafka 高吞吐里「批量 + 压缩 + 零拷贝」若改成每条消息独立 fsync，后果是？",
       "options": [
         "更安全且吞吐几乎不变",
@@ -132,6 +140,7 @@
       "id": "kafka-offset-009",
       "noteId": "kafka/basic/core/02-offset",
       "type": "single",
+      "difficulty": 4,
       "q": "关于 Kafka 的自动位移提交（enable.auto.commit=true，默认每 5 秒），下列说法正确的是？",
       "options": [
         "自动提交保证消息既不丢也不重，生产可放心使用",
@@ -148,6 +157,7 @@
       "id": "kafka-rebalance-010",
       "noteId": "kafka/intermediate/core/05-rebalance",
       "type": "single",
+      "difficulty": 5,
       "q": "关于 Kafka 消费组重平衡的分配方案，下列说法正确的是？",
       "options": [
         "分区分配方案由 GroupCoordinator 计算并下发到所有成员",
@@ -164,6 +174,7 @@
       "id": "kafka-producer-011",
       "noteId": "kafka/basic/core/03-producer-path",
       "type": "single",
+      "difficulty": 5,
       "q": "未开启幂等生产者时，「重试 + 在途请求数 > 1」会引发什么问题？",
       "options": [
         "消息必然丢失",

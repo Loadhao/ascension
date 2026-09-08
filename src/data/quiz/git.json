@@ -4,6 +4,7 @@
       "id": "git-object-001",
       "noteId": "git/basic/foundations/01-core-model",
       "type": "single",
+      "difficulty": 2,
       "q": "关于 Git 的对象模型与分支本质，下列说法正确的是？",
       "options": [
         "blob 对象同时保存文件内容和文件名",
@@ -20,6 +21,7 @@
       "id": "git-squash-002",
       "noteId": "git/intermediate/collaboration/01-branch-merge",
       "type": "judge",
+      "difficulty": 3,
       "q": "使用 git merge --squash 合并 feature 分支后，可以直接用 git branch -d feature 删除该分支。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "git-undo-003",
       "noteId": "git/intermediate/collaboration/03-undo-recovery",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 Git 撤销命令的选型，下列说法正确的是？",
       "options": [
         "git reset --soft HEAD~1 会把最近一次提交退回暂存区，修改全部保留",
@@ -50,6 +53,7 @@
       "id": "git-remote-004",
       "noteId": "git/intermediate/collaboration/02-remote-collab",
       "type": "single",
+      "difficulty": 1,
       "q": "git pull 默认做的事情更接近？",
       "options": [
         "只下载对象不移动分支指针",
@@ -66,6 +70,7 @@
       "id": "git-rewrite-005",
       "noteId": "git/advanced/workflow/01-history-rewrite",
       "type": "judge",
+      "difficulty": 2,
       "q": "rebase / filter-branch 等改写历史会让提交哈希全变，已推送的公共分支上做这些等于让所有人的本地历史分叉。",
       "options": [
         "正确",
@@ -80,6 +85,7 @@
       "id": "git-daily-006",
       "noteId": "git/basic/foundations/02-daily-commands",
       "type": "single",
+      "difficulty": 2,
       "q": "git diff 与 git diff --staged 分别比较的是哪两层？",
       "options": [
         "两者都是工作区 vs 最近一次提交，只是显示格式不同",
@@ -96,6 +102,7 @@
       "id": "git-tools-007",
       "noteId": "git/advanced/workflow/02-advanced-tools",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于 bisect、worktree 与 LFS，下列正确的有？（多选）",
       "options": [
         "git bisect 在 good/bad 之间二分历史，可配合 bisect run 自动跑测试",
@@ -114,6 +121,7 @@
       "id": "git-team-008",
       "noteId": "git/advanced/workflow/03-team-standards",
       "type": "single",
+      "difficulty": 3,
       "q": "小团队持续部署的 Web 产品，笔记更推荐哪套分支模型？公共分支必须强推时该用？",
       "options": [
         "Git Flow 全家桶（main/develop/release/hotfix）；git push -f",

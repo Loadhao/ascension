@@ -4,6 +4,7 @@
       "id": "etcd-raft-001",
       "noteId": "etcd/basic/core/01-etcd-core",
       "type": "single",
+      "difficulty": 2,
       "q": "etcd 作为分布式强一致 KV，写请求的提交条件是？",
       "options": [
         "任意 follower 本地落盘即可",
@@ -20,6 +21,7 @@
       "id": "etcd-lease-002",
       "noteId": "etcd/basic/core/02-etcd-lease-txn-watch",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 etcd Lease / Watch / 一致性读，下列正确的有？（多选）",
       "options": [
         "一个 Lease 可挂多个 key，TTL 到期则这些 key 一并删除",
@@ -38,6 +40,7 @@
       "id": "etcd-txn-003",
       "noteId": "etcd/basic/core/02-etcd-lease-txn-watch",
       "type": "judge",
+      "difficulty": 3,
       "q": "etcd 的 Txn 把多个 Compare 与 then/else 压成一条 Raft 日志，因此 check-then-act 是原子的。",
       "options": [
         "正确",
@@ -52,6 +55,7 @@
       "id": "etcd-raft-004",
       "noteId": "etcd/basic/core/01-etcd-core",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 etcd 的 Raft 共识落地，下列说法正确的是？",
       "options": [
         "所有节点都可以直接处理写请求，无需经过 Leader",
@@ -68,6 +72,7 @@
       "id": "etcd-watch-002",
       "noteId": "etcd/basic/core/02-etcd-lease-txn-watch",
       "type": "single",
+      "difficulty": 5,
       "q": "客户端断线较久后带上次的 revision 重新发起 etcd Watch，收到了 compacted 错误，正确的理解与处置是？",
       "options": [
         "服务端网络抖动，原样重试即可恢复",

@@ -4,6 +4,7 @@
       "id": "seata-at-001",
       "noteId": "seata/basic/core/01-seata-core",
       "type": "single",
+      "difficulty": 4,
       "q": "关于 Seata AT 模式一阶段的行为，下列说法正确的是？",
       "options": [
         "各分支执行业务 SQL 时把 beforeImage/afterImage 记入 undo log，随后立即提交本地事务",
@@ -20,6 +21,7 @@
       "id": "seata-lock-002",
       "noteId": "seata/basic/core/02-seata-deep-dive",
       "type": "multiple",
+      "difficulty": 3,
       "q": "下列哪些场景会导致 @GlobalTransactional 注解失效（不生效）？（多选）",
       "options": [
         "同类中通过 this.doBusiness() 自调用，绕过了代理对象",

@@ -4,6 +4,7 @@
       "id": "mysql-btree-001",
       "noteId": "mysql/basic/core/02-index-btree",
       "type": "single",
+      "difficulty": 4,
       "q": "InnoDB「三层 B+ 树可存约 2000 万行」的推导中，非叶子节点单页能放约 1170 个索引项，关键前提是？",
       "options": [
         "非叶子节点只存键+指针，bigint 8B+页指针 6B≈14B，16KB 页可放 16384/14≈1170 项",
@@ -20,6 +21,7 @@
       "id": "mysql-btree-002",
       "noteId": "mysql/basic/core/02-index-btree",
       "type": "judge",
+      "difficulty": 2,
       "q": "二级索引的叶子节点存的是整行数据，所以按普通索引查询不需要回表。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "mysql-mvcc-003",
       "noteId": "mysql/intermediate/transaction-lock/01-transaction-mvcc",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 InnoDB 的 MVCC 与 RR 隔离级别，下列说法正确的有？（多选）",
       "options": [
         "RC 与 RR 的唯一区别是 ReadView 的生成时机：RC 每次快照读重新生成，RR 第一次生成后复用",
@@ -52,6 +55,7 @@
       "id": "mysql-log-004",
       "noteId": "mysql/intermediate/transaction-lock/03-redo-undo-binlog",
       "type": "single",
+      "difficulty": 5,
       "q": "MySQL 崩溃恢复时发现某事务的 redo log 停在 prepare 状态，该事务最终提交还是回滚由什么裁决？",
       "options": [
         "redo 是物理日志，按页重放即可提交",
@@ -68,6 +72,7 @@
       "id": "mysql-sql-005",
       "noteId": "mysql/basic/core/01-sql-execution",
       "type": "single",
+      "difficulty": 2,
       "q": "一条查询 SQL 在 MySQL 8.0 中的大致路径是？",
       "options": [
         "执行器 → 优化器 → 分析器 → 连接器，8.0 强制走查询缓存",
@@ -84,6 +89,7 @@
       "id": "mysql-lock-006",
       "noteId": "mysql/intermediate/transaction-lock/02-locks",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 InnoDB 行锁，下列正确的有？（多选）",
       "options": [
         "行锁加在索引记录上，没走索引可能锁大量记录甚至表级效果",
@@ -102,6 +108,7 @@
       "id": "mysql-nf-007",
       "noteId": "mysql/basic/theory/01-normal-forms",
       "type": "judge",
+      "difficulty": 1,
       "q": "3NF 消除传递依赖；反范式是为读性能主动冗余，不是设计失误。",
       "options": [
         "正确",
@@ -116,6 +123,7 @@
       "id": "mysql-opt-008",
       "noteId": "mysql/advanced/performance-ha/01-optimization",
       "type": "single",
+      "difficulty": 3,
       "q": "慢 SQL 优化时 explain 应优先盯哪些列？",
       "options": [
         "只看 id 是否为 1",
@@ -132,6 +140,7 @@
       "id": "mysql-repl-009",
       "noteId": "mysql/advanced/performance-ha/02-replication-sharding",
       "type": "single",
+      "difficulty": 3,
       "q": "主从复制默认异步提交即返回。从库 Seconds_Behind_Master 飙高，最常见的结构性原因是？",
       "options": [
         "主库 dump 线程是单线程，写多了就推不动 binlog",
@@ -148,6 +157,7 @@
       "id": "mysql-ddl-010",
       "noteId": "mysql/advanced/performance-ha/03-online-ddl",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于大表 Online DDL，下列正确的有？（多选）",
       "options": [
         "生产应显式声明 ALGORITHM，不满足就报错，防止悄悄降级成锁写的 COPY",

@@ -4,6 +4,7 @@
       "id": "dist-cap-001",
       "noteId": "distributed/basic/theory/01-cap-base",
       "type": "single",
+      "difficulty": 4,
       "q": "关于 CAP 定理，下列理解正确的是？",
       "options": [
         "分布式系统必须在 C、A、P 三者中任意放弃两个才能工作",
@@ -20,6 +21,7 @@
       "id": "dist-raft-002",
       "noteId": "distributed/intermediate/consensus/01-paxos-raft",
       "type": "single",
+      "difficulty": 4,
       "q": "5 节点 Raft 集群被网络分区劈成 3+2 两边，两侧行为是？",
       "options": [
         "2 节点一侧的旧主靠任期更高仍能提交写入，3 节点一侧反而阻塞",
@@ -36,6 +38,7 @@
       "id": "dist-tcc-003",
       "noteId": "distributed/intermediate/transaction/01-distributed-transaction",
       "type": "single",
+      "difficulty": 5,
       "q": "TCC 场景中 Cancel 先执行完，之后迟到的 Try 才到达——这属于哪个问题，正确处理是？",
       "options": [
         "空回滚：说明 Try 已丢失，Cancel 报错并终止事务",
@@ -52,6 +55,7 @@
       "id": "dist-quorum-004",
       "noteId": "distributed/advanced/availability/02-split-brain",
       "type": "judge",
+      "difficulty": 3,
       "q": "集群节点从 3 个扩到 4 个后，容错能力随之提升到可以容忍 2 台故障。",
       "options": [
         "正确",
@@ -66,6 +70,7 @@
       "id": "dist-id-005",
       "noteId": "distributed/intermediate/transaction/02-distributed-id",
       "type": "single",
+      "difficulty": 3,
       "q": "分库分表后为什么不能继续用单机自增主键当全局 ID？",
       "options": [
         "自增会重复、无法跨库唯一，需要号段/雪花/UUID 等全局发号",
@@ -82,6 +87,7 @@
       "id": "dist-retry-006",
       "noteId": "distributed/intermediate/traffic/02-timeout-retry",
       "type": "multiple",
+      "difficulty": 3,
       "q": "超时与重试的正确姿势包括？（多选）",
       "options": [
         "超时必须设，且要小于上游超时，避免雪崩式等待",
@@ -100,6 +106,7 @@
       "id": "dist-gossip-007",
       "noteId": "distributed/intermediate/consensus/02-gossip",
       "type": "judge",
+      "difficulty": 2,
       "q": "Gossip 用随机 spreading 换最终一致的成员/状态传播，适合故障检测和元数据扩散，不能替代 Raft 做强一致日志。",
       "options": [
         "正确",
@@ -114,6 +121,7 @@
       "id": "dist-trace-008",
       "noteId": "distributed/advanced/observability/01-distributed-tracing",
       "type": "single",
+      "difficulty": 2,
       "q": "分布式追踪能定位「慢在哪一跳」，靠的是？",
       "options": [
         "只看单机 CPU，不需要跨服务 ID",
@@ -130,6 +138,7 @@
       "id": "dist-gray-009",
       "noteId": "distributed/advanced/availability/04-full-link-gray",
       "type": "single",
+      "difficulty": 4,
       "q": "全链路灰度相对单服务金丝雀，要解决的核心问题是？泳道里没部署的服务怎么处理？",
       "options": [
         "让每个服务独立按 1% 随机灰度，互不影响；缺失服务直接 404",
@@ -146,6 +155,7 @@
       "id": "dist-rto-010",
       "noteId": "distributed/advanced/availability/01-dr-multi-active",
       "type": "single",
+      "difficulty": 3,
       "q": "RTO 与 RPO 分别由什么决定？",
       "options": [
         "RTO 由复制同步程度决定，RPO 由切换速度决定",
@@ -162,6 +172,7 @@
       "id": "dist-release-011",
       "noteId": "distributed/advanced/availability/03-release-strategies",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于滚动 / 蓝绿 / 金丝雀，下列正确的有？（多选）",
       "options": [
         "滚动发布资源成本低，回滚要逐批退；就绪探针与优雅停机决定是否「无感」",
@@ -180,6 +191,7 @@
       "id": "dist-chaos-012",
       "noteId": "distributed/advanced/availability/05-chaos-engineering",
       "type": "single",
+      "difficulty": 3,
       "q": "混沌工程实验开始前必须先有「稳态假设」，含义是？",
       "options": [
         "假设线上永远不会出故障，所以只在预发注入",
@@ -196,6 +208,7 @@
       "id": "dist-cell-013",
       "noteId": "distributed/advanced/availability/06-cell-based",
       "type": "single",
+      "difficulty": 4,
       "q": "单元化（set 化）解决异地多活「两地都在写」的根本手段是？",
       "options": [
         "两地同步强一致互写同一份数据，用分布式事务消冲突",
@@ -212,6 +225,7 @@
       "id": "dist-cpat-014",
       "noteId": "distributed/advanced/consistency/01-consistency-patterns",
       "type": "single",
+      "difficulty": 4,
       "q": "用户刚发完评论刷新看不到，这首先破坏的是哪种一致性？工程上常用哪类对策？",
       "options": [
         "线性一致；必须上 Raft 才能发评论",
@@ -228,6 +242,7 @@
       "id": "dist-cachec-015",
       "noteId": "distributed/advanced/consistency/02-cache-consistency",
       "type": "single",
+      "difficulty": 5,
       "q": "Cache Aside 为什么用「删缓存」而不是「更新缓存」？先更库再删仍可能脏的窗口有多苛刻？",
       "options": [
         "删除比 set 更快；窗口是写库失败就会脏",
@@ -244,6 +259,7 @@
       "id": "dist-nwr-016",
       "noteId": "distributed/advanced/consistency/03-quorum-nwr",
       "type": "judge",
+      "difficulty": 5,
       "q": "配置 W+R>N 之后，系统就具备线性一致（强一致），可以当 Raft 用。",
       "options": [
         "正确",
@@ -258,6 +274,7 @@
       "id": "dist-clock-017",
       "noteId": "distributed/advanced/consistency/04-time-order",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于分布式顺序，下列正确的有？（多选）",
       "options": [
         "不要用各机器墙钟时间戳比较事件先后或做冲突检测",
@@ -276,6 +293,7 @@
       "id": "dist-metrics-018",
       "noteId": "distributed/advanced/observability/02-metrics-alerting",
       "type": "single",
+      "difficulty": 3,
       "q": "可观测性三支柱的分工，以及黄金四信号优先看哪四个？",
       "options": [
         "Metrics 归因、Logging 发现、Tracing 聚合；先看磁盘 inode",
@@ -292,6 +310,7 @@
       "id": "dist-rpc-019",
       "noteId": "distributed/intermediate/governance/01-rpc-principles",
       "type": "single",
+      "difficulty": 4,
       "q": "一次 RPC 链路里，异步收发能把响应配对回正确请求，靠的是哪一项？JDK SPI 为什么不够 Dubbo 用？",
       "options": [
         "靠 TCP 端口号配对；JDK SPI 更快所以 Dubbo 继续用",
@@ -308,6 +327,7 @@
       "id": "dist-triple-020",
       "noteId": "distributed/intermediate/performance/01-triple-high",
       "type": "multiple",
+      "difficulty": 3,
       "q": "三高「五大武器」背后的共同思想，下列正确的有？（多选）",
       "options": [
         "没有访问局部性（完全随机）的数据不适合缓存，还没二次访问就被挤出",
@@ -326,6 +346,7 @@
       "id": "dist-iface-021",
       "noteId": "distributed/intermediate/performance/02-interface-optimization",
       "type": "single",
+      "difficulty": 3,
       "q": "接口优化为什么要先看「耗时地图」？跨地域调用该如何处理？",
       "options": [
         "所有优化效果都在同一数量级，所以先微优化 CPU",
@@ -342,6 +363,7 @@
       "id": "dist-lock-022",
       "noteId": "distributed/intermediate/coordination/01-distributed-lock-compare",
       "type": "single",
+      "difficulty": 5,
       "q": "「Redis 是效率锁，ZK/etcd 是正确锁」这句话的工程含义，正确性终解通常补什么？",
       "options": [
         "Redis 锁绝对不会误删；ZK 更慢所以不适合任何场景",
@@ -358,6 +380,7 @@
       "id": "dist-idem-023",
       "noteId": "distributed/intermediate/coordination/02-idempotency",
       "type": "single",
+      "difficulty": 4,
       "q": "`update set stock=stock-1` 与 `update set status='PAID' where id=?` 哪个天然幂等？分布式为什么必须做幂等？",
       "options": [
         "扣库存天然幂等，改状态不幂等；因为数据库会自动去重",
@@ -374,6 +397,7 @@
       "id": "dist-chash-024",
       "noteId": "distributed/basic/theory/02-consistent-hashing",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于一致性哈希，下列说法正确的有？（多选）",
       "options": [
         "普通 hash 取模扩容（3→4 台）约 3/4 的 key 会换归属节点；一致性哈希扩容平均迁移量约 1/(N+1)",
@@ -393,6 +417,7 @@
       "id": "dist-clustervs-025",
       "noteId": "distributed/basic/theory/03-cluster-vs-distributed",
       "type": "single",
+      "difficulty": 2,
       "q": "关于集群、分布式与单点，下列说法正确的是？",
       "options": [
         "主备形态冗余利用率最高，因为备机时刻参与服务，故障瞬间无感切换",
@@ -409,6 +434,7 @@
       "id": "dist-flash-026",
       "noteId": "distributed/intermediate/case-studies/01-flash-sale",
       "type": "judge",
+      "difficulty": 3,
       "q": "秒杀系统中，Redis Lua 预扣成功后发 MQ 异步下单。由于 MQ 是至少一次投递，可能出现重复消息，因此消费端必须做幂等（如用户 ID+商品 ID 唯一键去重），同时 DB 层仍保留 where stock > 0 条件更新作兜底。",
       "options": [
         "正确",
@@ -423,6 +449,7 @@
       "id": "dist-shorturl-027",
       "noteId": "distributed/intermediate/case-studies/02-short-url",
       "type": "single",
+      "difficulty": 3,
       "q": "短链接系统的重定向与生成方案，下列说法正确的是？",
       "options": [
         "应选 301 永久重定向：浏览器缓存后直达长链接，既减轻服务端压力又能保证点击统计完整",
@@ -439,6 +466,7 @@
       "id": "dist-feed-028",
       "noteId": "distributed/intermediate/case-studies/03-feed-stream",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 Feed 流的推模式与拉模式，下列说法正确的有？（多选）",
       "options": [
         "推模式读快但写放大，百万粉大 V 发一条帖子要写百万次收件箱",
@@ -458,6 +486,7 @@
       "id": "dist-lb-029",
       "noteId": "distributed/intermediate/cluster/01-load-balancing",
       "type": "single",
+      "difficulty": 3,
       "q": "LVS 的 DR（直接路由）模式吞吐最高，其根本原因是？",
       "options": [
         "DR 模式由 LB 同时改写目标 IP 与源 IP，使响应报文沿最优路径返回",
@@ -474,6 +503,7 @@
       "id": "dist-jwt-030",
       "noteId": "distributed/intermediate/cluster/02-session-sharing",
       "type": "judge",
+      "difficulty": 4,
       "q": "JWT 的 Payload 带有签名且经过 Base64URL 处理，因此内容对外不可见，可以安全存放手机号等敏感信息；同时校验只做本地验签，所以用户注销时删除客户端的令牌即可使其立即失效。",
       "options": [
         "正确",
@@ -488,6 +518,7 @@
       "id": "dist-sched-031",
       "noteId": "distributed/intermediate/coordination/03-distributed-scheduler",
       "type": "single",
+      "difficulty": 4,
       "q": "关于分布式定时任务的三层解法，下列说法正确的是？",
       "options": [
         "分布式锁方案最可靠：锁保证了任意时刻只有一台执行，不存在双跑风险",
@@ -504,6 +535,7 @@
       "id": "dist-capacity-032",
       "noteId": "distributed/intermediate/performance/03-capacity-planning",
       "type": "single",
+      "difficulty": 4,
       "q": "关于容量规划与压测，下列说法正确的是？",
       "options": [
         "容量应按日均 QPS 规划，峰值只是瞬时现象，不值得为它投入机器",
@@ -520,6 +552,7 @@
       "id": "dist-sharding-033",
       "noteId": "distributed/intermediate/sharding/01-sharding-methods",
       "type": "judge",
+      "difficulty": 4,
       "q": "采用 hash 取模分片且初始分库数设为 2 的幂（如 4 库），扩容翻倍到 8 库时，每个老分片恰好有一半数据按新模数落在自己对应的新分片上，因此只需迁走一半数据、配合双写窗口灰度切换即可，而不是全局洗牌。",
       "options": [
         "正确",
@@ -534,6 +567,7 @@
       "id": "dist-ratelimit-034",
       "noteId": "distributed/intermediate/traffic/01-distributed-rate-limiting",
       "type": "single",
+      "difficulty": 4,
       "q": "关于分布式限流，下列说法正确的是？",
       "options": [
         "把全局阈值除以实例数下发到每台做单机限流，效果等价于全局限流，还省去了 Redis 依赖",

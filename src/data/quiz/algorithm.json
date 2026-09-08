@@ -4,6 +4,7 @@
       "id": "algo-binsearch-001",
       "noteId": "algorithm/basic/searching/01-binary-search",
       "type": "single",
+      "difficulty": 2,
       "q": "二分查找能把比较次数从 O(n) 降到 O(log n)，依赖的两个前提是？",
       "options": [
         "数组有序，且支持随机访问",
@@ -20,6 +21,7 @@
       "id": "algo-twopointer-002",
       "noteId": "algorithm/basic/searching/02-two-pointers",
       "type": "judge",
+      "difficulty": 2,
       "q": "有序数组上用对撞双指针求两数之和，和太小时应移动右指针 R 以排除更大的组合。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "algo-window-003",
       "noteId": "algorithm/basic/searching/03-sliding-window",
       "type": "single",
+      "difficulty": 3,
       "q": "滑动窗口能把「满足约束的最短/最长连续子数组」从暴力 O(n²) 降到 O(n)，根源是？",
       "options": [
         "窗口每次随机跳过一半元素",
@@ -50,6 +53,7 @@
       "id": "algo-prefix-004",
       "noteId": "algorithm/basic/techniques/01-prefix-sum",
       "type": "single",
+      "difficulty": 2,
       "q": "前缀和数组 P 满足 P[i] 为前 i 个元素之和时，区间 [l, r] 的和等于？",
       "options": [
         "P[r] - P[l]",
@@ -66,6 +70,7 @@
       "id": "algo-diff-005",
       "noteId": "algorithm/basic/techniques/02-difference-array",
       "type": "judge",
+      "difficulty": 2,
       "q": "差分数组上给区间 [l, r] 整体加 v，只需改两个端点：diff[l]+=v、diff[r+1]-=v，最后一趟前缀和还原。",
       "options": [
         "正确",
@@ -80,6 +85,7 @@
       "id": "algo-mergesort-006",
       "noteId": "algorithm/basic/sorting/05-merge-sort",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于归并排序，下列说法正确的有？（多选）",
       "options": [
         "最好、最坏都是 O(n log n)，不挑输入",
@@ -98,6 +104,7 @@
       "id": "algo-quickselect-007",
       "noteId": "algorithm/basic/searching/04-quickselect",
       "type": "single",
+      "difficulty": 4,
       "q": "快速选择找第 K 小，期望复杂度能到 O(n) 的关键是？",
       "options": [
         "每次分区后只递归包含答案的那一侧，另一侧整段丢弃",
@@ -114,6 +121,7 @@
       "id": "algo-floyd-008",
       "noteId": "algorithm/intermediate/linked-list/02-cycle-detection",
       "type": "single",
+      "difficulty": 3,
       "q": "Floyd 快慢指针判定链表有环后，要找环入口，正确做法是？",
       "options": [
         "快指针继续走一圈，慢指针原地等，再次相遇即入口",
@@ -130,6 +138,7 @@
       "id": "algo-topo-009",
       "noteId": "algorithm/advanced/graph/02-topological-sort",
       "type": "judge",
+      "difficulty": 2,
       "q": "Kahn 算法输出的节点数小于总节点数，说明图中一定存在环。",
       "options": [
         "正确",
@@ -144,6 +153,7 @@
       "id": "algo-kadane-010",
       "noteId": "algorithm/intermediate/dp/03-max-subarray",
       "type": "single",
+      "difficulty": 3,
       "q": "Kadane 算法求最大子数组和时，cur = max(nums[i], cur + nums[i]) 的含义是？",
       "options": [
         "前面累计是负资产就丢弃，从当前元素重开一段",
@@ -160,6 +170,7 @@
       "id": "algo-binanswer-011",
       "noteId": "algorithm/advanced/binary-answer/01-koko-eating-bananas",
       "type": "single",
+      "difficulty": 4,
       "q": "「最小的最大 / 最少时间完成」这类题改成对答案 k 本身二分，前提是？",
       "options": [
         "k 越大越容易（或越不容易）满足，判定具有单调性",
@@ -176,6 +187,7 @@
       "id": "algo-countsort-012",
       "noteId": "algorithm/basic/sorting/08-counting-sort",
       "type": "judge",
+      "difficulty": 3,
       "q": "计数排序能突破比较排序 Ω(n log n) 下界，是因为它根本不比较，而是用值本身当数组下标统计次数。",
       "options": [
         "正确",
@@ -190,6 +202,7 @@
       "id": "algo-bin-001",
       "noteId": "algorithm/basic/searching/01-binary-search",
       "type": "single",
+      "difficulty": 4,
       "q": "关于二分查找的实现细节，下列说法正确的是？",
       "options": [
         "mid = (low + high) / 2 与 low + (high - low) / 2 完全等价，任选其一即可",
@@ -206,6 +219,7 @@
       "id": "algo-stack-002",
       "noteId": "algorithm/basic/techniques/03-monotonic-stack",
       "type": "single",
+      "difficulty": 4,
       "q": "关于单调栈求「每个元素右边第一个更大元素」，下列说法正确的是？",
       "options": [
         "虽然写法上是两层循环，但每个下标至多入栈一次、出栈一次，总操作数不超过 2n，均摊 O(n)",
@@ -222,6 +236,7 @@
       "id": "algo-prefix-003",
       "noteId": "algorithm/basic/techniques/01-prefix-sum",
       "type": "judge",
+      "difficulty": 4,
       "q": "使用前缀和数组 P（含 P[0]=0 哨兵）后，若对原数组某元素 a[i] 做单点修改，只需把 P[i] 更新为新值即可恢复所有区间和查询。",
       "options": [
         "正确",
@@ -236,6 +251,7 @@
       "id": "algo-kadane-005",
       "noteId": "algorithm/intermediate/dp/03-max-subarray",
       "type": "single",
+      "difficulty": 5,
       "q": "对全负数组 {-3, -1} 跑 Kadane，若实现写成 int cur = 0, best = 0，循环内 cur = Math.max(nums[i], cur + nums[i])、best = Math.max(best, cur)，最终返回值是？",
       "options": [
         "正确返回 -1，循环内的 Math.max 会自动修正错误的初始值",
@@ -252,6 +268,7 @@
       "id": "algo-bubble-013",
       "noteId": "algorithm/basic/sorting/01-bubble-sort",
       "type": "single",
+      "difficulty": 1,
       "q": "冒泡排序一轮扫描后，确定就位的是哪一类元素？swapped 标记的作用？",
       "options": [
         "无序区的最小值被换到头部；swapped 用于提前插入新元素",
@@ -268,6 +285,7 @@
       "id": "algo-insert-014",
       "noteId": "algorithm/basic/sorting/03-insertion-sort",
       "type": "single",
+      "difficulty": 2,
       "q": "O(n²) 三兄弟里，近乎有序时能接近 O(n)、因而常做工业排序小区间兜底的是？",
       "options": [
         "选择排序：比较次数固定所以更快",
@@ -284,6 +302,7 @@
       "id": "algo-select-015",
       "noteId": "algorithm/basic/sorting/04-selection-sort",
       "type": "judge",
+      "difficulty": 2,
       "q": "选择排序是稳定排序，且交换次数是各排序里最少的一档。",
       "options": [
         "正确",
@@ -298,6 +317,7 @@
       "id": "algo-heap-016",
       "noteId": "algorithm/basic/sorting/06-heap-sort",
       "type": "single",
+      "difficulty": 2,
       "q": "堆排序把数组当下标完全二叉树：下标 k 的孩子是？任意输入复杂度？",
       "options": [
         "k-1 与 k+1；最好 O(n)，最坏 O(n²)",
@@ -314,6 +334,7 @@
       "id": "algo-3way-017",
       "noteId": "algorithm/basic/sorting/09-three-way-partition",
       "type": "single",
+      "difficulty": 4,
       "q": "三路分区处理 a[i] > pivot 时，为什么 i 不前进？",
       "options": [
         "大于分支已经检查过换来的元素",
@@ -330,6 +351,7 @@
       "id": "algo-rotated-018",
       "noteId": "algorithm/basic/searching/05-rotated-array-search",
       "type": "single",
+      "difficulty": 4,
       "q": "旋转一次的升序数组上仍能 O(log n) 查找，依据是？",
       "options": [
         "旋转后全局仍单调，直接套原版二分",
@@ -346,6 +368,7 @@
       "id": "algo-graph-019",
       "noteId": "algorithm/advanced/graph/01-graph-traversal",
       "type": "multiple",
+      "difficulty": 3,
       "q": "图遍历相对树遍历，下列正确的有？（多选）",
       "options": [
         "图有环和交叉边，必须 visited，否则死循环或重复爆炸",
@@ -364,6 +387,7 @@
       "id": "algo-jump-020",
       "noteId": "algorithm/advanced/greedy/01-jump-game",
       "type": "single",
+      "difficulty": 4,
       "q": "跳跃游戏 I（能否到达）维护 farthest；若某个下标 i > farthest，结论是？",
       "options": [
         "继续往后跳，也许后面格子能补上",
@@ -380,6 +404,7 @@
       "id": "algo-para-021",
       "noteId": "algorithm/advanced/principles/02-paradigm-landscape",
       "type": "single",
+      "difficulty": 3,
       "q": "「只要最优值且子问题大量重叠」应优先选哪条路？「要列出所有解」呢？",
       "options": [
         "贪心；分治",
@@ -396,6 +421,7 @@
       "id": "algo-bigO-022",
       "noteId": "algorithm/advanced/principles/03-complexity-analysis",
       "type": "single",
+      "difficulty": 2,
       "q": "大 O 度量的是什么？n 从 100 万到 200 万时，O(n²) 大约变几倍？",
       "options": [
         "运行秒数的精确值；约 2 倍",
@@ -412,6 +438,7 @@
       "id": "algo-tree-023",
       "noteId": "algorithm/intermediate/tree/01-tree-traversal",
       "type": "single",
+      "difficulty": 3,
       "q": "层序遍历按层输出时，为什么要先执行 int size = queue.size() 把本层人数锁存下来再进 for 循环？",
       "options": [
         "队列在循环里不断进出，不锁定就会边处理本层边混入下一层，分层失败",
@@ -428,6 +455,7 @@
       "id": "algo-bst-024",
       "noteId": "algorithm/intermediate/tree/02-bst",
       "type": "judge",
+      "difficulty": 4,
       "q": "验证 BST 只需对每个节点检查 node.left.val < node.val && node.val < node.right.val，即节点与左右直接孩子的大小关系满足即可。",
       "options": [
         "正确",
@@ -442,6 +470,7 @@
       "id": "algo-lca-025",
       "noteId": "algorithm/intermediate/tree/04-lca",
       "type": "single",
+      "difficulty": 3,
       "q": "递归求 LCA 中当 left 和 right 都非空时意味着什么？",
       "options": [
         "p 和 q 一定在同一条根路径上，还需继续向下递归确认",
@@ -458,6 +487,7 @@
       "id": "algo-paren-026",
       "noteId": "algorithm/intermediate/stack-queue/01-valid-parentheses",
       "type": "single",
+      "difficulty": 4,
       "q": "右括号处理写成 if (stack.pop() != '(') return false;（合并了判空），哪类输入会出问题？",
       "options": [
         "左括号偏多的串，会被误判为合法",
@@ -474,6 +504,7 @@
       "id": "algo-minstack-027",
       "noteId": "algorithm/intermediate/stack-queue/02-min-stack",
       "type": "judge",
+      "difficulty": 3,
       "q": "双栈版最小栈在 pop 掉当前最小值之后，新的最小值只能重新扫描一遍主栈才能得到。",
       "options": [
         "正确",
@@ -488,6 +519,7 @@
       "id": "algo-twostack-028",
       "noteId": "algorithm/intermediate/stack-queue/03-queue-via-stacks",
       "type": "single",
+      "difficulty": 4,
       "q": "双栈实现队列中，倒栈条件为什么必须是 out 栈空？",
       "options": [
         "in 栈为空时倒栈会抛出异常，必须先检查 out",
@@ -504,6 +536,7 @@
       "id": "algo-reverse-029",
       "noteId": "algorithm/intermediate/linked-list/01-reverse-list",
       "type": "single",
+      "difficulty": 3,
       "q": "迭代反转链表中 ListNode next = curr.next; curr.next = prev; 这两行的顺序为什么不能颠倒？",
       "options": [
         "颠倒后 prev 和 curr 会指向同一个节点，造成自环",
@@ -520,6 +553,7 @@
       "id": "algo-merge-030",
       "noteId": "algorithm/intermediate/linked-list/03-merge-lists",
       "type": "judge",
+      "difficulty": 4,
       "q": "合并两个有序链表时把比较写成 if (l1.val < l2.val) 接 l1 else 接 l2，除了破坏稳定性，两链当前值相等时还会导致接错方。",
       "options": [
         "正确",
@@ -534,6 +568,7 @@
       "id": "algo-perm-031",
       "noteId": "algorithm/intermediate/backtracking/02-permutations",
       "type": "single",
+      "difficulty": 3,
       "q": "全排列回溯里撤销只写了 path.remove(path.size()-1); 漏掉 used[i] = false;，直接后果是？",
       "options": [
         "结果完全正确，只是多占 O(n) 内存",
@@ -550,6 +585,7 @@
       "id": "algo-robber-032",
       "noteId": "algorithm/intermediate/dp/02-house-robber",
       "type": "single",
+      "difficulty": 4,
       "q": "打家劫舍滚动变量版 int cur = Math.max(prev1, prev2 + x); 中「不偷当前这家」对应哪个分支，为什么它可能更优？",
       "options": [
         "prev1：它继承到前一家为止的最优，当偷当前的收益接不上时不偷反而更大",
@@ -566,6 +602,7 @@
       "id": "algo-lcs-033",
       "noteId": "algorithm/intermediate/dp/04-lcs",
       "type": "single",
+      "difficulty": 4,
       "q": "LCS 转移中不等时取 max(上, 左) 的原因是？",
       "options": [
         "两个末字符不可能同时作为 LCS 的末尾，必须至少丢掉一个，枚举丢 s1 末或丢 s2 末取较优方案",
@@ -582,6 +619,7 @@
       "id": "algo-shell-034",
       "noteId": "algorithm/basic/sorting/07-shell-sort",
       "type": "judge",
+      "difficulty": 2,
       "q": "希尔排序和插入排序一样是稳定的排序算法，相等元素排序后相对位置不会改变。",
       "options": [
         "正确",

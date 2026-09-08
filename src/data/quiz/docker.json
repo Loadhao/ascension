@@ -4,6 +4,7 @@
       "id": "docker-cow-001",
       "noteId": "docker/basic/fundamentals/01-concepts",
       "type": "single",
+      "difficulty": 2,
       "q": "关于容器可写层与数据持久化，下列说法正确的是？",
       "options": [
         "容器删除后，可写层里的数据会回写进镜像长久保留",
@@ -20,6 +21,7 @@
       "id": "docker-ns-002",
       "noteId": "docker/advanced/orchestration/02-principles",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于容器的三大底层机制，下列说法正确的有？（多选）",
       "options": [
         "--memory=512m 超限时 OOM killer 直接杀进程，容器退出码为 137",
@@ -38,6 +40,7 @@
       "id": "docker-dockerfile-003",
       "noteId": "docker/intermediate/practice/01-dockerfile",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 Dockerfile 指令的运行时机与覆盖行为，下列说法正确的是？",
       "options": [
         "docker run 镜像 args 中，args 会替换掉 ENTRYPOINT 定义的内容",
@@ -54,6 +57,7 @@
       "id": "docker-net-004",
       "noteId": "docker/intermediate/practice/03-network",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于 Docker 容器网络，下列说法正确的有？（多选）",
       "options": [
         "-p 8080:80 中 8080 是容器端口、80 是宿主端口",
@@ -71,6 +75,7 @@
       "id": "docker-vol-005",
       "noteId": "docker/intermediate/practice/02-volume",
       "type": "single",
+      "difficulty": 2,
       "q": "生产环境数据库数据应优先用哪种挂载？",
       "options": [
         "bind mount 到开发者家目录，方便编辑",
@@ -87,6 +92,7 @@
       "id": "docker-life-006",
       "noteId": "docker/basic/fundamentals/03-lifecycle",
       "type": "single",
+      "difficulty": 3,
       "q": "关于容器生命周期，下列说法正确的是？",
       "options": [
         "容器的生死由主进程（PID 1）决定，主进程退出容器即退出",
@@ -103,6 +109,7 @@
       "id": "docker-compose-007",
       "noteId": "docker/advanced/orchestration/01-compose",
       "type": "single",
+      "difficulty": 3,
       "q": "compose.yml 里 api depends_on db，只写了服务名、没有 healthcheck。api 起来时 db 一定已经接受连接吗？",
       "options": [
         "一定：depends_on 会阻塞到依赖进程就绪",
@@ -119,6 +126,7 @@
       "id": "docker-opt-008",
       "noteId": "docker/advanced/orchestration/03-image-optimization",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于镜像瘦身与安全，下列正确的有？（多选）",
       "options": [
         "先 docker history / dive 定位哪一层最大，再决定换 alpine、多阶段还是清缓存",
@@ -136,6 +144,7 @@
       "id": "docker-cmd-009",
       "noteId": "docker/basic/fundamentals/02-commands",
       "type": "single",
+      "difficulty": 1,
       "q": "docker run -p 8080:80 nginx 中两个端口的含义，以及 --rm 的典型用途？",
       "options": [
         "8080 是容器端口、80 是宿主端口；--rm 表示重启策略为 unless-stopped",

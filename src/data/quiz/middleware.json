@@ -4,6 +4,7 @@
       "id": "mq-why-001",
       "noteId": "middleware/basic/mq/01-why-mq",
       "type": "multiple",
+      "difficulty": 1,
       "q": "引入消息队列的三大经典收益是？（多选）",
       "options": [
         "解耦",
@@ -19,6 +20,7 @@
       "id": "mq-compare-002",
       "noteId": "middleware/basic/mq/02-mq-comparison",
       "type": "single",
+      "difficulty": 2,
       "q": "业务上需要事务消息、延迟消息、消息轨迹等完善的功能特性，优先考虑？",
       "options": ["Kafka", "RocketMQ", "RabbitMQ", "ActiveMQ"],
       "answer": [1],
@@ -28,6 +30,7 @@
       "id": "mq-reliability-003",
       "noteId": "middleware/intermediate/reliability/01-message-reliability",
       "type": "judge",
+      "difficulty": 3,
       "q": "要保证消息不丢，只需把消费端改成手动 ack 提交即可，生产端与 Broker 不用动。",
       "options": ["正确", "错误"],
       "answer": [1],
@@ -37,6 +40,7 @@
       "id": "mq-reliability-004",
       "noteId": "middleware/intermediate/reliability/01-message-reliability",
       "type": "multiple",
+      "difficulty": 4,
       "q": "消息不丢的三段布防包括？（多选）",
       "options": [
         "生产端发送确认（acks=all / confirm）",

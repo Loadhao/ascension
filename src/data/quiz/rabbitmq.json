@@ -4,6 +4,7 @@
       "id": "rabbit-amqp-001",
       "noteId": "rabbitmq/basic/core/01-amqp-model",
       "type": "single",
+      "difficulty": 2,
       "q": "AMQP 模型里，生产者把消息交给谁？消息进不进某队列由什么决定？",
       "options": [
         "直接交给队列；队列自己按 FIFO 决定",
@@ -20,6 +21,7 @@
       "id": "rabbit-ack-002",
       "noteId": "rabbitmq/basic/core/02-reliable-delivery",
       "type": "multiple",
+      "difficulty": 3,
       "q": "一条消息从生产到消费的防丢，下列正确的有？（多选）",
       "options": [
         "生产者等 confirm，等不到就重发",
@@ -38,6 +40,7 @@
       "id": "rabbit-delay-003",
       "noteId": "rabbitmq/intermediate/usage/01-deadletter-delay",
       "type": "single",
+      "difficulty": 3,
       "q": "RabbitMQ 用 TTL + 死信交换机模拟延迟消息，本质是？",
       "options": [
         "Broker 内置 cron 到点把消息投给消费者",
@@ -54,6 +57,7 @@
       "id": "rabbit-ha-004",
       "noteId": "rabbitmq/intermediate/usage/02-cluster-ha",
       "type": "judge",
+      "difficulty": 4,
       "q": "RabbitMQ 集群默认会把每条消息同步到所有节点，因此普通队列在任意节点挂掉后消息仍在。",
       "options": [
         "正确",
@@ -68,6 +72,7 @@
       "id": "rmq-topic-001",
       "noteId": "rabbitmq/basic/core/01-amqp-model",
       "type": "single",
+      "difficulty": 3,
       "q": "生产者以路由键 order.paid.1024 向 topic 交换机发消息，交换机绑定了队列 A（order.created.#）、队列 B（order.paid.#）、队列 C（order.#），消息会进入哪些队列？",
       "options": [
         "只进队列 B",
@@ -84,6 +89,7 @@
       "id": "rmq-ack-002",
       "noteId": "rabbitmq/basic/core/02-reliable-delivery",
       "type": "single",
+      "difficulty": 4,
       "q": "消费者处理消息失败后执行 basicNack(requeue=true) 反复重试，会有什么问题、更稳的做法是什么？",
       "options": [
         "消息会被 broker 立即删除，应改用自动 ACK 避免",
@@ -100,6 +106,7 @@
       "id": "rmq-quorum-003",
       "noteId": "rabbitmq/intermediate/usage/02-cluster-ha",
       "type": "single",
+      "difficulty": 4,
       "q": "新项目要在 RabbitMQ 上扛单点故障、优先保证不丢数据，按笔记的选型建议应该用？",
       "options": [
         "经典镜像队列，异步镜像延迟低",

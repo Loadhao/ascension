@@ -4,6 +4,7 @@
       "id": "js-typeof-001",
       "noteId": "js/basic/core/01-js-fundamentals",
       "type": "multiple",
+      "difficulty": 2,
       "q": "关于 JS 类型与比较，下列说法正确的有？（多选）",
       "options": [
         "typeof null === 'object' 是历史 bug，判 null 应用 ===",
@@ -22,6 +23,7 @@
       "id": "js-closure-002",
       "noteId": "js/basic/core/02-scope-closure",
       "type": "single",
+      "difficulty": 3,
       "q": "for (var i = 0; i < 3; i++) { setTimeout(() => console.log(i)); } 会打印三个 3，根因是？",
       "options": [
         "setTimeout 把回调放到微任务队列，循环还没结束",
@@ -38,6 +40,7 @@
       "id": "js-proto-003",
       "noteId": "js/basic/core/03-prototype-class",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 __proto__ 与 prototype，下列说法正确的是？",
       "options": [
         "prototype 在每个对象上，指向它的原型对象",
@@ -54,6 +57,7 @@
       "id": "js-this-004",
       "noteId": "js/basic/core/04-this-binding",
       "type": "single",
+      "difficulty": 4,
       "q": "普通函数 this 绑定的优先级从高到低是？",
       "options": [
         "new > call/apply/bind > obj.fn() > 独立调用",
@@ -70,6 +74,7 @@
       "id": "js-eventloop-005",
       "noteId": "js/basic/core/05-event-loop",
       "type": "single",
+      "difficulty": 3,
       "q": "setTimeout(() => console.log(1)); Promise.resolve().then(() => console.log(2)); console.log(3); 输出顺序是？",
       "options": [
         "1 2 3",
@@ -86,6 +91,7 @@
       "id": "js-cors-006",
       "noteId": "js/intermediate/web/02-cors",
       "type": "judge",
+      "difficulty": 4,
       "q": "浏览器同源策略会阻止跨域 AJAX 请求发出去，所以服务端收不到这类请求，CSRF 因此被天然防住。",
       "options": [
         "正确",
@@ -100,6 +106,7 @@
       "id": "js-ws-007",
       "noteId": "js/intermediate/web/01-websocket",
       "type": "single",
+      "difficulty": 2,
       "q": "WebSocket 握手成功的标志与之后的传输模型是？",
       "options": [
         "HTTP 200 后仍按请求-响应模型推消息",
@@ -116,6 +123,7 @@
       "id": "js-event-008",
       "noteId": "js/intermediate/web/03-dom-events",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于 DOM 事件流与委托，下列说法正确的有？（多选）",
       "options": [
         "完整事件流是捕获 → 目标 → 冒泡",
@@ -133,6 +141,7 @@
       "id": "js-gc-009",
       "noteId": "js/intermediate/node/01-node-gc-memory",
       "type": "judge",
+      "difficulty": 4,
       "q": "process.memoryUsage() 的 heapUsed 上涨才代表泄漏；RSS 涨而 heapUsed 不涨，应先怀疑堆外（Buffer/内存映射）。",
       "options": [
         "正确",

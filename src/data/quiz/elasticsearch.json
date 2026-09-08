@@ -4,6 +4,7 @@
       "id": "es-invert-001",
       "noteId": "elasticsearch/basic/core/01-inverted-index",
       "type": "single",
+      "difficulty": 2,
       "q": "倒排索引相对关系库 B+ 树做全文检索的核心差异是？",
       "options": [
         "按行存完整文档，用 LIKE 走覆盖索引",
@@ -20,6 +21,7 @@
       "id": "es-shard-002",
       "noteId": "elasticsearch/basic/core/02-shard-replica",
       "type": "judge",
+      "difficulty": 2,
       "q": "创建索引后可以随时改 number_of_shards，集群会自动按新分片数重哈希路由。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "es-query-003",
       "noteId": "elasticsearch/intermediate/usage/01-query-dsl",
       "type": "single",
+      "difficulty": 3,
       "q": "想查 text 字段「包含某个词」，应该用？",
       "options": [
         "term 查询该 text 字段",
@@ -50,6 +53,7 @@
       "id": "es-page-004",
       "noteId": "elasticsearch/intermediate/usage/03-pagination",
       "type": "single",
+      "difficulty": 3,
       "q": "from+size 深翻页会爆炸，是因为？",
       "options": [
         "每个分片都要把 from+size 条结果传给协调节点归并后再丢掉前 from 条",
@@ -66,6 +70,7 @@
       "id": "es-cluster-005",
       "noteId": "elasticsearch/intermediate/cluster/01-cluster-split-brain",
       "type": "multiple",
+      "difficulty": 3,
       "q": "关于 ES 集群角色与健康色，下列正确的有？（多选）",
       "options": [
         "master 管元数据，挂了只是不能改元数据，读写仍可由 data 节点继续",
@@ -84,6 +89,7 @@
       "id": "es-agg-006",
       "noteId": "elasticsearch/intermediate/usage/02-aggregation",
       "type": "judge",
+      "difficulty": 2,
       "q": "terms 聚合应对 keyword（或 text 的 .keyword 子字段）做精确值分组，而不是对已分词的 text 正文分组。",
       "options": [
         "正确",
@@ -98,6 +104,7 @@
       "id": "es-quorum-001",
       "noteId": "elasticsearch/intermediate/cluster/01-cluster-split-brain",
       "type": "single",
+      "difficulty": 4,
       "q": "7 个 master-eligible 节点的 ES 集群发生网络分区，分裂为 4 台和 3 台两侧，以下描述正确的是？",
       "options": [
         "两个分区各自选出 master，网络恢复后数据自动合并",
@@ -114,6 +121,7 @@
       "id": "es-term-002",
       "noteId": "elasticsearch/intermediate/usage/01-query-dsl",
       "type": "single",
+      "difficulty": 3,
       "q": "用 term 查询去查一个 text 类型的 title 字段，几乎搜不到结果，最可能的原因是？",
       "options": [
         "text 字段没有建倒排索引，只有 keyword 字段才有",
@@ -130,6 +138,7 @@
       "id": "es-terms-003",
       "noteId": "elasticsearch/intermediate/usage/02-aggregation",
       "type": "single",
+      "difficulty": 4,
       "q": "关于 ES terms 聚合的精确度，正确的是？",
       "options": [
         "terms 聚合和 SQL 的 GROUP BY 一样绝对精确，不会丢桶",

@@ -4,6 +4,7 @@
       "id": "linux-inode-001",
       "noteId": "linux/basic/commands/01-file-ops",
       "type": "single",
+      "difficulty": 2,
       "q": "同一文件系统内 mv 几乎瞬间完成，是因为？",
       "options": [
         "内核把文件内容按块并行拷贝",
@@ -20,6 +21,7 @@
       "id": "linux-perm-002",
       "noteId": "linux/basic/permission/01-users-permissions",
       "type": "judge",
+      "difficulty": 2,
       "q": "Linux 内核按用户名（root、alice）做权限判定，/etc/passwd 只是给人看的备注。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "linux-zombie-003",
       "noteId": "linux/intermediate/system/02-process-management",
       "type": "single",
+      "difficulty": 3,
       "q": "关于僵尸进程，下列说法正确的是？",
       "options": [
         "僵尸进程持续占用 CPU 和内存，必须尽快 kill -9",
@@ -50,6 +53,7 @@
       "id": "linux-systemd-004",
       "noteId": "linux/intermediate/system/03-system-service",
       "type": "single",
+      "difficulty": 2,
       "q": "自定义 systemd 服务单元应放在哪里，才能覆盖软件包自带的同名 unit？",
       "options": [
         "/usr/lib/systemd/system/",
@@ -66,6 +70,7 @@
       "id": "linux-net-005",
       "noteId": "linux/intermediate/system/04-network",
       "type": "multiple",
+      "difficulty": 2,
       "q": "关于 Linux 网络排障结论，下列正确的有？（多选）",
       "options": [
         "ping 通但端口不通 → 先看防火墙或服务没监听（ss -tlnp）",
@@ -84,6 +89,7 @@
       "id": "linux-mount-006",
       "noteId": "linux/basic/filesystem/01-filesystem",
       "type": "judge",
+      "difficulty": 1,
       "q": "Linux 是单一目录树，所有分区通过挂载接到某个目录上，不会像 Windows 那样出现独立的盘符。",
       "options": [
         "正确",
@@ -98,6 +104,7 @@
       "id": "linux-shell-002",
       "noteId": "linux/intermediate/system/01-shell-script",
       "type": "judge",
+      "difficulty": 1,
       "q": "在 Bash 脚本中写 count = 5（等号两侧有空格）来给变量 count 赋值，是合法的。",
       "options": [
         "正确",
@@ -112,6 +119,7 @@
       "id": "linux-kill-003",
       "noteId": "linux/intermediate/system/02-process-management",
       "type": "single",
+      "difficulty": 1,
       "q": "执行 kill <PID>（不带信号参数）时，默认发送的信号是？",
       "options": [
         "SIGKILL(9)，立即强杀",
@@ -128,6 +136,7 @@
       "id": "linux-net-004",
       "noteId": "linux/intermediate/system/04-network",
       "type": "single",
+      "difficulty": 3,
       "q": "服务器 ping 得通，但 nc -zv host 8080 连不上，最可能的原因是？",
       "options": [
         "DNS 解析失败，域名没变出 IP",

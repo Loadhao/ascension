@@ -4,6 +4,7 @@
       "id": "nginx-worker-001",
       "noteId": "nginx/basic/config/01-working-model",
       "type": "single",
+      "difficulty": 3,
       "q": "关于 Nginx 的 worker 与连接模型，下列说法正确的是？",
       "options": [
         "worker_processes 应设为 CPU 核数的 2~4 倍，以利用 IO 等待时间",
@@ -20,6 +21,7 @@
       "id": "nginx-proxy-002",
       "noteId": "nginx/intermediate/proxy/01-reverse-proxy-lb",
       "type": "judge",
+      "difficulty": 4,
       "q": "配置 location /api/ { proxy_pass http://backend; }（proxy_pass 不带尾斜杠）时，请求 /api/users 会被转发为 http://backend/users（location 前缀被去掉）。",
       "options": [
         "正确",
@@ -34,6 +36,7 @@
       "id": "nginx-limit-003",
       "noteId": "nginx/intermediate/proxy/02-https-cache-ratelimit",
       "type": "multiple",
+      "difficulty": 4,
       "q": "关于 Nginx 的缓存与限流，下列说法正确的有？（多选）",
       "options": [
         "limit_req 默认是漏桶形态，突发请求被压平、以恒定速率流出",
@@ -52,6 +55,7 @@
       "id": "nginx-static-004",
       "noteId": "nginx/basic/config/02-static-server",
       "type": "single",
+      "difficulty": 3,
       "q": "location /static/ 配 alias /opt/assets/ 时，请求 /static/a.png 会落到？与 root 的差别是？",
       "options": [
         "/opt/assets/static/a.png，因为 alias 和 root 一样拼完整 URI",
@@ -68,6 +72,7 @@
       "id": "nginx-cdn-005",
       "noteId": "nginx/intermediate/proxy/04-cdn",
       "type": "judge",
+      "difficulty": 2,
       "q": "CDN 把静态内容缓存在边缘节点，回源只在未命中时发生；动态 API 默认不该整站交给 CDN 当源站缓存。",
       "options": [
         "正确",
@@ -82,6 +87,7 @@
       "id": "nginx-ka-006",
       "noteId": "nginx/intermediate/proxy/03-keepalived-ha",
       "type": "single",
+      "difficulty": 4,
       "q": "keepalived 给 Nginx 做主备时，track_script 应该探什么？脑裂比宕机更危险是因为？",
       "options": [
         "探主机 ping 通即可；脑裂只是短暂丢几个包",
