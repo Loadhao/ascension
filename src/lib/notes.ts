@@ -12,7 +12,7 @@ export const LEVEL_LABELS: Record<Level, string> = {
 };
 
 /** 仪表盘方向展示顺序（未知方向按字典序追加） */
-const DIRECTION_ORDER = ['linux', 'nginx', 'java', 'js', 'mysql', 'postgresql', 'redis', 'mongodb', 'elasticsearch', 'distributed', 'zookeeper', 'etcd', 'seata', 'middleware', 'kafka', 'rocketmq', 'mqtt', 'rabbitmq', 'python', 'algorithm', 'ai', 'docker', 'git', 'tools'];
+const DIRECTION_ORDER = ['linux', 'nginx', 'network', 'java', 'js', 'mysql', 'postgresql', 'redis', 'mongodb', 'elasticsearch', 'distributed', 'zookeeper', 'etcd', 'seata', 'middleware', 'kafka', 'rocketmq', 'mqtt', 'rabbitmq', 'python', 'algorithm', 'ai', 'docker', 'git', 'tools'];
 
 /** 根级保留页：不参与方向聚合（index/404 之外，panorama 为全站图谱入口页） */
 const RESERVED_ROOT_IDS = new Set(['index', '404', 'panorama']);

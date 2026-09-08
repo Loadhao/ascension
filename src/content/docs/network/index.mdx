@@ -1,0 +1,25 @@
+---
+title: 网络
+description: 网络方向学习路线与知识地图
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/network.json';
+
+## 学习路线
+
+从分层模型与 DNS 这些地基出发，吃透 TCP 的建连断连与可靠传输两件
+大事，再沿 HTTP 演进主线走到 HTTPS 与 HTTP/3。点击圆点标记学习
+状态：○ 未学 → ◐ 学习中 → ● 已掌握。
+
+<RoadmapIsland directionId="network" />
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放，右上角按钮可缩放、复位视图；悬停或点按节点可高亮关联关系；点击圆点进入对应笔记，左下图例点按可按分组筛选。
+图谱数据维护在 `src/data/graphs/network.json`。
+:::

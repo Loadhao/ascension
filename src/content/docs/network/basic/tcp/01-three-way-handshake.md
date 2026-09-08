@@ -1,0 +1,86 @@
+---
+title: 三次握手与四次挥手
+description: 建连与断连的全过程与状态机、为什么恰好三次/四次、TIME_WAIT 的两难与 CLOSE_WAIT 堆积的实战含义
+level: basic
+core: true
+---
+
+## 三次握手：同步双方的初始序号
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as 客户端
+    participant S as 服务端
+    Note over C: CLOSED → SYN_SENT
+    C->>S: SYN, seq=x
+    Note over S: LISTEN → SYN_RCVD
+    S-->>C: SYN+ACK, seq=y, ack=x+1
+    Note over C: SYN_SENT → ESTABLISHED
+    C->>S: ACK, ack=y+1
+    Note over S: SYN_RCVD → ESTABLISHED
+```
+
+每一步的使命：**同步彼此的初始序号（ISN）**——TCP 可靠传输的序号
+坐标系必须双方确认对齐（可靠机制见[TCP 可靠传输](/network/basic/tcp/02-reliable-transfer/)）。
+
+**为什么是三次，不是两次**：两次握手的致命场景是**历史连接**——
+客户端发了个旧 SYN（网络滞留），服务端回了 ACK 就当连接建立并分配
+资源，客户端根本不认这条连接。第三次 ACK 让客户端有机会说"我要的
+不是这个"；同时三次是"双方都确认了'我和你的收发能力都正常'"的
+最小次数。
+
+## 四次挥手：半关闭决定次数
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as 主动方
+    participant S as 被动方
+    Note over C: ESTABLISHED → FIN_WAIT_1
+    C->>S: FIN, seq=u
+    Note over S: → CLOSE_WAIT（还能发数据！）
+    S-->>C: ACK, ack=u+1
+    Note over C: → FIN_WAIT_2
+    S->>C: 数据发完，FIN, seq=w
+    Note over S: LAST_ACK
+    C-->>S: ACK, ack=w+1
+    Note over C: TIME_WAIT 等 2MSL → CLOSED
+```
+
+**为什么四次**：TCP 全双工，两个方向要各自关。被动方收到 FIN 时
+可能还有数据没发完，ACK 先回（"知道了"），数据发完再发自己的
+FIN——ACK 与 FIN 拆成两次，四次由此而来。（`TCP_NODELAY` 类优化里
+也有把 ACK 与数据合并的思想，四次在某些场景可"三次"折叠，但考试
+答标准四次。）
+
+## TIME_WAIT：谁主动关谁背
+
+主动关闭方最后进入 **TIME_WAIT，停留 2MSL**（报文最大生存时间的
+两倍），两个理由：
+
+1. **兜底最后一个 ACK**：它若丢了，对端会重传 FIN，我还能补 ACK；
+2. **让旧连接的报文自然消亡**，避免污染相同四元组的新连接。
+
+生产含义（高频）：
+
+- **大量 TIME_WAIT 出现在高压客户端/网关**（主动关的是它）——解决：
+  连接复用（连接池/长连接）治本；`tcp_tw_reuse` 治标。
+- **大量 CLOSE_WAIT 才是事故信号**：被动方收到 FIN 后回了 ACK 却
+  没调 `close()`——**代码泄漏**（连接没关、响应流没关），与内核参数
+  无关，查代码。
+
+## 建连侧的两个参数
+
+- **SYN 洪泛**：半连接队列（SYN_RCVD）被恶意 SYN 塞满 → `syncookies`
+  用加密 cookie 免队列扛洪。
+- **backlog**：`listen(backlog)` 控制全连接队列长度，业务秒级可接受
+  新连接但队列小会掉建连（`accept` 不及时）。
+
+## 小结
+
+- 三次握手同步初始序号并防历史连接；四次挥手因半关闭（ACK 与 FIN
+  分离）。
+- TIME_WAIT 在主动方，2MSL = 兜底 ACK + 清洗旧报文；TIME_WAIT 多看
+  复用，**CLOSE_WAIT 多查代码**。
+- 半连接队列与 syncookies、全连接 backlog 是建连侧的两个容量旋钮。
