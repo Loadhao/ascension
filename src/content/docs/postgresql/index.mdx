@@ -11,10 +11,11 @@ import graph from '../../../data/graphs/postgresql.json';
 
 点击圆点标记学习状态：○ 未学 → ◐ 学习中 → ● 已掌握。
 
-当前覆盖**高可用与集群**（Pgpool-II 与 Postgres-XL 两种集群技术、pgpool
-容灾高可用：流复制与主备自动切换）→ **性能优化**（连接池、索引与执行
-计划、VACUUM 表膨胀、WAL 与 checkpoint 调参），后续可扩展 SQL 进阶、
-备份恢复、逻辑复制等主题。
+当前覆盖**基础差异与 MVCC**（与 MySQL 的进程/复制/索引对照，以及
+xmin/xmax、默认 RC、HOT、xid 回卷）→ **索引类型与 WAL**（GIN/GiST/BRIN
+与 EXPLAIN 读法，物理 WAL / checkpoint / PITR）→ **高可用与集群**
+（Pgpool-II 与 Postgres-XL、pgpool 容灾）→ **性能优化**（连接池、
+VACUUM、checkpoint 调参）。
 
 <RoadmapIsland directionId="postgresql" />
 

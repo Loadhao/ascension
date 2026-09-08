@@ -2,10 +2,16 @@
   "nodes": [
     { "id": "root", "label": "ZooKeeper", "group": "核心" },
     { "id": "core", "label": "核心机制", "href": "/zookeeper/basic/core/01-zookeeper-core/", "group": "核心机制" },
-    { "id": "deep", "label": "高频追问", "href": "/zookeeper/basic/core/02-zk-deep-dive/", "group": "核心机制" }
+    { "id": "deep", "label": "高频追问", "href": "/zookeeper/basic/core/02-zk-deep-dive/", "group": "核心机制" },
+    { "id": "election", "label": "临时顺序节点与选主", "href": "/zookeeper/intermediate/coordination/01-ephemeral-election/", "group": "协调配方" },
+    { "id": "ops", "label": "ZAB 生产注意点", "href": "/zookeeper/intermediate/ops/01-zab-production/", "group": "生产注意点" }
   ],
   "edges": [
     { "source": "root", "target": "core" },
-    { "source": "core", "target": "deep", "label": "细节与陷阱" }
+    { "source": "core", "target": "deep", "label": "细节与陷阱" },
+    { "source": "core", "target": "election", "label": "选主/锁的标准算法" },
+    { "source": "deep", "target": "election", "label": "半死会话要 fencing" },
+    { "source": "deep", "target": "ops", "label": "协议之后是磁盘与集合" },
+    { "source": "election", "target": "ops", "label": "Watch 数量也是税" }
   ]
 }

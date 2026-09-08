@@ -1,0 +1,13 @@
+---
+title: 协调配方
+description: 临时顺序节点如何真正选出一个主、Watch 前驱避免羊群效应——选主与分布式锁的标准算法
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+基础篇说明了「临时节点 + 顺序节点可以做选主和锁」。本分类把这句话
+展开成**可实现的算法**：为什么不能所有人 Watch 父节点、半死会话如何
+与 fencing 衔接、Curator 配方对应哪一种。点击右侧圆点可标记学习状态
+（未学 → 学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="zookeeper/intermediate/coordination" />

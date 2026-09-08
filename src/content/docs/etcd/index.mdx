@@ -14,7 +14,8 @@ import graph from '../../../data/graphs/etcd.json';
 当前覆盖**核心机制**：etcd 的 KV 模型、Raft 共识、MVCC 与 Watch，
 以及深入篇——Lease 租约、txn 原子比较、按 revision 的可靠 Watch、
 linearizable 与 serializable 读的取舍，和 Kubernetes 对 etcd 的
-依赖。横向的共识算法见「分布式」方向。
+依赖；**运维与故障**则落到空间配额 / Compaction / Defrag、以及
+Leader 切换时写与线性读如何一起失败。横向的共识算法见「分布式」方向。
 
 <RoadmapIsland directionId="etcd" />
 

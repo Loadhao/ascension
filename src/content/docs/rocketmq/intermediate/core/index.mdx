@@ -1,0 +1,13 @@
+---
+title: 过滤与路由
+description: Tag / SQL92 过滤如何落到 ConsumeQueue，NameServer 路由表如何被客户端使用——补上缺失的中级层
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+基础篇立了 NameServer「无状态、AP 即可」的骨架，高级篇把事务消息、
+延迟消息挂在骨架上。中间缺一层工程细节：**消费者声明的 Tag/SQL92
+在哪一层过滤**、**路由表里到底有什么、Broker 挂了客户端怎样换路**。
+点击右侧圆点可标记学习状态（未学 → 学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="rocketmq/intermediate/core" />

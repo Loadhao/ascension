@@ -67,6 +67,61 @@
         2
       ],
       "hint": "1MB 上限 + 全量内存恰恰是「ZK 不适合存大量数据」的依据；Watch 是一次性通知，触发后必须重新注册。"
+    },
+    {
+      "id": "zk-election-005",
+      "noteId": "zookeeper/intermediate/coordination/01-ephemeral-election",
+      "type": "single",
+      "difficulty": 4,
+      "q": "用 ZooKeeper 做选主/分布式锁，避免羊群效应的标准做法是？",
+      "options": [
+        "所有失败者 Watch 父节点，Leader 一挂一起抢 create(/leader)",
+        "创建 EPHEMERAL_SEQUENTIAL，最小序号者持锁，其余只 Watch 自己的前驱",
+        "创建持久顺序节点，靠客户端定时续期",
+        "所有人 Watch Leader 节点本身，以便第一时间接任"
+      ],
+      "answer": [1],
+      "hint": "Watch 父节点或 Watch Leader 都会在切换时叫醒所有等待者；只 Watch 前驱每次只叫醒一个人。exists(前驱) 为空必须重读子节点，不能干等。"
+    },
+    {
+      "id": "zk-herd-006",
+      "noteId": "zookeeper/intermediate/coordination/01-ephemeral-election",
+      "type": "judge",
+      "difficulty": 3,
+      "q": "临时顺序节点选出的最小序号者，足以保证旧 Leader 进程在会话过期后一定停手。",
+      "options": ["正确", "错误"],
+      "answer": [1],
+      "hint": "算法只保证 ZK 集群内唯一最小者；半死会话下旧进程仍可能写，必须把 zxid/序号当 fencing token 带到下游。"
+    },
+    {
+      "id": "zk-observer-007",
+      "noteId": "zookeeper/intermediate/ops/01-zab-production",
+      "type": "single",
+      "difficulty": 3,
+      "q": "ZooKeeper 生产集群要从 3 节点扩展读能力，又不增加写的过半代价，应？",
+      "options": [
+        "加第 4 个投票者，容错从 1 变成 2",
+        "加 Observer：复制日志但不投票、不进 quorum",
+        "把 forceSync 关掉以提高吞吐",
+        "把 jute.maxbuffer 调到几十 MB 减少往返"
+      ],
+      "answer": [1],
+      "hint": "4 投票者是偶数错配：容错仍是 1，写却要等 3 个 ack。forceSync 关掉等于放弃崩溃一致性；单节点 1MB 上限不要为当 KV 而放大。"
+    },
+    {
+      "id": "zk-fsync-008",
+      "noteId": "zookeeper/intermediate/ops/01-zab-production",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 ZooKeeper 生产约束，正确的有？（多选）",
+      "options": [
+        "写延迟天花板通常是事务日志盘的 fsync，dataDir 与 dataLogDir 应分盘",
+        "3.6 持久递归 Watch 消除了重注册窗口，但仍占用堆内常驻表项，大扇出仍要克制",
+        "偶数节点能额外多扛一台故障，所以 4 节点比 3 节点更安全",
+        "ZK 全量内存 + 小节点，不适合当消息队列或百万级心跳注册中心"
+      ],
+      "answer": [0, 1, 3],
+      "hint": "N 节点容忍 (N-1)/2，4 节点仍只扛 1，还抬高过半。"
     }
   ]
 }

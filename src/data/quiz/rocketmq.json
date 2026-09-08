@@ -133,6 +133,61 @@
         1
       ],
       "hint": "零拷贝不是「没有页缓存」也不是「并发拷贝」——传统路径本是 4 次拷贝 4 次切换，省掉的是用户空间与内核之间的来回搬运；生产路径用的是 mmap，不是 sendfile。"
+    },
+    {
+      "id": "rmq-tag-006",
+      "noteId": "rocketmq/intermediate/core/01-tag-sql92",
+      "type": "single",
+      "difficulty": 4,
+      "q": "RocketMQ Tag 过滤相对便宜，主要是因为？",
+      "options": [
+        "未匹配 Tag 的消息根本不会写入 CommitLog",
+        "ConsumeQueue 每条带 8 字节 tag hash，Broker 可比 hash 跳过、多数情况不读消息体",
+        "Tag 在 NameServer 做路由时就已经按消费组切开",
+        "同一消费组内不同实例可以订阅不同 Tag，Broker 按 Tag 分配 Queue"
+      ],
+      "answer": [1],
+      "hint": "过滤不减少写入；同组必须订阅同一套 Tag，否则按 Queue 负载均衡会导致有人空转。一条消息只有一个 Tag，订阅只有或。"
+    },
+    {
+      "id": "rmq-sql92-007",
+      "noteId": "rocketmq/intermediate/core/01-tag-sql92",
+      "type": "judge",
+      "difficulty": 3,
+      "q": "SQL92 按消息用户属性过滤，Broker 几乎必须读到属性才能求值，吞吐一般明显低于 Tag hash 跳过。",
+      "options": ["正确", "错误"],
+      "answer": [0],
+      "hint": "属性不在 ConsumeQueue 的 20 字节里。多维度/范围条件才用 SQL92，不要当默认过滤。"
+    },
+    {
+      "id": "rmq-route-008",
+      "noteId": "rocketmq/intermediate/core/02-nameserver-route",
+      "type": "single",
+      "difficulty": 4,
+      "q": "Broker 进程被杀掉后，生产者仍可能往它发一段时间，原因是？",
+      "options": [
+        "NameServer 用 Raft 提交摘除，提交前路由不变",
+        "NameServer 约 120s 无心跳才从路由摘除，客户端还有默认 30s 的本地路由缓存，失败后再刷新",
+        "Slave 会立刻以相同地址冒充 Master",
+        "Tag 过滤层会把发送重定向到还活着的 Broker"
+      ],
+      "answer": [1],
+      "hint": "这是 AP 的具体代价：稍旧路由 + 发送失败重试。NameServer 节点间不同步，Broker 必须向每一台心跳。"
+    },
+    {
+      "id": "rmq-heartbeat-009",
+      "noteId": "rocketmq/intermediate/core/02-nameserver-route",
+      "type": "multiple",
+      "difficulty": 3,
+      "q": "关于 NameServer 路由，正确的有？（多选）",
+      "options": [
+        "写默认打 brokerId=0 的 Master 队列；4.x 未自动切主时，Topic 队列全在挂掉的 Master 上则写停",
+        "NameServer 全挂时，已有客户端可靠本地缓存继续收发，新客户端/新 Topic 发现不了路由",
+        "VIP 通道通常是 Broker 普通端口减 2，连错端口会表现为偶发超时而路由看起来正常",
+        "NameServer 参与每条消息的转发，否则无法负载均衡"
+      ],
+      "answer": [0, 1, 2],
+      "hint": "NameServer 不参与消息流转，只提供路由；收发直连 Broker。"
     }
   ]
 }

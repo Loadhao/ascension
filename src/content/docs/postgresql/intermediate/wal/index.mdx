@@ -1,0 +1,13 @@
+---
+title: WAL 与持久化
+description: 物理 WAL、full_page_writes、checkpoint 与 PITR——崩溃恢复和流复制共用的那条日志
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+差异地图说「PG 复制走物理 WAL」。调优篇把 checkpoint 当写放大旋钮。
+本分类讲 WAL **本身**：为什么必须先写日志、整页写入防什么、归档
+如何做到时间点恢复。流复制的中间件形态见高可用篇。点击右侧圆点
+可标记学习状态（未学 → 学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="postgresql/intermediate/wal" />
