@@ -1207,6 +1207,7 @@ export default defineConfig({
                         { label: 'Kafka 架构与存储模型', link: '/kafka/intermediate/core/01-kafka-architecture/' },
                         { label: '副本与 ISR 机制', link: '/kafka/intermediate/core/02-replica-isr/' },
                         { label: '不丢消息与幂等消费', link: '/kafka/intermediate/core/03-reliability-idempotent/' },
+                        { label: 'Kafka 高吞吐之谜：从顺序写到零拷贝', link: '/kafka/intermediate/core/04-high-throughput/' },
                       ],
                     },
                   ],
