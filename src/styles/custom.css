@@ -2378,3 +2378,91 @@ html.mmd-viewer-open {
     width: 100%;
   }
 }
+
+/* ===== 阅读历史（src/lib/history.ts）：笔记页续读提示/累计数据 + 仪表盘最近阅读 ===== */
+
+/* 底部标记条允许换行，阅读数据靠右，窄屏时落到下一行 */
+.learn-page-mark {
+  flex-wrap: wrap;
+  row-gap: 6px;
+}
+
+.learn-read-meta {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+}
+
+.learn-read-resume {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  color: var(--sl-color-gray-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.learn-read-resume:hover {
+  color: var(--sl-color-gray-1);
+}
+
+.learn-recent {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.learn-recent li + li {
+  border-top: 1px solid var(--sl-color-gray-5);
+}
+
+.learn-recent-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 2px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.learn-recent-title {
+  color: var(--sl-color-white);
+  font-weight: 500;
+  font-size: 14.5px;
+}
+
+.learn-recent-link:hover .learn-recent-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.learn-recent-meta {
+  flex: none;
+  color: var(--sl-color-gray-3);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+@media (max-width: 50em) {
+  .learn-recent-link {
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .learn-read-meta {
+    margin-left: 0;
+  }
+}
+
+@media print {
+  .learn-read-meta {
+    display: none !important;
+  }
+}
+

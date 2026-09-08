@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import type { NavSiteData } from '../../lib/notes';
 import { getLastVisit, withBase, type LastVisit } from '../../lib/learn';
+import {
+  formatDuration,
+  formatWhen,
+  getReadHistory,
+  type ReadEntry,
+} from '../../lib/history';
 import { useStatusSnapshot } from './LearnDot';
 
 interface FlatNote {
@@ -38,8 +44,10 @@ function formatDate(ts: number): string {
 export default function Dashboard({ data }: { data: NavSiteData }) {
   const snapshot = useStatusSnapshot();
   const [lastVisit, setLastVisit] = useState<LastVisit | null>(null);
+  const [history, setHistory] = useState<Record<string, ReadEntry>>({});
   useEffect(() => {
     setLastVisit(getLastVisit());
+    setHistory(getReadHistory());
   }, []);
 
   const flat = flatten(data);
@@ -82,6 +90,13 @@ export default function Dashboard({ data }: { data: NavSiteData }) {
 
   const lastNote = lastVisit ? flat.find((note) => note.id === lastVisit.id) : undefined;
   const heroNote = lastNote ?? recommended;
+
+  // 最近阅读：按阅读时间倒序取前 5；置顶大卡已是最近一篇，排除避免重复
+  const recent = Object.entries(history)
+    .sort((a, b) => b[1].ts - a[1].ts)
+    .map(([id]) => flat.find((note) => note.id === id))
+    .filter((note): note is FlatNote => note !== undefined && note.id !== heroNote?.id)
+    .slice(0, 5);
 
   const statOf = (note: FlatNote) =>
     directionStats.find((s) => s.direction.title === note.directionTitle);
@@ -130,7 +145,33 @@ export default function Dashboard({ data }: { data: NavSiteData }) {
         <div className="learn-empty">知识点整理中，先逛逛各方向的学习路线吧。</div>
       )}
 
-      {/* ② 下一步推荐 */}
+      {/* ② 最近阅读 */}
+      {recent.length > 0 && (
+        <>
+          <h2>最近阅读</h2>
+          <ul className="learn-recent">
+            {recent.map((note) => {
+              const entry = history[note.id]!;
+              return (
+                <li key={note.id}>
+                  <a className="learn-recent-link" href={withBase(note.href)}>
+                    <span className="learn-recent-title">
+                      {note.directionTitle} · {note.title}
+                    </span>
+                    <span className="learn-recent-meta">
+                      {formatWhen(entry.ts)}
+                      {entry.count > 1 ? ` · ${entry.count} 次` : ''}
+                      {entry.seconds >= 60 ? ` · 累计 ${formatDuration(entry.seconds)}` : ''}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+
+      {/* ③ 下一步推荐 */}
       <h2>下一步推荐</h2>
       {recommended ? (
         <div className="learn-next">

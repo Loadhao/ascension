@@ -5,6 +5,7 @@
  */
 import DefaultFooter from '@astrojs/starlight/components/Footer.astro';
 import ProgressMark from '../learn/ProgressMark';
+import { HISTORY_KEY, RESTORE_MIN_RATIO } from '../../lib/history';
 
 const entry = Astro.locals.starlightRoute?.entry as
   | { id: string; data: { level?: string } }
@@ -12,5 +13,30 @@ const entry = Astro.locals.starlightRoute?.entry as
 const noteId = entry?.data?.level !== undefined ? entry.id : null;
 ---
 
+{noteId && (
+  <script is:inline define:vars={{ noteId, historyKey: HISTORY_KEY, minRatio: RESTORE_MIN_RATIO }}>
+    // 续读：文档解析完成即恢复上次滚动位置（先于岛屿水合，避免 idle 水合后才跳动），
+    // 并在 html 上打标记，供 ProgressMark 水合后展示「回到顶部」出口。
+    // 存储结构见 src/lib/history.ts（ascension-read-history-v1）。
+    try {
+      var rec = JSON.parse(localStorage.getItem(historyKey) || '{}')[noteId];
+      var ratio = typeof rec?.scroll === 'number' ? rec.scroll : 0;
+      if (ratio >= minRatio && !location.hash) {
+        var restore = function () {
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          if (max > 0) {
+            window.scrollTo(0, ratio * max);
+            document.documentElement.dataset.readRestored = String(Math.round(ratio * 100));
+          }
+        };
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', restore, { once: true });
+        } else {
+          restore();
+        }
+      }
+    } catch (e) {}
+  </script>
+)}
 {noteId && <ProgressMark client:idle noteId={noteId} />}
 <DefaultFooter />
