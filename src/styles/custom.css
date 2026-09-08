@@ -2192,6 +2192,10 @@ html.mmd-viewer-open {
   border-color: var(--sl-color-gray-3);
 }
 
+.quiz-setup .quiz-dir-list > li > .quiz-dir-row {
+  margin: 0;
+}
+
 .quiz-dir-row:has(input:checked) {
   border-color: var(--sl-color-gray-3);
   background: color-mix(in srgb, var(--sl-color-white) 6%, var(--sl-color-bg));
