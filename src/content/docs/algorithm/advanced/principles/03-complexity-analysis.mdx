@@ -23,6 +23,16 @@ core: true
 
 **经验法则（白板/竞赛通用）**：1 秒 ≈ 10⁸ 次简单操作。拿到题先看 n 的范围，反推可行复杂度：
 
+```mermaid
+flowchart TB
+    N["看题目给的 n 的范围"] --> R1["n ≤ 20<br/>O(2ⁿ) / O(n!)<br/>回溯全搜 · 状压枚举"]
+    N --> R2["n ≤ 500<br/>O(n³)<br/>区间 DP"]
+    N --> R3["n ≤ 5000<br/>O(n²)<br/>二维 DP · 枚举数对"]
+    N --> R4["n ≤ 10⁵ ~ 10⁶<br/>O(n log n)<br/>排序 · 堆 · 分治"]:::hl
+    N --> R5["n ≥ 10⁷<br/>O(n) / O(log n)<br/>双指针 · 前缀和 · 二分"]
+    classDef hl stroke-width:1.5px
+```
+
 | n 的规模 | 可行复杂度 | 对应套路 |
 | --- | --- | --- |
 | ≤ 20 | O(2ⁿ) / O(n!) | 回溯全搜、状压枚举 |
@@ -52,7 +62,16 @@ core: true
 | T(n) = T(n-1) + O(n) | O(n²) | 快排最坏、插入排序最坏 |
 | T(n) = 2T(n-1) + O(1) | O(2ⁿ) | 暴力递归爬楼梯 |
 
-（完整版是主定理 Master Theorem，面试记住上表四个形态即可。）
+（完整版是主定理 Master Theorem，面试记住下表四个形态即可。）
+
+```mermaid
+flowchart LR
+    T["写出递推式"] --> A["2T(n/2) + O(n)<br/>归并 · 快排平均<br/>= O(n log n)"]
+    T --> B["T(n/2) + O(1)<br/>二分查找<br/>= O(log n)"]
+    T --> C["T(n-1) + O(n)<br/>快排最坏 · 插入最坏<br/>= O(n²)"]:::hl
+    T --> D["2T(n-1) + O(1)<br/>暴力递归爬楼梯<br/>= O(2ⁿ)"]
+    classDef hl stroke-width:1.5px
+```
 
 ## 三、空间复杂度怎么数
 
