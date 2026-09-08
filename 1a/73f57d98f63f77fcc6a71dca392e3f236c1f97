@@ -1,0 +1,36 @@
+astro.config.mjs
+  h_9324126a55eff3 827,862-879,892,901
+src/content/docs/distributed/advanced/availability/02-split-brain.md
+  h_9324126a55eff3 1-110
+src/content/docs/distributed/advanced/consistency/02-cache-consistency.md
+  h_9324126a55eff3 1-118
+src/content/docs/distributed/basic/theory/03-cluster-vs-distributed.md
+  h_9324126a55eff3 1-110
+src/content/docs/distributed/index.mdx
+  h_9324126a55eff3 15-20
+src/content/docs/distributed/intermediate/cluster/01-load-balancing.md
+  h_9324126a55eff3 1-120
+src/content/docs/distributed/intermediate/cluster/02-session-sharing.md
+  h_9324126a55eff3 1-110
+src/content/docs/distributed/intermediate/cluster/index.mdx
+  h_9324126a55eff3 1-14
+src/content/docs/distributed/intermediate/coordination/01-distributed-lock-compare.md
+  h_9324126a55eff3 1-153
+src/content/docs/distributed/intermediate/coordination/02-idempotency.md
+  h_9324126a55eff3 1-138
+src/content/docs/distributed/intermediate/coordination/index.mdx
+  h_9324126a55eff3 1-14
+src/data/graphs/distributed.json
+  h_9324126a55eff3 6-10,17,19,28-29,31-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "1a73f57d98f63f77fcc6a71dca392e3f236c1f97",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
