@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1225
+src/content/docs/kafka/intermediate/core/05-rebalance.md
+  h_9324126a55eff3 1-89
+src/data/graphs/kafka.json
+  h_9324126a55eff3 8-9,18-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "343d270749b462246089fc71cc785a5e300a08bf",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
