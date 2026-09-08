@@ -1,0 +1,32 @@
+src/content/docs/distributed/index.mdx
+  h_9324126a55eff3 18-19
+src/content/docs/distributed/intermediate/performance/03-capacity-planning.md
+  h_9324126a55eff3 1-104
+src/content/docs/distributed/intermediate/traffic/02-timeout-retry.md
+  h_9324126a55eff3 1-107
+src/content/docs/seata/basic/core/02-seata-deep-dive.md
+  h_9324126a55eff3 1-92
+src/content/docs/seata/index.mdx
+  h_9324126a55eff3 15-18
+src/content/docs/zookeeper/basic/core/02-zk-deep-dive.md
+  h_9324126a55eff3 1-96
+src/content/docs/zookeeper/index.mdx
+  h_9324126a55eff3 15-18
+src/data/graphs/distributed.json
+  h_9324126a55eff3 13,18,60-63
+src/data/graphs/seata.json
+  h_9324126a55eff3 4-5,8-9
+src/data/graphs/zookeeper.json
+  h_9324126a55eff3 4-5,8-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "3c66b57e30f63465f7635adb8daee6de1ea9f8ae",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
