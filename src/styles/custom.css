@@ -2466,6 +2466,12 @@ html.mmd-viewer-open {
   }
 }
 
+/* —— 右栏内容与页头的呼吸间距：目录/本组笔记/刷题导航统一，滚动到底也留白 —— */
+.right-sidebar-panel :is(.quiz-rail, .cat-nav, starlight-toc nav) {
+  padding-top: 2rem;
+  padding-bottom: 2.5rem;
+}
+
 /* —— 右侧栏刷题导航器（TableOfContents 覆盖，quiz 页专用） —— */
 .quiz-rail {
   display: flex;
