@@ -591,6 +591,86 @@
         1
       ],
       "hint": "大 gap 交换时，相等元素可能在不同的组里被交叉换位、越过相等元素，因此希尔排序不稳定——这是它与插入排序的性质差异之一。"
+    },
+    {
+      "id": "algo-invert-035",
+      "noteId": "algorithm/intermediate/tree/03-invert-tree",
+      "type": "single",
+      "q": "翻转二叉树把交换放在中序位置为什么会出错？",
+      "options": [
+        "左子树翻转后原来的「左」变成「右」，再递归 root.right 会把已翻转的左子树再翻一遍",
+        "中序会漏掉根节点，左右交换不完整",
+        "交换是不对称操作，只有后序合法",
+        "中序栈深度不够，与指针语义无关"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "前序（先交换再递归）和后序（先递归再交换）都能正确，因为交换对称。这题考的是遍历框架换动作，不是巧妙算法。"
+    },
+    {
+      "id": "algo-tradeoff-036",
+      "noteId": "algorithm/advanced/principles/01-time-space-tradeoff",
+      "type": "single",
+      "q": "LCS 把二维 dp 滚成一行，这笔「时间换空间」真正牺牲的是？",
+      "options": [
+        "可回溯性——要打印 LCS 本体就必须保留全表；时间复杂度往往不变",
+        "时间从 O(mn) 变成 O(n³)",
+        "正确性：滚动后结果会错",
+        "稳定性：滚动数组是不稳定算法"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "决策先问查询是否重复（空间换时间），再问内存是否硬约束，再问昂贵操作是否稀有（均摊）。"
+    },
+    {
+      "id": "algo-qsort-037",
+      "noteId": "algorithm/basic/sorting/02-quick-sort",
+      "type": "single",
+      "q": "快速排序最坏 O(n²) 的典型触发与工业对策？",
+      "options": [
+        "已有序数组 + 取末尾做基准，每次只缩短 1；对策：随机基准/三数取中/小区间改插入/过深转堆排",
+        "快排本身不稳定所以最坏总是 O(n²)，无解",
+        "最坏来自辅助数组不够，加大 O(n) 空间即可",
+        "与归并一样最坏也是 O(n log n)"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "快排原地不稳定；功夫花在分区（先做事后递归），归并功夫花在合并。内层循环缓存友好是它实际最快的原因。"
+    },
+    {
+      "id": "algo-subset-038",
+      "noteId": "algorithm/intermediate/backtracking/01-subsets",
+      "type": "single",
+      "q": "子集回溯收集答案时写成 `res.add(path)` 而不拷贝，会出现什么？",
+      "options": [
+        "收集的全是同一个 ArrayList 引用，回溯清空后结果全空或全是终态",
+        "Java 会自动深拷贝 List，没有问题",
+        "只需在结束时拷贝一次，中间节点不必",
+        "start 参数已经保证不会回头，引用共享无影响"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "子集每个节点都是答案，必须 new ArrayList<>(path)。组合无序靠 start 只向后选；排列靠 used 数组。"
+    },
+    {
+      "id": "algo-climb-039",
+      "noteId": "algorithm/intermediate/dp/01-climbing-stairs",
+      "type": "single",
+      "q": "爬楼梯 dp 的边界 dp[0] 为什么是 1 不是 0？",
+      "options": [
+        "「站在地面什么都不做」算一种方案，这个 off-by-one 会带崩整个斐波那契数列",
+        "dp[0] 必须是 0，因为还没开始爬",
+        "滚动变量版不需要边界，任意初始化都行",
+        "dp[0]=1 只对「每次 1/2/3 阶」变体成立"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "DP 四步：定义状态 → 转移方程 → 初始化 → 遍历顺序。走法数只与阶数有关（无后效性）；滚动变量可把空间压到 O(1)。"
     }
   ]
 }

@@ -33,6 +33,14 @@ Docker、Nginx、Git 等全站方向。
 | [BIO/NIO/AIO](/java/basic/io/01-io-model/) | 阻塞流 → 多路复用（selector 一个线程管千连接）→ 异步回调；Netty 是 NIO 的事实标准 |
 | [零拷贝](/java/basic/io/02-zero-copy/) | mmap/sendfile 砍掉内核态与用户态之间的拷贝，Kafka 吞吐的底层来源 |
 | [TCP 粘包拆包](/java/basic/io/03-tcp-sticky-packets/) | TCP 是字节流没有消息边界，靠定长/分隔符/长度域解码切分（Netty 解码器） |
+| [位运算与补码](/java/basic/syntax/07-bit-operations/) | 补码让零唯一、符号位免特判、减法变加法；`>>` 补符号位，`>>>` 补 0 会把负数变成正大数 |
+| [serialVersionUID](/java/basic/syntax/08-serialization/) | JDK 序列化的版本关卡：不一致即 InvalidClassException；不声明会随类结构自动哈希漂移 |
+| [深浅拷贝与 Integer 缓存](/java/basic/syntax/09-object-copy/) | clone 默认浅拷贝（引用只抄地址）；深拷贝首选拷贝构造；Integer -128~127 走缓存，包装类型永远 equals |
+| [Comparable vs Comparator](/java/basic/syntax/11-common-interfaces/) | Comparable 是类内自然顺序，Comparator 是类外规则；TreeSet 去重只认 compareTo |
+| [JNI 与 JNDI](/java/basic/syntax/12-jni-jndi/) | JNI 调本地库、JNDI 按名查找；lookup 不可信输入会变成远程类加载 RCE（Log4Shell） |
+| [Lombok 与 APT](/java/basic/syntax/13-lombok-apt/) | SOURCE 注解在编译期改语法树；@Builder 吞无参构造，实体上 @Data 的 hashCode 是隐患 |
+| [Web 容器是什么](/java/basic/tomcat/01-web-container/) | HTTP 服务器 + Servlet 容器；Servlet 无 main，靠容器回调；SpringMVC 本身就是一个 Servlet |
+| [Jetty 与 Tomcat 线程池](/java/basic/tomcat/02-jetty-architecture/) | Jetty 全局共享一个线程池更轻；Tomcat 每 Connector 独立线程池，隔离性更好 |
 
 ## Java 并发
 
@@ -95,6 +103,8 @@ Docker、Nginx、Git 等全站方向。
 | [@ExceptionHandler 的匹配顺序](/java/intermediate/spring-mvc/02-exception-advice/) | Controller 本地就近优先 → 全局 Advice 按 @Order 遍历，异常按继承链由近及远取最精确；都未命中才落 /error |
 | [@Valid 与 @Validated 怎么分工](/java/intermediate/spring-mvc/03-validation/) | @Valid（规范）管嵌套级联，@Validated（Spring）管分组与类上方法级校验——方法级校验靠 AOP 代理，自调用失效 |
 | [Stream 消费者重启后重复消费旧消息](/java/advanced/springcloud/07-stream/) | Consumer 没配稳定 group，每次重启被当成新的随机 group 从头消费；同 group 负载分担、不同 group 各拿一份 |
+| [Spring 四家怎么叠](/java/intermediate/spring/00-family-map/) | Framework→MVC→Boot→Cloud 单向叠加；Boot 3.x = JDK 17 + jakarta，Cloud 用年份列车对齐大版本 |
+| [SLF4J 门面与 MDC](/java/intermediate/log/01-logging-system/) | 门面与实现分离；MDC 是 ThreadLocal 的日志版，入口 put、finally remove，异步要 TaskDecorator 透传 |
 
 ## 设计模式
 
@@ -105,6 +115,23 @@ Docker、Nginx、Git 等全站方向。
 | [策略模式和状态模式只差在哪](/java/intermediate/design-pattern/09-strategy/) | 谁决定切换——策略由调用方/外部条件选定后不自己换，状态由对象按迁移规则自己流转 |
 | [@EventListener 默认同步还是异步](/java/intermediate/design-pattern/11-observer/) | 默认同步——发布线程执行，主链路耗时等于所有监听器之和；跨事务用 @TransactionalEventListener(AFTER_COMMIT) |
 | [Bean 生命周期与 AQS 共同体现的模式](/java/intermediate/design-pattern/15-patterns-in-frameworks/) | 模板方法——父类定死骨架、钩子（BeanPostProcessor/tryAcquire）开放扩展，「骨架稳定+钩子开放」是优秀框架共性 |
+| [工厂三件套怎么选](/java/intermediate/design-pattern/03-factory/) | 按加产品成本：简单工厂改方法、工厂方法加工厂、抽象工厂换产品族；Spring 容器即工厂 |
+| [建造者 vs 原型](/java/intermediate/design-pattern/04-creational/) | 建造者治参数爆炸（build 统一校验）；原型治构造昂贵（浅拷贝只抄引用，工程优先拷贝构造） |
+| [适配器换的是什么](/java/intermediate/design-pattern/05-adapter/) | 换接口不换实现；前提是老代码改不了，写法选组合（对象适配器） |
+| [装饰器与代理差在哪](/java/intermediate/design-pattern/07-decorator/) | 结构同为同接口转发；装饰器穿衣服增强能力，代理把门控制访问 |
+| [外观/组合/桥接/享元](/java/intermediate/design-pattern/08-structural/) | 外观简化、组合组树、桥接拆双维度（JDBC）、享元拆内外状态共享（Integer 缓存） |
+| [模板方法的骨架](/java/intermediate/design-pattern/10-template-method/) | 骨架 final、钩子 protected；AQS 是继承填空，JdbcTemplate 是回调填空 |
+| [责任链 vs 观察者](/java/intermediate/design-pattern/12-chain-of-responsibility/) | 责任链接力（节点自决拦截），观察者广播；Gateway/OkHttp 是递归进、逆序出 |
+| [状态/迭代器/命令/备忘录](/java/intermediate/design-pattern/13-behavioral/) | 状态自己流转；fail-fast 靠 modCount；命令把请求对象化；备忘录是封装好的快照 |
+| [访问者的双分派](/java/intermediate/design-pattern/14-visitor-mediator/) | 访问者赌结构稳、操作变；中介者把 N² 交互收成星状；解释器落地用解析库 |
+
+## Java 测试
+
+| 问题 | 一句话答案 |
+|---|---|
+| [JUnit 5 生命周期](/java/intermediate/test/01-junit5/) | @BeforeAll 全类一次须 static（或 PER_CLASS）；默认每方法新实例；异常用 assertThrows 拿对象再断言 |
+| [mock 与 spy](/java/intermediate/test/02-mockito/) | mock 全假隔离依赖，spy 半真；匹配器全或无；spy 上用 doReturn 避免 when 先真实执行 |
+| [测试成本阶梯](/java/intermediate/test/03-springboot-test/) | 纯单测占大头，@WebMvcTest/@DataJpaTest 切片接线，@SpringBootTest 只守关键路径 |
 
 ## Java 版本与新特性
 
@@ -334,6 +361,7 @@ Docker、Nginx、Git 等全站方向。
 | [跳跃游戏](/algorithm/advanced/greedy/01-jump-game/) | 维护最远可达判可行性；最少步数把「第 k 步能到的下标」看成一层，省掉 BFS 队列 |
 | [四大范式怎么选](/algorithm/advanced/principles/02-paradigm-landscape/) | 分治/贪心/DP/回溯都是聪明地穷举：子问题独立→分治，重叠→DP，要全部解→回溯 |
 | [大 O 量的是什么](/algorithm/advanced/principles/03-complexity-analysis/) | 度量操作次数随 n 的增长趋势不是秒数；n 范围反推可行复杂度（1 秒 ≈ 10⁸ 次） |
+| [翻转二叉树中序为什么不行](/algorithm/intermediate/tree/03-invert-tree/) | 前序/后序都能翻（交换对称）；中序会把已翻转的左子树再翻一遍 |
 
 ## Python
 
@@ -369,6 +397,13 @@ Docker、Nginx、Git 等全站方向。
 | [库代码里该不该调 basicConfig](/python/intermediate/data/03-logging/) | 不该——库只 getLogger(__name__) 输出不配置，配置权归应用入口 |
 | [Python 为什么禁裸 except](/python/basic/syntax/04-exceptions/) | 连 KeyboardInterrupt 和系统退出信号一起吞；最低 except Exception，捕获从窄到宽排队 |
 | [线上 Python 进程偶尔卡死怎么定位](/python/advanced/internals/04-profiling/) | py-spy dump 打印所有线程栈——采样不侵入，十秒定位卡在哪行 |
+| [for-else 何时走](/python/basic/syntax/02-control-flow/) | else 只在循环没被 break、正常耗尽时执行——专门处理「没找到」 |
+| [str 与 bytes](/python/basic/syntax/03-strings/) | str 是 Unicode 码点、bytes 是字节；乱码多因编解码不一致；循环拼接用 join |
+| [json dumps 中文与 datetime](/python/intermediate/data/02-json-csv/) | ensure_ascii=False 才出真中文；datetime 要 default 兜底；Excel CSV 用 utf-8-sig |
+| [requests 必须写 timeout](/python/intermediate/libs/01-requests-httpx/) | 默认无限等；循环走 Session 复用连接；异步代码禁用同步 requests |
+| [pathlib 与 with](/python/intermediate/stdlib/03-pathlib-io/) | 路径用 `/` 拼接；文本 IO 必带 encoding；with 把清理变成语言结构 |
+| [naive vs aware](/python/intermediate/stdlib/05-datetime/) | now() 返回 naive 本地时间；存储计算一律 UTC aware；timestamp() 是秒不是毫秒 |
+| [wheel 不打包依赖](/python/advanced/eng/04-packaging/) | wheel 只描述依赖，安装环境按 lockfile 解决；Docker 先拷 lock 再 `--frozen` |
 
 ## AI 与大模型
 
@@ -400,6 +435,9 @@ Docker、Nginx、Git 等全站方向。
 | [429/529 临时故障的恢复套路](/ai/intermediate/agent/07-error-recovery/) | 指数退避 + 抖动（500×2^n 封顶 32s）最多 10 次，Retry-After 优先，连续 3 次 529 切备用模型 |
 | [durable 的 cron 任务进程关了还会跑吗](/ai/advanced/agent/04-cron-scheduler/) | 不会——durable 只是任务定义跨重启保留，调度器必须在 Agent 进程内跑；进程外用系统 crontab/systemd timer |
 | [多 Agent 协议消息靠什么配对](/ai/advanced/agent/06-team-protocols/) | request_id 贯穿全链路，match_response 做类型匹配 + 已解决幂等两层校验 |
+| [并行 Agent 为什么要 worktree](/ai/advanced/agent/08-worktree-isolation/) | 对话隔离不够，还要隔离文件系统；绑定不改任务状态，有未提交改动默认拒绝删除 |
+| [综合 Harness 改了循环吗](/ai/advanced/agent/09-comprehensive-agent/) | 没改——机制很多循环一个：LLM 前注入、工具前权限、工具后回写 |
+| [OpenClaw 三层](/ai/advanced/agent/11-openclaw/) | Channels + 唯一 Gateway 收口 + Workspace 隔离；LLM 不直连任何聊天平台 |
 
 ## 分布式与集群
 
