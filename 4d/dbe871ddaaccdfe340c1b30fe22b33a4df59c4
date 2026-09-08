@@ -1,0 +1,32 @@
+AGENTS.md
+  h_9324126a55eff3 26-27
+src/components/quiz/Quiz.tsx
+  h_9324126a55eff3 1-603
+src/components/quiz/QuizIsland.astro
+  h_9324126a55eff3 1-24
+src/content/docs/guide/interview-cheatsheet.md
+  h_9324126a55eff3 10-14
+src/content/docs/guide/quiz.mdx
+  h_9324126a55eff3 1-8
+src/data/quiz/java.json
+  h_9324126a55eff3 1-129
+src/data/quiz/kafka.json
+  h_9324126a55eff3 1-78
+src/data/quiz/middleware.json
+  h_9324126a55eff3 1-51
+src/lib/quiz-store.ts
+  h_9324126a55eff3 1-98
+src/styles/custom.css
+  h_9324126a55eff3 1933-2380
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "4ddbe871ddaaccdfe340c1b30fe22b33a4df59c4",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
