@@ -2,6 +2,7 @@
   "nodes": [
     { "id": "root", "label": "Kafka", "group": "核心" },
     { "id": "whymq", "label": "MQ 三问", "href": "/kafka/basic/core/01-why-mq/", "group": "基础" },
+    { "id": "offset", "label": "offset 语义", "href": "/kafka/basic/core/02-offset/", "group": "基础" },
     { "id": "arch", "label": "架构与存储", "href": "/kafka/intermediate/core/01-kafka-architecture/", "group": "核心机制" },
     { "id": "isr", "label": "副本与 ISR", "href": "/kafka/intermediate/core/02-replica-isr/", "group": "核心机制" },
     { "id": "reliability", "label": "可靠性与幂等", "href": "/kafka/intermediate/core/03-reliability-idempotent/", "group": "核心机制" },
@@ -10,6 +11,8 @@
   ],
   "edges": [
     { "source": "root", "target": "whymq" },
+    { "source": "whymq", "target": "offset", "label": "消费侧根基" },
+    { "source": "offset", "target": "reliability", "label": "至少一次的源头" },
     { "source": "whymq", "target": "arch", "label": "机制深化" },
     { "source": "root", "target": "arch" },
     { "source": "root", "target": "throughput" },
