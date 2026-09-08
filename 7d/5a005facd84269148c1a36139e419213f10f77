@@ -1,0 +1,50 @@
+astro.config.mjs
+  h_9324126a55eff3 231-273,1398-1406
+src/content/docs/algorithm/advanced/principles/01-time-space-tradeoff.mdx
+  h_9324126a55eff3 1-64
+src/content/docs/algorithm/advanced/principles/02-paradigm-landscape.mdx
+  h_9324126a55eff3 1-61
+src/content/docs/algorithm/advanced/principles/index.mdx
+  h_9324126a55eff3 1-14
+src/content/docs/network/basic/foundation/01-osi-tcpip.md
+  h_9324126a55eff3 1-73
+src/content/docs/network/basic/foundation/02-dns.md
+  h_9324126a55eff3 1-74
+src/content/docs/network/basic/foundation/03-from-url-to-page.md
+  h_9324126a55eff3 1-66
+src/content/docs/network/basic/foundation/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/network/basic/http/01-http-basics.md
+  h_9324126a55eff3 1-83
+src/content/docs/network/basic/http/02-https-tls.md
+  h_9324126a55eff3 1-80
+src/content/docs/network/basic/http/03-http-evolution.md
+  h_9324126a55eff3 1-76
+src/content/docs/network/basic/http/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/network/basic/tcp/01-three-way-handshake.md
+  h_9324126a55eff3 1-86
+src/content/docs/network/basic/tcp/02-reliable-transfer.md
+  h_9324126a55eff3 1-74
+src/content/docs/network/basic/tcp/03-tcp-vs-udp.md
+  h_9324126a55eff3 1-59
+src/content/docs/network/basic/tcp/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/network/index.mdx
+  h_9324126a55eff3 1-25
+src/data/graphs/network.json
+  h_9324126a55eff3 1-29
+src/lib/notes.ts
+  h_9324126a55eff3 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "7d5a005facd84269148c1a36139e419213f10f77",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
