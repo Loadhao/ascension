@@ -2629,3 +2629,59 @@ html.mmd-viewer-open {
   font-size: 11px;
 }
 
+/* —— 沉浸模式：全屏作答覆盖层（盖过站点框架，Esc 收起） —— */
+.quiz-immersive {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  background: var(--sl-color-bg);
+}
+
+.quiz-immersive-bar {
+  flex: none;
+  height: 3px;
+  background: var(--sl-color-gray-5);
+}
+
+.quiz-immersive-bar-fill {
+  height: 100%;
+  background: var(--sl-color-white);
+  transition: width 0.2s ease;
+}
+
+.quiz-immersive-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: min(680px, 100%);
+  margin: 0 auto;
+  padding: clamp(20px, 4vh, 40px) clamp(16px, 5vw, 32px) 48px;
+  overflow-y: auto;
+}
+
+.quiz-immersive-body .quiz-question {
+  font-size: 20px;
+}
+
+.quiz-immersive-body .quiz-opt {
+  padding: 14px 16px;
+  font-size: 16px;
+}
+
+.quiz-immersive-foot {
+  flex: none;
+  padding: 10px 16px calc(18px + env(safe-area-inset-bottom));
+  border-top: 1px solid color-mix(in srgb, var(--sl-color-gray-5) 45%, transparent);
+  color: var(--sl-color-gray-3);
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-immersive-bar-fill {
+    transition: none;
+  }
+}
+

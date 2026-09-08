@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { withBase } from '../../lib/learn';
 import type { NavDirection } from '../../lib/notes';
 import {
@@ -175,13 +176,18 @@ export default function Quiz({ directions, banks }: Props) {
     update({ ...quiz, scope: { ...quiz.scope, random: !quiz.scope.random } });
   }
 
+  function toggleImmersive(): void {
+    update({ ...quiz, scope: { ...quiz.scope, immersive: !quiz.scope.immersive } });
+  }
+
   // ===== 轮次 =====
-  function startQueueRound(kind: RoundKind, pool: QuizQuestion[], random: boolean): void {
+  function startQueueRound(kind: RoundKind, pool: QuizQuestion[], random: boolean, immersive: boolean): void {
     if (pool.length === 0) return;
     const round: RoundState = {
       kind,
       directionIds: kind === 'scope' ? [...scopeIds] : [],
       random,
+      immersive,
       queue: (random ? shuffled(pool) : pool).map((q) => q.id),
       index: 0,
       answers: {},
@@ -193,13 +199,20 @@ export default function Quiz({ directions, banks }: Props) {
   }
 
   function startScopeRound(resetDone: boolean): void {
+    const immersive = quiz.scope.immersive;
     const done = { ...quiz.done };
-    if (resetDone) for (const q of scopeQuestions) delete done[q.id];
-    const pool = scopeQuestions.filter((q) => done[q.id] === undefined);
+    // 沉浸模式 = 全量池，所选方向的所有题完整过一遍；普通模式只出未刷题
+    const pool = immersive
+      ? scopeQuestions
+      : scopeQuestions.filter((q) => {
+          if (resetDone) delete done[q.id];
+          return done[q.id] === undefined;
+        });
     const round: RoundState = {
       kind: 'scope',
       directionIds: [...scopeIds],
       random: quiz.scope.random,
+      immersive,
       queue: (quiz.scope.random ? shuffled(pool) : pool).map((q) => q.id),
       index: 0,
       answers: {},
@@ -283,6 +296,48 @@ export default function Quiz({ directions, banks }: Props) {
     return () => window.removeEventListener('ascension:quiz-goto', handler);
   }, [quizRef]);
 
+  // 沉浸模式键盘流：数字键选择、Enter 确认/下一题、← 回看、Esc 收起（每次渲染重挂，闭包常新）
+  useEffect(() => {
+    if (view !== 'quiz' || summary !== null || quiz.round?.immersive !== true) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const round = quiz.round!;
+      const q = questionById.get(round.queue[round.index]!);
+      if (!q) return;
+      const answered = round.answers[q.id] !== undefined;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        update({ ...quiz, round: { ...round, immersive: false } });
+      } else if (e.key === 'ArrowLeft') {
+        if (round.index > 0) {
+          e.preventDefault();
+          go(-1);
+        }
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (answered) {
+          round.index + 1 >= round.queue.length ? finishRound() : go(1);
+        } else if (q.type === 'multiple' && picked.length > 0) {
+          submitAnswer(picked);
+        }
+      } else if (/^[1-9]$/.test(e.key) && !answered) {
+        const i = Number(e.key) - 1;
+        if (i < q.options.length) pickOption(i);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  });
+
+  // 沉浸模式锁定页面背景滚动
+  useEffect(() => {
+    const immersive = view === 'quiz' && summary === null && quiz.round?.immersive === true;
+    document.body.style.overflow = immersive ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  });
+
   function finishRound(): void {
     const round = quiz.round;
     if (!round) return;
@@ -341,6 +396,7 @@ export default function Quiz({ directions, banks }: Props) {
                       .map((id) => questionById.get(id))
                       .filter((q): q is QuizQuestion => q !== undefined),
                     false,
+                    false,
                   )
                 }
               >
@@ -356,6 +412,7 @@ export default function Quiz({ directions, banks }: Props) {
                   summary.queue
                     .map((id) => questionById.get(id))
                     .filter((q): q is QuizQuestion => q !== undefined),
+                  false,
                   false,
                 )
               }
@@ -385,10 +442,9 @@ export default function Quiz({ directions, banks }: Props) {
     const ok = answered?.correct === true;
     const isLast = round.index + 1 >= round.queue.length;
     const starred = quiz.starred[q.id] !== undefined;
-    const effectivePicked = answered ? answered.picked : picked;
 
-    return (
-      <div className="quiz-app">
+    const card = (
+      <>
         <div className="quiz-top">
           <span className="quiz-progress">
             {round.index + 1} / {round.queue.length}
@@ -485,8 +541,23 @@ export default function Quiz({ directions, banks }: Props) {
             </button>
           </div>
         )}
-      </div>
+      </>
     );
+    if (round.immersive) {
+      const progress = Math.round(((round.index + (answered ? 1 : 0)) / round.queue.length) * 100);
+      // Portal 挂到 body：跳出 main-pane 的 isolation 层叠上下文，才能真正盖住页头与侧栏
+      return createPortal(
+        <div className="quiz-immersive">
+          <div className="quiz-immersive-bar" aria-hidden="true">
+            <div className="quiz-immersive-bar-fill" style={{ width: `${progress}%` }} />
+          </div>
+          <div className="quiz-immersive-body">{card}</div>
+          <div className="quiz-immersive-foot">数字键选择 · Enter 确认 / 下一题 · ← 上一题 · Esc 收起沉浸</div>
+        </div>,
+        document.body,
+      );
+    }
+    return <div className="quiz-app">{card}</div>;
   }
 
   // ===== 选题页 =====
@@ -543,6 +614,10 @@ export default function Quiz({ directions, banks }: Props) {
             <input type="checkbox" checked={quiz.scope.random} onChange={toggleRandom} />
             随机不重复出题
           </label>
+          <label className="quiz-shuffle">
+            <input type="checkbox" checked={quiz.scope.immersive} onChange={toggleImmersive} />
+            沉浸模式
+          </label>
           <span className="quiz-setup-sum">
             已选 {scopeIds.size} 个方向 · 未刷 {scopeRemaining.length} / {scopeQuestions.length} 题
             {allScopeDone
@@ -557,7 +632,11 @@ export default function Quiz({ directions, banks }: Props) {
             disabled={scopeQuestions.length === 0}
             onClick={() => startScopeRound(allScopeDone)}
           >
-            {allScopeDone ? '重刷本范围' : '开始新一轮'}
+            {quiz.scope.immersive
+              ? `沉浸刷一遍 · ${scopeQuestions.length} 题`
+              : allScopeDone
+                ? '重刷本范围'
+                : '开始新一轮'}
           </button>
         </div>
       </div>
@@ -571,7 +650,7 @@ export default function Quiz({ directions, banks }: Props) {
             type="button"
             className="quiz-btn"
             disabled={wrongPool.length === 0}
-            onClick={() => startQueueRound('wrong', wrongPool, quiz.scope.random)}
+            onClick={() => startQueueRound('wrong', wrongPool, quiz.scope.random, quiz.scope.immersive)}
           >
             去刷错题
           </button>
@@ -593,7 +672,7 @@ export default function Quiz({ directions, banks }: Props) {
             type="button"
             className="quiz-btn"
             disabled={starredPool.length === 0}
-            onClick={() => startQueueRound('starred', starredPool, quiz.scope.random)}
+            onClick={() => startQueueRound('starred', starredPool, quiz.scope.random, quiz.scope.immersive)}
           >
             去刷收藏
           </button>

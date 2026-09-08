@@ -16,6 +16,8 @@ export interface RoundState {
   /** scope 轮的方向快照；wrong/starred 轮为空数组 */
   directionIds: string[];
   random: boolean;
+  /** 沉浸模式：全屏覆盖 + 键盘作答 */
+  immersive: boolean;
   /** 题目 id 的固定顺序（开局生成，恢复时沿用） */
   queue: string[];
   index: number;
@@ -37,6 +39,8 @@ export interface QuizScope {
   checked: string[] | null;
   /** true = 随机不重复出题；false = 按方向与笔记顺序 */
   random: boolean;
+  /** true = 沉浸模式：全屏覆盖 + 键盘作答 */
+  immersive: boolean;
 }
 
 export interface QuizPersist {
@@ -63,7 +67,7 @@ export function emptyQuizState(): QuizPersist {
     done: {},
     wrong: {},
     starred: {},
-    scope: { checked: null, random: true },
+    scope: { checked: null, random: true, immersive: false },
     round: null,
   };
 }
@@ -81,8 +85,11 @@ export function loadQuizState(): QuizPersist {
       scope: {
         checked: Array.isArray(parsed.scope?.checked) ? parsed.scope.checked : null,
         random: parsed.scope?.random !== false,
+        immersive: parsed.scope?.immersive === true,
       },
-      round: parsed.round ?? null,
+      round: parsed.round
+        ? { ...parsed.round, immersive: parsed.round.immersive === true }
+        : null,
     };
   } catch {
     return emptyQuizState();
