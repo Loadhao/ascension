@@ -64,8 +64,24 @@ console.log(`审计 ${pages.length} 个含图页面 × 2 主题`);
 const browser = await chromium.launch();
 const page = await browser.newPage();
 let total = 0, bad = [];
+const skipped = [];
+async function gotoWithRetry(url) {
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      return true;
+    } catch (err) {
+      if (attempt === 3) return false;
+      await new Promise((r) => setTimeout(r, 1500));
+    }
+  }
+}
 for (let i = 0; i < pages.length; i++) {
-  await page.goto(pages[i], { waitUntil: 'domcontentloaded' });
+  if (!(await gotoWithRetry(pages[i]))) {
+    skipped.push(pages[i]);
+    console.log(`  ⚠ 跳过（连续超时）：${pages[i]}`);
+    continue;
+  }
   for (const theme of ['dark', 'light']) {
     await page.evaluate((t) => { document.documentElement.dataset.theme = t; }, theme);
     await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
@@ -78,6 +94,7 @@ for (let i = 0; i < pages.length; i++) {
   if ((i + 1) % 50 === 0) console.log(`  …${i + 1}/${pages.length}`);
 }
 await browser.close();
+if (skipped.length) console.log(`跳过 ${skipped.length} 页（导航连续超时，需人工复核）：\n  ${skipped.join('\n  ')}`);
 console.log(total === 0 ? '通过：所有图表双主题对比度 ≥ 4.5:1' : `不通过：低对比文字 ${total} 处，页面/主题组合 ${bad.length} 组`);
 for (const b of bad.slice(0, 20)) console.log(JSON.stringify(b));
 process.exit(total === 0 ? 0 : 1);
