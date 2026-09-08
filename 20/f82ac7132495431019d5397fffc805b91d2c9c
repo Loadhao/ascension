@@ -1,0 +1,30 @@
+AGENTS.md
+  h_9324126a55eff3 30
+astro.config.mjs
+  h_9324126a55eff3 111-113
+src/components/quiz/Quiz.tsx
+  h_9324126a55eff3 8,270-285
+src/components/quiz/QuizNav.tsx
+  h_9324126a55eff3 1-84
+src/components/quiz/QuizNavIsland.astro
+  h_9324126a55eff3 1-16
+src/components/starlight/MobileTableOfContents.astro
+  h_9324126a55eff3 1-12
+src/components/starlight/TableOfContents.astro
+  h_9324126a55eff3 1-13
+src/lib/quiz-store.ts
+  h_9324126a55eff3 55,99-117
+src/styles/custom.css
+  h_9324126a55eff3 2469-2577
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "20f82ac7132495431019d5397fffc805b91d2c9c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
