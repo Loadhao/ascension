@@ -1,0 +1,32 @@
+astro.config.mjs
+  h_9324126a55eff3 414-431
+src/content/docs/java/basic/syntax/13-lombok-apt.md
+  h_9324126a55eff3 1-84
+src/content/docs/java/intermediate/log/01-logging-system.md
+  h_9324126a55eff3 1-126
+src/content/docs/java/intermediate/log/index.mdx
+  h_9324126a55eff3 1-12
+src/content/docs/java/intermediate/spring/12-annotations-map.md
+  h_9324126a55eff3 90
+src/content/docs/java/intermediate/test/01-junit5.md
+  h_9324126a55eff3 1-86
+src/content/docs/java/intermediate/test/02-mockito.md
+  h_9324126a55eff3 1-87
+src/content/docs/java/intermediate/test/03-springboot-test.md
+  h_9324126a55eff3 1-97
+src/content/docs/java/intermediate/test/index.mdx
+  h_9324126a55eff3 1-12
+src/data/graphs/java.json
+  h_9324126a55eff3 54-60,183-191
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "6419d010be6313fb0b717762bd80fd92dda5062e",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
