@@ -1234,6 +1234,20 @@ export default defineConfig({
               items: [
                 { label: '学习路线', link: '/rocketmq/' },
                 {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: 'RocketMQ 基础',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/rocketmq/basic/core/' },
+                        { label: 'RocketMQ 架构与消息模型', link: '/rocketmq/basic/core/01-rocketmq-architecture/' },
+                      ],
+                    },
+                  ],
+                },
+                {
                   label: '高级',
                   collapsed: true,
                   items: [
