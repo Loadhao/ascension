@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] kafka/intermediate/core/01-kafka-architecture — 第二题考「顺序写 + 批量压缩之外的存储模型（分区日志段/索引）」
-- [ ] redis/intermediate/usage/03-distributed-lock — 第二题考「Redisson 看门狗续期机制」
-- [ ] java/advanced/jvm/01-class-loading — 第二题考「(类加载器, 全限定名) 是类的唯一身份，不同加载器加载同一 class 互不相等」
 - [ ] mysql/basic/core/02-index-btree — 第二题考「索引失效清单：列上函数运算/隐式类型转换/前导 %/or 连无索引列」
 - [ ] network/basic/tcp/01-three-way-handshake — 第二题考「TIME_WAIT 在主动关闭方与 2MSL 的两个使命」
+- [ ] elasticsearch/basic/core/02-shard-replica — 第二题考「主分片数建索引时定死的原因：路由 hash(doc) % 主分片数，扩容要 reindex」
+- [ ] distributed/intermediate/case-studies/01-flash-sale — 第二题考「预扣不支付：下单消息带过期时间，超时关单 + 回补库存（延迟消息）」
+- [ ] mongodb/intermediate/replication/01-replication-set — 第二题考「oplog 是固定大小环形缓冲，Secondary 落后超窗口被套圈只能重新 initial-sync」
 
 ### b 类：旧题返修
 
@@ -30,6 +30,8 @@
 - 2026-09-09 · 首轮：38 道旧题补 difficulty（2~5 按概念/原理/边界/生产权衡定级）+ 3 道核心笔记第二题（py-freethread-031 / pg-index-002 / docker-pid1-003）+ 状态文件初始化（本轮提交主题：feat: 题库深化首轮）
 
 - 2026-09-09 · 第二轮：3 道核心笔记第二题（docker-latest-005 / py-mutparam-032 / java-metaspace-096，difficulty 3/3/4）· 本轮提交主题：feat: 题库深化第二轮
+
+- 2026-09-09 · 第三轮：3 道核心笔记第二题（kafka-storage-012 / redis-watchdog-008 / java-classidentity-097，difficulty 3/4/4）· 本轮提交主题：feat: 题库深化第三轮
 
 ## 经验与规则
 

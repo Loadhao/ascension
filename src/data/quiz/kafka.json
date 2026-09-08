@@ -186,6 +186,23 @@
         1
       ],
       "hint": "重试与乱序互锁——max.in.flight.requests.per.connection > 1 且无幂等时重试可能乱序；顺序性要求高的场景必须开幂等生产者，Broker 按序列号重排（max.in.flight≤5 保证分区内有序），同时重试不再写入重复。"
+    },
+    {
+      "id": "kafka-storage-012",
+      "noteId": "kafka/intermediate/core/01-kafka-architecture",
+      "type": "single",
+      "q": "Kafka 分区的磁盘存储与过期清理，按笔记正确的是？",
+      "options": [
+        "分区是一串只追加的日志段（segment）文件、按起始 offset 命名；过期清理是「删整个旧段文件」而不是逐条删消息，代价 O(1)；定位靠 .index 稀疏索引（offset → 文件位置）",
+        "每条消息独立一个小文件，删除时逐条回收磁盘空间",
+        "消息按到达顺序存进 B+ 树，过期靠页合并回收",
+        "旧段删除需要重写整个分区目录，代价与分区大小成正比"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "存储三件套——顺序追加（磁盘顺序写 ≈ 内存随机写，吞吐的物理根基）、分段删除（O(1)）、offset 进度（消费进度就是一个数字）；kafka-arch-003 考的是「为什么快」，本题考的是「怎么存」。"
     }
   ]
 }

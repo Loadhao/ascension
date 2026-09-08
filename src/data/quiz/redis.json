@@ -190,6 +190,23 @@
         1
       ],
       "hint": "单线程公理：MONITOR / KEYS * / DEL 百万元素都会卡住所有请求。--bigkeys 是 SCAN 式采样；精确盘点离线解析 RDB 零线上风险。删除大集合用 UNLINK 而不是 DEL。"
+    },
+    {
+      "id": "redis-watchdog-012",
+      "noteId": "redis/intermediate/usage/03-distributed-lock",
+      "type": "single",
+      "q": "关于 Redisson 看门狗的续期机制，按笔记正确的是？",
+      "options": [
+        "lock() 不指定 leaseTime 才启用看门狗：后台定时任务每 10s（TTL 30s 的 1/3）检查仍持有就把 TTL 重置回 30s；unlock 或客户端崩溃后停止续期（崩溃最多 30s 自动释放）",
+        "看门狗默认关闭，必须手动传 leaseTime 才会启动续期",
+        "看门狗续期依赖主从同步，从库也会各自为锁续期",
+        "客户端崩溃后看门狗仍在后台无限续期，直到人工清理"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "「不传 leaseTime 才启用」是最常考的反直觉点；可重入靠 Hash 结构记重入计数（同线程 lock +1、unlock -1 归零才真删，全程 Lua 保证原子）；主从切换有丢锁窗口——正确性攸关场景用 DB 唯一约束或 ZooKeeper 兜底。"
     }
   ]
 }

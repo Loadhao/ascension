@@ -1625,6 +1625,23 @@
       ],
       "hint": 4,
       "difficulty": "两代迁移各对应一类「不是 heap 的 OOM」——Metaspace OOM 多来自动态代理/CGLib 无限生成类；堆与堆外（直接内存、元空间）要一起算资源预算，别只看 -Xmx；滥用 intern 反而撑大常驻常量池。"
+    },
+    {
+      "id": "java-classidentity-097",
+      "noteId": "java/advanced/jvm/01-class-loading",
+      "type": "single",
+      "q": "两个不同的类加载器分别加载同一个 class 文件，得到的 Class 相互比较与强转，结果是？",
+      "options": [
+        "c1 == c2 为 false，强转抛 ClassCastException——JVM 里类的身份证 = (类加载器, 全限定名)，这也是热部署与 Tomcat 每 webapp 隔离的理论基础",
+        "c1 == c2 为 true，只要字节码相同 JVM 就视为同一个类",
+        "c1 == c2 为 false，但两者实例之间可以正常互相强转",
+        "第二个加载器会直接返回第一个加载器已加载的 Class，不会重复加载"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "「类相等 = 类加载器 + 类全名都相同」正是双亲委派「防重复」的判定依据；Tomcat 给每个 webapp 一套 WebappClassLoader 才能实现同 war 多版本共存。java-prepare-032 考准备阶段，本题考类的唯一性。"
     }
   ]
 }
