@@ -1023,6 +1023,143 @@ function monotonicStackDemo(): VizConfig {
 	return { title: '单调栈 · 下一个更大元素', frames };
 }
 
+/** 爬楼梯：dp[i] = dp[i-1] + dp[i-2]，一维 DP 的入门形态（就是斐波那契） */
+function climbingStairsDemo(): VizConfig {
+	const n = 8;
+	const dp = new Array<number>(n).fill(0);
+	dp[0] = 1;
+	dp[1] = 1;
+	const out: VizItem[] = Array.from({ length: n }, (_, i) => ({ id: 100 + i, value: 0 }));
+	const frames: VizFrame[] = [];
+	const fill = (i: number) => {
+		out[i] = { id: 100 + i, value: dp[i]! };
+	};
+
+	frames.push({
+		items: out.map((it) => ({ ...it })),
+		note: `爬 ${n} 阶楼梯，每步跨 1 或 2 阶，求走法总数（矮柱是还没算出的 dp 位）。最后一步只有两种可能：从 i-1 阶跨 1 步、从 i-2 阶跨 2 步——所以 dp[i] = dp[i-1] + dp[i-2]`,
+	});
+	fill(0);
+	fill(1);
+	frames.push({
+		items: out.map((it) => ({ ...it })),
+		locked: [0, 1],
+		note: '边界：dp[0] = 1（站在地面算 1 种）、dp[1] = 1（跨一步）。它们是递推的种子',
+	});
+	for (let i = 2; i < n; i++) {
+		dp[i] = dp[i - 1]! + dp[i - 2]!;
+		fill(i);
+		frames.push({
+			items: out.map((it) => ({ ...it })),
+			active: [i],
+			locked: [...Array(i).keys()],
+			note: `dp[${i}] = dp[${i - 1}] + dp[${i - 2}] = ${dp[i - 1]} + ${dp[i - 2]} = ${dp[i]}：跨 1 步继承 ${dp[i - 1]} 种 + 跨 2 步继承 ${dp[i - 2]} 种`,
+		});
+	}
+	frames.push({
+		items: out.map((it) => ({ ...it })),
+		locked: [...Array(n).keys()],
+		note: `dp[${n - 1}] = ${dp[n - 1]}。数列 1, 1, 2, 3, 5, 8, 13, 21 正是斐波那契——空间还能压到 O(1)：只留最近两个滚动变量`,
+	});
+	return { title: '爬楼梯 · 一维递推', frames };
+}
+
+/** 打家劫舍：dp[i] = max(dp[i-1], dp[i-2] + nums[i])，「选与不选」的状态转移入门 */
+function houseRobberDemo(): VizConfig {
+	const nums = [2, 7, 9, 3, 1];
+	const n = nums.length;
+	const dp = new Array<number>(n).fill(0);
+	const out: VizItem[] = Array.from({ length: n }, (_, i) => ({ id: 200 + i, value: 0 }));
+	const frames: VizFrame[] = [];
+	const fill = (i: number) => {
+		out[i] = { id: 200 + i, value: dp[i]! };
+	};
+
+	frames.push({
+		items: out.map((it) => ({ ...it })),
+		note: `沿街 ${n} 家，金额 [${nums.join(', ')}]，不能偷相邻两家，求最大收益。每家只有两种决策：偷（收益 = dp[i-2] + nums[i]，隔一家）或不偷（收益 = dp[i-1]）`,
+	});
+	dp[0] = nums[0]!;
+	fill(0);
+	dp[1] = Math.max(nums[0]!, nums[1]!);
+	fill(1);
+	frames.push({
+		items: out.map((it) => ({ ...it })),
+		locked: [0, 1],
+		note: `边界：dp[0] = ${dp[0]}（只有一家）；dp[1] = max(${nums[0]}, ${nums[1]}) = ${dp[1]}（两家只能选一家）`,
+	});
+	for (let i = 2; i < n; i++) {
+		const rob = dp[i - 2]! + nums[i]!;
+		const skip = dp[i - 1]!;
+		dp[i] = Math.max(rob, skip);
+		fill(i);
+		frames.push({
+			items: out.map((it) => ({ ...it })),
+			active: [i],
+			locked: [...Array(i).keys()],
+			note: `第 ${i + 1} 家（金额 ${nums[i]}）：偷 → dp[${i - 2}] + ${nums[i]} = ${rob}；不偷 → dp[${i - 1}] = ${skip}。取较大者 dp[${i}] = ${dp[i]}`,
+		});
+	}
+	frames.push({
+		items: out.map((it) => ({ ...it })),
+		locked: [...Array(n).keys()],
+		note: `dp[${n - 1}] = ${dp[n - 1]} 即答案（偷 2 + 9 + 1）。最优子结构 + 无后效性：知道 dp[0..i-1] 就够决策 dp[i]，不需要更早的历史`,
+	});
+	return { title: '打家劫舍 · 选与不选', frames };
+}
+
+/** 最大子数组和（Kadane）：cur<0 就丢弃重开，一遍扫描 O(n) */
+function maxSubarrayDemo(): VizConfig {
+	const nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+	const n = nums.length;
+	const items = nums.map((v, i) => ({ id: 300 + i, value: v }));
+	const frames: VizFrame[] = [];
+	let cur = 0;
+	let best = -Infinity;
+	let start = 0;
+	const bestRange: [number, number] = [0, 0];
+	const range = (l: number, r: number) => Array.from({ length: r - l + 1 }, (_, k) => l + k);
+
+	frames.push({
+		items: [...items],
+		note: '最大子数组和（LC 53，负数画成贴地矮柱）：cur 记录「以 i 结尾的最大子数组和」。它要么延长前面的子数组（cur + nums[i]），要么从自己重开（nums[i]）——前面的 cur 是负数就果断丢弃',
+	});
+	for (let i = 0; i < n; i++) {
+		const extend = cur + nums[i]!;
+		if (i > 0 && nums[i]! > extend) {
+			cur = nums[i]!;
+			start = i;
+		} else {
+			cur = i === 0 ? nums[0]! : extend;
+		}
+		if (cur > best) {
+			best = cur;
+			bestRange[0] = start;
+			bestRange[1] = i;
+		}
+		const reopened = i > 0 && start === i;
+		const grew = bestRange[1] === i;
+		const note =
+			i === 0
+				? `i = 0：cur = ${cur}，best = ${best}，最优区间 [${bestRange[0]}, ${bestRange[1]}]`
+				: reopened
+					? `i = ${i}：cur + nums[${i}] = ${extend} < nums[${i}] 本身，前面的累计是负资产——丢弃，从 ${nums[i]} 重开。cur = ${cur}，best = ${best}`
+					: `i = ${i}：cur = ${extend - nums[i]!} + ${nums[i]} = ${cur}，${grew ? `刷新 best = ${best}（灰色区间 [${bestRange[0]}, ${bestRange[1]}]）` : `未超过 best = ${best}`}`;
+		frames.push({
+			items: [...items],
+			active: range(start, i),
+			locked: range(bestRange[0], bestRange[1]),
+			note,
+		});
+	}
+	frames.push({
+		items: [...items],
+		locked: range(bestRange[0], bestRange[1]),
+		note: `扫描结束：最大子数组和 = ${best}，对应子数组 [${nums.slice(bestRange[0], bestRange[1] + 1).join(', ')}]。一遍扫描 O(n)、O(1) 空间，是「前缀和 + 贪心丢弃」的合一形态`,
+	});
+	return { title: '最大子数组和 · Kadane 算法', frames };
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的演示注册表 */
 export const vizDemos: Record<string, VizConfig> = {
 	'bubble-sort': bubbleSortDemo(),
@@ -1042,4 +1179,7 @@ export const vizDemos: Record<string, VizConfig> = {
 	'prefix-sum': prefixSumDemo(),
 	'difference-array': differenceArrayDemo(),
 	'monotonic-stack': monotonicStackDemo(),
+	'climbing-stairs': climbingStairsDemo(),
+	'house-robber': houseRobberDemo(),
+	'max-subarray': maxSubarrayDemo(),
 };

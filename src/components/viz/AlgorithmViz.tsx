@@ -26,7 +26,11 @@ export interface VizConfig {
 
 /** 算法步骤动画播放器：柱状数组 + 指针芯片 + 逐帧说明；进入视口自动播放并循环 */
 export default function AlgorithmViz({ title, frames }: VizConfig) {
-	const max = useMemo(() => Math.max(...frames[0]!.items.map((it) => it.value)), [frames]);
+	// 全帧取最大：柱状数组只是重排时首帧即全局最大；逐格填充型演示（DP 表）必须看全部帧
+	const max = useMemo(
+		() => Math.max(...frames.flatMap((f) => f.items.map((it) => it.value)), 1),
+		[frames],
+	);
 
 	// 指针按下标分槽，同一位置的多个指针并排进一个芯片
 	function renderPlot(frame: VizFrame | undefined) {

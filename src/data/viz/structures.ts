@@ -366,10 +366,166 @@ function queueViaStacksDemo(): StackVizConfig {
 	return { title: '双栈实现队列 · 负负得正', frames };
 }
 
+/** 子集：每个元素「选 / 不选」二叉决策，回溯 = 探路 + 撤销，栈列就是当前路径 */
+function subsetsDemo(): StackVizConfig {
+	const elems = ['1', '2', '3'];
+	const frames: StackFrame[] = [];
+	const path: Array<{ id: number; label: string }> = [];
+	let uid = 0;
+	let found = 0;
+
+	const push = (label: string) => {
+		const item = { id: ++uid, label };
+		path.push(item);
+		frames.push({
+			stacks: [{ label: '当前路径', items: [...path] }],
+			active: [item.id],
+			scan: { chars: elems, pos: path.length - 1 },
+			note: `决策「${label}」：走「选」分支 → 路径压入 ${label}`,
+		});
+	};
+	const pop = (who: string, reason: string) => {
+		const item = path.pop()!;
+		frames.push({
+			stacks: [{ label: '当前路径', items: [...path] }],
+			scan: { chars: elems, pos: path.length },
+			note: `回溯：撤销「${item.label}」（${reason}）。回溯的核心 = 递归到底后把状态恢复成进入前的样子`,
+		});
+	};
+	const record = () => {
+		found++;
+		frames.push({
+			stacks: [{ label: '当前路径', items: [...path] }],
+			scan: { chars: elems, pos: elems.length },
+			note: `到达决策链末端：收集子集 { ${path.map((p) => p.label).join(', ') || '空'} }（第 ${found} 个）`,
+		});
+	};
+
+	frames.push({
+		stacks: [{ label: '当前路径', items: [] }],
+		scan: { chars: elems, pos: 0 },
+		note: '子集问题：每个元素都有「选 / 不选」两种决策，n 个元素共 2ⁿ 个子集。橙色扫描条指向当前决策位，竖直栈列是「已选元素路径」——回溯算法 = 递归探路 + 到底收集 + 撤销换分支',
+	});
+
+	push('1');
+	push('2');
+	push('3');
+	record();
+	pop('3', '3 的两种决策都试完了');
+	frames.push({
+		stacks: [{ label: '当前路径', items: [...path] }],
+		scan: { chars: elems, pos: elems.length },
+		note: '「不选 3」也是一条完整路径：收集子集 { 1, 2 }（第 2 个）——不必真的弹出再压入，决策本身就包含两个分支',
+	});
+	pop('2', '2 的「选」分支已穷尽');
+	push('3');
+	record();
+	pop('3', '3 穷尽');
+	frames.push({
+		stacks: [{ label: '当前路径', items: [...path] }],
+		scan: { chars: elems, pos: elems.length },
+		note: '收集 { 1 }（第 4 个）',
+	});
+	pop('1', '1 的「选」分支已穷尽');
+	push('2');
+	push('3');
+	record();
+	pop('3', '3 穷尽');
+	frames.push({
+		stacks: [{ label: '当前路径', items: [...path] }],
+		scan: { chars: elems, pos: elems.length },
+		note: '收集 { 2 }（第 5 个）',
+	});
+	pop('2', '2 穷尽');
+	push('3');
+	record();
+	pop('3', '3 穷尽');
+	frames.push({
+		stacks: [{ label: '当前路径', items: [...path] }],
+		scan: { chars: elems, pos: null },
+		note: '收集 { 3 }（第 6 个）。还剩 { 1, 3 }、空集 ∅ 两条分支同理——2³ = 8 个子集全部由这棵决策树给出，时间 O(2ⁿ · n)',
+	});
+	frames.push({
+		stacks: [{ label: '当前路径', items: [] }],
+		scan: { chars: elems, pos: null },
+		note: '决策树走完。记住骨架：每层做一个决策 → 递归下一层 → 撤销本层决策，「路径 + 撤销」就是回溯的全部',
+	});
+	return { title: '子集 · 二叉决策回溯', frames };
+}
+
+/** 全排列：每层从没用过的元素里选一个，路径栈顶到底即一个排列 */
+function permutationsDemo(): StackVizConfig {
+	const elems = ['1', '2', '3'];
+	const frames: StackVizConfig['frames'] = [];
+	const path: Array<{ id: number; label: string }> = [];
+	let uid = 0;
+	let found = 0;
+
+	const push = (label: string, why: string) => {
+		const item = { id: ++uid, label };
+		path.push(item);
+		frames.push({
+			stacks: [{ label: '当前排列', items: [...path] }],
+			active: [item.id],
+			scan: { chars: elems, pos: path.length - 1 },
+			note: `第 ${path.length} 位选 ${label}（${why}）`,
+		});
+	};
+	const pop = (why: string) => {
+		const item = path.pop()!;
+		frames.push({
+			stacks: [{ label: '当前排列', items: [...path] }],
+			scan: { chars: elems, pos: path.length },
+			note: `撤销 ${item.label}：${why}`,
+		});
+	};
+	const record = () => {
+		found++;
+		frames.push({
+			stacks: [{ label: '当前排列', items: [...path] }],
+			scan: { chars: elems, pos: elems.length },
+			note: `排列完成：${path.map((p) => p.label).join(' ')}（第 ${found} 个）`,
+		});
+	};
+
+	frames.push({
+		stacks: [{ label: '当前排列', items: [] }],
+		scan: { chars: elems, pos: 0 },
+		note: '全排列：每一位从「还没用过的元素」里选一个。和子集的区别：每层的候选集会因前面用掉而收缩，路径长度到 n 就收集答案',
+	});
+
+	push('1', '首位三个候选 1/2/3，按序尝试');
+	push('2', '1 已用');
+	push('3', '只剩 3');
+	record();
+	pop('3 已穷尽');
+	pop('第二位候选也穷尽');
+	push('3', '1 已用，试 3');
+	push('2', '只剩 2');
+	record();
+	pop('2 已穷尽');
+	pop('3 已穷尽');
+	pop('1 的全部分支完成');
+	push('2', '首位轮到 2');
+	push('1', '2 已用');
+	push('3', '只剩 3');
+	record();
+	pop('3 穷尽');
+	pop('1 穷尽');
+	frames.push({
+		stacks: [{ label: '当前排列', items: [...path] }],
+		scan: { chars: elems, pos: null },
+		note: '按同一骨架继续：2 3 1 → 3 1 2 → 3 2 1，共 3! = 6 个排列。时间 O(n · n!)——回溯的复杂度都由「解的数量 × 每个解的构造代价」决定',
+	});
+	return { title: '全排列 · used 候选收缩', frames };
+}
+
 export const stackDemos: Record<string, StackVizConfig> = {
 	'valid-parentheses': validParenthesesDemo(),
 	'min-stack': minStackDemo(),
 	'queue-via-stacks': queueViaStacksDemo(),
+	'subsets': subsetsDemo(),
+	'permutations': permutationsDemo(),
 };
 
 // ===== 二叉树 =====
@@ -565,7 +721,62 @@ function bstDemo(): TreeVizConfig {
 	return { title: '二叉搜索树 · 查找与中序有序性', frames };
 }
 
+/** 翻转二叉树：递归交换每个节点的左右子树，布局随结构逐层镜像 */
+function invertTreeDemo(): TreeVizConfig {
+	const items: TreeNodeItem[] = [
+		{ id: 1, label: '1', left: 2, right: 3 },
+		{ id: 2, label: '2', left: 4, right: 5 },
+		{ id: 3, label: '3', left: 6, right: 7 },
+		{ id: 4, label: '4', left: null, right: null },
+		{ id: 5, label: '5', left: null, right: null },
+		{ id: 6, label: '6', left: null, right: null },
+		{ id: 7, label: '7', left: null, right: null },
+	];
+	const frames: TreeFrame[] = [];
+	const swap = (id: number) => {
+		const node = items.find((it) => it.id === id)!;
+		[node.left, node.right] = [node.right, node.left];
+	};
+
+	frames.push({
+		items: treeSnap(items),
+		root: 1,
+		note: '翻转二叉树（LC 226）：把每个节点的左右子树互换。递归框架与遍历完全相同，只是「访问时做的事」换成交换——注意树形布局随结构重算，交换一发生整棵树就开始镜像',
+	});
+	swap(1);
+	frames.push({
+		items: treeSnap(items),
+		root: 1,
+		active: [1],
+		note: 'swap(1)：根的孩子 2、3 互换，左右子树整体对调',
+	});
+	swap(2);
+	frames.push({
+		items: treeSnap(items),
+		root: 1,
+		active: [2],
+		visited: [1],
+		note: '递归左半：swap(2)，4、5 互换',
+	});
+	swap(3);
+	frames.push({
+		items: treeSnap(items),
+		root: 1,
+		active: [3],
+		visited: [1, 2],
+		note: '递归右半：swap(3)，6、7 互换',
+	});
+	frames.push({
+		items: treeSnap(items),
+		root: 1,
+		visited: [1, 2, 3, 4, 5, 6, 7],
+		note: '叶子左右皆 null，交换无效果（递归边界）。镜像完成——中序序列从 4 2 5 1 6 3 7 变为 7 3 6 1 5 2 4，恰好整体反转',
+	});
+	return { title: '翻转二叉树 · 镜像交换', frames };
+}
+
 export const treeDemos: Record<string, TreeVizConfig> = {
 	'tree-traversal': treeTraversalDemo(),
 	'bst-operations': bstDemo(),
+	'invert-tree': invertTreeDemo(),
 };

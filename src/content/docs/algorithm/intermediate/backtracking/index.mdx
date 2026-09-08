@@ -1,0 +1,12 @@
+---
+title: 递归与回溯
+description: 回溯 = 路径 + 撤销：子集的二叉决策树与全排列的候选收缩，配路径栈进退的动态演示
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+回溯（Backtracking）是「带撤销的穷举」：每层做一个决策进入下一层，走到头收集答案，然后**撤销当前决策换下一个分支**——
+「路径 + 撤销」四个字就是全部。它和动态规划是穷举的两个分支：答案要**全部列出来**用回溯，
+只要**最优值**且子问题重叠才值得上 DP。这里用子集和全排列两个母题把骨架练熟，演示里栈列的进退就是递归的呼吸。
+
+<CategoryNotesIsland categoryId="algorithm/intermediate/backtracking" />

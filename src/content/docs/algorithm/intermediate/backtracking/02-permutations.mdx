@@ -1,0 +1,62 @@
+---
+title: 全排列
+description: 每一位从没用过的元素里选：used 标记的候选收缩，n! 解的回溯母题与去重要点
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+全排列（Permutations，LeetCode 46）：n 个互不相同的元素，列出所有 n! 个排列。
+和子集的决策结构不同：**每一位都能从全部剩余元素里选**，所以需要 `used` 数组记录谁已经被路径占用——
+每深入一层，候选集就收缩一格。路径长度到 n 就收集答案，然后逐层撤销。
+
+## 动态演示
+
+栈列是当前排列的前几位，路径压入弹出对应递归进出。注意「第二位候选因 1 已用而收缩」。
+组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="permutations" />
+
+## Java 实现
+
+```java
+public List<List<Integer>> permute(int[] nums) {
+    List<List<Integer>> res = new ArrayList<>();
+    dfs(nums, new boolean[nums.length], new ArrayList<>(), res);
+    return res;
+}
+
+private void dfs(int[] nums, boolean[] used, List<Integer> path, List<List<Integer>> res) {
+    if (path.size() == nums.length) {          // 路径满长才收集——只有叶子是答案
+        res.add(new ArrayList<>(path));
+        return;
+    }
+    for (int i = 0; i < nums.length; i++) {
+        if (used[i]) continue;                 // 候选收缩：用过的跳过
+        used[i] = true;                        // 做决策
+        path.add(nums[i]);
+        dfs(nums, used, path, res);
+        path.remove(path.size() - 1);          // 撤销
+        used[i] = false;                       // 撤销要成对：path 和 used 一起恢复
+    }
+}
+```
+
+与子集的两个结构差异：**收集时机**（排列只有长度为 n 的叶子是答案，子集每个节点都是）；
+**去重手段**（排列靠 `used`，因为同层之后还会用到前面的元素，不能像子集那样用 `start` 砍掉回头路）。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间 | O(n · n!) | n! 个排列 × 每个拷贝 O(n)；第一层 n 选、第二层 n-1 选…… |
+| 空间 | O(n) | 递归深度 + path + used（不算输出） |
+| 解规模 | n! 增长极快 | n=10 已 362 万——回溯题先估解的规模再动手 |
+
+## 面试要点
+
+- **回溯复杂度的标准答法**：「解的数量 × 每个解的构造代价」——子集 2ⁿ·n、排列 n!·n、N 皇后视剪枝而定。说得出这个公式的候选人很少。
+- **去重进阶**（LC 47，元素可重复）：先排序，`nums[i] == nums[i-1] && !used[i-1]` 时跳过——同层重复剪掉、同路径保留，`!used[i-1]` 的方向是必考点（保证重复元素在树层间从左到右使用）。
+- 变体追问：下一个排列（LC 31，字典序法不用回溯）、字符串的排列（LC 剑指）、电话号码字母组合（LC 17，每层候选集不同但骨架相同）。
+- 手写坑：撤销要**成对**——`path.remove` 与 `used[i] = false` 漏一个，候选集就永久污染，表现为解缺失或重复；收集答案记得拷贝。

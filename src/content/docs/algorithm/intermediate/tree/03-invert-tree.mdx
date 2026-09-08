@@ -1,0 +1,64 @@
+---
+title: 翻转二叉树
+description: 递归交换每个节点的左右子树：遍历框架「换个动作」的最小样本，树形布局逐层镜像
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+翻转二叉树（Invert Binary Tree，LeetCode 226）：把每个节点的左右子树互换，得到镜像树。
+它的地位很特别——Homebrew 作者 Max Howell 面试 Google 被这道题刷掉的梗让它出了圈；
+对学习者而言，它是「**遍历框架不变、换掉访问时做的事**」的最小样本：
+框架还是前序遍历，只是「访问」的内容从收集值换成了交换指针。
+
+## 动态演示
+
+树形布局随结构实时重算：每次交换发生，整棵树立刻开始镜像。组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="invert-tree" />
+
+## Java 实现
+
+```java
+public TreeNode invertTree(TreeNode root) {
+    if (root == null) return null;          // 递归边界：空树返回空
+    TreeNode left = invertTree(root.left);   // 先翻转左右子树（后序位置拿结果）
+    TreeNode right = invertTree(root.right);
+    root.left = right;                       // 再交换挂接
+    root.right = left;
+    return root;
+}
+```
+
+放在**前序位置**（先交换再递归）或**后序位置**（先递归再交换）都能正确翻转——
+交换是对称操作，与递归顺序无关；但**中序不行**：左子树翻转后原来的「左」变成了「右」，
+再递归 `root.right` 会把已翻转的左子树再翻一遍，等于部分节点被翻两次。
+
+```java
+// 前序版（最直观）：先交换，再递归
+public TreeNode invertTree(TreeNode root) {
+    if (root == null) return null;
+    TreeNode t = root.left;
+    root.left = root.right;
+    root.right = t;
+    invertTree(root.left);
+    invertTree(root.right);
+    return root;
+}
+```
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间 | O(n) | 每个节点恰好被访问一次 |
+| 空间 | O(h) | 递归栈，最坏链状树 O(n) |
+| 不变量 | 中序序列整体反转 | 镜像的代数特征，可用来自检 |
+
+## 面试要点
+
+- **这题考的是「写遍历框架」本身**：面试官想看的是你能不能把递归三要素（边界、子问题、挂接）一次写对，而不是想出什么巧妙算法——直接说「这是遍历框架的应用，我在前序位置交换」就是满分开场。
+- **中序为何不行的追问**是深层考点：涉及「递归时左右指针已被修改」——要么先暂存引用，要么统一用前序/后序，说清这一点才算真懂指针语义。
+- 迭代版就是层序/前序的迭代把「访问」换成交换（队列逐层 swap 或栈逐个 swap），证明「遍历框架 × 任意动作」的可组合性。
+- 关联题：对称二叉树（LC 101）不是先翻转再比较，而是双指针同步走（左左、右右对照）——先翻转再比是 O(n) 但多一趟，面试给优化版更佳。

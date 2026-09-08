@@ -1,0 +1,57 @@
+---
+title: 子集
+description: 每个元素选/不选的二叉决策树：2ⁿ 个子集的枚举母题，路径栈的进退就是回溯的全部
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+子集（Subsets，LeetCode 78）：给 n 个**互不相同**的元素，列出所有 2ⁿ 个子集。
+它是回溯的「二叉决策」母题：每个元素只有**选 / 不选**两种命运，n 层决策走完就是一条完整路径，
+路径上的元素构成一个子集。框架永远是三步：**做决策 → 递归下一层 → 撤销决策**。
+
+## 动态演示
+
+竖直栈列是当前路径（已选元素），橙色扫描条指向当前决策位。看路径怎么伸长、怎么回退——
+栈的每一次压入弹出对应一次递归进出。组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="subsets" />
+
+## Java 实现
+
+```java
+public List<List<Integer>> subsets(int[] nums) {
+    List<List<Integer>> res = new ArrayList<>();
+    dfs(nums, 0, new ArrayList<>(), res);
+    return res;
+}
+
+private void dfs(int[] nums, int start, List<Integer> path, List<List<Integer>> res) {
+    res.add(new ArrayList<>(path));            // 每个节点（不只是叶子）都是一个子集
+    for (int i = start; i < nums.length; i++) {
+        path.add(nums[i]);                     // 做决策：选 nums[i]
+        dfs(nums, i + 1, path, res);           // 只看后面：i+1 保证不回头
+        path.remove(path.size() - 1);          // 撤销决策（回溯的「溯」）
+    }
+}
+```
+
+这里用的是「**每个节点都是答案**」写法：进入 `dfs` 先收集当前路径，循环尝试每个后续元素——
+比「到叶子才收集」少写一个分支，且天然含空集。`start` 参数是去重的关键：**只向后选**，
+组合无序（{1,2} 和 {2,1} 算同一个）。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间 | O(2ⁿ · n) | 2ⁿ 个子集，每个拷贝 O(n)；这是**输出规模决定下限**的问题 |
+| 空间 | O(n) | 递归深度 + 路径（不算输出） |
+| 剪枝空间 | 无 | 子集要全部列出，没有可剪的分支——回溯不等于快 |
+
+## 面试要点
+
+- **回溯三问**：路径是什么（已选元素）、候选列表是什么（start 之后的元素）、结束条件（start 越界）——任何回溯题先答这三问，代码就出来了。
+- **与组合/排列的分界**：子集每个节点都收、用 `start` 防回头；组合（LC 77）同款但只收长度为 k 的节点；排列（下一篇）每一位都能从头选、靠 `used` 数组去重。
+- **去重进阶**（LC 90 子集 II，元素可重复）：先排序，同层跳过相同元素（`i > start && nums[i] == nums[i-1]`）——「树层去重」是回溯去重的标准术语。
+- 手写坑：收集答案必须**拷贝**（`new ArrayList<>(path)`），直接 `res.add(path)` 收集的全是同一个引用，最后全被回溯清空。

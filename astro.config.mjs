@@ -1204,6 +1204,26 @@ export default defineConfig({
                         { label: '概览', link: '/algorithm/intermediate/tree/' },
                         { label: '二叉树遍历', link: '/algorithm/intermediate/tree/01-tree-traversal/' },
                         { label: '二叉搜索树', link: '/algorithm/intermediate/tree/02-bst/' },
+                        { label: '翻转二叉树', link: '/algorithm/intermediate/tree/03-invert-tree/' },
+                      ],
+                    },
+                    {
+                      label: '动态规划',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/algorithm/intermediate/dp/' },
+                        { label: '爬楼梯', link: '/algorithm/intermediate/dp/01-climbing-stairs/' },
+                        { label: '打家劫舍', link: '/algorithm/intermediate/dp/02-house-robber/' },
+                        { label: '最大子数组和', link: '/algorithm/intermediate/dp/03-max-subarray/' },
+                      ],
+                    },
+                    {
+                      label: '递归与回溯',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/algorithm/intermediate/backtracking/' },
+                        { label: '子集', link: '/algorithm/intermediate/backtracking/01-subsets/' },
+                        { label: '全排列', link: '/algorithm/intermediate/backtracking/02-permutations/' },
                       ],
                     },
                   ],
