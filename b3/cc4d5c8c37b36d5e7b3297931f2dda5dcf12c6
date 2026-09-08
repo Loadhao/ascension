@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 968-975
+src/content/docs/elasticsearch/intermediate/cluster/01-cluster-split-brain.md
+  h_9324126a55eff3 1-72
+src/content/docs/elasticsearch/intermediate/cluster/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/elasticsearch.json
+  h_9324126a55eff3 8-9,12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "b3cc4d5c8c37b36d5e7b3297931f2dda5dcf12c6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
