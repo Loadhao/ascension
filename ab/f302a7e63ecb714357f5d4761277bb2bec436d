@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1286
+src/content/docs/rocketmq/basic/core/02-consumer-semantics.md
+  h_9324126a55eff3 1-67
+src/data/graphs/rocketmq.json
+  h_9324126a55eff3 5,12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "abf302a7e63ecb714357f5d4761277bb2bec436d",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
