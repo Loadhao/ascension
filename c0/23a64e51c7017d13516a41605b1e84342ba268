@@ -1,0 +1,16 @@
+docs/evolution.md
+  h_9324126a55eff3 247-273
+scripts/mermaid-contrast-verify.mjs
+  h_9324126a55eff3 67-78,80-84,97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c023a64e51c7017d13516a41605b1e84342ba268",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
