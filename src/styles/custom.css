@@ -2466,3 +2466,112 @@ html.mmd-viewer-open {
   }
 }
 
+/* —— 右侧栏刷题导航器（TableOfContents 覆盖，quiz 页专用） —— */
+.quiz-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-rail h2 {
+  margin: 0;
+  color: var(--sl-color-gray-3);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.quiz-rail-round {
+  color: var(--sl-color-gray-2);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.quiz-rail-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.quiz-rail-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  background: var(--sl-color-bg);
+  color: var(--sl-color-gray-3);
+  font-family: inherit;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.quiz-rail-dot:hover {
+  border-color: var(--sl-color-gray-3);
+  color: var(--sl-color-white);
+}
+
+.quiz-rail-dot.is-current {
+  border-color: var(--sl-color-white);
+  background: color-mix(in srgb, var(--sl-color-white) 8%, var(--sl-color-bg));
+  color: var(--sl-color-white);
+}
+
+.quiz-rail-dot.is-right {
+  border-color: var(--quiz-ok-border);
+  color: var(--quiz-ok);
+}
+
+.quiz-rail-dot.is-wrong {
+  border-color: var(--quiz-no-border);
+  color: var(--quiz-no);
+}
+
+.quiz-rail-legend {
+  display: flex;
+  gap: 12px;
+  color: var(--sl-color-gray-3);
+  font-size: 11px;
+}
+
+.quiz-rail-legend .is-right {
+  color: var(--quiz-ok);
+}
+
+.quiz-rail-legend .is-wrong {
+  color: var(--quiz-no);
+}
+
+.quiz-rail-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quiz-rail-stats li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.quiz-rail-num {
+  color: var(--sl-color-white);
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.quiz-rail-label {
+  color: var(--sl-color-gray-3);
+  font-size: 13px;
+}
+

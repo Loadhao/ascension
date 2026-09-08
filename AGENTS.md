@@ -27,7 +27,7 @@
 | 自测作答存储 | `src/lib/quiz-store.ts`       | localStorage：刷题进度（不重复出题）、错题本、收藏本、进行中轮次恢复         |
 | 阅读历史存储 | `src/lib/history.ts`           | localStorage：每篇笔记的最近阅读时间/次数/可见时长/滚动位置，笔记页续读定位与仪表盘「最近阅读」共用 |
 | 全局样式   | `src/styles/custom.css`        | 黑白主题令牌、学习组件样式、Mermaid 与打印样式             |
-| 站点配置   | `astro.config.mjs`             | 手动嵌套侧边栏、Footer/Sidebar 覆盖、Mermaid 插件、base 路径    |
+| 站点配置   | `astro.config.mjs`             | 手动嵌套侧边栏、Footer/Sidebar/TableOfContents 覆盖、Mermaid 插件、base 路径    |
 | 部署流水线 | `.github/workflows/deploy.yml` | push main 自动构建发布 GitHub Pages            |
 | 书签入库工作区 | `bookmark-kb-design/`        | 浏览器书签分级入库的独立设计区（源数据/分级流水线/清单产物），不参与站点构建，详见其 `方案设计.md` |
 

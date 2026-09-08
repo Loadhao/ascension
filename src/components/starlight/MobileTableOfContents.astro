@@ -1,0 +1,12 @@
+---
+/**
+ * Starlight MobileTableOfContents 覆盖：自测作答页不渲染移动端目录
+ * （右侧栏已是刷题导航器，移动端目录只剩 Overview 没有意义）。
+ */
+import DefaultMobileTOC from '@astrojs/starlight/components/MobileTableOfContents.astro';
+
+const entry = Astro.locals.starlightRoute?.entry as { id: string } | undefined;
+const isQuiz = entry?.id === 'guide/quiz';
+---
+
+{isQuiz ? null : <DefaultMobileTOC />}

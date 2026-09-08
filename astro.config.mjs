@@ -108,6 +108,9 @@ export default defineConfig({
         Footer: './src/components/starlight/Footer.astro',
         // 侧边栏目录树工具条（全部展开/收起）
         Sidebar: './src/components/starlight/Sidebar.astro',
+        // 自测作答页右侧栏换刷题导航器，其余页面保持默认目录
+        TableOfContents: './src/components/starlight/TableOfContents.astro',
+        MobileTableOfContents: './src/components/starlight/MobileTableOfContents.astro',
       },
       head: [
         {

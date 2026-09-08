@@ -1,0 +1,16 @@
+---
+import QuizNav from './QuizNav';
+
+// 右侧栏导航器：题库总题数构建期统计（见 TableOfContents 覆盖）
+const modules = import.meta.glob('../../data/quiz/*.json', { eager: true }) as Record<
+  string,
+  { default?: { questions?: unknown[] }; questions?: unknown[] }
+>;
+
+const total = Object.values(modules).reduce((sum, mod) => {
+  const raw = mod.default ?? mod;
+  return sum + (raw.questions?.length ?? 0);
+}, 0);
+---
+
+<QuizNav client:load total={total} />

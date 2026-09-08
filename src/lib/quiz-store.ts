@@ -52,6 +52,7 @@ export interface QuizPersist {
 }
 
 const KEY = 'ascension-quiz-state-v1';
+const CHANGE_EVENT = 'ascension:quiz-change';
 
 function isSSR(): boolean {
   return typeof window === 'undefined';
@@ -95,4 +96,23 @@ export function saveQuizState(state: QuizPersist): void {
   } catch {
     /* 隐私模式等场景静默降级为会话内状态 */
   }
+  // 通知同页订阅方（如右侧栏题目导航器）
+  window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
+}
+
+/** 订阅作答状态变化（同页自定义事件 + 跨标签页 storage 事件，返回取消函数） */
+export function subscribeQuizChange(callback: () => void): () => void {
+  if (isSSR()) return () => {};
+  window.addEventListener(CHANGE_EVENT, callback);
+  window.addEventListener('storage', callback);
+  return () => {
+    window.removeEventListener(CHANGE_EVENT, callback);
+    window.removeEventListener('storage', callback);
+  };
+}
+
+/** 请求作答组件跳到当前轮次的第 index 题（0 起） */
+export function gotoQuizIndex(index: number): void {
+  if (isSSR()) return;
+  window.dispatchEvent(new CustomEvent('ascension:quiz-goto', { detail: { index } }));
 }

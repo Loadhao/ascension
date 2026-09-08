@@ -5,6 +5,7 @@ import {
   emptyQuizState,
   loadQuizState,
   saveQuizState,
+  gotoQuizIndex,
   type QuizPersist,
   type RoundKind,
   type RoundState,
@@ -265,6 +266,22 @@ export default function Quiz({ directions, banks }: Props) {
     setPicked([]);
     update({ ...quiz, round: { ...round, index } });
   }
+
+  // 右侧栏导航器点题号跳转（经 update 落盘并发变更事件，导航网格随动刷新）
+  const quizRef = quiz;
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const index = (event as CustomEvent<{ index?: number }>).detail?.index;
+      if (typeof index !== 'number' || !quizRef.round) return;
+      const clamped = Math.min(Math.max(index, 0), quizRef.round.queue.length - 1);
+      setPicked([]);
+      setSummary(null);
+      setView('quiz');
+      update({ ...quizRef, round: { ...quizRef.round, index: clamped } });
+    };
+    window.addEventListener('ascension:quiz-goto', handler);
+    return () => window.removeEventListener('ascension:quiz-goto', handler);
+  }, [quizRef]);
 
   function finishRound(): void {
     const round = quiz.round;

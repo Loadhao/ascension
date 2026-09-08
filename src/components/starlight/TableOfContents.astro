@@ -1,0 +1,13 @@
+---
+/**
+ * Starlight TableOfContents 覆盖：自测作答页右侧栏换成刷题导航器
+ * （轮次题号网格 + 点击跳题，见 QuizNav），其余页面保持默认目录。
+ */
+import DefaultTOC from '@astrojs/starlight/components/TableOfContents.astro';
+import QuizNavIsland from '../quiz/QuizNavIsland.astro';
+
+const entry = Astro.locals.starlightRoute?.entry as { id: string } | undefined;
+const isQuiz = entry?.id === 'guide/quiz';
+---
+
+{isQuiz ? <QuizNavIsland /> : <DefaultTOC />}
