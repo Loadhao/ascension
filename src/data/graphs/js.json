@@ -2,16 +2,28 @@
   "nodes": [
     { "id": "root", "label": "JS", "group": "核心" },
     { "id": "langcore", "label": "语言核心速览", "href": "/js/basic/core/01-js-fundamentals/", "group": "核心" },
+    { "id": "scope", "label": "作用域与闭包", "href": "/js/basic/core/02-scope-closure/", "group": "核心" },
+    { "id": "prototype", "label": "原型链与继承", "href": "/js/basic/core/03-prototype-class/", "group": "核心" },
+    { "id": "thisbind", "label": "this 与箭头函数", "href": "/js/basic/core/04-this-binding/", "group": "核心" },
+    { "id": "eventloop", "label": "事件循环与异步", "href": "/js/basic/core/05-event-loop/", "group": "核心" },
     { "id": "gcmemory", "label": "GC 与内存管理", "href": "/js/intermediate/node/01-node-gc-memory/", "group": "运行时" },
     { "id": "websocket", "label": "WebSocket 原理", "href": "/js/intermediate/web/01-websocket/", "group": "网络" },
-    { "id": "cors", "label": "同源与跨域", "href": "/js/intermediate/web/02-cors/", "group": "网络" }
+    { "id": "cors", "label": "同源与跨域", "href": "/js/intermediate/web/02-cors/", "group": "网络" },
+    { "id": "domevents", "label": "DOM 事件与委托", "href": "/js/intermediate/web/03-dom-events/", "group": "网络" }
   ],
   "edges": [
     { "source": "root", "target": "langcore" },
     { "source": "root", "target": "gcmemory" },
+    { "source": "langcore", "target": "scope", "label": "展开：作用域闭包" },
+    { "source": "langcore", "target": "prototype", "label": "展开：原型链" },
+    { "source": "langcore", "target": "thisbind", "label": "展开：this 绑定" },
+    { "source": "langcore", "target": "eventloop", "label": "展开：事件循环" },
+    { "source": "scope", "target": "thisbind", "label": "词法作用域 vs 调用绑定" },
+    { "source": "scope", "target": "gcmemory", "label": "闭包持有延缓回收" },
     { "source": "langcore", "target": "gcmemory", "label": "闭包泄漏进 V8 堆" },
     { "source": "root", "target": "websocket" },
     { "source": "root", "target": "cors" },
+    { "source": "cors", "target": "domevents", "label": "同为浏览器平台机制" },
     { "source": "websocket", "target": "cors", "label": "不受同源限制" }
   ]
 }

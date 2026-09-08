@@ -435,6 +435,10 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/js/basic/core/' },
                         { label: 'JS 语言核心速览', link: '/js/basic/core/01-js-fundamentals/' },
+                        { label: '作用域与闭包', link: '/js/basic/core/02-scope-closure/' },
+                        { label: '原型链与继承', link: '/js/basic/core/03-prototype-class/' },
+                        { label: 'this 与箭头函数', link: '/js/basic/core/04-this-binding/' },
+                        { label: '事件循环与异步演进', link: '/js/basic/core/05-event-loop/' },
                       ],
                     },
                   ],
@@ -458,6 +462,7 @@ export default defineConfig({
                         { label: '概览', link: '/js/intermediate/web/' },
                         { label: 'WebSocket 原理', link: '/js/intermediate/web/01-websocket/' },
                         { label: '同源策略与九种跨域方案', link: '/js/intermediate/web/02-cors/' },
+                        { label: 'DOM 事件机制与委托', link: '/js/intermediate/web/03-dom-events/' },
                       ],
                     },
                   ],
