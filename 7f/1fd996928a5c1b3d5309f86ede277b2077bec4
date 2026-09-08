@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 765-778
+src/content/docs/postgresql/basic/core/01-pg-vs-mysql.md
+  h_9324126a55eff3 1-73
+src/content/docs/postgresql/basic/core/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/postgresql.json
+  h_9324126a55eff3 4,12-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "7f1fd996928a5c1b3d5309f86ede277b2077bec4",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
