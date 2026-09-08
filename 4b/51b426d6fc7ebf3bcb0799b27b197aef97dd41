@@ -1,0 +1,18 @@
+src/content/docs/distributed/advanced/observability/02-metrics-alerting.md
+  h_9324126a55eff3 5
+src/content/docs/mysql/advanced/performance-ha/01-optimization.md
+  h_9324126a55eff3 5
+src/content/docs/rocketmq/advanced/core/01-rocketmq-features.md
+  h_9324126a55eff3 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "4b51b426d6fc7ebf3bcb0799b27b197aef97dd41",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
