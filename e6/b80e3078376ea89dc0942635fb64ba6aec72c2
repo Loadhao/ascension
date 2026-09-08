@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 1236-1249
+src/content/docs/rocketmq/basic/core/01-rocketmq-architecture.md
+  h_9324126a55eff3 1-72
+src/content/docs/rocketmq/basic/core/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/rocketmq.json
+  h_9324126a55eff3 4,10-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "e6b80e3078376ea89dc0942635fb64ba6aec72c2",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
