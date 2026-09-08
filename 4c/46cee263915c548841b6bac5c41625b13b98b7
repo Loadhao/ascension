@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 871-884
+src/content/docs/mongodb/basic/core/01-document-model.md
+  h_9324126a55eff3 1-76
+src/content/docs/mongodb/basic/core/index.mdx
+  h_9324126a55eff3 1-12
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 4,11-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "4c46cee263915c548841b6bac5c41625b13b98b7",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
