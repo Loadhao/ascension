@@ -1,0 +1,64 @@
+---
+title: 最近公共祖先
+description: 两条根路径的最后一个公共节点，或左右子树分治上抛：LCA 的直觉解与递归解
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+最近公共祖先（LCA，LeetCode 236）：树上两节点的最近共同祖先。
+直觉解法一句话：**LCA = 两条「根到目标」路径的最后一个公共节点**——先各搜一条路径，再逐位对齐。
+递归解法则更优雅：左右子树各找一遍，两边都命中则当前节点就是答案，只命中一边就原样上抛。
+
+## 动态演示
+
+先高亮根到 6 的路径，再高亮根到 4 的路径，逐位对齐找最后一个公共节点。
+组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="lca" />
+
+## Java 实现
+
+```java
+/** 递归解法：p、q 必然都在树中 */
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    if (root == null || root == p || root == q) return root;   // 命中目标或空树：上抛
+    TreeNode left = lowestCommonAncestor(root.left, p, q);     // 左边找到了什么
+    TreeNode right = lowestCommonAncestor(root.right, p, q);   // 右边找到了什么
+    if (left != null && right != null) return root;            // 两边各一个 → 我是分岔点
+    return left != null ? left : right;                        // 只有一边命中 → 上抛
+}
+```
+
+读懂它的关键在「上抛语义」：子树调用返回的不是布尔值，而是「这棵子树里找到的 p / q / LCA」。
+两个目标分居两侧时，它们的分岔点恰好是唯一一个「左右都拿到非空」的节点——这就是 LCA。
+
+路径法（演示的直觉版）实现也不复杂：DFS 记录根到两目标的路径栈，弹栈到长度对齐再逐位比较：
+
+```java
+private boolean findPath(TreeNode root, TreeNode target, Deque<TreeNode> path) {
+    if (root == null) return false;
+    path.addLast(root);
+    if (root == target) return true;
+    if (findPath(root.left, target, path) || findPath(root.right, target, path)) return true;
+    path.removeLast();                       // 这条子树里没有：撤销（又是回溯）
+    return false;
+}
+// 两条路径找完后：先弹到等长，再同步弹出直到栈顶相同
+```
+
+## 复杂度与特点
+
+| 维度 | 递归解 | 路径法 |
+| --- | --- | --- |
+| 时间 | O(n) | O(n) 两次 DFS + 对齐 O(h) |
+| 空间 | O(h) 递归栈 | O(h) 两条路径 |
+| 直觉 | 抽象但代码短 | 直观，还能顺便给出两节点距离 |
+
+## 面试要点
+
+- **BST 的 LCA 有捷径**（LC 235）：利用有序性走单边——p、q 都小于 root 进左，都大于进右，第一次「分居两侧」（或等于 root）的就是答案，O(h) 不用搜全树。普通二叉树没有序，才需要 O(n) 的递归解。
+- 递归解的隐藏前提：题目保证 p、q 都存在。若不保证（LC 1644），需要统计命中个数，只有恰命中 2 个才返回 LCA。
+- 变体延伸：**求两节点距离** = dist(root, p) + dist(root, q) − 2·dist(root, LCA)，路径法顺手就能算。
+- 手写坑：把「上抛」写成布尔返回后丢掉了 LCA 信息；路径法对齐前忘记先把较长路径弹到等长。

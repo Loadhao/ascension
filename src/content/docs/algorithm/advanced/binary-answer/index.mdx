@@ -1,0 +1,13 @@
+---
+title: 二分答案
+description: 把「求最小满足」变成单调判定 + 二分：答案空间上的折半搜索，配速度轴排除区的动态演示
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+二分不只能查数组——**只要「答案是否满足条件」随候选值单调，就能对答案本身二分**。
+这类题的题面通常长成「最小的最大」「最大的最小」「最少时间完成」，套路三板斧：
+确定答案区间 [min, max] → 写一个 O(n) 的贪心判定 `check(k)` → 在区间上左边界二分。
+复杂度从「逐个试」的 O(nV) 降到 O(n log V)，V 是答案的值域宽度。
+
+<CategoryNotesIsland categoryId="algorithm/advanced/binary-answer" />

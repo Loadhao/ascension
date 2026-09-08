@@ -1,0 +1,65 @@
+---
+title: 二分答案
+description: 判定单调就二分答案：科科吃香蕉的速度轴演示，「最小的最大/最大的最小」类题三板斧
+level: advanced
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+「最小的最大」「最大的最小」「最少时间完成」——这类题面是**二分答案**的信号。
+关键洞察：题目问的答案 k 通常满足一个**单调判定**——k 越大越容易满足（或反之）。
+既然「k 行不行」单调，就在答案的取值区间 [min, max] 上**对 k 本身二分**，
+每次花 O(n) 做一次贪心判定。复杂度从 O(nV) 降到 **O(n log V)**。
+
+## 动态演示
+
+横轴就是速度 k（1 到最大堆），柱高 = 该速度下吃完所有堆所需的小时数，随 k 单调下降。
+灰色柱是二分排除掉的区间，橙色柱是当步试探的 mid。组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="koko-eating-bananas" />
+
+## Java 实现
+
+```java
+public int minEatingSpeed(int[] piles, int h) {
+    int low = 1, high = 0;
+    for (int p : piles) high = Math.max(high, p);       // 上界：一次吞掉最大堆
+
+    while (low < high) {                                 // 区间收缩到唯一点
+        int mid = low + (high - low) / 2;
+        if (hoursNeeded(piles, mid) <= h) {              // 判定：mid 速度来得及吗
+            high = mid - 1;                              // 来得及：答案 ≤ mid（mid 保留候选）
+        } else {
+            low = mid + 1;                               // 太慢：mid 以下全不可行
+        }
+    }
+    return low;
+}
+
+/** 速度 k 的总耗时：每堆 ceil(p / k)， 向上取整不可省 */
+private long hoursNeeded(int[] piles, int k) {
+    long sum = 0;
+    for (int p : piles) sum += (p + k - 1L) / k;
+    return sum;
+}
+```
+
+`high = mid - 1` 而不是 `high = mid`：因为求的是**最小**可行值，mid 可行时答案可能是 mid 也可能更小——
+mid 先保留在候选里（不清零），比它快的区间整段排除。这是左边界二分在「答案空间」上的镜像用法
+（对照二分查找笔记的 lower_bound）。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间 | O(n log V) | log V 次判定，每次 O(n)；V 是值域宽度 |
+| 空间 | O(1) | 三个变量 |
+| 前提 | **判定单调** | k 行不行必须随 k 单调，不单调就不能二分 |
+
+## 面试要点
+
+- **三板斧是答题模板**：① 找到答案的值域 [lo, hi]（本题 [1, max(piles)]）；② 写 `check(k)`（本题按 k 逐堆向上取整求和）；③ 选对收缩方向（最小可行 → mid 可行时缩右界）。讲题按这三步说，条理分自然高。
+- 同族题清单：**分割数组的最大值**（LC 410，check = 贪心装箱数段数）、**运送包裹 D 天内**（LC 1011）、**H 指数 II**、** pavement 的机器人最小半径**……题面千变，都是「最小满足」。
+- 判定函数里最容易错的是**向上取整**：`(p + k - 1) / k` 或 `Math.ceil`，直接 `/` 向下取整会算快；耗时和要用 `long` 防溢出。
+- 为什么不用 DP/贪心直接解？答案空间 V 可能高达 10⁹——线性扫描必炸，「值域大 + 判定单调」就是二分答案的身份证。

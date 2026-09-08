@@ -3,8 +3,9 @@ import AlgorithmViz from './AlgorithmViz';
 import ListViz from './ListViz';
 import TreeViz from './TreeViz';
 import StackViz from './StackViz';
+import GraphViz from './GraphViz';
 import { vizDemos } from '../../data/viz';
-import { listDemos, stackDemos, treeDemos } from '../../data/viz/structures';
+import { listDemos, stackDemos, treeDemos, graphDemos } from '../../data/viz/structures';
 
 const { demo } = Astro.props as { demo: string };
 // 按注册表分发到对应画法；旧柱状数组演示的 props 保持不变
@@ -12,9 +13,11 @@ const bars = vizDemos[demo];
 const list = listDemos[demo];
 const tree = treeDemos[demo];
 const stack = stackDemos[demo];
+const graph = graphDemos[demo];
 ---
 
 {bars && <AlgorithmViz client:visible {...bars} />}
 {list && <ListViz client:visible {...list} />}
 {tree && <TreeViz client:visible {...tree} />}
 {stack && <StackViz client:visible {...stack} />}
+{graph && <GraphViz client:visible {...graph} />}

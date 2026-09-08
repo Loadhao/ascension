@@ -1160,6 +1160,132 @@ function maxSubarrayDemo(): VizConfig {
 	return { title: '最大子数组和 · Kadane 算法', frames };
 }
 
+/** 跳跃游戏 II：贪心按「层」推进，每层是当前步数能到达的区间 */
+function jumpGameDemo(): VizConfig {
+	const nums = [2, 3, 1, 1, 4];
+	const n = nums.length;
+	const items = toItems(nums);
+	const frames: VizFrame[] = [];
+	let jumps = 0;
+	let layerL = 0;
+	let layerR = 0;
+
+	const range = (l: number, r: number) => Array.from({ length: Math.max(r - l + 1, 0) }, (_, k) => l + k);
+
+	frames.push({
+		items: [...items],
+		note: `跳跃游戏 II（LC 45，柱高 = 每格可跳的步数）：从下标 0 跳到末尾最少几步？贪心按「层」推进——第 k 层 = 步数 k 内能到达的下标区间，本质是 BFS 分层。本例 [2, 3, 1, 1, 4]`,
+	});
+	while (layerR < n - 1) {
+		const prevL = layerL;
+		const prevR = layerR;
+		let nextFar = prevR;
+		for (let i = prevL; i <= prevR; i++) nextFar = Math.max(nextFar, i + nums[i]!);
+		layerL = prevR + 1;
+		layerR = nextFar;
+		jumps++;
+		const covered = layerR >= n - 1;
+		frames.push({
+			items: [...items],
+			active: range(layerL, Math.min(layerR, n - 1)),
+			locked: prevL > 0 ? range(0, prevL - 1) : [],
+			pointers: { 最远: Math.min(layerR, n - 1) },
+			note: `第 ${jumps} 步：扫描上一层区间 [${prevL}, ${prevR}] 各格的可达范围（${Array.from({ length: prevR - prevL + 1 }, (_, k) => `${prevL + k}+${nums[prevL + k]}`).join('、')}），最远到下标 ${layerR}${covered ? ' —— 覆盖终点，结束' : `，下一层区间 [${layerL}, ${layerR}]（橙色列）`}`,
+		});
+	}
+	frames.push({
+		items: [...items],
+		locked: range(0, n - 1),
+		note: `最少 ${jumps} 步（0 → 1 → 4）。每格只被扫描一次，整体 O(n)；跳跃游戏 I（能否到达）是同一贪心的退化版：只维护一个「最远可达」变量，扫到 i > 最远即失败`,
+	});
+	return { title: '跳跃游戏 · 贪心分层', frames };
+}
+
+/** 二分答案：科科吃香蕉——柱子是「速度轴」：每根柱 = 该速度下所需小时数（随 k 单调递减） */
+function kokoEatingBananasDemo(): VizConfig {
+	const piles = [3, 6, 7, 11];
+	const hours = 8;
+	const hoursAt = (k: number) => piles.reduce((sum, p) => sum + Math.ceil(p / k), 0);
+	const maxSpeed = Math.max(...piles);
+	const speeds = Array.from({ length: maxSpeed }, (_, i) => i + 1);
+	const items = toItems(speeds.map((k) => hoursAt(k)));
+	const frames: VizFrame[] = [];
+	let low = 1;
+	let high = maxSpeed;
+
+	const range = (l: number, r: number) => Array.from({ length: Math.max(r - l + 1, 0) }, (_, k) => l + k);
+	const excluded = new Set<number>();
+	const lockedIdx = () => [...excluded].sort((a, b) => a - b);
+
+	frames.push({
+		items: [...items],
+		pointers: { low: low - 1, high: high - 1 },
+		note: `爱吃香蕉的科科（LC 875）：香蕉堆 [${piles.join(', ')}]，要在 ${hours} 小时内吃完，求最小速度 k。横轴就是速度 k = 1 ~ ${maxSpeed}（柱高 = 该速度下的总耗时，随 k 单调下降）。「耗时 ≤ ${hours}」这个判定随 k 单调——答案空间可以二分`,
+	});
+	while (low < high) {
+		const mid = low + ((high - low) >> 1);
+		const used = hoursAt(mid);
+		const feasible = used <= hours;
+		if (feasible) {
+			for (let k = mid + 1; k <= maxSpeed; k++) excluded.add(k - 1);
+			high = mid - 1;
+		} else {
+			for (let k = low; k <= mid; k++) excluded.add(k - 1);
+			low = mid + 1;
+		}
+		frames.push({
+			items: [...items],
+			active: [mid - 1],
+			locked: lockedIdx(),
+			pointers: { low: low - 1, mid: mid - 1, high: high - 1 },
+			note: `试探 k = mid = ${mid}（橙柱）：耗时 ${used} 小时。${feasible ? `≤ ${hours} 来得及：k = ${mid} 可行且可能是答案（保留），比它更快的 ${mid + 1} ~ ${maxSpeed} 无需再试（灰色为已排除区），high = mid - 1 = ${high}` : `> ${hours} 太慢：k ≤ ${mid} 全部不可行（灰色为已排除区），low = mid + 1 = ${low}`}`,
+		});
+	}
+	frames.push({
+		items: [...items],
+		active: [low - 1],
+		locked: lockedIdx(),
+		note: `区间收缩到唯一点：最小可行速度 k = ${low}（耗时 ${hoursAt(low)} 小时，恰好 ≤ ${hours}；k = ${low - 1} 时需 ${hoursAt(low - 1)} 小时会超时）。单调判定 + 二分 = O(n log V)。「分割数组的最大值」(LC 410) 是同款「二分答案 + 贪心判定」`,
+	});
+	return { title: `二分答案 · 速度轴上找 k`, frames };
+}
+
+/** 最长公共子序列：滚动行填 DP 表，每帧是一行 dp[j] */
+function lcsDemo(): VizConfig {
+	const s1 = 'abcde';
+	const s2 = 'ace';
+	const n2 = s2.length;
+	const frames: VizFrame[] = [];
+	const display = (vals: number[]): VizItem[] => vals.map((v, i) => ({ id: 400 + i, value: v }));
+	const range = (n: number) => Array.from({ length: n }, (_, k) => k);
+
+	frames.push({
+		items: display(new Array(n2).fill(0)),
+		note: `最长公共子序列（LC 1143）：s1 = "${s1}"、s2 = "${s2}"，答案 "ace" 长度 3。dp[i][j] = s1 前 i 个与 s2 前 j 个的 LCS 长度：字符相等取「左上 + 1」，不等取 max(上, 左)。柱子按 s2 的三列 (a/c/e) 摆放，逐行滚动填表（矮柱 = 还没算到）`,
+	});
+	let prevRow = new Array(n2).fill(0);
+	for (let i = 1; i <= s1.length; i++) {
+		const row = new Array(n2).fill(0);
+		for (let j = 1; j <= n2; j++) {
+			row[j - 1] = s1[i - 1] === s2[j - 1] ? (j >= 2 ? prevRow[j - 2]! : 0) + 1 : Math.max(prevRow[j - 1]!, j >= 2 ? row[j - 2]! : 0);
+		}
+		const cells = s2.split('').map((c, j) => (s1[i - 1] === c ? `${c} 匹配 → 左上+1 = ${row[j]}` : `${c} 不等 → max(上, 左) = ${row[j]}`)).join('；');
+		frames.push({
+			items: display(row),
+			active: range(n2),
+			locked: range(n2),
+			note: `i = ${i}（字符 '${s1[i - 1]}'）：${cells}。本行 dp = [${row.join(', ')}]`,
+		});
+		prevRow = row;
+	}
+	frames.push({
+		items: display(prevRow),
+		locked: range(n2),
+		note: `最后一行最后一格 = ${prevRow[n2 - 1]}，即 LCS("${s1}", "${s2}") 长度 3（"ace"）。时间 O(mn)；空间用滚动行压到 O(n)——二维表「每行只依赖上一行」时的标准压缩，0-1 背包滚动数组同理`,
+	});
+	return { title: `LCS · "${s1}" vs "${s2}"`, frames };
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的演示注册表 */
 export const vizDemos: Record<string, VizConfig> = {
 	'bubble-sort': bubbleSortDemo(),
@@ -1182,4 +1308,7 @@ export const vizDemos: Record<string, VizConfig> = {
 	'climbing-stairs': climbingStairsDemo(),
 	'house-robber': houseRobberDemo(),
 	'max-subarray': maxSubarrayDemo(),
+	'jump-game': jumpGameDemo(),
+	'koko-eating-bananas': kokoEatingBananasDemo(),
+	'lcs': lcsDemo(),
 };

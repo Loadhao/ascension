@@ -226,10 +226,70 @@
   gap: 6px;
 }
 
+/* ---- 图 ---- */
+.algo-graph-plot {
+  height: 300px;
+}
+
+.algo-graph-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.algo-graph-edge {
+  stroke: var(--algo-chip-border);
+  stroke-width: 1.4;
+  transition: stroke 150ms ease;
+}
+.algo-graph-edge--active {
+  stroke: var(--algo-bar-active);
+  stroke-width: 2.4;
+}
+.algo-graph-arrowhead {
+  fill: var(--algo-chip-border);
+}
+.algo-graph-arrowhead--active {
+  fill: var(--algo-bar-active);
+}
+.algo-graph-elabel {
+  fill: var(--algo-chip-text);
+  font-size: 13px;
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+}
+
+.algo-graph-node circle {
+  fill: var(--algo-bar);
+  stroke: var(--algo-chip-border);
+  stroke-width: 1.2;
+  transition:
+    fill 150ms ease,
+    stroke 150ms ease;
+}
+.algo-graph-node text {
+  fill: var(--algo-bar-text);
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.algo-graph-node--visited circle {
+  fill: var(--algo-bar-locked);
+}
+.algo-graph-node--frontier circle {
+  stroke: var(--algo-bar-active);
+}
+.algo-graph-node--active circle {
+  fill: var(--algo-bar-active);
+  stroke: var(--algo-bar-active);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .algo-list-node,
   .algo-stack-item,
-  .algo-tree-node rect {
+  .algo-tree-node rect,
+  .algo-graph-node circle,
+  .algo-graph-edge {
     transition: none;
   }
 }

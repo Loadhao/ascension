@@ -1,0 +1,13 @@
+---
+title: 图论
+description: BFS 与 DFS 双遍历、Kahn 拓扑排序：邻接表建图、visited 防环、入度剥离定序，配图上动态演示
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+图是所有数据结构的终局——树是无边界的图，链表是一叉的树。图论入门抓三件事：
+**建图用邻接表**（`Map<节点, 邻居[]>`）、**遍历必带 visited**（图有环，不标记必死循环）、
+**BFS 走队列 DFS 走栈**（前者最短路后者钻到底）。拓扑排序再示范「在遍历上叠加业务约束」：
+入度剥离给出不违反依赖的执行序。
+
+<CategoryNotesIsland categoryId="algorithm/advanced/graph" />

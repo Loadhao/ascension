@@ -1,6 +1,7 @@
 import type { ListFrame, ListNodeItem, ListVizConfig } from '../../components/viz/ListViz';
 import type { StackFrame, StackVizConfig, StackSpec } from '../../components/viz/StackViz';
 import type { TreeFrame, TreeNodeItem, TreeVizConfig } from '../../components/viz/TreeViz';
+import type { GraphFrame, GraphNodeItem, GraphVizConfig, GraphEdgeItem } from '../../components/viz/GraphViz';
 
 // ===== 链表 =====
 
@@ -779,4 +780,252 @@ export const treeDemos: Record<string, TreeVizConfig> = {
 	'tree-traversal': treeTraversalDemo(),
 	'bst-operations': bstDemo(),
 	'invert-tree': invertTreeDemo(),
+	'lca': lowestCommonAncestorDemo(),
+};
+
+/** 最近公共祖先：两条根到目标的路径，第一次分岔（或一方结束）处即 LCA */
+function lowestCommonAncestorDemo(): TreeVizConfig {
+	//          3
+	//        /   \
+	//       5     1
+	//      / \   / \
+	//     6   2 0   8
+	//        / \
+	//       7   4
+	const items: TreeNodeItem[] = [
+		{ id: 3, label: '3', left: 5, right: 1 },
+		{ id: 5, label: '5', left: 6, right: 2 },
+		{ id: 1, label: '1', left: 0, right: 8 },
+		{ id: 6, label: '6', left: null, right: null },
+		{ id: 2, label: '2', left: 7, right: 4 },
+		{ id: 0, label: '0', left: null, right: null },
+		{ id: 8, label: '8', left: null, right: null },
+		{ id: 7, label: '7', left: null, right: null },
+		{ id: 4, label: '4', left: null, right: null },
+	];
+	const frames: TreeFrame[] = [];
+	const pathOf = (target: number): number[] => {
+		const path: number[] = [];
+		const walk = (id: number): boolean => {
+			if (id === null) return false;
+			path.push(id);
+			if (id === target) return true;
+			const node = items.find((it) => it.id === id)!;
+			if ((node.left !== null && walk(node.left)) || (node.right !== null && walk(node.right))) return true;
+			path.pop();
+			return false;
+		};
+		walk(3);
+		return path;
+	};
+	const p1 = pathOf(6);
+	const p2 = pathOf(4);
+
+	frames.push({
+		items: treeSnap(items),
+		root: 3,
+		note: '最近公共祖先（LC 236）：节点 6 与 4 的 LCA。解法直觉：LCA 就是两条「根到目标」路径的最后一个公共节点',
+	});
+	frames.push({
+		items: treeSnap(items),
+		root: 3,
+		visited: p1,
+		active: [6],
+		note: `根到 6 的路径：${p1.map((id) => items.find((it) => it.id === id)!.label).join(' → ')}`,
+	});
+	frames.push({
+		items: treeSnap(items),
+		root: 3,
+		visited: p2,
+		active: [4],
+		note: `根到 4 的路径：${p2.map((id) => items.find((it) => it.id === id)!.label).join(' → ')}（灰色列）`,
+	});
+	const lcaId = (() => {
+		let lca = 3;
+		for (let i = 0; i < Math.min(p1.length, p2.length); i++) {
+			if (p1[i] === p2[i]) lca = p1[i]!;
+			else break;
+		}
+		return lca;
+	})();
+	frames.push({
+		items: treeSnap(items),
+		root: 3,
+		visited: [lcaId],
+		active: [6, 4],
+		note: `逐位对齐两条路径：${p1.map((id) => items.find((it) => it.id === id)!.label).join('、')} 与 ${p2.map((id) => items.find((it) => it.id === id)!.label).join('、')}，最后一个公共节点是 ${lcaId} —— 即 LCA`,
+	});
+	frames.push({
+		items: treeSnap(items),
+		root: 3,
+		visited: [lcaId],
+		note: '递归解法一页写完：左右子树各找一遍，两边都命中则当前节点是 LCA，只命中一边就上抛——O(n) 一趟。若树是 BST 还能利用有序性走单边（对照 BST 笔记）',
+	});
+	return { title: '最近公共祖先 · 路径对齐', frames };
+}
+
+// ===== 图 =====
+
+/** 网格小图（无向图，边双向给出）：同一张图的 BFS 与 DFS 两幕 */
+function graphTraversalDemo(): GraphVizConfig {
+	const nodes: GraphNodeItem[] = [
+		{ id: 0, label: '0', x: 0.05, y: 0.1 },
+		{ id: 1, label: '1', x: 0.5, y: 0.1 },
+		{ id: 2, label: '2', x: 0.95, y: 0.1 },
+		{ id: 3, label: '3', x: 0.05, y: 0.85 },
+		{ id: 4, label: '4', x: 0.5, y: 0.85 },
+		{ id: 5, label: '5', x: 0.95, y: 0.85 },
+	];
+	const edges: GraphEdgeItem[] = [
+		{ from: 0, to: 1 }, { from: 1, to: 0 },
+		{ from: 1, to: 2 }, { from: 2, to: 1 },
+		{ from: 0, to: 3 }, { from: 3, to: 0 },
+		{ from: 1, to: 4 }, { from: 4, to: 1 },
+		{ from: 2, to: 5 }, { from: 5, to: 2 },
+		{ from: 3, to: 4 }, { from: 4, to: 3 },
+		{ from: 4, to: 5 }, { from: 5, to: 4 },
+	];
+	const adj = new Map<number, number[]>(nodes.map((n) => [n.id, []]));
+	for (const e of edges) if (adj.has(e.from)) adj.get(e.from)!.push(e.to);
+	const labelOf = (id: number) => String(id);
+	const frames: GraphFrame[] = [];
+
+	frames.push({
+		nodes,
+		edges,
+		frontier: [],
+		note: '同一张无向图，两种遍历：BFS 用队列逐层推进（最短路的基础），DFS 用递归/栈一条路扎到底（连通性、环检测的基础）。都必须带 visited 集合——图里有环，不标记会死循环。邻接表建图后都是 O(V + E)',
+	});
+
+	// BFS
+	const bfsOrder: number[] = [];
+	const bfsVisited = new Set<number>([0]);
+	let queue = [0];
+	frames.push({ nodes, edges, active: [], visited: [], frontier: [...queue], frontierLabel: '队列', note: '【BFS】0 入队。约定：出队时访问，邻居按编号从小到大入队' });
+	while (queue.length > 0) {
+		const cur = queue.shift()!;
+		bfsOrder.push(cur);
+		bfsVisited.add(cur);
+		const neighbors = (adj.get(cur) ?? []).filter((x) => !bfsVisited.has(x) && !queue.includes(x));
+		for (const nx of neighbors) bfsVisited.add(nx);
+		queue = [...queue, ...neighbors];
+		frames.push({
+			nodes,
+			edges,
+			active: [cur],
+			visited: [...bfsOrder],
+			frontier: [...queue],
+			frontierLabel: '队列',
+			activeEdges: neighbors.map((nx) => [cur, nx] as [number, number]),
+			note: `${labelOf(cur)} 出队访问${neighbors.length ? `，未访问邻居 ${neighbors.map(labelOf).join('、')} 入队` : '，邻居都已在队列或已访问'}。输出：${bfsOrder.map(labelOf).join(' → ')}${queue.length ? `；队列 [${queue.map(labelOf).join(', ')}]` : '；队列空'}`,
+		});
+	}
+
+	// DFS
+	const dfsOrder: number[] = [];
+	const dfsVisited = new Set<number>();
+	const stack: number[] = [0];
+	frames.push({ nodes, edges, visited: [], frontier: [...stack], frontierLabel: '栈', note: '【DFS】改用显式栈：入栈时访问，邻居编号大的先压（小的先弹），一条路扎到底再回头' });
+	while (stack.length > 0) {
+		const cur = stack.pop()!;
+		if (dfsVisited.has(cur)) continue;
+		dfsOrder.push(cur);
+		dfsVisited.add(cur);
+		const neighbors = (adj.get(cur) ?? []).filter((x) => !dfsVisited.has(x)).reverse();
+		for (const nx of neighbors) stack.push(nx);
+		frames.push({
+			nodes,
+			edges,
+			active: [cur],
+			visited: [...dfsOrder],
+			frontier: [...stack],
+			frontierLabel: '栈',
+			activeEdges: neighbors.slice(0, 1).map((nx) => [cur, nx] as [number, number]),
+			note: `${labelOf(cur)} 入栈即访问${neighbors.length ? `，未访问邻居 ${neighbors.map(labelOf).join('、')} 压栈（栈顶将先被探索）` : '，无未访问邻居，开始回退'}。输出：${dfsOrder.map(labelOf).join(' → ')}`,
+		});
+	}
+
+	frames.push({
+		nodes,
+		edges,
+		visited: [...dfsOrder],
+		note: `BFS 序 ${bfsOrder.map(labelOf).join(' → ')}（按层扩散），DFS 序 ${dfsOrder.map(labelOf).join(' → ')}（先纵后横）。图遍历是网格岛数量、迷宫最短路、课程依赖这些题的共同引擎`,
+	});
+	return { title: '图的遍历 · BFS 与 DFS', frames };
+}
+
+/** 拓扑排序（Kahn 算法）：入度清零即入队，队列为空时若还有节点未输出则存在环 */
+function topologicalSortDemo(): GraphVizConfig {
+	// 依赖图：0、1 无前置 → 2 依赖 0 和 1 → 3 依赖 2 → 4 依赖 2
+	const nodes: GraphNodeItem[] = [
+		{ id: 0, label: '0', x: 0.08, y: 0.15 },
+		{ id: 1, label: '1', x: 0.08, y: 0.8 },
+		{ id: 2, label: '2', x: 0.5, y: 0.48 },
+		{ id: 3, label: '3', x: 0.92, y: 0.15 },
+		{ id: 4, label: '4', x: 0.92, y: 0.8 },
+	];
+	const edges: GraphEdgeItem[] = [
+		{ from: 0, to: 2 },
+		{ from: 1, to: 2 },
+		{ from: 2, to: 3 },
+		{ from: 2, to: 4 },
+	];
+	const labelOf = (id: number) => String(id);
+	const indegree = new Map<number, number>(nodes.map((n) => [n.id, 0]));
+	for (const e of edges) indegree.set(e.to, (indegree.get(e.to) ?? 0) + 1);
+	const adj = new Map<number, number[]>(nodes.map((n) => [n.id, []]));
+	for (const e of edges) adj.get(e.from)!.push(e.to);
+	const frames: GraphFrame[] = [];
+	const order: number[] = [];
+
+	frames.push({
+		nodes,
+		edges,
+		note: `拓扑排序（Kahn / BFS 法）：反复摘除「入度为 0」的节点。入度 = 有多少前置依赖，先统计：${nodes.map((n) => `${n.label}→${indegree.get(n.id)}`).join('，')}`,
+	});
+
+	let queue = nodes.filter((n) => indegree.get(n.id) === 0).map((n) => n.id);
+	frames.push({
+		nodes,
+		edges,
+		frontier: [...queue],
+		frontierLabel: '队列',
+		note: `入度为 0 的 ${queue.map(labelOf).join('、')} 入队——它们没有任何前置，可以立刻输出`,
+	});
+	while (queue.length > 0) {
+		const cur = queue.shift()!;
+		order.push(cur);
+		const released: number[] = [];
+		const hotEdges: Array<[number, number]> = [];
+		for (const nx of adj.get(cur) ?? []) {
+			indegree.set(nx, indegree.get(nx)! - 1);
+			hotEdges.push([cur, nx]);
+			if (indegree.get(nx) === 0) {
+				queue.push(nx);
+				released.push(nx);
+			}
+		}
+		frames.push({
+			nodes,
+			edges,
+			active: [cur],
+			visited: [...order],
+			frontier: [...queue],
+			frontierLabel: '队列',
+			activeEdges: hotEdges,
+			note: `${labelOf(cur)} 出队进入结果（${order.map(labelOf).join(' → ')}），它指向的边全部删除，${released.length ? `邻居 ${released.map(labelOf).join('、')} 入度清零入队` : '邻居入度尚未清零'}${queue.length ? `；队列 [${queue.map(labelOf).join(', ')}]` : '；队列空'}`,
+		});
+	}
+	frames.push({
+		nodes,
+		edges,
+		visited: [...order],
+		note: `结果 ${order.map(labelOf).join(' → ')} 是一个合法的线性执行序（结果不唯一，依赖关系都满足）。关键性质：若输出的节点数 < V，必有环——这正是「课程表能否修完」（LC 207/210）的标准解法`,
+	});
+	return { title: '拓扑排序 · Kahn 入度剥离', frames };
+}
+
+export const graphDemos: Record<string, GraphVizConfig> = {
+	'graph-traversal': graphTraversalDemo(),
+	'topological-sort': topologicalSortDemo(),
 };

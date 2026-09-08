@@ -190,6 +190,42 @@
       "label": "全排列",
       "href": "/algorithm/intermediate/backtracking/02-permutations/",
       "group": "递归与回溯"
+    },
+    {
+      "id": "lca",
+      "label": "最近公共祖先",
+      "href": "/algorithm/intermediate/tree/04-lca/",
+      "group": "二叉树"
+    },
+    {
+      "id": "lcs",
+      "label": "最长公共子序列",
+      "href": "/algorithm/intermediate/dp/04-lcs/",
+      "group": "动态规划"
+    },
+    {
+      "id": "graph-traversal",
+      "label": "图的遍历",
+      "href": "/algorithm/advanced/graph/01-graph-traversal/",
+      "group": "图论"
+    },
+    {
+      "id": "topo",
+      "label": "拓扑排序",
+      "href": "/algorithm/advanced/graph/02-topological-sort/",
+      "group": "图论"
+    },
+    {
+      "id": "jump-game",
+      "label": "跳跃游戏",
+      "href": "/algorithm/advanced/greedy/01-jump-game/",
+      "group": "贪心"
+    },
+    {
+      "id": "binary-answer",
+      "label": "二分答案",
+      "href": "/algorithm/advanced/binary-answer/01-koko-eating-bananas/",
+      "group": "二分答案"
     }
   ],
   "edges": [
@@ -461,6 +497,70 @@
       "source": "heap",
       "target": "kadane",
       "label": "都是一遍扫描的 O(n)"
+    },
+    {
+      "source": "root",
+      "target": "lca"
+    },
+    {
+      "source": "root",
+      "target": "lcs"
+    },
+    {
+      "source": "root",
+      "target": "graph-traversal"
+    },
+    {
+      "source": "root",
+      "target": "topo"
+    },
+    {
+      "source": "root",
+      "target": "jump-game"
+    },
+    {
+      "source": "root",
+      "target": "binary-answer"
+    },
+    {
+      "source": "traversal",
+      "target": "lca",
+      "label": "递归框架上抛语义"
+    },
+    {
+      "source": "bst",
+      "target": "lca",
+      "label": "BST 版走单边 O(h)"
+    },
+    {
+      "source": "robber",
+      "target": "lcs",
+      "label": "一维 → 二维状态扩张"
+    },
+    {
+      "source": "sliding-window",
+      "target": "graph-traversal",
+      "label": "BFS 队列同源"
+    },
+    {
+      "source": "graph-traversal",
+      "target": "topo",
+      "label": "Kahn = BFS + 入度"
+    },
+    {
+      "source": "jump-game",
+      "target": "graph-traversal",
+      "label": "贪心分层 = 无队列 BFS"
+    },
+    {
+      "source": "rotated",
+      "target": "binary-answer",
+      "label": "二分数组 → 二分答案"
+    },
+    {
+      "source": "kadane",
+      "target": "jump-game",
+      "label": "同为一遍扫描的 O(n)"
     }
   ]
 }

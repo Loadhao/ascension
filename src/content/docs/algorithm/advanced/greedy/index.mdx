@@ -1,0 +1,13 @@
+---
+title: 贪心
+description: 每步局部最优导向全局最优：跳跃游戏的分层推进，配「贪心分层 ≈ BFS」的动态演示
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+贪心算法不回溯、不保存所有子问题的解，每一步只做「眼前看起来最好」的选择——它能不能用，
+取决于问题是否具有**贪心选择性质**：局部最优不会堵死全局最优。证明贪心正确性往往比写代码难，
+实战里最可靠的信号是「交换论证」：任何最优解都可以逐步替换成贪心解而不变差。
+跳跃游戏展示最经典的一种贪心形态——**按层推进，本质上是省掉队列的 BFS**。
+
+<CategoryNotesIsland categoryId="algorithm/advanced/greedy" />

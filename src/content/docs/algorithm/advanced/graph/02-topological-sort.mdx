@@ -1,0 +1,71 @@
+---
+title: 拓扑排序
+description: Kahn 入度剥离：入度为零即可执行，队空后未输出完即有环——课程表题的标准解法
+level: advanced
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+拓扑排序把有向无环图（DAG）的节点排成线性序，使**每条边都从前往后**——即「满足全部依赖的执行顺序」。
+Kahn 算法（BFS 法）的直觉一句话：**入度为 0 = 没有任何前置依赖 = 现在就能做**。
+摘掉它、删掉它的出边，邻居入度减一，减到 0 的继续入队。附赠一个关键性质：
+**如果输出的节点数 < 总节点数，图里必有环**。
+
+## 动态演示
+
+依赖图 0、1 → 2 → 3、4。橙边是当步删除的出边，队列条是「入度已清零的待输出集合」。
+组件进入视野后**自动循环播放**：
+
+<AlgorithmVizIsland demo="topological-sort" />
+
+## Java 实现
+
+```java
+public int[] findOrder(int numCourses, int[][] prerequisites) {
+    List<List<Integer>> graph = new ArrayList<>();
+    int[] indegree = new int[numCourses];
+    for (int i = 0; i < numCourses; i++) graph.add(new ArrayList<>());
+    for (int[] p : prerequisites) {
+        graph.get(p[1]).add(p[0]);            // 先修 p[1]，才能修 p[0]
+        indegree[p[0]]++;                     // p[0] 多一个前置
+    }
+
+    Queue<Integer> queue = new ArrayDeque<>();
+    for (int i = 0; i < numCourses; i++) {
+        if (indegree[i] == 0) queue.offer(i); // 无前置的课程直接可修
+    }
+
+    int[] order = new int[numCourses];
+    int idx = 0;
+    while (!queue.isEmpty()) {
+        int cur = queue.poll();
+        order[idx++] = cur;
+        for (int next : graph.get(cur)) {
+            if (--indegree[next] == 0) {      // 删除出边 = 邻居入度减一
+                queue.offer(next);
+            }
+        }
+    }
+    return idx == numCourses ? order : new int[0];   // 没输出完 = 有环
+}
+```
+
+注意边方向的语义：`prerequisites[i] = [course, prereq]` 表示「先 prereq 后 course」，
+建图时**从 prereq 指向 course**（依赖箭头 = 执行方向），入度记在 course 头上。
+
+## 复杂度与特点
+
+| 维度 | 结论 | 说明 |
+| --- | --- | --- |
+| 时间 | O(V + E) | 每节点入队一次、每边删除一次 |
+| 空间 | O(V + E) | 邻接表 + 入度数组 + 队列 |
+| 结果 | 不唯一 | 同时入度为 0 的节点任意顺序；题目要字典序最小就把队列换小顶堆 |
+| 前提 | DAG | 有环图的拓扑序不存在，但「检测到环」本身就是答案 |
+
+## 面试要点
+
+- **课程表 I / II（LC 207/210）是标配考题**：I 只回答「能否修完」= 拓扑序输出数是否等于 V；II 输出一个顺序——同一个 Kahn 框架，返回值不同。
+- 环检测的另一种视角：DFS 三色标记法（白=未访问、灰=递归中、黑=完成），**遇到灰色节点即有环**；完成序的逆序也是一组合法拓扑序——两种写法都要能说一种。
+- 工程落地全是它：构建系统的编译顺序（Make/Bazel）、Maven 依赖解析、任务调度（Airflow）、JS 模块打包的模块排序。
+- 手写坑：入度数组忘记初始化到每个节点（V 个节点都可能在答案里）；判断环时比较的是「输出计数」而不是队列最终是否为空（队空是正常结束条件）。
