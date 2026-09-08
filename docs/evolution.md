@@ -187,43 +187,54 @@
 - 新证据与经验：①"根基缺失"模式要升级为"看大纲定缺口"：ES 各篇已有（深入）小节，凭篇数判断会选错题（差点重复写写入路径）；②quorum/脑裂与分布式共识篇同源，跨方向引用是本站知识的复利点；③本日三次新建分类流程全部模板化零失误。
 - 下一轮入口：第六次启动候选——①mongodb 复制集/分片之上的分片键选型深入篇；②kafka/rocketmq/RabbitMQ 横向选型对比（需确认 middleware 方向是否已有，避免违反"不挂单一工具"约束）；③algorithm/api 等方向勘察。每轮先跑体检基线（含 mermaid-syntax-verify 第 9 项）。
 
-## 经验与判断沉淀（第五次启动增补）
+### 第 16 轮（2026-09-08，第六次启动）
 
-- **mermaid-syntax-verify.mjs 纳入例行体检（第 9 项）**：背景是构建静默吞 mermaid 错误（c480b1b 修复暴露），脚本经注入自测可信；凡围栏块变更必跑。
-- 选题前必扫目标篇目的 ## 大纲：ES 差点重复写已有"从写入到可搜索的完整路径（深入）"，篇数判断不可靠，大纲判断才可靠。
-- 并行编辑 stale 冲突处理已流程化：Edit 报 modified → git status 确认占用者 → 重读目标段落 → 重新插入（本轮 rocketmq 侧边栏实战验证）。
+- 选择：**工具固化**——历轮 8 项一致性体检一直是临时内联脚本，收编为 `scripts/consistency-verify.mjs`（8 项 + 清单输出 + exit 1）。
+- 交付：`scripts/consistency-verify.mjs`（侧边栏死链/未注册/图谱死链/覆盖率/内链/frontmatter/level/空壳页 8 项，逻辑与历轮实战版本一致）。
+- 验证：全站 8 项全绿（489 link/352 篇/134 index 页）；注入自测：造未提交笔记不误报（git ls-files 只查已提交文件，符合"不干扰并行会话"的设计约束）；提交 341459a 已推送。
+- 结论：修问题（工具债清偿）。
+- 新证据与经验：①开工先 `git pull --ff-only` 同步：远端经 PR#2#3 合并了题库扩充与内链 base 前缀 remark 插件（6159f6f）；②候选②（MQ 选型）勘察确认 middleware 方向已有专篇即退场；③mongodb 分片键小节已深入（对比表/基数/单调性/refine）同样退场——"看大纲定缺口"连续生效；④**Edit 老教训重犯**：凭记忆重打 old_string 措辞不一致导致失败（第 9 轮 kafka.json 同款），诊断确认文件健康后纠正——old_string 必须从最近 Read 内容复制；⑤quiz 题库方向并行会话在做（PR 流），本轮起避开防撞车。
+- 下一轮入口：kafka 生产者侧基础篇（`kafka/basic/core/03-producer-path.md`，补客户端发送路径空白）。
 
-## 经验与判断沉淀（第四次启动增补）
+### 第 17 轮（2026-09-08，第六次启动）
 
-- "根基缺失"选题模式已三连验证（kafka 三问/PG 差异地图/MongoDB 文档模型）：薄弱方向先补"是什么/为什么/怎么选"，再深挖机制；判断"缺不缺"看主题覆盖而非篇数（seata/zookeeper 各 2 篇但覆盖深，不缺）。
-- 新建分类的三件套流程已完全模板化：复制分类页模板改四处参数 → 写笔记 → 侧边栏插"基础"分组 → 图谱加节点边 → build + JSON 校验 → pathspec 提交。
-- 无图表笔记用对比表格与代码块承载结论，同样符合站点文风；有 mermaid 时才需跑对比度审计。
+- 选择：kafka 生产者侧基础篇（既定入口；现有三篇覆盖消费侧 offset/broker 侧 ISR/传输侧高吞吐，客户端发送路径空白）。
+- 交付：`kafka/basic/core/03-producer-path.md`（send() 五步旅程图、分区三规则与粘性分区、重试+max.in.flight 乱序陷阱、幂等生产者一箭双雕、acks 速查表）+ 侧边栏注册 + 图谱 producer 节点与 2 条边。
+- 验证：**五连验证全绿**（build 493 页 / mermaid 语法 / consistency-verify 8 项 / kafka.json 合法 / 对比度 254 页）——固化脚本首次例行运行；提交 2bb402c 已推送。
+- 结论：补功能。
+- 新证据与经验：①期间 astro.config.mjs 再次被并行会话修改，stale 纪律（status 确认→重读→重插）流畅化解；②kafka 基础等级已成三篇（三问/offset/producer），消费侧+生产侧+业务语义的入门闭环完成。
+- 下一轮入口：第七次启动候选——先跑 `node scripts/consistency-verify.mjs` 基线，再按大纲勘察定题（方向覆盖整体已健康，宁缺毋滥）。
 
-## 经验与判断沉淀（第三次启动增补）
+### 第 18 轮（2026-09-08，第六次启动）
 
-- 新分类页不要手写模板：直接复制既有分类页（如 rabbitmq/basic/core/index.mdx）改 title/description/简介/categoryId 四处，本轮因手写把组件名写错（CategoryIsland），自查即改但可避免。
-- 多轮追加同一图谱 JSON：每次 Edit 前以最近一次 Read 内容为准重建 old_string；提交前 node -e JSON.parse 校验。
-- 时序图已进入本站图表语汇（Rebalance 篇首用，审计通过）；协议/流程类八股可用 sequenceDiagram 代替纯 flowchart。
-
-## 经验与判断沉淀（第二次启动增补）
-
-- 四项体检每轮例行：①一致性体检（侧边栏/图谱/覆盖率/笔记内链）；②Mermaid 双主题对比度审计（`scripts/mermaid-contrast-verify.mjs` + `pnpm preview`，图表改动后必跑）；③frontmatter/level 体检；④分类页导读体检。前两项本日已全绿。
-- 三件套模式（新笔记+侧边栏注册+图谱节点/边）+ pathspec 提交已跑通两次，可复制到任意薄弱方向。
-- 选题方法沉淀：先读目标分类现有篇目大纲避免重叠，按"面试出场率 × 与现有内容互补度"定题；补一篇前先量化方向密度（各方向笔记数排序）。
-- astro.config.mjs 占用状态轮转：本轮已释放并成功安全使用两次（pathspec）；sidebar 组件三件套（sidebar-tree.js/Sidebar.astro/custom.css）当前被占用，涉及侧边栏交互样式的工作顺延。
-
-## 经验与判断沉淀（第 1–3 轮）
-
-- **每轮开工铁律**：先 `git status` 重新定界占用区（并行会话活跃度高，3 轮内占用区换了三轮：js/mysql/redis 图谱 → algorithm/distributed/guide → java spring 重命名）；只提交本轮自建/自改文件，**必须用 `git commit -- <pathspec>`，禁止裸 commit**（会吞并行会话已暂存内容，第 2 轮已实际发生）。
-- 提交前先 `git fetch` 看远端是否领先（并行会话可能同时推送），推送被拒则按 AGENTS.md rebase 后重试。
-- 三项可复用体检（均已在本状态文件留下脚本逻辑）：一致性体检（侧边栏/图谱/覆盖率）、Mermaid 双主题对比度审计（`scripts/mermaid-contrast-verify.mjs`，需先 `pnpm preview`）、frontmatter+内链体检（剔除代码围栏后匹配）。
-- astro.config.mjs 是高冲突文件（手动侧边栏+并行会话常改）：涉及它的改动只在确认暂存区干净、且用 pathspec 提交时进行。
-- 一致性体检中 guide/diagrams、guide/resources 为有意豁免项（元文档）。
+- 选择：状态文件维护——本文件尾部堆叠了 6 个"经验与判断沉淀"段（5 个按启动倒序的增补段+1 个过时旧段），恢复现场时阅读成本高。
+- 交付：合并为单一主题化经验段（工作纪律/选题方法/三件套与验证三节），去除过时信息（旧占用区清单、内联脚本说明），内容无损。
+- 验证：段落结构唯一、全部有效信息保留；`node scripts/consistency-verify.mjs` 复跑全绿。
+- 结论：改善体验（状态文件可读性）。
+- 新证据与经验：状态文件本身也需定期维护——增补式追加适合记录过程，但积累 15 轮后应回收整理，否则恢复现场的成本随轮次线性增长。
+- 下一轮入口：见第 17 轮。
 
 ## 经验与判断沉淀
 
-- 工作区常驻并行会话改动（git status 长期不干净）：每轮开工先 git status 定界，只提交本轮自建/自改文件；astro.config.mjs 与 graphs/{js,mysql,redis}.json 当前为占用区。
-- 一致性体检脚本逻辑（node 内联）：侧边栏 link 解析→文件存在性；git ls-files 笔记→侧边栏注册集合差；图谱 href→文件存在性。每轮验证复用。
+### 工作纪律
+
+- 每轮开工：`git pull --ff-only` 同步 → `git status` 定界占用区 → 只提交本轮自建/自改文件；**必须 `git commit -- <pathspec>`，禁止裸 commit**（第 2 轮实际吞过并行会话已暂存内容）。
+- Edit 冲突两则：①stale（文件被并行会话改）→ git status 确认 → 重读目标段 → 重新插入；②old_string 必须从最近 Read 的实际内容复制，**禁止凭记忆重打**（kafka.json 与本文件各踩过一次）。
+- 图谱 JSON 多轮追加后、提交前 JSON.parse 校验；quiz 题库由并行会话维护（PR 流），演进轮次避开 quiz 数据防撞车。
+- astro.config.mjs 是高冲突文件（手动侧边栏），stale 频发但按纪律可安全使用；guide/diagrams、guide/resources 为体检豁免项（元文档）。
+
+### 选题方法
+
+- "根基缺失"模式三连验证（kafka 三问/PG 差异地图/MongoDB 文档模型）：薄弱方向先补"是什么/为什么/怎么选"，再深挖机制。
+- 判断缺口必看目标篇目 ## 大纲，篇数不可靠：ES、rocketmq 分片键、nginx 都凭大纲避免了重复写作；seata/zookeeper 篇少但覆盖深不算缺。
+- 勘察先行、候选可退场：middleware 已有 MQ 选型专篇即退场，不为写而写；选题按"面试出场率 × 与现有内容互补度"。
+- 定量工具：方向笔记数排序找薄弱面（java 94 篇 vs etcd 2 篇），再进大纲细察。
+
+### 三件套与验证
+
+- 新建分类流程模板化：复制既有分类页改四处参数（组件名勿手写，CategoryIsland 教训）→ 写笔记 → 侧边栏分组 → 图谱节点/边 → 五连验证 → pathspec 提交。
+- 体检体系 10 项：`scripts/consistency-verify.mjs`（8 项固化）+ `scripts/mermaid-syntax-verify.mjs`（语法守护，针对构建静默吞错的补丁，经注入自测）+ `scripts/mermaid-contrast-verify.mjs`（双主题对比度，需 preview）。
+- 无图表笔记用表格/代码块承载结论（有 mermaid 才需跑对比度审计）；时序图（sequenceDiagram）适用于协议/流程类内容。
 
 ## 待用户决策
 
