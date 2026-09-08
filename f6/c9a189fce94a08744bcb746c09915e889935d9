@@ -1,0 +1,18 @@
+src/components/quiz/Quiz.tsx
+  h_9324126a55eff3 2,179-182,184,190,202,204-210,215,299-340,399,416,446-447,544,546-560,617-620,635-639,653,675
+src/lib/quiz-store.ts
+  h_9324126a55eff3 19-20,42-43,70,88,90-92
+src/styles/custom.css
+  h_9324126a55eff3 2632-2687
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "f6c9a189fce94a08744bcb746c09915e889935d9",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
