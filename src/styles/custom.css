@@ -349,9 +349,10 @@ main:has(.kg-fullbleed) {
   :root[data-sidebar-tree='collapsed'] {
     --sl-content-inline-start: 0rem;
   }
-  /* 收起后正文列放宽（挂 .main-pane 作用域，避免波及页头网格的同名变量） */
+  /* 收起后正文列适度放宽（挂 .main-pane 作用域，避免波及页头网格的同名变量）；
+     不取更宽的值：留白随居中对半分，右侧不至于顶到目录栏 */
   :root[data-sidebar-tree='collapsed'] .main-pane {
-    --sl-content-width: 60rem;
+    --sl-content-width: 52rem;
   }
 }
 
