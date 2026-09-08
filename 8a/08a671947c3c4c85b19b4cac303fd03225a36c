@@ -1,0 +1,26 @@
+astro.config.mjs
+  h_9324126a55eff3 438-441,465
+src/content/docs/js/basic/core/02-scope-closure.md
+  h_9324126a55eff3 1-134
+src/content/docs/js/basic/core/03-prototype-class.md
+  h_9324126a55eff3 1-132
+src/content/docs/js/basic/core/04-this-binding.md
+  h_9324126a55eff3 1-122
+src/content/docs/js/basic/core/05-event-loop.md
+  h_9324126a55eff3 1-143
+src/content/docs/js/intermediate/web/03-dom-events.md
+  h_9324126a55eff3 1-122
+src/data/graphs/js.json
+  h_9324126a55eff3 5-8,11-12,17-22,26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "8a08a671947c3c4c85b19b4cac303fd03225a36c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
