@@ -1,0 +1,18 @@
+src/content/docs/algorithm/advanced/principles/01-time-space-tradeoff.mdx
+  h_9324126a55eff3 56-67
+src/content/docs/algorithm/advanced/principles/02-paradigm-landscape.mdx
+  h_9324126a55eff3 14-20
+src/content/docs/algorithm/advanced/principles/03-complexity-analysis.mdx
+  h_9324126a55eff3 26-35,65-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c1357f81596243a894708f0a670945beff3ea784",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
