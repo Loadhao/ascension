@@ -1608,6 +1608,23 @@
       ],
       "hint": "@MockBean 会替换容器 Bean 并可能重建上下文，同一 Bean 反复替换是 CI 慢的常见根源。",
       "difficulty": 4
+    },
+    {
+      "id": "java-metaspace-096",
+      "noteId": "java/advanced/jvm/02-memory",
+      "type": "single",
+      "q": "关于 String 常量池与方法区的位置演变，正确的是？",
+      "options": [
+        "JDK7 起 String 常量池移入堆（归 GC 管）；JDK8 的方法区（元空间）用本地内存、容量不受堆上限约束——动态生成类（CGLib）易撑爆 Metaspace",
+        "String 常量池至今仍在永久代，-XX:MaxPermSize 仍是有效调优参数",
+        "元空间在 JDK8 起移入堆内，受 -Xmx 约束",
+        "String.intern() 会把常量池搬进堆外直接内存，与 GC 彻底解耦"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "两代迁移各对应一类「不是 heap 的 OOM」——Metaspace OOM 多来自动态代理/CGLib 无限生成类；堆与堆外（直接内存、元空间）要一起算资源预算，别只看 -Xmx；滥用 intern 反而撑大常驻常量池。"
     }
   ]
 }

@@ -173,6 +173,23 @@
       ],
       "hint": 4,
       "difficulty": "PID 1 的两个职责——转发信号、回收僵尸进程：漏了前者 stop 超时强杀、后者僵尸堆积。另记：容器共享宿主内核（所以 Windows 容器跑不了 Linux 镜像），--privileged 等于放弃 Namespace 隔离仅调试用。"
+    },
+    {
+      "id": "docker-latest-005",
+      "noteId": "docker/basic/fundamentals/01-concepts",
+      "type": "single",
+      "q": "线上要回滚某服务的镜像版本时，说不清「上一个 latest 到底是哪个版本」。按笔记的结论，根因与对策是？",
+      "options": [
+        "latest tag 会被反复覆盖、不指向固定版本；生产应固定 tag 或 digest，用 docker history / image inspect 查分层",
+        "latest 是只读标签，一旦推送不可变，出问题只能重建镜像",
+        "应该用 docker commit 在每次改动后生成新镜像来代替 tag 管理",
+        "docker rmi 删除 latest 后会自动回滚到上一个版本"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "「改了 build 还是旧镜像」九成是构建缓存或旧 tag 指向——--no-cache 重建、明确打新 tag；看分层用 docker history（每层构建记录与大小）与 image inspect（分层信息）。"
     }
   ]
 }

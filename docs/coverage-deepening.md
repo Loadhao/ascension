@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] docker/basic/fundamentals/01-concepts — 第二题考「latest 标签会被覆盖、生产固定 tag/digest；docker history / image inspect 看分层」
-- [ ] python/basic/syntax/01-objects — 第二题考「可变对象传参副作用与浅拷贝边界（copy 只复制第一层）」
-- [ ] java/advanced/jvm/02-memory — 第二题考「元空间用本地内存 / String 常量池 JDK7 起移入堆」
 - [ ] kafka/intermediate/core/01-kafka-architecture — 第二题考「顺序写 + 批量压缩之外的存储模型（分区日志段/索引）」
 - [ ] redis/intermediate/usage/03-distributed-lock — 第二题考「Redisson 看门狗续期机制」
+- [ ] java/advanced/jvm/01-class-loading — 第二题考「(类加载器, 全限定名) 是类的唯一身份，不同加载器加载同一 class 互不相等」
+- [ ] mysql/basic/core/02-index-btree — 第二题考「索引失效清单：列上函数运算/隐式类型转换/前导 %/or 连无索引列」
+- [ ] network/basic/tcp/01-three-way-handshake — 第二题考「TIME_WAIT 在主动关闭方与 2MSL 的两个使命」
 
 ### b 类：旧题返修
 
@@ -28,6 +28,8 @@
 ## 已完成记录
 
 - 2026-09-09 · 首轮：38 道旧题补 difficulty（2~5 按概念/原理/边界/生产权衡定级）+ 3 道核心笔记第二题（py-freethread-031 / pg-index-002 / docker-pid1-003）+ 状态文件初始化（本轮提交主题：feat: 题库深化首轮）
+
+- 2026-09-09 · 第二轮：3 道核心笔记第二题（docker-latest-005 / py-mutparam-032 / java-metaspace-096，difficulty 3/3/4）· 本轮提交主题：feat: 题库深化第二轮
 
 ## 经验与规则
 
