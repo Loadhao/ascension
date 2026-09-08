@@ -69,10 +69,12 @@
     { "id": "scstream", "label": "Stream 消息", "href": "/java/advanced/springcloud/07-stream/", "group": "框架" },
     { "id": "patterns", "label": "设计模式", "href": "/java/intermediate/design-pattern/", "group": "设计" },
     { "id": "solid", "label": "SOLID 原则", "href": "/java/intermediate/design-pattern/01-principles/", "group": "设计" },
-    { "id": "creational", "label": "创建型模式", "href": "/java/intermediate/design-pattern/02-creational/", "group": "设计" },
-    { "id": "structural", "label": "结构型模式", "href": "/java/intermediate/design-pattern/03-structural/", "group": "设计" },
-    { "id": "behavioral", "label": "行为型模式", "href": "/java/intermediate/design-pattern/04-behavioral/", "group": "设计" },
-    { "id": "fwmap", "label": "框架模式地图", "href": "/java/intermediate/design-pattern/05-patterns-in-frameworks/", "group": "设计" }
+    { "id": "creational", "label": "创建型模式", "href": "/java/intermediate/design-pattern/04-creational/", "group": "设计" },
+    { "id": "singleton", "label": "单例模式", "href": "/java/intermediate/design-pattern/02-singleton/", "group": "设计" },
+    { "id": "factory", "label": "工厂模式", "href": "/java/intermediate/design-pattern/03-factory/", "group": "设计" },
+    { "id": "structural", "label": "结构型模式", "href": "/java/intermediate/design-pattern/08-structural/", "group": "设计" },
+    { "id": "behavioral", "label": "行为型模式", "href": "/java/intermediate/design-pattern/13-behavioral/", "group": "设计" },
+    { "id": "fwmap", "label": "框架模式地图", "href": "/java/intermediate/design-pattern/15-patterns-in-frameworks/", "group": "设计" }
   ],
   "edges": [
     { "source": "root", "target": "syntax" },
@@ -165,6 +167,8 @@
     { "source": "oop", "target": "patterns", "label": "原则落地" },
     { "source": "patterns", "target": "solid" },
     { "source": "patterns", "target": "creational" },
+    { "source": "creational", "target": "singleton", "label": "逐模式深入：单例" },
+    { "source": "creational", "target": "factory", "label": "逐模式深入：工厂" },
     { "source": "patterns", "target": "structural" },
     { "source": "patterns", "target": "behavioral" },
     { "source": "structural", "target": "fwmap", "label": "AOP 即代理" },

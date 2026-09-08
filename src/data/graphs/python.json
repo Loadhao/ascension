@@ -45,7 +45,10 @@
     { "id": "gil", "label": "GIL", "href": "/python/advanced/internals/01-gil/", "group": "语言" },
     { "id": "memgc", "label": "内存与 GC", "href": "/python/advanced/internals/02-memory-gc/", "group": "语言" },
     { "id": "descmeta", "label": "描述符与元类", "href": "/python/advanced/internals/03-descriptors-metaclass/", "group": "语言" },
-    { "id": "profiling", "label": "性能剖析", "href": "/python/advanced/internals/04-profiling/", "group": "语言" }
+    { "id": "profiling", "label": "性能剖析", "href": "/python/advanced/internals/04-profiling/", "group": "语言" },
+    { "id": "datetime", "label": "datetime", "href": "/python/intermediate/stdlib/05-datetime/", "group": "生态" },
+    { "id": "sqlalchemy", "label": "SQLAlchemy", "href": "/python/intermediate/libs/04-sqlalchemy/", "group": "生态" },
+    { "id": "packaging", "label": "打包发布", "href": "/python/advanced/eng/04-packaging/", "group": "生态" }
   ],
   "edges": [
     { "source": "root", "target": "syntax" },
@@ -110,6 +113,13 @@
     { "source": "internals", "target": "profiling" },
     { "source": "magic", "target": "descmeta", "label": "属性协议底层" },
     { "source": "dataclass", "target": "memgc", "label": "__slots__ 省内存" },
-    { "source": "memgc", "target": "gil", "label": "引用计数共生" }
+    { "source": "memgc", "target": "gil", "label": "引用计数共生" },
+    { "source": "stdlib", "target": "datetime" },
+    { "source": "jsoncsv", "target": "datetime", "label": "不可序列化类型" },
+    { "source": "libs", "target": "sqlalchemy" },
+    { "source": "fastapi", "target": "sqlalchemy", "label": "持久层" },
+    { "source": "typing", "target": "sqlalchemy", "label": "Mapped 标注" },
+    { "source": "eng", "target": "packaging" },
+    { "source": "modpkg", "target": "packaging", "label": "pyproject 打包" }
   ]
 }

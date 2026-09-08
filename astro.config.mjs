@@ -344,10 +344,12 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/java/intermediate/design-pattern/' },
                         { label: 'SOLID 设计原则', link: '/java/intermediate/design-pattern/01-principles/' },
-                        { label: '创建型模式', link: '/java/intermediate/design-pattern/02-creational/' },
-                        { label: '结构型模式', link: '/java/intermediate/design-pattern/03-structural/' },
-                        { label: '行为型模式', link: '/java/intermediate/design-pattern/04-behavioral/' },
-                        { label: '框架源码中的模式地图', link: '/java/intermediate/design-pattern/05-patterns-in-frameworks/' },
+                        { label: '单例模式', link: '/java/intermediate/design-pattern/02-singleton/' },
+                        { label: '工厂模式', link: '/java/intermediate/design-pattern/03-factory/' },
+                        { label: '创建型模式', link: '/java/intermediate/design-pattern/04-creational/' },
+                        { label: '结构型模式', link: '/java/intermediate/design-pattern/08-structural/' },
+                        { label: '行为型模式', link: '/java/intermediate/design-pattern/13-behavioral/' },
+                        { label: '框架源码中的模式地图', link: '/java/intermediate/design-pattern/15-patterns-in-frameworks/' },
                       ],
                     },
                     {
@@ -858,6 +860,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/distributed/intermediate/consensus/' },
                         { label: 'Paxos 与 Raft', link: '/distributed/intermediate/consensus/01-paxos-raft/' },
+                        { label: 'Gossip 协议：流感式传播', link: '/distributed/intermediate/consensus/02-gossip/' },
                       ],
                     },
                     {
@@ -896,6 +899,22 @@ export default defineConfig({
                         { label: '接口幂等性设计', link: '/distributed/intermediate/coordination/02-idempotency/' },
                       ],
                     },
+                    {
+                      label: '服务治理',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/distributed/intermediate/governance/' },
+                        { label: 'RPC 原理：一次远程调用发生了什么', link: '/distributed/intermediate/governance/01-rpc-principles/' },
+                      ],
+                    },
+                    {
+                      label: '流量治理',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/distributed/intermediate/traffic/' },
+                        { label: '分布式限流：从单机到全局', link: '/distributed/intermediate/traffic/01-distributed-rate-limiting/' },
+                      ],
+                    },
                   ],
                 },
                 {
@@ -909,6 +928,8 @@ export default defineConfig({
                         { label: '概览', link: '/distributed/advanced/consistency/' },
                         { label: '数据一致性：从强一致到最终一致', link: '/distributed/advanced/consistency/01-consistency-patterns/' },
                         { label: '缓存与数据库双写一致性', link: '/distributed/advanced/consistency/02-cache-consistency/' },
+                        { label: 'Quorum 与 NWR：一致性调节旋钮', link: '/distributed/advanced/consistency/03-quorum-nwr/' },
+                        { label: '分布式时钟与顺序', link: '/distributed/advanced/consistency/04-time-order/' },
                       ],
                     },
                     {
@@ -1011,6 +1032,20 @@ export default defineConfig({
                         { label: '概览', link: '/middleware/basic/mq/' },
                         { label: '为什么需要消息队列', link: '/middleware/basic/mq/01-why-mq/' },
                         { label: 'Kafka、RocketMQ 与 RabbitMQ 选型', link: '/middleware/basic/mq/02-mq-comparison/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '消息可靠性',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/middleware/intermediate/reliability/' },
+                        { label: '消息可靠性三问：不丢、不重、不乱序', link: '/middleware/intermediate/reliability/01-message-reliability/' },
                       ],
                     },
                   ],
