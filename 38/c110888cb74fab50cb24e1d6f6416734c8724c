@@ -1,0 +1,18 @@
+public/scripts/sidebar-tree.js
+  h_9324126a55eff3 1-2,5,31-33,37,99,110-115,117-131,133-218
+src/components/starlight/Sidebar.astro
+  h_9324126a55eff3 9-16,18-59
+src/styles/custom.css
+  h_9324126a55eff3 218,227-228,231,235-297,306,309-356
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "38c110888cb74fab50cb24e1d6f6416734c8724c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
