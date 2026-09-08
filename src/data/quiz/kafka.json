@@ -11,7 +11,9 @@
         "异步提交 + 关闭前同步提交兜底",
         "手动 commitSync 逐批提交"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "先提交后处理 = 至多一次：提交完还没处理就崩溃，重启会从已提交位移之后继续，未处理的被跳过；先处理后提交最多重复，不会丢。"
     },
     {
@@ -19,8 +21,13 @@
       "noteId": "kafka/basic/core/02-offset",
       "type": "judge",
       "q": "消费者提交的位移含义是「最后一条已处理消息的 offset」。",
-      "options": ["正确", "错误"],
-      "answer": [1],
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
       "hint": "提交的位移语义是「下一条要读的 offset」。手写提交时偏一格就是丢一条或重一条，这是最容易犯的边界错。"
     },
     {
@@ -34,7 +41,11 @@
         "零拷贝传输",
         "每条消息独立 fsync 刷盘"
       ],
-      "answer": [0, 1, 2],
+      "answer": [
+        0,
+        1,
+        2
+      ],
       "hint": "逐条 fsync 恰恰是吞吐杀手——Kafka 依赖批量写入与操作系统页缓存，配合批量压缩与零拷贝把吞吐拉满。"
     },
     {
@@ -42,8 +53,13 @@
       "noteId": "kafka/intermediate/core/02-replica-isr",
       "type": "judge",
       "q": "只要配置了 acks=all，即使 ISR 收缩到只剩 leader 自己，消息也不会丢。",
-      "options": ["正确", "错误"],
-      "answer": [1],
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
       "hint": "acks=all 只等 ISR 内副本确认，而 ISR 可以收缩到只剩 leader，此时等价于 acks=1，leader 宕机照样丢；要配 min.insync.replicas ≥ 2 用可用性换可靠。"
     },
     {
@@ -57,7 +73,9 @@
         "调大 max.poll.interval.ms 或调小 max.poll.records",
         "重启 Broker 触发重新协调"
       ],
-      "answer": [2],
+      "answer": [
+        2
+      ],
       "hint": "两个超时管两件事：session.timeout.ms 靠心跳判「死没死」，max.poll.interval.ms 管两次 poll 的间隔。处理慢被踢看后者，调 session 超时无效。"
     },
     {
@@ -71,8 +89,44 @@
         "关闭自动提交，改为手动提交",
         "消费端按业务唯一键做幂等"
       ],
-      "answer": [3],
+      "answer": [
+        3
+      ],
       "hint": "acks、副本数、提交时机解决的是「丢不丢」；重复来自重平衡与崩溃重试，唯一可靠的解法是消费端幂等（唯一键去重、版本号、状态机）。"
+    },
+    {
+      "id": "kafka-why-007",
+      "noteId": "kafka/basic/core/01-why-mq",
+      "type": "multiple",
+      "q": "引入 MQ 的三大价值与必须承认的代价，下列对应正确的有？（多选）",
+      "options": [
+        "价值：解耦、削峰、异步",
+        "代价包含复杂度（丢/重/乱序/积压）、最终一致窗口、多一个要运维的组件",
+        "削峰意味着队列会加速下游，QPS 能力被队列放大",
+        "转账扣款这类强一致短链路，硬上 MQ 往往是给自己找负担"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "队列是抗洪水的堤坝不是加速器——下游能力没变，只是峰值被摊平。能说出代价才证明真用过。"
+    },
+    {
+      "id": "kafka-tp-008",
+      "noteId": "kafka/intermediate/core/04-high-throughput",
+      "type": "single",
+      "q": "Kafka 高吞吐里「批量 + 压缩 + 零拷贝」若改成每条消息独立 fsync，后果是？",
+      "options": [
+        "更安全且吞吐几乎不变",
+        "吞吐显著下降，因为丢掉了顺序写与页缓存批量的优势",
+        "零拷贝会自动合并 fsync，无影响",
+        "只有压缩比变化，延迟不变"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "可靠性靠 ISR 与 acks，不是逐条 fsync；把数据库的同步刷盘直觉套到 Kafka 会毁吞吐。"
     }
   ]
 }

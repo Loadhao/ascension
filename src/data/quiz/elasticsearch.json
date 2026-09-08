@@ -1,0 +1,98 @@
+{
+  "questions": [
+    {
+      "id": "es-invert-001",
+      "noteId": "elasticsearch/basic/core/01-inverted-index",
+      "type": "single",
+      "q": "倒排索引相对关系库 B+ 树做全文检索的核心差异是？",
+      "options": [
+        "按行存完整文档，用 LIKE 走覆盖索引",
+        "给「词」建索引：词项 → 文档列表，查词即得命中文档",
+        "只对主键建哈希，关键词走全表扫描",
+        "把文档向量化后用余弦相似度替代分词"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "LIKE '%关键词%' 在关系库必然全表扫；ES 的 Analyzer（字符过滤→分词→词过滤）把文本变成可检索词项。"
+    },
+    {
+      "id": "es-shard-002",
+      "noteId": "elasticsearch/basic/core/02-shard-replica",
+      "type": "judge",
+      "q": "创建索引后可以随时改 number_of_shards，集群会自动按新分片数重哈希路由。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "主分片数按 _id 哈希路由，改了路由全对不上；要做大得 reindex。加副本才能横向扩展读。"
+    },
+    {
+      "id": "es-query-003",
+      "noteId": "elasticsearch/intermediate/usage/01-query-dsl",
+      "type": "single",
+      "q": "想查 text 字段「包含某个词」，应该用？",
+      "options": [
+        "term 查询该 text 字段",
+        "match 查询该 text 字段",
+        "只能用 ids 查询",
+        "用 aggregations 代替 query"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "经典误区是拿 term 查 text——text 已被分词，term 要求整个字段值等于某词项。精确等于才用 term 且字段得是 keyword。"
+    },
+    {
+      "id": "es-page-004",
+      "noteId": "elasticsearch/intermediate/usage/03-pagination",
+      "type": "single",
+      "q": "from+size 深翻页会爆炸，是因为？",
+      "options": [
+        "每个分片都要把 from+size 条结果传给协调节点归并后再丢掉前 from 条",
+        "scroll 会锁住全部文档写入",
+        "search_after 必须先把全量文档加载进协调节点内存",
+        "max_result_window 默认 10，超过即集群变 red"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "这正是默认卡 10000 的原因；深翻页改 search_after/scroll。max_result_window 默认是 10000 不是 10。"
+    },
+    {
+      "id": "es-cluster-005",
+      "noteId": "elasticsearch/intermediate/cluster/01-cluster-split-brain",
+      "type": "multiple",
+      "q": "关于 ES 集群角色与健康色，下列正确的有？（多选）",
+      "options": [
+        "master 管元数据，挂了只是不能改元数据，读写仍可由 data 节点继续",
+        "yellow 表示有主分片不可用，对应索引查询会报错",
+        "7.x 起 quorum 按 eligible 数自动算，不必手写 minimum_master_nodes",
+        "green 要求主分片和副本分片都就位"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "yellow 是「主分片全好、有副本没分配」，读写不受影响；red 才是有主分片不可用。"
+    },
+    {
+      "id": "es-agg-006",
+      "noteId": "elasticsearch/intermediate/usage/02-aggregation",
+      "type": "judge",
+      "q": "terms 聚合应对 keyword（或 text 的 .keyword 子字段）做精确值分组，而不是对已分词的 text 正文分组。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "对 text 做 terms 会按词项零散分组，结果没有业务含义；度量/桶/管道三大家族也不要和 query 打分混为一谈。"
+    }
+  ]
+}

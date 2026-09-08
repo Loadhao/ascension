@@ -63,6 +63,72 @@
         0
       ],
       "hint": "容量恰恰要预估、且单个元素不能删除；布隆过滤器里只有位数组没有数据本体，判为「存在」仍要放行去查缓存和 DB——它的价值就落在「穿透的数据确定不存在」与「判不存在绝对可靠」的精确咬合上。"
+    },
+    {
+      "id": "redis-thread-005",
+      "noteId": "redis/basic/core/03-thread-model",
+      "type": "single",
+      "q": "Redis 6.0 开启 IO 多线程后，命令执行的线程模型是？",
+      "options": [
+        "多条命令在 IO 线程并行执行，原子性不再保证",
+        "IO 线程只分担读写与协议解析，命令执行仍回单线程排队",
+        "每个 CPU 核一个执行线程，靠锁保护 dict",
+        "执行也并行，靠 MVCC 保证可见性"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "「单线程」从来只指命令执行；6.0 解决的是 socket/解析慢，不是计算并行。"
+    },
+    {
+      "id": "redis-expire-006",
+      "noteId": "redis/intermediate/usage/01-expiration-eviction",
+      "type": "multiple",
+      "q": "关于过期删除与内存淘汰，下列正确的有？（多选）",
+      "options": [
+        "过期采用惰性删除 + 定期删除，不是到点立刻删",
+        "内存满时的默认策略是 allkeys-lru",
+        "noeviction 在内存满时拒绝写入",
+        "8 种淘汰策略里，volatile-* 只从设置了过期的键里挑"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "默认是 noeviction 不是 LRU；把过期和淘汰当成一回事会配错 maxmemory-policy。"
+    },
+    {
+      "id": "redis-lock-007",
+      "noteId": "redis/intermediate/usage/03-distributed-lock",
+      "type": "single",
+      "q": "setnx 成功后再单独 expire，最大的风险是？",
+      "options": [
+        "expire 会覆盖已有 TTL 导致锁永不过期？相反：两步不原子，崩溃在中间会死锁",
+        "Redis 单线程保证了两步一定一起成功",
+        "value 不用唯一标识也可以安全 del",
+        "这个问题只在 Cluster 才存在"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "正解是 SET NX EX 一条命令；释放必须 Lua 校验唯一 token，防止删掉别人续上的锁。"
+    },
+    {
+      "id": "redis-repl-008",
+      "noteId": "redis/advanced/ha/01-replication-sentinel-cluster",
+      "type": "single",
+      "q": "Redis 高可用三层递进，正确对应是？",
+      "options": [
+        "主从复制冗余 → 哨兵自动故障转移 → Cluster 16384 槽分片",
+        "Cluster 只做高可用不做分片，哨兵才做槽迁移",
+        "哨兵负责分片，主从负责选主",
+        "三层必须同时开启才有主从"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "先复制、再自动切主、最后才水平分片；不要把哨兵和 Cluster 的职责对调。"
     }
   ]
 }

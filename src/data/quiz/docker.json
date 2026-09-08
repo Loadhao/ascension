@@ -66,6 +66,38 @@
         3
       ],
       "hint": "-p 8080:80 的顺序是宿主:容器；host 模式直接监听宿主端口，-p 发布规则不适用；服务互连用自定义 bridge + 容器名（内置 DNS），别写死会变的容器 IP。"
+    },
+    {
+      "id": "docker-vol-005",
+      "noteId": "docker/intermediate/practice/02-volume",
+      "type": "single",
+      "q": "生产环境数据库数据应优先用哪种挂载？",
+      "options": [
+        "bind mount 到开发者家目录，方便编辑",
+        "具名卷：Docker 统一管理，可备份迁移，不受宿主目录权限干扰",
+        "tmpfs，避免磁盘磨损",
+        "不挂载，让数据留在容器可写层以便随镜像分发"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "可写层随容器删除丢失；bind 适合配置/热加载；tmpfs 在内存里，不适合库表。"
+    },
+    {
+      "id": "docker-life-006",
+      "noteId": "docker/basic/fundamentals/03-lifecycle",
+      "type": "single",
+      "q": "关于容器生命周期，下列说法正确的是？",
+      "options": [
+        "容器的生死由主进程（PID 1）决定，主进程退出容器即退出",
+        "docker stop 直接发 SIGKILL，没有宽限期",
+        "退出码 137 表示被 SIGTERM，属于正常 stop",
+        "Paused 状态的容器已被 rm，只能重新 run"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "stop 先 SIGTERM 默认等 10s 再 SIGKILL；137 是 SIGKILL（OOM 或 docker kill），143 才是 SIGTERM。pause 只是暂停，unpause 可恢复。"
     }
   ]
 }

@@ -63,6 +63,70 @@
         1
       ],
       "hint": "直接重放会破坏与 binlog 的一致性（从库会多一笔或少一笔），这正是需要两阶段提交的原因；undo 和数据页刷盘进度都不参与裁决，裁决依据只有 binlog 完整性。"
+    },
+    {
+      "id": "mysql-sql-005",
+      "noteId": "mysql/basic/core/01-sql-execution",
+      "type": "single",
+      "q": "一条查询 SQL 在 MySQL 8.0 中的大致路径是？",
+      "options": [
+        "执行器 → 优化器 → 分析器 → 连接器，8.0 强制走查询缓存",
+        "连接器 → 分析器 → 优化器 → 执行器 → 存储引擎；8.0 已移除查询缓存",
+        "先查 binlog 再查 InnoDB",
+        "优化器只对 DDL 生效，DML 直接执行"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "查询缓存已在 8.0 移除；面试还答「先看缓存」会暴露版本停在 5.7。"
+    },
+    {
+      "id": "mysql-lock-006",
+      "noteId": "mysql/intermediate/transaction-lock/02-locks",
+      "type": "multiple",
+      "q": "关于 InnoDB 行锁，下列正确的有？（多选）",
+      "options": [
+        "行锁加在索引记录上，没走索引可能锁大量记录甚至表级效果",
+        "Next-Key Lock = 记录锁 + 前面的间隙，是 RR 防幻读的基本单位",
+        "唯一索引等值命中的 for update 会退化成只锁该记录",
+        "MDL 只在显式 lock tables 时才加"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "查询自动加 MDL 读锁，所以长事务会堵住在线 DDL；意向锁让加表锁的人不必逐行扫。"
+    },
+    {
+      "id": "mysql-nf-007",
+      "noteId": "mysql/basic/theory/01-normal-forms",
+      "type": "judge",
+      "q": "3NF 消除传递依赖；反范式是为读性能主动冗余，不是设计失误。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "1NF 原子、2NF 消部分依赖、3NF 消传递依赖；业务读多写少时反范式是取舍。"
+    },
+    {
+      "id": "mysql-opt-008",
+      "noteId": "mysql/advanced/performance-ha/01-optimization",
+      "type": "single",
+      "q": "慢 SQL 优化时 explain 应优先盯哪些列？",
+      "options": [
+        "只看 id 是否为 1",
+        "type/key/rows/Extra：有没有用上索引、扫描行数、是否 Using filesort/temporary",
+        "只看 filtered 百分比",
+        "优先看 warnings 里的字符集"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "函数、隐式转换导致索引失效也会体现在 type/key 上；先 explain 再谈加机器。"
     }
   ]
 }

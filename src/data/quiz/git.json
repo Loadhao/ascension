@@ -45,6 +45,36 @@
         0
       ],
       "hint": "reset 改历史、只能用于私有分支，公共分支必须用 revert；restore --staged 移出暂存区但修改保留；reflog 救的是提交历史——未提交的修改被 --hard 清掉就真没了。"
+    },
+    {
+      "id": "git-remote-004",
+      "noteId": "git/intermediate/collaboration/02-remote-collab",
+      "type": "single",
+      "q": "git pull 默认做的事情更接近？",
+      "options": [
+        "只下载对象不移动分支指针",
+        "fetch 取回远端再 merge（或 rebase，若配置了 pull.rebase）到当前分支",
+        "强制用远端覆盖工作区，丢弃本地提交",
+        "等价于 git push --force-with-lease"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "fetch 才是「只取不合并」；pull 会改当前分支。覆盖历史是 push --force 那一类操作。"
+    },
+    {
+      "id": "git-rewrite-005",
+      "noteId": "git/advanced/workflow/01-history-rewrite",
+      "type": "judge",
+      "q": "rebase / filter-branch 等改写历史会让提交哈希全变，已推送的公共分支上做这些等于让所有人的本地历史分叉。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "改历史只留给尚未共享的提交；公共分支用 revert。"
     }
   ]
 }

@@ -63,6 +63,128 @@
         1
       ],
       "hint": "分工搞反了——模型只「举手」发出调用请求，真正执行工具的是 Harness（运行框架）；执行结果包装为 tool_result 追加回 messages 让循环继续。"
+    },
+    {
+      "id": "ai-prompt-005",
+      "noteId": "ai/intermediate/llm/02-prompt-engineering",
+      "type": "single",
+      "q": "提示工程相对改权重/微调，本质差异是？",
+      "options": [
+        "通过设计输入引导输出，不改任何权重",
+        "必须先做 SFT 才能写提示词",
+        "CoT 会改模型内部参数以记住推理步骤",
+        "少样本示例会写入权重，所以能永久记住格式"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "零样本/少样本/CoT 都是问法；CoT 只是让模型把中间步骤生成出来，等于多给自己算力，不是改参。"
+    },
+    {
+      "id": "ai-perm-006",
+      "noteId": "ai/basic/agent/03-permission",
+      "type": "single",
+      "q": "Agent 权限管线三道闸门的顺序是？",
+      "options": [
+        "用户审批 → 规则匹配 → 硬拒绝",
+        "硬拒绝列表 → 规则匹配（ask）→ 都没命中才放行",
+        "先执行工具，出错再拦截",
+        "完全信任模型对 bash 的自我约束"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "安全不能靠信任模型；命中 rm -rf /、sudo 直接拒绝，写工作区外等再问用户，拒绝也作为 tool_result 回传。"
+    },
+    {
+      "id": "ai-ml-007",
+      "noteId": "ai/basic/foundation/01-machine-learning",
+      "type": "judge",
+      "q": "机器学习相对传统编程，范式从「数据 + 规则 → 答案」变成「数据 + 答案 → 规则」。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "模型就是自动归纳出的那条规则；监督/无监督/强化学习是三种拿「答案信号」的方式，不要和深度学习架构混为一谈。"
+    },
+    {
+      "id": "ai-ctx-008",
+      "noteId": "ai/intermediate/agent/03-context-engineering",
+      "type": "single",
+      "q": "上下文工程要解决的核心问题是？",
+      "options": [
+        "把模型参数量化到 4bit",
+        "每次调用模型时它实际看到的全部信息（指令、工具描述、历史）决定能力上限，需要治理增长与压缩",
+        "只增大 max_tokens 即可，不必管理消息",
+        "把全部企业文档塞进 system prompt 一次加载"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "窗口有限、消息只增不减；技能按需加载、记忆外置、子智能体干净上下文，都是在做上下文治理。"
+    },
+    {
+      "id": "ai-subagent-009",
+      "noteId": "ai/intermediate/agent/09-subagent",
+      "type": "judge",
+      "q": "子智能体的价值是给子任务独立 messages，只把结论回传主循环，避免追踪细节挤爆主上下文。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "主循环保留全局视野，子任务用干净历史；若把所有中间过程都拼回主 messages，就失去隔离意义。"
+    },
+    {
+      "id": "ai-tool-010",
+      "noteId": "ai/basic/agent/02-tool-use",
+      "type": "single",
+      "q": "给 Agent 提供 read_file 等专用工具，而不是只留一个 bash，主要是为了？",
+      "options": [
+        "让模型在 shell 里可以 rm -rf",
+        "让模型直接表达意图，少一层命令翻译，少拼错、少浪费 token",
+        "专用工具可以绕过权限管线",
+        "bash 无法在 Agent Loop 里被 dispatch"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "循环不变，能力注册进 dispatch table；权限仍然在执行前拦截，工具变多不是为了更危险。"
+    },
+    {
+      "id": "ai-dl-011",
+      "noteId": "ai/basic/foundation/02-deep-learning",
+      "type": "single",
+      "q": "深度学习相对传统机器学习最关键的一步是？",
+      "options": [
+        "不再需要训练数据",
+        "多层网络自动逐层提取特征，把原先靠人做的特征工程交给模型",
+        "反向传播可以替代梯度下降",
+        "CNN/RNN 已经淘汰 Transformer"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "底层学边缘纹理、高层拼语义；训练仍要数据与反向传播。架构演进到 Transformer，并不是「不再训练」。"
+    },
+    {
+      "id": "ai-memory-012",
+      "noteId": "ai/intermediate/agent/04-memory",
+      "type": "judge",
+      "q": "上下文压缩后细节会丢失，且新会话连摘要都没有，所以需要文件仓库这类跨压缩、跨会话仍在的记忆层。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "LLM 没有持久状态；压缩有损，「用 tab 缩进」这类约束必须落到压缩丢不掉的存储里再按需加载。"
     }
   ]
 }

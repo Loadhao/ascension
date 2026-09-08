@@ -64,6 +64,128 @@
         1
       ],
       "hint": "把普通函数「调用即执行」的直觉套到生成器上了——调用含 yield 的函数一行代码都不跑，只创建并返回生成器对象，要等第一次 next() 才推进到 yield 处。"
+    },
+    {
+      "id": "py-default-005",
+      "noteId": "python/basic/functions/01-functions-closures",
+      "type": "single",
+      "q": "def add_item(item, items=[]): items.append(item); return items 连续两次 add_item(1)、add_item(2)，第二次返回？",
+      "options": [
+        "[2]",
+        "[1, 2]",
+        "[[1], [2]]",
+        "抛出 TypeError"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "默认值在 def 时求值一次，所有调用共享同一个 list；修法是哨兵 None，每次调用新建。"
+    },
+    {
+      "id": "py-gc-006",
+      "noteId": "python/advanced/internals/02-memory-gc",
+      "type": "judge",
+      "q": "CPython 的分代 GC 是内存回收的主力，引用计数只在循环引用时才启用。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "正好说反：引用计数归零立即释放是主力；分代 GC 只兜循环引用（互相 append 后 del 仍收不掉的那种）。"
+    },
+    {
+      "id": "py-asyncio-007",
+      "noteId": "python/intermediate/concurrency/02-asyncio",
+      "type": "single",
+      "q": "调用 async def fetch(): ... 而不 await，会发生什么？",
+      "options": [
+        "函数体立即执行完毕并返回结果",
+        "只返回协程对象，函数体并不执行，必须 await 或交给事件循环",
+        "自动在新线程里跑",
+        "语法错误，async def 必须同时写 await"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "与生成器「调用含 yield 的函数不执行」同源；一万条连接靠单线程事件循环在 IO 时让出，不是开一万线程。"
+    },
+    {
+      "id": "py-mro-008",
+      "noteId": "python/basic/oop/02-inheritance-mro",
+      "type": "single",
+      "q": "Python 多继承里 super() 的含义是？",
+      "options": [
+        "一定调用直接父类的同名方法",
+        "沿 C3 线性化算出的 MRO 走到下一站，用于菱形继承的协作式调用",
+        "运行时按调用栈动态找最近的基类",
+        "等价于显式写 Parent.method(self)，与 MRO 无关"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "super 不是「父类」的语法糖，是 MRO 的下一站；菱形继承靠 C3 保证子类在前、公共父类最后。"
+    },
+    {
+      "id": "py-dict-009",
+      "noteId": "python/basic/data-structures/02-dict-set",
+      "type": "judge",
+      "q": "CPython dict 用开放寻址解决冲突，装载因子超过约 2/3 就 resize；3.7+ 的插入有序是紧凑 dict 的实现效果。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "不要拿 Java HashMap 拉链法来套；可哈希性（__hash__/__eq__ 成对）是能进 dict/set 的前提。"
+    },
+    {
+      "id": "py-type-010",
+      "noteId": "python/intermediate/stdlib/04-typing",
+      "type": "single",
+      "q": "Python 类型标注在运行时的行为是？",
+      "options": [
+        "解释器强制检查，不符就 TypeError",
+        "运行时不强制，检查交给 mypy/pyright；标注主要用于 IDE、重构和文档",
+        "与 Java 泛型一样擦除后插入强制转换指令",
+        "只有 dataclass 字段的标注会在运行时校验"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "渐进式类型；运行时要强制校验边界数据，那是 Pydantic 的职责，不是 typing 本身。"
+    },
+    {
+      "id": "py-pydantic-011",
+      "noteId": "python/intermediate/libs/02-pydantic",
+      "type": "judge",
+      "q": "Pydantic 把类型标注升级为运行时强制执行，适合校验 HTTP 请求体、配置和第三方 JSON。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "typing 给 IDE 看，Pydantic 在边界处拦脏数据；两者不要当成同一层。"
+    },
+    {
+      "id": "py-mp-012",
+      "noteId": "python/intermediate/concurrency/03-multiprocessing",
+      "type": "single",
+      "q": "CPU 密集任务要利用多核，CPython 的正路是？",
+      "options": [
+        "开更多线程抢 GIL",
+        "multiprocessing / 进程池：每进程独立解释器，代价是隔离与序列化",
+        "asyncio.gather 并行计算",
+        "把 for 循环改成推导式即可并行"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "线程绕不开 GIL；asyncio 遇 CPU 计算会堵住循环；进程才有真正的多核，但通信要 pickle。"
     }
   ]
 }

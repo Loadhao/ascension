@@ -61,6 +61,70 @@
         1
       ],
       "hint": "容忍度按过半算：4 节点过半是 3，仍只容忍 1 台——第 4 台只增加同步开销不加容错；想容 2 台得按 2F+1 上 5 节点，这就是集群要奇数的原因。"
+    },
+    {
+      "id": "dist-id-005",
+      "noteId": "distributed/intermediate/transaction/02-distributed-id",
+      "type": "single",
+      "q": "分库分表后为什么不能继续用单机自增主键当全局 ID？",
+      "options": [
+        "自增会重复、无法跨库唯一，需要号段/雪花/UUID 等全局发号",
+        "自增比 UUID 更占空间所以禁用",
+        "数据库禁止自增列",
+        "只要把步长设为 1，多库就不会冲突"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "步长交错仍难运维且有时钟/扩容问题；先定趋势有序还是无意义唯一，再选雪花或 UUID。"
+    },
+    {
+      "id": "dist-retry-006",
+      "noteId": "distributed/intermediate/traffic/02-timeout-retry",
+      "type": "multiple",
+      "q": "超时与重试的正确姿势包括？（多选）",
+      "options": [
+        "超时必须设，且要小于上游超时，避免雪崩式等待",
+        "重试只对幂等操作安全，非幂等要带幂等键",
+        "失败立即无限重试，直到成功",
+        "指数退避 + 抖动，避免同时打爆下游"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "无限立刻重试会把故障放大成风暴；超时链要自上而下递减。"
+    },
+    {
+      "id": "dist-gossip-007",
+      "noteId": "distributed/intermediate/consensus/02-gossip",
+      "type": "judge",
+      "q": "Gossip 用随机 spreading 换最终一致的成员/状态传播，适合故障检测和元数据扩散，不能替代 Raft 做强一致日志。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Cassandra/SWIM 一类用它传播；要线性一致提交仍得过半共识。"
+    },
+    {
+      "id": "dist-trace-008",
+      "noteId": "distributed/advanced/observability/01-distributed-tracing",
+      "type": "single",
+      "q": "分布式追踪能定位「慢在哪一跳」，靠的是？",
+      "options": [
+        "只看单机 CPU，不需要跨服务 ID",
+        "traceId 贯穿调用链，span 记录每跳耗时与父子关系",
+        "把所有日志打到同一文件即可",
+        "用 ping 测量应用 RT"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "没有透传上下文就拼不出树；指标看水位、日志看原因、追踪看路径，三者互补。"
     }
   ]
 }

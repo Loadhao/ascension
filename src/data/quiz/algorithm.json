@@ -1,0 +1,190 @@
+{
+  "questions": [
+    {
+      "id": "algo-binsearch-001",
+      "noteId": "algorithm/basic/searching/01-binary-search",
+      "type": "single",
+      "q": "二分查找能把比较次数从 O(n) 降到 O(log n)，依赖的两个前提是？",
+      "options": [
+        "数组有序，且支持随机访问",
+        "数组有序即可，链表上同样适用",
+        "数组无序也能靠哈希定位中点",
+        "只要元素可比较，不必有序"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "链表虽然可以有序，但不支持 O(1) 取中点，折半无从谈起；无序数组没有「丢掉一半」的依据。"
+    },
+    {
+      "id": "algo-twopointer-002",
+      "noteId": "algorithm/basic/searching/02-two-pointers",
+      "type": "judge",
+      "q": "有序数组上用对撞双指针求两数之和，和太小时应移动右指针 R 以排除更大的组合。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "和太小只能让 L 右移（和变大），和太大才让 R 左移（和变小）；方向搞反会漏解或死循环。"
+    },
+    {
+      "id": "algo-window-003",
+      "noteId": "algorithm/basic/searching/03-sliding-window",
+      "type": "single",
+      "q": "滑动窗口能把「满足约束的最短/最长连续子数组」从暴力 O(n²) 降到 O(n)，根源是？",
+      "options": [
+        "窗口每次随机跳过一半元素",
+        "每个元素至多被右指针吃进一次、被左指针吐出一次",
+        "窗口内部用堆维护最值，比较次数变成 log n",
+        "预先排序后窗口长度固定为 k"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "高效来自不变式：每个元素进出窗口各至多一次，整体 2n 步；堆或排序是别的题的技巧，不是滑动窗口本身。"
+    },
+    {
+      "id": "algo-prefix-004",
+      "noteId": "algorithm/basic/techniques/01-prefix-sum",
+      "type": "single",
+      "q": "前缀和数组 P 满足 P[i] 为前 i 个元素之和时，区间 [l, r] 的和等于？",
+      "options": [
+        "P[r] - P[l]",
+        "P[r+1] - P[l]",
+        "P[r] - P[l-1] 且 l 必须从 1 起",
+        "P[r+1] + P[l]"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "P[r+1] 覆盖下标 0..r，再减掉多算的 P[l]（下标 0..l-1），剩下才是 [l, r]；写成 P[r]-P[l] 会少算 a[r] 或多减 a[l]。"
+    },
+    {
+      "id": "algo-diff-005",
+      "noteId": "algorithm/basic/techniques/02-difference-array",
+      "type": "judge",
+      "q": "差分数组上给区间 [l, r] 整体加 v，只需改两个端点：diff[l]+=v、diff[r+1]-=v，最后一趟前缀和还原。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "差分是前缀和的逆运算，区间修改被压成两个端点；误区是以为还要扫一遍区间内部。"
+    },
+    {
+      "id": "algo-mergesort-006",
+      "noteId": "algorithm/basic/sorting/05-merge-sort",
+      "type": "multiple",
+      "q": "关于归并排序，下列说法正确的有？（多选）",
+      "options": [
+        "最好、最坏都是 O(n log n)，不挑输入",
+        "是稳定排序，相等元素取左半边保证相对次序",
+        "原地完成，辅助空间 O(1)",
+        "先递归拆到单元素，功夫花在合并上"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "稳定与最坏保证换来的代价正是 O(n) 辅助数组，不是原地；把它和快排的「分区原地」搞混就会选错。"
+    },
+    {
+      "id": "algo-quickselect-007",
+      "noteId": "algorithm/basic/searching/04-quickselect",
+      "type": "single",
+      "q": "快速选择找第 K 小，期望复杂度能到 O(n) 的关键是？",
+      "options": [
+        "每次分区后只递归包含答案的那一侧，另一侧整段丢弃",
+        "先整段排序再按下标取值，排序可以提前终止",
+        "用堆维护全部元素，取堆顶 K 次",
+        "三路分区让所有元素一次归位"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "找第 K 小不需要整段有序；n+n/2+n/4+…≈2n。整段排序是 O(n log n)；堆是另一条 Top-K 路；三路分区是快排对重复元素的优化。"
+    },
+    {
+      "id": "algo-floyd-008",
+      "noteId": "algorithm/intermediate/linked-list/02-cycle-detection",
+      "type": "single",
+      "q": "Floyd 快慢指针判定链表有环后，要找环入口，正确做法是？",
+      "options": [
+        "快指针继续走一圈，慢指针原地等，再次相遇即入口",
+        "把慢指针拉回 head，两指针改为同速前进，再次相遇处即环入口",
+        "从相遇点把 next 置空，破坏环后再从头扫描",
+        "给每个节点打 visited 标记，第一次重复访问的即入口"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "O(1) 空间的标准第二幕是：相遇后 slow 回 head、同速再走；打标记是 O(n) 空间，破坏指针会改原结构。"
+    },
+    {
+      "id": "algo-topo-009",
+      "noteId": "algorithm/advanced/graph/02-topological-sort",
+      "type": "judge",
+      "q": "Kahn 算法输出的节点数小于总节点数，说明图中一定存在环。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "入度为 0 的节点才能出队；有环则环上节点入度永远减不完，队空时还有残留——这正是课程表题判环的依据。"
+    },
+    {
+      "id": "algo-kadane-010",
+      "noteId": "algorithm/intermediate/dp/03-max-subarray",
+      "type": "single",
+      "q": "Kadane 算法求最大子数组和时，cur = max(nums[i], cur + nums[i]) 的含义是？",
+      "options": [
+        "前面累计是负资产就丢弃，从当前元素重开一段",
+        "始终把负数也并入窗口，靠最后取绝对值纠正",
+        "只在 nums[i] 为正时才更新答案",
+        "等价于先排序再取最大的连续 k 个"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "以 i 结尾的最优要么延长前面、要么自己重开；数组含负数，全是负数时答案是最大的那个负数，不能跳过负数或先排序。"
+    },
+    {
+      "id": "algo-binanswer-011",
+      "noteId": "algorithm/advanced/binary-answer/01-koko-eating-bananas",
+      "type": "single",
+      "q": "「最小的最大 / 最少时间完成」这类题改成对答案 k 本身二分，前提是？",
+      "options": [
+        "k 越大越容易（或越不容易）满足，判定具有单调性",
+        "答案空间必须是质数",
+        "数组本身已经有序",
+        "判定函数必须是 O(1)"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "对 k 二分靠的是「行不行」单调，复杂度从 O(nV) 降到 O(n log V)；数组不必有序，判定通常是 O(n) 贪心。"
+    },
+    {
+      "id": "algo-countsort-012",
+      "noteId": "algorithm/basic/sorting/08-counting-sort",
+      "type": "judge",
+      "q": "计数排序能突破比较排序 Ω(n log n) 下界，是因为它根本不比较，而是用值本身当数组下标统计次数。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "比较排序的下界来自决策树；计数排序走「值即地址」，耗时 O(n+k)，k 是值域——值域巨大时并不划算。"
+    }
+  ]
+}

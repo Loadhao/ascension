@@ -1,0 +1,68 @@
+{
+  "questions": [
+    {
+      "id": "rabbit-amqp-001",
+      "noteId": "rabbitmq/basic/core/01-amqp-model",
+      "type": "single",
+      "q": "AMQP 模型里，生产者把消息交给谁？消息进不进某队列由什么决定？",
+      "options": [
+        "直接交给队列；队列自己按 FIFO 决定",
+        "只交给交换机；绑定（队列+路由键模式）决定进哪些队列",
+        "直接交给消费者；Broker 只做转发日志",
+        "交给 NameServer，再由队列拉取"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "交换机和队列都不保存分发逻辑，规则在绑定里；NameServer 是 RocketMQ 的组件。"
+    },
+    {
+      "id": "rabbit-ack-002",
+      "noteId": "rabbitmq/basic/core/02-reliable-delivery",
+      "type": "multiple",
+      "q": "一条消息从生产到消费的防丢，下列正确的有？（多选）",
+      "options": [
+        "生产者等 confirm，等不到就重发",
+        "交换机/队列 durable + 消息 delivery_mode=2 才谈得上落盘",
+        "消费者成功后 basicAck，失败可 nack 或进死信",
+        "反复 requeue=true 是处理毒消息的最佳实践"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "反复 requeue 会原样死循环，毒消息应进死信；实体 durable 与消息持久化是两层，缺一不可。"
+    },
+    {
+      "id": "rabbit-delay-003",
+      "noteId": "rabbitmq/intermediate/usage/01-deadletter-delay",
+      "type": "single",
+      "q": "RabbitMQ 用 TTL + 死信交换机模拟延迟消息，本质是？",
+      "options": [
+        "Broker 内置 cron 到点把消息投给消费者",
+        "消息先进入只设了 TTL 且配置了 DLX 的等待队列，过期转投真实业务队列",
+        "消费者 sleep 后再 ack",
+        "用镜像队列的同步延迟当定时器"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "原生没有延迟交换机，经典思路是「到期进死信再投目标」——用等待换延迟。"
+    },
+    {
+      "id": "rabbit-ha-004",
+      "noteId": "rabbitmq/intermediate/usage/02-cluster-ha",
+      "type": "judge",
+      "q": "RabbitMQ 集群默认会把每条消息同步到所有节点，因此普通队列在任意节点挂掉后消息仍在。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "集群默认只同步元数据；普通队列消息只落在声明它的节点。要扛单点得用镜像/仲裁队列（新项目用 quorum）。"
+    }
+  ]
+}

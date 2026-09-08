@@ -1,0 +1,84 @@
+{
+  "questions": [
+    {
+      "id": "rmq-arch-001",
+      "noteId": "rocketmq/basic/core/01-rocketmq-architecture",
+      "type": "single",
+      "q": "RocketMQ 的 NameServer 敢做成无状态、节点间不通信，是因为？",
+      "options": [
+        "路由表强一致，丢了集群就不可用，所以反而要简单",
+        "路由粒度粗，客户端拿到稍旧路由顶多发错重试，CAP 取 AP 即可",
+        "NameServer 把路由存在 ZooKeeper，自己只做缓存",
+        "所有元数据走 Raft，NameServer 只是只读副本"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "对比 Kafka/KRaft：分区粒度细、元数据必须强一致；RocketMQ 路由 30 秒内可全量重建，不值得上共识。"
+    },
+    {
+      "id": "rmq-consume-002",
+      "noteId": "rocketmq/basic/core/02-consumer-semantics",
+      "type": "multiple",
+      "q": "关于集群消费与广播消费，下列正确的有？（多选）",
+      "options": [
+        "集群消费：组内一个实例消费一条消息，进度存在 Broker",
+        "广播消费：组内每个实例全量，进度存在消费者本地",
+        "广播消费同样具备 %RETRY% 重试",
+        "消费失败进 %RETRY%，递增约 16 次后进 %DLQ%，且不阻塞后续新消息"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "广播无重试；失败消息跳出去重试、新消息继续——这点常被误当成「失败会堵住分区」。"
+    },
+    {
+      "id": "rmq-tx-003",
+      "noteId": "rocketmq/advanced/core/01-rocketmq-features",
+      "type": "single",
+      "q": "RocketMQ 事务消息保证本地事务与发消息最终一致，靠的是？",
+      "options": [
+        "2PC 锁住所有下游表直到全部提交",
+        "半消息先落库 + 本地事务 + 回查补偿",
+        "生产者同步等待所有消费者 ack",
+        "NameServer 作为事务协调者写 undo"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "半消息对下游不可见，本地成功再提交，不确定则回查——这是 MQ 解分布式事务，不是 XA 锁资源。"
+    },
+    {
+      "id": "rmq-order-004",
+      "noteId": "rocketmq/advanced/core/02-order-performance",
+      "type": "single",
+      "q": "生产端已按 key 哈希进同一队列，消费仍乱序，最常见原因是？",
+      "options": [
+        "CommitLog 是随机写",
+        "多线程消费把同一队列消息并行处理，或失败进重试导致后到的先入库",
+        "NameServer 路由抖动会打乱队列内顺序",
+        "只要用了 Push 长轮询就无法保序"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "同 key 进同队列只解决生产侧；消费侧必须串行（OrderlyService），重试和 Rebalance 也会打乱。"
+    },
+    {
+      "id": "rmq-backlog-005",
+      "noteId": "rocketmq/advanced/core/03-backlog",
+      "type": "judge",
+      "q": "发现积压后应先加消费者实例；即使分区/队列数不够，加实例也能提高并行度。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "分区数 = 消费并行度上限，队列不够时加消费者没用；先定位瓶颈（生产/存储/消费），多数积压其实是同步慢 IO。"
+    }
+  ]
+}
