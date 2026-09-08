@@ -2575,3 +2575,51 @@ html.mmd-viewer-open {
   font-size: 13px;
 }
 
+/* —— 分类页右栏「本组笔记」导航（TableOfContents 覆盖注入） —— */
+.cat-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cat-nav h2 {
+  margin: 0;
+  color: var(--sl-color-gray-3);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.cat-nav ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cat-nav li + li {
+  border-top: 1px solid color-mix(in srgb, var(--sl-color-gray-5) 45%, transparent);
+}
+
+.cat-nav a {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 7px 0;
+  color: var(--sl-color-gray-2);
+  font-size: 13px;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.cat-nav a:hover {
+  color: var(--sl-color-white);
+}
+
+.cat-nav-core {
+  flex: none;
+  color: var(--sl-color-gray-3);
+  font-size: 11px;
+}
+

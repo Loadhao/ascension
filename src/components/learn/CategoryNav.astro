@@ -1,0 +1,34 @@
+---
+/**
+ * 分类页右栏「本组笔记」导航（TableOfContents 覆盖注入）：
+ * 分类落地页正文没有章节结构，默认目录是空壳；此处按构建期聚合
+ * 结果列出组内笔记作为常驻快速入口，核心知识点加星标。
+ */
+import type { CategoryMeta } from '../../lib/notes';
+import { withBase } from '../../lib/learn';
+
+interface Props {
+  category: CategoryMeta;
+}
+const { category } = Astro.props;
+---
+
+<nav class="cat-nav" aria-label="本组笔记">
+  <h2>本组笔记 · {category.notes.length}</h2>
+  <ul>
+    {
+      category.notes.map((note) => (
+        <li>
+          <a href={withBase(note.href)} title={note.description || note.title}>
+            {note.core && (
+              <span class="cat-nav-core" title="核心知识点">
+                ★
+              </span>
+            )}
+            {note.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

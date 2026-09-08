@@ -19,7 +19,7 @@ flowchart TB
         B2["Broker 2<br/>P0F + P1L"]
         B3["Broker 3<br/>P2L"]
     end
-    subgroup CG["Consumer Group: inventory-service"]
+    subgraph CG["Consumer Group: inventory-service"]
         C1["Consumer 1<br/>← P0"]
         C2["Consumer 2<br/>← P1 + P2"]
     end

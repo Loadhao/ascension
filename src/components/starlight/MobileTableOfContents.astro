@@ -1,12 +1,16 @@
 ---
 /**
- * Starlight MobileTableOfContents 覆盖：自测作答页不渲染移动端目录
- * （右侧栏已是刷题导航器，移动端目录只剩 Overview 没有意义）。
+ * Starlight MobileTableOfContents 覆盖：无实义目录的页面不渲染移动端目录
+ * （自测作答页右栏是刷题导航器；分类落地页正文无章节，默认目录只剩 Overview）。
  */
 import DefaultMobileTOC from '@astrojs/starlight/components/MobileTableOfContents.astro';
 
 const entry = Astro.locals.starlightRoute?.entry as { id: string } | undefined;
-const isQuiz = entry?.id === 'guide/quiz';
+const id = entry?.id ?? '';
+const segs = id.split('/');
+const isCategory =
+  segs.length === 3 && ['basic', 'intermediate', 'advanced'].includes(segs[1] ?? '');
+const skip = id === 'guide/quiz' || isCategory;
 ---
 
-{isQuiz ? null : <DefaultMobileTOC />}
+{skip ? null : <DefaultMobileTOC />}

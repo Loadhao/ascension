@@ -1,13 +1,21 @@
 ---
 /**
- * Starlight TableOfContents 覆盖：自测作答页右侧栏换成刷题导航器
- * （轮次题号网格 + 点击跳题，见 QuizNav），其余页面保持默认目录。
+ * Starlight TableOfContents 覆盖：
+ * 1. 自测作答页 → 刷题导航器（QuizNav）
+ * 2. 分类落地页（<方向>/<等级>/<分类>）→ 「本组笔记」列表（正文无章节，默认目录为空壳）
+ * 3. 其余页面保持默认目录。
  */
 import DefaultTOC from '@astrojs/starlight/components/TableOfContents.astro';
 import QuizNavIsland from '../quiz/QuizNavIsland.astro';
+import CategoryNav from '../learn/CategoryNav.astro';
+import { getCategory } from '../../lib/notes';
 
 const entry = Astro.locals.starlightRoute?.entry as { id: string } | undefined;
-const isQuiz = entry?.id === 'guide/quiz';
+const id = entry?.id ?? '';
+const segs = id.split('/');
+const isCategory =
+  segs.length === 3 && ['basic', 'intermediate', 'advanced'].includes(segs[1] ?? '');
+const category = isCategory ? await getCategory(id) : null;
 ---
 
-{isQuiz ? <QuizNavIsland /> : <DefaultTOC />}
+{id === 'guide/quiz' ? <QuizNavIsland /> : category ? <CategoryNav category={category} /> : <DefaultTOC />}
