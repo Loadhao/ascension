@@ -133,6 +133,39 @@
 - 新证据与经验：①kafka 面试主线已成体系：basic 三问(1) + 架构/ISR/可靠性/高吞吐/Rebalance(5)，共 6 篇；②编辑教训：多轮往同一 JSON 追加节点时，old_string 必须基于最近一次 Read 的完整内容重建，凭记忆拼接会漏前轮插入的行（本轮 Edit 一次失败后 Read 核对即成功）；③时序图（sequenceDiagram）在 mermaid 主题接管下审计通过，可用于协议类内容。
 - 下一轮入口：第四次启动候选——①kafka basic 再补 offset 语义/选型对比等入门篇；②rocketmq 消费端语义（重平衡/offset）；③postgresql/mongodb 等其他薄弱方向；每轮先跑四项体检基线。
 
+### 第 10 轮（2026-09-08，第四次启动）
+
+- 选择：postgresql basic 根基篇（密度重扫显示 etcd/seata/zookeeper 各 2 篇但覆盖深，postgresql 3 篇全是运维实战向、缺根基）。
+- 交付：新建 `postgresql/basic/core/` 分类——`01-pg-vs-mysql.md`「PG 与 MySQL：一张差异地图」（进程模型/MVCC 元组多版本 vs undo log/WAL 物理日志 vs binlog/索引家族四层差异 + count(*) 等高频追问）+ 分类页导读（直接复制模板改参数，零失误）+ 侧边栏"基础"分组 + 图谱 pgmysql 节点与 4 条边。
+- 验证：体检基线 8 项全绿（478 link/344→346 篇）；`pnpm build` 485 页通过；postgresql.json JSON 校验合法；提交 7f1fd99 已推送（4 文件）。本篇用对比表格代替 mermaid 图，无图表改动故未跑对比度审计。
+- 结论：补功能。
+- 新证据与经验：①mongodb 与 postgresql 病症相同：4 篇全是容量/性能/分片/复制集运维向，缺文档模型与选型根基篇——这是"薄弱方向补内容"的可复制选题模式（找根基缺失而非凑数量）；②seata/zookeeper 虽各 2 篇但主题覆盖深（核心机制+高频追问深挖），判定不缺，避免为密度数字写作。
+- 下一轮入口：mongodb 文档模型与选型基础篇（同模式）；kafka offset/选型篇作第 12 轮候选。
+
+### 第 11 轮（2026-09-08，第四次启动）
+
+- 选择：mongodb 文档模型与选型基础篇（mongodb 4 篇全是运维/集群向，缺根基——与 postgresql 同病症，模式可复制）。
+- 交付：新建 `mongodb/basic/core/` 分类——`01-document-model.md`（概念映射表/内嵌 vs 引用建模决策图/16MB 与事务追问）+ 分类页 + 侧边栏"基础"分组 + 图谱 docmodel 节点与 2 条边。
+- 验证：`pnpm build` 487 页通过；mongodb.json 合法；新图表对比度审计通过（246 页全绿）；提交 4c46cee 已推送（4 文件）。
+- 结论：补功能。
+- 新证据与经验：①"根基缺失"选题模式已三连验证（kafka 三问/PG 差异地图/MongoDB 文档模型）：薄弱方向先补"是什么/为什么/怎么选"，再深挖机制；②PG 与 MongoDB 两篇互为镜像（JSONB+GIN 与 BSON 的选型边界），已互相交叉引用。
+- 下一轮入口：kafka offset 语义篇（`kafka/basic/core/02-offset.md`），与 Rebalance/幂等消费篇形成消费侧闭环。
+
+### 第 12 轮（2026-09-08，第四次启动）
+
+- 选择：kafka offset 语义篇（既定入口；位移提交时机是"丢/重"问题的公共根，与 Rebalance/可靠性篇互补）。
+- 交付：`kafka/basic/core/02-offset.md`（offset=分区内序号、先处理/先提交取舍表、至少一次因果链、`__consumer_offsets` 50 分区与位移重置追问）+ 侧边栏注册 + 图谱 offset 节点与 2 条边。
+- 验证：`pnpm build` 488 页通过；kafka.json 合法；提交 6b947e2 已推送（3 文件）。本篇无 mermaid 图，未跑对比度审计。
+- 结论：补功能。
+- 新证据与经验：①kafka basic 已成两篇（三问+offset），"三问→offset→intermediate 机制篇"的学习路径闭合，MQ 主线完整度显著提升；②四次启动累计模式：纯文字+表格的笔记（无图表）也完全符合站点文风，mermaid 不是必选项。
+- 下一轮入口：第五次启动候选——①rocketmq 消费端语义篇（重平衡/offset，对齐 kafka 补齐 MQ 第二主线）；②elasticsearch（5 篇，缺全文检索原理根基）；③middleware 方向勘察（3 篇，主题未知）。每轮先跑体检基线。
+
+## 经验与判断沉淀（第四次启动增补）
+
+- "根基缺失"选题模式已三连验证（kafka 三问/PG 差异地图/MongoDB 文档模型）：薄弱方向先补"是什么/为什么/怎么选"，再深挖机制；判断"缺不缺"看主题覆盖而非篇数（seata/zookeeper 各 2 篇但覆盖深，不缺）。
+- 新建分类的三件套流程已完全模板化：复制分类页模板改四处参数 → 写笔记 → 侧边栏插"基础"分组 → 图谱加节点边 → build + JSON 校验 → pathspec 提交。
+- 无图表笔记用对比表格与代码块承载结论，同样符合站点文风；有 mermaid 时才需跑对比度审计。
+
 ## 经验与判断沉淀（第三次启动增补）
 
 - 新分类页不要手写模板：直接复制既有分类页（如 rabbitmq/basic/core/index.mdx）改 title/description/简介/categoryId 四处，本轮因手写把组件名写错（CategoryIsland），自查即改但可避免。
