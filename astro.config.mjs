@@ -1282,6 +1282,7 @@ export default defineConfig({
                         { label: '概览', link: '/kafka/basic/core/' },
                         { label: '消息队列三问：是什么、为什么、代价是什么', link: '/kafka/basic/core/01-why-mq/' },
                         { label: 'offset：消费位移的语义', link: '/kafka/basic/core/02-offset/' },
+                        { label: '生产者：一条消息怎么发出去', link: '/kafka/basic/core/03-producer-path/' },
                       ],
                     },
                   ],
