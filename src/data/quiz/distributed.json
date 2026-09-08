@@ -125,6 +125,250 @@
         1
       ],
       "hint": "没有透传上下文就拼不出树；指标看水位、日志看原因、追踪看路径，三者互补。"
+    },
+    {
+      "id": "dist-gray-009",
+      "noteId": "distributed/advanced/availability/04-full-link-gray",
+      "type": "single",
+      "q": "全链路灰度相对单服务金丝雀，要解决的核心问题是？泳道里没部署的服务怎么处理？",
+      "options": [
+        "让每个服务独立按 1% 随机灰度，互不影响；缺失服务直接 404",
+        "一个请求要么走完整条新版链路，要么走完整条旧版；缺失服务回落基线泳道",
+        "必须复制整套环境（等同蓝绿），否则无法隔离",
+        "只染色 HTTP，MQ 与线程池切换不必透传标记"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "入口打标、RPC/HTTP Header 透传；异步链路最容易丢标。流量灰了数据不隔离等于没灰——缓存 key / topic 也要隔离或双向兼容。"
+    },
+    {
+      "id": "dist-rto-010",
+      "noteId": "distributed/advanced/availability/01-dr-multi-active",
+      "type": "single",
+      "q": "RTO 与 RPO 分别由什么决定？",
+      "options": [
+        "RTO 由复制同步程度决定，RPO 由切换速度决定",
+        "RTO 是故障到恢复允许的最长时间（切换有多快），RPO 是允许丢失的数据窗口（复制有多同步）",
+        "两者都等于年停机分钟数",
+        "异地多活可以让 RTO/RPO 同时为 0 且保持跨区强一致互写"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "二者通常此消彼长，成本随严格程度指数上升。异步复制 RPO>0；半同步/强同步换更小 RPO。异地多活靠拆分流量、单元内闭环，不是两地实时互写同一份数据。"
+    },
+    {
+      "id": "dist-release-011",
+      "noteId": "distributed/advanced/availability/03-release-strategies",
+      "type": "multiple",
+      "q": "关于滚动 / 蓝绿 / 金丝雀，下列正确的有？（多选）",
+      "options": [
+        "滚动发布资源成本低，回滚要逐批退；就绪探针与优雅停机决定是否「无感」",
+        "蓝绿用一整套环境换秒级切回，资源大约翻倍",
+        "金丝雀先放小流量，出问题摘除即可，爆炸半径最小",
+        "数据库变更可以随应用一起做不兼容改列，反正可以回滚代码"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "schema 只做兼容变更（先加列/双写，再切读，最后删旧列）。直接 kill 会让调用方吃连接错误；长连接还要先反注册等 TTL。"
+    },
+    {
+      "id": "dist-chaos-012",
+      "noteId": "distributed/advanced/availability/05-chaos-engineering",
+      "type": "single",
+      "q": "混沌工程实验开始前必须先有「稳态假设」，含义是？",
+      "options": [
+        "假设线上永远不会出故障，所以只在预发注入",
+        "先用指标定义系统正常长什么样（成功率/P99/积压），注入后对比是否维持，越界要自动终止",
+        "随机杀进程即可，看值班人能不能修好就算成功",
+        "稳态假设等于容量规划里的水位线，与故障注入无关"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "没有对照的破坏叫盲打。关键纪律：指标越界时平台自动停止注入，不等人反应。没有预案的故障不要注入。"
+    },
+    {
+      "id": "dist-cell-013",
+      "noteId": "distributed/advanced/availability/06-cell-based",
+      "type": "single",
+      "q": "单元化（set 化）解决异地多活「两地都在写」的根本手段是？",
+      "options": [
+        "两地同步强一致互写同一份数据，用分布式事务消冲突",
+        "按同一 sharding key（通常 uid）把流量/数据/应用圈进自治单元，单元内闭环，单元间只互为灾备",
+        "全部服务都做成 GZone 全局单点，避免分片",
+        "只把缓存单元化，数据库仍然两地双主"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "RZone 可分片是多活主力；GZone 是强一致全局数据单地部署；CZone 读多写少可本地读。跨机房 30ms+ 决定了「两边实时互写同一行」走不通。"
+    },
+    {
+      "id": "dist-cpat-014",
+      "noteId": "distributed/advanced/consistency/01-consistency-patterns",
+      "type": "single",
+      "q": "用户刚发完评论刷新看不到，这首先破坏的是哪种一致性？工程上常用哪类对策？",
+      "options": [
+        "线性一致；必须上 Raft 才能发评论",
+        "read-your-writes（读写一致）；粘性路由 / 写后短窗读主 / 版本号引导重读主库",
+        "最终一致本身禁止这种情况，说明系统设计错了",
+        "会话一致与读写一致是一回事，关掉从库即可"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "口诀：资金类走强一致或共识，可容忍滞后的展示类走最终一致。最终一致最大的坑往往不是「最终」，而是「自己刚写的读不到」。"
+    },
+    {
+      "id": "dist-cachec-015",
+      "noteId": "distributed/advanced/consistency/02-cache-consistency",
+      "type": "single",
+      "q": "Cache Aside 为什么用「删缓存」而不是「更新缓存」？先更库再删仍可能脏的窗口有多苛刻？",
+      "options": [
+        "删除比 set 更快；窗口是写库失败就会脏",
+        "更新在并发下可能乱序覆盖，删除幂等且读时回填最新；脏窗口需要「读 miss 横跨整个写库+删缓存」且回填晚于删除",
+        "删缓存能保证强一致，所以不必补偿",
+        "先更库再删会被 Redis 事务回滚，所以窗口不存在"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "先更缓存再更 DB 直接排除（DB 失败则缓存永久脏）。工程默认：先更库再删 + 删除失败重试；敏感数据再加 Canal 订 binlog。"
+    },
+    {
+      "id": "dist-nwr-016",
+      "noteId": "distributed/advanced/consistency/03-quorum-nwr",
+      "type": "judge",
+      "q": "配置 W+R>N 之后，系统就具备线性一致（强一致），可以当 Raft 用。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "W+R>N 只保证读集合与写集合相交、能读到至少一份较新副本，不等于强一致（并发写冲突、读修复延迟、时钟都可能打破）。W>N/2 才防双主各写各的。N=3,W=2,R=2 是工程默认档。"
+    },
+    {
+      "id": "dist-clock-017",
+      "noteId": "distributed/advanced/consistency/04-time-order",
+      "type": "multiple",
+      "q": "关于分布式顺序，下列正确的有？（多选）",
+      "options": [
+        "不要用各机器墙钟时间戳比较事件先后或做冲突检测",
+        "Lamport 时钟：a→b 则 C(a)<C(b)，但 C(a)<C(b) 推不出因果上 a 在先",
+        "超时计算用 System.currentTimeMillis() 最合适，因为它单调",
+        "向量时钟才能识别并发（互相没有 happens-before）"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "NTP 可能回拨，超时要用单调时钟。全局顺序靠单写者或共识；逻辑时钟给全序但不识别并发。"
+    },
+    {
+      "id": "dist-metrics-018",
+      "noteId": "distributed/advanced/observability/02-metrics-alerting",
+      "type": "single",
+      "q": "可观测性三支柱的分工，以及黄金四信号优先看哪四个？",
+      "options": [
+        "Metrics 归因、Logging 发现、Tracing 聚合；先看磁盘 inode",
+        "Metrics 发现有没有问题、Logging 看长什么样、Tracing 定位哪一跳；黄金四信号是延迟/流量/错误/饱和度",
+        "三者可以互相替代，留日志即可；黄金四信号是 QPS/TPS/RT/UV",
+        "Histogram 不可做分位数，必须用 Summary 才能看 P99"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "粘合剂是 traceId/统一标签。平均值会吃掉长尾，延迟看 P95/P99。RED 面向服务，USE 面向资源。Counter 只增不减，Gauge 可上可下。"
+    },
+    {
+      "id": "dist-rpc-019",
+      "noteId": "distributed/intermediate/governance/01-rpc-principles",
+      "type": "single",
+      "q": "一次 RPC 链路里，异步收发能把响应配对回正确请求，靠的是哪一项？JDK SPI 为什么不够 Dubbo 用？",
+      "options": [
+        "靠 TCP 端口号配对；JDK SPI 更快所以 Dubbo 继续用",
+        "协议头里的请求 ID；JDK SPI 会一次性实例化全部实现，无法按需/自适应选择",
+        "靠序列化类型字段；Hessian 不能跨语言所以被淘汰",
+        "靠动态代理缓存方法名；SPI 与 RPC 无关"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "四件套：动态代理、序列化、协议编解码、网络传输。Protobuf 体积小且跨语言，是 gRPC 标准。HTTP 短连接每次握手，RPC 通常长连接+多路复用。"
+    },
+    {
+      "id": "dist-triple-020",
+      "noteId": "distributed/intermediate/performance/01-triple-high",
+      "type": "multiple",
+      "q": "三高「五大武器」背后的共同思想，下列正确的有？（多选）",
+      "options": [
+        "没有访问局部性（完全随机）的数据不适合缓存，还没二次访问就被挤出",
+        "预处理/延后处理都是把实时链路上的事剥离，缩短关键路径",
+        "Write Back 只写缓存即返回，写极快但可能丢数据",
+        "水平加机器万能，不必让每一层都支持水平扩展"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "高并发首先是正确性，吞吐是目标。池化=创建提前、销毁延后。这些手法多能在 OS/体系结构里找到原型（页缓存、预读、COW、连接池）。"
+    },
+    {
+      "id": "dist-iface-021",
+      "noteId": "distributed/intermediate/performance/02-interface-optimization",
+      "type": "single",
+      "q": "接口优化为什么要先看「耗时地图」？跨地域调用该如何处理？",
+      "options": [
+        "所有优化效果都在同一数量级，所以先微优化 CPU",
+        "CPU 周期与跨地域差六个数量级；链路图标出每次跨地域，让调用落在数据附近而不是 N 次跨区",
+        "Redis 比 MySQL 慢，所以应尽量把热点放数据库",
+        "前端串行调用两个独立接口总耗时一定等于 max(A,B)"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "北京-深圳光纤传播下界约 10ms，实际 ~40ms。核心/非核心拆接口，失败可独立降级。前端并行时总耗时才是 max 而不是求和。微服务拆过细会把网络 I/O 乘到链路上。"
+    },
+    {
+      "id": "dist-lock-022",
+      "noteId": "distributed/intermediate/coordination/01-distributed-lock-compare",
+      "type": "single",
+      "q": "「Redis 是效率锁，ZK/etcd 是正确锁」这句话的工程含义，正确性终解通常补什么？",
+      "options": [
+        "Redis 锁绝对不会误删；ZK 更慢所以不适合任何场景",
+        "Redis SET NX PX 吞吐高但有过期/暂停导致的安全争议；ZK/etcd 靠会话与共识更偏正确；跨进程互斥的终解是 fencing token 拒旧主",
+        "数据库唯一约束性能最好，应作为通用方案",
+        "RedLock 已经从数学上证明可替代共识"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "持锁者 GC/网络分区超时后锁过期，旧主醒来仍可能写——所以要带单调 fencing token，存储层拒绝过期一代。DB 锁无自动过期、性能差，只适合小并发后台任务。"
+    },
+    {
+      "id": "dist-idem-023",
+      "noteId": "distributed/intermediate/coordination/02-idempotency",
+      "type": "single",
+      "q": "`update set stock=stock-1` 与 `update set status='PAID' where id=?` 哪个天然幂等？分布式为什么必须做幂等？",
+      "options": [
+        "扣库存天然幂等，改状态不幂等；因为数据库会自动去重",
+        "改成固定状态幂等，stock=stock-1 每执行一次都变；超时重试/MQ 至少一次/重复点击会系统性重放",
+        "两者都不幂等；幂等只是支付公司的合规要求",
+        "两者都幂等；insert 才是唯一不幂等的操作"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "重试是保可用性的必然选择，所以重放必然存在。方案是唯一业务号 + 原子占坑（唯一索引/状态机条件更新），而不是先查后写的 check-then-act。"
     }
   ]
 }

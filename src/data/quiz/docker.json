@@ -98,6 +98,55 @@
         0
       ],
       "hint": "stop 先 SIGTERM 默认等 10s 再 SIGKILL；137 是 SIGKILL（OOM 或 docker kill），143 才是 SIGTERM。pause 只是暂停，unpause 可恢复。"
+    },
+    {
+      "id": "docker-compose-007",
+      "noteId": "docker/advanced/orchestration/01-compose",
+      "type": "single",
+      "q": "compose.yml 里 api depends_on db，只写了服务名、没有 healthcheck。api 起来时 db 一定已经接受连接吗？",
+      "options": [
+        "一定：depends_on 会阻塞到依赖进程就绪",
+        "不一定：depends_on 默认只保证启动顺序；等就绪要 healthcheck + condition: service_healthy",
+        "Compose V2 已删除 depends_on，必须改用 links",
+        "只要在同一自定义网络里，启动顺序无所谓，DNS 会重试到成功"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "服务名即 DNS 名（Compose 自动建自定义网络）。version 字段在 Compose V2 已废弃。down 默认不删具名卷，加 -v 才会。"
+    },
+    {
+      "id": "docker-opt-008",
+      "noteId": "docker/advanced/orchestration/03-image-optimization",
+      "type": "multiple",
+      "q": "关于镜像瘦身与安全，下列正确的有？（多选）",
+      "options": [
+        "先 docker history / dive 定位哪一层最大，再决定换 alpine、多阶段还是清缓存",
+        "Dockerfile 里 ENV SECRET=... 构建完就消失，history 看不到",
+        "生产 USER 非 root；基础镜像尽量 pin 到 digest 防仓库漂移",
+        "EXPOSE 了端口就等于对外可访问，不必再 -p"
+      ],
+      "answer": [
+        0,
+        2
+      ],
+      "hint": "ENV/ARG 里的密钥会永久留在层里。多阶段构建让编译器不进最终镜像；.dockerignore 减构建上下文。EXPOSE 只是声明。"
+    },
+    {
+      "id": "docker-cmd-009",
+      "noteId": "docker/basic/fundamentals/02-commands",
+      "type": "single",
+      "q": "docker run -p 8080:80 nginx 中两个端口的含义，以及 --rm 的典型用途？",
+      "options": [
+        "8080 是容器端口、80 是宿主端口；--rm 表示重启策略为 unless-stopped",
+        "8080 是宿主端口、80 是容器端口；--rm 让容器退出后自动删除，适合一次性任务",
+        "-p 两边可以随便写，Docker 会自动对调；--rm 删除镜像",
+        "80 必须等于 EXPOSE，否则 -p 无效"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "记住「宿主:容器」。pull 拉的是只读层，run 在上面叠可写层才成为容器。docker ps 默认只看运行中，-a 才含已停止。"
     }
   ]
 }

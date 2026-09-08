@@ -317,6 +317,188 @@
         1
       ],
       "hint": "thenApply 映射值、thenCompose 平铺 Future，避免 CF<CF<T>>；allOf 才是多任务汇聚等待。"
+    },
+    {
+      "id": "java-layout-021",
+      "noteId": "java/advanced/jvm/05-object-layout",
+      "type": "single",
+      "q": "64 位 JVM 开启压缩指针时，堆一旦大于约 32G 会怎样？对象三段式是？",
+      "options": [
+        "自动换成 128 位指针；对象只有实例数据没有头",
+        "压缩指针失效、引用回到 8B；对象 = 对象头（Mark Word + Klass）+ 实例数据 + 8 字节对齐填充",
+        "GC 年龄上限从 15 变成无限；对齐可以关掉",
+        "包装类型与基本类型占用相同，不必在意集合里的 Integer"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "压缩靠「8 字节对齐 + 4 字节偏移」寻址约 32G。Mark Word 按锁状态复用，分代年龄 4 bit 所以晋升上限 15。包装类型开销 4~6 倍是集合内存第一刀。"
+    },
+    {
+      "id": "java-tuning-022",
+      "noteId": "java/advanced/jvm/07-tuning",
+      "type": "multiple",
+      "q": "关于 JVM 内存账本与容器姿势，下列正确的有？（多选）",
+      "options": [
+        "进程占用 ≠ -Xmx，还要加元空间、栈×线程、直接内存、JVM 自身",
+        "MetaspaceSize 是元空间的初始大小，设了就不会再涨",
+        "容器里用 MaxRAMPercentage，避免默认 25% 太抠或总额超限被 OOM Killer 杀掉",
+        "调优一次只改一个变量，应用层优化优先于乱拧 GC 旋钮"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "MetaspaceSize 是首次触发元空间回收的水位，不是初始容量。Xms=Xmx 抗扩容抖动。G1 下不建议手设 -Xmn。"
+    },
+    {
+      "id": "java-bc-023",
+      "noteId": "java/advanced/jvm/09-bytecode",
+      "type": "single",
+      "q": "低版本 JVM 加载高版本 class 报 UnsupportedClassVersionError，直接原因是？invokevirtual 与 invokestatic 的分派时机？",
+      "options": [
+        "常量池损坏；两者都是运行期动态绑定",
+        "major_version 决定最低 JVM；虚方法（重写）运行期找，静态方法编译期定",
+        "缺少 CAFEBABE；重载也是运行期绑定",
+        "javap 版本不对；invokedynamic 只用于异常表"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "52.0 = Java 8。常量池是符号引用地址簿，解析阶段变成直接引用。invokedynamic 撑起 Lambda 与现代字符串拼接。重载是静态分派，重写是动态绑定。"
+    },
+    {
+      "id": "java-ms-024",
+      "noteId": "java/advanced/springcloud/01-microservices-overview",
+      "type": "single",
+      "q": "微服务用什么换什么？小团队硬拆的典型后果？",
+      "options": [
+        "用运维/分布式复杂度换并行研发与按热点精准扩容；小团队硬拆等于给自己上刑",
+        "用单库事务换无限扩容，没有代价",
+        "Netflix OSS 全家桶是 2024 年新项目的默认选择",
+        "拆得越细越好，网关和追踪都可以省"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "核心四件套：注册中心找得到、网关进得来、Feign 调得动、熔断挂得起。Spring Cloud 是规范+胶水，组件可插拔；新项目绕开停更的 Netflix 栈。"
+    },
+    {
+      "id": "java-feign-025",
+      "noteId": "java/advanced/springcloud/04-openfeign-loadbalancer",
+      "type": "single",
+      "q": "OpenFeign 让远程调用看起来像本地方法，底层关键三步是？重试的边界？",
+      "options": [
+        "字节码增强改写 JDK；任何请求都可以无限重试",
+        "注解契约 + JDK 动态代理拼 HTTP + LoadBalancer 按服务名选实例；重试只给幂等操作",
+        "编译期生成 REST 客户端源码；超时可以不配",
+        "走 JVM 进程内接口，不经过网络，所以没有超时"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "Ribbon 已退场，LoadBalancer 默认轮询。fallback 要提前设计，别把堆栈扔给用户。服务名对应注册中心的 key，不要硬编码 IP。"
+    },
+    {
+      "id": "java-cfg-026",
+      "noteId": "java/advanced/springcloud/06-config-center",
+      "type": "single",
+      "q": "Nacos 配置热更新不生效，应优先核对的关键注解/机制是？",
+      "options": [
+        "只重启 Nacos 即可，客户端没有刷新概念",
+        "@RefreshScope + 长轮询推送；失效再查通知、依赖链、import/bootstrap 方式",
+        "把配置写进环境变量就自动热更新",
+        "DataId 必须等于类名，否则无法绑定"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "三级组织：Namespace / Group / DataId。配置中心的价值是收拢配置 + 免去全量重启发版。Boot 2.4+ 常用 spring.config.import。"
+    },
+    {
+      "id": "java-trace-027",
+      "noteId": "java/advanced/springcloud/08-tracing",
+      "type": "multiple",
+      "q": "关于跨服务链路追踪，下列正确的有？（多选）",
+      "options": [
+        "单机 MDC 的 traceId 出了进程边界就对不上，必须把上下文塞进请求头往下传",
+        "W3C 标准头是 traceparent；Boot 3.x 用 Micrometer Tracing 取代 Sleuth",
+        "异步线程会自动继承 MDC/Trace 上下文，不必显式传播",
+        "采样是为了控制成本，全量上报在高 QPS 下不现实"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "trace 全链路唯一，span 构成调用树。线上排查固定套路：指标发现 → 链路定位跳 → 日志归因。线程池里丢上下文是高频坑。"
+    },
+    {
+      "id": "java-oop-028",
+      "noteId": "java/basic/syntax/01-oop",
+      "type": "single",
+      "q": "重载与重写的绑定时机差异，以及 Stack extends Vector 被批评的原因？",
+      "options": [
+        "两者都是运行期动态绑定；继承总能保持子类不变量",
+        "重载编译期静态分派，重写运行期走虚方法表；用继承暴露了 Vector 的随机插入，破坏栈语义——复合优先于继承",
+        "重写编译期定，重载运行期定；接口不能多实现",
+        "封装等于给字段加 getter/setter，与不变量无关"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "封装好坏看改内部字段时有多少外部要跟着改。is-a 才继承；has-a / can-do 用组合或接口。接口定义契约可多实现，抽象类承载状态且单继承。"
+    },
+    {
+      "id": "java-ex-029",
+      "noteId": "java/basic/syntax/05-exception",
+      "type": "single",
+      "q": "try 里 return 1，finally 里 return 2，方法实际返回？资源关闭为什么优先 try-with-resources？",
+      "options": [
+        "1，finally 不能改变返回值；手动 close 更可控",
+        "2，finally 的 return 会劫持已暂存的返回值（反模式）；TWR 逆序关闭并抑制异常",
+        "抛出异常，因为不能同时 return；finally 不执行",
+        "未定义行为，取决于 JIT"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "Error 不该 catch。受检异常是调用方有能力恢复的外部问题；RuntimeException 是 bug 信号。finally 几乎总会跑，但不要在里面 return。"
+    },
+    {
+      "id": "java-thb-030",
+      "noteId": "java/intermediate/concurrent/01-thread-basics",
+      "type": "multiple",
+      "q": "关于 Java 线程，下列正确的有？（多选）",
+      "options": [
+        "严格来说创建线程只有 new Thread().start()，Runnable/线程池都是使用方式",
+        "BLOCKED 只与 synchronized 相关，JUC 锁等待是 WAITING",
+        "sleep 与 wait 一样会释放持有的监视器锁",
+        "线程私有程序计数器/虚拟机栈/本地方法栈，堆与方法区共享"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "sleep 不释放锁，wait 释放锁并进入等待集。上下文切换有成本，线程池的本质是摊销创建与切换。进程是资源分配单位，线程是调度单位。"
+    },
+    {
+      "id": "java-ext-031",
+      "noteId": "java/intermediate/spring/06-extension-points",
+      "type": "single",
+      "q": "BeanFactoryPostProcessor 与 BeanPostProcessor 的分水岭？AOP 代理通常在哪一环织入？",
+      "options": [
+        "两者都改成品实例；AOP 在实例化之前",
+        "BFPP 改图纸（BeanDefinition），BPP 动成品；代理在 postProcessAfterInitialization",
+        "BFPP 只处理 @PostConstruct；BPP 只替换占位符 ${}",
+        "FactoryBean 取出的就是工厂本身，MyBatis Mapper 直接 new"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "占位符替换在 BFPP；@MapperScan 动态加定义靠 RegistryPostProcessor。Aware → @PostConstruct → BPP after。事件默认同步，别当 MQ 用。"
     }
   ]
 }

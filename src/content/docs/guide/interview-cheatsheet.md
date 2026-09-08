@@ -26,6 +26,8 @@ Docker、Nginx、Git 等全站方向。
 | [equals 与 hashCode 约定](/java/basic/syntax/03-equals-hashcode/) | 重写 equals 必须重写 hashCode，否则 HashMap/HashSet 语义失效 |
 | [String 为什么不可变](/java/basic/syntax/02-string/) | final 存储 + 常量池复用 + 天然线程安全，拼接大量字符串用 StringBuilder |
 | [SPI 机制](/java/basic/syntax/10-spi/) | ServiceLoader 从 META-INF/services 按接口加载实现——Dubbo/Spring 扩展体系的源头 |
+| [封装继承多态](/java/basic/syntax/01-oop/) | 封装维护不变量；继承慎用复合优先；重载编译期静态分派，重写运行期动态绑定 |
+| [受检异常 vs 运行时](/java/basic/syntax/05-exception/) | 能恢复抛受检、是 bug 抛运行时、JVM 坏了抛 Error；finally 里 return 会劫持返回值 |
 | [BIO/NIO/AIO](/java/basic/io/01-io-model/) | 阻塞流 → 多路复用（selector 一个线程管千连接）→ 异步回调；Netty 是 NIO 的事实标准 |
 | [零拷贝](/java/basic/io/02-zero-copy/) | mmap/sendfile 砍掉内核态与用户态之间的拷贝，Kafka 吞吐的底层来源 |
 | [TCP 粘包拆包](/java/basic/io/03-tcp-sticky-packets/) | TCP 是字节流没有消息边界，靠定长/分隔符/长度域解码切分（Netty 解码器） |
@@ -34,6 +36,7 @@ Docker、Nginx、Git 等全站方向。
 
 | 问题 | 一句话答案 |
 |---|---|
+| [进程与线程](/java/intermediate/concurrent/01-thread-basics/) | 进程是资源分配单位，线程是 CPU 调度单位；Java 创建线程本质只有 new Thread().start() |
 | [线程池执行流程](/java/intermediate/concurrent/02-thread-pool/) | 核心线程 → 队列 → 非核心线程 → 拒绝策略；7 参数按业务定，禁用 Executors 预设 |
 | [volatile 的语义](/java/intermediate/concurrent/03-volatile/) | 内存屏障保证可见性 + 禁止指令重排，**不保证原子性**（i++ 仍不安全） |
 | [synchronized 锁升级](/java/intermediate/concurrent/04-synchronized/) | 无锁 → 偏向 → 轻量级（自旋）→ 重量级，按竞争程度逐级膨胀 |
@@ -55,6 +58,9 @@ Docker、Nginx、Git 等全站方向。
 | [四种引用](/java/advanced/jvm/04-references/) | 强不回收、软引用内存不足回收（缓存）、弱引用下次必收（ThreadLocal key）、虚引用管堆外 |
 | [JIT 与逃逸分析](/java/advanced/jvm/06-jit/) | 热点代码即时编译；对象不逃逸可栈上分配/标量替换，省掉堆分配 |
 | [线上 JVM 故障排查](/java/advanced/jvm/08-troubleshooting/) | CPU 高：top -H 定线程 → jstack 看栈；OOM：jmap dump → MAT 分析支配树 |
+| [对象内存布局](/java/advanced/jvm/05-object-layout/) | 对象头 + 实例数据 + 8 字节对齐；压缩指针堆 >32G 自动失效，包装类型开销 4~6 倍 |
+| [JVM 调优铁律](/java/advanced/jvm/07-tuning/) | 进程内存 ≠ Xmx：堆+元空间+栈×线程+直接内存；容器用 MaxRAMPercentage，一次只改一个变量 |
+| [字节码与 invoke](/java/advanced/jvm/09-bytecode/) | Class 文件严格排版，常量池是符号引用地址簿；重载编译期定、重写运行期找 |
 
 ## Spring 与微服务
 
@@ -62,6 +68,7 @@ Docker、Nginx、Git 等全站方向。
 |---|---|
 | [Bean 生命周期](/java/intermediate/spring/01-ioc-bean-lifecycle/) | 实例化 → 属性填充 → Aware → BeanPostProcessor 前后 → init → 销毁，扩展点全挂在链上 |
 | [循环依赖与三级缓存](/java/intermediate/spring/03-circular-dependency/) | 提前暴露早期引用解决 setter 注入循环依赖；构造器循环依赖无解 |
+| [Spring 扩展点时间轴](/java/intermediate/spring/06-extension-points/) | 容器级 BFPP 改图纸，Bean 级 BPP 动成品；AOP 代理在 postProcessAfterInitialization 织入 |
 | [@Transactional 失效场景](/java/intermediate/spring/04-transaction/) | 自调用、异常被吞、非 public、传播行为误配——本质都是代理没拦到 |
 | [AOP 的实现](/java/intermediate/spring/02-aop/) | JDK 动态代理（有接口）与 CGLIB（子类），切面织入靠代理层拦截 |
 | [Spring Boot 自动配置](/java/intermediate/spring-boot/01-autoconfig/) | @EnableAutoConfiguration 加载候选配置类 + 条件注解按需生效 |
@@ -70,6 +77,10 @@ Docker、Nginx、Git 等全站方向。
 | [注册中心 Nacos](/java/advanced/springcloud/02-registry/) | 临时实例 AP（Distro）、持久实例 CP（Raft）可切换；心跳剔除 + 客户端缓存兜底 |
 | [Sentinel 熔断限流](/java/advanced/springcloud/05-sentinel/) | 滑动窗口统计，熔断器三态循环（关闭→打开→半开），失败率/慢调用触发 |
 | [网关的职责](/java/advanced/springcloud/03-gateway/) | 统一入口做路由、鉴权、限流、灰度——业务无关的横切关注点上收 |
+| [什么时候拆微服务](/java/advanced/springcloud/01-microservices-overview/) | 用运维复杂度换并行研发与精准扩容；小团队硬拆等于给自己上刑 |
+| [OpenFeign 调用](/java/advanced/springcloud/04-openfeign-loadbalancer/) | 注解契约 + 动态代理 + 注册中心寻址；超时重试只给幂等操作，fallback 提前设计 |
+| [配置中心动态刷新](/java/advanced/springcloud/06-config-center/) | Nacos 三级 Namespace/Group/DataId；热更新靠 @RefreshScope，免去全量重启发版 |
+| [跨服务链路追踪](/java/advanced/springcloud/08-tracing/) | 单机 MDC 不够：traceId 经 W3C traceparent 贯穿；Boot 3.x 用 Micrometer Tracing 取代 Sleuth |
 | [单例模式](/java/intermediate/design-pattern/02-singleton/) | 进程内真唯一：饿汉/枚举/静态内部类/DCL；难点是并发、反射、序列化围攻下仍唯一 |
 | [Stream 延迟求值](/java/intermediate/stream/01-stream-principle/) | 不存数据、中间操作惰性串联，终止操作才触发；并行流走 ForkJoinPool 工作窃取 |
 
@@ -110,6 +121,7 @@ Docker、Nginx、Git 等全站方向。
 | [主从、哨兵与集群](/redis/advanced/ha/01-replication-sentinel-cluster/) | 主从复制冗余，哨兵自动故障转移，Cluster 16384 槽分片——三层递进 |
 | [大 key 与热 key 治理](/redis/intermediate/usage/06-bigkey-hotkey/) | 大 key 拆分压缩，热 key 本地缓存 + 随机打散——都先监控发现再治理 |
 | [缓存架构模式](/redis/intermediate/usage/04-cache-patterns/) | Cache Aside 主流；Read/Write Through 收敛到缓存层，Write Behind 换吞吐冒风险 |
+| [管道、事务与 Lua](/redis/intermediate/usage/05-pipeline-transaction-lua/) | Pipeline 只省 RTT 不保证原子；MULTI/EXEC 不被插队但不回滚；真正多命令+逻辑原子靠 Lua |
 
 ## 网络协议
 
@@ -123,6 +135,8 @@ Docker、Nginx、Git 等全站方向。
 | [DNS 解析全过程](/network/basic/foundation/02-dns/) | 浏览器缓存 → hosts → 本地 DNS 递归 → 根/顶级/权威迭代，层层缓存 |
 | [从 URL 到页面](/network/basic/foundation/03-from-url-to-page/) | DNS → TCP 握手 → TLS → 发请求 → 响应解析渲染——一道题串起整个网络栈 |
 | [跨域与 CORS](/js/intermediate/web/02-cors/) | 浏览器同源策略的安全约束，CORS 靠响应头放行，复杂请求先 OPTIONS 预检 |
+| [OSI 与 TCP/IP](/network/basic/foundation/01-osi-tcpip/) | OSI 七层对照 TCP/IP 四层；排障 ping→端口→curl 逐层二分，L4/L7 用的是 OSI 编号 |
+| [HTTP 方法与状态码](/network/basic/http/01-http-basics/) | GET/PUT/DELETE 幂等、POST 不幂等是重试依据；401 未认证、403 没权限、502 上游挂、504 上游超时 |
 
 ## JavaScript
 
@@ -142,10 +156,13 @@ Docker、Nginx、Git 等全站方向。
 | 问题 | 一句话答案 |
 |---|---|
 | [为什么需要 MQ](/middleware/basic/mq/01-why-mq/) | 解耦、异步、削峰三大收益，代价：一致性问题、复杂度、重复消费、积压风险 |
+| [MQ 什么时候不该用](/kafka/basic/core/01-why-mq/) | 强一致短链路、QPS 不高、下游就一个——硬上 MQ 是给自己找运维负担；削峰是堤坝不是加速器 |
 | [三大 MQ 怎么选](/middleware/basic/mq/02-mq-comparison/) | Kafka 吞吐管道、RocketMQ 业务功能全、RabbitMQ 路由灵活——按场景不按名气 |
 | [消息不丢/不重/不乱序](/middleware/intermediate/reliability/01-message-reliability/) | 生产确认 + Broker 持久化副本 + 手动 ack 三段防丢；至少一次 + 消费幂等防重；按 key 分区保序 |
 | [Kafka 架构与高性能](/kafka/intermediate/core/01-kafka-architecture/) | 分区并行 + 顺序写 + 零拷贝 + 批量压缩——为吞吐而生 |
 | [ISR 机制](/kafka/intermediate/core/02-replica-isr/) | 与 leader 保持同步的副本集合；acks=all + min.insync.replicas 用可用性换可靠 |
+| [Kafka 幂等生产者](/kafka/intermediate/core/03-reliability-idempotent/) | Broker 按 PID+分区+序号去重只护单会话；不丢靠生产/存储/消费三段检查，跨会话去重仍靠消费端业务幂等 |
+| [零拷贝何时失效](/kafka/intermediate/core/04-high-throughput/) | SSL/TLS 必须在用户态改写字节，sendfile 链路断开；Kafka 持久性靠副本不靠单机逐条 fsync |
 | [offset 提交语义](/kafka/basic/core/02-offset/) | 提交的是「下一条要读的 offset」；先提交后处理会丢，先处理后提交可能重复 |
 | [Rebalance](/kafka/intermediate/core/05-rebalance/) | 成员/订阅/分区变化触发，代价是全组停消费；处理慢被踢调 max.poll.interval.ms |
 | [RocketMQ 事务消息](/rocketmq/advanced/core/01-rocketmq-features/) | 半消息先落库 + 本地事务 + 回查补偿——分布式事务的 MQ 解 |
@@ -161,6 +178,7 @@ Docker、Nginx、Git 等全站方向。
 | [RocketMQ 消费失败会阻塞吗](/rocketmq/basic/core/02-consumer-semantics/) | 不会——失败进 %RETRY% 按延迟级别递增重试 16 次，仍失败进 %DLQ% 死信，新消息继续消费 |
 | [消息队列高性能靠什么](/rocketmq/advanced/core/02-order-performance/) | 顺序写 × 零拷贝（sendfile 管消费、mmap 管生产）× 批量压缩——linger.ms 是延迟换吞吐的旋钮 |
 | [MQTT 保活](/mqtt/intermediate/usage/02-keepalive-reconnect/) | keepalive 间隔内无报文则 PINGREQ 探活；别设太小，重连用指数退避加抖动 |
+| [EMQX 与 Mosquitto 怎么选](/mqtt/intermediate/usage/01-broker-emqx/) | 验证/小规模用 Mosquitto；生产规模化上 EMQX 集群，路由表全节点同步、设备不必粘滞到某台 |
 
 ## 检索与文档存储
 
@@ -171,6 +189,7 @@ Docker、Nginx、Git 等全站方向。
 | [ES 深翻页](/elasticsearch/intermediate/usage/03-pagination/) | from+size 翻页深了协调节点归并爆炸——用 search_after / scroll |
 | [MongoDB 复制集](/mongodb/intermediate/replication/01-replication-set/) | 一主多从 + 选举（Raft 族），oplog 增量同步，读写分离与自动故障转移 |
 | [MongoDB 分片集群](/mongodb/advanced/sharding/01-sharding-cluster/) | mongos 路由 + config 元数据 + shard 分片；复制集只解决可用性，写扩展靠分片 |
+| [Mongo 容量规划](/mongodb/advanced/operations/01-capacity-planning/) | 磁盘 ≠ 原始数据：副本×3 + 索引常占 20%~50%；内存按 2× 工作集，能放下别急着分片 |
 | [文档模型怎么选](/mongodb/basic/core/01-document-model/) | BSON 结构长在文档里；第一决策是内嵌还是引用，不是「没有 schema」 |
 | [explain 看什么](/mongodb/advanced/operations/02-performance/) | keys/docs/returned 接近 1:1:1；COLLSCAN 就是没走到索引 |
 | [ES terms 聚合为什么会丢桶](/elasticsearch/intermediate/usage/02-aggregation/) | 各分片只交局部 top-N 再合并，size 太小高频词落选——聚合字段一律 keyword，size 要设够大 |
@@ -198,6 +217,9 @@ Docker、Nginx、Git 等全站方向。
 | [jq 与 -r](/tools/basic/cli/03-jq/) | 把 JSON 当值流过滤；字符串默认带引号，接到 shell 要 -r |
 | [jq 的流式心智](/tools/basic/cli/03-jq/) | `.[]` 把数组展开成值流每元素一行，`.` 整体一个值；Cannot iterate 是对非数组用 [] |
 | [正则贪婪](/tools/basic/efficiency/03-regex/) | 默认吃最多，量词后加 ? 变非贪婪——解析引号内容几乎总要用 |
+| [编辑器效率杠杆](/tools/basic/efficiency/01-editor-ide/) | 高频动作练成肌肉记忆：快速打开、多光标、跳转定义；写过三次的样板固化成 snippet |
+| [终端行编辑](/tools/basic/efficiency/02-terminal/) | Ctrl+R 反向搜历史是性价比最高的快捷键；alias + 管道/xargs 把长命令接起来 |
+| [网络调试工具链](/tools/basic/efficiency/04-network-debug/) | 自下而上：ping → dig → nc -zv → curl -v；curl -I 发 HEAD 只要响应头 |
 
 ## Docker 与容器
 
@@ -209,6 +231,9 @@ Docker、Nginx、Git 等全站方向。
 | [容器之间怎么互访](/docker/intermediate/practice/03-network/) | 放进同一自定义 bridge 用容器名互访（内置 DNS）；默认 bridge 不支持按名互访，容器 IP 重启会变别写死 |
 | [数据必须挂卷](/docker/intermediate/practice/02-volume/) | 可写层随容器删除丢失；生产用具名卷，开发热加载才 bind |
 | [容器生死](/docker/basic/fundamentals/03-lifecycle/) | 主进程退出容器即退出；stop 先 SIGTERM 再 SIGKILL，137 是被 SIGKILL |
+| [Docker Compose](/docker/advanced/orchestration/01-compose/) | 服务名即 DNS；depends_on 只保证启动顺序，等依赖就绪要 healthcheck + service_healthy |
+| [镜像怎么瘦身](/docker/advanced/orchestration/03-image-optimization/) | 先 dive 定位大层：换 alpine、多阶段构建、.dockerignore；生产 USER 非 root、密钥不进层 |
+| [镜像与容器命令](/docker/basic/fundamentals/02-commands/) | pull 拉只读层、run 叠可写层成容器；-p 是宿主:容器，--rm 一次性任务退出即删 |
 
 ## Nginx
 
@@ -219,6 +244,7 @@ Docker、Nginx、Git 等全站方向。
 | [HTTPS 证书为什么配在 Nginx 就够](/nginx/intermediate/proxy/02-https-cache-ratelimit/) | Nginx 做 TLS 终止——对外加密、对内网走 HTTP，证书一处维护，后端不用各自配 |
 | [root 与 alias](/nginx/basic/config/02-static-server/) | root 拼完整 URI，alias 剥前缀再替换；SPA 刷新靠 try_files 回退 index.html |
 | [CDN 动静态](/nginx/intermediate/proxy/04-cdn/) | 静态靠边缘缓存，动态无法缓存只做选路；命中率是生命线，回源是兜底 |
+| [keepalived 保 Nginx 入口](/nginx/intermediate/proxy/03-keepalived-ha/) | VRRP 组播 + priority 选举让 VIP 秒级漂移；探的是 nginx 进程不是主机，脑裂要比宕机更危险 |
 
 ## Git
 
@@ -229,6 +255,9 @@ Docker、Nginx、Git 等全站方向。
 | [公共分支的错误提交怎么撤](/git/intermediate/collaboration/03-undo-recovery/) | 用 revert 生成反向提交抵消——reset 改历史，只能用于私有分支 |
 | [fetch 与 pull](/git/intermediate/collaboration/02-remote-collab/) | fetch 只更新远端快照不动工作区；pull = fetch + merge（或 rebase） |
 | [什么时候可以改历史](/git/advanced/workflow/01-history-rewrite/) | 只改尚未推到公共分支的提交；rebase 是重放新哈希，不是原地修改 |
+| [日常 add/commit/diff](/git/basic/foundations/02-daily-commands/) | 先分清改动在工作区还是暂存区：git diff vs --staged；add -p 逐块挑选是最被低估的功能 |
+| [bisect 与 worktree](/git/advanced/workflow/02-advanced-tools/) | bisect 二分定位引入 bug 的提交；worktree 共享同一份 .git 对象开多个工作目录 |
+| [团队 Git 规范](/git/advanced/workflow/03-team-standards/) | 小团队 GitHub Flow 滚 main+PR 就够；公共分支禁止裸 force push，必须 --force-with-lease |
 
 ## 算法
 
@@ -251,6 +280,16 @@ Docker、Nginx、Git 等全站方向。
 | [拓扑排序](/algorithm/advanced/graph/02-topological-sort/) | Kahn：入度 0 即可执行；输出不足总结点数则有环 |
 | [二分答案](/algorithm/advanced/binary-answer/01-koko-eating-bananas/) | 「最小的最大」对 k 本身二分，前提是判定单调 |
 | [Kadane](/algorithm/intermediate/dp/03-max-subarray/) | 前面累计是负资产就丢弃重开，O(n) 求最大子数组和 |
+| [冒泡排序](/algorithm/basic/sorting/01-bubble-sort/) | 相邻逆序就交换，每轮把最大值冒到末尾；swapped 一轮未交换可提前退出 |
+| [插入排序](/algorithm/basic/sorting/03-insertion-sort/) | 抽 key 插入有序前缀；近乎有序接近 O(n)，是工业排序小区间的兜底 |
+| [选择排序](/algorithm/basic/sorting/04-selection-sort/) | 每轮扫出最小值与头部交换；比较次数固定、交换最少，但不稳定 |
+| [堆排序](/algorithm/basic/sorting/06-heap-sort/) | 数组当完全二叉树建大顶堆，堆顶归位再下沉，任意输入 O(n log n) |
+| [三路分区](/algorithm/basic/sorting/09-three-way-partition/) | 一次扫描分成 < = > 三段；大量重复时相等元素一次归位，防快排退化 |
+| [搜索旋转数组](/algorithm/basic/searching/05-rotated-array-search/) | mid 两侧至少一半有序，用有序半区判断目标，每步仍排除一半 O(log n) |
+| [图的 BFS/DFS](/algorithm/advanced/graph/01-graph-traversal/) | BFS 队列按层（最短路），DFS 栈扎到底（连通/环）；图必须 visited 防环 |
+| [跳跃游戏](/algorithm/advanced/greedy/01-jump-game/) | 维护最远可达判可行性；最少步数把「第 k 步能到的下标」看成一层，省掉 BFS 队列 |
+| [四大范式怎么选](/algorithm/advanced/principles/02-paradigm-landscape/) | 分治/贪心/DP/回溯都是聪明地穷举：子问题独立→分治，重叠→DP，要全部解→回溯 |
+| [大 O 量的是什么](/algorithm/advanced/principles/03-complexity-analysis/) | 度量操作次数随 n 的增长趋势不是秒数；n 范围反推可行复杂度（1 秒 ≈ 10⁸ 次） |
 
 ## Python
 
@@ -268,6 +307,16 @@ Docker、Nginx、Git 等全站方向。
 | [dict 实现](/python/basic/data-structures/02-dict-set/) | 开放寻址、装载因子约 2/3 扩容；3.7+ 语言保证插入有序 |
 | [typing 运行时不强制](/python/intermediate/stdlib/04-typing/) | 标注给 IDE/mypy 看，解释器不检查；边界脏数据要运行时校验 |
 | [Pydantic](/python/intermediate/libs/02-pydantic/) | 把类型标注变成运行时强制，拦 HTTP/配置/第三方 JSON |
+| [venv 与 uv](/python/advanced/eng/01-venv-uv/) | 隔离靠 venv，声明在 pyproject.toml，锁定在 uv.lock；应用提交 lock，库只声明宽松下限 |
+| [pytest 怎么写](/python/advanced/eng/02-pytest/) | 裸 assert + fixture 按名注入；参数化加用例只加数据行，共享放 conftest.py |
+| [ruff 与 mypy](/python/advanced/eng/03-ruff-mypy/) | ruff 一统 lint/format；mypy 渐进收紧，CI 门禁 check → format --check → mypy → pytest |
+| [描述符与元类](/python/advanced/internals/03-descriptors-metaclass/) | 描述符是 __get__/__set__ 协议，property/ORM 字段的本体；元类拦截类的创建，是最后手段 |
+| [list 与 tuple](/python/basic/data-structures/01-list-tuple/) | list 过度分配指针数组，append 均摊 O(1)、头部操作 O(n)；tuple 可哈希可作 dict key |
+| [import 执行几次](/python/basic/modules/01-modules-import/) | import 是运行时执行且 sys.modules 缓存只跑一次；循环导入优先抽公共模块 |
+| [包与 src 布局](/python/basic/modules/02-packages-layout/) | 包=带 __init__.py 的目录；包内相对、跨包绝对；跑脚本破坏相对导入时用 python -m |
+| [__new__ 与 __init__](/python/basic/oop/01-class-basics/) | __new__ 造实例、__init__ 填内容；可变默认值性质的类属性要挪进 __init__ |
+| [dataclass 与 slots](/python/basic/oop/03-dataclass-slots/) | frozen=True 当值对象；可变默认值用 default_factory；百万实例加 slots 省约一半内存 |
+| [线程适合什么](/python/intermediate/concurrency/01-threading/) | GIL 下 CPU 密集无法并行字节码，但 IO 等待会释放——IO 密集用线程池，共享状态优先 Queue |
 
 ## AI 与大模型
 
@@ -285,6 +334,16 @@ Docker、Nginx、Git 等全站方向。
 | [子智能体](/ai/intermediate/agent/09-subagent/) | 子任务用独立 messages，只把结论回传，避免中间过程挤爆主上下文 |
 | [机器学习范式](/ai/basic/foundation/01-machine-learning/) | 从「数据+规则→答案」变成「数据+答案→规则」；监督/无监督/强化学习三种信号 |
 | [深度学习](/ai/basic/foundation/02-deep-learning/) | 多层网络自动提取特征，把原先靠人做的特征工程交给模型 |
+| [多 Agent 第一动机](/ai/advanced/agent/01-multi-agent/) | 第一动机是上下文隔离与并行，不是堆更多算力；子 Agent 只回摘要，主线程视野不被稀释 |
+| [任务系统 vs 便签](/ai/advanced/agent/02-task-system/) | TodoWrite 是给自己看的便签，Task System 是可认领的看板：持久化、有 blockedBy、跨会话还在 |
+| [后台任务怎么回](/ai/advanced/agent/03-background-tasks/) | 一个 tool_use 只对应一个 tool_result：占位结果立刻回，完成后走独立通知通道 |
+| [Agent 团队](/ai/advanced/agent/05-agent-teams/) | 团队=收件箱的集合，协调不需要共享内存；权限冒泡让队友干危险活仍经用户审批 |
+| [自主认领任务](/ai/advanced/agent/07-autonomous-agents/) | 看板模式：任务可见、认领原子、依赖显式——不需要中央调度器；inbox 优先于任务板 |
+| [Agent 框架看什么](/ai/advanced/agent/10-agent-frameworks/) | 框架解决的是多租户/并发调度/沙箱/部署这些生产外围，不是会不会推理 |
+| [评测与对齐](/ai/advanced/eval/01-evaluation-align/) | 评测盯能力、对齐盯价值与安全；RLHF = 人类反馈 → 奖励模型 → 强化学习 |
+| [TodoWrite 对抗什么](/ai/intermediate/agent/01-todo-planning/) | 注意力稀释是长任务的敌人；计划以可见列表对抗上下文挤压，reminder 由 Harness 负责 |
+| [系统提示是组装的](/ai/intermediate/agent/02-system-prompt/) | system prompt 按当前状态运行时拼接，不是写死的字符串；加载依据是文件/工具是否真的存在 |
+| [技能按需加载](/ai/intermediate/agent/05-skill-loading/) | 两级加载：目录便宜常驻 system prompt，内容昂贵通过 tool_result 按需注入 |
 
 ## 分布式与集群
 
@@ -328,6 +387,11 @@ Docker、Nginx、Git 等全站方向。
 | [分布式 ID](/distributed/intermediate/transaction/02-distributed-id/) | 分库后自增会撞号；工程默认雪花（小心时钟回拨），严格连续用号段 |
 | [超时与重试](/distributed/intermediate/traffic/02-timeout-retry/) | 上层超时 > 下层之和；重试三门槛：幂等、可重试错误、退避加抖动 |
 | [链路追踪](/distributed/advanced/observability/01-distributed-tracing/) | traceId 贯穿、span 成树；透传 context 才能画出瀑布图 |
+| [全链路灰度](/distributed/advanced/availability/04-full-link-gray/) | 请求要么走完整新链路要么走完整旧链路；入口染色透传，泳道缺的服务回落基线 |
+| [一致性强度怎么选](/distributed/advanced/consistency/01-consistency-patterns/) | 资金类走强一致/共识，展示类走最终一致；刚写完读不到用粘性路由或写后短窗读主 |
+| [一次 RPC 发生了什么](/distributed/intermediate/governance/01-rpc-principles/) | 动态代理→序列化→协议编码→网络传输，把远程调用伪装成本地方法；请求 ID 配异步收发 |
+| [三高五大武器](/distributed/intermediate/performance/01-triple-high/) | 缓存、预处理/延后、池化、异步、MQ——都是把实时链路上的事提前或延后 |
+| [接口优化先看耗时地图](/distributed/intermediate/performance/02-interface-optimization/) | CPU 1ns 与跨地域 30ms 差六个数量级；先砍最贵的跨地域/RPC 次数再谈微优化 |
 
 ## 系统设计
 

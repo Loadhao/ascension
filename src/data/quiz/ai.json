@@ -185,6 +185,166 @@
         0
       ],
       "hint": "LLM 没有持久状态；压缩有损，「用 tab 缩进」这类约束必须落到压缩丢不掉的存储里再按需加载。"
+    },
+    {
+      "id": "ai-multi-013",
+      "noteId": "ai/advanced/agent/01-multi-agent",
+      "type": "single",
+      "q": "引入多 Agent 的第一动机应当是？",
+      "options": [
+        "堆更多模型调用次数，用算力硬提准确率",
+        "上下文管理：隔离与并行，子 Agent 返回摘要而不是过程，避免主线程视野被稀释",
+        "取消权限系统，让队友直接执行所有工具",
+        "先做完全自主认领，再补任务图和协议"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "三个地基是任务图（可观察）、消息契约（可预期）、文件隔离（不冲突）。自主认领之前先把任务系统和协议做扎实，顺序不能反。"
+    },
+    {
+      "id": "ai-task-014",
+      "noteId": "ai/advanced/agent/02-task-system",
+      "type": "single",
+      "q": "Task System 相对 TodoWrite，关键升级是什么？blockedBy 的语义？",
+      "options": [
+        "只是换了个文件名；blockedBy 里全部完成才能开始，缺依赖视为可做",
+        "持久化、有依赖、可认领的看板；blockedBy 里任何一个未完成或依赖不存在都不能开始",
+        "任务存在模型上下文里即可，压缩后自然还在",
+        "owner 字段可空，多 Agent 同时认领同一条更高效"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "上下文会丢，磁盘上的任务文件不会。owner 防止重复认领。TodoWrite 是给自己看的便签，不能当跨会话协作协议。"
+    },
+    {
+      "id": "ai-bg-015",
+      "noteId": "ai/advanced/agent/03-background-tasks",
+      "type": "single",
+      "q": "把慢工具丢到后台后，tool_use 与结果如何对应？",
+      "options": [
+        "一个 tool_use 可以对应多次 tool_result，完成后追加第二条",
+        "一个 tool_use 只对应一个 tool_result：立刻回占位结果，完成后走独立的 task_notification 通道",
+        "后台线程 daemon=False，主进程退出后任务必须继续跑完",
+        "是否后台化只看命令行是否包含 sleep 关键词"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "判断后台化的主路径是模型显式请求（run_in_background），启发式只是兜底。通知与当前轮 tool_result 合并成一条 user 消息。daemon=True 避免孤儿进程。"
+    },
+    {
+      "id": "ai-team-016",
+      "noteId": "ai/advanced/agent/05-agent-teams",
+      "type": "judge",
+      "q": "Agent 团队的协调本质是共享内存里的对象锁；没有共享堆就无法组队。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "团队 = 收件箱的集合，异步消息（文件+锁）就够了。子 Agent 解决临时隔离，常驻队友解决长期并行。权限冒泡：队友干危险活仍要经过用户审批。"
+    },
+    {
+      "id": "ai-auto-017",
+      "noteId": "ai/advanced/agent/07-autonomous-agents",
+      "type": "single",
+      "q": "自主智能体「自己看板自己认领」，空闲时为什么 inbox 要优先于任务板？",
+      "options": [
+        "任务板上的新任务永远比协议消息重要",
+        "关机请求等协议消息不能被新任务饿死",
+        "inbox 只存放日志，与调度无关",
+        "有任何依赖的任务都绝对不能做，即使依赖已完成"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "自治核心是看板模式，不需要中央调度器。只有被未完成任务阻塞才是 blocked。压缩后要重注入身份，队友才不会忘记自己是谁。"
+    },
+    {
+      "id": "ai-fw-018",
+      "noteId": "ai/advanced/agent/10-agent-frameworks",
+      "type": "single",
+      "q": "评估 Agent 框架时，笔记认为应先看的是？",
+      "options": [
+        "模型本身会不会推理、基准分数高不高",
+        "多租户、并发调度、沙箱、部署这些生产外围",
+        "是否自带一套私有通信协议替代 MCP",
+        "Router 必须是有状态的对话编排者，Supervisor 必须无状态"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "框架解决的不是「会不会推理」。Router 是预处理（无状态优先），Supervisor 才是对话感知的编排者。AgentScope 2.0 对 1.0 有破坏性变更。"
+    },
+    {
+      "id": "ai-eval-019",
+      "noteId": "ai/advanced/eval/01-evaluation-align",
+      "type": "multiple",
+      "q": "关于评测与对齐，下列正确的有？（多选）",
+      "options": [
+        "评测盯能力，对齐盯价值与安全，两者互补",
+        "评测三件套：基准测试 + 人类评估 + 模型裁判",
+        "RLHF 主路线：人类反馈 → 奖励模型 → 强化学习优化",
+        "对齐完成后再做评测就多余了，因为安全即能力"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "SFT 教「听懂指令」，RLHF 教「说人爱听/安全的话」。只刷基准、不对齐，模型可能能力强但不听话。"
+    },
+    {
+      "id": "ai-todo-020",
+      "noteId": "ai/intermediate/agent/01-todo-planning",
+      "type": "single",
+      "q": "长任务里 TodoWrite 要对抗的核心问题是？reminder 该由谁负责？",
+      "options": [
+        "磁盘不够；模型自觉记得更新计划即可",
+        "注意力稀释/上下文挤压；把「别忘了更新计划」变成 Harness 的责任",
+        "工具太多；应该禁止列出清单以免占窗口",
+        "多 Agent 冲突；TodoWrite 自带分布式锁"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "计划通过 tool_result 进入对话，模型每轮都能看到。V2 的依赖图 + 持久化 + 并发锁，才通往多 Agent 协作。"
+    },
+    {
+      "id": "ai-sys-021",
+      "noteId": "ai/intermediate/agent/02-system-prompt",
+      "type": "single",
+      "q": "system prompt 在生产级 Agent 里通常是？缓存 key 为什么不能用进程内 hash()？",
+      "options": [
+        "写死在仓库里的一整段字符串；hash() 稳定可跨进程",
+        "运行时按当前状态分段组装；hash() 随机化，缓存 key 要用确定性序列化",
+        "每次请求随机生成以增加多样性",
+        "与 API 层 prompt cache 是同一件事，边界可以随便切"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "加载依据是真实状态（文件在不在、工具注册了没），不是关键词猜测。字符串拼接缓存 ≠ 供应商的 prompt cache，后者还要保住静态/动态边界。"
+    },
+    {
+      "id": "ai-skill-022",
+      "noteId": "ai/intermediate/agent/05-skill-loading",
+      "type": "single",
+      "q": "技能按需加载的 token 经济学是？",
+      "options": [
+        "目录和内容都塞进 system prompt，省一次 tool 调用",
+        "目录便宜常驻，内容昂贵，通过 tool_result 用到再注入；查找走注册表而不是随意拼文件路径",
+        "技能必须 fork 进主线程，才能让主 Agent 看到全过程",
+        "技能与上下文压缩互相替代，有压缩就不必按需加载"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "安全边界由注册表保证。context: fork 让技能在子 Agent 里跑，加载内容不进主线程。技能是前置知识的惰性求值，与压缩互补。"
     }
   ]
 }

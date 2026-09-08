@@ -247,6 +247,166 @@
         1
       ],
       "hint": "best 初始 0 等于默认「答案至少为 0」，而最大子数组至少含一个元素、全负时答案是 -1，永远小于 0 根本进不了 best；「丢弃重开」逻辑本身没问题，根因全在初始化。"
+    },
+    {
+      "id": "algo-bubble-013",
+      "noteId": "algorithm/basic/sorting/01-bubble-sort",
+      "type": "single",
+      "q": "冒泡排序一轮扫描后，确定就位的是哪一类元素？swapped 标记的作用？",
+      "options": [
+        "无序区的最小值被换到头部；swapped 用于提前插入新元素",
+        "无序区的最大值「冒」到区间末尾；若一轮零交换说明已整体有序，可提前退出",
+        "整个数组已有序；swapped 没有意义",
+        "随机一个元素就位；必须固定跑满 n-1 轮"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "相邻比较、逆序交换。有 swapped 优化后最好情况接近 O(n)，最坏仍 O(n²)。它稳定，但常数大于插入排序。"
+    },
+    {
+      "id": "algo-insert-014",
+      "noteId": "algorithm/basic/sorting/03-insertion-sort",
+      "type": "single",
+      "q": "O(n²) 三兄弟里，近乎有序时能接近 O(n)、因而常做工业排序小区间兜底的是？",
+      "options": [
+        "选择排序：比较次数固定所以更快",
+        "冒泡排序：每轮必有交换",
+        "插入排序：抽 key 插入有序前缀，移位次数随逆序数下降",
+        "堆排序：虽然是 O(n log n) 但小数组更快"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "选择排序比较次数恒定 n(n-1)/2，对有序数组也毫不留情。TimSort/内省排序在小区间切到插入，正是吃这点。"
+    },
+    {
+      "id": "algo-select-015",
+      "noteId": "algorithm/basic/sorting/04-selection-sort",
+      "type": "judge",
+      "q": "选择排序是稳定排序，且交换次数是各排序里最少的一档。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "交换至多 n-1 次这一点成立，但把最小值与头部交换可能越过相等元素，所以不稳定。比较次数固定，对已有序输入也没有优惠。"
+    },
+    {
+      "id": "algo-heap-016",
+      "noteId": "algorithm/basic/sorting/06-heap-sort",
+      "type": "single",
+      "q": "堆排序把数组当下标完全二叉树：下标 k 的孩子是？任意输入复杂度？",
+      "options": [
+        "k-1 与 k+1；最好 O(n)，最坏 O(n²)",
+        "2k+1 与 2k+2；建堆 + 反复取堆顶下沉，任意输入 O(n log n)，原地但不稳定",
+        "需要额外指针堆节点；O(n) 额外空间",
+        "只用于 Top-K，不能做全排序"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "先从最后一个非叶子 n/2-1 自底向上建大顶堆，再把堆顶与无序区末尾交换、缩小堆、siftDown。它也是优先队列的地基。"
+    },
+    {
+      "id": "algo-3way-017",
+      "noteId": "algorithm/basic/sorting/09-three-way-partition",
+      "type": "single",
+      "q": "三路分区处理 a[i] > pivot 时，为什么 i 不前进？",
+      "options": [
+        "大于分支已经检查过换来的元素",
+        "从 gt 换过来的是未知值，必须留在 i 下轮再看；小于分支换来的来自中段，i 可以前进",
+        "i 永远只能前进，否则死循环",
+        "这是为了让算法不稳定"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "荷兰国旗：lt 左全 <，gt 右全 >，i 扫中间。大量重复时相等段一次归位，避免两路快排退化。"
+    },
+    {
+      "id": "algo-rotated-018",
+      "noteId": "algorithm/basic/searching/05-rotated-array-search",
+      "type": "single",
+      "q": "旋转一次的升序数组上仍能 O(log n) 查找，依据是？",
+      "options": [
+        "旋转后全局仍单调，直接套原版二分",
+        "任意 mid 的左右两半至少有一半完全有序，用有序半区判断 target 在不在，每步仍排除一半",
+        "必须先 O(n) 找到旋转点再二分",
+        "哈希一下旋转点就能 O(1)"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "旋转点只有一个，不可能同时落在两半。无重复的 LC 33 是这个模板；有重复时有序半区可能判不清，最坏会退化为 O(n)。"
+    },
+    {
+      "id": "algo-graph-019",
+      "noteId": "algorithm/advanced/graph/01-graph-traversal",
+      "type": "multiple",
+      "q": "图遍历相对树遍历，下列正确的有？（多选）",
+      "options": [
+        "图有环和交叉边，必须 visited，否则死循环或重复爆炸",
+        "BFS 队列按层扩散，是无权最短路的基础",
+        "DFS 一条路扎到底，是连通性、环检测、拓扑的基础",
+        "邻接矩阵在稀疏图上比邻接表更省，所以默认建矩阵"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "稀疏图用邻接表，复杂度 O(V+E)。BFS 入队时就标记，防止重复入队。无向图建表要加反向边。"
+    },
+    {
+      "id": "algo-jump-020",
+      "noteId": "algorithm/advanced/greedy/01-jump-game",
+      "type": "single",
+      "q": "跳跃游戏 I（能否到达）维护 farthest；若某个下标 i > farthest，结论是？",
+      "options": [
+        "继续往后跳，也许后面格子能补上",
+        "这个格子永远到不了，直接返回 false",
+        "改成 DFS 从终点倒推",
+        "farthest 只用于求最少步数，与可行性无关"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "扫描到 i 时 farthest 仍盖不住 i，说明前面所有起点都跳不过来。版本 II 最少步数把「第 k 步能到的区间」看成 BFS 的一层，用两个端点省掉队列。"
+    },
+    {
+      "id": "algo-para-021",
+      "noteId": "algorithm/advanced/principles/02-paradigm-landscape",
+      "type": "single",
+      "q": "「只要最优值且子问题大量重叠」应优先选哪条路？「要列出所有解」呢？",
+      "options": [
+        "贪心；分治",
+        "动态规划；回溯",
+        "回溯；贪心",
+        "分治；动态规划"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "四大范式都是让穷举变聪明：子问题独立→分治；重叠→DP；局部最优不堵死全局→贪心；要全部解或结构复杂→回溯（带撤销）。"
+    },
+    {
+      "id": "algo-bigO-022",
+      "noteId": "algorithm/advanced/principles/03-complexity-analysis",
+      "type": "single",
+      "q": "大 O 度量的是什么？n 从 100 万到 200 万时，O(n²) 大约变几倍？",
+      "options": [
+        "运行秒数的精确值；约 2 倍",
+        "操作次数随 n 的增长趋势（丢系数与低阶）；约 4 倍",
+        "机器主频；与 n 无关",
+        "递归栈深度；约 log 倍"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "经验：1 秒 ≈ 10⁸ 次简单操作。n≤20 才能 2ⁿ/n!；n 百万级 O(n²) 已经不现实。O(log n) 在 n 翻倍时只多一次基本操作。"
     }
   ]
 }

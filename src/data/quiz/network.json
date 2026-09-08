@@ -109,6 +109,40 @@
         2
       ],
       "hint": "没有连接就没有响应体，渲染一定在拿到资源之后（当然浏览器会流水线化，但因果不能颠倒）。"
+    },
+    {
+      "id": "net-osi-008",
+      "noteId": "network/basic/foundation/01-osi-tcpip",
+      "type": "single",
+      "q": "「能 ping 通却连不上 3306」按分层排障，问题最可能落在哪一层？",
+      "options": [
+        "物理层：网线没插好，ICMP 与 TCP 会一起失败",
+        "网络层已通（ICMP），传输层端口被防火墙拦住或服务没监听",
+        "应用层 HTTP 状态码错了，应该先 curl",
+        "表示层证书问题，因为 ping 不校验证书"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "ping 测的是网络层 ICMP；端口通不通才是传输层。口语里的 L4/L7 负载均衡用的是 OSI 编号：LVS 按 IP+端口转发是四层，Nginx 按 URL/头转发是七层。"
+    },
+    {
+      "id": "net-http-009",
+      "noteId": "network/basic/http/01-http-basics",
+      "type": "multiple",
+      "q": "关于 HTTP 方法幂等与状态码，下列正确的有？（多选）",
+      "options": [
+        "GET/PUT/DELETE 幂等，POST 不幂等——网关敢不敢自动重试看的就是这个",
+        "401 是没权限，403 是未认证，两者可以混用",
+        "499 是 Nginx 特有：客户端等不及主动断开，常出现在慢接口",
+        "502 看上游是否存活，504 看上游是否超时"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "401 Unauthorized 是没登录/令牌无效，403 Forbidden 是身份有了但没权限。301 会被浏览器缓存，误用很难救回；304 省的是流量不是请求次数。"
     }
   ]
 }
