@@ -303,6 +303,7 @@ export default defineConfig({
                         { label: 'SPI 机制：ServiceLoader', link: '/java/basic/syntax/10-spi/' },
                         { label: '常用接口与抽象类地图', link: '/java/basic/syntax/11-common-interfaces/' },
                         { label: 'JNI 与 JNDI：本地调用与命名查找', link: '/java/basic/syntax/12-jni-jndi/' },
+                        { label: 'Lombok 与注解处理器', link: '/java/basic/syntax/13-lombok-apt/' },
                       ],
                     },
                     {
