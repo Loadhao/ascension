@@ -160,6 +160,39 @@
 - 新证据与经验：①kafka basic 已成两篇（三问+offset），"三问→offset→intermediate 机制篇"的学习路径闭合，MQ 主线完整度显著提升；②四次启动累计模式：纯文字+表格的笔记（无图表）也完全符合站点文风，mermaid 不是必选项。
 - 下一轮入口：第五次启动候选——①rocketmq 消费端语义篇（重平衡/offset，对齐 kafka 补齐 MQ 第二主线）；②elasticsearch（5 篇，缺全文检索原理根基）；③middleware 方向勘察（3 篇，主题未知）。每轮先跑体检基线。
 
+### 第 13 轮（2026-09-08，第五次启动）
+
+- 选择：**阻塞项置顶**——并行提交 c480b1b 暴露"构建静默吞掉 mermaid 语法错误（正文整页丢失、构建仍成功）"，而既有 mermaid-verify.mjs 是过时的样式检查脚本，语法守护缺口悬空。
+- 交付：`scripts/mermaid-syntax-verify.mjs`——提取全站 ```mermaid 围栏块（文件:行定位），playwright 无头浏览器加载项目同版本 mermaid 11.17.2 UMD 包逐块 parse，失败清单 + exit 1。
+- 验证：①全站 393 个图块全部语法有效；②工具自测：向 01-why-mq.md 注入非法语法 → 脚本精确定位（文件:行）并 exit 1 → 恢复后复跑全绿；③提交 2a5b1fb 已推送。
+- 结论：修问题（补上关键路径的验证缺口）。
+- 新证据与经验：①实现细节：ESM 版 mermaid 在 about:blank 有 CORS 限制且不挂 window，换 UMD 版 addScriptTag 直接可用；②此脚本应纳入例行体检（mermaid 围栏块变更后必跑），当前口径 393 块；③并行会话的修复（c480b1b）已把存量错误清零，本工具保证增量不再静默腐坏。
+- 下一轮入口：rocketmq 消费端语义篇（既定候选①）。
+
+### 第 14 轮（2026-09-08，第五次启动）
+
+- 选择：rocketmq 消费端语义篇（既定候选①；勘察确认重试队列/进度存储/重复消费无专篇，01 篇 Push 小节只讲长轮询）。
+- 交付：`rocketmq/basic/core/02-consumer-semantics.md`（集群 vs 广播取舍表、%RETRY% 16 级递增重试与 %DLQ% 死信流转图、广播进度存本地的原因、与 Kafka Rebalance 的对照）+ 侧边栏注册 + 图谱 consumer 节点与 2 条边。
+- 验证：四连验证全绿——`pnpm build` 490 页、mermaid 语法校验 394 块通过（新工具首次纳入例行）、rocketmq.json 合法、对比度审计 252 页；提交 abf302a 已推送。
+- 结论：补功能。
+- 新证据与经验：①并行会话期间再次修改 astro.config.mjs（Edit 报 stale 后重读重插，行号已偏移）——并行编辑高频区在变，但"stale 即重读"纪律有效；②重试队列设计（%RETRY% 递增退避 vs Kafka 无内建退避）是两 MQ 对比题的新弹药；③mermaid-syntax-verify 已成为体检第 9 项。
+- 下一轮入口：elasticsearch 根基篇（候选②，勘察后定题）。
+
+### 第 15 轮（2026-09-08，第五次启动）
+
+- 选择：elasticsearch 集群与高可用篇（勘察发现 ES 覆盖比预期扎实——倒排/写路径/深翻页都有深入节，真实缺口是集群控制面：节点角色/选主/脑裂/健康三色）。
+- 交付：新建 `elasticsearch/intermediate/cluster/` 分类——`01-cluster-split-brain.md`（四角色分工表、quorum 防脑裂分区图、三色健康排障、磁盘双水位追问）+ 分类页 + 侧边栏"集群与高可用"分类 + 图谱 cluster 节点与 2 条边。
+- 验证：四连验证全绿——`pnpm build` 492 页、mermaid 语法校验 395 块、elasticsearch.json 合法、对比度审计 253 页；提交 b3cc4d5 已推送（4 文件）。
+- 结论：补功能。
+- 新证据与经验：①"根基缺失"模式要升级为"看大纲定缺口"：ES 各篇已有（深入）小节，凭篇数判断会选错题（差点重复写写入路径）；②quorum/脑裂与分布式共识篇同源，跨方向引用是本站知识的复利点；③本日三次新建分类流程全部模板化零失误。
+- 下一轮入口：第六次启动候选——①mongodb 复制集/分片之上的分片键选型深入篇；②kafka/rocketmq/RabbitMQ 横向选型对比（需确认 middleware 方向是否已有，避免违反"不挂单一工具"约束）；③algorithm/api 等方向勘察。每轮先跑体检基线（含 mermaid-syntax-verify 第 9 项）。
+
+## 经验与判断沉淀（第五次启动增补）
+
+- **mermaid-syntax-verify.mjs 纳入例行体检（第 9 项）**：背景是构建静默吞 mermaid 错误（c480b1b 修复暴露），脚本经注入自测可信；凡围栏块变更必跑。
+- 选题前必扫目标篇目的 ## 大纲：ES 差点重复写已有"从写入到可搜索的完整路径（深入）"，篇数判断不可靠，大纲判断才可靠。
+- 并行编辑 stale 冲突处理已流程化：Edit 报 modified → git status 确认占用者 → 重读目标段落 → 重新插入（本轮 rocketmq 侧边栏实战验证）。
+
 ## 经验与判断沉淀（第四次启动增补）
 
 - "根基缺失"选题模式已三连验证（kafka 三问/PG 差异地图/MongoDB 文档模型）：薄弱方向先补"是什么/为什么/怎么选"，再深挖机制；判断"缺不缺"看主题覆盖而非篇数（seata/zookeeper 各 2 篇但覆盖深，不缺）。
