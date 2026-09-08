@@ -1,0 +1,34 @@
+src/content/docs/guide/interview-cheatsheet.md
+  h_9324126a55eff3 161-162,176,178,180,190-191,194,197,199,316,318,325
+src/data/quiz/algorithm.json
+  h_9324126a55eff3 188-249
+src/data/quiz/elasticsearch.json
+  h_9324126a55eff3 96-143
+src/data/quiz/etcd.json
+  h_9324126a55eff3 50-81
+src/data/quiz/kafka.json
+  h_9324126a55eff3 130-161
+src/data/quiz/linux.json
+  h_9324126a55eff3 96-141
+src/data/quiz/mongodb.json
+  h_9324126a55eff3 82-127
+src/data/quiz/rabbitmq.json
+  h_9324126a55eff3 66-113
+src/data/quiz/rocketmq.json
+  h_9324126a55eff3 82-127
+src/data/quiz/tools.json
+  h_9324126a55eff3 82-127
+src/data/quiz/zookeeper.json
+  h_9324126a55eff3 50-65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "76526837da7b5a4f59b3562f34a53c28a5c57287",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
