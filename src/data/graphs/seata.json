@@ -1,9 +1,11 @@
 {
   "nodes": [
     { "id": "root", "label": "Seata", "group": "核心" },
-    { "id": "core", "label": "核心机制", "href": "/seata/basic/core/01-seata-core/", "group": "核心机制" }
+    { "id": "core", "label": "核心机制", "href": "/seata/basic/core/01-seata-core/", "group": "核心机制" },
+    { "id": "deep", "label": "高频追问", "href": "/seata/basic/core/02-seata-deep-dive/", "group": "核心机制" }
   ],
   "edges": [
-    { "source": "root", "target": "core" }
+    { "source": "root", "target": "core" },
+    { "source": "core", "target": "deep", "label": "全局锁与失效" }
   ]
 }

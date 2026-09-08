@@ -1,9 +1,11 @@
 {
   "nodes": [
     { "id": "root", "label": "ZooKeeper", "group": "核心" },
-    { "id": "core", "label": "核心机制", "href": "/zookeeper/basic/core/01-zookeeper-core/", "group": "核心机制" }
+    { "id": "core", "label": "核心机制", "href": "/zookeeper/basic/core/01-zookeeper-core/", "group": "核心机制" },
+    { "id": "deep", "label": "高频追问", "href": "/zookeeper/basic/core/02-zk-deep-dive/", "group": "核心机制" }
   ],
   "edges": [
-    { "source": "root", "target": "core" }
+    { "source": "root", "target": "core" },
+    { "source": "core", "target": "deep", "label": "细节与陷阱" }
   ]
 }
