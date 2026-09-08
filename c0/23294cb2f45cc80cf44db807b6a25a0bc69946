@@ -1,0 +1,38 @@
+src/content/docs/distributed/advanced/consistency/03-quorum-nwr.md
+  h_9324126a55eff3 1-86
+src/content/docs/distributed/advanced/consistency/04-time-order.md
+  h_9324126a55eff3 1-93
+src/content/docs/distributed/index.mdx
+  h_9324126a55eff3 16-21
+src/content/docs/distributed/intermediate/consensus/02-gossip.md
+  h_9324126a55eff3 1-94
+src/content/docs/distributed/intermediate/governance/01-rpc-principles.md
+  h_9324126a55eff3 1-101
+src/content/docs/distributed/intermediate/governance/index.mdx
+  h_9324126a55eff3 1-14
+src/content/docs/distributed/intermediate/traffic/01-distributed-rate-limiting.md
+  h_9324126a55eff3 1-107
+src/content/docs/distributed/intermediate/traffic/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/middleware/index.mdx
+  h_9324126a55eff3 3,15-19
+src/content/docs/middleware/intermediate/reliability/01-message-reliability.md
+  h_9324126a55eff3 1-98
+src/content/docs/middleware/intermediate/reliability/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/distributed.json
+  h_9324126a55eff3 11-12,14,21-22,34-41
+src/data/graphs/middleware.json
+  h_9324126a55eff3 6-7,15-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c023294cb2f45cc80cf44db807b6a25a0bc69946",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
