@@ -1,0 +1,14 @@
+---
+title: Java IO
+description: BIO/NIO/AIO 三种 IO 模型与多路复用 select/poll/epoll，零拷贝从 4 次拷贝到 sendfile gather
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+网络编程的底层地基：从"一连接一线程"的 BIO 出发，看 NIO 用多路复用
+如何以个位数线程管住海量连接（Reactor 模式是它的工程骨架），再顺
+着 4 次拷贝的账本理解零拷贝三代优化。Tomcat 连接器、Netty、Kafka
+的高性能都能在这两篇里找到根。点击右侧圆点可标记学习状态（未学 →
+学习中 → 已掌握）。
+
+<CategoryNotesIsland categoryId="java/basic/io" />

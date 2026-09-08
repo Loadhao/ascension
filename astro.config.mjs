@@ -256,6 +256,7 @@ export default defineConfig({
                         { label: '反射与注解', link: '/java/basic/syntax/06-reflection-annotation/' },
                         { label: '位运算与原码、反码、补码', link: '/java/basic/syntax/07-bit-operations/' },
                         { label: '序列化与 serialVersionUID', link: '/java/basic/syntax/08-serialization/' },
+                        { label: '深浅拷贝与包装类型缓存', link: '/java/basic/syntax/09-object-copy/' },
                       ],
                     },
                     {
@@ -267,6 +268,7 @@ export default defineConfig({
                         { label: 'HashMap 源码分析', link: '/java/basic/collection/02-hashmap/' },
                         { label: 'ConcurrentHashMap 详解', link: '/java/basic/collection/03-concurrenthashmap/' },
                         { label: '红黑树：从 BST 到 TreeMap', link: '/java/basic/collection/04-red-black-tree/' },
+                        { label: 'LinkedHashMap 与 LRU 缓存', link: '/java/basic/collection/05-linkedhashmap-lru/' },
                       ],
                     },
                     {
@@ -276,6 +278,15 @@ export default defineConfig({
                         { label: '概览', link: '/java/basic/tomcat/' },
                         { label: 'Web 容器的本质', link: '/java/basic/tomcat/01-web-container/' },
                         { label: 'Jetty 架构与 Tomcat 对比', link: '/java/basic/tomcat/02-jetty-architecture/' },
+                      ],
+                    },
+                    {
+                      label: 'Java IO',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/java/basic/io/' },
+                        { label: 'IO 模型：BIO、NIO、AIO', link: '/java/basic/io/01-io-model/' },
+                        { label: '零拷贝', link: '/java/basic/io/02-zero-copy/' },
                       ],
                     },
                   ],
@@ -305,6 +316,10 @@ export default defineConfig({
                         { label: 'ThreadLocal 原理与内存泄漏', link: '/java/intermediate/concurrent/06-threadlocal/' },
                         { label: 'LongAdder 高并发计数', link: '/java/intermediate/concurrent/07-longadder/' },
                         { label: '阻塞队列与 ArrayBlockingQueue', link: '/java/intermediate/concurrent/08-blocking-queue/' },
+                        { label: 'CAS 与原子类', link: '/java/intermediate/concurrent/09-cas-atomics/' },
+                        { label: '并发工具类与读写锁', link: '/java/intermediate/concurrent/10-concurrent-tools/' },
+                        { label: 'CompletableFuture 异步编排', link: '/java/intermediate/concurrent/11-completablefuture/' },
+                        { label: '死锁与活锁', link: '/java/intermediate/concurrent/12-deadlock/' },
                       ],
                     },
                     {
@@ -320,6 +335,7 @@ export default defineConfig({
                         { label: 'MyBatis 集成：SqlSessionTemplate', link: '/java/intermediate/spring/06-mybatis-sqlsession/' },
                         { label: '认证与单点登录：JWT/OAuth2/SSO/CAS', link: '/java/intermediate/spring/07-auth-sso/' },
                         { label: '统一异常处理：@RestControllerAdvice', link: '/java/intermediate/spring/08-exception-advice/' },
+                        { label: 'Spring MVC 请求处理全流程', link: '/java/intermediate/spring/09-springmvc-flow/' },
                       ],
                     },
                     {
@@ -501,6 +517,7 @@ export default defineConfig({
                         { label: 'functools 与 itertools', link: '/python/intermediate/stdlib/02-functools-itertools/' },
                         { label: 'pathlib 与文件 IO', link: '/python/intermediate/stdlib/03-pathlib-io/' },
                         { label: 'typing 类型标注', link: '/python/intermediate/stdlib/04-typing/' },
+                        { label: 'datetime：时间与日期', link: '/python/intermediate/stdlib/05-datetime/' },
                       ],
                     },
                     {
@@ -531,6 +548,7 @@ export default defineConfig({
                         { label: 'requests 与 httpx', link: '/python/intermediate/libs/01-requests-httpx/' },
                         { label: 'Pydantic 数据校验', link: '/python/intermediate/libs/02-pydantic/' },
                         { label: 'FastAPI', link: '/python/intermediate/libs/03-fastapi/' },
+                        { label: 'SQLAlchemy：数据库访问', link: '/python/intermediate/libs/04-sqlalchemy/' },
                       ],
                     },
                   ],
@@ -547,6 +565,7 @@ export default defineConfig({
                         { label: '环境管理与 uv', link: '/python/advanced/eng/01-venv-uv/' },
                         { label: 'pytest 测试', link: '/python/advanced/eng/02-pytest/' },
                         { label: 'ruff 与 mypy', link: '/python/advanced/eng/03-ruff-mypy/' },
+                        { label: '打包与发布', link: '/python/advanced/eng/04-packaging/' },
                       ],
                     },
                     {
