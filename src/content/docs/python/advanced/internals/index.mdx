@@ -1,0 +1,13 @@
+---
+title: 运行时内幕
+description: GIL、内存管理与 GC、描述符与元类、性能剖析——CPython 运行时的四块底牌
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+会写 Python 之后，这一级回答"为什么"：GIL 为什么存在又如何被移除、对象
+内存怎么管理、property 和 ORM 字段凭什么生效、性能瓶颈怎么定位。理解
+运行时机制不直接产出代码，但决定了并发选型、内存调优和框架源码阅读的
+能力上限——也是与"只会调 API"拉开差距的地方。
+
+<CategoryNotesIsland categoryId="python/advanced/internals" />

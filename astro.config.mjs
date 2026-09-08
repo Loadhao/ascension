@@ -477,6 +477,15 @@ export default defineConfig({
                         { label: 'dataclass 与 __slots__', link: '/python/basic/oop/03-dataclass-slots/' },
                       ],
                     },
+                    {
+                      label: '模块与包',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/python/basic/modules/' },
+                        { label: '模块与 import：代码组织单元', link: '/python/basic/modules/01-modules-import/' },
+                        { label: '包与项目布局', link: '/python/basic/modules/02-packages-layout/' },
+                      ],
+                    },
                   ],
                 },
                 {
@@ -492,6 +501,26 @@ export default defineConfig({
                         { label: 'functools 与 itertools', link: '/python/intermediate/stdlib/02-functools-itertools/' },
                         { label: 'pathlib 与文件 IO', link: '/python/intermediate/stdlib/03-pathlib-io/' },
                         { label: 'typing 类型标注', link: '/python/intermediate/stdlib/04-typing/' },
+                      ],
+                    },
+                    {
+                      label: '数据处理与日志',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/python/intermediate/data/' },
+                        { label: 're 正则表达式', link: '/python/intermediate/data/01-re-regex/' },
+                        { label: 'json 与 csv：数据序列化', link: '/python/intermediate/data/02-json-csv/' },
+                        { label: 'logging 日志体系', link: '/python/intermediate/data/03-logging/' },
+                      ],
+                    },
+                    {
+                      label: '并发编程',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/python/intermediate/concurrency/' },
+                        { label: '多线程与 GIL：IO 密集的正确工具', link: '/python/intermediate/concurrency/01-threading/' },
+                        { label: 'asyncio：单线程异步并发', link: '/python/intermediate/concurrency/02-asyncio/' },
+                        { label: 'multiprocessing：多核并行', link: '/python/intermediate/concurrency/03-multiprocessing/' },
                       ],
                     },
                     {
@@ -518,6 +547,17 @@ export default defineConfig({
                         { label: '环境管理与 uv', link: '/python/advanced/eng/01-venv-uv/' },
                         { label: 'pytest 测试', link: '/python/advanced/eng/02-pytest/' },
                         { label: 'ruff 与 mypy', link: '/python/advanced/eng/03-ruff-mypy/' },
+                      ],
+                    },
+                    {
+                      label: '运行时内幕',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/python/advanced/internals/' },
+                        { label: 'GIL 深入：为什么有它、如何绕开', link: '/python/advanced/internals/01-gil/' },
+                        { label: '内存管理与垃圾回收', link: '/python/advanced/internals/02-memory-gc/' },
+                        { label: '描述符与元类：属性访问的底层协议', link: '/python/advanced/internals/03-descriptors-metaclass/' },
+                        { label: '性能剖析与优化', link: '/python/advanced/internals/04-profiling/' },
                       ],
                     },
                   ],

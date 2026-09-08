@@ -1,0 +1,14 @@
+---
+title: 并发编程
+description: 多线程与 GIL、asyncio 事件循环、multiprocessing 多核——三套并发模型的原理与选型
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+Python 的并发有三套模型，各有各的物理极限：多线程受 GIL 约束，只赢在
+IO 等待；asyncio 用单线程事件循环扛起万级并发，但要求全链路异步；
+multiprocessing 用独立进程换真多核，代价是隔离与序列化。这一分类依次讲
+透三者的原理、纪律与选型判据——**"等用线程、多用协程、算用进程"**，
+这句判词的每个字都值得展开。
+
+<CategoryNotesIsland categoryId="python/intermediate/concurrency" />
