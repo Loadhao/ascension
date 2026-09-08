@@ -1,0 +1,54 @@
+astro.config.mjs
+  h_9324126a55eff3 374,378,383-408,496
+src/content/docs/java/advanced/springcloud/08-tracing.md
+  h_9324126a55eff3 1-89
+src/content/docs/java/basic/syntax/10-spi.md
+  h_9324126a55eff3 76
+src/content/docs/java/basic/syntax/12-jni-jndi.md
+  h_9324126a55eff3 81
+src/content/docs/java/intermediate/log/01-logging-system.md
+  h_9324126a55eff3 99
+src/content/docs/java/intermediate/spring-boot/03-configuration.md
+  h_9324126a55eff3 1-82
+src/content/docs/java/intermediate/spring-boot/04-embedded-deploy.md
+  h_9324126a55eff3 1-89
+src/content/docs/java/intermediate/spring-boot/05-actuator.md
+  h_9324126a55eff3 1-89
+src/content/docs/java/intermediate/spring-boot/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/java/intermediate/spring-mvc/01-springmvc-flow.md
+  h_9324126a55eff3 75,82
+src/content/docs/java/intermediate/spring-mvc/03-validation.md
+  h_9324126a55eff3 1-114
+src/content/docs/java/intermediate/spring-mvc/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/java/intermediate/spring/00-family-map.md
+  h_9324126a55eff3 1-87
+src/content/docs/java/intermediate/spring/06-extension-points.md
+  h_9324126a55eff3 70,82,135
+src/content/docs/java/intermediate/spring/07-application-context.md
+  h_9324126a55eff3 84
+src/content/docs/java/intermediate/spring/08-annotations-map.md
+  h_9324126a55eff3 58,64,86
+src/content/docs/java/intermediate/spring/index.mdx
+  h_9324126a55eff3 2-3,8-14
+src/content/docs/java/intermediate/test/03-springboot-test.md
+  h_9324126a55eff3 49,51-52
+src/content/docs/network/basic/foundation/03-from-url-to-page.md
+  h_9324126a55eff3 38
+src/content/docs/network/basic/http/01-http-basics.md
+  h_9324126a55eff3 51,66
+src/data/graphs/java.json
+  h_9324126a55eff3 47,50-57,69,81-84,199-209
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "034bed16e2640a7a09396623efffe2368434ed01",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
