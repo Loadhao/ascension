@@ -1,0 +1,21 @@
+src/content/docs/python/basic/modules/02-packages-layout.md
+  s_4b2886dc03d3ec::t_39b7c74fb3dda9 1-81
+src/content/docs/python/basic/modules/index.mdx
+  s_4b2886dc03d3ec::t_1715ec902c0b1e 1-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "f401e581340072d591f7ec9551948af05be2aa57",
+  "prompts": {},
+  "sessions": {
+    "s_4b2886dc03d3ec": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a07ec6-c147-7650-ade0-6962ed131df0",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
