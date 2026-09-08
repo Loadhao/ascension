@@ -1003,6 +1003,7 @@ export default defineConfig({
                         { label: '秒杀系统设计', link: '/distributed/intermediate/case-studies/01-flash-sale/' },
                         { label: '短链接系统设计', link: '/distributed/intermediate/case-studies/02-short-url/' },
                         { label: 'Feed 流设计：推模式、拉模式与推拉结合', link: '/distributed/intermediate/case-studies/03-feed-stream/' },
+                        { label: '系统设计题的答题框架', link: '/distributed/intermediate/case-studies/04-design-interview/' },
                       ],
                     },
                   ],
@@ -1030,6 +1031,7 @@ export default defineConfig({
                         { label: '容灾与多活：RTO/RPO 与切换策略', link: '/distributed/advanced/availability/01-dr-multi-active/' },
                         { label: '脑裂与仲裁：quorum 与 fencing', link: '/distributed/advanced/availability/02-split-brain/' },
                         { label: '发布策略：滚动、蓝绿与金丝雀', link: '/distributed/advanced/availability/03-release-strategies/' },
+                        { label: '全链路灰度：泳道与流量染色', link: '/distributed/advanced/availability/04-full-link-gray/' },
                       ],
                     },
                     {
