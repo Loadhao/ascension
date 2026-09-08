@@ -1,0 +1,19 @@
+src/content/docs/kafka/intermediate/core/01-kafka-architecture.md
+  s_78c28461ca738e::t_8cb197f774d8b2 22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "b75048710a7e6dbe254f3968a11d63c88a31d1c3",
+  "prompts": {},
+  "sessions": {
+    "s_78c28461ca738e": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "f894e97a-83bc-4b5f-85ac-32286b68017c",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
