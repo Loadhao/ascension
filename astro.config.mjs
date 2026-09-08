@@ -965,6 +965,14 @@ export default defineConfig({
                         { label: '深翻页方案与查询性能优化', link: '/elasticsearch/intermediate/usage/03-pagination/' },
                       ],
                     },
+                    {
+                      label: '集群与高可用',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/elasticsearch/intermediate/cluster/' },
+                        { label: '节点角色、master 选举与脑裂', link: '/elasticsearch/intermediate/cluster/01-cluster-split-brain/' },
+                      ],
+                    },
                   ],
                 },
               ],

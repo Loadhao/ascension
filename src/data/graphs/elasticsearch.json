@@ -5,9 +5,12 @@
     { "id": "shard", "label": "文档·分片·副本", "href": "/elasticsearch/basic/core/02-shard-replica/", "group": "基础核心" },
     { "id": "query", "label": "Query DSL", "href": "/elasticsearch/intermediate/usage/01-query-dsl/", "group": "查询聚合" },
     { "id": "agg", "label": "聚合分析", "href": "/elasticsearch/intermediate/usage/02-aggregation/", "group": "查询聚合" },
-    { "id": "pagination", "label": "深翻页与性能优化", "href": "/elasticsearch/intermediate/usage/03-pagination/", "group": "查询聚合" }
+    { "id": "pagination", "label": "深翻页与性能优化", "href": "/elasticsearch/intermediate/usage/03-pagination/", "group": "查询聚合" },
+    { "id": "cluster", "label": "集群与脑裂", "href": "/elasticsearch/intermediate/cluster/01-cluster-split-brain/", "group": "集群高可用" }
   ],
   "edges": [
+    { "source": "root", "target": "cluster" },
+    { "source": "shard", "target": "cluster", "label": "分片分配由 master 决策" },
     { "source": "root", "target": "inverted" },
     { "source": "root", "target": "shard" },
     { "source": "inverted", "target": "query", "label": "match 检索" },
