@@ -67,8 +67,10 @@ if (root) {
   const ICON =
     '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 5 12 10 17 5"/><polyline points="7 13 12 18 17 13"/></svg>';
 
-  // 每个分组的子树开关：有收起的后代则全部展开，否则全部收起
+  // 每个分组的子树开关：有收起的后代则全部展开，否则全部收起。
+  // 叶分组（无后代分组）没有子树可开合，点行即可折叠自身，不注入按钮避免出现点击无效的死控件。
   for (const details of root.querySelectorAll('details')) {
+    if (!details.querySelector('details')) continue;
     const summary = details.querySelector(':scope > summary');
     const caret = summary?.querySelector('.caret');
     if (!summary || !caret || summary.querySelector('.sl-tree-toggle')) continue;

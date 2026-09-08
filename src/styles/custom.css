@@ -216,13 +216,21 @@ main:has(.kg-fullbleed) {
 }
 
 /* ===== 侧边栏目录树工具条与子树开关 ===== */
+/* 工具条吸顶：margin-block 负值抵掉 .sidebar-content 的 padding-top(1rem) 与
+   flex gap(1rem)（两值都是 Starlight core 约定，升级若变需同步），间距收进自身
+   padding，背景连同 hairline 覆盖整个滑动区，滚动时目录项不会从缝隙里透出 */
 .sl-sidebar-tools {
+  position: sticky;
+  top: 0;
+  z-index: 5;
   display: flex;
   justify-content: flex-end;
   gap: 0.875rem;
-  padding: 0 0.5rem 0.4rem;
+  margin-inline: calc(-1 * var(--sl-sidebar-pad-x));
+  margin-block: -1rem -1rem;
+  padding: 1rem calc(var(--sl-sidebar-pad-x) + 0.5rem) 1.8rem;
+  background: var(--sl-color-bg-sidebar);
   border-bottom: 1px solid var(--sl-color-hairline-light);
-  margin-bottom: 0.4rem;
 }
 .sl-sidebar-tools button {
   font-size: 0.6875rem;
