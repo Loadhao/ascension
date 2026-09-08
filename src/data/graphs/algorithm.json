@@ -238,6 +238,12 @@
       "label": "算法思想全景",
       "href": "/algorithm/advanced/principles/02-paradigm-landscape/",
       "group": "设计思想"
+    },
+    {
+      "id": "complexity",
+      "label": "复杂度分析",
+      "href": "/algorithm/advanced/principles/03-complexity-analysis/",
+      "group": "设计思想"
     }
   ],
   "edges": [
@@ -636,6 +642,35 @@
       "source": "landscape",
       "target": "subsets",
       "label": "回溯代表"
+    },
+    {
+      "source": "root",
+      "target": "complexity"
+    },
+    {
+      "source": "complexity",
+      "target": "tradeoff",
+      "label": "先量准，再谈交换"
+    },
+    {
+      "source": "complexity",
+      "target": "landscape",
+      "label": "尺子 + 地图"
+    },
+    {
+      "source": "merge",
+      "target": "complexity",
+      "label": "递归式 2T(n/2)+O(n)"
+    },
+    {
+      "source": "binary",
+      "target": "complexity",
+      "label": "减半出对数"
+    },
+    {
+      "source": "two-stack-queue",
+      "target": "complexity",
+      "label": "均摊分析的案例"
     }
   ]
 }

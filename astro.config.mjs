@@ -1364,6 +1364,7 @@ export default defineConfig({
                         { label: '概览', link: '/algorithm/advanced/principles/' },
                         { label: '时间与空间的交换', link: '/algorithm/advanced/principles/01-time-space-tradeoff/' },
                         { label: '算法思想全景', link: '/algorithm/advanced/principles/02-paradigm-landscape/' },
+                        { label: '复杂度分析入门', link: '/algorithm/advanced/principles/03-complexity-analysis/' },
                       ],
                     },
                   ],
