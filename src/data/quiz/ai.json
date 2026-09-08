@@ -345,6 +345,66 @@
         1
       ],
       "hint": "安全边界由注册表保证。context: fork 让技能在子 Agent 里跑，加载内容不进主线程。技能是前置知识的惰性求值，与压缩互补。"
+    },
+    {
+      "id": "ai-hooks-023",
+      "noteId": "ai/basic/agent/04-hooks",
+      "type": "judge",
+      "q": "PreToolUse hook 的某个回调返回了非 None 值时，本次工具执行将被阻止。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "trigger_hooks 的约定是「返回值 ≠ None → hook 说停」，PreToolUse 的非 None 返回值会阻止本次工具执行；注意 Stop 的非 None 返回值含义相反——是强制续跑而不是退出。"
+    },
+    {
+      "id": "ai-recovery-024",
+      "noteId": "ai/intermediate/agent/07-error-recovery",
+      "type": "single",
+      "q": "Agent 第一次遇到 max_tokens 输出截断，正确的第一个恢复动作是？",
+      "options": [
+        "立即保存截断输出并注入续写提示，让模型接着说",
+        "把 max_tokens 从 8K 升级到 64K，messages 保持不变重试同一请求",
+        "触发 reactive compact 压缩历史后重试",
+        "按指数退避连续重试最多 10 次"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "截断恢复「先升级不续写」——续写会把截断输出固化进 messages，升级只是同一请求重试、更干净；升级只有一次，64K 还不够才续写（最多 3 次）。reactive compact 是 prompt_too_long 的路径，退避是 429/529 的路径。"
+    },
+    {
+      "id": "ai-cron-025",
+      "noteId": "ai/advanced/agent/04-cron-scheduler",
+      "type": "judge",
+      "q": "durable=True 的 cron 任务在 Agent 进程关闭后，到点仍会由调度线程自动触发。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "durable 只意味着任务定义写进 .scheduled_tasks.json 跨重启保留，下次 Agent 启动时调度器才发现该触发了；调度器必须在 Agent 进程内跑，进程关闭调度也停——要进程外定时用系统 crontab 或 systemd timer。"
+    },
+    {
+      "id": "ai-protocol-026",
+      "noteId": "ai/advanced/agent/06-team-protocols",
+      "type": "single",
+      "q": "Lead 收到一条 shutdown_response，其 request_id 指向一个 plan_approval 类型的请求，match_response 会怎么处理？",
+      "options": [
+        "按 approve 值把该请求状态更新为 approved/rejected",
+        "类型不匹配，跳过不处理，plan_approval 请求状态保持 pending 不变",
+        "抛出异常，协议状态机终止",
+        "自动把该请求标记为 rejected"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "match_response 先做类型校验（state.type 与 response_type 必须对应），再做幂等校验（已 resolved 的请求跳过重复回复）——一个 shutdown_response 不会意外 approve 一个 plan_approval 请求。"
     }
   ]
 }

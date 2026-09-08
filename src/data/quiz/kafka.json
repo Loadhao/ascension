@@ -159,6 +159,22 @@
         1
       ],
       "hint": "两阶段协议里 Coordinator 只负责收名片（JoinGroup 选出 Leader）与发通知（SyncGroup），真正定方案的是 Leader 成员——把两者分工记混是高频误区。"
+    },
+    {
+      "id": "kafka-producer-011",
+      "noteId": "kafka/basic/core/03-producer-path",
+      "type": "single",
+      "q": "未开启幂等生产者时，「重试 + 在途请求数 > 1」会引发什么问题？",
+      "options": [
+        "消息必然丢失",
+        "分区内乱序：第一批失败重试时第二批已成功写入，分区里第二批排在第一批前面",
+        "Broker 检测到序列号冲突直接拒收",
+        "没有任何影响，重试天然保序"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "重试与乱序互锁——max.in.flight.requests.per.connection > 1 且无幂等时重试可能乱序；顺序性要求高的场景必须开幂等生产者，Broker 按序列号重排（max.in.flight≤5 保证分区内有序），同时重试不再写入重复。"
     }
   ]
 }

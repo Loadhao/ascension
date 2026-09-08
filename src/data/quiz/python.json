@@ -350,6 +350,139 @@
         1
       ],
       "hint": "GIL 使多线程无法并行执行字节码，但 IO 等待会释放。+= 仍是多步字节码，要显式锁。CPU 密集换多进程。"
+    },
+    {
+      "id": "py-fastapi-023",
+      "noteId": "python/intermediate/libs/03-fastapi",
+      "type": "single",
+      "q": "在 FastAPI 中编写 CPU 密集型路由（如重计算报告）的正确姿势是？",
+      "options": [
+        "声明为 async def，内部 await 计算函数",
+        "声明为普通 def（不加 async），框架自动把它丢线程池执行，不堵事件循环",
+        "声明为 async def，内部用 requests 同步请求后返回",
+        "声明为 async def，插入 time.sleep 让事件循环喘口气"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "async 路由里一个同步阻塞（requests、time.sleep）就冻结全服务；async 只给 IO 密集并发用，CPU 密集走同步 def 让框架进线程池。"
+    },
+    {
+      "id": "py-sqlalchemy-024",
+      "noteId": "python/intermediate/libs/04-sqlalchemy",
+      "type": "multiple",
+      "q": "关于 SQLAlchemy 的 Session、懒加载与建表，下列说法正确的有？（多选）",
+      "options": [
+        "Engine 应全局创建一次供所有会话共享，Session 按请求创建",
+        "改实例属性后 commit() 会自动 flush 生成 UPDATE，无需手写 update 语句",
+        "Session 关闭后再访问 user.posts 这类懒加载关联属性，会抛 DetachedInstanceError",
+        "N+1 的解法是 selectinload 显式预加载，与 JPA 的 fetch join/EntityGraph 一致",
+        "生产环境建表也推荐 Base.metadata.create_all(engine)，不需要迁移工具"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": "create_all 只用于开发期，生产必须用 Alembic 迁移；其余四条分别是 Engine/Session 生命周期纪律、脏检查、DetachedInstanceError 陷阱与 selectinload 预加载。"
+    },
+    {
+      "id": "py-collections-025",
+      "noteId": "python/intermediate/stdlib/01-collections",
+      "type": "single",
+      "q": "list.pop(0) 与 deque.popleft() 的复杂度分别是？",
+      "options": [
+        "都是 O(1)",
+        "pop(0) 是 O(n)（全员平移），popleft() 是 O(1)",
+        "pop(0) 是 O(1)，popleft() 是 O(n)",
+        "都是 O(n)"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "list 头部删除要全员平移是 O(n)；deque 的双端结构保证两端进出都是 O(1)，这也是滑动窗口、BFS 队列选 deque(maxlen=n) 的原因。"
+    },
+    {
+      "id": "py-groupby-026",
+      "noteId": "python/intermediate/stdlib/02-functools-itertools",
+      "type": "judge",
+      "q": "itertools.groupby 可以直接对未排序的日志列表按 level 分组，不必先排序。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "groupby 只合并相邻的相同项，不先 sorted(logs, key=level) 拿到的是碎片；另外所有 itertools 产物都是一次性迭代器。"
+    },
+    {
+      "id": "py-findall-027",
+      "noteId": "python/intermediate/data/01-re-regex",
+      "type": "single",
+      "q": "re.findall(r\"(\\d{4})-(\\d{2})\", \"a 2026-09 b 2026-10\") 的返回值是？",
+      "options": [
+        "['2026-09', '2026-10']",
+        "[('2026', '09'), ('2026', '10')]",
+        "['2026', '09', '2026', '10']",
+        "[('2026-09',), ('2026-10',)]"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "findall 遇到分组返回的是组而不是整体——多个组返回元组列表，这是 findall 的第二大坑。"
+    },
+    {
+      "id": "py-logging-028",
+      "noteId": "python/intermediate/data/03-logging",
+      "type": "multiple",
+      "q": "关于 logging 的使用纪律，下列说法正确的有？（多选）",
+      "options": [
+        "库代码只 getLogger(__name__) 打日志，不加 handler、不 setLevel",
+        "log.exception() 可以在任意位置调用，等价于 log.error() 自动附堆栈",
+        "Logger 级别决定要不要产生记录，Handler 级别决定要不要输出",
+        "吞掉异常时才记日志；处理不了要上抛的，只 log 后 raise，让最外层统一记录",
+        "库里调 basicConfig 帮应用统一日志格式是最佳实践"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "log.exception 只在 except 块里用；库擅自 basicConfig 会抢走应用的配置权，是日志格式混乱的十有八九元凶。"
+    },
+    {
+      "id": "py-except-029",
+      "noteId": "python/basic/syntax/04-exceptions",
+      "type": "single",
+      "q": "为什么多个 except 分支必须从窄到宽排列（子类异常放前面）？",
+      "options": [
+        "排列顺序不影响行为，Python 会自动挑最匹配的分支",
+        "except 按书写顺序尝试匹配，父类放前面会把子类异常一并吞掉，子类的 except 永远轮不到",
+        "宽的放前面会直接抛 SyntaxError",
+        "只是风格约定，与捕获行为无关"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "异常捕获是按顺序逐个匹配的；同理裸 except: 连 KeyboardInterrupt 和系统退出信号都吞。"
+    },
+    {
+      "id": "py-profile-030",
+      "noteId": "python/advanced/internals/04-profiling",
+      "type": "single",
+      "q": "cProfile 输出中 tottime 和 cumtime 的含义分别是？",
+      "options": [
+        "tottime 是含子调用的总耗时，cumtime 是函数自身耗时",
+        "tottime 是函数自身耗时（不含子调用），cumtime 是含子调用的累计耗时",
+        "两者都是含子调用的耗时，只是默认排序不同",
+        "tottime 是墙钟时间，cumtime 是 CPU 时间"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "tottime 大 = 函数自身慢（计算热点），cumtime 大 = 调用链条上游；另注意 cProfile 有 30%+ 探针开销，只找相对热点、不测绝对耗时。"
     }
   ]
 }

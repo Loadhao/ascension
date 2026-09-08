@@ -407,6 +407,190 @@
         1
       ],
       "hint": "经验：1 秒 ≈ 10⁸ 次简单操作。n≤20 才能 2ⁿ/n!；n 百万级 O(n²) 已经不现实。O(log n) 在 n 翻倍时只多一次基本操作。"
+    },
+    {
+      "id": "algo-tree-023",
+      "noteId": "algorithm/intermediate/tree/01-tree-traversal",
+      "type": "single",
+      "q": "层序遍历按层输出时，为什么要先执行 int size = queue.size() 把本层人数锁存下来再进 for 循环？",
+      "options": [
+        "队列在循环里不断进出，不锁定就会边处理本层边混入下一层，分层失败",
+        "锁定 size 可以让时间复杂度从 O(n) 降为 O(log n)",
+        "Java 的 Queue.size() 每次调用返回值不同，必须缓存",
+        "为了在循环结束后判断树的高度是否超过上限"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "考点就是分层本身——循环内队列同时在吐本层、吞下层，不先存 size 层边界就错了；与复杂度优化无关。"
+    },
+    {
+      "id": "algo-bst-024",
+      "noteId": "algorithm/intermediate/tree/02-bst",
+      "type": "judge",
+      "q": "验证 BST 只需对每个节点检查 node.left.val < node.val && node.val < node.right.val，即节点与左右直接孩子的大小关系满足即可。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "反例：6 的孩子 3 与 6 满足父子关系，却小于整棵左子树的上界——BST 约束来自全部祖先，须用 (lo, hi) 开区间一路夹逼。"
+    },
+    {
+      "id": "algo-lca-025",
+      "noteId": "algorithm/intermediate/tree/04-lca",
+      "type": "single",
+      "q": "递归求 LCA 中当 left 和 right 都非空时意味着什么？",
+      "options": [
+        "p 和 q 一定在同一条根路径上，还需继续向下递归确认",
+        "当前 root 就是 p、q 的分岔点，即最近公共祖先，直接返回 root",
+        "只说明左子树非空且右子树非空，与 p、q 位置无关",
+        "说明 p 或 q 中恰有一个在树里，另一个不存在"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "两个目标分居两侧时，分岔点恰好是唯一一个左右都拿到非空的节点；返回值语义是「子树里找到的 p/q/LCA」，不是布尔。"
+    },
+    {
+      "id": "algo-paren-026",
+      "noteId": "algorithm/intermediate/stack-queue/01-valid-parentheses",
+      "type": "single",
+      "q": "右括号处理写成 if (stack.pop() != '(') return false;（合并了判空），哪类输入会出问题？",
+      "options": [
+        "左括号偏多的串，会被误判为合法",
+        "栈已空却遇到右括号时，直接抛 EmptyStackException 而不是返回 false",
+        "所有输入都正确，判空是多余的防御",
+        "右括号偏多的串，会被误判为合法"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "空栈时 pop() 本身就抛异常，「先查空再弹」的顺序不能合并成一行；左括号偏多漏判的是结尾忘了 return stack.isEmpty()。"
+    },
+    {
+      "id": "algo-minstack-027",
+      "noteId": "algorithm/intermediate/stack-queue/02-min-stack",
+      "type": "judge",
+      "q": "双栈版最小栈在 pop 掉当前最小值之后，新的最小值只能重新扫描一遍主栈才能得到。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "最小栈与主栈同步弹，第二小的信息早就压在它下面那格里、从入栈那天就备好了——这正是同步压入同步弹出的意义，getMin 依旧 O(1)。"
+    },
+    {
+      "id": "algo-twostack-028",
+      "noteId": "algorithm/intermediate/stack-queue/03-queue-via-stacks",
+      "type": "single",
+      "q": "双栈实现队列中，倒栈条件为什么必须是 out 栈空？",
+      "options": [
+        "in 栈为空时倒栈会抛出异常，必须先检查 out",
+        "out 还有货就倒会把新元素压在旧元素下面，先进先出顺序错乱，还破坏均摊结构",
+        "只是为了少执行几次循环，对正确性没有影响",
+        "条件写成 in.isEmpty() 效果完全一样，只是风格问题"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "out 非空时倒入会把新来的压到待出队元素下面；只在空时倒一次，让每个元素至多搬运两次，总代价 ≤ 2n，均摊 O(1)。"
+    },
+    {
+      "id": "algo-reverse-029",
+      "noteId": "algorithm/intermediate/linked-list/01-reverse-list",
+      "type": "single",
+      "q": "迭代反转链表中 ListNode next = curr.next; curr.next = prev; 这两行的顺序为什么不能颠倒？",
+      "options": [
+        "颠倒后 prev 和 curr 会指向同一个节点，造成自环",
+        "颠倒后 curr.next 被覆盖，再取 curr.next 拿到的是已调头的值，后半条链从这里开始丢失",
+        "颠倒不影响结果，只是多一次临时变量赋值",
+        "颠倒后时间复杂度从 O(n) 变成 O(n²)"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "断链事故的标准画像就是先改了 curr.next 再想取 curr.next——口诀「先记后改」；另外最终返回的是 prev 不是原头节点。"
+    },
+    {
+      "id": "algo-merge-030",
+      "noteId": "algorithm/intermediate/linked-list/03-merge-lists",
+      "type": "judge",
+      "q": "合并两个有序链表时把比较写成 if (l1.val < l2.val) 接 l1 else 接 l2，除了破坏稳定性，两链当前值相等时还会导致接错方。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "相等时 < 使 l1 不被接、走 else 接了 l2——稳定性没了；正解是 l1.val <= l2.val 相等取 A，还能避免两指针都不动的边界。"
+    },
+    {
+      "id": "algo-perm-031",
+      "noteId": "algorithm/intermediate/backtracking/02-permutations",
+      "type": "single",
+      "q": "全排列回溯里撤销只写了 path.remove(path.size()-1); 漏掉 used[i] = false;，直接后果是？",
+      "options": [
+        "结果完全正确，只是多占 O(n) 内存",
+        "used 永久为 true，候选集被污染，表现为解缺失或重复",
+        "递归无法返回导致栈溢出",
+        "只在元素有重复时才出错，互不相同元素下没有影响"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "撤销必须成对：path 和 used 一起恢复；used 没复位，该元素在此后所有分支都被当成已用，与是否有重复元素无关。"
+    },
+    {
+      "id": "algo-robber-032",
+      "noteId": "algorithm/intermediate/dp/02-house-robber",
+      "type": "single",
+      "q": "打家劫舍滚动变量版 int cur = Math.max(prev1, prev2 + x); 中「不偷当前这家」对应哪个分支，为什么它可能更优？",
+      "options": [
+        "prev1：它继承到前一家为止的最优，当偷当前的收益接不上时不偷反而更大",
+        "prev2 + x：不偷当前这家时收益自然等于偷上上家",
+        "prev1：因为相邻约束禁止偷前一家，所以只能不偷",
+        "prev2：不偷当前这家就必须偷上上家，二者绑定"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "偷了 i 就强制放弃 i-1，只有 nums[i] + dp[i-2] > dp[i-1] 时偷才划算——不偷分支就是 dp[i-1]（prev1），不与任何强制绑定。"
+    },
+    {
+      "id": "algo-lcs-033",
+      "noteId": "algorithm/intermediate/dp/04-lcs",
+      "type": "single",
+      "q": "LCS 转移中不等时取 max(上, 左) 的原因是？",
+      "options": [
+        "两个末字符不可能同时作为 LCS 的末尾，必须至少丢掉一个，枚举丢 s1 末或丢 s2 末取较优方案",
+        "取 max 只是为了让代码与相等分支写法统一，实际取哪个结果一样",
+        "不相等时两个末字符仍可能同时进入 LCS，只是要各退一格重新配对",
+        "取 max(上, 左) 是为了避免 dp 表越界，与最优性无关"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "不等时丢掉哪个末字符都不优于留下的方案，要取较大者；只有相等才允许两个都要（左上 + 1）。"
+    },
+    {
+      "id": "algo-shell-034",
+      "noteId": "algorithm/basic/sorting/07-shell-sort",
+      "type": "judge",
+      "q": "希尔排序和插入排序一样是稳定的排序算法，相等元素排序后相对位置不会改变。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "大 gap 交换时，相等元素可能在不同的组里被交叉换位、越过相等元素，因此希尔排序不稳定——这是它与插入排序的性质差异之一。"
     }
   ]
 }

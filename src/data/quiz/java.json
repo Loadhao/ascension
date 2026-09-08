@@ -499,6 +499,674 @@
         1
       ],
       "hint": "占位符替换在 BFPP；@MapperScan 动态加定义靠 RegistryPostProcessor。Aware → @PostConstruct → BPP after。事件默认同步，别当 MQ 用。"
+    },
+    {
+      "id": "java-prepare-032",
+      "noteId": "java/advanced/jvm/01-class-loading",
+      "type": "single",
+      "q": "类加载准备阶段结束后，static int a = 1; 与 static final int B = 2; 的值分别是？",
+      "options": [
+        "a=0，B=2（B 因 ConstantValue 属性在准备期直接赋值）",
+        "a=0，B=0（所有静态变量统一设零值）",
+        "a=1，B=2（静态变量都在准备期完成赋值）",
+        "a=1，B=0（final 常量要到初始化才赋值）"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "准备阶段的原则是设零值，但存在例外——编译期 final 常量带 ConstantValue 属性会提前赋好；普通静态变量的赋值语句属于 <clinit>，要等初始化才执行。"
+    },
+    {
+      "id": "java-direct-mem-033",
+      "noteId": "java/advanced/jvm/02-memory",
+      "type": "judge",
+      "q": "直接内存不足时抛出的 OutOfMemoryError 不带 \"Java heap space\" 字样，且该内存不占用 -Xmx 设定的堆空间。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "直接内存由本地内存提供，归 MaxDirectMemorySize 管而不归堆参数管；这类 OOM 发生时堆看起来正常、进程却可能被杀，排查时别漏掉堆外这个大分项。"
+    },
+    {
+      "id": "java-ref-034",
+      "noteId": "java/advanced/jvm/04-references",
+      "type": "single",
+      "q": "关于四种引用的回收时机，正确的是？",
+      "options": [
+        "软引用只要发生 GC 就被回收，与内存是否充足无关",
+        "弱引用要等内存不足、OOM 前的第二次 GC 才被回收",
+        "虚引用的 get() 恒返回 null，唯一作用是配合 ReferenceQueue 拿回收通知",
+        "强引用在内存不足时会被优先回收以避免 OOM"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "软、弱两种引用的回收条件正好说反了——一个见 GC 就收、一个内存不够才收；强引用宁可 OOM 也不收；虚引用不决定对象生死，只负责事后通知。"
+    },
+    {
+      "id": "java-escape-035",
+      "noteId": "java/advanced/jvm/06-jit",
+      "type": "single",
+      "q": "关于 JIT 逃逸分析与标量替换，正确的是？",
+      "options": [
+        "标量替换把整个对象从堆搬到线程栈上存放，属于教科书式栈上分配",
+        "对象存入静态字段后仍可对它做锁消除优化",
+        "对象不逃逸时干脆不创建对象，把字段拆成局部变量放入寄存器/栈帧",
+        "逃逸分析对全局逃逸的对象优化收益最大，对不逃逸的对象无能为力"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "HotSpot 的实际做法不是给对象挪个地方，而是让它根本不存在；一旦对象被存进静态字段/堆集合或被覆写方法接收，所有相关优化作废、退回普通堆分配。"
+    },
+    {
+      "id": "java-cpu-036",
+      "noteId": "java/advanced/jvm/08-troubleshooting",
+      "type": "single",
+      "q": "线上 Java 进程 CPU 100%，要快速定位到代码行，标准四步链是？",
+      "options": [
+        "jmap dump → MAT 支配树 → 找大对象 → 优化持有链",
+        "top → top -Hp <pid> → printf '%x' 转十六进制 → jstack 按 nid 找栈",
+        "jstat -gcutil → 观察 FGC 增长 → 调大 -Xmx → 重启",
+        "jstack 全量抓栈 → grep BLOCKED → thread -b → 生成火焰图"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "CPU 飙高的主角是某个具体线程，链路是「进程 → 线程 → 线程号转 16 进制对上 jstack 的 nid」；dump 是 OOM 场景的主角，GC 统计是 GC 风暴场景的入口。"
+    },
+    {
+      "id": "java-bq-037",
+      "noteId": "java/intermediate/concurrent/08-blocking-queue",
+      "type": "single",
+      "q": "ArrayBlockingQueue 的 put 方法判断队列已满用 while (count == items.length) 而不是 if，原因是？",
+      "options": [
+        "while 能减少加锁次数，提升整体吞吐",
+        "被唤醒后条件可能又被其他线程抢先消费掉，醒来必须重查条件再决定干活还是继续等",
+        "if 在响应中断时会抛 InterruptedException 导致死锁",
+        "while 是历史遗留写法，换成 if 功能完全相同"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "关键在于醒来那一刻条件未必还成立——从 signal 到重新拿回锁之间存在窗口，别的线程可能先消费/先生产，虚假唤醒也是来源；这是使用条件变量的通用铁律。"
+    },
+    {
+      "id": "java-rwlock-038",
+      "noteId": "java/intermediate/concurrent/10-concurrent-tools",
+      "type": "single",
+      "q": "关于 ReentrantReadWriteLock 的锁降级与升级，正确的是？",
+      "options": [
+        "支持读锁升级为写锁，写锁降级为读锁不被允许",
+        "持写锁时再拿读锁、随后释放写锁的降级是官方背书的安全姿势；读锁升级写锁不允许",
+        "升级和降级都不允许，必须全部释放后重新按需获取",
+        "锁降级指把写锁自动切换成共享模式而无需重新加锁"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "升级被禁的原因：两个读线程都想升级又互不放掉手里的读锁，只能互相死等；降级强调操作顺序——先拿读锁再放写锁，保证写完的数据立刻能被自己读到且中途不被插写。"
+    },
+    {
+      "id": "java-arraylist-039",
+      "noteId": "java/basic/collection/01-arraylist",
+      "type": "single",
+      "q": "ArrayList 把 elementData 声明为 transient 并自定义 writeObject，目的是？",
+      "options": [
+        "避免迭代器在序列化过程中检测到 modCount 变化而抛异常",
+        "数组长度经扩容后大于 size，只序列化前 size 个有效元素，避免把尾部的 null 一并写出浪费空间",
+        "elementData 里的元素不支持默认序列化协议，必须逐个手写写出逻辑",
+        "防止反序列化时 size 与数组长度不一致导致越界"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "动机来自「容量 ≠ 元素个数」这个错位——数组里扩容留下的空位没有业务含义；序列化时按 size 循环逐个写出即可，不必带上空闲槽位。"
+    },
+    {
+      "id": "java-rbt-040",
+      "noteId": "java/basic/collection/04-red-black-tree",
+      "type": "single",
+      "q": "红黑树「最长路径不超过最短路径 2 倍」的近似平衡，直接依赖哪两条性质推出？",
+      "options": [
+        "根节点是黑色 + 叶子（NIL）是黑色",
+        "红节点的两个子节点必黑（红红不相邻）+ 任一节点到所有叶子的路径黑高相同",
+        "每个节点到根的路径上红节点数量相同 + 根节点是黑色",
+        "左右子树高度差不超过 1 + 黑高相同"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "最短路径是全黑、最长是红黑相间——红不能挨红限制了红色密度，黑高相同锁住了黑色底线，两者相除就得到 2 倍上限；高度差 ≤1 是 AVL 的严格平衡标准。"
+    },
+    {
+      "id": "java-rbt-041",
+      "noteId": "java/basic/collection/04-red-black-tree",
+      "type": "single",
+      "q": "HashMap 桶内树化选红黑树而不是 AVL 树，原因是？",
+      "options": [
+        "AVL 树不是自平衡结构，无法保证查找 O(log n)",
+        "红黑树查找 O(log n)，AVL 树查找是 O(n)",
+        "桶内节点随扩容不断增删，红黑树比 AVL 的严格平衡调整成本更低更划算",
+        "AVL 树无法支持 headMap/tailMap 这类范围查询"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "两者查找都是对数级，差距在写路径的代价——AVL 为严格平衡频繁旋转，红黑树放宽平衡少转几次；HashMap 桶里增删（尤其扩容搬移）太频繁，调整成本才是主要矛盾。"
+    },
+    {
+      "id": "java-epoll-042",
+      "noteId": "java/basic/io/01-io-model",
+      "type": "single",
+      "q": "关于 select / poll / epoll 三代多路复用实现，正确的是？",
+      "options": [
+        "poll 仍受 1024 个 fd 上限约束，epoll 用链表解除了该限制",
+        "epoll 每次调用仍要把全量 fd 集合拷进内核线性扫描，只是用红黑树组织加快了查找",
+        "epoll 注册一次（红黑树），就绪 fd 由回调挂到就绪链表，事件就绪才返回，复杂度 O(1)",
+        "select 与 epoll 性能相当，只是 API 风格不同"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "1024 上限是 select 的短板（poll 恰恰是用链表去掉上限的）；epoll 的本质优势在于「谁就绪」的判断被下放给内核、且只返回就绪的那部分，而不是把扫描做得更快。"
+    },
+    {
+      "id": "java-zerocopy-043",
+      "noteId": "java/basic/io/02-zero-copy",
+      "type": "judge",
+      "q": "零拷贝指数据从磁盘到网卡全程一次拷贝都没有发生，连 DMA 拷贝也被消除了。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "「零」砍掉的只是 CPU 参与的、数据在用户空间进出的无意义搬运；DMA 负责外设与内存间的直接搬运且不占 CPU，在最优方案下依然有两次。"
+    },
+    {
+      "id": "java-sticky-044",
+      "noteId": "java/basic/io/03-tcp-sticky-packets",
+      "type": "single",
+      "q": "关于 TCP 粘包拆包，正确的是？",
+      "options": [
+        "粘包是 TCP 协议实现的缺陷，新版本内核已经修复",
+        "UDP 面向报文但同样会发生粘包，需要与 TCP 相同的方案处理",
+        "只要接收端及时调用 read，粘包拆包就不会出现",
+        "消息边界必须由应用层自己定义，定长/分隔符/长度域三种方案中长度域是主流"
+      ],
+      "answer": [
+        3
+      ],
+      "hint": "字节流不维护边界是协议的天然表现而非缺陷；UDP 一次发送就是一个 datagram，不存在粘包（代价是丢包乱序）；及时读取只能缓解接收端排队这一种成因，Nagle 攒包和 MSS 切段照样发生。"
+    },
+    {
+      "id": "java-equals-045",
+      "noteId": "java/basic/syntax/03-equals-hashcode",
+      "type": "single",
+      "q": "一个类重写了 equals 但没有重写 hashCode，以它为 key put 进 HashMap 后，再用一个 equals 相等的新对象去 get，结果与原因是？",
+      "options": [
+        "能取到：HashMap 的 get 最终靠 equals 匹配 key",
+        "能取到但会抛 ConcurrentModificationException：扩容时 modCount 被意外修改",
+        "返回 null：两个 equals 相等的对象 hash 不同、落进不同桶，get 根本走不到 equals 那一步",
+        "抛出 ClassCastException：取出的 value 类型与预期不符"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "HashMap 的查找是两段式——先按 hash 找到桶，桶内才轮到 equals 精确比对；hash 不一致意味着连候选桶都找错了，equals 写得再标准也没有执行机会。"
+    },
+    {
+      "id": "java-proxy-046",
+      "noteId": "java/basic/syntax/06-reflection-annotation",
+      "type": "single",
+      "q": "关于 JDK 动态代理与 CGLIB 的机制，正确的是？",
+      "options": [
+        "JDK 动态代理基于继承生成子类，CGLIB 基于接口实现代理",
+        "CGLIB 通过继承覆写方法增强，因此也能代理 final 类和 final 方法",
+        "JDK 动态代理基于接口（Proxy + InvocationHandler），CGLIB 基于继承生成子类，final 类/方法无法被 CGLIB 代理",
+        "两者都只能代理接口，无接口的类一律无法被代理"
+      ],
+      "answer": [
+        2
+      ],
+      "hint": "两者实现路线正好相反——一个要求目标实现接口、运行期生成实现同一接口的 $Proxy0；一个靠继承覆写，被 final 修饰的类与方法成了天然屏障。Spring 事务对有无接口的目标分别走哪条路可作为记忆锚点。"
+    },
+    {
+      "id": "java-aop-self-047",
+      "noteId": "java/intermediate/spring/02-aop",
+      "type": "single",
+      "q": "createOrder() 内部 this.validate() 调用本类 @Transactional 方法，事务不生效，原因与最干净的解法是？",
+      "options": [
+        "this 是原始对象没走代理，把方法拆到另一个 Bean 最干净",
+        "CGLIB 不能代理 final 方法，把类改成 final 即可生效",
+        "事务切面 Order 值太小，调大 @Order 即可",
+        "Spring AOP 只支持接口方法，给类补一个接口即可"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "根因是「外部调用先经过代理」没有发生，this 直达原始对象；final/static/private 是另外的失效场景；也可自注入代理或 AopContext.currentProxy()（需 exposeProxy=true）。"
+    },
+    {
+      "id": "java-sqlsession-048",
+      "noteId": "java/intermediate/spring/05-mybatis-sqlsession",
+      "type": "single",
+      "q": "SqlSessionTemplate 为什么能注册成全局单例被 N 个请求线程共用？",
+      "options": [
+        "DefaultSqlSession 内部对 Executor 加了同步锁",
+        "Template 自身无会话状态，JDK 动态代理拦截每次调用临时取会话，会话生命周期由 Spring 事务上下文管理",
+        "每个请求线程都会创建一个新的 SqlSessionTemplate 实例",
+        "它强制把 ExecutorType 换成线程安全的 BATCH"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "单例的只是壳；不是加锁也不是每请求换 Template；且 ExecutorType 在同一事务内不可中途切换。"
+    },
+    {
+      "id": "java-refresh-049",
+      "noteId": "java/intermediate/spring/07-application-context",
+      "type": "single",
+      "q": "关于 refresh() 启动流程，下列说法正确的是？",
+      "options": [
+        "建厂段就会实例化所有非懒加载单例",
+        "BeanPostProcessor 必须赶在普通 Bean 实例化前注册，否则 @Autowired、AOP 织入等加工失效",
+        "ContextRefreshedEvent 在建厂段发布",
+        "Boot 内嵌 Tomcat 在 finishBeanFactoryInitialization 阶段启动"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "建厂段只产图纸不产对象；预实例化在实例化段；ContextRefreshedEvent 在收尾段 finishRefresh；Tomcat 在 onRefresh 起动。"
+    },
+    {
+      "id": "java-anno-050",
+      "noteId": "java/intermediate/spring/08-annotations-map",
+      "type": "single",
+      "q": "下列注解机制的说法正确的是？",
+      "options": [
+        "getAnnotation 能读到组合注解里的元注解属性",
+        "@Configuration 类被 CGLIB 增强，@Bean 方法互相调用拿到的是容器单例",
+        "@Inherited 能让接口实现类继承接口上的注解",
+        "@Primary 与 @Qualifier 同时存在时 @Primary 优先"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "查组合注解要用 findMergedAnnotation；@Inherited 只认类继承不传接口；@Qualifier 优先于 @Primary。"
+    },
+    {
+      "id": "java-autoconfig-051",
+      "noteId": "java/intermediate/spring-boot/01-autoconfig",
+      "type": "multiple",
+      "q": "引入 starter 后 @Autowired SmsClient 报 NoSuchBeanDefinition，可能的原因有哪些？（多选）",
+      "options": [
+        "yml 忘了写 @ConditionalOnProperty 要求的开关项（如 sms.enabled=true）",
+        "@ConditionalOnClass 引用的类不在 classpath 依赖里",
+        "容器里已有同名 Bean，@ConditionalOnMissingBean 让位给了用户的",
+        "@ConfigurationProperties 前缀与 yml 不一致，整组绑定不上",
+        "自动配置失败时启动会明确报错指出哪个条件不满足，查日志即可，与上述无关"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hint": "自动配置是「条件让路，不是无条件注入」，条件不满足时配置类被跳过且不报错——最后一项与笔记相反；引入依赖没生效，九成是条件不满足，而不是代码写错。"
+    },
+    {
+      "id": "java-oauth-052",
+      "noteId": "java/intermediate/spring-boot/02-auth-sso",
+      "type": "single",
+      "q": "OAuth2 授权码模式为什么要先回传短命 code，再由服务端拿 code 换 access_token？",
+      "options": [
+        "为了减少一次网络请求",
+        "access_token 不经过浏览器前端，且换 token 时用 client_secret 做服务端认证，防令牌被截获",
+        "code 比 token 更长，放在 URL 里更安全",
+        "为了兼容不支持 Cookie 的浏览器"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "两次回传（code → token）是安全设计的精髓；把 OAuth2 的 token 直接当登录态是常见误用，认证要上 OIDC。"
+    },
+    {
+      "id": "java-refreshscope-053",
+      "noteId": "java/intermediate/spring-boot/03-configuration",
+      "type": "judge",
+      "q": "配置中心已推送新值，即使 Bean 没标 @RefreshScope，里面已注入的配置字段也会自动更新。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "热更新的落地是 @RefreshScope，不标它 Environment 变了 Bean 里的字段还是旧值；远程配置优先级压过本地 yml 说的是覆盖关系，不等于字段热更新。"
+    },
+    {
+      "id": "java-fatjar-054",
+      "noteId": "java/intermediate/spring-boot/04-embedded-deploy",
+      "type": "single",
+      "q": "fat jar 里为什么需要 JarLauncher + LaunchedURLClassLoader 才能直接 java -jar？",
+      "options": [
+        "为了压缩体积、减小 jar 包大小",
+        "JDK 标准 ClassLoader 只认顶层 jar 或目录，加载不了 jar 里的 jar，需要自定义入口和类加载器读嵌套 jar",
+        "为了兼容 JDK 8 以下的老版本",
+        "为了让 fat jar 能被其他应用当作普通依赖引用"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "这正是 fat jar 不能被别的应用当依赖引用的原因；想复用要走解压 + -cp 启动（分层镜像优化点）。"
+    },
+    {
+      "id": "java-actuator-055",
+      "noteId": "java/intermediate/spring-boot/05-actuator",
+      "type": "single",
+      "q": "关于 Actuator 的暴露面与安全，下列说法正确的是？",
+      "options": [
+        "Web 环境默认暴露所有端点方便排查",
+        "Web 上默认只暴露 health 与 info，其余默认开在 JMX，生产用独立 management 端口收敛",
+        "env、beans 这类端点信息量大，建议直接对公网开放",
+        "health 的 show-details 默认是 always，对所有人生效"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "默认暴露面极小是安全设计；show-details 配 when-authorized，env/beans 是信息泄露大户绝不对外。"
+    },
+    {
+      "id": "java-prehandle-056",
+      "noteId": "java/intermediate/spring-mvc/01-springmvc-flow",
+      "type": "judge",
+      "q": "拦截器 preHandle 返回 false 时，Controller 与 postHandle 被跳过，但已执行的那些 preHandle 对应的 afterCompletion 仍会倒序补偿执行。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "放行过的都要收尾，afterCompletion 倒序补偿；别以为 preHandle 返回 false 就什么都不执行了。"
+    },
+    {
+      "id": "java-exception-057",
+      "noteId": "java/intermediate/spring-mvc/02-exception-advice",
+      "type": "single",
+      "q": "@ExceptionHandler 的匹配规则，下列正确的是？",
+      "options": [
+        "全局 @ControllerAdvice 永远优先于 Controller 本地的 @ExceptionHandler",
+        "本地 @ExceptionHandler 就近优先，全局 Advice 按 @Order 排序遍历，异常按继承链由近及远取最精确匹配",
+        "抛出 MyException 时一定落到 Exception 的兜底方法",
+        "多个 Advice 之间按方法名字典序决定先后"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "就近原则是局部覆盖全局；只要 MyException 被声明过，就不会落到 Exception 兜底；Advice 顺序由 @Order 决定。"
+    },
+    {
+      "id": "java-valid-058",
+      "noteId": "java/intermediate/spring-mvc/03-validation",
+      "type": "single",
+      "q": "校验失败抛出的异常对应关系，正确的是？",
+      "options": [
+        "@RequestBody @Valid 失败抛 ConstraintViolationException",
+        "类级 @Validated 修饰的 @RequestParam 失败抛 ConstraintViolationException；@RequestBody @Valid 失败抛 MethodArgumentNotValidException",
+        "表单绑定失败抛 MethodArgumentNotValidException",
+        "三种场景统一都抛 BindException"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "三种异常取错结构不同（前两者从 getBindingResult() 取 FieldError），统一异常处理里分开适配才能返回字段级错误——这是校验提示不友好的头号原因。"
+    },
+    {
+      "id": "java-eureka-059",
+      "noteId": "java/advanced/springcloud/02-registry",
+      "type": "judge",
+      "q": "Eureka 进入自我保护（心跳续约数低于阈值）后，会停止剔除所有实例、保留可能已死的条目，把「不存在但还在表里」的问题交给调用方的重试与熔断处理。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "这是 CAP 选 A 舍 C 的工程落地；触发靠的是续约总量断崖式下跌（网络分区），偶发掉线不会触发；大量 503 时要查自我保护 + 熔断兜底。"
+    },
+    {
+      "id": "java-gateway-060",
+      "noteId": "java/advanced/springcloud/03-gateway",
+      "type": "single",
+      "q": "在 GlobalFilter 里 return chain.filter(exchange) 之后直接打印耗时，得到的是？",
+      "options": [
+        "请求完整处理完的真实耗时",
+        "只是交给下一个过滤器的时刻，真实后置逻辑要写在 doFinally 等 chain 完成之后",
+        "什么都不会打印，因为 filter 立即返回",
+        "会阻塞 EventLoop 直到响应完成"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "嵌套链里 chain.filter 返回不等于下游完成；另记 getOrder 越小越先 pre 越后 post；碰 IO 要切 boundedElastic，否则 EventLoop 被阻塞、无关请求全变慢。"
+    },
+    {
+      "id": "java-sentinel-061",
+      "noteId": "java/advanced/springcloud/05-sentinel",
+      "type": "single",
+      "q": "固定窗口计数限流算法的主要问题是什么？",
+      "options": [
+        "统计开销太高，需要 O(n) 遍历",
+        "窗口边界突刺：交界两侧各自放行满阈值流量，瞬时可达 2 倍",
+        "对低流量冷门接口完全不起作用",
+        "必须配合线程池隔离才能使用"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "滑动窗口把窗口切小格滚动、统计相邻格之和来抹平突刺；注意与漏桶的绝对均匀、无法应对突发区分。"
+    },
+    {
+      "id": "java-stream-binder-062",
+      "noteId": "java/advanced/springcloud/07-stream",
+      "type": "judge",
+      "q": "配置了 Kafka Binder 的手动 ack（ackMode: MANUAL）之后，就能保证消息不重复消费。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "Stream 只保证至少一次；不丢看 broker + 确认，不重看业务幂等（唯一键去重）——Stream 只是替你摆好开关位置，不改变责任边界。"
+    },
+    {
+      "id": "java-lsp-063",
+      "noteId": "java/intermediate/design-pattern/01-principles",
+      "type": "multiple",
+      "q": "依据里氏替换原则（LSP），下列哪些是「违反 LSP」的信号？（多选）",
+      "options": [
+        "子类抛出父类没声明过的异常",
+        "子类把父类方法空实现",
+        "调用方被迫用 instanceof 判断子类",
+        "子类新增了父类没有声明过的方法"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "新增方法不是违反信号——LSP 说子类可以加强行为、不能削弱/改变父类承诺的语义。"
+    },
+    {
+      "id": "java-spring-singleton-064",
+      "noteId": "java/intermediate/design-pattern/02-singleton",
+      "type": "single",
+      "q": "关于 Spring 的 singleton scope 与单例模式的关系，笔记的结论是哪一项？",
+      "options": [
+        "二者等同，Spring singleton 就是类级唯一的单例模式",
+        "Spring singleton 是「每容器每 BeanDefinition 一个实例」的注册表管理，与类级、构造器私有的单例模式不是一回事",
+        "自己 new 出来的对象同样受 Spring 容器管辖保证唯一",
+        "Spring singleton 天然防反射与反序列化破坏"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "单例模式的唯一性是类级别、构造器私有的；Spring 的唯一性是容器级别、由 SingletonBeanRegistry 保证，同一个类完全可以容器里一个、外面随便 new。"
+    },
+    {
+      "id": "java-proxy-self-065",
+      "noteId": "java/intermediate/design-pattern/06-proxy",
+      "type": "judge",
+      "q": "Spring AOP 自调用失效（同类内 this 调用 @Transactional 方法事务不生效）的根因是：代理只拦截「从外部进入对象」的调用，对象内部 this 直达原始对象、不经过代理。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "不是注解失效或代理没创建——代理控制的是入口调用，this 不走代理；解法是拆类、自注入或 AopContext.currentProxy()。"
+    },
+    {
+      "id": "java-strategy-066",
+      "noteId": "java/intermediate/design-pattern/09-strategy",
+      "type": "single",
+      "q": "策略模式与状态模式结构完全同构（接口+一组实现+上下文），两者的分界在哪里？",
+      "options": [
+        "结构不同：策略需要上下文类，状态模式不需要",
+        "谁决定用哪个：策略由调用方/外部条件选中后不自己换，状态由对象按迁移规则自己流转",
+        "策略运行期不可替换，状态可以",
+        "状态模式是策略模式在并发场景下的变体"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "别答结构不同——两者同构；分界是切换的决定者（strategies.get(type) 是外部选，订单 UNPAID→PAID→SHIPPED 是对象自己流转）。"
+    },
+    {
+      "id": "java-observer-067",
+      "noteId": "java/intermediate/design-pattern/11-observer",
+      "type": "multiple",
+      "q": "关于 Spring 事件，正确的说法有哪些？（多选）",
+      "options": [
+        "@EventListener 默认同步，在发布线程里执行",
+        "@TransactionalEventListener(AFTER_COMMIT) 在事务真正提交后才触发",
+        "Spring 事件具备持久化、重试、死信能力，可放心跨进程投递",
+        "java.util.Observable/Observer 自 JDK 9 起已废弃"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "Spring 事件是单进程内的，进程挂了事件就没了，跨进程解耦应使用 MQ。"
+    },
+    {
+      "id": "java-tmpl-068",
+      "noteId": "java/intermediate/design-pattern/15-patterns-in-frameworks",
+      "type": "single",
+      "q": "Bean 生命周期（doCreateBean 定骨架、BeanPostProcessor 当钩子）与 AQS 的 acquire+tryAcquire 被笔记归为完全同构，它们体现的是哪个模式？",
+      "options": [
+        "模板方法——骨架稳定 + 钩子开放",
+        "责任链——节点处理后放行",
+        "桥接——抽象与实现两维度独立演化",
+        "享元——内部状态共享"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "不是责任链——责任链对应的是 Gateway 过滤器链/OkHttp Interceptor；骨架稳定+钩子开放是模板方法的标志。"
+    },
+    {
+      "id": "java-lambda-069",
+      "noteId": "java/intermediate/version/01-java8",
+      "type": "single",
+      "q": "Lambda 为什么比匿名内部类轻？",
+      "options": [
+        "匿名内部类编译后是真实 class 文件、运行时真加载一个类；Lambda 编译成私有静态方法 + invokedynamic，多数情况不生成新类",
+        "Lambda 在运行期动态生成并加载完整 class 文件",
+        "匿名内部类会被 JVM 内联优化掉",
+        "Lambda 通过反射调用所以开销更小"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "方向别记反——生成 class 文件、真 new 对象的是匿名内部类；Lambda 的实现由 JVM 延迟织入。"
+    },
+    {
+      "id": "java-var-070",
+      "noteId": "java/intermediate/version/02-java9-11",
+      "type": "single",
+      "q": "Java 10 引入的 var 类型推断，用法正确的是哪一项？",
+      "options": [
+        "可用于字段、方法参数与方法返回值",
+        "只能用于有初始化器的局部变量，不能用于字段/方法参数/返回值，var x = null 也不合法",
+        "var 是动态类型，实际类型运行期才确定",
+        "允许声明后延迟赋值（var list; list = ...）"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "var 是编译期语法糖，字节码里仍是确切类型，不是动态类型；仅限有初始化器的局部变量。"
+    },
+    {
+      "id": "java-record-071",
+      "noteId": "java/intermediate/version/03-java14-17",
+      "type": "multiple",
+      "q": "关于 record 记录类的说法正确的有哪些？（多选）",
+      "options": [
+        "访问器不带 get 前缀，字段 x 的访问器就是 x()",
+        "record 可以 extends 继承其他类",
+        "equals/hashCode 按全部字段生成",
+        "紧凑构造器只做参数校验/规整，不用手抄赋值"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "record 不能继承其他类（隐含继承 java.lang.Record），是字段全 final 的不可变数据载体。"
+    },
+    {
+      "id": "java-vthread-072",
+      "noteId": "java/intermediate/version/04-java18-21",
+      "type": "single",
+      "q": "关于虚拟线程的 pin（钉住载体）问题，正确的是哪一项？",
+      "options": [
+        "虚拟线程在 synchronized 块/方法内阻塞时无法让出载体，载体被占着干等，热点路径应改用 ReentrantLock",
+        "把虚拟线程放进线程池池化就能避免 pin",
+        "pin 只发生在 CPU 密集任务中",
+        "把载体线程池调大就能根治 pin"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "笔记明确不池化虚拟线程，载体池大小设 CPU 核数即可、调大无害也无益；pin 的主要来源是 synchronized 内阻塞（22 起 JEP 491 已修复）。"
+    },
+    {
+      "id": "java-commonpool-073",
+      "noteId": "java/intermediate/stream/01-stream-principle",
+      "type": "single",
+      "q": "并行流里做阻塞 HTTP 调用导致全 JVM 卡死，事故机理与对策是？",
+      "options": [
+        "parallelStream 共享 commonPool（默认线程数=CPU 核数），worker 全卡在等响应耗光线程，所有并行流/parallelSort 一起陪葬；这类任务应换独立线程池或异步化",
+        "每条并行流自动新建独立 ForkJoinPool，互不影响",
+        "ForkJoinPool 会对阻塞等待自动补偿扩容线程",
+        "调大 common.parallelism 参数即可安全地在并行流里做阻塞 I/O"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "ForkJoinPool 不补偿阻塞等待，调大参数治标不治本；共享意味着互相影响，阻塞任务必须隔离。"
     }
   ]
 }

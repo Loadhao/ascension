@@ -26,6 +26,8 @@ Docker、Nginx、Git 等全站方向。
 | [equals 与 hashCode 约定](/java/basic/syntax/03-equals-hashcode/) | 重写 equals 必须重写 hashCode，否则 HashMap/HashSet 语义失效 |
 | [String 为什么不可变](/java/basic/syntax/02-string/) | final 存储 + 常量池复用 + 天然线程安全，拼接大量字符串用 StringBuilder |
 | [SPI 机制](/java/basic/syntax/10-spi/) | ServiceLoader 从 META-INF/services 按接口加载实现——Dubbo/Spring 扩展体系的源头 |
+| [红黑树与 HashMap 树化](/java/basic/collection/04-red-black-tree/) | BST 退化 O(n)、AVL 严格平衡但旋转频繁；红黑树靠「红红不相邻 + 黑高相同」做到最长 ≤ 2×最短，插入修复至多 2 次旋转 |
+| [反射、注解与动态代理](/java/basic/syntax/06-reflection-annotation/) | 反射经 Class 对象运行期解剖成员（forName 触发初始化）；注解是元数据，RUNTIME + 反射是框架标配；JDK 代理走接口、CGLIB 走继承 |
 | [封装继承多态](/java/basic/syntax/01-oop/) | 封装维护不变量；继承慎用复合优先；重载编译期静态分派，重写运行期动态绑定 |
 | [受检异常 vs 运行时](/java/basic/syntax/05-exception/) | 能恢复抛受检、是 bug 抛运行时、JVM 坏了抛 Error；finally 里 return 会劫持返回值 |
 | [BIO/NIO/AIO](/java/basic/io/01-io-model/) | 阻塞流 → 多路复用（selector 一个线程管千连接）→ 异步回调；Netty 是 NIO 的事实标准 |
@@ -45,6 +47,7 @@ Docker、Nginx、Git 等全站方向。
 | [CAS 与 ABA](/java/intermediate/concurrent/09-cas-atomics/) | CPU 原子指令实现无锁；ABA 用版本号（AtomicStampedReference）解决 |
 | [LongAdder 为什么快](/java/intermediate/concurrent/07-longadder/) | 分段 Cell 分散热点计数，sum 弱一致——高并发写场景胜过 AtomicLong |
 | [CompletableFuture 编排](/java/intermediate/concurrent/11-completablefuture/) | thenApply/thenCompose 串行、thenCombine 并行、allOf 汇聚，异常沿链传播 |
+| [并发工具三件套](/java/intermediate/concurrent/10-concurrent-tools/) | CountDownLatch/CyclicBarrier/Semaphore 都是 AQS 的 state 语义封装——倒计时放行、到齐齐走、许可扣还限流；读写锁可降级不可升级 |
 | [死锁的四个必要条件](/java/intermediate/concurrent/12-deadlock/) | 互斥、持有等待、不可剥夺、循环等待——破坏任意一条即可预防 |
 | [阻塞队列](/java/intermediate/concurrent/08-blocking-queue/) | put/take 在空/满时阻塞，是生产者-消费者与线程池工作队列的底座 |
 
@@ -83,6 +86,34 @@ Docker、Nginx、Git 等全站方向。
 | [跨服务链路追踪](/java/advanced/springcloud/08-tracing/) | 单机 MDC 不够：traceId 经 W3C traceparent 贯穿；Boot 3.x 用 Micrometer Tracing 取代 Sleuth |
 | [单例模式](/java/intermediate/design-pattern/02-singleton/) | 进程内真唯一：饿汉/枚举/静态内部类/DCL；难点是并发、反射、序列化围攻下仍唯一 |
 | [Stream 延迟求值](/java/intermediate/stream/01-stream-principle/) | 不存数据、中间操作惰性串联，终止操作才触发；并行流走 ForkJoinPool 工作窃取 |
+| [SqlSessionTemplate 单例凭什么线程安全](/java/intermediate/spring/05-mybatis-sqlsession/) | 壳是无状态 JDK 代理，真实 SqlSession 按调用临时获取、按事务生命周期管理（ThreadLocal 绑定 + 引用计数） |
+| [Boot 内嵌 Web 服务器何时启动](/java/intermediate/spring/07-application-context/) | refresh 的 onRefresh 阶段，早于业务 Bean 预实例化——「Web 服务器就绪 ≠ 应用就绪」 |
+| [@Configuration 的 @Bean 互调为什么不 new 第二份](/java/intermediate/spring/08-annotations-map/) | 配置类被 CGLIB 增强拦截方法互调、返回容器单例；proxyBeanMethods=false 即 lite 模式提速原理 |
+| [配置中心改了配置 Bean 里的值为什么没变](/java/intermediate/spring-boot/03-configuration/) | 热更新必须标 @RefreshScope，否则只是 Environment 更新，字段仍是旧值 |
+| [fat jar 能直接 java -jar 的原理](/java/intermediate/spring-boot/04-embedded-deploy/) | Main-Class 是 JarLauncher，由 LaunchedURLClassLoader 从嵌套 jar 加载类，绕过标准 ClassLoader 读不了 jar 里 jar 的限制 |
+| [线上临时调日志级别](/java/intermediate/spring-boot/05-actuator/) | POST /actuator/loggers 运行时即改无需重启（端点需暴露且收敛在独立管理端口） |
+| [@ExceptionHandler 的匹配顺序](/java/intermediate/spring-mvc/02-exception-advice/) | Controller 本地就近优先 → 全局 Advice 按 @Order 遍历，异常按继承链由近及远取最精确；都未命中才落 /error |
+| [@Valid 与 @Validated 怎么分工](/java/intermediate/spring-mvc/03-validation/) | @Valid（规范）管嵌套级联，@Validated（Spring）管分组与类上方法级校验——方法级校验靠 AOP 代理，自调用失效 |
+| [Stream 消费者重启后重复消费旧消息](/java/advanced/springcloud/07-stream/) | Consumer 没配稳定 group，每次重启被当成新的随机 group 从头消费；同 group 负载分担、不同 group 各拿一份 |
+
+## 设计模式
+
+| 问题 | 一句话答案 |
+|---|---|
+| [被问「为什么用这个设计模式」答什么](/java/intermediate/design-pattern/01-principles/) | 答原则不答模式——「依赖倒置，调用方只依赖抽象」；原则是价值观，模式是案例 |
+| [JDK 动态代理和 CGLIB 的硬性区别](/java/intermediate/design-pattern/06-proxy/) | JDK 只能代理接口（入口 InvocationHandler），CGLIB 靠生成子类覆写方法（类和方法不能 final，入口 MethodInterceptor） |
+| [策略模式和状态模式只差在哪](/java/intermediate/design-pattern/09-strategy/) | 谁决定切换——策略由调用方/外部条件选定后不自己换，状态由对象按迁移规则自己流转 |
+| [@EventListener 默认同步还是异步](/java/intermediate/design-pattern/11-observer/) | 默认同步——发布线程执行，主链路耗时等于所有监听器之和；跨事务用 @TransactionalEventListener(AFTER_COMMIT) |
+| [Bean 生命周期与 AQS 共同体现的模式](/java/intermediate/design-pattern/15-patterns-in-frameworks/) | 模板方法——父类定死骨架、钩子（BeanPostProcessor/tryAcquire）开放扩展，「骨架稳定+钩子开放」是优秀框架共性 |
+
+## Java 版本与新特性
+
+| 问题 | 一句话答案 |
+|---|---|
+| [Lambda 为什么比匿名内部类轻](/java/intermediate/version/01-java8/) | 匿名内部类编译成真实 class 并真加载一个类；Lambda 编译成私有静态方法 + invokedynamic，多数情况不生成新类 |
+| [从 8 升 11 最常见的两大报错](/java/intermediate/version/02-java9-11/) | JDK 内部 API 强封装（反射要 --add-opens）与 Java EE 模块移除（javax.* 要自己补依赖） |
+| [record 为什么不能继承其他类](/java/intermediate/version/03-java14-17/) | 隐含继承 java.lang.Record，字段全 final 的不可变数据载体——适合 DTO、值对象、Map 复合 key |
+| [虚拟线程要不要池化](/java/intermediate/version/04-java18-21/) | 不池化——便宜到每任务一个，限流用 Semaphore；synchronized 内阻塞会 pin 载体（22 起 JEP 491 修复） |
 
 ## MySQL
 
@@ -175,6 +206,7 @@ Docker、Nginx、Git 等全站方向。
 | [RabbitMQ 集群](/rabbitmq/intermediate/usage/02-cluster-ha/) | 默认只同步元数据，普通队列消息只在声明节点；要 HA 用仲裁队列 |
 | [NameServer 为何无中心](/rocketmq/basic/core/01-rocketmq-architecture/) | 路由粒度粗、稍旧可重试，取 AP 即可，不值得为路由上共识 |
 | [集群消费 vs 广播](/rocketmq/basic/core/02-consumer-semantics/) | 集群：组内一人消费、进度在 Broker、有 %RETRY%；广播全量、进度在本地、无重试 |
+| [send() 返回成功就落盘了吗](/kafka/basic/core/03-producer-path/) | 不——只代表进了累加器；确认要 get() 拿 Future 或回调，「发完就忘」是丢消息的高发姿势 |
 | [RocketMQ 消费失败会阻塞吗](/rocketmq/basic/core/02-consumer-semantics/) | 不会——失败进 %RETRY% 按延迟级别递增重试 16 次，仍失败进 %DLQ% 死信，新消息继续消费 |
 | [消息队列高性能靠什么](/rocketmq/advanced/core/02-order-performance/) | 顺序写 × 零拷贝（sendfile 管消费、mmap 管生产）× 批量压缩——linger.ms 是延迟换吞吐的旋钮 |
 | [MQTT 保活](/mqtt/intermediate/usage/02-keepalive-reconnect/) | keepalive 间隔内无报文则 PINGREQ 探活；别设太小，重连用指数退避加抖动 |
@@ -280,6 +312,18 @@ Docker、Nginx、Git 等全站方向。
 | [拓扑排序](/algorithm/advanced/graph/02-topological-sort/) | Kahn：入度 0 即可执行；输出不足总结点数则有环 |
 | [二分答案](/algorithm/advanced/binary-answer/01-koko-eating-bananas/) | 「最小的最大」对 k 本身二分，前提是判定单调 |
 | [Kadane](/algorithm/intermediate/dp/03-max-subarray/) | 前面累计是负资产就丢弃重开，O(n) 求最大子数组和 |
+| [二叉树遍历差别是什么](/algorithm/intermediate/tree/01-tree-traversal/) | 前/中/后序只差「访问根」在递归位置 1/2/3，走树路线相同；层序靠队列，分层先锁 size |
+| [BST 的复杂度与不变量](/algorithm/intermediate/tree/02-bst/) | 平均 O(log n) 最坏 O(n)（有序插入退化成链）；中序遍历即升序；验证 BST 要 (lo,hi) 上下界夹逼 |
+| [BST 上求 LCA 为什么快](/algorithm/intermediate/tree/04-lca/) | 利用有序性每层走单边，第一次分居两侧或等于 root 即答案，O(h) 无需搜全树 |
+| [有效括号为什么最后 return stack.isEmpty()](/algorithm/intermediate/stack-queue/01-valid-parentheses/) | 左括号多了全程不会配对失败，只有扫完栈非空才暴露——写成 true 会漏判这一失败模式 |
+| [最小栈 getMin 如何 O(1)](/algorithm/intermediate/stack-queue/02-min-stack/) | 辅助最小栈与主栈同步压弹，第二小的信息在它下面那格从入栈那天就备好了 |
+| [双栈实现队列为什么快](/algorithm/intermediate/stack-queue/03-queue-via-stacks/) | 每个元素一生至多搬运两次（总 ≤ 2n）均摊 O(1)；out 栈空才倒，顺序才不乱 |
+| [反转链表为什么返回 prev](/algorithm/intermediate/linked-list/01-reverse-list/) | 循环结束时 curr 已走到 null、prev 恰好停在新头；口诀「先记后改」防断链 |
+| [合并有序链表为什么用 <=](/algorithm/intermediate/linked-list/03-merge-lists/) | 相等取 A 保证稳定，还避免两指针都不动的边界；剩余整段一个赋值接上 |
+| [全排列撤销为什么必须成对](/algorithm/intermediate/backtracking/02-permutations/) | path 和 used 一起恢复——漏一个候选集永久污染，表现为解缺失或重复 |
+| [打家劫舍的转移方程](/algorithm/intermediate/dp/02-house-robber/) | dp[i] = max(dp[i-1], dp[i-2] + nums[i])（不偷 vs 偷）；「不偷也可能更优」是理解关键 |
+| [LCS 不相等时为什么取 max(上, 左)](/algorithm/intermediate/dp/04-lcs/) | 两个末字符不可能同时进 LCS，必须丢一个取较优；相等才能「都要」（左上 + 1） |
+| [希尔排序最后一轮为什么快](/algorithm/basic/sorting/07-shell-sort/) | 大 gap 轮已消除远距离逆序对、数组近乎有序（先粗调后微调），gap=1 接近 O(n)；跨组交换所以不稳定 |
 | [冒泡排序](/algorithm/basic/sorting/01-bubble-sort/) | 相邻逆序就交换，每轮把最大值冒到末尾；swapped 一轮未交换可提前退出 |
 | [插入排序](/algorithm/basic/sorting/03-insertion-sort/) | 抽 key 插入有序前缀；近乎有序接近 O(n)，是工业排序小区间的兜底 |
 | [选择排序](/algorithm/basic/sorting/04-selection-sort/) | 每轮扫出最小值与头部交换；比较次数固定、交换最少，但不稳定 |
@@ -317,6 +361,14 @@ Docker、Nginx、Git 等全站方向。
 | [__new__ 与 __init__](/python/basic/oop/01-class-basics/) | __new__ 造实例、__init__ 填内容；可变默认值性质的类属性要挪进 __init__ |
 | [dataclass 与 slots](/python/basic/oop/03-dataclass-slots/) | frozen=True 当值对象；可变默认值用 default_factory；百万实例加 slots 省约一半内存 |
 | [线程适合什么](/python/intermediate/concurrency/01-threading/) | GIL 下 CPU 密集无法并行字节码，但 IO 等待会释放——IO 密集用线程池，共享状态优先 Queue |
+| [FastAPI 的 async 路由能塞同步阻塞吗](/python/intermediate/libs/03-fastapi/) | 不能——一个同步阻塞（requests、time.sleep）冻结全服务；CPU 密集写普通 def 让框架丢线程池 |
+| [SQLAlchemy 的 Engine 和 Session 各建几个](/python/intermediate/libs/04-sqlalchemy/) | Engine 全局一个管连接池，Session 请求一个管事务；生产建表用 Alembic 不用 create_all |
+| [list 的 pop(0) 和 deque.popleft() 差在哪](/python/intermediate/stdlib/01-collections/) | list 头部删除 O(n) 全员平移，deque 两端 O(1)，maxlen 白送环形缓冲 |
+| [itertools.groupby 为什么分错组](/python/intermediate/stdlib/02-functools-itertools/) | 只合并相邻相同项——必须先按同一 key sorted 再 groupby |
+| [re.findall 带分组返回什么](/python/intermediate/data/01-re-regex/) | 返回组不是整体——一个组→字符串列表，多个组→元组列表 |
+| [库代码里该不该调 basicConfig](/python/intermediate/data/03-logging/) | 不该——库只 getLogger(__name__) 输出不配置，配置权归应用入口 |
+| [Python 为什么禁裸 except](/python/basic/syntax/04-exceptions/) | 连 KeyboardInterrupt 和系统退出信号一起吞；最低 except Exception，捕获从窄到宽排队 |
+| [线上 Python 进程偶尔卡死怎么定位](/python/advanced/internals/04-profiling/) | py-spy dump 打印所有线程栈——采样不侵入，十秒定位卡在哪行 |
 
 ## AI 与大模型
 
@@ -344,6 +396,10 @@ Docker、Nginx、Git 等全站方向。
 | [TodoWrite 对抗什么](/ai/intermediate/agent/01-todo-planning/) | 注意力稀释是长任务的敌人；计划以可见列表对抗上下文挤压，reminder 由 Harness 负责 |
 | [系统提示是组装的](/ai/intermediate/agent/02-system-prompt/) | system prompt 按当前状态运行时拼接，不是写死的字符串；加载依据是文件/工具是否真的存在 |
 | [技能按需加载](/ai/intermediate/agent/05-skill-loading/) | 两级加载：目录便宜常驻 system prompt，内容昂贵通过 tool_result 按需注入 |
+| [想给 agent 加行为该改循环吗](/ai/basic/agent/04-hooks/) | 不改——注册回调即可（PreToolUse/PostToolUse/Stop 等事件），加行为 = 注册回调、循环零改动 |
+| [429/529 临时故障的恢复套路](/ai/intermediate/agent/07-error-recovery/) | 指数退避 + 抖动（500×2^n 封顶 32s）最多 10 次，Retry-After 优先，连续 3 次 529 切备用模型 |
+| [durable 的 cron 任务进程关了还会跑吗](/ai/advanced/agent/04-cron-scheduler/) | 不会——durable 只是任务定义跨重启保留，调度器必须在 Agent 进程内跑；进程外用系统 crontab/systemd timer |
+| [多 Agent 协议消息靠什么配对](/ai/advanced/agent/06-team-protocols/) | request_id 贯穿全链路，match_response 做类型匹配 + 已解决幂等两层校验 |
 
 ## 分布式与集群
 
