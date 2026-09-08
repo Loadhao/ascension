@@ -53,6 +53,15 @@
 main:has(.kg-fullbleed) {
   padding-bottom: 8px !important;
 }
+/* 图谱页 toc:false 时 html 仍带 data-has-toc，全局「正文靠右」公式会误把标题/图谱
+   推到主栏右侧，中间留出大块空白；右侧栏已隐藏，正文应贴左占满主栏 */
+@media (min-width: 50rem) {
+  .lg\:sl-flex:has(.kg-fullbleed) .content-panel .sl-container {
+    margin-inline: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+}
 /* bar 布局：操作按钮悬浮画布右上，分组统计作为底部条全部展开（不滚动） */
 .kg-toolbar {
   position: absolute;
@@ -433,6 +442,10 @@ main:has(.kg-fullbleed) {
   .main-pane {
     order: 1;
     width: calc(100% - 14rem);
+  }
+  /* 图谱全宽页：右侧栏已隐藏，勿再为目录列预留 14rem */
+  .lg\:sl-flex:has(.kg-fullbleed) .main-pane {
+    width: 100%;
   }
 }
 summary .sl-tree-toggle {
