@@ -1,0 +1,26 @@
+astro.config.mjs
+  h_9324126a55eff3 231-273,714,773,791-792
+src/content/docs/mysql/advanced/performance-ha/03-online-ddl.md
+  h_9324126a55eff3 1-87
+src/content/docs/redis/basic/core/03-thread-model.md
+  h_9324126a55eff3 1-68
+src/content/docs/redis/intermediate/usage/05-pipeline-transaction-lua.md
+  h_9324126a55eff3 1-98
+src/content/docs/redis/intermediate/usage/06-bigkey-hotkey.md
+  h_9324126a55eff3 1-91
+src/data/graphs/mysql.json
+  h_9324126a55eff3 11-12,25-27
+src/data/graphs/redis.json
+  h_9324126a55eff3 6-8,24-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "84f21f4207b31884d4bc733272cea1d678872b1f",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
