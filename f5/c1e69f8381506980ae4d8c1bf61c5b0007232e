@@ -1,0 +1,38 @@
+astro.config.mjs
+  h_9324126a55eff3 259,271,283-291,319-322,338,520,551,568
+src/content/docs/java/basic/collection/05-linkedhashmap-lru.md
+  h_9324126a55eff3 1-98
+src/content/docs/java/basic/io/01-io-model.md
+  h_9324126a55eff3 1-117
+src/content/docs/java/basic/io/02-zero-copy.md
+  h_9324126a55eff3 1-87
+src/content/docs/java/basic/io/index.mdx
+  h_9324126a55eff3 1-14
+src/content/docs/java/basic/syntax/09-object-copy.md
+  h_9324126a55eff3 1-84
+src/content/docs/java/intermediate/concurrent/09-cas-atomics.md
+  h_9324126a55eff3 1-84
+src/content/docs/java/intermediate/concurrent/10-concurrent-tools.md
+  h_9324126a55eff3 1-105
+src/content/docs/java/intermediate/concurrent/11-completablefuture.md
+  h_9324126a55eff3 1-110
+src/content/docs/java/intermediate/concurrent/12-deadlock.md
+  h_9324126a55eff3 1-103
+src/content/docs/java/intermediate/design-pattern/02-singleton.md
+  h_9324126a55eff3 1-141
+src/content/docs/java/intermediate/spring/09-springmvc-flow.md
+  h_9324126a55eff3 1-105
+src/data/graphs/java.json
+  h_9324126a55eff3 39-48,129-143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "f5c1e69f8381506980ae4d8c1bf61c5b0007232e",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
