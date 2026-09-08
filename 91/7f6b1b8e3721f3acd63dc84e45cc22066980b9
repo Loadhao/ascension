@@ -1,0 +1,14 @@
+src/data/graphs/java.json
+  h_9324126a55eff3 80,211
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "917f6b1b8e3721f3acd63dc84e45cc22066980b9",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
