@@ -186,6 +186,170 @@
         1
       ],
       "hint": "线程绕不开 GIL；asyncio 遇 CPU 计算会堵住循环；进程才有真正的多核，但通信要 pickle。"
+    },
+    {
+      "id": "py-uv-013",
+      "noteId": "python/advanced/eng/01-venv-uv",
+      "type": "single",
+      "q": "应用项目用 uv 管理依赖，锁文件与声明应如何分工？",
+      "options": [
+        "库和应用都只声明宽松下限，不要 lock，方便随时升级",
+        "声明在 pyproject.toml，锁定在 uv.lock 并提交；uv sync 一步复现。库才只声明宽松下限",
+        "lock 文件不能提交，每人本地生成一份",
+        "venv 已经隔离，不再需要 lock"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "uv add/remove 改依赖，uv run 跑命令，uvx 一次性跑工具。隔离靠 venv，可复现靠 lock。"
+    },
+    {
+      "id": "py-pytest-014",
+      "noteId": "python/advanced/eng/02-pytest",
+      "type": "multiple",
+      "q": "关于 pytest，下列正确的有？（多选）",
+      "options": [
+        "裸 assert 失败时中间值会自动展开，不必手写一长串 assertEqual",
+        "fixture 按参数名注入，共享放 conftest.py",
+        "测试函数必须继承 unittest.TestCase 才能被收集",
+        "参数化加用例主要是加数据行，而不是复制测试函数"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "发现规则靠 test_ 前缀。pytest.raises 断言异常。mark 分组让慢测试与网络测试可过滤，保住本地反馈速度。"
+    },
+    {
+      "id": "py-ruff-015",
+      "noteId": "python/advanced/eng/03-ruff-mypy",
+      "type": "single",
+      "q": "ruff 与 mypy 在质量门禁里的角色，笔记推荐的渐进策略是？",
+      "options": [
+        "ruff 只做 format，类型检查交给运行时",
+        "ruff 一统 lint+format；mypy 先 check_untyped_defs，新目录再 disallow_untyped_defs，老代码 overrides 灰度",
+        "mypy 必须一次 disallow 全仓库，否则没有意义",
+        "lint 与 format 冲突时关掉 format，保留全部 lint 规则"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "冲突规则关 lint 侧、让 format 说了算。CI 顺序：ruff check → format --check → mypy → pytest。本地保存即跑 ruff。"
+    },
+    {
+      "id": "py-desc-016",
+      "noteId": "python/advanced/internals/03-descriptors-metaclass",
+      "type": "single",
+      "q": "property 与 ORM 字段的底层协议是？力量层级上元类应处于？",
+      "options": [
+        "装饰器语法糖而已，与属性访问无关；元类是第一选择",
+        "描述符 __get__/__set__；数据描述符优先于实例字典。先普通属性/装饰器/__init_subclass__，元类是最后手段",
+        "元类拦截的是实例构造 __init__，不是 class 语句",
+        "实例字典永远覆盖数据描述符"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "class 语句 = 元类调用，拦截的是「类的创建」（注册、注入、校验）。能不用元类就不用。"
+    },
+    {
+      "id": "py-list-017",
+      "noteId": "python/basic/data-structures/01-list-tuple",
+      "type": "multiple",
+      "q": "关于 list 与 tuple，下列正确的有？（多选）",
+      "options": [
+        "list 是过度分配的指针数组，索引 O(1)，append 均摊 O(1)，头插头删 O(n)",
+        "频繁成员检测应换 set，频繁头插头删换 deque",
+        "单元素 tuple 写成 (1) 即可，括号能创造元组",
+        "tuple 可哈希（元素也可哈希时）因而能当 dict key"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "单元素必须 (1,) 带逗号。tuple 是结构固定的记录，省内存。list 不适合当 set 用。"
+    },
+    {
+      "id": "py-import-018",
+      "noteId": "python/basic/modules/01-modules-import",
+      "type": "single",
+      "q": "同一进程里两次 import mymod，模块顶层代码会执行几次？循环导入优先怎么解？",
+      "options": [
+        "每次都执行；用多线程 import 即可",
+        "只执行一次（sys.modules 缓存）；优先抽公共模块，其次函数内延迟导入",
+        "由 GIL 决定执行次数；循环导入是语法错误无法运行",
+        "exec 与 import 无关，顶层副作用没有坏处"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "import 是运行时执行，sys.path 决定搜索位置。__name__=='__main__' 让文件兼任库与脚本。模块顶层避免副作用。"
+    },
+    {
+      "id": "py-pkg-019",
+      "noteId": "python/basic/modules/02-packages-layout",
+      "type": "single",
+      "q": "包内相对导入在「直接 python path/to/mod.py」时容易挂，推荐怎么跑？",
+      "options": [
+        "改用绝对磁盘路径 import",
+        "python -m 包.模块，保证包上下文还在；包内相对、跨包绝对",
+        "删掉 __init__.py，Python 3 不再需要包",
+        "测试去 import 源码树里未经安装的包，避免 src 布局"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "包 = 带 __init__.py 的目录，门面收敛对外 API。src 布局让测试 import 的是安装后的包，而不是碰巧的本地路径。"
+    },
+    {
+      "id": "py-oop-020",
+      "noteId": "python/basic/oop/01-class-basics",
+      "type": "single",
+      "q": "__new__ 与 __init__ 的分工，以及可变默认值性质的类属性应放哪？",
+      "options": [
+        "__init__ 造实例、__new__ 填内容；可变列表可以安全写在类体里共享",
+        "__new__ 造实例、__init__ 填内容；可变默认值性质的类属性要挪进 __init__ 做成实例属性",
+        "两者完全等价，CPython 会合并",
+        "只有继承 object 时才有 __new__"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "类属性查找链是实例 dict → 类 → 基类。运算符是魔术方法协议，不必继承接口。__repr__ 给开发者，__str__ 给用户。"
+    },
+    {
+      "id": "py-dc-021",
+      "noteId": "python/basic/oop/03-dataclass-slots",
+      "type": "single",
+      "q": "dataclass 里可变默认值（如空列表）正确写法，以及百万级实例为何加 slots=True？",
+      "options": [
+        "default=[] 即可；slots 让实例能动态加属性所以更省",
+        "field(default_factory=list)；slots 去掉实例 __dict__，约省一半内存，代价是不能再动态加属性",
+        "只能用 namedtuple，dataclass 不支持默认值",
+        "frozen=True 与 slots 冲突，不能同时用"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "值对象首选 frozen=True（不可变 + 可哈希 + 线程安全）。dataclass 生成 __init__/__repr__/__eq__，消灭样板。"
+    },
+    {
+      "id": "py-th-022",
+      "noteId": "python/intermediate/concurrency/01-threading",
+      "type": "single",
+      "q": "CPython 多线程适合哪类负载？共享状态更推荐什么而不是满地 lock？",
+      "options": [
+        "CPU 密集数值计算；靠 GIL 保证 += 原子",
+        "IO 密集（等网络/磁盘时释放 GIL）；用 ThreadPoolExecutor，共享状态优先 queue.Queue 消息化",
+        "任意负载都线性加速；锁越细越好",
+        "只能用 multiprocessing，线程在 Python 里无效"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "GIL 使多线程无法并行执行字节码，但 IO 等待会释放。+= 仍是多步字节码，要显式锁。CPU 密集换多进程。"
     }
   ]
 }

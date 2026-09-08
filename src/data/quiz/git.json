@@ -75,6 +75,56 @@
         0
       ],
       "hint": "改历史只留给尚未共享的提交；公共分支用 revert。"
+    },
+    {
+      "id": "git-daily-006",
+      "noteId": "git/basic/foundations/02-daily-commands",
+      "type": "single",
+      "q": "git diff 与 git diff --staged 分别比较的是哪两层？",
+      "options": [
+        "两者都是工作区 vs 最近一次提交，只是显示格式不同",
+        "前者工作区 vs 暂存区，后者暂存区 vs 最近提交——先分清改动在哪一层",
+        "前者只看未跟踪文件，后者只看冲突",
+        "--staged 会把文件移出暂存区"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "add 把工作区推进暂存区，commit 把暂存区写成历史。add -p 可以逐块挑选，避免把调试打印一并提交。--amend 只用于尚未 push 的最近一次提交。"
+    },
+    {
+      "id": "git-tools-007",
+      "noteId": "git/advanced/workflow/02-advanced-tools",
+      "type": "multiple",
+      "q": "关于 bisect、worktree 与 LFS，下列正确的有？（多选）",
+      "options": [
+        "git bisect 在 good/bad 之间二分历史，可配合 bisect run 自动跑测试",
+        "worktree 再 clone 一份完整对象库，所以比普通 clone 更占空间",
+        "多个 worktree 共享同一份 .git 对象，各有独立工作区文件",
+        "大文件用 LFS 存指针，避免仓库膨胀"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "worktree 的卖点正是共享对象库、省一份 clone。submodule 记录的是子仓某个 commit 指针；能用普通依赖就别上子模块。"
+    },
+    {
+      "id": "git-team-008",
+      "noteId": "git/advanced/workflow/03-team-standards",
+      "type": "single",
+      "q": "小团队持续部署的 Web 产品，笔记更推荐哪套分支模型？公共分支必须强推时该用？",
+      "options": [
+        "Git Flow 全家桶（main/develop/release/hotfix）；git push -f",
+        "GitHub Flow：main 常绿 + 短命 feature + PR；--force-with-lease",
+        "每人长期个人分支永不合并；禁止一切强推",
+        "只允许在 main 上直接 commit --amend 改历史"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "从简是趋势：真需要发版/hotfix 再加 release 分支，不必先上 Git Flow。--force-with-lease 会拒绝覆盖别人新推的提交；裸 -f 可能抹掉同事的工作。"
     }
   ]
 }

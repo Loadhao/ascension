@@ -125,6 +125,38 @@
         0
       ],
       "hint": "别把 -I 和 -i 混为一谈——小写 -i 是在完整响应前面显示响应头，大写 -I 是直接改发 HEAD 请求、压根不取 body。"
+    },
+    {
+      "id": "tools-ide-007",
+      "noteId": "tools/basic/efficiency/01-editor-ide",
+      "type": "single",
+      "q": "把「写过三次以上的样板代码」固化下来，笔记推荐的手段是？",
+      "options": [
+        "多装几个主题扩展，启动时自动生成模板",
+        "代码片段（snippet）：输入缩写展开，光标停在占位符",
+        "只用多光标，禁止任何模板",
+        "把样板提交进 Git hooks，每次 commit 自动插入"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "多光标解决的是「这一次批量改」；snippet 解决的是「以后每次都要写」。扩展按需装，别让它拖慢启动。"
+    },
+    {
+      "id": "tools-term-008",
+      "noteId": "tools/basic/efficiency/02-terminal",
+      "type": "single",
+      "q": "bash/zsh 里召回很久以前一条长命令，性价比最高的做法是？",
+      "options": [
+        "history 全打出来用鼠标翻",
+        "Ctrl+R 反向增量搜索历史，再配合 alias 缩短高频命令",
+        "每次把命令写进脚本再 bash 脚本名",
+        "只用 ↑ 逐条回退，因为 Ctrl+R 会改写历史文件"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "Ctrl+R 是行编辑里最值得练的一个；Ctrl+A/E 跑到行首行尾。!! 重复上一条，!$ 是上一条最后一个参数。"
     }
   ]
 }

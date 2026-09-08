@@ -129,6 +129,56 @@
         0
       ],
       "hint": "先复制、再自动切主、最后才水平分片；不要把哨兵和 Cluster 的职责对调。"
+    },
+    {
+      "id": "redis-pattern-009",
+      "noteId": "redis/intermediate/usage/04-cache-patterns",
+      "type": "single",
+      "q": "Cache Aside 写路径的主流顺序是「先更新 DB 再删缓存」。若改成「先删缓存再更新 DB」，最典型的脏数据窗口是？",
+      "options": [
+        "删缓存失败会导致 DB 永久写不进去",
+        "删后、写库完成前的并发读会把旧值回填进缓存，脏到下次删除",
+        "Redis 单线程会自动串行化这次读写，所以没有窗口",
+        "只能在 Cluster 分片下出现，单机 Redis 安全"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "先删再写的窗口里，读 miss 会把尚未更新的旧行回填；主流组合是先更库再删 + 删除失败进重试/binlog 补偿。要强一致的数据诚实回答是：不适合缓存。"
+    },
+    {
+      "id": "redis-pipe-010",
+      "noteId": "redis/intermediate/usage/05-pipeline-transaction-lua",
+      "type": "multiple",
+      "q": "关于 Pipeline、MULTI/EXEC 与 Lua，下列正确的有？（多选）",
+      "options": [
+        "Pipeline 把多条命令打包往返，服务端仍逐条执行，中间可能被其他客户端插队",
+        "EXEC 后某条命令失败会自动回滚已执行的命令，保证全成或全败",
+        "WATCH 在 EXEC 前发现被监视 key 被改过，整个事务放弃（返回 nil）",
+        "集群上 Lua 访问的所有 key 必须落在同一槽，可用 hash tag 强制同槽"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "Redis 事务不支持回滚——EXEC 时某条失败其余照常生效；入队阶段的语法错误才会整体放弃。真正「多命令+判断」原子靠 Lua，且脚本必须短小，否则单线程假死。"
+    },
+    {
+      "id": "redis-bigkey-011",
+      "noteId": "redis/intermediate/usage/06-bigkey-hotkey",
+      "type": "single",
+      "q": "线上要找大 key，为什么生产环境几乎禁止用 MONITOR，而推荐 redis-cli --bigkeys 或离线分析 RDB？",
+      "options": [
+        "MONITOR 只能看过期键，看不到大 value",
+        "MONITOR 本身会独占单线程执行路径，生产等于给自己制造阻塞",
+        "--bigkeys 会 KEYS * 扫全库，MONITOR 反而更安全",
+        "RDB 分析必须停写，所以只适合开发环境"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "单线程公理：MONITOR / KEYS * / DEL 百万元素都会卡住所有请求。--bigkeys 是 SCAN 式采样；精确盘点离线解析 RDB 零线上风险。删除大集合用 UNLINK 而不是 DEL。"
     }
   ]
 }

@@ -77,6 +77,22 @@
         0
       ],
       "hint": "缓存键和 Cache-Control 决定能不能缓存；把带 Cookie 的个性化接口缓在边缘会串数据。"
+    },
+    {
+      "id": "nginx-ka-006",
+      "noteId": "nginx/intermediate/proxy/03-keepalived-ha",
+      "type": "single",
+      "q": "keepalived 给 Nginx 做主备时，track_script 应该探什么？脑裂比宕机更危险是因为？",
+      "options": [
+        "探主机 ping 通即可；脑裂只是短暂丢几个包",
+        "探 nginx 进程/本机健康检查：主机活着但 nginx 死了也要让位；脑裂会双主绑同一 VIP，ARP 抖动比宕机更难查",
+        "探上游业务接口；脑裂时 VRRP 会自动 fencing 对端",
+        "探 VIP 是否在本机；有状态的 MySQL 主从也该用同一套 VRRP 管选主"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "weight 扣到低于备机 priority 才会切换。无状态入口用 keepalived 做 IP 漂移；有状态主从交给哨兵/ZK，VRRP 不懂复制。脑裂防护：独立心跳 + 仲裁 + fencing。"
     }
   ]
 }
