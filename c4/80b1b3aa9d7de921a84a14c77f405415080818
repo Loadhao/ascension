@@ -1,0 +1,23 @@
+src/content/docs/docker/intermediate/practice/02-volume.md
+  s_78c28461ca738e::t_501b7244776549 27
+src/content/docs/java/advanced/jvm/01-class-loading.md
+  s_78c28461ca738e::t_9e938198d0bd55 88
+src/content/docs/java/intermediate/design-pattern/01-principles.md
+  s_78c28461ca738e::t_6b1c1949ce497e 103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c480b1b3aa9d7de921a84a14c77f405415080818",
+  "prompts": {},
+  "sessions": {
+    "s_78c28461ca738e": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "f894e97a-83bc-4b5f-85ac-32286b68017c",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
