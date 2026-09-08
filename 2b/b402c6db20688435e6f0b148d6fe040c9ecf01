@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1285
+src/content/docs/kafka/basic/core/03-producer-path.md
+  h_9324126a55eff3 1-79
+src/data/graphs/kafka.json
+  h_9324126a55eff3 6,17-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "2bb402c6db20688435e6f0b148d6fe040c9ecf01",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
