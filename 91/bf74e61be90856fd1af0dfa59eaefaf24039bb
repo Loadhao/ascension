@@ -1,0 +1,38 @@
+src/content/docs/guide/interview-cheatsheet.md
+  h_9324126a55eff3 3,7-8,84-92,132-133,154-178,190-207,238-239,256
+src/data/quiz/ai.json
+  h_9324126a55eff3 1-68
+src/data/quiz/distributed.json
+  h_9324126a55eff3 1-66
+src/data/quiz/docker.json
+  h_9324126a55eff3 1-71
+src/data/quiz/git.json
+  h_9324126a55eff3 1-50
+src/data/quiz/mqtt.json
+  h_9324126a55eff3 1-48
+src/data/quiz/mysql.json
+  h_9324126a55eff3 1-68
+src/data/quiz/network.json
+  h_9324126a55eff3 1-50
+src/data/quiz/nginx.json
+  h_9324126a55eff3 1-52
+src/data/quiz/postgresql.json
+  h_9324126a55eff3 1-69
+src/data/quiz/python.json
+  h_9324126a55eff3 1-69
+src/data/quiz/redis.json
+  h_9324126a55eff3 1-68
+src/data/quiz/seata.json
+  h_9324126a55eff3 1-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "91bf74e61be90856fd1af0dfa59eaefaf24039bb",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
