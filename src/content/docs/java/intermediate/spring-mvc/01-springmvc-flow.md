@@ -72,14 +72,14 @@ MessageConverter 序列化直接写响应——**不走视图**。这就是"前�
 afterCompletion → Filter 后`。鉴权放拦截器是主流——比 Filter 多
 拿到"目标方法"信息（可读 `@RequiresPermission` 之类注解），比 AOP
 贴近 HTTP 语义；三者协作的实战见
-[认证与单点登录](/java/intermediate/spring/07-auth-sso/)。
+[认证与单点登录](/java/intermediate/spring-boot/02-auth-sso/)。
 
 ## 异常去哪了：@ControllerAdvice 的接入点
 
 Handler 抛出的异常不会直接漏给容器：`ExceptionHandlerExceptionResolver`
 （三个默认 Resolver 之一）按"本类 `@ExceptionHandler` →
 `@ControllerAdvice` 全局"的顺序找处理方法，命中就转成正常响应——
-这就是[统一异常处理](/java/intermediate/spring/08-exception-advice/)
+这就是[统一异常处理](/java/intermediate/spring-mvc/02-exception-advice/)
 的执行位置。未命中才落到容器层（Tomcat error page / ErrorController）。
 
 ## 高频细节

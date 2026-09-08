@@ -67,7 +67,7 @@ public class MapperFactoryBean<T> implements FactoryBean<T> {
 MyBatis 的 `@Mapper` 接口没有实现类，却能 `@Autowired` 注入——因为
 容器里放的是 `MapperFactoryBean`，注入时拿到的是 `getMapper` 的
 动态代理。**FactoryBean = 容器认可的自定义对象生产线**（MyBatis
-接入全链见[MyBatis 集成](/java/intermediate/spring/06-mybatis-sqlsession/)）。
+接入全链见[MyBatis 集成](/java/intermediate/spring/05-mybatis-sqlsession/)）。
 
 ## @Import：把任意东西塞进容器的统一入口
 
@@ -79,7 +79,7 @@ MyBatis 的 `@Mapper` 接口没有实现类，却能 `@Autowired` 注入——�
 
 `@EnableAutoConfiguration` 的本质就是 `@Import(AutoConfigurationImportSelector.class)`
 ——SPI 文件里列出的配置类由 Selector 筛选后导入（链路见
-[Spring Boot 自动配置](/java/intermediate/spring/05-springboot-autoconfig/)），
+[Spring Boot 自动配置](/java/intermediate/spring-boot/01-autoconfig/)），
 与[SPI 机制](/java/basic/syntax/10-spi/)正好首尾相接。
 
 ## 事件机制：容器内的发布订阅
@@ -132,7 +132,7 @@ Runner 之间用 `@Order` 排先后；Web 层还留有四个高频插槽——
 当前用户）、`Converter/Formatter`（类型转换）、
 `RequestBodyAdvice/ResponseBodyAdvice`（报文加解密与日志）、
 `HandlerExceptionResolver`（@ControllerAdvice 的底层机制，见
-[统一异常处理](/java/intermediate/spring/08-exception-advice/)）。
+[统一异常处理](/java/intermediate/spring-mvc/02-exception-advice/)）。
 
 ## 小结
 

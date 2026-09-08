@@ -81,7 +81,7 @@ flowchart TB
 
 - **建厂段只产图纸不产对象**——扫描 `@Component`、解析 `@Bean` 都发生在
   这里（`ConfigurationClassPostProcessor`，一个 BeanFactoryPostProcessor，
-  详见[扩展点全景](/java/intermediate/spring/10-extension-points/)）。
+  详见[扩展点全景](/java/intermediate/spring/06-extension-points/)）。
 - **装配段必须赶在实例化之前**：@Autowired 解析器、AOP 织入器这些
   BeanPostProcessor 若晚于普通 Bean 注册，普通 Bean 就"没人加工"了。
 - **Boot 的内嵌 Tomcat 在 onRefresh 起动**，随后单例铺开、

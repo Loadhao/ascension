@@ -78,7 +78,7 @@ DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/mysql");
 经典用途是 **Java EE/Tomcat 场景下的数据源**：连接池在容器层配置好，
 应用按 JNDI 名查找使用，改数据库配置不用动应用。Spring 里的对应物是
 `JndiObjectFactoryBean` / `JndiTemplate`（FactoryBean 模式见
-[Spring 扩展点](/java/intermediate/spring/10-extension-points/)）。
+[Spring 扩展点](/java/intermediate/spring/06-extension-points/)）。
 微服务时代配置中心接管了这类需求，JNDI 的日常戏份变少，但它作为
 ** lookup 机制**留在了历史与漏洞史里。
 

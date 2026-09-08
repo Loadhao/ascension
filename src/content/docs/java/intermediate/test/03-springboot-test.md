@@ -46,10 +46,10 @@ class OrderControllerTest {
 ```
 
 切片只装载 MVC 相关 Bean（ArgumentResolver、MessageConverter、
-[统一异常处理](/java/intermediate/spring/08-exception-advice/)都在），
+[统一异常处理](/java/intermediate/spring-mvc/02-exception-advice/)都在），
 业务 Bean 一律用 `@MockBean` 顶替——**这正测到
-[Spring MVC 请求处理全流程](/java/intermediate/spring/09-springmvc-flow/)里
-doDispatch 的第③到第⑧步**，与[请求参数注解](/java/intermediate/spring/12-annotations-map/)
+[Spring MVC 请求处理全流程](/java/intermediate/spring-mvc/01-springmvc-flow/)里
+doDispatch 的第③到第⑧步**，与[请求参数注解](/java/intermediate/spring/08-annotations-map/)
 的每个来源（@RequestParam/@PathVariable/@RequestBody）一一对账。
 
 ## @DataJpaTest 与 @MockBean 的位置

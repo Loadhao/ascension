@@ -48,7 +48,7 @@ Location: /api/orders/9527         ← 3xx 时才有意义
 | 200/201/204 | 成功/已创建/无返回体 | REST 语义区分 |
 | 301/302 | 永久/临时重定向 | 301 会被浏览器缓存——**误用 301 很难救回**；防开放重定向 |
 | 304 Not Modified | 缓存仍有效 | 配 `ETag`/`Last-Modified`，省流量不省请求 |
-| 400/401/403 | 参数错/未认证/没权限 | 401 去[登录](/java/intermediate/spring/07-auth-sso/)，403 管鉴权 |
+| 400/401/403 | 参数错/未认证/没权限 | 401 去[登录](/java/intermediate/spring-boot/02-auth-sso/)，403 管鉴权 |
 | 404/405 | 资源不存在/方法不支持 | 405 常见于把 POST 打成 GET |
 | 499 | **客户端主动断开**（Nginx 特有） | 上游慢、客户端超时先走——高频出现在慢接口告警 |
 | 500/502/504 | 服务端错/上游挂/上游超时 | 502 看上游存活，504 看上游耗时（网关视角见[Spring Cloud Gateway](/java/advanced/springcloud/03-gateway/)） |
@@ -63,7 +63,7 @@ HTTP 无状态（请求之间互不认识），身份延续靠三层接力：
 | Session | **服务端**，Cookie 只存 sid | 集群要共享（粘性路由/集中存储） |
 | Token/JWT | 客户端任意位置，请求头携带 | 自包含免查库、无法主动作废需黑名单 |
 
-三者的鉴权链路全貌见[认证与单点登录](/java/intermediate/spring/07-auth-sso/)。
+三者的鉴权链路全貌见[认证与单点登录](/java/intermediate/spring-boot/02-auth-sso/)。
 
 ## 长连接：keep-alive
 

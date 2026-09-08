@@ -96,7 +96,7 @@ public class TraceIdFilter implements Filter {
 下一个请求）；**跨线程要透传**——@Async、线程池里异步任务默认拿不到
 父线程的 MDC，需要装饰器（`TaskDecorator`）复制上下文（线程池语境见
 [线程池详解](/java/intermediate/concurrent/02-thread-pool/)）。挂在
-[Filter 层](/java/intermediate/spring/09-springmvc-flow/)是通用位置，
+[Filter 层](/java/intermediate/spring-mvc/01-springmvc-flow/)是通用位置，
 下游 RPC 的 traceId 传递由链路追踪组件（Sleuth/Micrometer Tracing）接管。
 
 ## 占位符与异步日志

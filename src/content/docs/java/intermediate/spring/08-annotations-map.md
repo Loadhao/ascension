@@ -55,13 +55,13 @@ Java 自带的标准注解同理：`@Override`（编译器校验）、`@Deprecat
 | `@RequestMapping` | URL 映射；`@GetMapping` 等是方法级马甲 |
 | `@RequestParam` / `@PathVariable` / `@RequestBody` | 查询参数 / 路径段 / 请求体，三种来源 |
 | `@RequestHeader` / `@CookieValue` | 头与 Cookie |
-| `@ControllerAdvice` + `@ExceptionHandler` | 全局异常兜底（机制见[统一异常处理](/java/intermediate/spring/08-exception-advice/)） |
+| `@ControllerAdvice` + `@ExceptionHandler` | 全局异常兜底（机制见[统一异常处理](/java/intermediate/spring-mvc/02-exception-advice/)） |
 | `@CrossOrigin` | 声明式 CORS（更细的放全局配置） |
 | `@Valid` / `@NotNull` 等 | JSR-303 校验触发器与约束 |
 
 这些注解能生效，靠的是启动期把它们注册进 `RequestMappingHandlerMapping`、
 请求期由 ArgumentResolver/MessageConverter 解析——执行位置见
-[Spring MVC 请求处理全流程](/java/intermediate/spring/09-springmvc-flow/)。
+[Spring MVC 请求处理全流程](/java/intermediate/spring-mvc/01-springmvc-flow/)。
 
 ## Spring：AOP、事务、异步与事件
 
@@ -83,7 +83,7 @@ BeanPostProcessor/Advisor——开关一开，对应的扩展点就上岗。
 | 注解 | 说明 |
 | --- | --- |
 | `@SpringBootApplication` | = `@SpringBootConfiguration` + `@EnableAutoConfiguration` + `@ComponentScan` |
-| `@EnableAutoConfiguration` | 按 classpath 条件加载自动配置（原理见[自动配置篇](/java/intermediate/spring/05-springboot-autoconfig/)） |
+| `@EnableAutoConfiguration` | 按 classpath 条件加载自动配置（原理见[自动配置篇](/java/intermediate/spring-boot/01-autoconfig/)） |
 | `@ConditionalOnClass` / `@ConditionalOnMissingBean` / `@ConditionalOnProperty` | 条件装配三巨头：有某个类才生效 / 用户没定义才兜底 / 配置开关 |
 | `@ConfigurationProperties` | 配置绑定（配合 `@EnableConfigurationProperties` 注册） |
 | `@Profile("prod")` | 按环境装配 Bean |

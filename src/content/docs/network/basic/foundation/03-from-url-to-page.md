@@ -35,7 +35,7 @@ flowchart LR
 | ③ TCP 建连 | SYN/ACK 三次握手，拿到的可能还有 CDN 边缘 IP | [三次握手与四次挥手](/network/basic/tcp/01-three-way-handshake/) |
 | ④ TLS | 证书验证 + 密钥协商（1 个 RTT） | [HTTPS 与 TLS](/network/basic/http/02-https-tls/) |
 | ⑤ 请求 | 构造请求行/头/体；可能带上 Cookie | [HTTP 基础](/network/basic/http/01-http-basics/) |
-| ⑥ 服务端 | 负载均衡 → 网关鉴权限流 → 业务 → 缓存/DB | [Spring MVC 流程](/java/intermediate/spring/09-springmvc-flow/) |
+| ⑥ 服务端 | 负载均衡 → 网关鉴权限流 → 业务 → 缓存/DB | [Spring MVC 流程](/java/intermediate/spring-mvc/01-springmvc-flow/) |
 | ⑦ 响应 | 状态码语义、Content-Type、长连接复用 | 同上 |
 | ⑧ 渲染 | 解析 HTML 建 DOM/CSSOM → 渲染树 → 排版绘制；JS 阻塞解析 | （前端领域） |
 

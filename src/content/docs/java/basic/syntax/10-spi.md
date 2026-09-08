@@ -73,7 +73,7 @@ Spring 没直接用 JDK SPI，而是自己做了两代"增强版 SPI"：
 
 与 JDK SPI 的两点差别：**值不是实现类而是配置类/选择器**（配合
 条件注解按环境装配），且与 `@Import` 机制打通——完整链路见
-[Spring Boot 自动配置原理](/java/intermediate/spring/05-springboot-autoconfig/)。
+[Spring Boot 自动配置原理](/java/intermediate/spring-boot/01-autoconfig/)。
 Spring Cloud（OpenFeign 的编解码器、Gateway 的谓词工厂）、
 springdoc 等生态组件的可插拔都走这条路。
 
