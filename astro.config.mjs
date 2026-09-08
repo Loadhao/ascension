@@ -412,6 +412,24 @@ export default defineConfig({
                       ],
                     },
                     {
+                      label: '单元测试',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/java/intermediate/test/' },
+                        { label: 'JUnit 5：生命周期与参数化', link: '/java/intermediate/test/01-junit5/' },
+                        { label: 'Mockito：打桩与验证', link: '/java/intermediate/test/02-mockito/' },
+                        { label: 'Spring Boot 测试：切片与全量', link: '/java/intermediate/test/03-springboot-test/' },
+                      ],
+                    },
+                    {
+                      label: '日志体系',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/java/intermediate/log/' },
+                        { label: '门面绑定、MDC 与异步日志', link: '/java/intermediate/log/01-logging-system/' },
+                      ],
+                    },
+                    {
                       label: 'Java 版本演进',
                       collapsed: false,
                       items: [

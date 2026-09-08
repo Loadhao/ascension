@@ -87,7 +87,7 @@ BeanPostProcessor/Advisor——开关一开，对应的扩展点就上岗。
 | `@ConditionalOnClass` / `@ConditionalOnMissingBean` / `@ConditionalOnProperty` | 条件装配三巨头：有某个类才生效 / 用户没定义才兜底 / 配置开关 |
 | `@ConfigurationProperties` | 配置绑定（配合 `@EnableConfigurationProperties` 注册） |
 | `@Profile("prod")` | 按环境装配 Bean |
-| `@SpringBootTest` / `@MockBean` | 集成测试起容器 + 替换 Bean |
+| `@SpringBootTest` / `@MockBean` | 集成测试起容器 + 替换 Bean（成本阶梯见 [Spring Boot 测试](/java/intermediate/test/03-springboot-test/)）
 
 条件注解是 starter 幂等的全部秘密：`@ConditionalOnMissingBean` 保证
 "用户自己配了就用用户的，没配才给默认值"。
