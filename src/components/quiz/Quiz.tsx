@@ -377,7 +377,7 @@ export default function Quiz({ directions, banks }: Props) {
     const wrongCount = summary.wrongQueue.length;
     const kindLabel = ROUND_LABELS[summary.kind];
     return (
-      <div className="quiz-app">
+      <div className="quiz-app not-content">
         <div className="quiz-done">
           <div className="quiz-done-title">本轮完成 · {kindLabel}</div>
           <p className="quiz-done-sum">
@@ -433,7 +433,7 @@ export default function Quiz({ directions, banks }: Props) {
     const q = questionById.get(round.queue[round.index]!);
     if (!q) {
       return (
-        <div className="quiz-app">
+        <div className="quiz-app not-content">
           <div className="learn-empty">题目数据缺失，请退出本轮重新开始。</div>
         </div>
       );
@@ -557,7 +557,7 @@ export default function Quiz({ directions, banks }: Props) {
         document.body,
       );
     }
-    return <div className="quiz-app">{card}</div>;
+    return <div className="quiz-app not-content">{card}</div>;
   }
 
   // ===== 选题页 =====
@@ -566,7 +566,7 @@ export default function Quiz({ directions, banks }: Props) {
   const starredPool = vaultQuestions('starred');
 
   return (
-    <div className="quiz-app">
+    <div className="quiz-app not-content">
       {round && (
         <div className="quiz-continue">
           <span className="quiz-continue-text">
