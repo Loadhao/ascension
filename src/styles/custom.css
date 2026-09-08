@@ -215,7 +215,7 @@ main:has(.kg-fullbleed) {
   font-weight: 600;
 }
 
-/* ===== 侧边栏目录树工具条与子树开关 ===== */
+/* ===== 侧边栏目录树工具条（搜索 + 批量开合）与子树开关 ===== */
 /* 工具条吸顶：margin-block 负值抵掉 .sidebar-content 的 padding-top(1rem) 与
    flex gap(1rem)（两值都是 Starlight core 约定，升级若变需同步），间距收进自身
    padding，背景连同 hairline 覆盖整个滑动区，滚动时目录项不会从缝隙里透出 */
@@ -224,15 +224,77 @@ main:has(.kg-fullbleed) {
   top: 0;
   z-index: 5;
   display: flex;
-  justify-content: flex-end;
-  gap: 0.875rem;
+  flex-direction: column;
+  gap: 0.5rem;
   margin-inline: calc(-1 * var(--sl-sidebar-pad-x));
   margin-block: -1rem -1rem;
-  padding: 1rem calc(var(--sl-sidebar-pad-x) + 0.5rem) 1.8rem;
+  padding: 1rem calc(var(--sl-sidebar-pad-x) + 0.5rem) 0.9rem;
   background: var(--sl-color-bg-sidebar);
   border-bottom: 1px solid var(--sl-color-hairline-light);
 }
-.sl-sidebar-tools button {
+.sl-sidebar-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.sl-sidebar-search > svg {
+  position: absolute;
+  inset-inline-start: 0.5rem;
+  color: var(--sl-color-gray-3);
+  pointer-events: none;
+}
+.sl-sidebar-search input {
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--sl-color-white);
+  background: transparent;
+  border: 1px solid var(--sl-color-hairline-light);
+  border-radius: 0.375rem;
+  padding: 0.3rem 1.7rem 0.3rem 1.8rem;
+}
+.sl-sidebar-search input:focus {
+  outline: none;
+  border-color: var(--sl-color-gray-3);
+}
+.sl-sidebar-search input::placeholder {
+  color: var(--sl-color-gray-3);
+}
+.sl-sidebar-search input::-webkit-search-cancel-button,
+.sl-sidebar-search input::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.sl-search-clear {
+  position: absolute;
+  inset-inline-end: 0.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sl-color-gray-3);
+  cursor: pointer;
+}
+/* display 会压过 UA 的 [hidden] 规则，显式补上 */
+.sl-search-clear[hidden] {
+  display: none;
+}
+.sl-search-clear:hover {
+  color: var(--sl-color-white);
+}
+.sl-sidebar-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.875rem;
+}
+.sl-sidebar-actions button {
   font-size: 0.6875rem;
   line-height: 1.4;
   color: var(--sl-color-gray-3);
@@ -241,8 +303,56 @@ main:has(.kg-fullbleed) {
   padding: 0;
   cursor: pointer;
 }
-.sl-sidebar-tools button:hover {
+.sl-sidebar-actions button:hover {
   color: var(--sl-color-white);
+}
+
+/* ===== 页头：侧边栏整体收起/展开（桌面端） =====
+   收起状态记在 html[data-sidebar-tree='collapsed']，初始应用由 Sidebar.astro
+   的内联脚本在正文渲染前完成，点击切换由 sidebar-tree.js 注入的页头按钮负责 */
+.sl-sidebar-collapse {
+  display: none;
+}
+@media (min-width: 50rem) {
+  .sl-sidebar-collapse {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 0.375rem;
+    background: transparent;
+    color: var(--sl-color-gray-3);
+    cursor: pointer;
+  }
+  .sl-sidebar-collapse:hover {
+    color: var(--sl-color-white);
+    background: var(--sl-color-hairline-light);
+  }
+  :root[data-sidebar-tree='collapsed'] nav.sidebar {
+    display: none;
+  }
+  /* 归零左栏让位：.main-frame 的 padding 与页头网格都消费该变量 */
+  :root[data-sidebar-tree='collapsed'] {
+    --sl-content-inline-start: 0rem;
+  }
+}
+
+/* ===== 右侧篇章目录收窄 + 正文在剩余空间居中（≥72rem 覆盖 Starlight 布局公式） ===== */
+@media (min-width: 72rem) {
+  .right-sidebar-container {
+    width: 16rem;
+  }
+  [data-has-sidebar][data-has-toc] .main-pane {
+    width: calc(100% - 16rem);
+    --sl-content-margin-inline: auto;
+  }
+  /* 图谱全宽页右侧栏已被 display:none 收起，正文占满整行 */
+  .lg\:sl-flex:has(.kg-fullbleed) .main-pane {
+    width: 100%;
+  }
 }
 summary .sl-tree-toggle {
   flex-shrink: 0;
