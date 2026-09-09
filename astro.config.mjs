@@ -1181,6 +1181,7 @@ export default defineConfig({
                         { label: '短链接系统设计', link: '/distributed/intermediate/case-studies/02-short-url/' },
                         { label: 'Feed 流设计：推模式、拉模式与推拉结合', link: '/distributed/intermediate/case-studies/03-feed-stream/' },
                         { label: '系统设计题的答题框架', link: '/distributed/intermediate/case-studies/04-design-interview/' },
+                        { label: '大文件上传：分片、断点续传与秒传', link: '/distributed/intermediate/case-studies/05-large-file-upload/' },
                       ],
                     },
                   ],
