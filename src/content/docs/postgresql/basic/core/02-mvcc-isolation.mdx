@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 [差异地图](/postgresql/basic/core/01-pg-vs-mysql/)用一句话对比过：
 **PG 的 UPDATE 是写新元组、旧元组留在表内**。本篇把这句话展开成
 可推导的机制——隐藏字段、快照规则、隔离级别默认值，以及为什么
@@ -48,6 +50,10 @@ flowchart LR
 口诀：**插入者对我已成定局，删除者对我尚未定局**。推一道题比背
 定义有用：RR 下事务 A 开了快照之后，事务 B 改同一行并提交——A
 再读仍走 v1，因为 v2 的 xmin 对 A 的快照太新。
+
+版本链与 RC/RR 的判定分野按帧放一遍：
+
+<AlgorithmVizIsland demo="pg-mvcc" />
 
 ## 隔离级别：默认是 RC，不是 RR
 

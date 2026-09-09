@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 架构篇的 Rebalance 小节给了"是什么 + 治理表格"，本篇深挖面试官追问的三层：
 **协议怎么走、为什么代价是全组停摆、参数到底怎么调**。"线上消费突然抖了一下"
 的事故里，Rebalance 是出镜率最高的嫌疑人。
@@ -46,6 +48,10 @@ sequenceDiagram
   Sticky / CooperativeSticky）。
 - 每次重平衡 **Generation 代数 +1**：旧代提交的 offset 会被拒绝，防止新旧
   成员同时写——这是"僵尸消费者"的防线。
+
+两阶段洗牌按帧放一遍（注意方案是谁算的、Generation 什么时候变）：
+
+<AlgorithmVizIsland demo="kafka-rebalance" />
 
 ## 为什么代价是全组停止消费
 

@@ -1709,6 +1709,332 @@ function urlToPage(): FlowVizConfig {
 	};
 }
 
+/** JVM 三色标记与并发漏标：灰=扫描中、黑=扫完、白=待定，两个条件凑齐就漏标 */
+function javaTricolor(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: '并发标记（GC 线程与业务线程同跑）用三色描述：白=没扫到（最终白=垃圾）、灰=自己扫了成员没扫完、黑=全部扫完。图里琥珀=灰、暗色=黑、默认=白。',
+	});
+	frames.push({
+		active: ['root'],
+		note: '根扫描：GC Roots 直连的对象先变灰——「我自己扫完了，成员引用还没查」。',
+	});
+	frames.push({
+		active: ['a'],
+		done: ['root'],
+		hotEdges: ['ra'],
+		packets: [{ edge: 'ra', at: 0.5, tone: 'data', label: '扫描' }],
+		note: '标记 A：查它的成员引用，把 B、D 变灰，A 自己转黑。',
+	});
+	frames.push({
+		active: ['b'],
+		done: ['root', 'a'],
+		hotEdges: ['ab'],
+		packets: [{ edge: 'ab', at: 0.5, tone: 'data', label: '扫描' }],
+		note: '标记 B：同理继续推进——灰色队列清空、所有可达对象变黑时，标记完成。没有并发，故事到这就结束了。',
+	});
+	frames.push({
+		active: ['b'],
+		done: ['root', 'a'],
+		badges: { b: '灰 · 成员未扫完', c: '白' },
+		note: '并发来了。业务线程还在跑，此刻的中间态：A 已黑（不会再扫）、B 还是灰、C 是白——接下来业务线程连续做两个动作。',
+	});
+	frames.push({
+		active: ['b'],
+		done: ['root', 'a'],
+		badges: { b: '已删除 →C 的引用', c: '白' },
+		note: '动作一：B（灰）删除了到 C 的引用——C 失去了唯一一个「本来会扫到它」的来源。',
+	});
+	frames.push({
+		active: ['a'],
+		done: ['root', 'a', 'b'],
+		badges: { a: '新增 →C 的引用', c: '白' },
+		note: '动作二：A（黑）新增引用指向 C——黑色不会再被重扫，这条新边标记器看不见。两个条件同时成立：漏标已成。',
+	});
+	frames.push({
+		done: ['root', 'a', 'b'],
+		badges: { c: '漏标 · 被误回收' },
+		note: '清理阶段：C 仍是白色 → 被当垃圾回收，但它明明是活对象——这就是并发漏标，致命错误。',
+	});
+	frames.push({
+		done: ['root', 'a', 'b', 'c'],
+		badges: { c: '存活' },
+		note: '解法两大流派：增量更新（CMS）——黑新增引用时记下来，重新标记时把黑改灰重扫；原始快照 SATB（G1）——灰删白引用时按删前快照重标，宁可多留浮动垃圾下轮再收。',
+	});
+
+	return {
+		title: '三色标记 · 并发漏标的两个条件',
+		height: 420,
+		nodes: [
+			{ id: 'root', label: 'GC Roots', x: 0.08, y: 0.45 },
+			{ id: 'a', label: 'A', sub: '对象', x: 0.36, y: 0.14 },
+			{ id: 'b', label: 'B', sub: '对象', x: 0.36, y: 0.76 },
+			{ id: 'c', label: 'C', sub: '对象', x: 0.66, y: 0.14 },
+			{ id: 'd', label: 'D', sub: '对象', x: 0.66, y: 0.76 },
+		],
+		edges: [
+			{ id: 'ra', from: 'root', to: 'a' },
+			{ id: 'ab', from: 'a', to: 'b' },
+			{ id: 'bc', from: 'b', to: 'c' },
+			{ id: 'ad', from: 'a', to: 'd' },
+		],
+		frames,
+	};
+}
+
+/** PostgreSQL MVCC：UPDATE 产生版本链，RC 与 RR 的快照判定分野 */
+function pgMvcc(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: 'PG 的 UPDATE 不改原行：旧元组打上 xmax、新元组带新 xmin，新旧版本物理共存于页中。谁能看见哪个版本，全靠快照判定——「插入者对我已成定局，删除者对我尚未定局」。',
+	});
+	frames.push({
+		active: ['v1'],
+		badges: { v1: 'xmin=100 · xmax=0' },
+		note: '事务 A（xid=100）插入并提交了这行——此刻 v1 是对所有人可见的唯一版本。',
+	});
+	frames.push({
+		active: ['upd'],
+		hotEdges: ['bx'],
+		packets: [{ edge: 'bx', at: 0.5, tone: 'req', label: 'xmax=200' }],
+		badges: { v1: 'xmin=100 · xmax=200' },
+		note: '事务 B（xid=200）UPDATE：不原地改，先给 v1 打上 xmax=200——「从 200 号事务起，这行旧了」。',
+	});
+	frames.push({
+		active: ['v2'],
+		hotEdges: ['bw'],
+		packets: [{ edge: 'bw', at: 0.5, tone: 'data', label: '插入 v2' }],
+		badges: { v1: 'xmax=200', v2: 'xmin=200 · xmax=0' },
+		note: 'B 同时插入新元组 v2（xmin=200）。v1、v2 物理共存，靠 xmax → xmin 串成版本链——这是和 InnoDB「旧版本进 undo log」的分界。',
+	});
+	frames.push({
+		active: ['reader'],
+		badges: { reader: 'RR · 快照不含 200', v1: 'xmax=200', v2: 'xmin=200 · xmax=0' },
+		note: 'RR 下事务 A 在 B 提交前就拍了快照：v2 的 xmin=200 对快照太新 → 不可见；v1 的 xmax=200 尚未提交 → 删除未成。口诀生效：A 读到 v1，可重复读。',
+	});
+	frames.push({
+		active: ['reader'],
+		badges: { reader: 'RC · 每条语句新快照', v1: 'xmax=200', v2: 'xmin=200 · xmax=0' },
+		note: '换成 RC：每条语句重拍快照，B 已提交、200 已成定局 → v2 可见、v1 被删成。同一事务里两次读结果不同——不可重复读由此而来。',
+	});
+	frames.push({
+		done: ['v1', 'v2', 'upd', 'reader'],
+		badges: { v1: '死元组 · 待 VACUUM' },
+		note: '收尾：旧版本要等 VACUUM 清理，否则表膨胀；事务 ID 32 位会用完回卷，freeze 是比膨胀更硬的墙。可见性判定拿这道题手推一遍就懂了。',
+	});
+
+	return {
+		title: 'MVCC 快照可见性 · xmin/xmax 与隔离级别',
+		height: 400,
+		nodes: [
+			{ id: 'v1', label: '元组 v1', sub: '旧版本', x: 0.18, y: 0.25, hw: 70 },
+			{ id: 'v2', label: '元组 v2', sub: '新版本', x: 0.18, y: 0.75, hw: 70 },
+			{ id: 'upd', label: '事务 B', sub: 'UPDATE · xid=200', x: 0.62, y: 0.25 },
+			{ id: 'reader', label: '事务 A', sub: '只读 · 持快照', x: 0.62, y: 0.75 },
+		],
+		edges: [
+			{ id: 'bx', from: 'upd', to: 'v1', dashed: true, label: '打 xmax' },
+			{ id: 'bw', from: 'upd', to: 'v2', label: '插入新版本' },
+			{ id: 'rv', from: 'reader', to: 'v1', both: true, label: '按快照判定', labelAt: 0.24 },
+		],
+		frames,
+	};
+}
+
+/** 分布式脑裂：分区出双主，三层防线 quorum / 主自裁 / fencing */
+function splitBrain(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { old: '主', sentinel: '哨兵多数派', neo: '从 A' },
+		note: '故障转移解决「主挂了」；脑裂是「旧主没死透」——网络分区把集群裂成两半，两边的「主」各自为政，数据从此分叉。',
+	});
+	frames.push({
+		active: ['sentinel'],
+		hotEdges: ['hb'],
+		packets: [{ edge: 'hb', at: 0.5, tone: 'req', label: '心跳超时' }],
+		badges: { old: '失联 · 但活着', sentinel: '哨兵多数派', neo: '从 A' },
+		note: '机房网络中断：旧主与哨兵多数派失联。注意旧主没有宕机——它自认为还是主，照样接受写入。',
+	});
+	frames.push({
+		active: ['neo'],
+		hotEdges: ['promote'],
+		packets: [{ edge: 'promote', at: 0.5, tone: 'req', label: '过半同意 · 提升' }],
+		badges: { old: '失联 · 但活着', sentinel: '哨兵多数派', neo: '新主' },
+		note: '哨兵侧凑出过半（quorum），把从 A 提升为新主。分区另一侧凑不出过半——两个多数派必然相交，谁也别想造出第二个「合法」主，这就是 quorum 的数学。',
+	});
+	frames.push({
+		active: ['clientOld'],
+		hotEdges: ['stale'],
+		packets: [{ edge: 'stale', at: 0.5, tone: 'req', label: '继续写入' }],
+		badges: { old: '仍在接写', neo: '新主' },
+		note: '脑裂现场：旧客户端缓存着旧主地址继续写入——两段互斥的历史就此分叉。分区恢复后合并不了，Redis 这类无版本合并的直接丢数据。',
+	});
+	frames.push({
+		badges: { old: '自裁 · 拒绝写', neo: '新主' },
+		note: '防线一（主自裁）：min-replicas-to-write=1——主感知不到足够从库同步就拒绝写入，从根上掐掉旧主的写。ES、Kafka 的 min.insync.replicas 同款思想。',
+	});
+	frames.push({
+		badges: { old: 'fencing · epoch 过期', neo: '新主' },
+		note: '防线二（fencing）：每任主带单调递增 epoch/term（Raft 的 term、哨兵的 config epoch），存储层只认最新 epoch——旧主漏网的写入被拦在存储端。再粗暴一层是 STONITH 直接电源隔离。',
+	});
+	frames.push({
+		done: ['old', 'sentinel', 'neo'],
+		badges: { old: 'fencing · epoch 过期', neo: '新主' },
+		note: '三层防线总结：quorum 选新主（管选举）→ 主自裁（管旧主不接写）→ fencing epoch 校验（管旧数据写不进）。灾备双中心同时提升是「人为脑裂」——切换决策只能出自单一仲裁源。',
+	});
+
+	return {
+		title: '脑裂与防线 · quorum / 主自裁 / fencing',
+		height: 400,
+		nodes: [
+			{ id: 'old', label: '旧主', sub: '被分区隔离', x: 0.16, y: 0.25, shape: 'cylinder' },
+			{ id: 'sentinel', label: '哨兵多数派', sub: '另一机房', x: 0.5, y: 0.25 },
+			{ id: 'neo', label: '新主', sub: '从 A 晋升', x: 0.84, y: 0.25, shape: 'cylinder' },
+			{ id: 'clientOld', label: '旧客户端', sub: '缓存旧主地址', x: 0.16, y: 0.78 },
+		],
+		edges: [
+			{ id: 'hb', from: 'old', to: 'sentinel', dashed: true, label: '心跳断' },
+			{ id: 'promote', from: 'sentinel', to: 'neo', label: '提升' },
+			{ id: 'stale', from: 'clientOld', to: 'old' },
+		],
+		frames,
+	};
+}
+
+/** nginx 平滑 reload：新 worker 接管监听，旧 worker 跑完存量退出 */
+function nginxReload(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { master: 'v1 配置', wold: '处理连接中', client: '已建立连接' },
+		note: '线上改 nginx 配置基本零抖动，靠的是 reload 的平滑替换：worker 新旧交替、连接不断。看一次 nginx -s reload 内部发生了什么。',
+	});
+	frames.push({
+		active: ['master'],
+		badges: { master: '收到 SIGHUP', wold: '处理连接中', client: '已建立连接' },
+		note: 'master 收到 reload 信号：先做配置语法检查（习惯：先 nginx -t）——失败就当无事发生，线上不受影响。',
+	});
+	frames.push({
+		active: ['wnew'],
+		hotEdges: ['fork'],
+		packets: [{ edge: 'fork', at: 0.5, tone: 'req', label: 'fork' }],
+		badges: { master: 'v2 配置', wold: '处理连接中', wnew: '新配置 · 接管监听' },
+		note: 'master 用新配置 fork 出新 worker：新 worker 打开监听端口，接手所有新连接。',
+	});
+	frames.push({
+		badges: { master: 'v2 配置', wold: '停止接新连接 · 存量照跑', wnew: '接新连接' },
+		note: '旧 worker 收到通知：关闭监听套接字——不再接新连接，但已建立的长连接和正在处理的请求原样跑完。',
+	});
+	frames.push({
+		active: ['wold'],
+		hotEdges: ['conn'],
+		packets: [{ edge: 'conn', at: 0.4, tone: 'resp', label: '响应返回' }],
+		badges: { client: '无感知', wold: '存量收尾中', wnew: '接新连接' },
+		note: '进行中的请求在旧 worker 里继续处理完毕——客户端全程无感，这就是「平滑」的含义。',
+	});
+	frames.push({
+		dim: ['wold'],
+		badges: { client: '无感知', wold: '已退出', wnew: '独占监听' },
+		note: '存量连接全部结束，旧 worker 进程退出——替换完成，全程没有「重启」的瞬间。',
+	});
+	frames.push({
+		done: ['master', 'wnew', 'client'],
+		badges: { client: '长连接复用中' },
+		note: '备忘：热升级二进制用 USR2（新旧 master 共存再收尾）；worker 之间不共享内存——跨请求状态一律放上游（Redis/DB），别指望 worker 内存。',
+	});
+
+	return {
+		title: 'nginx 平滑 reload · worker 新旧交替',
+		height: 400,
+		nodes: [
+			{ id: 'master', label: 'master 进程', sub: '读配置 · 管 worker', x: 0.22, y: 0.18 },
+			{ id: 'client', label: '客户端', sub: '长连接', x: 0.8, y: 0.18 },
+			{ id: 'wold', label: '旧 worker', x: 0.22, y: 0.72 },
+			{ id: 'wnew', label: '新 worker', sub: '新配置生效', x: 0.66, y: 0.72 },
+		],
+		edges: [
+			{ id: 'fork', from: 'master', to: 'wnew' },
+			{ id: 'conn', from: 'client', to: 'wold', both: true, label: '存量连接' },
+			{ id: 'fresh', from: 'client', to: 'wnew', label: '新连接' },
+		],
+		frames,
+	};
+}
+
+/** Kafka 消费组重平衡：JoinGroup 收集 + SyncGroup 下发，Leader 消费者算方案 */
+function kafkaRebalance(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { c1: '消费 P0-P2', c2: '消费 P3-P5' },
+		note: '消费组正常分工。成员增减（扩容、宕机、心跳超时、处理超时）都会触发重平衡——Eager 协议下，全组要先放弃手头分区再进组。',
+	});
+	frames.push({
+		active: ['coord'],
+		hotEdges: ['j1', 'j2'],
+		packets: [
+			{ edge: 'j1', at: 0.4, tone: 'req', label: 'JoinGroup' },
+			{ edge: 'j2', at: 0.6, tone: 'req', label: 'JoinGroup' },
+		],
+		badges: { c1: '已放弃分区', c2: '已放弃分区' },
+		note: '第一阶段 JoinGroup：全员向 GroupCoordinator（Broker 端）报到，交出订阅信息，并放弃手头全部分区——这就是「全组停止消费」的起点。',
+	});
+	frames.push({
+		active: ['c1'],
+		hotEdges: ['j1'],
+		packets: [{ edge: 'j1', at: 0.15, tone: 'resp', label: '你是 Leader' }],
+		badges: { c1: '当选 Leader', c2: '等分配结果' },
+		note: 'Coordinator 选一个成员当 Leader consumer，把全组成员的订阅信息下发——注意：分配方案由 Leader 消费者算，Coordinator 只管收集与下发。',
+	});
+	frames.push({
+		active: ['c1'],
+		badges: { c1: '计算分配方案', c2: '等分配结果' },
+		note: 'Leader 按 partition.assignment.strategy（Range / RoundRobin / Sticky / CooperativeSticky）算出新的分配方案。',
+	});
+	frames.push({
+		active: ['c1', 'c2'],
+		hotEdges: ['j1', 'j2'],
+		packets: [
+			{ edge: 'j1', at: 0.5, tone: 'req', label: 'SyncGroup 方案' },
+			{ edge: 'j2', at: 0.5, tone: 'req', label: 'SyncGroup' },
+		],
+		badges: { c1: '提交方案', c2: '等下发' },
+		note: '第二阶段 SyncGroup：Leader 把方案经 Coordinator 下发，各成员拿到自己的分区清单。',
+	});
+	frames.push({
+		active: ['parts'],
+		hotEdges: ['assign'],
+		packets: [{ edge: 'assign', at: 0.5, tone: 'data', label: '重新分工' }],
+		badges: { c1: '新分工', c2: '新分工', coord: 'Generation +1' },
+		note: 'Generation 代数 +1 生效——旧代提交的 offset 会被拒绝，防止新旧成员同时写。这是「僵尸消费者」的防线。',
+	});
+	frames.push({
+		done: ['c1', 'c2', 'coord', 'parts'],
+		badges: { coord: 'Generation +1' },
+		note: '复盘：JoinGroup 收集 + SyncGroup 下发，方案由 Leader 消费者算。代价是全组停摆——所以有 heartbeat/session.timeout/max.poll 三个超时陷阱题，以及 CooperativeSticky 的增量协作重平衡。',
+	});
+
+	return {
+		title: '消费组重平衡 · JoinGroup 与 SyncGroup 两阶段',
+		height: 420,
+		nodes: [
+			{ id: 'c1', label: 'Consumer 1', x: 0.1, y: 0.2 },
+			{ id: 'coord', label: 'GroupCoordinator', sub: 'Broker 端', x: 0.45, y: 0.2, hw: 80 },
+			{ id: 'c2', label: 'Consumer 2', x: 0.8, y: 0.2 },
+			{ id: 'parts', label: '分区 P0-P5', sub: '重新分配', x: 0.45, y: 0.78 },
+		],
+		edges: [
+			{ id: 'j1', from: 'c1', to: 'coord', both: true },
+			{ id: 'j2', from: 'c2', to: 'coord', both: true },
+			{ id: 'assign', from: 'coord', to: 'parts', dashed: true },
+		],
+		frames,
+	};
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的架构/流程演示注册表 */
 export const flowDemos: Record<string, FlowVizConfig> = {
 	'mysql-2pc': mysqlTwoPhaseCommit(),
@@ -1734,4 +2060,9 @@ export const flowDemos: Record<string, FlowVizConfig> = {
 	'etcd-write': etcdWrite(),
 	'mqtt-qos2': mqttQos2(),
 	'url-to-page': urlToPage(),
+	'java-tricolor': javaTricolor(),
+	'pg-mvcc': pgMvcc(),
+	'split-brain': splitBrain(),
+	'nginx-reload': nginxReload(),
+	'kafka-rebalance': kafkaRebalance(),
 };

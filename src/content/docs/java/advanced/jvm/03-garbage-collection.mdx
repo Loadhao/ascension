@@ -5,6 +5,8 @@ level: advanced
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 判定垃圾：可达性分析
 
 引用计数（互相引用成环即泄漏，JVM 不用）之外，主流方案是从 **GC Roots**
@@ -83,6 +85,10 @@ flowchart LR
 |---|---|---|---|
 | 增量更新 | 黑色新增引用时记录，重新标记扫一遍 | 只需重扫黑对象新增引用 | CMS |
 | 原始快照 SATB | 灰→白删除引用时记录快照，按旧图重标 | 可能多标浮着垃圾（下轮再收） | G1 |
+
+两个「动作」怎么凑出漏标，按帧放一遍（琥珀=灰、暗色=黑）：
+
+<AlgorithmVizIsland demo="java-tricolor" />
 
 ## 收集器演进主线
 

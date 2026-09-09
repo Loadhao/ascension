@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 为什么它"快"：事件驱动 + 多 worker
 
 Nginx 启动一个 **master** 进程，fork 出多个 **worker** 进程。每个 worker
@@ -67,6 +69,10 @@ kill -USR2 pid  # 热升级二进制（平滑升级，保留连接）
 
 `reload` 会关闭旧 worker 的连接但**把正在处理的请求跑完**，所以线上改配置
 基本零抖动。养成"改完先 `nginx -t`"的习惯能省下大量返工。
+
+worker 新旧交替的完整过程按帧放一遍：
+
+<AlgorithmVizIsland demo="nginx-reload" />
 
 ## 一个请求在 worker 里的完整生命周期（深入）
 
