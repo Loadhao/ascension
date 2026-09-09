@@ -3009,8 +3009,9 @@ html.mmd-viewer-open {
 
 .sum-panel-sub {
   font-size: 0.75rem;
-  color: var(--sum-title);
-  opacity: 0.78;
+  /* 用高对比的 ink 色而非 title 色：title 色加透明后在亮色浅底上会跌破 4.5:1 */
+  color: var(--sum-ink);
+  opacity: 0.88;
 }
 
 .sum-cells {

@@ -241,7 +241,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
    `<AlgorithmVizIsland demo="key" />` 引用，正文一句话交代这张卡总结什么。
 3. 颜色只允许写语义色调名 `tone`（blue / teal / green / amber / rose / violet /
    slate），实际配色由 `custom.css` 的 `--sum-*` 令牌按亮暗主题接管，
-   数据里不允许出现具体颜色值。
+   数据里不允许出现具体颜色值；新增或调整色调时，双主题下所有文字
+   （标题 / 副标 / 单元格 / 徽标）对所在底色的对比度必须 ≥ 4.5:1。
 
 选型原则：**mermaid 讲结构，FlowViz 讲过程，SummaryViz 讲总结**——静态关系、
 层次、分类用 mermaid；按时间推进、状态会翻转的内容用 FlowViz；一篇笔记读完
