@@ -1,0 +1,28 @@
+src/content/docs/java/advanced/jvm/03-garbage-collection.mdx
+  h_9324126a55eff3 158-161
+src/content/docs/java/basic/collection/index.mdx
+  h_9324126a55eff3 7,13-16
+src/content/docs/java/basic/io/01-io-model.mdx
+  h_9324126a55eff3 8-9,120-123
+src/content/docs/java/basic/syntax/05-exception.mdx
+  h_9324126a55eff3 7-8,30-33
+src/content/docs/network/basic/http/06-http-cache.md
+  h_9324126a55eff3 1-87
+src/content/docs/network/basic/tcp/03-tcp-vs-udp.mdx
+  h_9324126a55eff3 7-8,24-27
+src/content/docs/redis/basic/core/02-persistence.mdx
+  h_9324126a55eff3 20-23
+src/data/viz/summaries.ts
+  h_9324126a55eff3 182-419,427-432
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ba4712b0f5d4db988b441c23a8eb0c292d282b35",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
