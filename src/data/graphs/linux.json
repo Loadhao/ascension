@@ -2,6 +2,7 @@
   "nodes": [
     { "id": "root", "label": "Linux", "group": "核心" },
     { "id": "basics", "label": "基础命令", "href": "/linux/basic/commands/01-file-ops/", "group": "基础" },
+    { "id": "textpipe", "label": "文本三剑客", "href": "/linux/basic/commands/02-text-pipeline/", "group": "基础" },
     { "id": "fs", "label": "文件系统", "href": "/linux/basic/filesystem/01-filesystem/", "group": "基础" },
     { "id": "perm", "label": "用户与权限", "href": "/linux/basic/permission/01-users-permissions/", "group": "基础" },
     { "id": "shell", "label": "Shell 脚本", "href": "/linux/intermediate/system/01-shell-script/", "group": "进阶" },
@@ -11,6 +12,8 @@
   ],
   "edges": [
     { "source": "root", "target": "basics" },
+    { "source": "basics", "target": "textpipe", "label": "文本处理进阶" },
+    { "source": "textpipe", "target": "shell", "label": "脚本里最常用" },
     { "source": "root", "target": "fs" },
     { "source": "root", "target": "perm" },
     { "source": "basics", "target": "shell", "label": "进阶" },

@@ -191,6 +191,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/linux/basic/commands/' },
                         { label: '文件与目录操作', link: '/linux/basic/commands/01-file-ops/' },
+                        { label: '文本处理与管道：grep、sed、awk 三剑客', link: '/linux/basic/commands/02-text-pipeline/' },
                       ],
                     },
                     {
