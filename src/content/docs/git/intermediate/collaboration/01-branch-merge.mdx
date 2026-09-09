@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 分支的本质
 
 分支只是一个**指向某个 commit 的可移动指针**，HEAD 指向当前分支。因此创建、切换、删除分支都是 O(1) 操作——Git 鼓励小步多分支。
@@ -54,6 +56,10 @@ git switch main && git merge feature/login   # 此时必是 fast-forward
 
 > **rebase 黄金法则：不要对已经推送到公共分支的提交做 rebase。**
 > rebase 会重写提交（哈希全变），别人的历史会和你彻底分叉。
+
+rebase 把提交逐个「摘下来重放」的过程，在提交图上按帧走一遍：
+
+<AlgorithmVizIsland demo="git-rebase" />
 
 ## merge 还是 rebase？
 

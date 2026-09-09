@@ -2035,6 +2035,286 @@ function kafkaRebalance(): FlowVizConfig {
 	};
 }
 
+/** git rebase：feature 提交摘下来在 main 顶端逐个重放，哈希全变 */
+function gitRebase(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		dim: ['r1', 'r2', 'r3'],
+		badges: { m3: 'main', f3: 'feature/login' },
+		note: '分支 = 指向提交的轻量指针。feature 从 C2 分叉出 F1→F2→F3，main 自己走到了 C3——历史分叉了，直接 merge 会多出一个合并提交。',
+	});
+	frames.push({
+		active: ['f1'],
+		dim: ['r1', 'r2', 'r3'],
+		badges: { m3: 'main', f3: 'feature/login' },
+		note: 'git rebase main：把 feature 上的提交逐个「摘下来」，搬到 main 顶端重新重放。注意是复制——新提交的内容一样、父指针和哈希全变。',
+	});
+	frames.push({
+		active: ['r1'],
+		done: ['f1'],
+		dim: ['r2', 'r3'],
+		badges: { m3: 'main', f3: 'feature/login' },
+		note: '第一步：摘下 F1，以 C3 为父重放出 F1′——改动相同，哈希不同。',
+	});
+	frames.push({
+		active: ['r2'],
+		done: ['f1', 'f2', 'r1'],
+		dim: ['r3'],
+		badges: { m3: 'main', f3: 'feature/login' },
+		note: '第二步：摘下 F2，父指针接到 F1′ 上，重放出 F2′。有冲突就在这一步解决后 rebase --continue。',
+	});
+	frames.push({
+		active: ['r3'],
+		done: ['f1', 'f2', 'f3', 'r1', 'r2'],
+		badges: { m3: 'main', f3: 'feature/login' },
+		note: '第三步：F3 重放为 F3′。三个新提交串在 C3 后面——历史变成一条直线。',
+	});
+	frames.push({
+		done: ['m1', 'm2', 'm3', 'r1', 'r2', 'r3'],
+		dim: ['f1', 'f2', 'f3'],
+		badges: { m3: 'main', r3: 'feature/login', f3: '旧提交 · 弃用' },
+		note: 'feature 指针移到 F3′，旧 F1-F3 成为无引用的弃用提交（GC 后消失）。此后合回 main 必是 fast-forward——一条干净的直线历史，好读、好 bisect。',
+	});
+	frames.push({
+		done: ['m1', 'm2', 'm3', 'r1', 'r2', 'r3'],
+		dim: ['f1', 'f2', 'f3'],
+		badges: { m3: 'main', r3: 'feature/login' },
+		note: '黄金法则：rebase 会重写提交，已推送到公共分支的提交绝不要 rebase——别人的历史会和你彻底分叉。惯例：自己分支上 rebase，合入 main 用 merge（PR 默认 no-ff）。',
+	});
+
+	return {
+		title: 'git rebase · 摘下来，在新的基底上重放',
+		height: 420,
+		nodes: [
+			{ id: 'm1', label: 'C1', x: 0.07, y: 0.18 },
+			{ id: 'm2', label: 'C2', x: 0.23, y: 0.18 },
+			{ id: 'm3', label: 'C3', x: 0.39, y: 0.18 },
+			{ id: 'f1', label: 'F1', x: 0.31, y: 0.74 },
+			{ id: 'f2', label: 'F2', x: 0.47, y: 0.74 },
+			{ id: 'f3', label: 'F3', x: 0.63, y: 0.74 },
+			{ id: 'r1', label: "F1'", x: 0.55, y: 0.18 },
+			{ id: 'r2', label: "F2'", x: 0.71, y: 0.18 },
+			{ id: 'r3', label: "F3'", x: 0.87, y: 0.18 },
+		],
+		edges: [
+			{ id: 'c12', from: 'm1', to: 'm2' },
+			{ id: 'c23', from: 'm2', to: 'm3' },
+			{ id: 'f12', from: 'f1', to: 'f2' },
+			{ id: 'f23', from: 'f2', to: 'f3' },
+			{ id: 'fork', from: 'm2', to: 'f1' },
+			{ id: 'base1', from: 'm3', to: 'r1' },
+			{ id: 'base2', from: 'r1', to: 'r2' },
+			{ id: 'base3', from: 'r2', to: 'r3' },
+		],
+		frames,
+	};
+}
+
+/** Redis Cluster 槽重定向：MOVED 永久改址、ASK 临时绕行、Gossip 探活 */
+function redisSlot(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { na: '槽 0~5460', nc: '槽 10923~16383' },
+		note: 'Cluster 把键空间切成 16384 个槽：slot = CRC16(key) % 16384，每个主节点负责一段。客户端可以直连任意节点——路由错了有重定向兜着。',
+	});
+	frames.push({
+		active: ['na'],
+		hotEdges: ['qa'],
+		packets: [{ edge: 'qa', at: 0.4, tone: 'req', label: 'GET user:42' }],
+		note: '客户端 GET user:42，随手打到了节点 A。',
+	});
+	frames.push({
+		active: ['na'],
+		hotEdges: ['qa'],
+		packets: [{ edge: 'qa', at: 0.78, tone: 'resp', label: 'MOVED 9842 → 节点C' }],
+		note: 'A 算槽：CRC16(user:42) % 16384 = 9842，不在我这段。返回 MOVED——这是「永久归属」重定向，客户端应记下槽位表，下次直连 C。',
+	});
+	frames.push({
+		active: ['nc'],
+		hotEdges: ['qc'],
+		packets: [{ edge: 'qc', at: 0.4, tone: 'req', label: 'GET user:42' }],
+		badges: { na: '槽 0~5460', nc: '槽 10923~16383' },
+		note: '客户端改连节点 C 重发——槽在本地，直接执行。',
+	});
+	frames.push({
+		badges: { na: '9842 迁移中', nc: '9842 导入中' },
+		note: '扩缩容要迁槽：迁移期间槽处于 MIGRATING / IMPORTING 状态，新旧节点各持这段槽的一部分 key。',
+	});
+	frames.push({
+		active: ['nc'],
+		hotEdges: ['qc'],
+		packets: [{ edge: 'qc', at: 0.78, tone: 'resp', label: 'ASK 9842' }],
+		badges: { na: '9842 迁移中', nc: '9842 导入中' },
+		note: '查到迁移中的 key：返回 ASK——「这条临时去 C 问」。ASK 不改客户端缓存（迁移完就失效），和 MOVED 的本质区别。',
+	});
+	frames.push({
+		active: ['na', 'nc'],
+		hotEdges: ['gossip'],
+		packets: [{ edge: 'gossip', at: 0.5, tone: 'data', label: 'ping/pong' }],
+		badges: { na: '槽 0~5460', nc: '槽 10923~16383' },
+		note: '节点间用 Gossip（ping/pong 携带槽位图与拓扑）互相探活；主挂了它的内置从库自动顶上——哨兵的活被 Cluster 内置了。',
+	});
+	frames.push({
+		done: ['client', 'na', 'nc'],
+		badges: { na: '槽 0~5460', nc: '槽 10923~16383' },
+		note: '复盘：MOVED = 永久改址（缓存），ASK = 临时绕行（不缓存）。16384 个槽是心跳位图 2KB 的工程折中；槽显式分配让扩缩容按槽搬数据，而不是一致性哈希那样全库 rehash。',
+	});
+
+	return {
+		title: 'Cluster 槽路由 · MOVED / ASK / Gossip',
+		height: 400,
+		nodes: [
+			{ id: 'client', label: '客户端', x: 0.07, y: 0.2 },
+			{ id: 'na', label: '节点 A', sub: 'Redis 主', x: 0.38, y: 0.2, shape: 'cylinder' },
+			{ id: 'nc', label: '节点 C', sub: 'Redis 主', x: 0.7, y: 0.2, shape: 'cylinder' },
+		],
+		edges: [
+			{ id: 'qa', from: 'client', to: 'na', both: true },
+			{ id: 'qc', from: 'client', to: 'nc', both: true, bend: 48 },
+			{ id: 'gossip', from: 'na', to: 'nc', dashed: true, label: 'Gossip' },
+		],
+		frames,
+	};
+}
+
+/** Seata TCC：Try 预留 → Confirm 实扣 / Cancel 释放，隔离做在数据模型里 */
+function seataTcc(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { acct: 'available=100 · frozen=0' },
+		note: 'TCC 没有 undo_log，它把「这笔事务可能成功」编码进数据模型：Try 预留、Confirm 实扣、Cancel 释放。看一次库存扣减的 TCC 一生。',
+	});
+	frames.push({
+		active: ['tm'],
+		hotEdges: ['reg'],
+		packets: [{ edge: 'reg', at: 0.4, tone: 'req', label: 'begin' }],
+		badges: { acct: 'available=100 · frozen=0' },
+		note: 'TM 向 TC 开启全局事务，XID 随调用链传播到参与者。',
+	});
+	frames.push({
+		active: ['inv'],
+		hotEdges: ['call', 'w'],
+		packets: [
+			{ edge: 'call', at: 0.5, tone: 'req', label: 'Try(-2)' },
+			{ edge: 'w', at: 0.5, tone: 'data', label: '预留' },
+		],
+		badges: { acct: 'available=98 · frozen=2' },
+		note: 'Try：资源预留——available -= 2、frozen += 2。数据可见、可并发：两笔全局事务争的是 available 的条件更新（WHERE available >= n），不是 TC 全局锁——热点行从 AT 换 TCC 的原因就在这。',
+	});
+	frames.push({
+		active: ['inv'],
+		badges: { acct: 'available=98 · frozen=2' },
+		done: ['tm'],
+		note: '业务动作成功，TM 通知 TC：全局提交。若失败则走 Cancel——frozen 释放回 available，失败立刻了断，不像 AT 要持着全局锁等到事务结束。',
+	});
+	frames.push({
+		active: ['tc'],
+		hotEdges: ['cmd'],
+		packets: [{ edge: 'cmd', at: 0.5, tone: 'req', label: 'Confirm' }],
+		badges: { acct: 'available=98 · frozen=2' },
+		done: ['tm'],
+		note: '二阶段：TC 通知 RM 执行 Confirm——frozen -= 2，冻结转实扣。Confirm 必须幂等：TC 会重试驱动直到成功。',
+	});
+	frames.push({
+		done: ['tm', 'tc', 'inv'],
+		badges: { acct: 'available=98 · frozen=0' },
+		hotEdges: ['w'],
+		packets: [{ edge: 'w', at: 0.5, tone: 'data', label: '实扣' }],
+		note: '账本落定：可售 98、冻结清零。回滚路径（Cancel）则是 frozen -= 2、available += 2，把预留原样还回去。',
+	});
+	frames.push({
+		done: ['tm', 'tc', 'inv'],
+		badges: { acct: 'available=98 · frozen=0' },
+		note: '复盘：TCC 的隔离由 Try 的预留模型保证（无全局锁），适合库存/余额这类热点；代价全在纪律——Try 必须真预留、Confirm/Cancel 必须幂等，还要防悬挂与空回滚。',
+	});
+
+	return {
+		title: 'Seata TCC · Try 预留，Confirm 实扣，Cancel 释放',
+		height: 400,
+		nodes: [
+			{ id: 'tm', label: '业务服务', sub: 'TM · 发起方', x: 0.12, y: 0.2 },
+			{ id: 'tc', label: 'TC 协调器', sub: '二阶段指令', x: 0.5, y: 0.2 },
+			{ id: 'inv', label: '库存服务', sub: 'RM', x: 0.85, y: 0.2 },
+			{ id: 'acct', label: '库存行', sub: 'available / frozen', x: 0.5, y: 0.78, hw: 76 },
+		],
+		edges: [
+			{ id: 'reg', from: 'tm', to: 'tc', both: true },
+			{ id: 'call', from: 'tm', to: 'inv', both: true, bend: 40 },
+			{ id: 'w', from: 'inv', to: 'acct' },
+			{ id: 'cmd', from: 'tc', to: 'inv', dashed: true },
+		],
+		frames,
+	};
+}
+
+/** nginx 事件驱动：一个 proxy_pass 请求的生命周期，worker 从不干等 IO */
+function nginxLifecycle(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: '「几个 worker 撑住海量连接」的本质：单线程事件循环从不干等 IO。看一个 proxy_pass 请求在 worker 里的完整生命周期。',
+	});
+	frames.push({
+		active: ['worker'],
+		hotEdges: ['req'],
+		packets: [{ edge: 'req', at: 0.4, tone: 'req', label: '请求到达' }],
+		badges: { worker: 'epoll：可读事件' },
+		note: '网卡收到请求，epoll_wait 把「可读」事件交给 worker——不是每个连接配一个线程，而是事件来了才有人管。',
+	});
+	frames.push({
+		active: ['worker'],
+		badges: { worker: '读头 · 匹配 location' },
+		note: 'worker 为连接建 HTTP 状态机：读请求头 → 匹配 server → 匹配 location，决定直接回静态文件还是转发。',
+	});
+	frames.push({
+		active: ['upstream'],
+		hotEdges: ['proxy'],
+		packets: [{ edge: 'proxy', at: 0.3, tone: 'req', label: '异步连接 upstream' }],
+		badges: { worker: '发起后立即返回' },
+		note: 'proxy_pass 转发：向 upstream 发起连接——异步，发完立刻返回，worker 不挂在这里等。',
+	});
+	frames.push({
+		active: ['others'],
+		hotEdges: ['idle'],
+		packets: [{ edge: 'idle', at: 0.5, tone: 'data', label: '继续处理别的连接' }],
+		badges: { worker: '去忙别的连接' },
+		note: '等 upstream 回包期间 worker 不阻塞，转身处理其他请求——「高并发」的关键就在这：等待的成本趋近于零，对比每连接一线程的模型，等 IO 时线程闲置却占资源。',
+	});
+	frames.push({
+		active: ['worker'],
+		hotEdges: ['proxy'],
+		packets: [{ edge: 'proxy', at: 0.75, tone: 'resp', label: '回包事件' }],
+		badges: { worker: '可写事件 · 写回客户端' },
+		done: ['others'],
+		note: 'upstream 回包——又是事件触发：epoll 报告可读，worker 把响应异步写给客户端。',
+	});
+	frames.push({
+		done: ['client', 'worker', 'upstream'],
+		badges: { worker: '事件循环继续' },
+		note: '调优事实两条：worker_processes = CPU 核数（每个 worker 单线程，核数才等于并行度）；worker_connections 是单个 worker 的连接上限——海量长连接先放大 ulimit，否则先撞文件句柄。',
+	});
+
+	return {
+		title: '请求的生命周期 · epoll 事件循环从不干等 IO',
+		height: 400,
+		nodes: [
+			{ id: 'client', label: '客户端', x: 0.07, y: 0.2 },
+			{ id: 'worker', label: 'worker', sub: '单线程事件循环', x: 0.38, y: 0.2 },
+			{ id: 'upstream', label: '上游服务', sub: 'proxy_pass 目标', x: 0.74, y: 0.2 },
+			{ id: 'others', label: '其他请求', sub: '同时在线的连接', x: 0.38, y: 0.78 },
+		],
+		edges: [
+			{ id: 'req', from: 'client', to: 'worker', both: true },
+			{ id: 'proxy', from: 'worker', to: 'upstream', both: true },
+			{ id: 'idle', from: 'worker', to: 'others', dashed: true, label: '不阻塞', labelAt: 0.72 },
+		],
+		frames,
+	};
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的架构/流程演示注册表 */
 export const flowDemos: Record<string, FlowVizConfig> = {
 	'mysql-2pc': mysqlTwoPhaseCommit(),
@@ -2065,4 +2345,8 @@ export const flowDemos: Record<string, FlowVizConfig> = {
 	'split-brain': splitBrain(),
 	'nginx-reload': nginxReload(),
 	'kafka-rebalance': kafkaRebalance(),
+	'git-rebase': gitRebase(),
+	'redis-slot': redisSlot(),
+	'seata-tcc': seataTcc(),
+	'nginx-lifecycle': nginxLifecycle(),
 };

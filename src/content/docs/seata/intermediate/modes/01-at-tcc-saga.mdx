@@ -72,6 +72,10 @@ TCC 没有 undo_log，Try 必须把「这笔事务可能成功」编码进数据
 解冻：frozen -= n, available += n     # Cancel
 ```
 
+Try → Confirm / Cancel 在账本上的每一步变化，按帧放一遍：
+
+<AlgorithmVizIsland demo="seata-tcc" />
+
 两笔全局事务同时 Try 同一 SKU，争的是 **available 字段的条件更新**
 （`WHERE available >= n`），不是 TC 全局锁。这就是热点行从 AT 换成
 TCC 的原因：冲突在业务行上用乐观条件消化，失败立刻 Cancel，不自旋
