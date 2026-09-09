@@ -236,6 +236,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/linux/basic/filesystem/' },
                         { label: '文件系统与磁盘管理', link: '/linux/basic/filesystem/01-filesystem/' },
+                        { label: '交换分区与内存回收', link: '/linux/basic/filesystem/02-swap-memory/' },
                       ],
                     },
                     {
