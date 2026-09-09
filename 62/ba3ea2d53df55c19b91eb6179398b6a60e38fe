@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1186
+src/content/docs/distributed/intermediate/case-studies/07-red-packet.md
+  h_9324126a55eff3 1-81
+src/data/graphs/distributed.json
+  h_9324126a55eff3 28,82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "62ba3ea2d53df55c19b91eb6179398b6a60e38fe",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
