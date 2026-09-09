@@ -1,0 +1,18 @@
+public/scripts/mermaid-interact.js
+  h_9324126a55eff3 3-4,25-30,33,35-97,277,284-328,336-337
+src/content/docs/guide/diagrams.mdx
+  h_9324126a55eff3 200-205
+src/styles/custom.css
+  h_9324126a55eff3 1540-1556,3057-3058,3060-3061
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "223f4646aa2816404cdddf0d36dfd8663a374ed6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
