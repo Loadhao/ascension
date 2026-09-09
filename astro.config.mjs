@@ -1696,6 +1696,7 @@ export default defineConfig({
                         { label: '工具调用与分发', link: '/ai/basic/agent/02-tool-use/' },
                         { label: '权限系统', link: '/ai/basic/agent/03-permission/' },
                         { label: '钩子机制', link: '/ai/basic/agent/04-hooks/' },
+                        { label: 'Agent 护栏：注入、越权与失控费用', link: '/ai/basic/agent/05-guardrails/' },
                       ],
                     },
                   ],
