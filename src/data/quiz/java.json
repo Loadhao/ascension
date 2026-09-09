@@ -1676,6 +1676,23 @@
       ],
       "hint": 4,
       "difficulty": "GC 把 Reference 挂 pending 链、ReferenceHandler 守护线程头插法入队——ReferenceQueue 名为队列实为 head 单链表，不「存」引用；Cleaner 是虚引用机制的产品化，DirectByteBuffer 的堆外内存就靠它释放。java-ref-034 考四种引用回收时机，本题考通知机制与 finalize 的坑。"
+    },
+    {
+      "id": "java-treeify-100",
+      "noteId": "java/basic/collection/02-hashmap",
+      "type": "single",
+      "q": "HashMap 的桶内链表长度到了 8 就一定树化吗？按笔记的条件与设计意图是？",
+      "options": [
+        "不一定——树化要同时满足链表长度 ≥8 且数组容量 ≥64，数组还小时优先扩容而不是树化；树化是兜底而非常态",
+        "只要链表长度到 8 就立即树化，与数组容量无关",
+        "树化阈值只看数组容量，链表长度无所谓",
+        "链表到 8 就同时树化并把数组翻倍，两件事一起做"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "TREEIFY_THRESHOLD=8 与 MIN_TREEIFY_CAPACITY=64 两个常量缺一不可——容量不到 64 先扩容缓解冲突（扩容可能把链表拆短），树化把桶内查询从 O(n) 提到 O(log n)。java-hashmap-006 考头插/尾插演进，本题考树化条件。"
     }
   ]
 }

@@ -151,6 +151,23 @@
         0
       ],
       "hint": "Node 进程内存 ≠ V8 堆；只盯 heapUsed 会漏掉 C++ Buffer 和 libuv 占用。"
+    },
+    {
+      "id": "js-await-010",
+      "noteId": "js/basic/core/05-event-loop",
+      "type": "single",
+      "q": "async 函数第一次被调用时，函数体什么时候开始执行？await 之后的代码何时运行？",
+      "options": [
+        "第一次调用是同步执行的，直到遇到第一个 await 才让出调用栈；await 之后的代码被包成微任务，在当前宏任务执行完的微任务清空阶段运行",
+        "调用 async 函数只创建协程对象，函数体一行都不执行",
+        "await 之后的代码同步立即执行，不需要排队",
+        "await 之后的代码被包成宏任务，排在 setTimeout 之后"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "两条准确的调度语义——「async 函数首次调用同步执行到第一个 await」与「await 之后 = .then 回调 = 微任务」：所以 await 后的代码排在同步代码之后、任何 setTimeout 之前。js-eventloop-005 考宏微任务输出顺序，本题考 await 本身的语义。"
     }
   ]
 }

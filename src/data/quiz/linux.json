@@ -148,6 +148,23 @@
         2
       ],
       "hint": "ping 走 ICMP 且已通，说明 IP、链路、路由这些下层都没问题——卡点收窄到传输层端口，先 ss -tlnp 确认监听再查防火墙，而不是回去查 DNS 或网卡。"
+    },
+    {
+      "id": "linux-diskfull-007",
+      "noteId": "linux/basic/filesystem/01-filesystem",
+      "type": "single",
+      "q": "磁盘排障三件套的分工，按笔记正确的是？",
+      "options": [
+        "df -h 查空间、df -i 查 inode（海量小文件会把 inode 先吃满）、lsof +L1 | grep deleted 查已删仍被进程占用的文件——重启持有进程才真正释放",
+        "df -h 查空间、du -sh 查 inode、fsck 查已删文件",
+        "inode 数量随文件写入动态增长，永远不会成为瓶颈",
+        "文件删除后立即释放空间，lsof 与磁盘满排查无关"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "「df -h 有余但写入仍报 No space left」十有八九是 inode 被海量小文件吃光；「删了日志空间不释放」是进程还握着文件描述符——lsof +L1 定位后重启/重开持有进程。linux-mount-006 考单一目录树，本题考磁盘满排查。"
     }
   ]
 }

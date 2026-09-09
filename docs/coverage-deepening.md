@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] linux/basic/filesystem/01-filesystem — 第二题考「磁盘满三件套：df -h 空间 / df -i inode 满（海量小文件）/ lsof +L1 已删未释放」
-- [ ] js/basic/core/05-event-loop — 第二题考「await 语义：后面的代码包成微任务让出调用栈；async 函数首次调用同步执行到第一个 await」
-- [ ] java/basic/collection/02-hashmap — 第二题考「树化双阈值：链表长度 ≥8 且数组容量 ≥64 才树化，否则先扩容」
 - [ ] nginx/basic/config/01-working-model — 第二题考「location 匹配优先级：精确 = → 前缀最长 → 正则按出现顺序 → 通用前缀」
 - [ ] docker/intermediate/practice/02-volume — 第二题考「具名卷 vs bind mount：生产数据用具名卷，开发热加载才 bind」
+- [ ] java/advanced/jvm/08-troubleshooting — 第二题考「假死（CPU 不高）排查：BLOCKED 找锁竞争、http-nio 全 WAITING 是线程池被下游拖垮、arthas thread -b 找持锁源头」
+- [ ] postgresql/intermediate/ha/02-pgpool-dr — 第二题考「老主恢复三步：重建数据目录 → pg_basebackup -R 全量 → pcp_attach_node 入集群」
+- [ ] seata/basic/core/02-seata-deep-dive — 第二题考「热点行（秒杀库存/账户余额）下全局锁退化串行，AT 不适用换 TCC/消息最终一致」
 
 ### b 类：旧题返修
 
@@ -38,6 +38,8 @@
 - 2026-09-09 · 第五轮：3 道核心笔记第二题（dist-flashrefund-035 / mongo-oplog-004 / java-adviceorder-098，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第五轮
 
 - 2026-09-09 · 第六轮：3 道核心笔记第二题（redis-sds-009 / dist-term-036 / java-refqueue-099，difficulty 3/4/4）· 本轮提交主题：feat: 题库深化第六轮
+
+- 2026-09-09 · 第七轮：3 道核心笔记第二题（linux-diskfull-007 / js-await-010 / java-treeify-100，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第七轮
 
 ## 经验与规则
 
