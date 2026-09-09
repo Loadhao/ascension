@@ -8,7 +8,8 @@
     { "id": "shell", "label": "Shell 脚本", "href": "/linux/intermediate/system/01-shell-script/", "group": "进阶" },
     { "id": "proc", "label": "进程管理", "href": "/linux/intermediate/system/02-process-management/", "group": "进阶" },
     { "id": "svc", "label": "系统服务", "href": "/linux/intermediate/system/03-system-service/", "group": "进阶" },
-    { "id": "net", "label": "网络", "href": "/linux/intermediate/system/04-network/", "group": "进阶" }
+    { "id": "net", "label": "网络", "href": "/linux/intermediate/system/04-network/", "group": "进阶" },
+    { "id": "perf", "label": "性能排查", "href": "/linux/intermediate/system/05-performance/", "group": "进阶" }
   ],
   "edges": [
     { "source": "root", "target": "basics" },
@@ -20,6 +21,8 @@
     { "source": "fs", "target": "perm", "label": "inode 权限" },
     { "source": "root", "target": "proc" },
     { "source": "proc", "target": "svc", "label": "systemd" },
-    { "source": "root", "target": "net" }
+    { "source": "root", "target": "net" },
+    { "source": "proc", "target": "perf", "label": "从观察到排查" },
+    { "source": "root", "target": "perf" }
   ]
 }
