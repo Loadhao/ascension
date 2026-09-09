@@ -188,6 +188,23 @@
       ],
       "hint": 4,
       "difficulty": "失效的本质只有一条：条件必须能翻译成「B+ 树上连续的一段」——对列用函数/运算、隐式类型转换（varchar 比数字）、前导 % 都让条件失去连续定位能力；index(a,b,c) 相当于建了 (a)(a,b)(a,b,c) 三套索引。"
+    },
+    {
+      "id": "mysql-rcrr-012",
+      "noteId": "mysql/intermediate/transaction-lock/01-transaction-mvcc",
+      "type": "single",
+      "q": "MySQL 默认 RR、Oracle/PostgreSQL 默认 RC——按笔记，这个差异的历史原因与 MVCC 实现上的关系是？",
+      "options": [
+        "历史原因是早期 binlog 的 statement 格式在 RC 下会主从不一致、RR 更安全；实现上两者只差 ReadView 生成时机——RC 每次快照读重新生成，RR 第一次生成后复用",
+        "RC 下没有 MVCC，只能靠锁实现隔离，RR 才有 undo 版本链",
+        "差异来自 Oracle 的许可限制，MySQL 在兼容性上必须用 RR",
+        "RC 生成 ReadView 更频繁是为了省内存，与主从复制无关"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "「RC 和 RR 只差照片拍几次」——RR 的世界从第一次快照读起定格，所以可重复读；statement 格式下语句在从库重放的结果依赖提交顺序，RC 的间隙提交会乱序。mysql-mvcc-003 多选考 ReadView 细节，本题考默认值差异的来龙去脉。"
     }
   ]
 }

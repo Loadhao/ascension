@@ -1727,6 +1727,25 @@
       ],
       "hint": 3,
       "difficulty": "内联预算：小方法 ≤35B（MaxInlineSize）随手内联，大方法要足够热 ≤325B（FreqInlineSize）；「你写的基准测试可能被 JIT 优化没了」——不隔离、不消费返回值，测的是空转。java-escape-035 考逃逸分析，本题考内联与测试纪律。"
+    },
+    {
+      "id": "java-zcp3gen-103",
+      "noteId": "java/basic/io/02-zero-copy",
+      "type": "multiple",
+      "q": "关于零拷贝的演进与工程选型，下列说法正确的有？（多选）",
+      "options": [
+        "mmap+write 省掉 1 次 CPU 拷贝，但映射有缺页与 TLB 成本，适合要改数据/随机访问的场景",
+        "sendfile 让数据完全不进用户空间，2 次拷贝、2 次切换；Java 落点是 FileChannel.transferTo",
+        "sendfile+gather 更进一步：Socket 缓冲区里不放数据，只追加位置和长度，DMA 直接从 PageCache 取",
+        "Kafka 的消费路径与 RocketMQ 的 CommitLog 都走 sendfile，两家选型一致"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": 4,
+      "difficulty": "RocketMQ 混合存储用 mmap（CommitLog 映射读写），Kafka 消费走 sendfile——两家选型相反、各取所长；传统 read+write 是 4 次拷贝 4 次切换，中间 2 次 CPU 拷贝纯属「进用户空间转一圈什么都没变」。java-zerocopy-043 考「零拷贝 ≠ 无 DMA」，本题考演进与选型。"
     }
   ]
 }
