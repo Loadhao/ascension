@@ -1,0 +1,14 @@
+astro.config.mjs
+  h_9324126a55eff3 123-158,1965-1968
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "21ec8c71b3a243a6c10d00df69d0617d3debca73",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
