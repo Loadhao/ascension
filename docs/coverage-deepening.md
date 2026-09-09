@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] java/intermediate/concurrent/09-cas-atomics — 第二题考「AtomicLong 与 LongAdder 的分界：低竞争下前者够用，高并发写才值得分段」
-- [ ] rabbitmq/basic/core/02-reliable-delivery — 第二题考「confirm 与手动 ACK 是两段独立责任链，收到 confirm ≠ 消费方已处理」
-- [ ] java/intermediate/concurrent/02-thread-pool — 第二题考「7 参数组合与禁用 Executors：newFixedThreadPool 的无界队列 OOM 风险」
 - [ ] js/basic/core/02-scope-closure — 第二题考「TDZ 与 var 提升：let/const 块级作用域，声明前访问抛 ReferenceError」
 - [ ] git/intermediate/collaboration/02-remote-collab — 第二题考「fetch 只更新远端快照不动工作区；pull = fetch + merge（或 rebase）」
+- [ ] js/intermediate/web/02-cors — 第二题考「简单请求 vs 复杂请求：复杂请求先发 OPTIONS 预检」
+- [ ] java/basic/io/03-tcp-sticky-packets — 第二题考「LengthFieldBasedFrameDecoder 的 adjustment 口诀与 maxFrameLength 防恶意大包」
+- [ ] docker/basic/fundamentals/03-lifecycle — 第二题考「stop 先 SIGTERM 再 SIGKILL，退出码 137 是被 SIGKILL」
 
 ### b 类：旧题返修
 
@@ -48,6 +48,8 @@
 - 2026-09-09 · 第十轮：3 道核心笔记第二题（mysql-rcrr-006 / tools-sedtrap-007 / java-zcp3gen-103，difficulty 4/4/4；tools 条目原定角度与 tools-gsa-001 撞车，换陷阱与安全姿势）· 本轮提交主题：feat: 题库深化第十轮
 
 - 2026-09-09 · 第十一轮：3 道核心笔记第二题（rmq-silentdrop-005 / mq-cost-004 / net-dnsttl-006，difficulty 4/3/3）· 本轮提交主题：feat: 题库深化第十一轮
+
+- 2026-09-09 · 第十二轮：3 道核心笔记第二题（java-casadder-104 / java-poolargs-105 / rabbit-confirmtack-006，difficulty 4/3/3）· 本轮提交主题：feat: 题库深化第十二轮
 
 ## 经验与规则
 

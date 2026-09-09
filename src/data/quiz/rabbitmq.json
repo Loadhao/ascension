@@ -135,6 +135,21 @@
       ],
       "hint": 4,
       "difficulty": "交换机和队列都不保存分发逻辑，规则全在「绑定」里；绑定运行时可增删（灰度动态路由的入口），「昨天还好好的」也可能是绑定被改了。rabbit-amqp-001 考交给谁、rmq-topic-001 考命中判定，本题考投递失败的排查路径。"
+    },
+    {
+      "id": "rabbit-confirmtack-006",
+      "noteId": "rabbitmq/basic/core/02-reliable-delivery",
+      "type": "judge",
+      "q": "生产者收到了 RabbitMQ 的 confirm，就意味着消费方已经成功处理了这条消息。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": 3,
+      "difficulty": "confirm 只保证「broker 收到了」（通常=已落盘），消费是否成功取决于消费者→broker 的手动 ACK——两段是独立的责任链，一段失守消息就可能在另一端丢。另记：confirm 超时要留在本地未确认缓冲区重发或记失败，绝不能发了就扔。rabbit-ack-002 考三段防丢全景、rmq-ack-002 考 requeue 死循环，本题考两个「确认」的边界混淆。"
     }
   ]
 }

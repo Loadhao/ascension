@@ -1746,6 +1746,40 @@
       ],
       "hint": 4,
       "difficulty": "RocketMQ 混合存储用 mmap（CommitLog 映射读写），Kafka 消费走 sendfile——两家选型相反、各取所长；传统 read+write 是 4 次拷贝 4 次切换，中间 2 次 CPU 拷贝纯属「进用户空间转一圈什么都没变」。java-zerocopy-043 考「零拷贝 ≠ 无 DMA」，本题考演进与选型。"
+    },
+    {
+      "id": "java-casadder-104",
+      "noteId": "java/intermediate/concurrent/09-cas-atomics",
+      "type": "single",
+      "q": "高并发计数场景在 AtomicLong 和 LongAdder 之间怎么选？按笔记的选型心法是？",
+      "options": [
+        "竞争低、操作简单（计数/置位/换引用）用 CAS 原子类就够；竞争激烈时 CAS 反复失败自旋空转烧 CPU——高并发写计数换 LongAdder 分流，或换锁挂起而不空转",
+        "LongAdder 在所有场景下都优于 AtomicLong，应无条件替换",
+        "AtomicLong 的 CAS 失败后会阻塞挂起，不存在空转问题",
+        "两者性能完全一致，差别只在 API 风格"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "CAS 失败不挂起、由调用方自旋——激烈竞争时它是「CPU 火葬场」；LongAdder 分流的本质是把一个热点变量拆成多段。java-cas-005 考 ABA 与版本戳，本题考自旋开销与选型边界。"
+    },
+    {
+      "id": "java-poolargs-104",
+      "noteId": "java/intermediate/concurrent/02-thread-pool",
+      "type": "single",
+      "q": "《阿里巴巴 Java 开发手册》强制手动 new ThreadPoolExecutor、禁用 Executors 工厂方法，按笔记的原因是？",
+      "options": [
+        "FixedThreadPool/SingleThreadExecutor 用无界 LinkedBlockingQueue，任务堆积无上限会 OOM；CachedThreadPool 最大线程数是 Integer.MAX_VALUE，线程无限创建也会 OOM",
+        "Executors 创建的线程池不能设置线程名，排查困难是唯一原因",
+        "Executors 是老版本 API，JDK 17 起已被移除",
+        "手动 new 能让线程池启动更快，性能差异是主因"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "两类 OOM 温床——无界队列堆任务、无限线程数堆线程；正确姿势是有界队列（ArrayBlockingQueue）+ 显式拒绝策略 + 线程命名便于排查。java-thread-pool-001 考「先入队后扩线程」的执行流程，本题考禁用工厂方法的原因。"
     }
   ]
 }
