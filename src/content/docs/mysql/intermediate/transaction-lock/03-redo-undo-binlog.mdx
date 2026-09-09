@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 三本账各记各的
 
 | | undo log | redo log | binlog |
@@ -45,6 +47,11 @@ sequenceDiagram
 
 把 redo 拆成 prepare/commit 两截、binlog 夹在中间，崩溃恢复就能用
 "binlog 完不完整"裁决 prepare 状态的事务该提交还是回滚。
+
+把这条时序放进架构图里按帧过一遍，redo 的徽标从 `prepare` 翻到 `commit`
+的那一步就是两阶段提交的心脏（可暂停、可单步）：
+
+<AlgorithmVizIsland demo="mysql-2pc" />
 
 ## 刷盘参数
 

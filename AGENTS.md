@@ -45,6 +45,8 @@
 
 - **图表配色一律由站点主题接管，必须保证亮/暗两种主题下文字都看得清**：严禁在 mermaid 块内出现任何硬编码颜色（`style X fill:#…`、`classDef … fill:#…` 的 `fill`/`color`/`stroke`，以及 `%%{init}%%` 主题指令等）——Mermaid 会将其烘焙为行内 `!important`，压过 `custom.css` 的主题变量，暗/亮主题必有一种浅底浅字。需要区分节点语义时只用 `good`/`bad`/`hl`/`rb-black`/`rb-red` 五个语义类（写法见图表写作指南「语义强调节点」）；需要新语义时在 `custom.css` 补主题变量与类规则，图表里只引用类名。改动图表或图表样式后，运行 `node scripts/mermaid-contrast-verify.mjs`（需先 `pnpm preview`）做全站双主题对比度审计，必须 0 处低于 4.5:1 才算通过。
 
+- **过程型知识点优先补「步进式流程动画」，与 mermaid 分工为「mermaid 讲结构、FlowViz 讲过程」**：请求链路、协议握手、状态机迁移、生命周期等按时间推进、状态会翻转的内容，在 `src/data/viz/flows.ts` 定义 `FlowVizConfig` 并注册到 `flowDemos`，笔记改用 `.mdx` 后以 `<AlgorithmVizIsland demo="<key>" />` 引用（字段含义与模板见图表写作指南「步进式流程动画」）；播放器、主题令牌（`--algo-*`）与算法动画共用，动画数据里不允许写颜色。静态的结构/层次/分类不要滥用动画。
+
 - 新增分类时三处同步：`<方向>/<等级>/<分类>/index.mdx` 分类页 + `astro.config.mjs` 侧边栏对应等级组内注册 + 知识点笔记放入该目录（分类项不设 `badge`；笔记页底部 ProgressMark 由 Footer 覆盖自动注入，无需手写）。
 
 - 新增方向时四处同步：建目录与 `index.mdx` 路线图 + `astro.config.mjs` 侧边栏注册 + `src/data/graphs/` 建图谱数据 + `src/lib/notes.ts` 的 `DIRECTION_ORDER` 追加方向 slug。

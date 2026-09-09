@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 三次握手：同步双方的初始序号
 
 ```mermaid
@@ -47,6 +49,10 @@ sequenceDiagram
     C-->>S: ACK, ack=w+1
     Note over C: TIME_WAIT 等 2MSL → CLOSED
 ```
+
+两侧状态徽标随报文逐帧迁移的动画版（可暂停单步，对照上面的状态注释）：
+
+<AlgorithmVizIsland demo="tcp-close" />
 
 **为什么四次**：TCP 全双工，两个方向要各自关。被动方收到 FIN 时
 可能还有数据没发完，ACK 先回（"知道了"），数据发完再发自己的

@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 一层层拆开
 
 ```mermaid
@@ -66,6 +68,11 @@ Lucene 与 ES 分工下的结果。逐步放大一次写入：
   → merge：
         多个小 segment 后台合并成大 segment，删掉被标记删除的文档
 ```
+
+这条路径有节点、有先后、有状态翻转（不可搜 → 可搜 → 已持久），
+放到架构图里按帧走一遍最直观：
+
+<AlgorithmVizIsland demo="es-write" />
 
 **四个动作别混淆：**
 

@@ -4,6 +4,8 @@ description: 从 setnx 到 SET NX EX、唯一标识防误删、Redisson 看门�
 level: intermediate
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 为什么单机锁不够
 
 多实例部署后，synchronized 只锁得住**自己这个进程**——两个服务实例同时
@@ -63,6 +65,10 @@ flowchart LR
     class C hl
     classDef hl stroke-width:1.5px
 ```
+
+把 TTL 的燃烧与续期放到时间轴上按帧看（锁的徽标就是 TTL 读数）：
+
+<AlgorithmVizIsland demo="redisson-watchdog" />
 
 ## Redisson 的完整答案
 

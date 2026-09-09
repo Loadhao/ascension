@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 三层模型
 
 ```mermaid
@@ -71,6 +73,10 @@ flowchart LR
   而不是"删消息"，O(1)）。
 - **offset 即地位**：每条消息在分区内单调递增的编号，消费进度就是
   一个数字——极简的进度模型。
+
+segment 的一生（写入 → 滚动 → 读取 → 整段删除）可以按帧播放着看：
+
+<AlgorithmVizIsland demo="kafka-segment" />
 
 ## 消费：拉模式 + offset 提交
 

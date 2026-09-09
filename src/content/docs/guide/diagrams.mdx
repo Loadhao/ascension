@@ -3,6 +3,8 @@ title: 图表写作指南
 description: Mermaid 各类图表语法模板与知识图谱数据维护方式
 ---
 
+import AlgorithmVizIsland from '../../../components/viz/AlgorithmVizIsland.astro';
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 写笔记时直接在正文用 ` ```mermaid ` 代码块即可，构建时自动渲染为 SVG，
@@ -181,6 +183,34 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 按钮或直接**双击图表**进入全屏——滚轮 / 双指捏合缩放，拖拽平移，双击在
 「放大 ↔ 适屏」间切换，`Esc` 或点击空白退出。大图看细节、窄屏读宽图时
 特别有用。
+
+## 步进式流程动画（FlowViz）
+
+讲「过程」而非「结构」时（请求链路、协议握手、状态迁移、生命周期），给笔记加一段
+可播放的步进动画：数据包沿线行进、节点状态翻转、状态徽标随步迁移、逐帧讲解。
+播放器与算法动画共用（进入视野自动循环、暂停单步、五档倍速、进度条拖拽、
+键盘 `←` `→` 单步 / 空格播放暂停）：
+
+<AlgorithmVizIsland demo="mysql-2pc" />
+
+新增一个演示三步：
+
+1. 在 `src/data/viz/flows.ts` 写一个 `FlowVizConfig` 并注册进 `flowDemos`（key 用短横线）：
+   - `nodes`：固定布局，`x`/`y` 为 0~1 归一化中心坐标，形状可选 `rect`（组件）、
+     `cylinder`（存储）、`doc`（日志/文件）；
+   - `edges`：可选 `bend`（弧度，同两点双向时正负各一条）、`dashed`（异步/后台动作）、
+     `both`（双端箭头）、`label` + `labelAt`（连线文字及其位置）；
+   - `frames`：每步给 `active`（当步动作，琥珀高亮）/ `done`（已完成）/ `dim`（弱化）、
+     `hotEdges`（本步有数据流动的连线）、`packets`（沿线数据包，`at` 为 0~1 位置，
+     `tone` 分 `req`/`resp`/`data`）、`badges`（节点下的状态徽标，如 `prepare`、TCP 状态）
+     与 `note`（本步讲解，一句话把「为什么」说清）。
+2. 笔记改为 `.mdx`（`.md` 不支持 import），在合适的小节里
+   `<AlgorithmVizIsland demo="key" />` 引用，正文一句话交代怎么读图。
+3. 配色全部走 `--algo-*` 主题令牌（与算法动画同源），数据里不允许写颜色；
+   亮暗主题与「减弱动态效果」自动适配。
+
+选型原则：**mermaid 讲结构，FlowViz 讲过程**——静态关系、层次、分类仍用 mermaid；
+只有「按时间推进、状态会翻转」的内容才上步进动画，一篇笔记两者混用不冲突。
 
 ## 时序图（sequenceDiagram）
 

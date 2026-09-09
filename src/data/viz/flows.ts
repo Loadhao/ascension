@@ -158,8 +158,268 @@ function tcpClose(): FlowVizConfig {
 	};
 }
 
+/** ES 一次写入到可搜索：buffer/translog → refresh → flush 的完整路径 */
+function esWrite(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: '一次写入在 ES 内部怎么变成「可搜索」？refresh / translog / flush / merge 四个动作逐个登场（merge 是后台段合并，本图聚焦前三步）。',
+	});
+	frames.push({
+		active: ['coord'],
+		hotEdges: ['req'],
+		packets: [{ edge: 'req', at: 0.32, tone: 'req', label: 'index' }],
+		note: '客户端把写文档的请求发给任意一个节点，它就是这次的协调节点，负责算路由、定主分片。',
+	});
+	frames.push({
+		active: ['primary'],
+		hotEdges: ['route'],
+		packets: [{ edge: 'route', at: 0.5, tone: 'req', label: '路由' }],
+		note: '协调节点按文档 _id 哈希算出目标分片（建索引时主分片数定死，路由结果稳定），把请求转发给主分片 P0 所在节点。',
+	});
+	frames.push({
+		active: ['pbuf', 'trans'],
+		done: ['coord'],
+		hotEdges: ['wb', 'wt'],
+		packets: [
+			{ edge: 'wb', at: 0.5, tone: 'data', label: 'doc' },
+			{ edge: 'wt', at: 0.5, tone: 'data', label: '日志' },
+		],
+		badges: { pbuf: '不可搜' },
+		note: '主分片把文档写进内存 buffer，同时追加一条 translog（预写日志）。此刻数据只在内存——按 search 是搜不到的。',
+	});
+	frames.push({
+		active: ['primary'],
+		hotEdges: ['repl'],
+		packets: [{ edge: 'repl', at: 0.5, tone: 'data', label: 'doc' }],
+		badges: { pbuf: '不可搜' },
+		note: '主分片把文档并行复制给所有副本分片（组内同步），副本做同样的 buffer + translog 写入。',
+	});
+	frames.push({
+		active: ['replica'],
+		hotEdges: ['repl'],
+		packets: [{ edge: 'repl', at: 0.82, tone: 'resp', label: 'ACK' }],
+		badges: { pbuf: '不可搜' },
+		note: '副本写完后向主分片确认；in-sync 副本组全部到位，写才算成功。',
+	});
+	frames.push({
+		active: ['coord'],
+		done: ['primary', 'replica'],
+		hotEdges: ['route', 'req'],
+		packets: [
+			{ edge: 'route', at: 0.4, tone: 'resp', label: 'ACK' },
+			{ edge: 'req', at: 0.35, tone: 'resp', label: 'OK' },
+		],
+		badges: { pbuf: '不可搜' },
+		note: '确认逐层返回，客户端收到成功。注意：此时文档依然搜不到——成功只代表已进入 buffer 和 translog。',
+	});
+	frames.push({
+		active: ['seg'],
+		hotEdges: ['refresh'],
+		packets: [{ edge: 'refresh', at: 0.75, tone: 'data', label: 'segment' }],
+		badges: { pbuf: '已清空', seg: '可搜索' },
+		note: 'refresh（默认每 1s）：buffer 里的文档生成一段不可变的新 segment，放进 filesystem cache——文档从此可被 search。这就是「近实时」（NRT）的含义：最多差一个 refresh 周期。',
+	});
+	frames.push({
+		active: ['disk'],
+		hotEdges: ['flush'],
+		packets: [{ edge: 'flush', at: 0.55, tone: 'data', label: 'fsync' }],
+		badges: { seg: '可搜索', disk: '已持久' },
+		note: '后台 flush：内存里的 segment 真正落到磁盘，translog 清空。到这一步数据才算「持久」——宕机后未刷盘的部分靠重放 translog 恢复。',
+	});
+	frames.push({
+		done: ['client', 'coord', 'primary', 'replica', 'seg', 'disk'],
+		badges: { seg: '可搜索', disk: '已持久' },
+		note: '复盘：refresh 解决「可搜索」，flush 解决「可持久」，后台 merge 负责合并小段、物理清除已删文档——四个动作各管一件事，别混。',
+	});
+
+	return {
+		title: '一次写入到可搜索 · refresh / translog / flush',
+		height: 440,
+		nodes: [
+			{ id: 'client', label: '客户端', x: 0.05, y: 0.12 },
+			{ id: 'coord', label: '协调节点', sub: '算路由', x: 0.27, y: 0.12 },
+			{ id: 'primary', label: '主分片 P0', sub: '写入方', x: 0.56, y: 0.12 },
+			{ id: 'replica', label: '副本 R0', sub: '同步副本', x: 0.88, y: 0.12 },
+			{ id: 'pbuf', label: 'memory buffer', sub: '内存缓冲', x: 0.56, y: 0.52 },
+			{ id: 'trans', label: 'translog', sub: '预写日志', x: 0.82, y: 0.52, shape: 'doc' },
+			{ id: 'seg', label: 'FS cache', sub: 'filesystem cache · 内存', x: 0.34, y: 0.85, hw: 78 },
+			{ id: 'disk', label: '磁盘', sub: 'segment 落盘', x: 0.66, y: 0.85, shape: 'cylinder' },
+		],
+		edges: [
+			{ id: 'req', from: 'client', to: 'coord', both: true },
+			{ id: 'route', from: 'coord', to: 'primary', both: true, label: '路由' },
+			{ id: 'repl', from: 'primary', to: 'replica', both: true, label: '并行复制' },
+			{ id: 'wb', from: 'primary', to: 'pbuf', label: '写 buffer' },
+			{ id: 'wt', from: 'primary', to: 'trans', label: '同时写' },
+			{ id: 'refresh', from: 'pbuf', to: 'seg', label: 'refresh' },
+			{ id: 'flush', from: 'seg', to: 'disk', label: 'flush 落盘' },
+		],
+		frames,
+	};
+}
+
+/** Redisson 看门狗：不指定 leaseTime 时的自动续期循环与宕机兜底 */
+function redissonWatchdog(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: '锁 TTL 30s、业务要跑 40s——第 31 秒起互斥就破了。看 Redisson 的看门狗怎么让锁「跟着业务续命」，以及为什么进程崩了也不会死锁。',
+	});
+	frames.push({
+		active: ['thread'],
+		hotEdges: ['lockop'],
+		packets: [{ edge: 'lockop', at: 0.35, tone: 'req', label: 'lock()' }],
+		badges: { lock: 'TTL 30s' },
+		note: 'lock() 不传 leaseTime：加锁成功，锁 key 的 TTL 默认 30 秒。正因为你没说「多久过期」，Redisson 才认为需要看门狗来管寿命。',
+	});
+	frames.push({
+		active: ['thread'],
+		done: ['lock'],
+		badges: { lock: 'TTL 30s' },
+		note: '业务开始执行。看门狗是同进程里的后台定时任务：每 1/3 TTL（10 秒）检查一次锁的持有状态。',
+	});
+	frames.push({
+		active: ['thread'],
+		badges: { lock: 'TTL 14s' },
+		note: '业务跑到第 16 秒还没完，TTL 已烧到 14 秒——再不续，锁就要过期，别的客户端就能 lock() 进来了。',
+	});
+	frames.push({
+		active: ['watchdog', 'lock'],
+		hotEdges: ['renew'],
+		packets: [{ edge: 'renew', at: 0.5, tone: 'data', label: '续期' }],
+		badges: { lock: 'TTL 30s' },
+		note: '看门狗检查：锁还被自己这个线程持有 → 把 TTL 重置回 30 秒。业务每快到 2/3 点，就会被续满一次。',
+	});
+	frames.push({
+		active: ['thread'],
+		badges: { lock: 'TTL 30s' },
+		note: '业务继续跑，看门狗循环续期——锁不会中途被抢，也不会因为写死的 TTL 提前释放，互斥性由「续命」保住。',
+	});
+	frames.push({
+		active: ['thread'],
+		hotEdges: ['lockop'],
+		packets: [{ edge: 'lockop', at: 0.4, tone: 'resp', label: 'unlock()' }],
+		badges: { lock: '已释放' },
+		note: 'finally 里 unlock()：锁 key 删除，看门狗随之停止续期。所以 unlock 一定要放在 finally——不释放的话续期不会停。',
+	});
+	frames.push({
+		dim: ['thread', 'watchdog'],
+		badges: { lock: 'lock(10, SECONDS)' },
+		note: '反面对照：一旦显式指定 leaseTime（如 lock(10, SECONDS)），看门狗就不启动——TTL 钉死 10 秒，业务没跑完锁照样失效。',
+	});
+	frames.push({
+		dim: ['thread', 'watchdog'],
+		badges: { lock: '30s 后自动释放' },
+		note: '进程宕机：看门狗随进程消失，没人续期，锁最长 30 秒后自动过期——不会死锁；代价是这 30 秒内其他客户端必须等。',
+	});
+
+	return {
+		title: 'Redisson 看门狗 · 锁的自动续期与兜底',
+		height: 380,
+		nodes: [
+			{ id: 'thread', label: '业务线程', x: 0.13, y: 0.3 },
+			{ id: 'lock', label: '锁 key', sub: 'Redis', x: 0.52, y: 0.3, shape: 'cylinder' },
+			{ id: 'watchdog', label: '看门狗', sub: '同进程定时任务', x: 0.84, y: 0.74 },
+		],
+		edges: [
+			{ id: 'lockop', from: 'thread', to: 'lock', both: true, label: 'lock() / unlock()' },
+			{ id: 'renew', from: 'watchdog', to: 'lock', label: '每 10s 检查续期', labelAt: 0.78 },
+		],
+		frames,
+	};
+}
+
+/** Kafka 分区 = segment 文件串：追加、滚动、按 offset 读、整段删除 */
+function kafkaSegment(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		dim: ['seg3'],
+		badges: { seg2: 'active' },
+		note: '分区在磁盘上是一串按「起始 offset」命名的 segment 文件，只追加、永不改写。看一段消息的生命周期：写入 → 滚动 → 读取 → 过期删除。',
+	});
+	frames.push({
+		hotEdges: ['send'],
+		packets: [{ edge: 'send', at: 0.4, tone: 'req', label: 'batch' }],
+		dim: ['seg3'],
+		badges: { seg2: 'active' },
+		note: '生产者把消息批次发进 topic-a 的 0 号分区——分区的磁盘目录就是下面这一排 segment 文件。',
+	});
+	frames.push({
+		active: ['seg2'],
+		hotEdges: ['w2'],
+		packets: [{ edge: 'w2', at: 0.5, tone: 'data', label: 'append' }],
+		dim: ['seg3'],
+		badges: { seg2: 'active' },
+		note: '写入永远落在 active segment 的文件尾：纯顺序追加。磁盘顺序写接近内存随机写的速度，这是 Kafka 吞吐的物理根基。',
+	});
+	frames.push({
+		active: ['cons', 'idx'],
+		hotEdges: ['read'],
+		packets: [{ edge: 'read', at: 0.4, tone: 'req', label: 'offset 358000' }],
+		dim: ['seg3'],
+		badges: { seg2: 'active' },
+		note: '消费时按 offset 取：先查稀疏索引——每个 segment 只为少量消息建索引条目，用「找起点 + 顺序扫」定位数据。',
+	});
+	frames.push({
+		active: ['seg1'],
+		hotEdges: ['idxb'],
+		packets: [{ edge: 'idxb', at: 0.5, tone: 'resp', label: '定位' }],
+		dim: ['seg3'],
+		badges: { seg2: 'active' },
+		note: '稀疏索引答出「offset 358000 在 segment 1 的某个位置附近」，从这里顺序读到目标消息。索引小、查找快，代价只是定位后多扫几条。',
+	});
+	frames.push({
+		active: ['seg3'],
+		hotEdges: ['w3'],
+		packets: [{ edge: 'w3', at: 0.5, tone: 'data', label: 'append' }],
+		done: ['seg2'],
+		badges: { seg2: 'sealed', seg3: 'active' },
+		note: 'seg2 写满（log.segment.bytes 或滚动时间到）→ 封口变只读，分区滚动出新 active segment，写入换到新尾巴。整段封口，不改动任何旧数据。',
+	});
+	frames.push({
+		dim: ['seg0'],
+		done: ['seg2'],
+		badges: { seg0: '已删除', seg2: 'sealed', seg3: 'active' },
+		note: 'retention 时间到（log.retention.*）：清理线程直接删掉最旧的 segment 0 整个文件——过期清理以「文件」为单位，不做逐条删除，O(1)。',
+	});
+	frames.push({
+		dim: ['seg0', 'seg1'],
+		done: ['seg2'],
+		badges: { seg0: '已删除', seg1: '已删除', seg2: 'sealed', seg3: 'active' },
+		note: 'segment 1 同样整段删除。复盘：顺序追加 + 分段滚动 + 稀疏索引 + 文件级删除，四个机制合起来就是「写得快、读得不慢、清得便宜」。',
+	});
+
+	return {
+		title: '分区 = segment 文件串 · 写入 / 滚动 / 读取 / 清理',
+		height: 400,
+		nodes: [
+			{ id: 'producer', label: '生产者', x: 0.05, y: 0.16 },
+			{ id: 'dir', label: '分区目录', sub: 'topic-a / 0', x: 0.3, y: 0.16 },
+			{ id: 'idx', label: '稀疏索引', sub: 'offset → 位置', x: 0.64, y: 0.16, shape: 'doc' },
+			{ id: 'cons', label: '消费者', x: 0.95, y: 0.16 },
+			{ id: 'seg0', label: 'segment 0', sub: '起始 offset 0', x: 0.16, y: 0.78 },
+			{ id: 'seg1', label: 'segment 1', sub: '起始 offset 357', x: 0.38, y: 0.78 },
+			{ id: 'seg2', label: 'segment 2', sub: '起始 offset 359', x: 0.6, y: 0.78 },
+			{ id: 'seg3', label: 'segment 3', sub: '新滚动段', x: 0.82, y: 0.78 },
+		],
+		edges: [
+			{ id: 'send', from: 'producer', to: 'dir' },
+			{ id: 'w2', from: 'dir', to: 'seg2' },
+			{ id: 'w3', from: 'dir', to: 'seg3' },
+			{ id: 'read', from: 'cons', to: 'idx', label: '按 offset 查', labelAt: 0.5 },
+			{ id: 'idxb', from: 'idx', to: 'seg1', label: '定位段与位置', labelAt: 0.78 },
+		],
+		frames,
+	};
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的架构/流程演示注册表 */
 export const flowDemos: Record<string, FlowVizConfig> = {
 	'mysql-2pc': mysqlTwoPhaseCommit(),
 	'tcp-close': tcpClose(),
+	'es-write': esWrite(),
+	'redisson-watchdog': redissonWatchdog(),
+	'kafka-segment': kafkaSegment(),
 };
