@@ -1,0 +1,30 @@
+src/content/docs/elasticsearch/intermediate/usage/03-pagination.md
+  h_9324126a55eff3 17-30
+src/content/docs/java/basic/syntax/09-object-copy.md
+  h_9324126a55eff3 44-62
+src/content/docs/java/intermediate/design-pattern/07-decorator.md
+  h_9324126a55eff3 41-55
+src/content/docs/java/intermediate/design-pattern/09-strategy.md
+  h_9324126a55eff3 59-72
+src/content/docs/java/intermediate/design-pattern/13-behavioral.md
+  h_9324126a55eff3 39-54
+src/content/docs/java/intermediate/spring-mvc/03-validation.md
+  h_9324126a55eff3 60-75
+src/content/docs/js/basic/core/02-scope-closure.md
+  h_9324126a55eff3 73-83
+src/content/docs/js/basic/core/04-this-binding.md
+  h_9324126a55eff3 22-35
+src/content/docs/redis/intermediate/usage/05-pipeline-transaction-lua.md
+  h_9324126a55eff3 28-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a0c3be8a3e2d91ecb07c81be4f149574387b3da7",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
