@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 [AT 核心](/seata/basic/core/01-seata-core/)与[全局锁](/seata/basic/core/02-seata-deep-dive/)
 把自动补偿讲透了。面试下一问几乎总是：「那为什么还要 TCC / Saga？」
 答案不在实现细节，在**失败时你能不能自动把数据改回去、中间态能不能
@@ -55,6 +57,10 @@ AT 能自动补偿，前提是：
 
 AT 不是 2PC：资源锁（行锁）在本地提交时就放了，只留一把 TC 侧的
 全局锁防写冲突。所以它「省心」的代价是隔离弱、热点不行。
+
+一次 AT 全局事务按帧放一遍（TM / TC / RM 三角色 + 一二阶段的分工）：
+
+<AlgorithmVizIsland demo="seata-at" />
 
 ## TCC：把隔离做成业务预留
 

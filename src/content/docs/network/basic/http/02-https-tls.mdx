@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## HTTPS = HTTP + TLS 层干什么
 
 明文 HTTP 有三宗罪：**窃听**（链路上看得到全部内容）、**篡改**
@@ -38,6 +40,10 @@ sequenceDiagram
     S-->>C: ChangeCipherSpec + Finished
     Note over C,S: 双方用 两个随机数+预主密钥 派生会话密钥，之后对称加密
 ```
+
+握手报文逐帧走一遍（公钥只在第 5 步出场一次，之后全是对称加密）：
+
+<AlgorithmVizIsland demo="tls-handshake" />
 
 考点三连：
 

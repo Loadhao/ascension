@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## ZooKeeper 是什么
 
 ZooKeeper 是一个**分布式协调服务**：多个节点之间需要"统一认知"时（谁主谁备、
@@ -52,6 +54,10 @@ flowchart LR
 
 ZAB 与 Paxos/Raft 同属"共识门类"，思想一致：**Leader 排序 + 过半确认 + 日志
 复制**。这也正是它在「分布式」图谱里作为 ZAB 落地代表的原因。
+
+广播与提交按帧放一遍，末尾两帧演了 Leader 宕机后的崩溃恢复选主：
+
+<AlgorithmVizIsland demo="zk-zab" />
 
 ## 会话与 Watch 监听
 

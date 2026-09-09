@@ -5,6 +5,8 @@ level: advanced
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 架构：无中心元数据
 
 ```mermaid
@@ -59,6 +61,10 @@ sequenceDiagram
         P-->>M: 查本地订单表返回 commit/rollback
     end
 ```
+
+五个步骤按帧放一遍，重点是回查那一环——生产者宕机也能兜住：
+
+<AlgorithmVizIsland demo="rocketmq-tx" />
 
 ```java
 // 生产者：实现两个回调

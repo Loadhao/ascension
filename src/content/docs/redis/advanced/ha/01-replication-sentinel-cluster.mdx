@@ -5,6 +5,8 @@ level: advanced
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 演进主线
 
 ```mermaid
@@ -57,6 +59,10 @@ flowchart TB
     E --> F["leader 哨兵从从库里挑新主：<br/>① 排除断线的 ② 优先级 replica-priority<br/>③ 复制 offset 最新 ④ runid 最小"]
     F --> G["执行切换：旧主变从库<br/>发布新主地址，客户端重连"]
 ```
+
+把这次故障转移放到集群拓扑里按帧播放（主观/客观下线、选 leader、挑新主）：
+
+<AlgorithmVizIsland demo="redis-sentinel" />
 
 两个容易混的数：**quorum 只用于"认定客观下线"**（门槛可低）；**leader
 选举必须过半哨兵**（保证同一任期内只有一个 leader）——所以哨兵要部署

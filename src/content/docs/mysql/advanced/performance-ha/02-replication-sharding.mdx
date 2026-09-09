@@ -4,6 +4,8 @@ description: 复制原理与延迟对策、读写分离、垂直与水平拆分�
 level: advanced
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 主从复制
 
 ```mermaid
@@ -26,6 +28,10 @@ flowchart LR
 
 三个线程各司其职：主库 dump 推送、从库 IO 接收写 relay、SQL 线程重放。
 断线重连时靠 **GTID / 位点（offset）** 续传，不重复不丢失。
+
+看一条更新怎么从主库流到从库（三个线程接力，异步与半同步的差别在最后一环）：
+
+<AlgorithmVizIsland demo="mysql-replication" />
 
 同步模式：
 

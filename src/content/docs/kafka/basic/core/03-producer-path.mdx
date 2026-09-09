@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 消费侧有 offset 篇打底，broker 侧有 ISR 篇讲 acks 语义，但**消息从 `send()`
 到落盘的客户端路径**没有专篇——"消息发出去就不管了？"背后的分区选择、
 批量发送、重试乱序是生产端排障的日常，也是高频面试题。
@@ -30,6 +32,10 @@ flowchart LR
   `hash(key) % 分区数`（同 key 恒同分区——有序性的根基）；③都没有走
   **粘性分区**：一批时间内钉住一个随机分区，攒满换下一个（3.x 行为），
   目的是让批量更满。
+
+这条双线程路径按帧放一遍，「send() 返回」与「消息落盘」之间发生了什么一目了然：
+
+<AlgorithmVizIsland demo="kafka-producer" />
 
 ## 重试与乱序：一对陷阱
 

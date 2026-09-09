@@ -5,6 +5,8 @@ level: advanced
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 类加载的全过程
 
 ```mermaid
@@ -42,6 +44,10 @@ static final int B = 2;
 **初始化的触发时机（六种，主动引用）**：new、读写非 final 静态字段、调
 静态方法、反射调用、初始化子类先初始化父类、main 所在类。其余（定义
 类数组、引用 final 常量、子类引用父类字段）不触发。
+
+五个阶段按帧走一遍（准备期 `a = 0`、初始化才 `a = 1` 的反直觉点值得单步细看）：
+
+<AlgorithmVizIsland demo="java-classload" />
 
 ## 四层类加载器
 
