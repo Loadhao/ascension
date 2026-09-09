@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1711
+src/content/docs/ai/intermediate/llm/03-adapter-selection.md
+  h_9324126a55eff3 1-88
+src/data/graphs/ai.json
+  h_9324126a55eff3 8,41-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6861da1737531c73b756f8f1bc951d0b74204741",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
