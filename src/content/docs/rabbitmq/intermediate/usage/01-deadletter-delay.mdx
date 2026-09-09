@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 死信：处理失败消息的归档通道
 
 消息满足条件会进入一个"死信交换机（DLX）"，再路由到**死信队列**：
@@ -34,6 +36,10 @@ flowchart LR
     A["延迟交换机<br/>发送时设 TTL"] --> B["延迟队列<br/>（不消费，只等过期）"]
     B -->|"TTL 到期 → 进设置好的 DLX"| C["真实业务交换机"] --> D["业务队列"] --> E["消费者"]
 ```
+
+延迟消息的完整旅程（发送 → 等待过期 → 死信转投 → 消费）按帧走一遍：
+
+<AlgorithmVizIsland demo="rabbitmq-dlq" />
 
 配置要点：业务消息丢到"只设了 `x-message-ttl` 且 `x-dead-letter-exchange=真实交换机`"
 的队列，过期时自动转投到真正的业务队列——**用"等待"换"延迟"**。

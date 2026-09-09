@@ -964,7 +964,7 @@ function tlsHandshake(): FlowVizConfig {
 		hotEdges: ['s2c'],
 		packets: [{ edge: 's2c', at: 0.5, tone: 'data', label: '证书链' }],
 		badges: { client: '明文 HTTP', server: '明文 HTTP' },
-		note: '服务端回应：自己的随机数、从套件列表里选定的算法，以及**证书**——服务器的公钥就放在证书里。',
+		note: '服务端回应：自己的随机数、从套件列表里选定的算法，以及证书——服务器的公钥就放在证书里。',
 	});
 	frames.push({
 		active: ['client'],
@@ -1088,7 +1088,7 @@ function jsEventLoop(): FlowVizConfig {
 		hotEdges: ['s2micro'],
 		packets: [{ edge: 's2micro', at: 0.5, tone: 'data', label: 'Promise.then' }],
 		badges: { micro: '1 个任务', macro: '1 个任务' },
-		note: '遇到 Promise.then，回调进**微任务**队列——它和宏任务不在同一个班次，优先级天差地别。',
+		note: '遇到 Promise.then，回调进微任务队列——它和宏任务不在同一个班次，优先级天差地别。',
 	});
 	frames.push({
 		active: ['stack'],
@@ -1100,19 +1100,19 @@ function jsEventLoop(): FlowVizConfig {
 		hotEdges: ['s2micro'],
 		packets: [{ edge: 's2micro', at: 0.6, tone: 'req', label: 'then 回调' }],
 		badges: { micro: '清空中', macro: '1 个任务' },
-		note: '先清空**整个**微任务队列：then 回调立即执行——微任务比 setTimeout(0) 快，因为它插队插在渲染和下一个宏任务之前。',
+		note: '先清空整个微任务队列：then 回调立即执行——微任务比 setTimeout(0) 快，因为它插队插在渲染和下一个宏任务之前。',
 	});
 	frames.push({
 		active: ['macro'],
 		hotEdges: ['s2macro'],
 		packets: [{ edge: 's2macro', at: 0.6, tone: 'req', label: '回调执行' }],
 		badges: { micro: '空', macro: '出队中' },
-		note: '微队列空了，事件循环才取**一个**宏任务执行——setTimeout(0) 的回调到这一步才跑，这就是「3 2 1」里 1 排最后的全部原因。',
+		note: '微队列空了，事件循环才取一个宏任务执行——setTimeout(0) 的回调到这一步才跑，这就是「3 2 1」里 1 排最后的全部原因。',
 	});
 	frames.push({
 		done: ['stack', 'micro', 'macro'],
 		badges: { micro: '空', macro: '空' },
-		note: '宏任务执行完，又立刻清一遍微任务队列（await 的后续、新注册的 then），然后才轮到渲染——**每个宏任务都是一个微任务清空点**。',
+		note: '宏任务执行完，又立刻清一遍微任务队列（await 的后续、新注册的 then），然后才轮到渲染——每个宏任务都是一个微任务清空点。',
 	});
 	frames.push({
 		done: ['stack', 'micro', 'macro'],
@@ -1180,7 +1180,7 @@ function rabbitmqReliable(): FlowVizConfig {
 		hotEdges: ['deliver'],
 		packets: [{ edge: 'deliver', at: 0.3, tone: 'resp', label: 'basicAck' }],
 		done: ['b', 'd', 'c'],
-		note: '消费者**处理完**才回手动 ACK，broker 收到才删除消息；没 ACK 或 channel 断开，消息重新入队再投。',
+		note: '消费者处理完才回手动 ACK，broker 收到才删除消息；没 ACK 或 channel 断开，消息重新入队再投。',
 	});
 	frames.push({
 		done: ['p', 'b', 'd', 'c'],
@@ -1357,6 +1357,358 @@ function pgWal(): FlowVizConfig {
 	};
 }
 
+/** RabbitMQ 死信与延迟：TTL 到期变死信 → DLX → 业务队列，用等待换延迟 */
+function rabbitmqDeadletter(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: 'RabbitMQ 没有原生延迟队列，经典解法是「TTL + 死信」组合拳：消息先在延迟队列里等过期，过期变死信、经死信交换机转投真正的业务队列。看订单 30 分钟超时取消怎么落地。',
+	});
+	frames.push({
+		active: ['p'],
+		hotEdges: ['send'],
+		packets: [{ edge: 'send', at: 0.4, tone: 'req', label: '订单 · TTL 30min' }],
+		note: '生产者发一条订单消息——它不进业务队列，而是进「延迟队列」：只设 x-message-ttl、绑定死信交换机 DLX，并且没有消费者。',
+	});
+	frames.push({
+		active: ['delayq'],
+		badges: { delayq: '堆积等待' },
+		done: ['p'],
+		note: '消息在延迟队列里安静躺着。注意坑：过期只看队头，队头没到期后面全堵——延迟粒度太碎时慎用 TTL 方案（分级队列或官方插件）。',
+	});
+	frames.push({
+		active: ['delayq'],
+		badges: { delayq: 'TTL 到期' },
+		hotEdges: ['dead'],
+		packets: [{ edge: 'dead', at: 0.35, tone: 'data', label: '死信' }],
+		note: '30 分钟到，消息过期，成为「死信」——自动转发给队列绑定的死信交换机。被拒绝（requeue=false）和队满（x-max-length）也会走同一条路。',
+	});
+	frames.push({
+		active: ['dlx'],
+		hotEdges: ['dead', 'route'],
+		packets: [
+			{ edge: 'dead', at: 0.85, tone: 'data', label: '死信' },
+			{ edge: 'route', at: 0.5, tone: 'data', label: '路由 #' },
+		],
+		done: ['delayq'],
+		note: 'DLX 按绑定规则（这里是 # 通配）把死信投给真正的业务队列——DLX 忘了绑队列，死信就无路可走被丢弃。',
+	});
+	frames.push({
+		active: ['biz'],
+		hotEdges: ['deliver'],
+		packets: [{ edge: 'deliver', at: 0.5, tone: 'data', label: '超时取消' }],
+		done: ['delayq', 'dlx'],
+		note: '业务队列的消费者收到消息，执行「订单超时自动取消」——延迟 30 分钟送达，全程没有轮询、没有扫表。',
+	});
+	frames.push({
+		done: ['p', 'delayq', 'dlx', 'biz', 'consumer'],
+		badges: { biz: '已消费' },
+		note: '复盘：用「等待」换「延迟」。生产优先用官方 Delay Exchange 插件（语义更直白）；重试 + 死信 + 告警的闭环同样靠 DLX 兜底——坏消息不堵业务队列、失败可见可度量。',
+	});
+
+	return {
+		title: '死信与延迟消息 · TTL 到期转投业务队列',
+		height: 380,
+		nodes: [
+			{ id: 'p', label: '生产者', x: 0.06, y: 0.18 },
+			{ id: 'delayq', label: '延迟队列', sub: 'TTL · 无人消费', x: 0.32, y: 0.18, shape: 'cylinder' },
+			{ id: 'dlx', label: 'DLX', sub: '死信交换机', x: 0.6, y: 0.18 },
+			{ id: 'biz', label: '业务队列', sub: '订单超时', x: 0.87, y: 0.18, shape: 'cylinder' },
+			{ id: 'consumer', label: '消费者', x: 0.87, y: 0.78 },
+		],
+		edges: [
+			{ id: 'send', from: 'p', to: 'delayq' },
+			{ id: 'dead', from: 'delayq', to: 'dlx' },
+			{ id: 'route', from: 'dlx', to: 'biz' },
+			{ id: 'deliver', from: 'biz', to: 'consumer' },
+		],
+		frames,
+	};
+}
+
+/** Docker 镜像分层与写时复制：容器 = 只读镜像 + 私有可写层 */
+function dockerCow(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: '镜像与容器的关系一句话：镜像 = 只读的分层模板，容器 = 镜像 + 一个私有的可写层。理解「写时复制（CoW）」，容器数据为什么易逝就通了。',
+	});
+	frames.push({
+		active: ['image'],
+		hotEdges: ['pull'],
+		packets: [{ edge: 'pull', at: 0.5, tone: 'data', label: '分层下载' }],
+		note: '拉镜像按层下载：本地已有的层直接复用——多个镜像共享底层只读层，这是「镜像很大但拉取很快」的原因。',
+	});
+	frames.push({
+		active: ['rw'],
+		hotEdges: ['mount'],
+		packets: [{ edge: 'mount', at: 0.45, tone: 'data', label: '联合挂载' }],
+		done: ['image'],
+		note: 'docker run：只读镜像层作下层，顶部新建一个容器私有的可写层，联合挂载成一个统一视图。',
+	});
+	frames.push({
+		active: ['rw'],
+		badges: { rw: '读 · 直读镜像' },
+		note: '读文件：自上而下在各层找，找到直接读——不需要任何拷贝。',
+	});
+	frames.push({
+		active: ['rw'],
+		badges: { rw: '写 · 先拷贝再改（CoW）' },
+		note: '改文件（写时复制）：先把文件从镜像层整个复制到可写层，再在副本上改——镜像层永远不被修改。大文件首次改写有拷贝代价。',
+	});
+	frames.push({
+		active: ['rw'],
+		badges: { rw: '删 · 只打标记' },
+		note: '删除文件：只是在可写层打一个 whiteout 标记把它「遮住」——镜像层原封不动。',
+	});
+	frames.push({
+		dim: ['rw'],
+		badges: { rw: '已丢弃' },
+		note: '容器删除：只丢可写层。同一镜像起 10 个容器互不干扰、也不占 10 份磁盘——每个容器只多一份自己的可写层。',
+	});
+	frames.push({
+		active: ['vol'],
+		hotEdges: ['vol'],
+		packets: [{ edge: 'vol', at: 0.5, tone: 'req', label: '挂载' }],
+		dim: ['rw'],
+		note: '那数据库数据放哪？挂 volume——写到可写层之外，容器删了数据还在。「容器里改的东西删容器就没」，就是可写层在作怪。',
+	});
+
+	return {
+		title: '镜像分层与写时复制 · 容器 = 镜像 + 可写层',
+		height: 400,
+		nodes: [
+			{ id: 'reg', label: '镜像仓库', sub: 'Registry', x: 0.07, y: 0.22, shape: 'cylinder' },
+			{ id: 'image', label: '镜像只读层', sub: 'base·依赖·应用', x: 0.36, y: 0.22, hw: 72 },
+			{ id: 'rw', label: '容器可写层', sub: '容器私有', x: 0.68, y: 0.22, hw: 72 },
+			{ id: 'vol', label: '数据卷', sub: 'volume', x: 0.68, y: 0.78, shape: 'cylinder' },
+		],
+		edges: [
+			{ id: 'pull', from: 'reg', to: 'image', label: '按层拉取' },
+			{ id: 'mount', from: 'image', to: 'rw', both: true, label: '联合挂载' },
+			{ id: 'vol', from: 'rw', to: 'vol', dashed: true },
+		],
+		frames,
+	};
+}
+
+/** etcd 一次写入：Raft 过半提交 → MVCC revision → Watch 事件流 */
+function etcdWrite(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: 'etcd = Raft 共识 + MVCC 多版本 + Watch 推送。Kubernetes 把全量集群状态存在它上面，controller 靠 Watch 做「声明式收敛」。看一次 put 的完整旅程。',
+	});
+	frames.push({
+		active: ['client'],
+		hotEdges: ['put'],
+		packets: [{ edge: 'put', at: 0.4, tone: 'req', label: 'PUT' }],
+		note: '客户端发起写请求：层级 key + 小 value（etcdctl put /config/app/port 8080）。',
+	});
+	frames.push({
+		active: ['leader', 'follower'],
+		hotEdges: ['raft'],
+		packets: [{ edge: 'raft', at: 0.5, tone: 'data', label: '日志复制' }],
+		done: ['client'],
+		note: 'Leader 把写追加为 Raft 日志（term 标记任期），复制给 Follower；过半（3 台里的 2 台）确认后提交——用 Quorum 换强一致。',
+	});
+	frames.push({
+		active: ['mvcc'],
+		hotEdges: ['apply'],
+		packets: [{ edge: 'apply', at: 0.5, tone: 'data', label: '应用' }],
+		done: ['client', 'follower'],
+		badges: { mvcc: 'rev +1' },
+		note: '提交后应用到 MVCC 状态树：每次写分配全局递增 revision——旧版本不被覆盖，get --prefix 还能按版本回溯历史。',
+	});
+	frames.push({
+		active: ['watcher'],
+		hotEdges: ['watch'],
+		packets: [{ edge: 'watch', at: 0.5, tone: 'data', label: 'PUT 事件' }],
+		done: ['client', 'follower', 'mvcc'],
+		note: 'Watch 了 /config 前缀的客户端立刻收到事件流——K8s 的 controller 就靠这个「状态一变就 reconcile」，声明式收敛的地基。',
+	});
+	frames.push({
+		done: ['client', 'leader', 'follower', 'mvcc'],
+		note: '读请求默认走节点本地状态（快）；要线性一致可强制走 Raft。Lease 租约给 key 带 TTL，过期自动删除——临时节点的同款语义。',
+	});
+	frames.push({
+		done: ['client', 'leader', 'follower', 'mvcc', 'watcher'],
+		badges: { mvcc: 'compaction' },
+		note: '历史版本不能无限留：compaction 压缩旧 revision，防止存储与内存膨胀——MVCC 的便利要用压缩来还。',
+	});
+	frames.push({
+		done: ['client', 'leader', 'follower', 'mvcc', 'watcher'],
+		badges: { mvcc: 'compaction' },
+		note: '复盘：Raft 保「多数派认可才存在」，MVCC 保「变化有版本可溯」，Watch 保「变化即时可见」——三者拼出云原生的协调中枢。',
+	});
+
+	return {
+		title: 'etcd 一次写入 · Raft → MVCC → Watch',
+		height: 380,
+		nodes: [
+			{ id: 'client', label: '客户端', x: 0.07, y: 0.18 },
+			{ id: 'leader', label: 'Leader', sub: '追加日志 · term', x: 0.38, y: 0.18 },
+			{ id: 'follower', label: 'Follower', sub: '过半确认', x: 0.72, y: 0.18 },
+			{ id: 'mvcc', label: 'MVCC 树', sub: 'revision 递增', x: 0.38, y: 0.76 },
+			{ id: 'watcher', label: 'Watch 订阅者', sub: 'K8s controller', x: 0.76, y: 0.76 },
+		],
+		edges: [
+			{ id: 'put', from: 'client', to: 'leader' },
+			{ id: 'raft', from: 'leader', to: 'follower', both: true },
+			{ id: 'apply', from: 'leader', to: 'mvcc', label: '提交后应用' },
+			{ id: 'watch', from: 'mvcc', to: 'watcher', dashed: true, label: '事件流' },
+		],
+		frames,
+	};
+}
+
+/** MQTT QoS2 四段握手：接收方按 message id 登记去重，恰好一次 */
+function mqttQos2(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { pub: 'QoS 2', rec: 'QoS 2' },
+		note: 'QoS2 的目标是「恰好一次」：不重也不丢，代价是 4 段报文。关键机制是中间态记账——接收方按 message id 去重。',
+	});
+	frames.push({
+		active: ['pub'],
+		hotEdges: ['p2s'],
+		packets: [{ edge: 'p2s', at: 0.5, tone: 'req', label: 'PUBLISH id=42' }],
+		badges: { pub: 'QoS 2', rec: '未登记' },
+		note: '第一次发送：PUBLISH 带上 message id。在收到 PUBREC 之前，发送方随时可能重发这条 PUBLISH。',
+	});
+	frames.push({
+		active: ['rec'],
+		hotEdges: ['s2r'],
+		packets: [{ edge: 's2r', at: 0.5, tone: 'resp', label: 'PUBREC' }],
+		badges: { pub: 'QoS 2', rec: '已登记 id=42' },
+		note: '接收方收到 → 登记这个 message id → 回 PUBREC。这一笔登记，就是去重的全部秘密。',
+	});
+	frames.push({
+		active: ['pub'],
+		hotEdges: ['s2r'],
+		packets: [{ edge: 's2r', at: 0.25, tone: 'req', label: 'PUBREL' }],
+		badges: { pub: '不再重发 PUBLISH', rec: '已登记 id=42' },
+		note: '发送方收到 PUBREC：知道对方「已收到且已登记」——从此只补确认，不再重发数据本身。',
+	});
+	frames.push({
+		hotEdges: ['p2s'],
+		packets: [{ edge: 'p2s', at: 0.5, tone: 'req', label: 'PUBREL' }],
+		badges: { pub: '不再重发 PUBLISH', rec: '已登记 id=42' },
+		note: '没收到 PUBCOMP 就重发 PUBREL——注意重发的是确认，不是 PUBLISH，数据不会因此重复投递。',
+	});
+	frames.push({
+		active: ['rec'],
+		hotEdges: ['s2r'],
+		packets: [{ edge: 's2r', at: 0.15, tone: 'resp', label: 'PUBCOMP' }],
+		badges: { pub: '不再重发 PUBLISH', rec: '已投递 · 清算完成' },
+		note: '接收方收到 PUBREL → 把消息投给应用层（只这一次） → 回 PUBCOMP。双方清算完毕，忘掉这个 id。',
+	});
+	frames.push({
+		done: ['pub', 'rec'],
+		badges: { pub: '不再重发 PUBLISH', rec: '已投递 · 清算完成' },
+		note: '如果重发窗口内出现了重复的 PUBLISH / PUBREL：接收方查到 id 已登记，不再重复投递、只补 ACK——「恰好一次」就是这样成立的。',
+	});
+	frames.push({
+		done: ['pub', 'rec'],
+		badges: { pub: '默认 QoS 1', rec: '默认 QoS 1' },
+		note: '复盘：QoS1 两条报文「至少一次」（可能重复），QoS2 四条报文「恰好一次」（开销高少用）。工程默认 QoS1 + 业务幂等，QoS2 留给带宽富余且无法幂等的场景。',
+	});
+
+	return {
+		title: 'MQTT QoS2 · 四段握手与 message id 去重',
+		height: 300,
+		nodes: [
+			{ id: 'pub', label: '发送方', x: 0.12, y: 0.45 },
+			{ id: 'rec', label: '接收方', x: 0.88, y: 0.45 },
+		],
+		edges: [
+			{ id: 's2r', from: 'rec', to: 'pub', bend: 64 },
+			{ id: 'p2s', from: 'pub', to: 'rec', bend: 64 },
+		],
+		frames,
+	};
+}
+
+/** 输入 URL 到页面显示：八步因果链，排障即倒放 */
+function urlToPage(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { browser: '输入 URL' },
+		note: '「输入 URL 到页面显示」是网络八股的总纲：把 DNS、TCP、TLS、HTTP 串成因果链，也是线上排障的地图。走一遍 https://example.com。',
+	});
+	frames.push({
+		active: ['dns'],
+		hotEdges: ['dq'],
+		packets: [{ edge: 'dq', at: 0.4, tone: 'req', label: '查 A 记录' }],
+		note: 'DNS 解析：浏览器缓存 → hosts → 本地 DNS → 根/顶级/权威，逐级查到 example.com 的 IP（命中缓存则短路）。CDN 就是在这一步把你引到边缘节点。',
+	});
+	frames.push({
+		done: ['dns'],
+		hotEdges: ['dq'],
+		packets: [{ edge: 'dq', at: 0.8, tone: 'resp', label: 'IP 返回' }],
+		note: '拿到 IP。首次访问这一步可能跨多个 RTT，所以各级 DNS 缓存都很关键。',
+	});
+	frames.push({
+		active: ['server'],
+		hotEdges: ['main'],
+		packets: [{ edge: 'main', at: 0.3, tone: 'req', label: 'TCP 三次握手' }],
+		badges: { server: '连接建立' },
+		done: ['dns'],
+		note: 'TCP 建连：三次握手同步双方初始序号——握手的每一帧在上面的握手动画里。',
+	});
+	frames.push({
+		hotEdges: ['main'],
+		packets: [{ edge: 'main', at: 0.5, tone: 'req', label: 'TLS 握手' }],
+		badges: { server: '加密通道' },
+		done: ['dns'],
+		note: 'TLS 握手：验证证书 + 协商会话密钥（1 个 RTT）。https 才有这一步——优化史就是这条链的减 RTT 史。',
+	});
+	frames.push({
+		active: ['browser'],
+		hotEdges: ['main'],
+		packets: [{ edge: 'main', at: 0.72, tone: 'req', label: 'GET /index.html' }],
+		badges: { server: '加密通道', browser: '请求已发出' },
+		done: ['dns'],
+		note: '发 HTTP 请求：构造请求行/头/体，可能带上 Cookie；经 CDN / 负载均衡进入服务端。',
+	});
+	frames.push({
+		active: ['server'],
+		badges: { server: '处理中', browser: '请求已发出' },
+		done: ['dns'],
+		note: '服务端链路：负载均衡 → 网关鉴权限流 → 业务逻辑 → 缓存/DB。最常见的故障都在这一段：网关 502/504、慢 SQL、线程池打满。',
+	});
+	frames.push({
+		active: ['browser'],
+		hotEdges: ['main'],
+		packets: [{ edge: 'main', at: 0.35, tone: 'resp', label: 'HTML 200' }],
+		badges: { server: '加密通道', browser: '渲染中' },
+		done: ['dns', 'server'],
+		note: '响应回程：状态码 + 报文。keep-alive 下连接不断，后续请求直接复用——四次挥手要等空闲超时或主动关闭。',
+	});
+	frames.push({
+		done: ['browser', 'dns', 'server'],
+		badges: { browser: '首屏 ✓' },
+		note: '渲染：解析 HTML 建 DOM/CSSOM → 渲染树 → 排版绘制，JS 阻塞解析。排障时把这条链倒着二分：curl 直接打后端 IP，通不通一测就知道问题在哪一段。',
+	});
+
+	return {
+		title: '输入 URL 到页面显示 · 八步因果链',
+		height: 380,
+		nodes: [
+			{ id: 'browser', label: '浏览器', x: 0.1, y: 0.2 },
+			{ id: 'dns', label: 'DNS 解析', sub: '递归查询', x: 0.38, y: 0.72 },
+			{ id: 'server', label: '服务端', sub: 'LB → 网关 → 服务', x: 0.68, y: 0.2 },
+		],
+		edges: [
+			{ id: 'dq', from: 'browser', to: 'dns', both: true },
+			{ id: 'main', from: 'browser', to: 'server', both: true },
+		],
+		frames,
+	};
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的架构/流程演示注册表 */
 export const flowDemos: Record<string, FlowVizConfig> = {
 	'mysql-2pc': mysqlTwoPhaseCommit(),
@@ -1377,4 +1729,9 @@ export const flowDemos: Record<string, FlowVizConfig> = {
 	'rabbitmq-reliable': rabbitmqReliable(),
 	'mongo-election': mongoElection(),
 	'pg-wal': pgWal(),
+	'rabbitmq-dlq': rabbitmqDeadletter(),
+	'docker-cow': dockerCow(),
+	'etcd-write': etcdWrite(),
+	'mqtt-qos2': mqttQos2(),
+	'url-to-page': urlToPage(),
 };

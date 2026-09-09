@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 为什么这道题经久不衰
 
 它是**网络八股的总纲**：单独背三次握手、DNS、HTTP 都容易，这道题
@@ -38,6 +40,10 @@ flowchart LR
 | ⑥ 服务端 | 负载均衡 → 网关鉴权限流 → 业务 → 缓存/DB | [Spring MVC 流程](/java/intermediate/spring-mvc/01-springmvc-flow/) |
 | ⑦ 响应 | 状态码语义、Content-Type、长连接复用 | 同上 |
 | ⑧ 渲染 | 解析 HTML 建 DOM/CSSOM → 渲染树 → 排版绘制；JS 阻塞解析 | （前端领域） |
+
+八步串成一条链按帧放一遍（每一步深入前的「地图视角」）：
+
+<AlgorithmVizIsland demo="url-to-page" />
 
 ## 三个高频追问
 

@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## QoS：三层送达保证
 
 消息"丢一次还是丢多次"可控，代价是更多的确认往返：
@@ -70,6 +72,10 @@ PUBCOMP）。很多人背流程但不理解它靠什么消重，关键在于**�
   → 发送方【存下这个包的 message id】，等待 PUBREL 确认
   → 若没收到 PUBCOMP，发送方会重发 PUBREL（不是重发 PUBLISH！）
 ```
+
+四段报文按帧走一遍，看清「登记 id」与「只重发确认」这两个关键动作：
+
+<AlgorithmVizIsland demo="mqtt-qos2" />
 
 **消重的真相**：接收方**一旦 PUBREC 过某个 message id，就记住了**；后续
 重复的 PUBLISH/PUBREL 都不再重复投递给应用层，只回 ACK。所以"恰好一次"

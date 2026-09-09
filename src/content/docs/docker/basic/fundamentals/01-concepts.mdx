@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 三大核心概念
 
 | 概念 | 类比 | 说明 |
@@ -71,6 +73,10 @@ flowchart LR
         W1[容器改 nginx.conf] --> W2[复制到可写层再改<br/>镜像层不受影响]
     end
 ```
+
+读 / 改 / 删三种操作在分层模型上怎么落，按帧走一遍：
+
+<AlgorithmVizIsland demo="docker-cow" />
 
 这就是"同一镜像起 10 个容器、改各自配置互不干扰、也不占 10 份磁盘"的原因
 ——**每个容器只多一份可写层**，镜像只存一份。

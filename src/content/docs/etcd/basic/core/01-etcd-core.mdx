@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## etcd 是什么
 
 etcd 是一个**分布式强一致键值存储**，是云原生生态的"协调中枢"：Kubernetes
@@ -52,6 +54,10 @@ flowchart LR
   可回溯历史、支持按版本读。
 - **Watch**：客户端订阅前缀，key 变化时流式推送事件（PUT/DELETE）。K8s 的
   controller 正是靠 etcd Watch 实现的"声明式收敛"——状态一变就触发 reconcile。
+
+一次 put 从 Raft 复制到 MVCC 落库、再到 Watch 推送的完整旅程：
+
+<AlgorithmVizIsland demo="etcd-write" />
 
 ## 与 ZooKeeper 对比
 
