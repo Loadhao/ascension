@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 单线程为什么还需要异步
 
 JS 单线程跑调用栈——DOM 操作天然要求互斥，两条线程同时改 DOM 无法
@@ -28,6 +30,10 @@ flowchart TB
    宏任务；
 2. 微任务在当前调用栈 bottoms 时插队——**微任务比 setTimeout 快，
    哪怕 setTimeout(0)**。
+
+把一次「同步 → 微任务 → 宏任务」的完整排班按帧放一遍：
+
+<AlgorithmVizIsland demo="js-event-loop" />
 
 必背输出顺序，以及它的进阶版：
 

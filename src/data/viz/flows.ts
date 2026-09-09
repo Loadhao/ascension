@@ -1013,6 +1013,350 @@ function tlsHandshake(): FlowVizConfig {
 	};
 }
 
+/** TCP 三次握手：序号坐标对齐 + 给历史连接留 veto */
+function tcpHandshake(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { client: 'CLOSED', server: 'LISTEN' },
+		note: '服务端先监听（LISTEN），客户端主动建连。为什么恰好三次？看完握手，最后一步揭晓。',
+	});
+	frames.push({
+		active: ['client'],
+		hotEdges: ['c2s'],
+		packets: [{ edge: 'c2s', at: 0.5, tone: 'req', label: 'SYN seq=x' }],
+		badges: { client: 'SYN_SENT', server: 'LISTEN' },
+		note: '第一次：客户端发 SYN，携带初始序号 ISN = x，进入 SYN_SENT——「我要建连，我的序号坐标系从 x 开始」。',
+	});
+	frames.push({
+		active: ['server'],
+		hotEdges: ['s2c'],
+		packets: [{ edge: 's2c', at: 0.5, tone: 'data', label: 'SYN+ACK' }],
+		badges: { client: 'SYN_SENT', server: 'SYN_RCVD' },
+		note: '第二次：服务端回 SYN+ACK——自己的初始序号 y + 对 x 的确认（ack = x+1），进入 SYN_RCVD。「收到你的 x；我的坐标系从 y 开始」。',
+	});
+	frames.push({
+		active: ['client'],
+		hotEdges: ['c2s'],
+		packets: [{ edge: 'c2s', at: 0.5, tone: 'resp', label: 'ACK y+1' }],
+		badges: { client: 'ESTABLISHED', server: 'SYN_RCVD' },
+		note: '第三次：客户端回 ACK（y+1），自己先进入 ESTABLISHED。这第三次正是给「历史连接」准备的否决机会。',
+	});
+	frames.push({
+		active: ['server'],
+		done: ['client', 'server'],
+		badges: { client: 'ESTABLISHED', server: 'ESTABLISHED' },
+		note: '两次为什么不行？一个滞留的旧 SYN 若只握两次，服务端回个 ACK 就当连接建成、分配资源——客户端根本不认。第三次 ACK 让客户端有机会说「我要的不是这个」；三次也是「双方确认收发能力都正常」的最小次数。',
+	});
+	frames.push({
+		done: ['client', 'server'],
+		badges: { client: '可传数据', server: '可传数据' },
+		note: '双方序号坐标系对齐完毕，开始传数据。断开时的四次挥手与 TIME_WAIT 归属，见下文的挥手动画。',
+	});
+
+	return {
+		title: 'TCP 三次握手 · 序号对齐与防历史连接',
+		height: 300,
+		nodes: [
+			{ id: 'client', label: '客户端', x: 0.12, y: 0.45 },
+			{ id: 'server', label: '服务端', x: 0.88, y: 0.45 },
+		],
+		edges: [
+			{ id: 's2c', from: 'server', to: 'client', bend: 64 },
+			{ id: 'c2s', from: 'client', to: 'server', bend: 64 },
+		],
+		frames,
+	};
+}
+
+/** JS 事件循环：同步 → 清空微任务 → 一个宏任务 → 再清微任务 */
+function jsEventLoop(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: '事件循环的排班表：同步代码跑完 → 清空整个微任务队列 →（渲染）→ 取一个宏任务 → 再清微任务……两条铁律都从这张流程里长出来。',
+	});
+	frames.push({
+		active: ['stack'],
+		hotEdges: ['s2macro'],
+		packets: [{ edge: 's2macro', at: 0.5, tone: 'data', label: 'setTimeout' }],
+		badges: { macro: '1 个任务' },
+		note: '执行同步代码：遇到 setTimeout(0)，回调不是「0ms 后执行」，而是登记进宏任务队列——计时器只保证「至少等这么久」。',
+	});
+	frames.push({
+		active: ['stack'],
+		hotEdges: ['s2micro'],
+		packets: [{ edge: 's2micro', at: 0.5, tone: 'data', label: 'Promise.then' }],
+		badges: { micro: '1 个任务', macro: '1 个任务' },
+		note: '遇到 Promise.then，回调进**微任务**队列——它和宏任务不在同一个班次，优先级天差地别。',
+	});
+	frames.push({
+		active: ['stack'],
+		badges: { micro: '1 个任务', macro: '1 个任务' },
+		note: '同步代码执行完毕，调用栈清空。此刻微任务队列 1 个、宏任务队列 1 个——谁先跑？',
+	});
+	frames.push({
+		active: ['micro'],
+		hotEdges: ['s2micro'],
+		packets: [{ edge: 's2micro', at: 0.6, tone: 'req', label: 'then 回调' }],
+		badges: { micro: '清空中', macro: '1 个任务' },
+		note: '先清空**整个**微任务队列：then 回调立即执行——微任务比 setTimeout(0) 快，因为它插队插在渲染和下一个宏任务之前。',
+	});
+	frames.push({
+		active: ['macro'],
+		hotEdges: ['s2macro'],
+		packets: [{ edge: 's2macro', at: 0.6, tone: 'req', label: '回调执行' }],
+		badges: { micro: '空', macro: '出队中' },
+		note: '微队列空了，事件循环才取**一个**宏任务执行——setTimeout(0) 的回调到这一步才跑，这就是「3 2 1」里 1 排最后的全部原因。',
+	});
+	frames.push({
+		done: ['stack', 'micro', 'macro'],
+		badges: { micro: '空', macro: '空' },
+		note: '宏任务执行完，又立刻清一遍微任务队列（await 的后续、新注册的 then），然后才轮到渲染——**每个宏任务都是一个微任务清空点**。',
+	});
+	frames.push({
+		done: ['stack', 'micro', 'macro'],
+		badges: { micro: '空', macro: '空' },
+		note: '复盘铁律：①每个宏任务之后清空全部微任务；②微任务永远优先于宏任务。输出顺序题在脑子里跑这张图即可；await 的语义就是「把后面的代码包成微任务先让出栈」。',
+	});
+
+	return {
+		title: '事件循环 · 微任务插队与宏任务排班',
+		height: 350,
+		nodes: [
+			{ id: 'stack', label: '调用栈', sub: '同步执行', x: 0.14, y: 0.4 },
+			{ id: 'micro', label: '微任务队列', sub: 'Promise.then', x: 0.55, y: 0.14 },
+			{ id: 'macro', label: '宏任务队列', sub: 'setTimeout / IO', x: 0.55, y: 0.66 },
+		],
+		edges: [
+			{ id: 's2micro', from: 'stack', to: 'micro', both: true },
+			{ id: 's2macro', from: 'stack', to: 'macro', both: true },
+		],
+		frames,
+	};
+}
+
+/** RabbitMQ 可靠投递：confirm / 持久化 / 手动 ACK 三段责任链 */
+function rabbitmqReliable(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: '「不丢」是三段责任链：生产者 confirm、broker 持久化、消费者手动 ACK——任何一段失守都会丢。看一条持久化消息从发送到删除的完整一生。',
+	});
+	frames.push({
+		active: ['p'],
+		hotEdges: ['pub'],
+		packets: [{ edge: 'pub', at: 0.4, tone: 'req', label: 'basicPublish' }],
+		note: '生产者发布持久化消息（delivery_mode = 2），经交换机路由进队列——但此刻还没有 confirm，消息不能算安全。',
+	});
+	frames.push({
+		active: ['b'],
+		done: ['p'],
+		note: '消息入队（先在内存），刷盘前都不可靠——confirm 正被门控：broker 还不能回「已收到」。',
+	});
+	frames.push({
+		active: ['d'],
+		hotEdges: ['persist'],
+		packets: [{ edge: 'persist', at: 0.5, tone: 'data', label: 'fsync' }],
+		done: ['p'],
+		note: '消息落盘完成（durable 队列 + 持久化消息；镜像集群则同步到 mirror）——这一刻才有资格发 confirm。',
+	});
+	frames.push({
+		active: ['p'],
+		hotEdges: ['pub'],
+		packets: [{ edge: 'pub', at: 0.3, tone: 'resp', label: 'confirm' }],
+		done: ['b', 'd'],
+		note: 'broker 回 basicAck（confirm）：生产者收到后才删本地 pending 记录；没收到就超时重发——绝不能「发了就算」。',
+	});
+	frames.push({
+		active: ['c'],
+		hotEdges: ['deliver'],
+		packets: [{ edge: 'deliver', at: 0.5, tone: 'data', label: '投递' }],
+		done: ['b', 'd'],
+		note: 'broker 把消息投递给消费者。注意：confirm 只代表 broker 收到了，跟消费成功与否无关——别混。',
+	});
+	frames.push({
+		active: ['c'],
+		hotEdges: ['deliver'],
+		packets: [{ edge: 'deliver', at: 0.3, tone: 'resp', label: 'basicAck' }],
+		done: ['b', 'd', 'c'],
+		note: '消费者**处理完**才回手动 ACK，broker 收到才删除消息；没 ACK 或 channel 断开，消息重新入队再投。',
+	});
+	frames.push({
+		done: ['p', 'b', 'd', 'c'],
+		note: '复盘：confirm 与消费 ACK 是两段独立责任链（生产者→broker、消费者→broker），逐段守住才「不丢」；重发带来的重复交给业务幂等。',
+	});
+
+	return {
+		title: '可靠投递 · confirm / 持久化 / 手动 ACK 三道闸',
+		height: 400,
+		nodes: [
+			{ id: 'p', label: '生产者', x: 0.07, y: 0.22 },
+			{ id: 'b', label: 'Broker', sub: '交换机 → 队列', x: 0.4, y: 0.22, shape: 'cylinder' },
+			{ id: 'd', label: '磁盘', sub: '持久化队列', x: 0.4, y: 0.75, shape: 'cylinder' },
+			{ id: 'c', label: '消费者', x: 0.78, y: 0.22 },
+		],
+		edges: [
+			{ id: 'pub', from: 'p', to: 'b', both: true },
+			{ id: 'persist', from: 'b', to: 'd', label: '落盘' },
+			{ id: 'deliver', from: 'b', to: 'c', both: true, label: '投递 / ACK' },
+		],
+		frames,
+	};
+}
+
+/** MongoDB 复制集选举：心跳发现 → 同僚仲裁 → Elect 投票（30s 选举锁） */
+function mongoElection(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { p: 'Primary', s2: 'Secondary', s3: 'Secondary' },
+		note: '复制集 3 个投票成员，任意两两 2 秒一次心跳，每个节点只维护自己视角（POV）的状态。看 Primary 宕机后怎么选出新主。',
+	});
+	frames.push({
+		active: ['s2'],
+		dim: ['p'],
+		badges: { s2: '标记 P 失联', s3: 'Secondary' },
+		note: 'Primary 宕机。S2 心跳超时，先标记它失联——只是自己 POV；接着自检：能否连通 majority（2/3）、priority > 0、非 Arbiter。',
+	});
+	frames.push({
+		active: ['s2'],
+		hotEdges: ['fc'],
+		packets: [{ edge: 'fc', at: 0.35, tone: 'req', label: 'FreshnessCheck' }],
+		badges: { s2: '自检通过', s3: 'Secondary' },
+		note: '同僚仲裁：S2 向 S3 发 FreshnessCheck——发起者的 oplog 必须是存活节点里最新的，旧数据没资格当主。',
+	});
+	frames.push({
+		active: ['s3'],
+		hotEdges: ['fc'],
+		packets: [{ edge: 'fc', at: 0.8, tone: 'resp', label: '通过' }],
+		badges: { s2: '自检通过', s3: 'Secondary' },
+		note: 'S3 校验通过：S2 的 oplog 够新，有参选资格。',
+	});
+	frames.push({
+		active: ['s2'],
+		hotEdges: ['fc'],
+		packets: [{ edge: 'fc', at: 0.55, tone: 'req', label: 'Elect 求票' }],
+		badges: { s2: '参选中', s3: 'Secondary' },
+		note: 'S2 正式发起选举投票。',
+	});
+	frames.push({
+		active: ['s3'],
+		hotEdges: ['fc'],
+		packets: [{ edge: 'fc', at: 0.15, tone: 'resp', label: '同意' }],
+		badges: { s2: '参选中', s3: '投票 · 选举锁 30s' },
+		note: 'S3 投票并持有 30 秒选举锁（类似任期，期间不再投给别人）。S2 拿到 majority（3 台里的 2 票）当选——未过半则随机退避后重试。',
+	});
+	frames.push({
+		active: ['s2'],
+		done: ['s3'],
+		badges: { s2: '新 Primary', s3: '已投票' },
+		note: 'S2 就任新 Primary，driver 感知拓扑变化后自动把写入切过来——应用基本无感。',
+	});
+	frames.push({
+		badges: { s2: '新 Primary', p: '降级 Secondary' },
+		dim: ['p'],
+		note: '旧主恢复：oplog 分叉的部分要 rollback（落 rollback 文件人工处理），自己降级 Secondary 重新加入。若存活成员不足 majority，复制集整体只读——宁不可写，不出双主。',
+	});
+
+	return {
+		title: '复制集选举 · 心跳、仲裁与 30s 选举锁',
+		height: 350,
+		nodes: [
+			{ id: 'p', label: 'Primary', sub: 'S1 · 旧主', x: 0.16, y: 0.2, shape: 'cylinder' },
+			{ id: 's2', label: 'Secondary', sub: 'S2 · 发起选举', x: 0.5, y: 0.2 },
+			{ id: 's3', label: 'Secondary', sub: 'S3 · 投票者', x: 0.84, y: 0.2 },
+			{ id: 'client', label: '客户端', sub: 'driver 自动切换', x: 0.5, y: 0.78 },
+		],
+		edges: [
+			{ id: 'hb', from: 's2', to: 'p', both: true, label: '心跳 2s' },
+			{ id: 'fc', from: 's2', to: 's3', both: true },
+			{ id: 'w', from: 'client', to: 's2' },
+		],
+		frames,
+	};
+}
+
+/** PostgreSQL WAL：先记日志再改页，崩溃后从 checkpoint 重放 */
+function pgWal(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { wal: '空', page: '干净页' },
+		note: 'WAL 的契约：修改数据页之前，先把「这一改」的物理描述写进日志——崩溃后数据文件可以从 checkpoint 起重放日志追上来。',
+	});
+	frames.push({
+		active: ['wal'],
+		hotEdges: ['w'],
+		packets: [{ edge: 'w', at: 0.5, tone: 'data', label: '物理描述' }],
+		badges: { page: '干净页' },
+		note: '第一步：事务要改某数据页，先把这条修改的物理描述（哪个页哪个字节改成什么）追加进 WAL 并 fsync——synchronous_commit 决定等到哪一步。',
+	});
+	frames.push({
+		active: ['page'],
+		hotEdges: ['p'],
+		packets: [{ edge: 'p', at: 0.5, tone: 'data', label: '改页' }],
+		badges: { page: '脏页' },
+		done: ['wal'],
+		note: '第二步：修改共享缓冲里的数据页——它成了脏页，内存里对事务可见，但数据文件还没变。',
+	});
+	frames.push({
+		active: ['backend'],
+		badges: { page: '脏页', wal: '已持久' },
+		done: ['wal', 'page'],
+		note: '事务提交：WAL 已落盘，就可以对客户端返回成功——哪怕脏页还没刷盘。这就是「先记日志，再改页」换来的提交速度。',
+	});
+	frames.push({
+		active: ['disk'],
+		hotEdges: ['f'],
+		packets: [{ edge: 'f', at: 0.5, tone: 'data', label: '脏页刷盘' }],
+		dim: ['backend'],
+		badges: { page: '脏页' },
+		note: '脏页由后台进程择机刷到数据文件——顺序保证：WAL 记录永远先于它描述的数据页落盘。',
+	});
+	frames.push({
+		active: ['wal'],
+		badges: { wal: 'checkpoint 起点', page: '已刷盘' },
+		done: ['disk'],
+		note: 'checkpoint：把当前脏页批量刷盘，并在 WAL 里记一条「到此全部已落盘」——之后崩溃恢复只需重放这个起点之后的日志。',
+	});
+	frames.push({
+		dim: ['backend', 'page', 'disk'],
+		badges: { wal: 'checkpoint 起点' },
+		note: '崩溃！内存里的脏页全部丢失，数据文件停在旧状态——看似丢了已提交的修改？',
+	});
+	frames.push({
+		active: ['disk'],
+		hotEdges: ['f'],
+		packets: [{ edge: 'f', at: 0.5, tone: 'resp', label: '重放 WAL' }],
+		badges: { wal: '重放完成' },
+		done: ['wal'],
+		note: '恢复：从最后一个 checkpoint 起重放 WAL，把数据文件补到「已提交事务对应的页状态」。full_page_writes 保证重放不会拼出半页。',
+	});
+	frames.push({
+		done: ['backend', 'wal', 'page', 'disk'],
+		badges: { wal: '重放完成' },
+		note: '复盘：WAL 同时服务崩溃恢复与物理复制（流复制就是另一名消费者）；checkpoint 不是「刷不刷 WAL」的开关，而是重放起点的标记。',
+	});
+
+	return {
+		title: 'WAL 与崩溃恢复 · 先记日志，再改数据页',
+		height: 400,
+		nodes: [
+			{ id: 'backend', label: '事务', sub: '提交返回', x: 0.1, y: 0.2 },
+			{ id: 'wal', label: 'WAL', sub: '物理日志 · fsync', x: 0.4, y: 0.2, shape: 'doc' },
+			{ id: 'page', label: '共享缓冲', sub: '脏页', x: 0.4, y: 0.72 },
+			{ id: 'disk', label: '数据文件', sub: '磁盘', x: 0.75, y: 0.72, shape: 'cylinder' },
+		],
+		edges: [
+			{ id: 'w', from: 'backend', to: 'wal', label: '先写 WAL' },
+			{ id: 'p', from: 'backend', to: 'page', label: '再改页' },
+			{ id: 'f', from: 'page', to: 'disk', dashed: true, label: '稍后刷盘', labelAt: 0.14 },
+		],
+		frames,
+	};
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的架构/流程演示注册表 */
 export const flowDemos: Record<string, FlowVizConfig> = {
 	'mysql-2pc': mysqlTwoPhaseCommit(),
@@ -1028,4 +1372,9 @@ export const flowDemos: Record<string, FlowVizConfig> = {
 	'seata-at': seataAt(),
 	'rocketmq-tx': rocketmqTx(),
 	'tls-handshake': tlsHandshake(),
+	'tcp-handshake': tcpHandshake(),
+	'js-event-loop': jsEventLoop(),
+	'rabbitmq-reliable': rabbitmqReliable(),
+	'mongo-election': mongoElection(),
+	'pg-wal': pgWal(),
 };

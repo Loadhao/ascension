@@ -23,6 +23,10 @@ sequenceDiagram
     Note over S: SYN_RCVD → ESTABLISHED
 ```
 
+握手报文与两端状态徽标按帧走一遍（为什么恰好三次，最后一帧揭晓）：
+
+<AlgorithmVizIsland demo="tcp-handshake" />
+
 每一步的使命：**同步彼此的初始序号（ISN）**——TCP 可靠传输的序号
 坐标系必须双方确认对齐（可靠机制见[TCP 可靠传输](/network/basic/tcp/02-reliable-transfer/)）。
 

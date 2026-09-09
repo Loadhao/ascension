@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 为什么需要复制集
 
 单实例 mongod 有两个绕不开的问题：**机器一坏数据全丢**（持久化只能防
@@ -104,6 +106,10 @@ sequenceDiagram
     C->>S2: driver 感知拓扑变化，自动切换写入
     Note over P: 旧主恢复：oplog 分叉 → rollback<br/>降级为 Secondary 重新加入
 ```
+
+两阶段选举（自检 → 仲裁 → 投票）放到成员拓扑里按帧播放：
+
+<AlgorithmVizIsland demo="mongo-election" />
 
 ## 读写关注
 

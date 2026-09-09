@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 [差异地图](/postgresql/basic/core/01-pg-vs-mysql/)把 WAL 定义成
 「物理日志，记录哪个页哪个字节改了」。[调优篇](/postgresql/advanced/performance/01-tuning/)
 从写放大角度拧 checkpoint。本篇讲机制本身：**为什么必须先写 WAL、
@@ -32,6 +34,10 @@ flowchart LR
     classDef good stroke-width:1.5px
     classDef bad stroke-width:1.5px
 ```
+
+一条修改从「先写 WAL」到「崩溃重放」按帧走一遍（含 checkpoint 标记起点）：
+
+<AlgorithmVizIsland demo="pg-wal" />
 
 这和 MySQL redo 同构、和 binlog 不同：binlog 是逻辑变更（给复制
 和闪回用），InnoDB 崩溃恢复靠 redo；PG **一条 WAL 同时服务崩溃
