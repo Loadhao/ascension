@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 351
+src/content/docs/network/basic/http/08-password-storage.md
+  h_9324126a55eff3 1-69
+src/data/graphs/network.json
+  h_9324126a55eff3 16-17,35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "fa9f337147b1c87a238bc525b9129c60afbca332",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
