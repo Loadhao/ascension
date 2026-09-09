@@ -1537,6 +1537,23 @@ summary .sl-tree-toggle:hover {
   opacity: 1;
 }
 
+/* 悬浮工具条：复制 / 下载与全屏同族样式，向左依次排开 */
+.mmd-fullscreen-btn.mmd-dl-btn {
+  right: calc(0.6rem + 38px);
+  cursor: pointer;
+}
+
+.mmd-fullscreen-btn.mmd-copy-btn {
+  right: calc(0.6rem + 76px);
+  cursor: copy;
+}
+
+/* 操作成功反馈：图标短暂换成对勾，描边与图标提亮 */
+.mmd-fullscreen-btn.mmd-done {
+  color: var(--sl-color-text);
+  border-color: color-mix(in srgb, var(--sl-color-text) 55%, transparent);
+}
+
 /* 覆盖层 */
 .mmd-viewer {
   position: fixed;
@@ -3037,10 +3054,11 @@ html.mmd-viewer-open {
 .sum-cells {
   flex: 1;
   display: grid;
-  /* 自然行高：内容少时余量摊到行间（space-between），不把单元格撑出大段空白 */
+  /* 自然行高 + 顶部对齐：行距固定不随余量膨胀；行数对齐时面板底部余量趋近于零，
+     少量余量留在面板底色里，比行间大缝自然 */
   grid-auto-rows: auto;
-  gap: 8px;
-  align-content: space-between;
+  gap: 9px;
+  align-content: flex-start;
 }
 
 .sum-cell {

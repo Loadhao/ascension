@@ -1,6 +1,7 @@
 // Mermaid 图表交互增强：
 // 1) 悬停高亮：hover 节点 / 子图 / 连线 → 高亮关联链路并淡出其余，点击固定
-// 2) 全屏缩放：图表右上角按钮（或双击）进入全屏，滚轮/双指缩放、拖拽平移、Esc 退出
+// 2) 悬浮工具条：复制（PNG 图片进剪贴板，不支持时降级复制 SVG 源码）、下载（2x PNG）、全屏
+// 3) 全屏缩放：图表右上角按钮（或双击）进入全屏，滚轮/双指缩放、拖拽平移、Esc 退出
 // 图表本体仍是构建时渲染的 SVG，本脚本只做 DOM 交互增强（module 自动 defer）。
 (() => {
   const ON = 'mmd-on';
@@ -21,10 +22,79 @@
       '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>',
     close:
       '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+    copy:
+      '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+    download:
+      '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>',
+    check:
+      '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
   };
   let viewer = null; // { close } 单例
+  let seq = 0; // 图表序号：下载文件名用
 
-  // 全屏缩放覆盖所有图型；悬停高亮依赖流程图结构，仅流程图启用
+  // —— PNG 导出：SVG 是构建期烘焙的自包含实色（亮色基准），白底 2x 光栅化即可 ——
+  async function svgToPngBlob(svg) {
+    const ns = naturalSize(svg);
+    const clone = svg.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    clone.setAttribute('width', String(ns.w));
+    clone.setAttribute('height', String(ns.h));
+    const xml = new XMLSerializer().serializeToString(clone);
+    const url = URL.createObjectURL(new Blob([xml], { type: 'image/svg+xml;charset=utf-8' }));
+    try {
+      const img = await new Promise((resolve, reject) => {
+        const im = new Image();
+        im.onload = () => resolve(im);
+        im.onerror = () => reject(new Error('SVG 加载失败'));
+        im.src = url;
+      });
+      const scale = 2;
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(ns.w * scale));
+      canvas.height = Math.max(1, Math.round(ns.h * scale));
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const blob = await new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('光栅化失败'))), 'image/png'));
+      return blob;
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  // 复制 PNG 进剪贴板；浏览器不支持图片剪贴板时降级复制 SVG 源码
+  async function copyDiagram(svg) {
+    const blob = await svgToPngBlob(svg);
+    try {
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+      return 'png';
+    } catch {
+      await navigator.clipboard.writeText(new XMLSerializer().serializeToString(svg));
+      return 'svg';
+    }
+  }
+
+  function diagramName() {
+    const h1 = document.querySelector('h1')?.textContent?.trim() || 'diagram';
+    return `${h1.replace(/[\\/:*?"<>|]/g, '-')}-图${++seq}.png`;
+  }
+
+  // 按钮成功反馈：图标短暂换成对勾
+  function flash(btn) {
+    if (btn.dataset.done) return;
+    btn.dataset.done = '1';
+    const prev = btn.innerHTML;
+    btn.innerHTML = ICON.check;
+    btn.classList.add('mmd-done');
+    setTimeout(() => {
+      btn.innerHTML = prev;
+      btn.classList.remove('mmd-done');
+      delete btn.dataset.done;
+    }, 1200);
+  }
+
+  // —— 全屏缩放覆盖所有图型；悬停高亮依赖流程图结构，仅流程图启用 ——
   for (const svg of document.querySelectorAll('svg[id^="mermaid-"]')) {
     try {
       if (svg.classList.contains('flowchart')) enhance(svg);
@@ -204,12 +274,57 @@
     return { w: r.width || 1, h: r.height || 1 };
   }
 
-  // 每张图：包一层定位容器 + 右上角全屏按钮；双击图表也可进入
+  // 每张图：包一层定位容器 + 右上角工具条（复制 / 下载 / 全屏）；双击图表也可进入全屏
   function mountZoom(svg) {
     const wrap = document.createElement('div');
     wrap.className = 'mmd-zoom-wrap';
     svg.replaceWith(wrap);
     wrap.appendChild(svg);
+
+    const mkTool = (cls, title, aria, icon, cursor) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = `mmd-fullscreen-btn ${cls}`;
+      b.title = title;
+      b.setAttribute('aria-label', aria);
+      b.innerHTML = icon;
+      return b;
+    };
+
+    const copyBtn = mkTool('mmd-copy-btn', '复制图片', '复制图表图片', ICON.copy);
+    copyBtn.addEventListener('click', async () => {
+      if (copyBtn.dataset.busy) return;
+      copyBtn.dataset.busy = '1';
+      try {
+        const how = await copyDiagram(svg);
+        copyBtn.title = how === 'svg' ? '已复制 SVG 源码（浏览器不支持图片剪贴板）' : '已复制图片';
+        flash(copyBtn);
+      } catch {
+        copyBtn.title = '复制失败';
+      } finally {
+        delete copyBtn.dataset.busy;
+      }
+    });
+
+    const dlBtn = mkTool('mmd-dl-btn', '下载 PNG', '下载图表 PNG', ICON.download);
+    dlBtn.addEventListener('click', async () => {
+      if (dlBtn.dataset.busy) return;
+      dlBtn.dataset.busy = '1';
+      try {
+        const blob = await svgToPngBlob(svg);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = diagramName();
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+        flash(dlBtn);
+      } catch {
+        dlBtn.title = '下载失败';
+      } finally {
+        delete dlBtn.dataset.busy;
+      }
+    });
 
     const btn = document.createElement('button');
     btn.type = 'button';
@@ -218,7 +333,8 @@
     btn.setAttribute('aria-label', '全屏查看图表');
     btn.innerHTML = ICON.expand;
     btn.addEventListener('click', () => openViewer(svg, btn, wrap));
-    wrap.appendChild(btn);
+
+    wrap.append(copyBtn, dlBtn, btn);
 
     svg.addEventListener('dblclick', (e) => {
       if (viewer) return; // 查看器内的双击用于缩放切换
