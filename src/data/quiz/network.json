@@ -169,6 +169,23 @@
       ],
       "hint": 3,
       "difficulty": "半关闭（ACK 与 FIN 分离）是四次的原因；TIME_WAIT 的两个使命——兜底最后一个 ACK（丢了可补）+ 让旧连接报文自然消亡、不污染相同四元组的新连接；谁主动关谁背 TIME_WAIT，大量 CLOSE_WAIT 才是代码泄漏信号。"
+    },
+    {
+      "id": "net-dnsttl-011",
+      "noteId": "network/basic/foundation/02-dns",
+      "type": "single",
+      "q": "网站要迁移服务器换 IP，为了让切换期间新旧地址的生效节奏可控，按笔记的正确做法与依据是？",
+      "options": [
+        "提前调小记录的 TTL——缓存按 TTL 过期，TTL 越小旧记录失效越快、切换越可控，代价是解析请求变多",
+        "直接改 A 记录即可，各级 DNS 缓存会立即失效",
+        "把 A 记录换成 MX 记录，邮件服务器的解析不受缓存影响",
+        "TTL 只影响邮件服务器，网页解析与它无关"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "缓存无处不在（浏览器/系统/本地 DNS），按记录的 TTL 过期——换 IP 提前调小 TTL 是运维标准动作；A 记录指向 IP，CNAME 指向另一个域名（接 CDN 用）。net-dns-005 考解析顺序，本题考记录类型与 TTL 权衡。"
     }
   ]
 }

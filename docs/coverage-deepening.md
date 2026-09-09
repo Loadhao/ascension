@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] rabbitmq/basic/core/01-amqp-model — 第二题考「消息没有绑定匹配时被静默丢弃且发布方毫无报错——排查「发了没人收」先列绑定比对路由键」
-- [ ] middleware/basic/mq/01-why-mq — 第二题考「MQ 的代价清单：一致性问题/复杂度/重复消费/积压风险——收益与代价一起答」
-- [ ] network/basic/foundation/02-dns — 第二题考「DNS 记录类型与 TTL 权衡：A/CNAME 各管什么，TTL 短切换快但缓存压力高」
 - [ ] java/intermediate/concurrent/09-cas-atomics — 第二题考「AtomicLong 与 LongAdder 的分界：低竞争下前者够用，高并发写才值得分段」
 - [ ] rabbitmq/basic/core/02-reliable-delivery — 第二题考「confirm 与手动 ACK 是两段独立责任链，收到 confirm ≠ 消费方已处理」
+- [ ] java/intermediate/concurrent/02-thread-pool — 第二题考「7 参数组合与禁用 Executors：newFixedThreadPool 的无界队列 OOM 风险」
+- [ ] js/basic/core/02-scope-closure — 第二题考「TDZ 与 var 提升：let/const 块级作用域，声明前访问抛 ReferenceError」
+- [ ] git/intermediate/collaboration/02-remote-collab — 第二题考「fetch 只更新远端快照不动工作区；pull = fetch + merge（或 rebase）」
 
 ### b 类：旧题返修
 
@@ -46,6 +46,8 @@
 - 2026-09-09 · 第九轮：3 道核心笔记第二题（pg-rejoin-003 / seata-hotrow-003 / java-inline-102，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第九轮
 
 - 2026-09-09 · 第十轮：3 道核心笔记第二题（mysql-rcrr-006 / tools-sedtrap-007 / java-zcp3gen-103，difficulty 4/4/4；tools 条目原定角度与 tools-gsa-001 撞车，换陷阱与安全姿势）· 本轮提交主题：feat: 题库深化第十轮
+
+- 2026-09-09 · 第十一轮：3 道核心笔记第二题（rmq-silentdrop-005 / mq-cost-004 / net-dnsttl-006，difficulty 4/3/3）· 本轮提交主题：feat: 题库深化第十一轮
 
 ## 经验与规则
 
