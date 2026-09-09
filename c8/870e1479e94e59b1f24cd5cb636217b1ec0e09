@@ -1,0 +1,24 @@
+src/content/docs/java/basic/syntax/07-bit-operations.md
+  h_9324126a55eff3 68-81
+src/content/docs/java/basic/syntax/08-serialization.md
+  h_9324126a55eff3 32-49
+src/content/docs/java/intermediate/design-pattern/04-creational.md
+  h_9324126a55eff3 36-49
+src/content/docs/java/intermediate/test/01-junit5.md
+  h_9324126a55eff3 28-43
+src/content/docs/linux/basic/permission/01-users-permissions.md
+  h_9324126a55eff3 67-76
+src/content/docs/network/basic/http/01-http-basics.md
+  h_9324126a55eff3 31-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c8870e1479e94e59b1f24cd5cb636217b1ec0e09",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
