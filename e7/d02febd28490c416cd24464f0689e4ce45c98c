@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1699
+src/content/docs/ai/basic/agent/05-guardrails.md
+  h_9324126a55eff3 1-76
+src/data/graphs/ai.json
+  h_9324126a55eff3 16,54-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "e7d02febd28490c416cd24464f0689e4ce45c98c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
