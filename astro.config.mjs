@@ -347,6 +347,7 @@ export default defineConfig({
                         { label: '登录态：Cookie、Session、JWT 与 OAuth2', link: '/network/basic/http/04-auth-state/' },
                         { label: '同源策略与 CORS', link: '/network/basic/http/05-cors/' },
                         { label: 'HTTP 缓存：强缓存与协商缓存', link: '/network/basic/http/06-http-cache/' },
+                        { label: 'WebSocket：全双工通信与 HTTP 的关系', link: '/network/basic/http/07-websocket/' },
                       ],
                     },
                   ],

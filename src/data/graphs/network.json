@@ -12,7 +12,8 @@
     { "id": "httpevo", "label": "HTTP 演进", "href": "/network/basic/http/03-http-evolution/", "group": "HTTP" },
     { "id": "authstate", "label": "登录态三件套", "href": "/network/basic/http/04-auth-state/", "group": "HTTP" },
     { "id": "cors", "label": "同源与 CORS", "href": "/network/basic/http/05-cors/", "group": "HTTP" },
-    { "id": "httpcache", "label": "HTTP 缓存", "href": "/network/basic/http/06-http-cache/", "group": "HTTP" }
+    { "id": "httpcache", "label": "HTTP 缓存", "href": "/network/basic/http/06-http-cache/", "group": "HTTP" },
+    { "id": "websocket", "label": "WebSocket", "href": "/network/basic/http/07-websocket/", "group": "HTTP" }
   ],
   "edges": [
     { "source": "root", "target": "osi" },
@@ -29,6 +30,7 @@
     { "source": "httpbasics", "target": "authstate", "label": "Cookie 是载体" },
     { "source": "authstate", "target": "cors", "label": "SameSite 与跨域" },
     { "source": "cors", "target": "httpcache", "label": "同为浏览器行为" },
+    { "source": "httpevo", "target": "websocket", "label": "长连接诉求" },
     { "source": "tcpudp", "target": "httpevo", "label": "QUIC 建在 UDP 上" },
     { "source": "reliable", "target": "httpevo", "label": "TCP 队头阻塞根源" }
   ]
