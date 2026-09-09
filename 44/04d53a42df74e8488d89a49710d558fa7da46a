@@ -1,0 +1,23 @@
+src/content/docs/git/intermediate/collaboration/02-remote-collab.mdx
+  s_8d25133e532c99::t_eb4ba81187a2df 7-8,99-102
+src/content/docs/java/basic/syntax/09-object-copy.mdx
+  s_8d25133e532c99::t_5c4ed45bceb5ea 7-8,73-76
+src/content/docs/redis/intermediate/usage/06-bigkey-hotkey.mdx
+  s_8d25133e532c99::t_f21667e95d7b16 7-8,39-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "4404d53a42df74e8488d89a49710d558fa7da46a",
+  "prompts": {},
+  "sessions": {
+    "s_8d25133e532c99": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "fdcc0e45-99f4-4da2-8c48-e97c271a3e9e",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
