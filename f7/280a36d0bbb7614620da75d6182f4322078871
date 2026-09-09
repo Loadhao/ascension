@@ -1,0 +1,198 @@
+AGENTS.md
+  h_9324126a55eff3 44-45
+src/content/docs/ai/advanced/agent/05-agent-teams.md
+  h_9324126a55eff3 91-93
+src/content/docs/ai/advanced/agent/06-team-protocols.md
+  h_9324126a55eff3 78-79,136-137
+src/content/docs/ai/intermediate/agent/01-todo-planning.mdx
+  h_9324126a55eff3 62-63,85-86
+src/content/docs/ai/intermediate/agent/03-context-engineering.md
+  h_9324126a55eff3 66-67,77-80,90-91
+src/content/docs/ai/intermediate/agent/04-memory.md
+  h_9324126a55eff3 41
+src/content/docs/ai/intermediate/agent/08-mcp.md
+  h_9324126a55eff3 175-178,183-184,201-202
+src/content/docs/algorithm/advanced/graph/01-graph-traversal.mdx
+  h_9324126a55eff3 27-28
+src/content/docs/algorithm/basic/searching/02-two-pointers.mdx
+  h_9324126a55eff3 30-34
+src/content/docs/algorithm/basic/searching/03-sliding-window.mdx
+  h_9324126a55eff3 25
+src/content/docs/algorithm/basic/searching/04-quickselect.mdx
+  h_9324126a55eff3 32
+src/content/docs/algorithm/basic/sorting/05-merge-sort.mdx
+  h_9324126a55eff3 38-39,42-50
+src/content/docs/algorithm/basic/sorting/06-heap-sort.mdx
+  h_9324126a55eff3 42
+src/content/docs/algorithm/basic/sorting/07-shell-sort.mdx
+  h_9324126a55eff3 28
+src/content/docs/algorithm/basic/sorting/08-counting-sort.mdx
+  h_9324126a55eff3 35-38,40-41
+src/content/docs/algorithm/basic/sorting/09-three-way-partition.mdx
+  h_9324126a55eff3 24,29,31
+src/content/docs/algorithm/intermediate/backtracking/01-subsets.mdx
+  h_9324126a55eff3 30-31
+src/content/docs/algorithm/intermediate/backtracking/02-permutations.mdx
+  h_9324126a55eff3 30-31
+src/content/docs/algorithm/intermediate/dp/04-lcs.mdx
+  h_9324126a55eff3 32-33
+src/content/docs/algorithm/intermediate/linked-list/01-reverse-list.mdx
+  h_9324126a55eff3 43
+src/content/docs/algorithm/intermediate/linked-list/03-merge-lists.mdx
+  h_9324126a55eff3 51
+src/content/docs/algorithm/intermediate/stack-queue/01-valid-parentheses.mdx
+  h_9324126a55eff3 29-37
+src/content/docs/algorithm/intermediate/stack-queue/02-min-stack.mdx
+  h_9324126a55eff3 41,46,60-61
+src/content/docs/algorithm/intermediate/tree/04-lca.mdx
+  h_9324126a55eff3 26,44-45
+src/content/docs/distributed/advanced/observability/01-distributed-tracing.md
+  h_9324126a55eff3 139-140
+src/content/docs/distributed/intermediate/traffic/01-distributed-rate-limiting.md
+  h_9324126a55eff3 48-49
+src/content/docs/distributed/intermediate/transaction/01-distributed-transaction.md
+  h_9324126a55eff3 62-63
+src/content/docs/distributed/intermediate/transaction/02-distributed-id.md
+  h_9324126a55eff3 49
+src/content/docs/docker/basic/fundamentals/01-concepts.mdx
+  h_9324126a55eff3 116-117
+src/content/docs/docker/basic/fundamentals/03-lifecycle.md
+  h_9324126a55eff3 59-60
+src/content/docs/elasticsearch/intermediate/usage/02-aggregation.md
+  h_9324126a55eff3 41-50,116-119
+src/content/docs/etcd/intermediate/ops/01-quota-compaction-defrag.md
+  h_9324126a55eff3 70-71
+src/content/docs/git/basic/foundations/02-daily-commands.md
+  h_9324126a55eff3 100
+src/content/docs/git/intermediate/collaboration/02-remote-collab.md
+  h_9324126a55eff3 110-111
+src/content/docs/java/advanced/jvm/02-memory.mdx
+  h_9324126a55eff3 147
+src/content/docs/java/advanced/jvm/05-object-layout.md
+  h_9324126a55eff3 76-77
+src/content/docs/java/advanced/jvm/06-jit.md
+  h_9324126a55eff3 104-105
+src/content/docs/java/advanced/jvm/07-tuning.md
+  h_9324126a55eff3 60-61
+src/content/docs/java/advanced/springcloud/03-gateway.md
+  h_9324126a55eff3 75-78,123-124,178-179,188-189
+src/content/docs/java/advanced/springcloud/04-openfeign-loadbalancer.md
+  h_9324126a55eff3 70-71,74-75,109-110,210-211
+src/content/docs/java/advanced/springcloud/05-sentinel.md
+  h_9324126a55eff3 173
+src/content/docs/java/advanced/springcloud/06-config-center.md
+  h_9324126a55eff3 30
+src/content/docs/java/advanced/springcloud/07-stream.md
+  h_9324126a55eff3 43-44,46-49
+src/content/docs/java/basic/collection/01-arraylist.md
+  h_9324126a55eff3 36
+src/content/docs/java/basic/collection/03-concurrenthashmap.mdx
+  h_9324126a55eff3 49-50,118,120,122-123
+src/content/docs/java/basic/io/02-zero-copy.md
+  h_9324126a55eff3 61-62
+src/content/docs/java/basic/syntax/02-string.mdx
+  h_9324126a55eff3 16-17
+src/content/docs/java/basic/syntax/03-equals-hashcode.md
+  h_9324126a55eff3 86-89,95-96
+src/content/docs/java/basic/syntax/04-generics.md
+  h_9324126a55eff3 26-27,34-35
+src/content/docs/java/basic/syntax/05-exception.mdx
+  h_9324126a55eff3 69-70
+src/content/docs/java/basic/syntax/06-reflection-annotation.md
+  h_9324126a55eff3 18
+src/content/docs/java/basic/syntax/12-jni-jndi.md
+  h_9324126a55eff3 25
+src/content/docs/java/basic/syntax/13-lombok-apt.md
+  h_9324126a55eff3 51-52
+src/content/docs/java/intermediate/concurrent/03-volatile.md
+  h_9324126a55eff3 36-37,122-123
+src/content/docs/java/intermediate/concurrent/04-synchronized.mdx
+  h_9324126a55eff3 47-54,105-106
+src/content/docs/java/intermediate/concurrent/06-threadlocal.md
+  h_9324126a55eff3 116-117
+src/content/docs/java/intermediate/concurrent/10-concurrent-tools.md
+  h_9324126a55eff3 33-34,50-51
+src/content/docs/java/intermediate/concurrent/11-completablefuture.md
+  h_9324126a55eff3 83-84
+src/content/docs/java/intermediate/concurrent/12-deadlock.md
+  h_9324126a55eff3 64-65
+src/content/docs/java/intermediate/design-pattern/01-principles.md
+  h_9324126a55eff3 45-50,85-86
+src/content/docs/java/intermediate/design-pattern/02-singleton.md
+  h_9324126a55eff3 34-35,39-40,107-108
+src/content/docs/java/intermediate/design-pattern/03-factory.md
+  h_9324126a55eff3 30-35
+src/content/docs/java/intermediate/design-pattern/07-decorator.md
+  h_9324126a55eff3 60-62,66-68
+src/content/docs/java/intermediate/design-pattern/08-structural.md
+  h_9324126a55eff3 98-100,116-118,146-147
+src/content/docs/java/intermediate/design-pattern/09-strategy.md
+  h_9324126a55eff3 37-39,46-47
+src/content/docs/java/intermediate/design-pattern/10-template-method.md
+  h_9324126a55eff3 27-32
+src/content/docs/java/intermediate/design-pattern/11-observer.md
+  h_9324126a55eff3 40-42
+src/content/docs/java/intermediate/design-pattern/12-chain-of-responsibility.md
+  h_9324126a55eff3 16-17
+src/content/docs/java/intermediate/design-pattern/13-behavioral.md
+  h_9324126a55eff3 25-27
+src/content/docs/java/intermediate/log/01-logging-system.md
+  h_9324126a55eff3 61-62,67-71,87-88
+src/content/docs/java/intermediate/spring-boot/01-autoconfig.md
+  h_9324126a55eff3 144-145
+src/content/docs/java/intermediate/spring-mvc/03-validation.md
+  h_9324126a55eff3 98-103,111-114
+src/content/docs/java/intermediate/spring/05-mybatis-sqlsession.md
+  h_9324126a55eff3 53-54,58-59,65-66
+src/content/docs/java/intermediate/stream/01-stream-principle.md
+  h_9324126a55eff3 60-61
+src/content/docs/java/intermediate/test/02-mockito.md
+  h_9324126a55eff3 30-31
+src/content/docs/java/intermediate/version/02-java9-11.md
+  h_9324126a55eff3 49-50
+src/content/docs/js/basic/core/03-prototype-class.md
+  h_9324126a55eff3 45-47
+src/content/docs/js/basic/core/05-event-loop.mdx
+  h_9324126a55eff3 101-102
+src/content/docs/js/intermediate/web/02-cors.md
+  h_9324126a55eff3 124
+src/content/docs/kafka/basic/core/02-offset.md
+  h_9324126a55eff3 44-45
+src/content/docs/kafka/intermediate/core/01-kafka-architecture.mdx
+  h_9324126a55eff3 86-87
+src/content/docs/kafka/intermediate/core/02-replica-isr.md
+  h_9324126a55eff3 61
+src/content/docs/kafka/intermediate/core/03-reliability-idempotent.md
+  h_9324126a55eff3 89-90
+src/content/docs/mongodb/advanced/operations/02-performance.md
+  h_9324126a55eff3 13-15
+src/content/docs/mqtt/intermediate/usage/01-broker-emqx.md
+  h_9324126a55eff3 66,68-69
+src/content/docs/mysql/basic/core/02-index-btree.md
+  h_9324126a55eff3 111-112
+src/content/docs/mysql/intermediate/transaction-lock/02-locks.md
+  h_9324126a55eff3 70-71
+src/content/docs/mysql/intermediate/transaction-lock/03-redo-undo-binlog.mdx
+  h_9324126a55eff3 62
+src/content/docs/nginx/intermediate/proxy/02-https-cache-ratelimit.md
+  h_9324126a55eff3 131
+src/content/docs/postgresql/intermediate/indexes/01-index-types-explain.md
+  h_9324126a55eff3 77-78
+src/content/docs/python/advanced/eng/03-ruff-mypy.md
+  h_9324126a55eff3 26-27
+src/content/docs/rocketmq/advanced/core/01-rocketmq-features.mdx
+  h_9324126a55eff3 74-75,100
+src/content/docs/tools/basic/cli/02-curl.md
+  h_9324126a55eff3 16-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f7280a36d0bbb7614620da75d6182f4322078871",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
