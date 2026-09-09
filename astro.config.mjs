@@ -1188,6 +1188,7 @@ export default defineConfig({
                         { label: '抽奖系统：概率、库存与兜底', link: '/distributed/intermediate/case-studies/08-lottery/' },
                         { label: '签到系统：位图的教科书应用', link: '/distributed/intermediate/case-studies/09-sign-in/' },
                         { label: '优惠券系统：发券、锁券与核销', link: '/distributed/intermediate/case-studies/10-coupon/' },
+                        { label: '点赞与收藏：去重、计数与列表', link: '/distributed/intermediate/case-studies/11-likes/' },
                       ],
                     },
                   ],
