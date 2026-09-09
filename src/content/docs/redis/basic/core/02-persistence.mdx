@@ -17,6 +17,10 @@ import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland
 | 丢失窗口 | 两次快照之间的数据 | 最多 1 秒（everysec） |
 | 性能影响 | fork 瞬间开销 | 持续小幅写入 |
 
+两条路线先同框对垒：
+
+<AlgorithmVizIsland demo="rdb-vs-aof" />
+
 ## RDB：fork + 写时复制
 
 `bgsave` 触发快照，**子进程**写 RDB 文件，主进程继续服务——靠操作

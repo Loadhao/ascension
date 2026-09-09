@@ -155,6 +155,10 @@ Region 一份）记录跨 Region 引用，避免整堆扫描。整堆走 SATB �
 - JDK 11+：默认 G1，堆 > 8G 且对延迟极端敏感再上 ZGC。
 - 吞吐型离线任务（跑得越快越好，停顿无所谓）：Parallel。
 
+三代主力收集器同框：
+
+<AlgorithmVizIsland demo="gc-collectors" />
+
 ## 小结
 
 - 可达性分析判垃圾；分代按存活周期分区，各自用复制/整理最合适的算法。

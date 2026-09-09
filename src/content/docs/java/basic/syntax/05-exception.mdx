@@ -4,6 +4,8 @@ description: Throwable 层次、受检与非受检之争、try-with-resources �
 level: basic
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 异常层次结构
 
 ```mermaid
@@ -24,6 +26,10 @@ flowchart TB
 - **RuntimeException**：程序 bug（NPE、越界、非法参数），修代码而不是接异常。
 
 设计原则：**能恢复就抛受检异常，是 bug 就抛运行时异常，JVM 坏了抛 Error**。
+
+三支异常同框收进一张卡：
+
+<AlgorithmVizIsland demo="exception-family" />
 
 ## finally 的执行真相
 

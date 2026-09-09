@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 先分清两组词
 
 | 维度 | 问的问题 | 取值 |
@@ -115,3 +117,7 @@ Tomcat 三代连接器正是上面三条路：BIO 连接器（一连接一线程
 - Reactor 是 NIO 的工程骨架：主从 Reactor + 业务线程池分离，事件循环
   里禁跑慢业务。
 - AIO 理论美但生态弱（Netty 已移除），实战选 NIO。
+
+三种模型最后同框对比一遍：
+
+<AlgorithmVizIsland demo="io-models" />

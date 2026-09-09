@@ -4,6 +4,8 @@ description: 连接性、可靠性、有序性、字节流与报文的差异矩�
 level: basic
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 差异矩阵（背这张表）
 
 | 维度 | TCP | UDP |
@@ -18,6 +20,10 @@ level: basic
 
 UDP 不是"残缺的 TCP"，是**故意做减法**：把可靠性、流控全部上交
 应用层，换取极低延迟与极简头部。
+
+差异矩阵收成一张速记卡，考前扫一眼：
+
+<AlgorithmVizIsland demo="tcp-vs-udp" />
 
 ## 各自的主场
 
