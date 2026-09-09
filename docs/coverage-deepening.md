@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] mysql/basic/core/02-index-btree — 第二题考「索引失效清单：列上函数运算/隐式类型转换/前导 %/or 连无索引列」
-- [ ] network/basic/tcp/01-three-way-handshake — 第二题考「TIME_WAIT 在主动关闭方与 2MSL 的两个使命」
-- [ ] elasticsearch/basic/core/02-shard-replica — 第二题考「主分片数建索引时定死的原因：路由 hash(doc) % 主分片数，扩容要 reindex」
 - [ ] distributed/intermediate/case-studies/01-flash-sale — 第二题考「预扣不支付：下单消息带过期时间，超时关单 + 回补库存（延迟消息）」
 - [ ] mongodb/intermediate/replication/01-replication-set — 第二题考「oplog 是固定大小环形缓冲，Secondary 落后超窗口被套圈只能重新 initial-sync」
+- [ ] java/intermediate/spring/02-aop — 第二题考「通知执行顺序：@Around 前半 → @Before → 目标 → @AfterReturning/@AfterThrowing → @After → @Around 后半」
+- [ ] redis/basic/core/01-data-structures — 第二题考「SDS 三改造：len 字段 O(1) 取长 / 二进制安全 / 空间预分配+惰性释放」
+- [ ] distributed/intermediate/consensus/01-paxos-raft — 第二题考「term 单调递增是逻辑时钟 + 随机选举超时 150~300ms 错开起跑线」
 
 ### b 类：旧题返修
 
@@ -32,6 +32,8 @@
 - 2026-09-09 · 第二轮：3 道核心笔记第二题（docker-latest-005 / py-mutparam-032 / java-metaspace-096，difficulty 3/3/4）· 本轮提交主题：feat: 题库深化第二轮
 
 - 2026-09-09 · 第三轮：3 道核心笔记第二题（kafka-storage-012 / redis-watchdog-008 / java-classidentity-097，difficulty 3/4/4）· 本轮提交主题：feat: 题库深化第三轮
+
+- 2026-09-09 · 第四轮：3 道核心笔记第二题（mysql-idxfail-005 / net-finwait-004 / es-writepath-007，difficulty 4/3/4；es 条目原定角度与 es-shard-002 撞车，就地换写路径四动作）· 本轮提交主题：feat: 题库深化第四轮
 
 ## 经验与规则
 

@@ -171,6 +171,23 @@
         3
       ],
       "hint": "INPLACE 允许并发读写，但 DDL 开始/结束仍要拿 MDL 写锁。8.0 INSTANT 加列只改元数据；改列类型/字符集基本仍是 COPY。gh-ost 无触发器、可暂停限流，是当前主流。"
+    },
+    {
+      "id": "mysql-idxfail-011",
+      "noteId": "mysql/basic/core/02-index-btree",
+      "type": "single",
+      "q": "联合索引 index(a, b, c)，下列查询按笔记结论走索引的情况是？",
+      "options": [
+        "where b=2 and c=3 不走（跳过最左 a）；where a=1 and c=3 只用到 a；where a=1 and b>2 and c=3 中 c 因 b 是范围列而失效——等值列放前、范围列放后",
+        "四个查询都会完整用到 (a, b, c) 三列，优化器会自动重排",
+        "只要查询带了 a 或 b 中任意一个，三列就全部生效",
+        "范围列放前面、等值列放后面才能让后续列继续命中"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "失效的本质只有一条：条件必须能翻译成「B+ 树上连续的一段」——对列用函数/运算、隐式类型转换（varchar 比数字）、前导 % 都让条件失去连续定位能力；index(a,b,c) 相当于建了 (a)(a,b)(a,b,c) 三套索引。"
     }
   ]
 }

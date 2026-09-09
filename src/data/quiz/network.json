@@ -152,6 +152,23 @@
         3
       ],
       "hint": "401 Unauthorized 是没登录/令牌无效，403 Forbidden 是身份有了但没权限。301 会被浏览器缓存，误用很难救回；304 省的是流量不是请求次数。"
+    },
+    {
+      "id": "net-finwait-010",
+      "noteId": "network/basic/tcp/01-three-way-handshake",
+      "type": "single",
+      "q": "关于四次挥手为什么拆成 ACK 和 FIN 两次、TIME_WAIT 出现在哪一方，正确的是？",
+      "options": [
+        "TCP 全双工要两个方向各自关；被动方收到 FIN 可能还有数据没发完，先回 ACK 再发自己的 FIN——TIME_WAIT 出现在主动关闭方，停留 2MSL",
+        "四次挥手是协议冗余，ACK 和 FIN 总是同时发出，实际总是三次",
+        "TIME_WAIT 出现在被动关闭方，等对方确认自己发出的 FIN",
+        "2MSL 等待是为了等对方的数据发完，与旧报文消亡无关"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "半关闭（ACK 与 FIN 分离）是四次的原因；TIME_WAIT 的两个使命——兜底最后一个 ACK（丢了可补）+ 让旧连接报文自然消亡、不污染相同四元组的新连接；谁主动关谁背 TIME_WAIT，大量 CLOSE_WAIT 才是代码泄漏信号。"
     }
   ]
 }

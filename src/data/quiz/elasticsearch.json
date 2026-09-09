@@ -150,6 +150,25 @@
         1
       ],
       "hint": "别把聚合当绝对精确的 GROUP BY——分片只交局部 top-N，size 越小合并越容易丢全局高频桶；size=1 只会让丢桶更严重；聚合字段要用 keyword。"
+    },
+    {
+      "id": "es-writepath-007",
+      "noteId": "elasticsearch/basic/core/02-shard-replica",
+      "type": "multiple",
+      "q": "关于 ES 写入路径中 refresh / translog / flush / merge 的分工，正确的有？（多选）",
+      "options": [
+        "refresh（默认 1s）把内存 buffer 变成可检索的 segment——这是「近实时」的来源",
+        "translog 是预写日志，崩溃后重放保证不丢——「可搜索」先于「可持久」",
+        "DELETE 只是标记删除，磁盘空间真正释放要等 merge；想立刻缩容手动 _forcemerge（重写 segment，代价大）",
+        "flush 与 refresh 是同一件事的两个名字，都只让数据可搜索"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": 4,
+      "difficulty": "flush 是「segment 刷盘 + 清空 translog」，让数据可持久，与 refresh（可搜索）分工不同；refresh_interval 可调小换更低延迟但别设 0——每次写入都 refresh，写放大剧增。es-shard-002 考分片数不可改，本题考写路径四动作。"
     }
   ]
 }
