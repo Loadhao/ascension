@@ -1191,6 +1191,7 @@ export default defineConfig({
                         { label: '点赞与收藏：去重、计数与列表', link: '/distributed/intermediate/case-studies/11-likes/' },
                         { label: '搜索联想：输入框背后的前缀匹配', link: '/distributed/intermediate/case-studies/12-search-suggest/' },
                         { label: '消息推送系统：通道选型与必达语义', link: '/distributed/intermediate/case-studies/13-push/' },
+                        { label: '购物车：多端同步与合并策略', link: '/distributed/intermediate/case-studies/14-cart/' },
                       ],
                     },
                   ],
