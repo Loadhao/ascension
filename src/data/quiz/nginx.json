@@ -99,6 +99,23 @@
         1
       ],
       "hint": "weight 扣到低于备机 priority 才会切换。无状态入口用 keepalived 做 IP 漂移；有状态主从交给哨兵/ZK，VRRP 不懂复制。脑裂防护：独立心跳 + 仲裁 + fencing。"
+    },
+    {
+      "id": "nginx-location-007",
+      "noteId": "nginx/basic/config/01-working-model",
+      "type": "single",
+      "q": "同一个 server 里配了 location = /favicon.ico、location /api/、location ~* \\.(png|jpg)$，请求 /api/logo.png 会命中哪个？",
+      "options": [
+        "命中正则 location：优先级是精确 = → 前缀最长 → 正则（按出现顺序）→ 通用前缀，前缀匹配后还要再过正则",
+        "命中 /api/ 前缀 location：前缀匹配一旦命中就短路，不再看正则",
+        "命中 = /favicon.ico：精确匹配是所有请求的兜底",
+        "三个都命中，响应按配置出现的先后顺序合并"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "/api/logo.png 先按前缀记住 /api/，但正则优先级更高、最终命中图片缓存规则——「前缀之后正则可以反超」是经典案例；指令放错上下文层级是最隐蔽的坑（limit_conn 写在 location 却想全站生效就做不到）。nginx-worker-001 考 worker/连接模型，本题考匹配规则。"
     }
   ]
 }

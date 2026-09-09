@@ -190,6 +190,23 @@
       ],
       "hint": 3,
       "difficulty": "「改了 build 还是旧镜像」九成是构建缓存或旧 tag 指向——--no-cache 重建、明确打新 tag；看分层用 docker history（每层构建记录与大小）与 image inspect（分层信息）。"
+    },
+    {
+      "id": "docker-voltrap-010",
+      "noteId": "docker/intermediate/practice/02-volume",
+      "type": "single",
+      "q": "关于 Docker 数据卷的使用细节与易踩的坑，按笔记正确的是？",
+      "options": [
+        "bind mount 挂空目录到 /etc/nginx 会遮盖镜像内配置；具名卷首次挂载到非空目录时 Docker 会把镜像内该目录内容预填充进卷；docker rm -v 顺带删匿名卷但不影响具名卷",
+        "具名卷首次挂载也会被容器内的空目录覆盖，所以必须先手动清空容器目录",
+        "bind mount 与具名卷行为完全一致，只是写法不同",
+        "docker volume prune 会把正在被容器使用的卷一并删除"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "「遮盖」与「预填充」是两种挂载最大的行为差异——配置被盖掉多半是 bind 空目录惹的祸；备份卷的做法是起个临时容器把卷内容 tar 出来。docker-vol-005 考生产挂载选型，本题考行为细节与坑。"
     }
   ]
 }

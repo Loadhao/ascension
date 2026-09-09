@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] nginx/basic/config/01-working-model — 第二题考「location 匹配优先级：精确 = → 前缀最长 → 正则按出现顺序 → 通用前缀」
-- [ ] docker/intermediate/practice/02-volume — 第二题考「具名卷 vs bind mount：生产数据用具名卷，开发热加载才 bind」
-- [ ] java/advanced/jvm/08-troubleshooting — 第二题考「假死（CPU 不高）排查：BLOCKED 找锁竞争、http-nio 全 WAITING 是线程池被下游拖垮、arthas thread -b 找持锁源头」
 - [ ] postgresql/intermediate/ha/02-pgpool-dr — 第二题考「老主恢复三步：重建数据目录 → pg_basebackup -R 全量 → pcp_attach_node 入集群」
 - [ ] seata/basic/core/02-seata-deep-dive — 第二题考「热点行（秒杀库存/账户余额）下全局锁退化串行，AT 不适用换 TCC/消息最终一致」
+- [ ] java/advanced/jvm/06-jit — 第二题考「方法内联是优化之母：小方法 ≤35 字节码随手内联；手写循环测性能会被死代码消除骗，必须 JMH」
+- [ ] mysql/intermediate/transaction-lock/01-transaction-mvcc — 第二题考「RC/RR 默认差异的历史原因：早期 binlog statement 格式在 RC 下主从不一致」
+- [ ] tools/basic/cli/01-grep-sed-awk — 第二题考「三件套分工：grep 找、sed 行编辑替换、awk 按列计算」
 
 ### b 类：旧题返修
 
@@ -40,6 +40,8 @@
 - 2026-09-09 · 第六轮：3 道核心笔记第二题（redis-sds-009 / dist-term-036 / java-refqueue-099，difficulty 3/4/4）· 本轮提交主题：feat: 题库深化第六轮
 
 - 2026-09-09 · 第七轮：3 道核心笔记第二题（linux-diskfull-007 / js-await-010 / java-treeify-100，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第七轮
+
+- 2026-09-09 · 第八轮：3 道核心笔记第二题（nginx-location-004 / docker-voltrap-006 / java-fakedead-101，difficulty 3/4/4；docker 条目原定角度与 docker-vol-005 撞车，换行为细节与坑）· 本轮提交主题：feat: 题库深化第八轮
 
 ## 经验与规则
 

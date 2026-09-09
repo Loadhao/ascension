@@ -1693,6 +1693,23 @@
       ],
       "hint": 3,
       "difficulty": "TREEIFY_THRESHOLD=8 与 MIN_TREEIFY_CAPACITY=64 两个常量缺一不可——容量不到 64 先扩容缓解冲突（扩容可能把链表拆短），树化把桶内查询从 O(n) 提到 O(log n)。java-hashmap-006 考头插/尾插演进，本题考树化条件。"
+    },
+    {
+      "id": "java-fakedead-101",
+      "noteId": "java/advanced/jvm/08-troubleshooting",
+      "type": "single",
+      "q": "接口大面积超时但 CPU 不高——「假死」场景，jstack 应该看什么？按笔记的归因速查是？",
+      "options": [
+        "看线程状态分布：大量 BLOCKED 是锁竞争/死锁（尾部自带 deadlock 提示，arthas thread -b 找源头）；http-nio-exec 全 WAITING 是 Tomcat 线程池被下游慢（DB/RPC）占满；WAITING 在连接池取连接是连接池耗尽或慢 SQL",
+        "CPU 不高说明线程都在空闲，问题一定出在网络设备",
+        "假死只能重启恢复，jstack 看不出任何有用信息",
+        "先 dump 堆找大对象——假死的本质是内存不足"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "假死 = 线程都被堵住，归因看「堵在哪」：锁、下游慢、连接池三种栈形态对应三种处理；arthas 的 trace '#cost > 200ms' 能逐层定位慢段。java-cpu-036 考 CPU 飙高四步链，本题考 CPU 不高的假死场景。"
     }
   ]
 }
