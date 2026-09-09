@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 一句话定位四个子工程
 
 这个方向下有四个并列分类，先搞清它们**谁是谁、谁依赖谁**：
@@ -57,6 +59,10 @@ Spring 家族发版是**对齐的列车**，选型必须看兼容矩阵：
 （见[AOP 篇](/java/intermediate/spring/02-aop/)）。Cloud 版本号用
 "年份.x" 命名正是为了对齐 Boot 的兼容关系——**Boot 升小版本，Cloud
 未必跟；Boot 换大版本，Cloud 必须换列车**。
+
+最容易混的是 Framework 与 Boot 这一对，先把分工画成一张总结卡：
+
+<AlgorithmVizIsland demo="spring-vs-boot" />
 
 ## 常见误区澄清
 

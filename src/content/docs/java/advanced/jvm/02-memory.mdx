@@ -5,6 +5,8 @@ level: advanced
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 总体结构
 
 ```mermaid
@@ -33,6 +35,10 @@ flowchart TB
 | 堆 | 共享 | `Java heap space` | `-Xms`/`-Xmx`；GC 主战场 |
 | 元空间 | 共享 | `Metaspace` | 使用本地内存；动态生成类（CGLib）易溢出 |
 | 直接内存 | 共享 | `OutOfMemoryError`（无堆标记） | 堆外；NIO/Netty 走 `-XX:MaxDirectMemorySize` |
+
+分区与各自的 OOM 特征收进一张分层总结卡：
+
+<AlgorithmVizIsland demo="jvm-memory-areas" />
 
 ## 栈帧内部：一次方法调用都在栈上放什么
 

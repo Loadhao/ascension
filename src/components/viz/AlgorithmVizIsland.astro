@@ -5,9 +5,11 @@ import TreeViz from './TreeViz';
 import StackViz from './StackViz';
 import GraphViz from './GraphViz';
 import FlowViz from './FlowViz';
+import SummaryViz from './SummaryViz';
 import { vizDemos } from '../../data/viz';
 import { listDemos, stackDemos, treeDemos, graphDemos } from '../../data/viz/structures';
 import { flowDemos } from '../../data/viz/flows';
+import { summaryDemos } from '../../data/viz/summaries';
 
 const { demo } = Astro.props as { demo: string };
 // 按注册表分发到对应画法；旧柱状数组演示的 props 保持不变
@@ -17,6 +19,7 @@ const tree = treeDemos[demo];
 const stack = stackDemos[demo];
 const graph = graphDemos[demo];
 const flow = flowDemos[demo];
+const summary = summaryDemos[demo];
 ---
 
 {bars && <AlgorithmViz client:visible {...bars} />}
@@ -25,3 +28,5 @@ const flow = flowDemos[demo];
 {stack && <StackViz client:visible {...stack} />}
 {graph && <GraphViz client:visible {...graph} />}
 {flow && <FlowViz client:visible {...flow} />}
+{/* 总结卡是纯静态渲染，不需要水合 */}
+{summary && <SummaryViz {...summary} />}

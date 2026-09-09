@@ -2779,3 +2779,337 @@ html.mmd-viewer-open {
   }
 }
 
+
+/* ===== 彩色总结卡（SummaryViz）：对比 / 分层速记卡，纯静态无脚本 ===== */
+/* 色调令牌：数据里只写 tone 名，实际颜色由这里按亮暗主题接管 */
+:root {
+  --sum-blue-bg: #1a2438;
+  --sum-blue-border: #2f4066;
+  --sum-blue-title: #9db8f5;
+  --sum-blue-chip-bg: #223052;
+  --sum-blue-chip-border: #3b4f7f;
+  --sum-blue-ink: #c9d7f8;
+  --sum-teal-bg: #142e2c;
+  --sum-teal-border: #27504b;
+  --sum-teal-title: #7fd6ca;
+  --sum-teal-chip-bg: #1a3a37;
+  --sum-teal-chip-border: #2f5f58;
+  --sum-teal-ink: #bfe3dc;
+  --sum-green-bg: #182b16;
+  --sum-green-border: #2f5229;
+  --sum-green-title: #93d388;
+  --sum-green-chip-bg: #203620;
+  --sum-green-chip-border: #38603a;
+  --sum-green-ink: #c4e5b8;
+  --sum-amber-bg: #332a14;
+  --sum-amber-border: #5c4a22;
+  --sum-amber-title: #e8bd6d;
+  --sum-amber-chip-bg: #3c3018;
+  --sum-amber-chip-border: #6b5528;
+  --sum-amber-ink: #ecd9a8;
+  --sum-rose-bg: #341b1e;
+  --sum-rose-border: #5d3038;
+  --sum-rose-title: #f0939f;
+  --sum-rose-chip-bg: #3d2126;
+  --sum-rose-chip-border: #704050;
+  --sum-rose-ink: #f2c4ca;
+  --sum-violet-bg: #241b38;
+  --sum-violet-border: #3e2f60;
+  --sum-violet-title: #c3a8f5;
+  --sum-violet-chip-bg: #2c2244;
+  --sum-violet-chip-border: #4d3d78;
+  --sum-violet-ink: #d9cbf6;
+  --sum-slate-bg: #23252b;
+  --sum-slate-border: #3d414c;
+  --sum-slate-title: #b6bccb;
+  --sum-slate-chip-bg: #2b2e37;
+  --sum-slate-chip-border: #4a4f5e;
+  --sum-slate-ink: #ccd1dc;
+}
+
+:root[data-theme='light'] {
+  --sum-blue-bg: #e4edfb;
+  --sum-blue-border: #c3d4f2;
+  --sum-blue-title: #1e4296;
+  --sum-blue-chip-bg: #ffffffd9;
+  --sum-blue-chip-border: #b9c9ec;
+  --sum-blue-ink: #26324f;
+  --sum-teal-bg: #dcf2f0;
+  --sum-teal-border: #b3dcd7;
+  --sum-teal-title: #0f6b62;
+  --sum-teal-chip-bg: #ffffffd9;
+  --sum-teal-chip-border: #aed6d0;
+  --sum-teal-ink: #1f403c;
+  --sum-green-bg: #e2f3e1;
+  --sum-green-border: #bcdcbc;
+  --sum-green-title: #256d1f;
+  --sum-green-chip-bg: #ffffffd9;
+  --sum-green-chip-border: #b5d5b2;
+  --sum-green-ink: #2a4226;
+  --sum-amber-bg: #faf0d9;
+  --sum-amber-border: #e4cf9d;
+  --sum-amber-title: #92600a;
+  --sum-amber-chip-bg: #ffffffd9;
+  --sum-amber-chip-border: #dfc891;
+  --sum-amber-ink: #57431c;
+  --sum-rose-bg: #fbe5e5;
+  --sum-rose-border: #eebfc0;
+  --sum-rose-title: #a02c3c;
+  --sum-rose-chip-bg: #ffffffd9;
+  --sum-rose-chip-border: #e8b7b8;
+  --sum-rose-ink: #5a2e33;
+  --sum-violet-bg: #ece5fa;
+  --sum-violet-border: #cfc0ee;
+  --sum-violet-title: #5b2fbf;
+  --sum-violet-chip-bg: #ffffffd9;
+  --sum-violet-chip-border: #c9b8ea;
+  --sum-violet-ink: #3c2d5e;
+  --sum-slate-bg: #e8e9ec;
+  --sum-slate-border: #c8cbd2;
+  --sum-slate-title: #3d4352;
+  --sum-slate-chip-bg: #ffffffd9;
+  --sum-slate-chip-border: #c2c5cd;
+  --sum-slate-ink: #343a46;
+}
+
+.sum-viz {
+  margin: 26px 0;
+  padding: 20px 20px 16px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 14px;
+  break-inside: avoid;
+}
+
+.sum-head {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.sum-title {
+  font-size: 1.06rem;
+  font-weight: 700;
+}
+
+.sum-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: var(--algo-chip-bg);
+  border: 1px solid var(--algo-chip-border);
+  color: var(--algo-chip-text);
+}
+
+.sum-cols {
+  display: grid;
+  gap: 14px;
+}
+
+.sum-cols--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.sum-cols--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* 两栏中缝的关系说明：放在 count 类之后，列宽按 1fr auto 1fr 覆盖 */
+.sum-cols--linked {
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+}
+
+.sum-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 2px;
+  color: var(--algo-bar-active);
+}
+
+.sum-link-arrow {
+  width: 44px;
+  height: auto;
+}
+
+.sum-link-text {
+  max-width: 130px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+  background: var(--algo-chip-bg);
+  border: 1px solid var(--algo-chip-border);
+  color: var(--algo-chip-text);
+}
+
+.sum-panel,
+.sum-layer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 14px 12px;
+  border-radius: 12px;
+  background: var(--sum-bg);
+  border: 1px solid var(--sum-border);
+}
+
+.sum-panel--blue { --sum-bg: var(--sum-blue-bg); --sum-border: var(--sum-blue-border); --sum-title: var(--sum-blue-title); --sum-chip-bg: var(--sum-blue-chip-bg); --sum-chip-border: var(--sum-blue-chip-border); --sum-ink: var(--sum-blue-ink); }
+.sum-panel--teal { --sum-bg: var(--sum-teal-bg); --sum-border: var(--sum-teal-border); --sum-title: var(--sum-teal-title); --sum-chip-bg: var(--sum-teal-chip-bg); --sum-chip-border: var(--sum-teal-chip-border); --sum-ink: var(--sum-teal-ink); }
+.sum-panel--green { --sum-bg: var(--sum-green-bg); --sum-border: var(--sum-green-border); --sum-title: var(--sum-green-title); --sum-chip-bg: var(--sum-green-chip-bg); --sum-chip-border: var(--sum-green-chip-border); --sum-ink: var(--sum-green-ink); }
+.sum-panel--amber { --sum-bg: var(--sum-amber-bg); --sum-border: var(--sum-amber-border); --sum-title: var(--sum-amber-title); --sum-chip-bg: var(--sum-amber-chip-bg); --sum-chip-border: var(--sum-amber-chip-border); --sum-ink: var(--sum-amber-ink); }
+.sum-panel--rose { --sum-bg: var(--sum-rose-bg); --sum-border: var(--sum-rose-border); --sum-title: var(--sum-rose-title); --sum-chip-bg: var(--sum-rose-chip-bg); --sum-chip-border: var(--sum-rose-chip-border); --sum-ink: var(--sum-rose-ink); }
+.sum-panel--violet { --sum-bg: var(--sum-violet-bg); --sum-border: var(--sum-violet-border); --sum-title: var(--sum-violet-title); --sum-chip-bg: var(--sum-violet-chip-bg); --sum-chip-border: var(--sum-violet-chip-border); --sum-ink: var(--sum-violet-ink); }
+.sum-panel--slate { --sum-bg: var(--sum-slate-bg); --sum-border: var(--sum-slate-border); --sum-title: var(--sum-slate-title); --sum-chip-bg: var(--sum-slate-chip-bg); --sum-chip-border: var(--sum-slate-chip-border); --sum-ink: var(--sum-slate-ink); }
+
+.sum-layer--blue { --sum-bg: var(--sum-blue-bg); --sum-border: var(--sum-blue-border); --sum-title: var(--sum-blue-title); --sum-chip-bg: var(--sum-blue-chip-bg); --sum-chip-border: var(--sum-blue-chip-border); --sum-ink: var(--sum-blue-ink); }
+.sum-layer--teal { --sum-bg: var(--sum-teal-bg); --sum-border: var(--sum-teal-border); --sum-title: var(--sum-teal-title); --sum-chip-bg: var(--sum-teal-chip-bg); --sum-chip-border: var(--sum-teal-chip-border); --sum-ink: var(--sum-teal-ink); }
+.sum-layer--green { --sum-bg: var(--sum-green-bg); --sum-border: var(--sum-green-border); --sum-title: var(--sum-green-title); --sum-chip-bg: var(--sum-green-chip-bg); --sum-chip-border: var(--sum-green-chip-border); --sum-ink: var(--sum-green-ink); }
+.sum-layer--amber { --sum-bg: var(--sum-amber-bg); --sum-border: var(--sum-amber-border); --sum-title: var(--sum-amber-title); --sum-chip-bg: var(--sum-amber-chip-bg); --sum-chip-border: var(--sum-amber-chip-border); --sum-ink: var(--sum-amber-ink); }
+.sum-layer--rose { --sum-bg: var(--sum-rose-bg); --sum-border: var(--sum-rose-border); --sum-title: var(--sum-rose-title); --sum-chip-bg: var(--sum-rose-chip-bg); --sum-chip-border: var(--sum-rose-chip-border); --sum-ink: var(--sum-rose-ink); }
+.sum-layer--violet { --sum-bg: var(--sum-violet-bg); --sum-border: var(--sum-violet-border); --sum-title: var(--sum-violet-title); --sum-chip-bg: var(--sum-violet-chip-bg); --sum-chip-border: var(--sum-violet-chip-border); --sum-ink: var(--sum-violet-ink); }
+.sum-layer--slate { --sum-bg: var(--sum-slate-bg); --sum-border: var(--sum-slate-border); --sum-title: var(--sum-slate-title); --sum-chip-bg: var(--sum-slate-chip-bg); --sum-chip-border: var(--sum-slate-chip-border); --sum-ink: var(--sum-slate-ink); }
+
+.sum-panel-head,
+.sum-layer-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sum-panel-head {
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--sum-border);
+}
+
+.sum-panel-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--sum-title);
+}
+
+.sum-panel-sub {
+  font-size: 0.75rem;
+  color: var(--sum-title);
+  opacity: 0.78;
+}
+
+.sum-cells {
+  flex: 1;
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 8px;
+  align-content: stretch;
+}
+
+.sum-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: var(--sum-chip-bg);
+  border: 1px solid var(--sum-chip-border);
+}
+
+.sum-cell-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--sum-ink);
+}
+
+.sum-cell-desc {
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--sum-ink);
+  opacity: 0.82;
+}
+
+.sum-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.sum-layer {
+  flex-direction: row;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.sum-layer-head {
+  flex: 0 0 132px;
+  justify-content: center;
+  padding-right: 12px;
+  border-right: 1px dashed var(--sum-border);
+}
+
+.sum-layer .sum-cells {
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.sum-takeaways {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.sum-take {
+  padding: 3px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--algo-chip-bg);
+  border: 1px solid var(--algo-bar-active);
+  color: var(--algo-chip-text);
+}
+
+.sum-caption {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+@media (max-width: 44rem) {
+  .sum-viz {
+    padding: 16px 12px 12px;
+  }
+
+  .sum-cols--2,
+  .sum-cols--3,
+  .sum-cols--linked {
+    grid-template-columns: 1fr;
+  }
+
+  /* 窄屏面板纵向堆叠，中缝退化为一条分隔胶囊 */
+  .sum-link {
+    flex-direction: row;
+    padding: 2px 0;
+  }
+
+  .sum-link-arrow {
+    display: none;
+  }
+
+  .sum-layer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sum-layer-head {
+    flex-basis: auto;
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px dashed var(--sum-border);
+    padding-bottom: 6px;
+  }
+}

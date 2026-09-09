@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 为什么不用 HashMap / Collections.synchronizedMap
 
 - **HashMap 多线程并发写**可能成环导致 get 死循环（JDK 7 resize 头插法），
@@ -162,4 +164,8 @@ helpTransfer 一起搬；get 碰到则通过 find 转发到新表查询。扩容
 - put 三条路径：空桶 CAS / MOVED 帮扩容 / 锁头节点 double check。
 
 - get 无锁靠 volatile；size 靠 LongAdder 思路分摊热点，接受弱一致。
+
+最后把它和 HashMap 放进同一张总结卡：
+
+<AlgorithmVizIsland demo="hashmap-vs-chm" />
 

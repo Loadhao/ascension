@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## String 为什么不可变
 
 JDK 9 起 String 内部是 `final byte[] value`（JDK 8 及以前是 `final char[]`），
@@ -70,6 +72,10 @@ System.out.println(s3 == "hello");           // false：堆中新对象
 | String        | 不可变 | 安全                   | 少量、不变的字符串   |
 | StringBuilder | 可变  | 不安全                  | **单线程拼接首选** |
 | StringBuffer  | 可变  | 安全（方法加 synchronized） | 多线程拼接（罕见）   |
+
+同一张表画成总结卡，一眼分清三兄弟的分工：
+
+<AlgorithmVizIsland demo="string-family" />
 
 循环里用 `+` 拼接是经典反模式——每轮都 new 一个 StringBuilder 并生成新
 String，产生大量临时对象：

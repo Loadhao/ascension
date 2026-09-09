@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 三种用法与锁对象
 
 ```java
@@ -149,6 +151,8 @@ wait 会**释放锁**（对比 sleep 抱着锁睡）——这是生产者消费�
 
 简单场景默认 synchronized（不漏释放、JIT 持续优化）；需要超时、可中断、
 公平性、多条件队列才上 ReentrantLock。
+
+<AlgorithmVizIsland demo="sync-vs-lock" />
 
 ## 小结
 
