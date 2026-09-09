@@ -1642,6 +1642,23 @@
       ],
       "hint": 4,
       "difficulty": "「类相等 = 类加载器 + 类全名都相同」正是双亲委派「防重复」的判定依据；Tomcat 给每个 webapp 一套 WebappClassLoader 才能实现同 war 多版本共存。java-prepare-032 考准备阶段，本题考类的唯一性。"
+    },
+    {
+      "id": "java-adviceorder-098",
+      "noteId": "java/intermediate/spring/02-aop",
+      "type": "single",
+      "q": "同一个切面里同时有 @Around、@Before、@After，目标方法抛出异常时执行顺序是？",
+      "options": [
+        "@Around 前半段 → @Before → 目标方法抛异常 → @AfterThrowing → @After（必然执行）→ @Around 后半段（proceed 放 finally 里的部分）",
+        "@Around 包裹一切并把异常吞掉，@AfterThrowing 与 @After 都不会执行",
+        "@Before → 目标方法 → @AfterThrowing 就结束，@Around 的后半段无从谈起",
+        "@After 最先执行（finally 语义），然后才轮到 @AfterThrowing"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "@Around 手里握着 proceed()——可以改参数、改返回值、吞异常、干脆不执行目标方法，日志统计选它、Spring 事务也是它；@After 是「必然执行」的最终通知。java-aop-self-047 考自调用失效，本题考通知编排顺序。"
     }
   ]
 }

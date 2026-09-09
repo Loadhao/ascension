@@ -133,6 +133,23 @@
         1
       ],
       "hint": "调参顺序永远是先修索引与模型（收益最大）、再对齐工作集与内存、最后才是参数微调；eviction 等内部参数默认值已近最优，乱调反而引入不可解释的行为。"
+    },
+    {
+      "id": "mongo-oplog-006",
+      "noteId": "mongodb/intermediate/replication/01-replication-set",
+      "type": "single",
+      "q": "一个 Secondary 停机 3 小时后恢复，发现同步位点已被 oplog 窗口覆盖。按笔记结论，后果与预防是？",
+      "options": [
+        "只能重新 initial-sync（清库全量拷贝再追增量）；预防是把 oplogSize 按「最长预期停机时间 × 写入速率」配置，宁大勿小",
+        "Secondary 会自动从最近一次备份恢复差异部分，无需人工干预",
+        "Primary 会暂停写入等待该 Secondary 追平后再继续",
+        "该节点会被自动提升为 Primary 以重新建立数据基线"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "oplog 是固定大小、只追加、满了删最旧的持久化 ring-buffer——落后超过窗口就被「套圈」，磁盘便宜、重同步贵；另一个高频坑是老主失联分叉后的 rollback（冲突文档写 rollback 目录人工裁决）。mongo-majority-002 考选举多数派，本题考 oplog 滚动窗口。"
     }
   ]
 }

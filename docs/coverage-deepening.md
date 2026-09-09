@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] distributed/intermediate/case-studies/01-flash-sale — 第二题考「预扣不支付：下单消息带过期时间，超时关单 + 回补库存（延迟消息）」
-- [ ] mongodb/intermediate/replication/01-replication-set — 第二题考「oplog 是固定大小环形缓冲，Secondary 落后超窗口被套圈只能重新 initial-sync」
-- [ ] java/intermediate/spring/02-aop — 第二题考「通知执行顺序：@Around 前半 → @Before → 目标 → @AfterReturning/@AfterThrowing → @After → @Around 后半」
 - [ ] redis/basic/core/01-data-structures — 第二题考「SDS 三改造：len 字段 O(1) 取长 / 二进制安全 / 空间预分配+惰性释放」
 - [ ] distributed/intermediate/consensus/01-paxos-raft — 第二题考「term 单调递增是逻辑时钟 + 随机选举超时 150~300ms 错开起跑线」
+- [ ] java/advanced/jvm/04-references — 第二题考「ReferenceQueue 入队的是 Reference 对象本身；finalize 两次标记可复活、JDK 9 起废弃改用 Cleaner」
+- [ ] linux/basic/filesystem/01-filesystem — 第二题考「磁盘满三件套：df -h 空间 / df -i inode 满（海量小文件）/ lsof +L1 已删未释放」
+- [ ] js/basic/core/05-event-loop — 第二题考「await 语义：后面的代码包成微任务让出调用栈；async 函数首次调用同步执行到第一个 await」
 
 ### b 类：旧题返修
 
@@ -34,6 +34,8 @@
 - 2026-09-09 · 第三轮：3 道核心笔记第二题（kafka-storage-012 / redis-watchdog-008 / java-classidentity-097，difficulty 3/4/4）· 本轮提交主题：feat: 题库深化第三轮
 
 - 2026-09-09 · 第四轮：3 道核心笔记第二题（mysql-idxfail-005 / net-finwait-004 / es-writepath-007，difficulty 4/3/4；es 条目原定角度与 es-shard-002 撞车，就地换写路径四动作）· 本轮提交主题：feat: 题库深化第四轮
+
+- 2026-09-09 · 第五轮：3 道核心笔记第二题（dist-flashrefund-035 / mongo-oplog-004 / java-adviceorder-098，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第五轮
 
 ## 经验与规则
 
