@@ -207,6 +207,23 @@
       ],
       "hint": 4,
       "difficulty": "「不传 leaseTime 才启用」是最常考的反直觉点；可重入靠 Hash 结构记重入计数（同线程 lock +1、unlock -1 归零才真删，全程 Lua 保证原子）；主从切换有丢锁窗口——正确性攸关场景用 DB 唯一约束或 ZooKeeper 兜底。"
+    },
+    {
+      "id": "redis-sds-013",
+      "noteId": "redis/basic/core/01-data-structures",
+      "type": "single",
+      "q": "Redis 的 SDS 相比 C 字符串的三大改造，按笔记正确的是？",
+      "options": [
+        "len 字段 O(1) 取长度；按 len 而非 '\\0' 判结尾（二进制安全，图片/序列化字节流都能存）；空间预分配 + 惰性释放减少反复 realloc",
+        "用哈希表管理字符，任意前缀查找 O(1)",
+        "只支持 ASCII，遇到非 ASCII 字符自动转 UTF-8 缓冲",
+        "内容强制以 '\\0' 结尾且不能包含 '\\0'，与 C 字符串行为完全一致"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "「二进制安全」的含义就是内容里可以有 '\\0'——判结尾看 len 不看 '\\0'；预分配/惰性释放把反复扩缩容的 realloc 摊薄。redis-ds-001 考编码切换与 rehash，本题考 SDS 本体。"
     }
   ]
 }

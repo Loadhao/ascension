@@ -1659,6 +1659,23 @@
       ],
       "hint": 3,
       "difficulty": "@Around 手里握着 proceed()——可以改参数、改返回值、吞异常、干脆不执行目标方法，日志统计选它、Spring 事务也是它；@After 是「必然执行」的最终通知。java-aop-self-047 考自调用失效，本题考通知编排顺序。"
+    },
+    {
+      "id": "java-refqueue-099",
+      "noteId": "java/advanced/jvm/04-references",
+      "type": "single",
+      "q": "关于 ReferenceQueue 的入队语义与 finalize 的废弃，按笔记正确的是？",
+      "options": [
+        "入队的元素是 Reference 对象本身而非 referent（后者已被回收）；finalize 因执行时机不确定、可「复活」对象等问题 JDK 9 起 @Deprecated，清理改用 try-with-resources 或 Cleaner",
+        "入队的是被回收的 referent 对象，业务从队列里取出原对象做清理",
+        "finalize 执行时机确定且可靠，仍是释放资源的首选",
+        "Cleaner 是 finalize 的别名，两者底层机制完全不同"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "GC 把 Reference 挂 pending 链、ReferenceHandler 守护线程头插法入队——ReferenceQueue 名为队列实为 head 单链表，不「存」引用；Cleaner 是虚引用机制的产品化，DirectByteBuffer 的堆外内存就靠它释放。java-ref-034 考四种引用回收时机，本题考通知机制与 finalize 的坑。"
     }
   ]
 }

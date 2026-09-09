@@ -613,6 +613,23 @@
       ],
       "hint": 4,
       "difficulty": "关单回补靠延迟消息；删去重集合破坏「同口径防重复抢购」；乐观锁降级是扣减方式不是回补机制，Redis 与 DB 的偏差要靠对账发现——那是超卖/少卖的直接信号。dist-flash-026 考消费幂等与 DB 兜底，本题考超时关单回补。"
+    },
+    {
+      "id": "dist-term-037",
+      "noteId": "distributed/intermediate/consensus/01-paxos-raft",
+      "type": "single",
+      "q": "关于 Raft 的 term（任期）与随机选举超时，按笔记正确的是？",
+      "options": [
+        "term 是单调递增的逻辑时钟，任何节点见到更高 term 立刻服从——新旧主不可能同时作恶；选举超时随机化（150~300ms）错开起跑线，避免选票分裂死循环",
+        "term 由各节点本地墙钟驱动，时钟跳变会导致任期倒退",
+        "随机超时是为了均匀分摊心跳的网络负载，与选票分裂无关",
+        "平票时各节点坚持投自己直到过半，不需要随机退避"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "term 比较而非墙钟，正是 Raft 不依赖物理时钟的设计——Candidate 见更高 term 退回 Follower、Leader 亦然；平票就再等一个随机超时重选。dist-raft-002 考分区下两侧行为，本题考任期与选举机制。"
     }
   ]
 }
