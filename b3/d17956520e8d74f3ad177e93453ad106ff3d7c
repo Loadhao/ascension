@@ -1,0 +1,24 @@
+src/content/docs/distributed/advanced/availability/02-split-brain.mdx
+  h_9324126a55eff3 7-8,88-91
+src/content/docs/java/advanced/jvm/03-garbage-collection.mdx
+  h_9324126a55eff3 8-9,89-92
+src/content/docs/kafka/intermediate/core/05-rebalance.mdx
+  h_9324126a55eff3 8-9,52-55
+src/content/docs/nginx/basic/config/01-working-model.mdx
+  h_9324126a55eff3 8-9,73-76
+src/content/docs/postgresql/basic/core/02-mvcc-isolation.mdx
+  h_9324126a55eff3 8-9,54-57
+src/data/viz/flows.ts
+  h_9324126a55eff3 1712-2037,2063-2067
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b3d17956520e8d74f3ad177e93453ad106ff3d7c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
