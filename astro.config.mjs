@@ -1709,6 +1709,7 @@ export default defineConfig({
                         { label: '大模型 LLM', link: '/ai/intermediate/llm/01-llm/' },
                         { label: '提示工程', link: '/ai/intermediate/llm/02-prompt-engineering/' },
                         { label: '落地选型：提示工程、RAG 还是微调', link: '/ai/intermediate/llm/03-adapter-selection/' },
+                        { label: '推理参数：temperature、top_p 与输出控制', link: '/ai/intermediate/llm/04-inference-params/' },
                       ],
                     },
                     {
