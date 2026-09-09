@@ -1,0 +1,14 @@
+src/styles/custom.css
+  h_9324126a55eff3 368-387
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3da7db408c5d9cd58d93e6a7bace60090c2773c4",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
