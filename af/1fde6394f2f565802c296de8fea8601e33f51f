@@ -1,0 +1,30 @@
+src/components/viz/AlgorithmVizIsland.astro
+  h_9324126a55eff3 8,12,22,31-32
+src/components/viz/SummaryViz.tsx
+  h_9324126a55eff3 1-124
+src/content/docs/java/advanced/jvm/02-memory.mdx
+  h_9324126a55eff3 8-9,39-42
+src/content/docs/java/basic/collection/03-concurrenthashmap.mdx
+  h_9324126a55eff3 8-9,168-171
+src/content/docs/java/basic/syntax/02-string.mdx
+  h_9324126a55eff3 8-9,76-79
+src/content/docs/java/intermediate/concurrent/04-synchronized.mdx
+  h_9324126a55eff3 8-9,155-156
+src/content/docs/java/intermediate/spring/00-family-map.mdx
+  h_9324126a55eff3 8-9,63-66
+src/data/viz/summaries.ts
+  h_9324126a55eff3 1-189
+src/styles/custom.css
+  h_9324126a55eff3 2782-3115
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "af1fde6394f2f565802c296de8fea8601e33f51f",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
