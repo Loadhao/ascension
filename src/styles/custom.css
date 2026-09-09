@@ -365,6 +365,26 @@ main:has(.kg-fullbleed) {
   }
 }
 
+/* ===== 页头搜索框水平居中（≥50rem 桌面端） =====
+   Starlight core 的页头网格把中间整条 1fr 分给搜索框，按钮贴列首，
+   视觉上被左栏顶到偏左；改为对称三列「1fr auto 1fr」，搜索按钮落在
+   视口正中的 auto 列，标题与右侧组分列两端。宽度沿用 core 的 22rem 上限 */
+@media (min-width: 50rem) {
+  header.header > .header {
+    grid-template-columns: 1fr auto 1fr;
+  }
+  header.header > .header .title-wrapper {
+    justify-self: start;
+  }
+  header.header > .header .right-group {
+    justify-self: end;
+  }
+  /* auto 列按内容收缩，显式补到 core 的 max-width 上限，保持原有输入框宽度 */
+  header.header > .header site-search button[data-open-modal] {
+    width: 22rem;
+  }
+}
+
 /* ===== 右侧篇章目录收窄 + 正文在剩余空间居中（≥72rem 覆盖 Starlight 布局公式） ===== */
 /* 正文列全宽度居中：Starlight core 只在 ≥72rem 给 .sl-container 加 auto 边距，
    50–72rem 区间正文贴左，这里统一接管（层叠优先级高于 core 的 @layer 规则） */
