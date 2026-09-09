@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1684
+src/content/docs/ai/basic/foundation/03-transformer.md
+  h_9324126a55eff3 1-85
+src/data/graphs/ai.json
+  h_9324126a55eff3 6,41-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "fbd48b198b2b8c6c2397890ad85c47d9fe48c788",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
