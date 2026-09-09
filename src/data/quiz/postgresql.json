@@ -189,6 +189,23 @@
       ],
       "hint": 3,
       "difficulty": "末项反了——PG 支持 Hash/部分索引/表达式索引按需创建（如只给未归档订单建部分索引）；索引家族是笔记总结的 PG 对 MySQL 四大差异中的碾压项。"
+    },
+    {
+      "id": "pg-rejoin-011",
+      "noteId": "postgresql/intermediate/ha/02-pgpool-dr",
+      "type": "single",
+      "q": "主库故障、备库提升为新主后，老主修复完毕要重新加入集群。按笔记的正确步骤是？",
+      "options": [
+        "重建数据目录 → 以 postgres 用户（属主须对）执行 pg_basebackup -R 从新主拉全量 → pcp_attach_node 重新加入集群",
+        "直接启动 PostgreSQL，老主会自动识别新主并增量追平数据",
+        "保留老主原数据目录，删掉 standby.signal 后以主库身份重启",
+        "先 pcp_attach_node 入集群，再手工向老主补同步缺失的数据"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "老主数据已分叉/落后，必须从新主全量重建——pg_basebackup -R 顺便生成 standby.signal，属主不对起不来是高频坑；PG 12 起 recovery.conf 被移除（数据目录存在它则起不来）。pg-sync-003 考 synchronous_commit 五档，本题考故障后的重入流程。"
     }
   ]
 }

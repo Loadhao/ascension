@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] postgresql/intermediate/ha/02-pgpool-dr — 第二题考「老主恢复三步：重建数据目录 → pg_basebackup -R 全量 → pcp_attach_node 入集群」
-- [ ] seata/basic/core/02-seata-deep-dive — 第二题考「热点行（秒杀库存/账户余额）下全局锁退化串行，AT 不适用换 TCC/消息最终一致」
-- [ ] java/advanced/jvm/06-jit — 第二题考「方法内联是优化之母：小方法 ≤35 字节码随手内联；手写循环测性能会被死代码消除骗，必须 JMH」
 - [ ] mysql/intermediate/transaction-lock/01-transaction-mvcc — 第二题考「RC/RR 默认差异的历史原因：早期 binlog statement 格式在 RC 下主从不一致」
 - [ ] tools/basic/cli/01-grep-sed-awk — 第二题考「三件套分工：grep 找、sed 行编辑替换、awk 按列计算」
+- [ ] java/basic/io/02-zero-copy — 第二题考「演进三代：mmap+write 省 1 次 CPU 拷贝 → sendfile 零 CPU 拷贝 → gather 连 socket 缓冲区都不放数据；Kafka 消费走 sendfile、RocketMQ 用 mmap」
+- [ ] rabbitmq/basic/core/01-amqp-model — 第二题考「消息没有绑定匹配时被静默丢弃且发布方毫无报错——排查「发了没人收」先列绑定比对路由键」
+- [ ] middleware/basic/mq/01-why-mq — 第二题考「MQ 的代价清单：一致性问题/复杂度/重复消费/积压风险——收益与代价一起答」
 
 ### b 类：旧题返修
 
@@ -42,6 +42,8 @@
 - 2026-09-09 · 第七轮：3 道核心笔记第二题（linux-diskfull-007 / js-await-010 / java-treeify-100，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第七轮
 
 - 2026-09-09 · 第八轮：3 道核心笔记第二题（nginx-location-004 / docker-voltrap-006 / java-fakedead-101，difficulty 3/4/4；docker 条目原定角度与 docker-vol-005 撞车，换行为细节与坑）· 本轮提交主题：feat: 题库深化第八轮
+
+- 2026-09-09 · 第九轮：3 道核心笔记第二题（pg-rejoin-003 / seata-hotrow-003 / java-inline-102，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第九轮
 
 ## 经验与规则
 

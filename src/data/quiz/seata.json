@@ -50,7 +50,9 @@
         "Saga：无隔离，但补偿能自动把库存加回去，适合强互斥",
         "三种等价，只是注解不同"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "AT 热点行退化为串行；Saga 中间态对外可见且不提供互斥。TCC 把隔离做成业务预留，Confirm/Cancel 必须幂等并处理空回滚。"
     },
     {
@@ -65,7 +67,11 @@
         "Saga 正向步骤已提交，失败按相反顺序调补偿，不承诺强一致",
         "Saga 是长事务版 AT，同样靠 undo_log 回滚"
       ],
-      "answer": [0, 1, 2],
+      "answer": [
+        0,
+        1,
+        2
+      ],
       "hint": "Saga 没有 Try 预留也没有 undo_log，把长流程说成 AT 是错的。"
     },
     {
@@ -80,7 +86,9 @@
         "undo_log 表被 VACUUM 清掉了",
         "TC 的全局锁超时，可以原样重试补偿"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "脏写 ≠ 脏读。全局锁是预防，afterImage 校验是发现；发现后只能人工。旁路 @Transactional / 直连 SQL 不申请全局锁，是脏写主入口。"
     },
     {
@@ -89,9 +97,31 @@
       "type": "judge",
       "difficulty": 4,
       "q": "AT 分支内对业务方法使用 @Transactional(REQUIRES_NEW) 是推荐写法，因为本地事务先提交更短、锁更少。",
-      "options": ["正确", "错误"],
-      "answer": [1],
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
       "hint": "undo_log 必须与业务 SQL 同一本地事务提交。REQUIRES_NEW 会把业务行先独立提交，拆掉这条契约，全局回滚时镜像失效或无归属。"
+    },
+    {
+      "id": "seata-hotrow-007",
+      "noteId": "seata/basic/core/02-seata-deep-dive",
+      "type": "single",
+      "q": "秒杀库存扣减场景想用 Seata AT 模式，笔记的结论是？",
+      "options": [
+        "热点行下全局锁退化为串行——AT 不适用，换 TCC 或消息最终一致；全局锁要持有到全局事务结束，链路越长锁越久",
+        "AT 的全局锁粒度是表级，热点行不受影响，可以放心用",
+        "把 @GlobalTransactional 换成 @GlobalLock，热点行问题就解决了",
+        "调大 lock.retryTimes 让自旋等待更久，热点行就能恢复正常吞吐"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "全局锁按「表名 + 主键」粒度，竞争同一行就退化为串行——秒杀库存/账户余额正是典型热点行；@GlobalLock 是读已提交的手段、不是热点解药；调参只权衡失败率，不改串行本质。seata-lock-002 考注解失效四坑，本题考全局锁的代价边界。"
     }
   ]
 }
