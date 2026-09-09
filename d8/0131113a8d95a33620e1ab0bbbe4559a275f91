@@ -1,0 +1,26 @@
+astro.config.mjs
+  h_9324126a55eff3 171
+src/components/viz/AlgorithmVizIsland.astro
+  h_9324126a55eff3 7,10,19,27
+src/components/viz/FlowViz.tsx
+  h_9324126a55eff3 1-357
+src/content/docs/guide/animated-flows.mdx
+  h_9324126a55eff3 1-59
+src/data/viz/flows.ts
+  h_9324126a55eff3 1-165
+src/styles/custom.css
+  h_9324126a55eff3 1691-1692,1705
+src/styles/viz-structures.css
+  h_9324126a55eff3 1,3,296-468
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "d80131113a8d95a33620e1ab0bbbe4559a275f91",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
