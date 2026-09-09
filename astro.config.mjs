@@ -1186,6 +1186,7 @@ export default defineConfig({
                         { label: '抢红包系统：从二倍均值法到热点账户', link: '/distributed/intermediate/case-studies/07-red-packet/' },
                         { label: '抽奖系统：概率、库存与兜底', link: '/distributed/intermediate/case-studies/08-lottery/' },
                         { label: '签到系统：位图的教科书应用', link: '/distributed/intermediate/case-studies/09-sign-in/' },
+                        { label: '优惠券系统：发券、锁券与核销', link: '/distributed/intermediate/case-studies/10-coupon/' },
                       ],
                     },
                   ],
