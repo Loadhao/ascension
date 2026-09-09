@@ -1,0 +1,19 @@
+src/content/docs/ai/basic/foundation/04-lora.md
+  s_d0327bd451979d::t_9429ea77a32ecb 1-79
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "7b9f04f20269072c3a8a162e2d04e05bab83e78d",
+  "prompts": {},
+  "sessions": {
+    "s_d0327bd451979d": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "7d151374-18a0-465e-ac4d-ea29d5ca618c",
+        "model": "composer-2.5-fast"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
