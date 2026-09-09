@@ -1,0 +1,28 @@
+AGENTS.md
+  h_9324126a55eff3 48-49
+src/content/docs/elasticsearch/basic/core/02-shard-replica.mdx
+  h_9324126a55eff3 8-9,72-76
+src/content/docs/guide/diagrams.mdx
+  h_9324126a55eff3 6-7,187-214
+src/content/docs/kafka/intermediate/core/01-kafka-architecture.mdx
+  h_9324126a55eff3 8-9,77-80
+src/content/docs/mysql/intermediate/transaction-lock/03-redo-undo-binlog.mdx
+  h_9324126a55eff3 8-9,51-55
+src/content/docs/network/basic/tcp/01-three-way-handshake.mdx
+  h_9324126a55eff3 8-9,53-56
+src/content/docs/redis/intermediate/usage/03-distributed-lock.mdx
+  h_9324126a55eff3 7-8,69-72
+src/data/viz/flows.ts
+  h_9324126a55eff3 161-417,422-424
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a3e91135677d8592dd74aae6c24b2adb100ca8dc",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
