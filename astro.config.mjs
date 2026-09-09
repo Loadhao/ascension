@@ -1731,6 +1731,7 @@ export default defineConfig({
                         { label: '机器学习基础', link: '/ai/basic/foundation/01-machine-learning/' },
                         { label: '深度学习', link: '/ai/basic/foundation/02-deep-learning/' },
                         { label: 'Transformer 与自注意力', link: '/ai/basic/foundation/03-transformer/' },
+                        { label: 'LoRA：低成本微调的原理', link: '/ai/basic/foundation/04-lora/' },
                       ],
                     },
                     {
