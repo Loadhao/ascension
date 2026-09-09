@@ -430,6 +430,32 @@
 - 新证据与经验：python 方向 basic 三个薄分类（data-structures/modules/functions）均可按此模式扩到 3-4 篇成体系。
 - 下一轮入口：候选池——①python/basic/oop（3 篇）与 functions（3 篇）勘察补全；②ai/basic/foundation 再补一篇（训练/推理分工或 scaling law 深入）；③linux/basic/filesystem 第二篇（LVM/RAID 运维向或挂载实战）。每轮开工先同步+定界+体检基线。
 
+### 第 43 轮（2026-09-08，第十五次启动，内容补充模式）
+
+- 选择：候选池三连退场（python oop/functions 勘察覆盖完整、ai 训练流水线已被 01-llm 三阶段表+评测篇 RLHF 图覆盖、docker 已被并行会话补全 Dockerfile/volume/network、mongodb 索引已有专节）后，改用"高频题清单 × grep 全站"法锁定 **WebSocket 全站零覆盖**。
+- 交付：`network/basic/http/07-websocket.md`（轮询/长轮询/SSE 三方案对比、Upgrade 握手时序图、101 与 Key/Accept 校验、心跳重连三件套、选型表含"LLM 流式为何用 SSE"）+ 侧边栏注册 + 图谱 websocket 节点与 1 条边。
+- 验证：五连验证全绿（build 524 页/对比度 291 页）；提交 66c34dd 已推送。
+- 结论：补功能。
+- 新证据与经验：①"高频题清单 × grep"选题法（候选池枯竭时的兜底武器）：列后端高频题清单逐个 grep，缺口一目了然——比方向密度扫描更直接；②并行会话在 js/intermediate/web 写了 WebSocket/CORS 前端视角篇，与我 network 侧互补，js 方向继续避开。
+- 下一轮入口：grep 法继续——密码存储/分布式 ID/分布式锁覆盖排查。
+
+### 第 44 轮（2026-09-08，第十五次启动）
+
+- 选择：grep 法排查——分布式 ID/分布式锁均有专篇，**密码存储（bcrypt/加盐）全站无专篇**；落点 network/basic/http（登录态篇续篇，认证安全一体）。
+- 交付：`08-password-storage.md`（MD5 两大死穴：太快+彩虹表、加盐防预计算 vs 慢哈希防穷举的分工、bcrypt 自带盐、前端 MD5 自欺欺人、URL 不放凭证等流程纪律）+ 侧边栏注册 + 图谱 pwdstore 节点与 1 条边。
+- 验证：build 525 页、语法/一致性全绿、JSON 合法；纯表格无 mermaid；提交 fa9f337 已推送。
+- 结论：补功能。
+- 下一轮入口：ai/intermediate/llm 第五篇（Token 计费，推理参数篇追问已埋点）。
+
+### 第 45 轮（2026-09-08，第十五次启动）
+
+- 选择：ai/intermediate/llm Token 计费与成本优化篇（第五篇）——AI 应用岗必谈成本，推理参数篇的"输出越长越贵"追问展开成篇。
+- 交付：`05-token-cost.md`（一次调用账单构成图、输入量大头/输出价高、O(n²) 与窗口成本根源、降本四招、提示缓存"稳定前缀放前"、流式省体验不省钱）+ 侧边栏注册 + 图谱 tokencost 节点与 1 条边。
+- 验证：五连验证全绿（build 526 页/对比度 292 页）；提交 cca75ac 已推送。
+- 结论：补功能。
+- 新证据与经验：①ai/intermediate/llm 分类 2→5 篇成体系（LLM 本质→提示工程→选型→参数→成本）；②PG 方向已被并行会话补全（MVCC/索引/WAL 三分类）——选题前查图谱节点是撞车预警的最快手段。
+- 下一轮入口：候选池——①"高频题清单 × grep"继续：CDN 回源/灰度发布/幂等矩阵（部分已有，先查）；②python/basic/functions（3 篇）勘察退场过，转 python/intermediate/libs 勘察；③linux/basic/filesystem 第二篇（swap/journal）。每轮开工先同步+定界+体检基线。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
