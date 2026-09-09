@@ -170,7 +170,7 @@ now / windowLength → 目标下标
 CLOSED
   ├─ 每个请求记录 RT，落到滑动窗口
   ├─ 需求条件：窗口数 ≥ minRequestAmount(默认5) 且 慢调用比例 > 阈值(默认0.8)
-  └─ 满足 → CircuitBreaker 置 OPEN，丢出一个 DegradeException（由 blockHandler 处理）
+  └─ 满足 → CircuitBreaker 置 OPEN，抛 DegradeException → blockHandler
 
 OPEN
   ├─ 记录开启时刻 statStartTime

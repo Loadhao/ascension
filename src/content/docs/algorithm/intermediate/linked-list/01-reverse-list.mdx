@@ -40,7 +40,7 @@ public ListNode reverseList(ListNode head) {
 
 ```java
 public ListNode reverseListRec(ListNode head) {
-    if (head == null || head.next == null) return head;  // 空表/单节点：自己就是答案
+    if (head == null || head.next == null) return head;  // 空表/单节点即答案
     ListNode newHead = reverseListRec(head.next);  // 反转后面的部分
     head.next.next = head;  // 让后继反过来指我
     head.next = null;  // 我变成尾

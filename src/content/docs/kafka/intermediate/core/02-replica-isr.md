@@ -58,7 +58,7 @@ Leader。为什么必须是 ISR：**ISR 里的副本拥有全部已提交消息*
 
 ```yaml
 unclean.leader.election.enable: false  # 默认：不选，分区不可用（CP 倾向）
-unclean.leader.election.enable: true  # 选 C：恢复服务但丢 C 缺的那段数据（AP 倾向）
+unclean.leader.election.enable: true  # 选 C：恢复服务但丢 C 缺的数据（AP 倾向）
 ```
 
 这是 CAP 的又一现场（见 CAP 篇）：日志场景通常选 false（丢日志不如停

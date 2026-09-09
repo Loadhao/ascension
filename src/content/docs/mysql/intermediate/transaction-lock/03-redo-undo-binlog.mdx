@@ -59,7 +59,7 @@ sequenceDiagram
 -- redo 刷盘策略（0/1/2，默认 1）
 innodb_flush_log_at_trx_commit = 1   -- 每次提交都 fsync，最安全最慢
                                     -- 0: 每秒刷（宕机丢 1 秒）
-                                    -- 2: 交给 OS 缓存（MySQL 挂了不丢，主机挂丢 1 秒）
+                                    -- 2: OS 缓存（MySQL 挂不丢，主机挂丢 1 秒）
 
 -- binlog 刷盘策略（默认 1）
 sync_binlog = 1                      -- 每次提交 fsync

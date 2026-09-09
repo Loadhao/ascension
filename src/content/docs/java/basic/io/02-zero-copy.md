@@ -58,7 +58,8 @@ try (FileChannel in = FileChannel.open(path, READ)) {
 }
 
 // MappedByteBuffer：mmap 映射，按页懒加载
-MappedByteBuffer buf = fileChannel.map(MapMode.READ_ONLY, 0, fileChannel.size());
+MappedByteBuffer buf = fileChannel.map(
+    MapMode.READ_ONLY, 0, fileChannel.size());
 ```
 
 框架层的同款思想（用户态零拷贝）：

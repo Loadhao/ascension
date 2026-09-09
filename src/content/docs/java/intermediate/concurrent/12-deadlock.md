@@ -61,7 +61,8 @@ flowchart TB
 
 ```java
 // 转账修复：永远先锁"小账号"，环就画不出来
-synchronized (System.identityHashCode(a) < System.identityHashCode(b) ? a : b) { ... }
+synchronized (System.identityHashCode(a)
+    < System.identityHashCode(b) ? a : b) { ... }
 ```
 
 或**破坏持有并等待**——用 tryLock + 回退：

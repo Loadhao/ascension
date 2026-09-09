@@ -24,8 +24,12 @@ abstract class AbstractGame {
     protected void initialize() { System.out.println("初始化"); }  // 公共实现
     protected abstract void startPlay();  // 子类填空
 }
-class Cricket extends AbstractGame { protected void startPlay() { /* 板球开局 */ } }
-class Football extends AbstractGame { protected void startPlay() { /* 足球开局 */ } }
+class Cricket extends AbstractGame {
+    protected void startPlay() { /* 板球开局 */ }
+}
+class Football extends AbstractGame {
+    protected void startPlay() { /* 足球开局 */ }
+}
 ```
 
 两个细节是面试考点：**骨架方法加 `final`**（子类不许改流程，只能填

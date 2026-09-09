@@ -141,7 +141,8 @@ AND"。classpath 缺某个依赖类、容器里已有同名 Bean、配置项没�
 
 ```java
 @AutoConfiguration
-@ConditionalOnProperty(name = "sms.enabled", havingValue = "true")  // ← 没配就跳过
+// 没配就跳过
+@ConditionalOnProperty(name = "sms.enabled", havingValue = "true")
 @EnableConfigurationProperties(SmsProperties.class)
 public class SmsAutoConfiguration {
     @Bean

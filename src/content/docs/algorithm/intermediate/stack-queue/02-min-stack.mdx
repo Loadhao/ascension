@@ -38,12 +38,12 @@ class MinStack {
 
     public void pop() {
         long diff = stack.pop();
-        if (diff < 0) min -= diff;  // 差值是负说明弹掉的是最小值，回滚上一个最小
+        if (diff < 0) min -= diff;  // 差值为负：弹掉的是最小值，回滚上一个最小
     }
 
     public int top() {
         long diff = stack.peek();
-        return diff >= 0 ? (int) (min + diff) : (int) min;  // 负差值时它自己就是 min
+        return diff >= 0 ? (int) (min + diff) : (int) min;  // 负差值时它即 min
     }
 
     public int getMin() {
@@ -57,7 +57,8 @@ class MinStack {
 
 ```java
 // 双栈版核心：与主栈同步压入 min(新值, 最小栈顶)，pop 时同弹
-minStack.push(minStack.isEmpty() || val <= minStack.peek() ? val : minStack.peek());
+minStack.push(minStack.isEmpty() || val <= minStack.peek()
+    ? val : minStack.peek());
 ```
 
 ## 复杂度与特点

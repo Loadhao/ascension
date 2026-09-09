@@ -57,11 +57,15 @@ flowchart TB
 
 ```java
 interface Pricer { double price(double base); }
-class BasePricer implements Pricer { public double price(double b) { return b; } }
+class BasePricer implements Pricer {
+    public double price(double b) { return b; }
+}
 
 class DiscountDecorator implements Pricer {
     private final Pricer next; private final double rate;
-    DiscountDecorator(Pricer next, double rate) { this.next = next; this.rate = rate; }
+    DiscountDecorator(Pricer next, double rate) {
+        this.next = next; this.rate = rate;
+    }
     public double price(double b) { return next.price(b) * rate; }
 }
 

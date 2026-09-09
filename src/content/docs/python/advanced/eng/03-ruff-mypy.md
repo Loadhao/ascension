@@ -23,7 +23,8 @@ target-version = "py312"
 line-length = 100
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]  # pycodestyle / pyflakes / import排序 / 语法升级 / 常见bug
+# pycodestyle / pyflakes / import排序 / 语法升级 / 常见bug
+select = ["E", "F", "I", "UP", "B"]
 # E501 关掉行长 lint（交给 format 管），避免和 formatter 打架
 ignore = ["E501"]
 

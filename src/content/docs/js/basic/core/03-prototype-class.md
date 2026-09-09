@@ -42,7 +42,9 @@ flowchart LR
 function myNew(Foo, ...args) {
   const obj = Object.create(Foo.prototype);  // ① 建空对象并链到 prototype
   const ret = Foo.apply(obj, args);  // ② 绑 this 执行构造逻辑
-  return ret instanceof Object ? ret : obj;  // ③ 构造器显式返回对象时覆盖，④ 否则返回 obj
+  // ③ 构造器显式返回对象时覆盖
+  // ④ 否则返回 obj
+  return ret instanceof Object ? ret : obj;
 }
 ```
 

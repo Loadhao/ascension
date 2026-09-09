@@ -57,7 +57,8 @@ IntStream 拆出 IntStream），子流还能继续拆。
 ```java
 Stream<T> filter(Predicate<? super T> predicate);  // 返回流本身
 <R> Stream<R> map(Function<? super T, ? extends R> mapper);
-<R> Stream<R> flatMap(Function<? super T, ? extends Stream<? extends R>> mapper);
+<R> Stream<R> flatMap(Function<? super T,
+    ? extends Stream<? extends R>> mapper);
 Stream<T> sorted();  Stream<T> peek(...);  Stream<T> limit(long maxSize);
 ```
 

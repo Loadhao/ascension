@@ -46,7 +46,7 @@ public class Snowflake {
         if (ts < lastTs) throw clockBack();  // 时钟回拨！见下
         if (ts == lastTs) {  // 同一毫秒：序列号 +1
             sequence = (sequence + 1) & 4095;
-            if (sequence == 0) ts = waitNextMillis(lastTs);  // 序列耗尽等下一毫秒
+            if (sequence == 0) ts = waitNextMillis(lastTs);  // 耗尽则等下一毫秒
         } else {
             sequence = 0;
         }

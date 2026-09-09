@@ -13,7 +13,8 @@ JDK 9 起 String 内部是 `final byte[] value`（JDK 8 及以前是 `final char
 类本身也被 final 修饰，无法继承篡改：
 
 ```java
-public final class String implements java.io.Serializable, Comparable<String>, CharSequence {
+public final class String
+    implements java.io.Serializable, Comparable<String>, CharSequence {
     private final byte[] value;  // final 引用 + 私有 + 不提供修改入口
     private final byte coder;  // LATIN1 或 UTF16
 }

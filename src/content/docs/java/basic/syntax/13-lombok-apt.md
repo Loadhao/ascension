@@ -48,7 +48,8 @@ APT 两派记法：**Lombok 改语法树**（你写的类"凭空多出方法"）
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    private final PaymentService payment;  // 构造器注入（Spring 4.3+ 单构造器免 @Autowired）
+    // 构造器注入（Spring 4.3+ 单构造器免 @Autowired）
+    private final PaymentService payment;
     private final OrderRepository repo;
 }
 ```

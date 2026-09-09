@@ -67,7 +67,8 @@ RC 隔离级别下没有 Gap Lock（除唯一性检查外），幻读防线交�
 update t set v=1 where id=1;        update t set v=1 where id=2;
                                     -- A 持有 id=1
 update t set v=1 where id=2;        -- A 等 B 放 2 → 阻塞
-                                    update t set v=1 where id=1;   -- B 等 A 放 1 → 死锁
+                                    update t set v=1 where id=1;
+                                    -- B 等 A 放 1 → 死锁
 ```
 
 InnoDB 检测到等待环（wait-for graph），**回滚代价小的事务**并返回

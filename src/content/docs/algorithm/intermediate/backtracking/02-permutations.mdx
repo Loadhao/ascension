@@ -27,7 +27,8 @@ public List<List<Integer>> permute(int[] nums) {
     return res;
 }
 
-private void dfs(int[] nums, boolean[] used, List<Integer> path, List<List<Integer>> res) {
+private void dfs(int[] nums, boolean[] used, List<Integer> path,
+        List<List<Integer>> res) {
     if (path.size() == nums.length) {  // 路径满长才收集——只有叶子是答案
         res.add(new ArrayList<>(path));
         return;

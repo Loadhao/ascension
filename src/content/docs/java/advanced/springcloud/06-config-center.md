@@ -27,7 +27,7 @@ flowchart LR
 ```yaml
 spring:
   config:
-    import: "optional:nacos:user-service.yaml"  # 云原生缺省 import 写法（Boot 2.4+）
+    import: "optional:nacos:user-service.yaml"  # 云原生缺省写法（Boot 2.4+）
   cloud:
     nacos:
       config:

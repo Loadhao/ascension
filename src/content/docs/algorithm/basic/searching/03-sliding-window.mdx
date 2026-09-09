@@ -22,7 +22,7 @@ import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland
 ## Java 实现
 
 ```java
-/** 长度最小的子数组：和 ≥ target 的最短连续子数组长度（元素均为正数），不存在返回 0 */
+/** 长度最小的子数组：和 ≥ target 的最短子数组长度（元素为正），不存在返回 0 */
 public static int minSubArrayLen(int[] a, int target) {
     int n = a.length, best = n + 1;
     int l = 0, sum = 0;

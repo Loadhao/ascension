@@ -37,7 +37,9 @@ public void onOrderCreated(OrderCreatedEvent event) { deductStock(event); }
 
 @EventListener
 @Async  // 异步不阻塞主链路（MQ 篇的削峰思想）
-public void onOrderCreatedForPoints(OrderCreatedEvent event) { addPoints(event); }
+public void onOrderCreatedForPoints(OrderCreatedEvent event) {
+    addPoints(event);
+}
 ```
 
 三个工程要点：

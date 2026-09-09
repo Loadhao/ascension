@@ -15,7 +15,7 @@ Spring 的依赖注入、MyBatis 的 Mapper 接口代理、JUnit 的 @Test 发�
 ```java
 Class<?> c1 = String.class;  // 类字面量：编译期已知，无初始化
 Class<?> c2 = "hello".getClass();  // 对象实例：运行期最常用
-Class<?> c3 = Class.forName("java.lang.String");  // 全限定名：配置驱动（按名字加载）
+Class<?> c3 = Class.forName("java.lang.String");  // 全限定名：配置驱动
 ```
 
 `Class.forName` 会触发类初始化（执行 static 块），类字面量不会——框架

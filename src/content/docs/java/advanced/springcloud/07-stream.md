@@ -40,9 +40,13 @@ spring:
     stream:
       bindings:
         monitor-out-0: { destination: monitor, binder: kafka }
-        monitor-in-0:   { destination: monitor, group: monitor-group, binder: kafka }
+        monitor-in-0: { destination: monitor,
+                        group: monitor-group, binder: kafka }
       binders:
-        kafka: { type: kafka, environment: { spring.cloud.stream.kafka.binder.brokers: localhost:9092 } }
+        kafka:
+          type: kafka
+          environment:
+            spring.cloud.stream.kafka.binder.brokers: localhost:9092
 ```
 
 ```java

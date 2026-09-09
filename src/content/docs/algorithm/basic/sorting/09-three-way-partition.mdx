@@ -21,14 +21,14 @@ import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland
 ## Java 实现
 
 ```java
-/** 一次扫描三分：返回后 [lo, lt) < pivot，[lt, gt] == pivot，(gt, hi] > pivot */
+/** 一次扫描三分：结果 [lo, lt) < pivot，[lt, gt] == pivot，(gt, hi] > pivot */
 public static void threeWayPartition(int[] a, int pivot) {
     int lt = 0, i = 0, gt = a.length - 1;
     while (i <= gt) {
         if (a[i] < pivot) {
-            swap(a, lt++, i++);  // 换到「小于」段：换来的必然等于基准（来自中段），i 可以前进
+            swap(a, lt++, i++);  // 换到「小于」段：中段来的必等于基准，i 可前进
         } else if (a[i] > pivot) {
-            swap(a, i, gt--);  // 换到「大于」段：换来的是未知值，i 不动，下轮再检查
+            swap(a, i, gt--);  // 换到「大于」段：换来未知值，i 不动，下轮再检查
         } else {
             i++;  // 等于基准：留在中段
         }

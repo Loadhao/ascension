@@ -22,7 +22,9 @@ interface OrderState {
 }
 class Unpaid implements OrderState {
     public OrderState pay()  { return new Paid(); }  // 合法迁移
-    public OrderState ship() { throw new IllegalStateException("未支付不能发货"); }
+    public OrderState ship() {
+        throw new IllegalStateException("未支付不能发货");
+    }
 }
 class Paid implements OrderState {
     public OrderState pay()  { return this; }

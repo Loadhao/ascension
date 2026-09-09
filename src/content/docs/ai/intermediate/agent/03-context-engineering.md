@@ -63,7 +63,8 @@ flowchart TB
 ```
 messages = [
   { role: "system",    content: "You are a helpful assistant..." },
-  { role: "user",      content: "What's the current time and weather in Vancouver?" },
+  { role: "user",
+    content: "What's the current time and weather in Vancouver?" },
 ]
 ```
 
@@ -73,8 +74,10 @@ messages = [
 messages = [
   { role: "system",    content: "..." },
   { role: "user",      content: "What's the current time..." },
-  { role: "assistant", tool_calls: [get_current_time, get_weather] },  # 模型生成
-  { role: "tool",      tool_call_id: "call_abc", content: "{time...}" },  # 框架执行
+  # 模型生成
+  { role: "assistant", tool_calls: [get_current_time, get_weather] },
+  # 框架执行
+  { role: "tool",      tool_call_id: "call_abc", content: "{time...}" },
   { role: "tool",      tool_call_id: "call_def", content: "{weather...}" },
 ]
 ```
@@ -84,7 +87,8 @@ messages = [
 ```
 messages = [
   ...（同上 5 条）
-  { role: "assistant", content: "It's currently 5:18 AM on Saturday..." },  # 最终回复
+  # 最终回复
+  { role: "assistant", content: "It's currently 5:18 AM on Saturday..." },
 ]
 ```
 

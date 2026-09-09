@@ -29,7 +29,7 @@ public static int quickSelect(int[] a, int k) {
     int low = 0, high = a.length - 1;
     int target = k - 1;  // 第 k 小 → 有序下标 k-1
     for (;;) {
-        int p = partition(a, low, high);  // 基准归位到 p（与快排同一个 partition）
+        int p = partition(a, low, high);  // 基准归位到 p（即快排的 partition）
         if (p == target) return a[p];
         if (p < target) low = p + 1;  // 答案在右段，左段整段丢弃
         else            high = p - 1;  // 答案在左段，右段整段丢弃

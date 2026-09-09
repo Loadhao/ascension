@@ -46,7 +46,8 @@ flowchart TB
 
 ```java
 final V putVal(K key, V value, boolean onlyIfAbsent) {
-    if (key == null || value == null) throw new NullPointerException();  // 不允许 null
+    // 不允许 null
+    if (key == null || value == null) throw new NullPointerException();
     int hash = spread(key.hashCode());  // 扰动：高低位异或，再与 HASH_BITS 相与
     for (Node<K,V>[] tab = table;;) {  // 自旋：失败重试
         Node<K,V> f; int n, i, fh;
@@ -114,10 +115,12 @@ flowchart TB
 public V get(Object key) {
     Node<K,V>[] tab; Node<K,V> e, p; int n, eh; K ek;
     int h = spread(key.hashCode());
+    // tabAt 用 Unsafe.getObjectVolatile
     if ((tab = table) != null && (n = tab.length) > 0 &&
-        (e = tabAt(tab, (n - 1) & h)) != null) {  // tabAt 用 Unsafe.getObjectVolatile
+        (e = tabAt(tab, (n - 1) & h)) != null) {
         if ((eh = e.hash) == h) { /* 头节点命中 */ }
-        else if (eh < 0)  return (p = e.find(h, key)) != null ? p.val : null;  // 树或迁移中
+        else if (eh < 0)
+            return (p = e.find(h, key)) != null ? p.val : null;  // 树或迁移中
         while ((e = e.next) != null) { /* 沿链表找 */ }
     }
     return null;

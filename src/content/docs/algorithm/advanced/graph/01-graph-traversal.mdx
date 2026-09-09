@@ -24,7 +24,8 @@ BFS 按层扩散（最短路的基础），DFS 一条路扎到底（连通性、
 Map<Integer, List<Integer>> graph = new HashMap<>();  // 邻接表建图
 for (int[] e : edges) {
     graph.computeIfAbsent(e[0], k -> new ArrayList<>()).add(e[1]);
-    graph.computeIfAbsent(e[1], k -> new ArrayList<>()).add(e[0]);  // 无向图双向
+    // 无向图：补反向边
+    graph.computeIfAbsent(e[1], k -> new ArrayList<>()).add(e[0]);
 }
 
 // BFS：队列 + visited 入队时标记（防止重复入队）

@@ -74,7 +74,8 @@ Bitmap 路径是 PG 相对 MySQL 的加分项：两个单列索引
 
 ```text
 EXPLAIN ANALYZE
-SELECT * FROM orders WHERE user_id = 42 AND created_at > now() - interval '7 days';
+SELECT * FROM orders
+WHERE user_id = 42 AND created_at > now() - interval '7 days';
 
 -- 健康例子（数字会变，结构是重点）：
 -- Bitmap Heap Scan on orders

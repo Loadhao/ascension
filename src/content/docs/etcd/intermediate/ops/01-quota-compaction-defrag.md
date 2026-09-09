@@ -67,7 +67,8 @@ defrag **会阻塞该成员**一段时间（大 db 可达数分钟），生产�
 etcdctl endpoint status -w table --cluster
 
 # 2. 压到「现在」之前（留一点给还活着的 watcher）
-rev=$(etcdctl endpoint status --write-out json | jq '.[0].Status.header.revision')
+rev=$(etcdctl endpoint status --write-out json \
+  | jq '.[0].Status.header.revision')
 etcdctl compact $rev
 
 # 3. 逐台整理（先 follower）

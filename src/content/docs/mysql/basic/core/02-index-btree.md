@@ -108,7 +108,8 @@ select * from users where name like '张%' and age = 18;
 
 ```sql
 where YEAR(create_time) = 2026        -- ① 对索引列用函数/运算：破坏有序性
-where phone = 13800001234             -- ② 隐式类型转换（phone 是 varchar，数字比较 = CAST(phone AS ...)）
+where phone = 13800001234             -- ② 隐式类型转换（phone 是 varchar，
+                                      -- 数字比较 = CAST(phone AS ...)）
 where name like '%三'                  -- ③ 前导通配：树不知道从哪开始找
 where a = 1 or d = 2                   -- ④ or 连接了无索引列
 where name != 'tom'                    -- ⑤ 否定条件选择性差，优化器弃用

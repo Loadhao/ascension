@@ -13,7 +13,8 @@ core: true
 
 ```java
 public interface Filter {
-    void doFilter(Request req, Response res, FilterChain chain);  // 自己处理后调链
+    // 自己处理后调链
+    void doFilter(Request req, Response res, FilterChain chain);
 }
 ```
 

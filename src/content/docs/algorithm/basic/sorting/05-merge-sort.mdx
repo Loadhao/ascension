@@ -35,13 +35,19 @@ private static void mergeSort(int[] a, int[] aux, int low, int high) {
 }
 
 private static void merge(int[] a, int[] aux, int low, int mid, int high) {
-    System.arraycopy(a, low, aux, low, high - low + 1);  // 暂存，a 的区间将被逐个写回覆盖
+    // 暂存，a 的区间将被逐个写回覆盖
+    System.arraycopy(a, low, aux, low, high - low + 1);
     int i = low, j = mid + 1;
     for (int k = low; k <= high; k++) {
-        if (i > mid)                     a[k] = aux[j++];  // 左半取完，搬右半剩余
-        else if (j > high)               a[k] = aux[i++];  // 右半取完，搬左半剩余
-        else if (aux[j] < aux[i])        a[k] = aux[j++];  // 右边更小，取右
-        else                             a[k] = aux[i++];  // <=：相等取左，保证稳定
+        if (i > mid) {
+            a[k] = aux[j++];  // 左半取完，搬右半剩余
+        } else if (j > high) {
+            a[k] = aux[i++];  // 右半取完，搬左半剩余
+        } else if (aux[j] < aux[i]) {
+            a[k] = aux[j++];  // 右边更小，取右
+        } else {
+            a[k] = aux[i++];  // <=：相等取左，保证稳定
+        }
     }
 }
 ```

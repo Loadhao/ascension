@@ -38,7 +38,16 @@ core: true
 
 **按时间分桶**（date_histogram，做时间趋势/埋点统计最常用）：
 ```json
-{ "aggs": { "per_day": { "date_histogram": { "field": "@timestamp", "calendar_interval": "day" } } } }
+{
+  "aggs": {
+    "per_day": {
+      "date_histogram": {
+        "field": "@timestamp",
+        "calendar_interval": "day"
+      }
+    }
+  }
+}
 ```
 
 **去重计数**（cardinality，统计独立用户/UV）：
@@ -104,7 +113,10 @@ sequenceDiagram
       "terms": { "field": "category.keyword", "size": 50 },
       "aggs": {
         "per_day": {
-          "date_histogram": { "field": "created_at", "calendar_interval": "day" },
+          "date_histogram": {
+            "field": "created_at",
+            "calendar_interval": "day"
+          },
           "aggs": {
             "avg_price": { "avg": { "field": "price" } }
           }

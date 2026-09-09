@@ -26,9 +26,15 @@ public boolean isValid(String s) {
     for (char c : s.toCharArray()) {
         switch (c) {
             case '(': case '[': case '{' -> stack.push(c);  // 左括号：入栈等待
-            case ')' -> { if (stack.isEmpty() || stack.pop() != '(') return false; }
-            case ']' -> { if (stack.isEmpty() || stack.pop() != '[') return false; }
-            case '}' -> { if (stack.isEmpty() || stack.pop() != '{') return false; }
+            case ')' -> {
+                if (stack.isEmpty() || stack.pop() != '(') return false;
+            }
+            case ']' -> {
+                if (stack.isEmpty() || stack.pop() != '[') return false;
+            }
+            case '}' -> {
+                if (stack.isEmpty() || stack.pop() != '{') return false;
+            }
             default  -> { }
         }
     }

@@ -72,8 +72,10 @@ flowchart LR
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+    public Mono<Void> filter(ServerWebExchange exchange,
+        GatewayFilterChain chain) {
+        String token = exchange.getRequest().getHeaders()
+            .getFirst("Authorization");
         if (!JwtUtil.verify(token)) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();  // 直接拒绝，不进链
@@ -118,7 +120,8 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
 @Component
 public class TimingGlobalFilter implements GlobalFilter, Ordered {
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    public Mono<Void> filter(ServerWebExchange exchange,
+        GatewayFilterChain chain) {
         long start = System.nanoTime();
         return chain.filter(exchange)  // 交给下一个过滤器
             .doFinally(sig ->  // 全部 filter 走完后回到这里
@@ -172,7 +175,8 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
     private final ReactiveStringRedisTemplate redis;  // 用 Redis 做失效名单
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    public Mono<Void> filter(ServerWebExchange exchange,
+        GatewayFilterChain chain) {
         String path = exchange.getRequest().getURI().getPath();
 
         // ① 白名单：登录、健康检查直接放行
@@ -181,7 +185,8 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
         }
 
         // ② 取 token，空则直接 401 结束（不再进链）
-        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        String token = exchange.getRequest().getHeaders()
+            .getFirst("Authorization");
         if (token == null || token.isBlank()) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();

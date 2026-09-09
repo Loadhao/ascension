@@ -42,8 +42,12 @@ double calcPrice(String type) {
 
 // 正面：新会员类型 = 新增一个子类，老代码纹丝不动
 interface PriceStrategy { double apply(double price); }
-class VipPrice implements PriceStrategy { public double apply(double p) { return p * 0.8; } }
-class SvipPrice implements PriceStrategy { public double apply(double p) { return p * 0.6; } }
+class VipPrice implements PriceStrategy {
+    public double apply(double p) { return p * 0.8; }
+}
+class SvipPrice implements PriceStrategy {
+    public double apply(double p) { return p * 0.6; }
+}
 ```
 
 开闭是其余原则的"总目标"：**多态（依赖倒置的实现机制）给了"不改
@@ -78,7 +82,8 @@ LSP 说的是**契约**：子类可以加强行为，不能削弱/改变父类�
 // 反面：一个胖接口逼游泳的鸟实现飞
 interface Bird { void fly(); void swim(); }
 class Penguin implements Bird {
-    public void fly() { throw new UnsupportedOperationException(); }  // LSP 也破了
+    // LSP 也破了
+    public void fly() { throw new UnsupportedOperationException(); }
 }
 
 // 正面：按能力拆

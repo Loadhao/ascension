@@ -172,12 +172,16 @@ curl -X POST http://localhost:8080/mcp \
 
 ```
 # 发送（换行分隔的 JSON 行）
-{"jsonrpc":"2.0","id":0,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"test","version":"0"}}}
+{"jsonrpc":"2.0","id":0,"method":"initialize","params":{
+  "protocolVersion":"2024-11-05",
+  "capabilities":{},
+  "clientInfo":{"name":"test","version":"0"}}}
 {"jsonrpc":"2.0","method":"notifications/initialized"}
 {"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}
 
 # 收到的应答尾段
-{"jsonrpc":"2.0","id":1,"result":{"tools":[{"name":"grep_code","description":"...","inputSchema":{...}}]}}
+{"jsonrpc":"2.0","id":1,"result":{"tools":[
+  {"name":"grep_code","description":"...","inputSchema":{...}}]}}
 ```
 
 > 设计要点：MCP 的 value（协议、Concepts、Levels、Elements）目前仍是**草案
@@ -194,7 +198,8 @@ curl -X POST http://localhost:8080/mcp \
 def connect_mcp_server(name, server_spec):
     tools = mcp_client.list_tools(server_spec)  # 对应 tools/list
     for t in tools:
-        TOOL_HANDLERS[prefix(name, t.name)] = lambda args, t=t: mcp_client.call(t.name, args)
+        TOOL_HANDLERS[prefix(name, t.name)] = (
+            lambda args, t=t: mcp_client.call(t.name, args))
     return tools
 ```
 

@@ -128,7 +128,7 @@ flowchart TB
 给一个能直接用的 QPS + 瞬发配置：
 
 ```nginx
-limit_req_zone $binary_remote_addr zone=api_limit:10m rate=20r/m; # 每 IP 20 次/分
+limit_req_zone $binary_remote_addr zone=api_limit:10m rate=20r/m; # 每 IP 20/分
 location /api/ {
     limit_req zone=api_limit burst=10 nodelay;  # 允许 10 次瞬间，其余 503
     proxy_pass http://backend;

@@ -23,7 +23,7 @@ import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland
 ```java
 /** 递归解法：p、q 必然都在树中 */
 public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-    if (root == null || root == p || root == q) return root;  // 命中目标或空树：上抛
+    if (root == null || root == p || root == q) return root;  // 命中/空树：上抛
     TreeNode left = lowestCommonAncestor(root.left, p, q);  // 左边找到了什么
     TreeNode right = lowestCommonAncestor(root.right, p, q);  // 右边找到了什么
     if (left != null && right != null) return root;  // 两边各一个 → 我是分岔点
@@ -41,7 +41,8 @@ private boolean findPath(TreeNode root, TreeNode target, Deque<TreeNode> path) {
     if (root == null) return false;
     path.addLast(root);
     if (root == target) return true;
-    if (findPath(root.left, target, path) || findPath(root.right, target, path)) return true;
+    if (findPath(root.left, target, path)
+        || findPath(root.right, target, path)) return true;
     path.removeLast();  // 这条子树里没有：撤销（又是回溯）
     return false;
 }

@@ -59,7 +59,8 @@ TOOLS = [
                      "properties": {
                          "content": {"type": "string"},
                          "status": {"type": "string",
-                                    "enum": ["pending", "in_progress", "completed"]},
+                                    "enum": ["pending", "in_progress",
+                                             "completed"]},
                      },
                  },
              },
@@ -81,7 +82,8 @@ def run_todo_write(todos: list) -> str:
 
     lines = ["\n## Current Tasks"]
     for t in CURRENT_TODOS:
-        icon = {"pending": " ", "in_progress": "▸", "completed": "✓"}[t["status"]]
+        icon = {"pending": " ", "in_progress": "▸",
+                "completed": "✓"}[t["status"]]
         lines.append(f"  [{icon}] {t['content']}")
     print("\n".join(lines))
     return f"Updated {len(CURRENT_TODOS)} tasks"

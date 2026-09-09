@@ -27,8 +27,12 @@ public static Payment of(String type) {
 
 // 工厂方法：把"造哪个"下放给子类——每加一个产品加一个工厂
 interface PaymentFactory { Payment create(); }
-class AlipayFactory implements PaymentFactory { public Payment create() { return new AlipayPayment(); } }
-class WechatFactory implements PaymentFactory { public Payment create() { return new WechatPayment(); } }
+class AlipayFactory implements PaymentFactory {
+    public Payment create() { return new AlipayPayment(); }
+}
+class WechatFactory implements PaymentFactory {
+    public Payment create() { return new WechatPayment(); }
+}
 
 // 抽象工厂：造"一族"相关产品——一次性换掉整个产品族
 interface CloudFactory {

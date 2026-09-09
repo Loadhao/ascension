@@ -56,7 +56,8 @@ docker exec -it web sh          # 镜像若没有 bash 就用 sh
 
 ```bash
 docker inspect web --format '{{json .NetworkSettings.Ports}}'
-docker inspect web --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{"\n"}}{{end}}'
+docker inspect web --format \
+  '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{"\n"}}{{end}}'
 ```
 
 ## 容器起不来排查流程

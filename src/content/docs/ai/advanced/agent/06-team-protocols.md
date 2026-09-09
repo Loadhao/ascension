@@ -75,7 +75,8 @@ pending_requests: dict[str, ProtocolState] = {}
 ```
 ① Lead 发请求
    req_id = new_request_id()  # "req_004281"
-   pending_requests[req_id] = ProtocolState(type="shutdown", status="pending", ...)
+   pending_requests[req_id] = ProtocolState(
+       type="shutdown", status="pending", ...)
    BUS.send("lead", "alice", "shutdown_request",
             metadata={"request_id": req_id})
 
@@ -132,7 +133,8 @@ def match_response(response_type, request_id, approve):
         return
     if state.type == "shutdown" and response_type != "shutdown_response":
         return  # type mismatch, skip
-    if state.type == "plan_approval" and response_type != "plan_approval_response":
+    if (state.type == "plan_approval"
+            and response_type != "plan_approval_response"):
         return
     if state.status != "pending":
         return  # already resolved, skip duplicate

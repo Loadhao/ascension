@@ -86,7 +86,8 @@ update orders set status='PAID' where id=? and status='UNPAID';
 // 返回 0 行 = 已处理过（或状态不对），天然幂等
 
 // ③ Redis SETNX：高频场景的前置快速过滤（TTL 兜底防膨胀）
-Boolean first = redis.setIfAbsent("mq:dedup:" + event.getEventId(), "1", 24, HOURS);
+Boolean first = redis.setIfAbsent(
+    "mq:dedup:" + event.getEventId(), "1", 24, HOURS);
 if (Boolean.FALSE.equals(first)) return;
 ```
 

@@ -71,7 +71,8 @@ sequenceDiagram
 @TransactionalMessageListener
 class OrderTxListener implements TransactionListener {
     @Override
-    public LocalTransactionState executeLocalTransaction(Message msg, Object arg) {
+    public LocalTransactionState executeLocalTransaction(
+        Message msg, Object arg) {
         orderMapper.insert(arg);  // 本地事务
         return LocalTransactionState.COMMIT_MESSAGE;
     }
@@ -96,7 +97,7 @@ Seata 是**同步强一致**（下游失败整体回滚）。
 // 30 分钟未支付自动取消：发消息时设级别，到期才对消费者可见
 Message msg = new Message("order-timeout-check", body);
 msg.setDelayTimeLevel(3);  // 级别 3 = 10s（1s 2s 5s 10s 30s 1m 2m...2h）
-// 4.x：msg.setDeliverTimeMs(System.currentTimeMillis() + 30 * 60 * 1000) 任意时间
+// 4.x：setDeliverTimeMs(System.currentTimeMillis() + 30 * 60 * 1000) 任意时间
 
 producer.send(msg);
 ```

@@ -50,17 +50,20 @@ public SqlSessionTemplate(SqlSessionFactory sqlSessionFactory, ...) {
 private class SqlSessionInterceptor implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) {
         // ① 拿会话：有事务就复用事务里那个，没有就开新的
-        SqlSession sqlSession = getSqlSession(sqlSessionFactory, executorType, ...);
+        SqlSession sqlSession =
+            getSqlSession(sqlSessionFactory, executorType, ...);
         try {
             // ② 反射调用真实会话的方法
             Object result = method.invoke(sqlSession, args);
-            // ③ 不在 Spring 事务里 → 手动 commit（有的库要求 commit 后才能 close）
+            // ③ 不在 Spring 事务里 → 手动 commit
+            //   （有的库要求 commit 后才能 close）
             if (!isSqlSessionTransactional(sqlSession, sqlSessionFactory)) {
                 sqlSession.commit(true);
             }
             return result;
         } catch (Throwable t) {
-            // ④ 异常翻译：PersistenceException → Spring DataAccessException 体系
+            // ④ 异常翻译：PersistenceException
+            //   → Spring DataAccessException 体系
             Throwable unwrapped = unwrapThrowable(t);
             Throwable translated = exceptionTranslator
                 .translateExceptionIfPossible((PersistenceException) unwrapped);

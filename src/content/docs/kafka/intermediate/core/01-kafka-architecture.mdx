@@ -83,7 +83,8 @@ segment 的一生（写入 → 滚动 → 读取 → 整段删除）可以按帧
 ```java
 // 消费者主动拉取批量消息，处理完提交 offset（进度游标）
 while (true) {
-    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
+    ConsumerRecords<String, String> records =
+        consumer.poll(Duration.ofMillis(500));
     for (ConsumerRecord<String, String> r : records) {
         process(r);  // 先处理……
     }

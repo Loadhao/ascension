@@ -98,7 +98,8 @@ async function run() {
 
 ```js
 const [a, b] = await Promise.all([fetchA(), fetchB()]);  // 并发，全成功才过
-const results = await Promise.allSettled([fetchA(), fetchB()]); // 要全部结果、容忍失败
+// 要全部结果、容忍失败
+const results = await Promise.allSettled([fetchA(), fetchB()]);
 ```
 
 `Promise.all`（一败俱败）、`allSettled`（全都要）、`race`（超时控制

@@ -45,7 +45,8 @@ Lua 脚本把它们捏成一个原子操作：
 
 ```lua
 -- 滑动窗口：zset 按时间戳记录每次请求
-local key, now, window, limit = KEYS[1], tonumber(ARGV[1]), tonumber(ARGV[2]), tonumber(ARGV[3])
+local key, now, window, limit =
+    KEYS[1], tonumber(ARGV[1]), tonumber(ARGV[2]), tonumber(ARGV[3])
 redis.call('ZREMRANGEBYSCORE', key, 0, now - window)   -- 清出窗口外的旧请求
 local count = redis.call('ZCARD', key)
 if count < limit then

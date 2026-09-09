@@ -57,8 +57,8 @@ java -Xlog:gc:file=gc.log -jar app.jar  # JDK 9+ 统一日志（替代 PrintGCDe
 G1 三个最有用的旋钮（默认 200ms 停顿目标、堆 45% 触发并发标记）：
 
 ```bash
--XX:MaxGCPauseMillis=100  # 软目标：别拍 10ms，G1 靠缩小 Region 集合逼近，太激进会积压
--XX:InitiatingHeapOccupancyPercent=40  # 并发标记触发水位；大堆/分配猛时调低提前规划
+-XX:MaxGCPauseMillis=100  # 软目标：别拍 10ms，G1 靠缩 Region 逼近，太激进会积压
+-XX:InitiatingHeapOccupancyPercent=40  # 并发标记触发水位；大堆/分配猛时提前调低
 -XX:G1ReservePercent=15  # 预留防晋升失败（to-space exhausted）
 ```
 

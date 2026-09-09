@@ -23,14 +23,16 @@ Java 泛型是**编译期语法**——编译后类型参数被替换，运行�
 
 ```java
 List<String> list = new ArrayList<>();
-list.getClass().getMethod("add", Object.class).invoke(list, 42);  // 反射调用 add(Object)
+// 反射调用 add(Object)
+list.getClass().getMethod("add", Object.class).invoke(list, 42);
 System.out.println(list.get(0));  // 42，运行期没有 String 约束
 ```
 
 证据二：所有参数化类型共享同一个 Class 对象：
 
 ```java
-new ArrayList<String>().getClass() == new ArrayList<Integer>().getClass()  // true
+// true
+new ArrayList<String>().getClass() == new ArrayList<Integer>().getClass()
 ```
 
 ```mermaid

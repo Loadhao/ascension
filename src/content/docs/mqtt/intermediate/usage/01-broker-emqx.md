@@ -63,10 +63,10 @@ flowchart TB
 
 ```text
 # EMQX ACL 规则（按顺序匹配，命中即停）
-allow {username: "dev-order-*"}  subscribe  "orders/#"       # 订单设备可订订单主题
+allow {username: "dev-order-*"}  subscribe  "orders/#"  # 订单设备可订订单主题
 allow {username: "dev-order-*"}  publish    "orders/{username_local}/status"
-deny  all                        all        "admin/#"        # 管理主题一律禁止
-deny  all                        all        "#"              # 兜底：其余全拒
+deny  all                        all        "admin/#"   # 管理主题一律禁止
+deny  all                        all        "#"         # 兜底：其余全拒
 ```
 
 **要点：**

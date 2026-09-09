@@ -88,8 +88,9 @@ def spawn_teammate_thread(name: str, role: str, prompt: str) -> str:
         for _ in range(10):  # 最多 10 轮
             inbox = BUS.read_inbox(name)
             if inbox:
-                messages.append({"role": "user",
-                                 "content": f"<inbox>{json.dumps(inbox)}</inbox>"})
+                messages.append(
+                    {"role": "user",
+                     "content": f"<inbox>{json.dumps(inbox)}</inbox>"})
             response = client.messages.create(
                 model=MODEL, system=system, messages=messages[-20:],
                 tools=sub_tools, max_tokens=8000)

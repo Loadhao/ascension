@@ -10,7 +10,9 @@ level: advanced
 **优化前先让证据说话**：
 
 ```js
-db.orders.find({ userId: "u42" }).sort({ createdAt: -1 }).explain("executionStats")
+db.orders.find({ userId: "u42" })
+  .sort({ createdAt: -1 })
+  .explain("executionStats")
 ```
 
 看三个数的比例：`totalKeysExamined : totalDocsExamined : nReturned`，

@@ -121,7 +121,7 @@ function jsonp({ url, params, callback }) {
     params = { ...params, callback };
     script.src = `${url}?${Object.entries(params)
       .map(([k, v]) => `${k}=${v}`).join('&')}`;  // ② script src 指向接口
-    document.body.appendChild(script);      // ③ 服务器回 "callback(data)" 即执行
+    document.body.appendChild(script);  // ③ 服务器回 "callback(data)" 即执行
   });
 }
 ```

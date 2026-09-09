@@ -95,8 +95,12 @@ public interface OnUpdate {}
 public record UserReq(@Null(groups = OnCreate.class) Long id,
                       @NotNull(groups = OnUpdate.class) Long id2) {}
 
-@PostMapping @Validated(OnCreate.class)  void create(@RequestBody @Valid UserReq req) {}
-@PutMapping             @Validated(OnUpdate.class)  void update(@RequestBody @Valid UserReq req) {}
+@PostMapping
+@Validated(OnCreate.class)
+void create(@RequestBody @Valid UserReq req) {}
+@PutMapping
+@Validated(OnUpdate.class)
+void update(@RequestBody @Valid UserReq req) {}
 ```
 
 **自定义约束**：注解 + 校验器两件套：
@@ -104,7 +108,10 @@ public record UserReq(@Null(groups = OnCreate.class) Long id,
 ```java
 @Target(ElementType.FIELD) @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = PhoneValidator.class)  // 绑定校验器
-public @interface Phone { String message() default "手机号不合法"; Class<?>[] groups() default {}; }
+public @interface Phone {
+    String message() default "手机号不合法";
+    Class<?>[] groups() default {};
+}
 
 public class PhoneValidator implements ConstraintValidator<Phone, String> {
     public boolean isValid(String v, ConstraintValidatorContext ctx) {

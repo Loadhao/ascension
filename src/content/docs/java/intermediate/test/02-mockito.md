@@ -27,7 +27,8 @@ class OrderServiceTest {
 
     @Test
     void payFailed_marksOrderUnpaid() {
-        when(payment.charge(any(Order.class))).thenReturn(PayResult.fail("余额不足"));
+        when(payment.charge(any(Order.class)))
+            .thenReturn(PayResult.fail("余额不足"));
         // BDD 风格等价：given(payment.charge(any())).willReturn(fail)
 
         service.submit(order);

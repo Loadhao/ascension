@@ -66,7 +66,8 @@ finally 里写 return / throw 会吞掉 try 里原始的返回值或异常，阿
 
 ```java
 try (var in = new BufferedReader(new FileReader("data.txt"));
-     var out = new BufferedWriter(new FileWriter("out.txt"))) {  // 多资源分号分隔
+     // 多资源用分号分隔
+     var out = new BufferedWriter(new FileWriter("out.txt"))) {
     String line = in.readLine();
     out.write(line);
 }  // 无需手写 close：资源按声明的【逆序】自动关闭

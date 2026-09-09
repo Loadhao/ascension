@@ -31,11 +31,13 @@ public class Config {
 
 // ④ DCL：需要延迟加载 + 高并发场景
 public class Config {
-    private static volatile Config instance;          // volatile 防"半成品"（volatile 篇）
+    // volatile 防"半成品"（volatile 篇）
+    private static volatile Config instance;
     public static Config getInstance() {
         if (instance == null) {  // 第一次检查：避免每次都抢锁
             synchronized (Config.class) {
-                if (instance == null) instance = new Config();  // 第二次检查：防重复创建
+                // 第二次检查：防重复创建
+                if (instance == null) instance = new Config();
             }
         }
         return instance;
@@ -102,7 +104,8 @@ public class Config implements Serializable {
             throw new IllegalStateException("已存在实例");
         }
     }
-    private Object readResolve() { return INSTANCE; }  // 防反序列化：还原时直接返回真身
+    // 防反序列化：还原时直接返回真身
+    private Object readResolve() { return INSTANCE; }
 }
 ```
 

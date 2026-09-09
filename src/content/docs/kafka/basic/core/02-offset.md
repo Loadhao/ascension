@@ -41,7 +41,8 @@ core: true
 Rebalance 把分区转走）。这条链路串起了本站三篇的关系：
 
 ```
-offset 语义（本篇）→ 至少一次 → 幂等消费三件套（可靠性篇）→ Rebalance 加剧重复（Rebalance 篇）
+offset 语义（本篇）→ 至少一次 → 幂等消费三件套（可靠性篇）
+→ Rebalance 加剧重复（Rebalance 篇）
 ```
 
 面试标准句式："Kafka 保证 at-least-once，精确一次要靠幂等生产者 +

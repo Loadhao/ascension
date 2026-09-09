@@ -38,7 +38,7 @@ User prefers using tabs, not spaces, for indentation.
 
 ```markdown
 <!-- MEMORY.md 索引 -->
-- [user-preference-tabs](user-preference-tabs.md) — User prefers tabs for indentation
+- [user-preference-tabs](user-preference-tabs.md) — prefers tabs for indentation
 ```
 
 四类记忆，各有用途：

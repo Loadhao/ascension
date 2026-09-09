@@ -22,7 +22,7 @@ native 方法。
 
 ```java
 public class HashNative {
-    static { System.loadLibrary("hashlib"); }  // ④ 加载 libhashlib.so / .dylib / .dll
+    static { System.loadLibrary("hashlib"); }  // ④ 加载 libhashlib.so 等平台库
     public native long hash(byte[] data);  // ① 声明 native 方法
 }
 ```

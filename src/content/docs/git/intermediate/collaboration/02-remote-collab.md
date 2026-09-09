@@ -107,7 +107,8 @@ rebase）。所以团队内"我拉下来 rebase 再推"是常态。
 git diff --name-only --diff-filter=U  # 列出所有冲突文件
 git mergetool  # 唤起 vimdiff 等图形工具
 git checkout --ours <f>                # 直接采用"我的"版本
-git checkout --theirs <f>              # 直接采用"对方的"版本（慎用，看清是 merge 还是 rebase 语境）
+# 直接采用"对方的"版本（慎用，看清是 merge 还是 rebase 语境）
+git checkout --theirs <f>
 ```
 
 > `--ours/--theirs` 在 merge 里"ours=当前分支"，在 rebase 里会**互换**——语义反转是经典坑，用时先 `git status` 确认处于 merge 还是 rebase。

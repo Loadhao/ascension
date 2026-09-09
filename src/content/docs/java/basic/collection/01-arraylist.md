@@ -33,7 +33,7 @@ public boolean add(E e) {
 private void grow(int minCapacity) {
     int oldCap = elementData.length;
     int newCap = oldCap + (oldCap >> 1);  // 1.5 倍（oldCap + oldCap/2）
-    if (newCap < minCapacity) newCap = minCapacity;  // 边界：刚构造时为 0 走默认 10
+    if (newCap < minCapacity) newCap = minCapacity;  // 边界：初始为 0 走默认 10
     elementData = Arrays.copyOf(elementData, newCap);  // 复制到新数组
 }
 ```

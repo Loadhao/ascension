@@ -113,7 +113,8 @@ ThreadLocalMap 是开放寻址（不是拉链），每个 ThreadLocal 有个
 ```java
 private static final int HASH_INCREMENT = 0x61c88647;
 private static int nextHashCode() {
-    return nextHashCode.getAndAdd(HASH_INCREMENT);  // 每新建一个 TL 实例 +固定增量
+    // 每新建一个 TL 实例 +固定增量
+    return nextHashCode.getAndAdd(HASH_INCREMENT);
 }
 ```
 

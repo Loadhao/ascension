@@ -73,7 +73,8 @@ flowchart TB
 HotSpot 不按声明顺序摆字段，而是**按宽度聚堆**减少对齐空洞：
 
 ```
-引用（4B 压缩）→ long/double(8B) → int/float(4B) → short/char(2B) → byte/boolean(1B)
+引用(4B压缩) → long/double(8B) → int/float(4B)
+→ short/char(2B) → byte/boolean(1B)
 ```
 
 （同宽按声明序；父类字段先于子类。目标：一个字段跨两个 8 字节块

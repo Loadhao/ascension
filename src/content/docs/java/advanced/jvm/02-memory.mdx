@@ -144,7 +144,7 @@ java -Xmx3g -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/data/dump \
 jmap -dump:live,format=b,file=/data/current.hprof <pid>
 
 # 3. 用 MAT 打开 hprof → Leak Suspects 看嫌疑对象 →
-#    沿引用链（Dominator Tree）找到"谁一直持有它"，通常是某个缓存/静态集合/未关闭连接
+#    沿引用链（Dominator Tree）找到持有者，通常是缓存/静态集合/未关闭连接
 ```
 
 **高频 OOM 归因速查：**

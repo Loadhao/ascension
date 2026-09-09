@@ -34,14 +34,17 @@ public interface PromotionStrategy {
 @Component
 class FullReductionStrategy implements PromotionStrategy {
     public String type() { return "FULL_REDUCTION"; }
-    public double calc(double price) { return price > 100 ? price - 20 : price; }
+    public double calc(double price) {
+        return price > 100 ? price - 20 : price;
+    }
 }
 
 @Component
 public class PromotionContext {
     private final Map<String, PromotionStrategy> strategies;
 
-    public PromotionContext(List<PromotionStrategy> list) {  // Spring 注入所有实现
+    // Spring 注入所有实现
+    public PromotionContext(List<PromotionStrategy> list) {
         this.strategies = list.stream()
             .collect(toMap(PromotionStrategy::type, s -> s));
     }

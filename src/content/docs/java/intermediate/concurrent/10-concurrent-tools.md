@@ -30,7 +30,8 @@ state 是**剩余计数**，`countDown()` 减一，`await()` 卡到归零。**�
 CountDownLatch latch = new CountDownLatch(services.length);
 for (String s : services) {
     executor.submit(() -> {
-        try { check(s); } finally { latch.countDown(); }  // finally 里减，异常也减
+        // finally 里减，异常也减
+        try { check(s); } finally { latch.countDown(); }
     });
 }
 latch.await(10, TimeUnit.SECONDS);  // 主线程等全部就绪；带超时防死等
@@ -46,7 +47,8 @@ state 是**还差几个人**，`await()` 自己也是参与者（计数 +1 并�
 凑满放行全员，**屏障可循环复用**（故名 cyclic），可挂"到齐动作"：
 
 ```java
-CyclicBarrier barrier = new CyclicBarrier(players, () -> System.out.println("开赛"));
+CyclicBarrier barrier = new CyclicBarrier(players,
+    () -> System.out.println("开赛"));
 // 每个线程：barrier.await();  ← 各自到起点等其他人
 ```
 

@@ -58,12 +58,17 @@ logback.xml 多出的能力）：
 <configuration>
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>logs/app.log</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+    <rollingPolicy
+        class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <fileNamePattern>logs/app.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
       <maxFileSize>100MB</maxFileSize>
       <maxHistory>30</maxHistory>
     </rollingPolicy>
-    <encoder><pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%X{traceId}] - %msg%n</pattern></encoder>
+    <encoder>
+      <pattern>
+        %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%X{traceId}] - %msg%n
+      </pattern>
+    </encoder>
   </appender>
   <root level="INFO"><appender-ref ref="FILE"/></root>
 </configuration>
@@ -79,7 +84,8 @@ pattern 里的 `%X{traceId}` 是本篇第二个主角——MDC。
 
 ```java
 public class TraceIdFilter implements Filter {
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+    public void doFilter(ServletRequest req, ServletResponse res,
+            FilterChain chain)
             throws IOException, ServletException {
         String traceId = UUID.randomUUID().toString();
         MDC.put("traceId", traceId);

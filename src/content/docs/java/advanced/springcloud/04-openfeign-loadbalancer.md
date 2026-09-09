@@ -67,10 +67,12 @@ public class CustomLoadBalancerConfig {
             Environment env, LoadBalancerClientFactory factory) {
         String name = env.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
         return new RandomLoadBalancer(
-            factory.getLazyProvider(name, ServiceInstanceListSupplier.class), name);
+            factory.getLazyProvider(name, ServiceInstanceListSupplier.class),
+            name);
     }
 }
-// @LoadBalancerClient(value = "order-service", configuration = CustomLoadBalancerConfig.class)
+// @LoadBalancerClient(value = "order-service",
+//     configuration = CustomLoadBalancerConfig.class)
 ```
 
 ## 超时与重试：调用方的安全带
@@ -104,7 +106,8 @@ spring:
 // 默认 Retryer.NEVER_RETRY；需要时才显式开启，且只对幂等接口
 @Bean
 public Retryer retryer() {
-    return new Retryer.Default(100, TimeUnit.MILLISECONDS, 3);  // 间隔100ms，最多3次
+    // 间隔100ms，最多3次
+    return new Retryer.Default(100, TimeUnit.MILLISECONDS, 3);
 }
 ```
 
@@ -204,7 +207,8 @@ public class PropagateHeaderInterceptor implements RequestInterceptor {
         }
 
         // ② 透传登录态：从 Spring Security / ThreadLocal 取当前用户 token
-        String token = StpUtil != null ? (String) StpUtil.getTokenValue() : null;
+        String token = StpUtil != null
+            ? (String) StpUtil.getTokenValue() : null;
         if (token != null) {
             template.header("Authorization", "Bearer " + token);
         }

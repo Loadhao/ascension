@@ -33,7 +33,8 @@ JMM 规定：所有共享变量存在主内存，每线程有自己的工作内�
 // 经典死循环：主线程改了 flag，工作线程却看不到
 static boolean flag = true;
 
-new Thread(() -> { while (flag) { } }).start();  // JIT 甚至把它提升成 if(flag) while(true)
+// JIT 甚至把它提升成 if(flag) while(true)
+new Thread(() -> { while (flag) { } }).start();
 Thread.sleep(100);
 flag = false;  // 线程可能永远不退出
 ```
@@ -118,7 +119,8 @@ flowchart LR
 
 ```java
 private static class Holder {
-    static final Singleton INSTANCE = new Singleton();  // 类初始化由 JVM 加锁保证只一次
+    // 类初始化由 JVM 加锁保证只一次
+    static final Singleton INSTANCE = new Singleton();
 }
 public static Singleton getInstance() { return Holder.INSTANCE; }
 ```
