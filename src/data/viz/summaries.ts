@@ -479,7 +479,8 @@ const cacheProblems: SummaryVizConfig = {
 			cells: [
 				{ label: '触发', desc: '恶意伪造 id / 业务缺陷' },
 				{ label: '后果', desc: '缓存永远不命中，全打到 DB' },
-				{ label: '对策', desc: '布隆过滤器：判「不存在」绝对可靠；缓存空值挡重复', tag: '治本' },
+				{ label: '对策：布隆过滤器', desc: '判「不存在」绝对可靠，漏过的误判走正常链路', tag: '治本' },
+				{ label: '对策：缓存空值', desc: '短 TTL（如 60s）挡住重复穿透；内存换安全，key 空间防爆破', tag: '治标' },
 			],
 		},
 		{

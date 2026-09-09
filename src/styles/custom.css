@@ -3037,9 +3037,10 @@ html.mmd-viewer-open {
 .sum-cells {
   flex: 1;
   display: grid;
-  grid-auto-rows: 1fr;
+  /* 自然行高：内容少时余量摊到行间（space-between），不把单元格撑出大段空白 */
+  grid-auto-rows: auto;
   gap: 8px;
-  align-content: stretch;
+  align-content: space-between;
 }
 
 .sum-cell {
