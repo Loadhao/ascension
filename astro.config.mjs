@@ -308,6 +308,7 @@ export default defineConfig({
                         { label: 'HTTPS 与 TLS 握手', link: '/network/basic/http/02-https-tls/' },
                         { label: 'HTTP 演进：1.0 / 1.1 / 2 / 3', link: '/network/basic/http/03-http-evolution/' },
                         { label: '登录态：Cookie、Session、JWT 与 OAuth2', link: '/network/basic/http/04-auth-state/' },
+                        { label: '同源策略与 CORS', link: '/network/basic/http/05-cors/' },
                       ],
                     },
                   ],
