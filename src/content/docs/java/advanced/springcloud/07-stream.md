@@ -49,12 +49,12 @@ spring:
 @Component
 public class MonitorStream {
     @Bean
-    public Supplier<Monitor> publish() {       // 生产者：定时/事件发到 monitor-out-0
+    public Supplier<Monitor> publish() {  // 生产者：定时/事件发到 monitor-out-0
         return () -> new Monitor(...);
     }
 
     @Bean
-    public Consumer<Monitor> consume() {       // 消费者：从 monitor group 消费
+    public Consumer<Monitor> consume() {  // 消费者：从 monitor group 消费
         return msg -> { /* 处理 */ };
     }
 }

@@ -36,15 +36,15 @@ flowchart LR
 
 ```java
 public class Snowflake {
-    private final long epoch = 1735689600000L;     // 2025-01-01 起算，延长可用年限
+    private final long epoch = 1735689600000L;  // 2025-01-01 起算，延长可用年限
     private final long workerId;
     private long sequence = 0;
     private long lastTs = -1;
 
     public synchronized long nextId() {
         long ts = System.currentTimeMillis();
-        if (ts < lastTs) throw clockBack();        // 时钟回拨！见下
-        if (ts == lastTs) {                        // 同一毫秒：序列号 +1
+        if (ts < lastTs) throw clockBack();  // 时钟回拨！见下
+        if (ts == lastTs) {  // 同一毫秒：序列号 +1
             sequence = (sequence + 1) & 4095;
             if (sequence == 0) ts = waitNextMillis(lastTs);  // 序列耗尽等下一毫秒
         } else {

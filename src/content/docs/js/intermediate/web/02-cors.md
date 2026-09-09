@@ -114,7 +114,7 @@ server {
 function jsonp({ url, params, callback }) {
   return new Promise((resolve) => {
     const script = document.createElement('script');
-    window[callback] = (data) => {          // ① 先声明全局回调
+    window[callback] = (data) => {  // ① 先声明全局回调
       resolve(data);
       document.body.removeChild(script);
     };

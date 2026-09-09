@@ -97,7 +97,7 @@ async function run() {
 **await 的并行陷阱**：顺序 await 是串行的，互相独立的请求要并发——
 
 ```js
-const [a, b] = await Promise.all([fetchA(), fetchB()]);   // 并发，全成功才过
+const [a, b] = await Promise.all([fetchA(), fetchB()]);  // 并发，全成功才过
 const results = await Promise.allSettled([fetchA(), fetchB()]); // 要全部结果、容忍失败
 ```
 

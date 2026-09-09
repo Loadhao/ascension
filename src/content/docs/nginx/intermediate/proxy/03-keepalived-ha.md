@@ -42,21 +42,21 @@ keepalived 三大模块：**core**（主进程与配置解析）、**check**（�
 ```nginx
 # /etc/keepalived/keepalived.conf —— 主机
 vrrp_script chk_nginx {
-    script "/etc/keepalived/check_nginx.sh"   # 探活脚本：curl 本机 nginx
+    script "/etc/keepalived/check_nginx.sh"  # 探活脚本：curl 本机 nginx
     interval 2
-    weight -20                                # 失败则 priority -20 → 让位
+    weight -20  # 失败则 priority -20 → 让位
     fall 2
 }
 vrrp_instance VI_1 {
-    state MASTER                              # 初始角色（非最终裁决，看 priority）
+    state MASTER  # 初始角色（非最终裁决，看 priority）
     interface eth0
-    virtual_router_id 51                      # 同组必须一致
+    virtual_router_id 51  # 同组必须一致
     priority 100
-    advert_int 1                              # 通告间隔 1s
+    advert_int 1  # 通告间隔 1s
     virtual_ipaddress {
-        10.0.0.10/24                          # VIP
+        10.0.0.10/24  # VIP
     }
-    track_script { chk_nginx }                # nginx 活着才配当 MASTER
+    track_script { chk_nginx }  # nginx 活着才配当 MASTER
 }
 ```
 

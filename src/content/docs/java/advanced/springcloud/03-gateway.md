@@ -37,10 +37,10 @@ flowchart LR
 public RouteLocator routes(RouteLocatorBuilder builder) {
     return builder.routes()
         .route("order-service", r -> r
-            .path("/api/order/**")                       // 断言：路径匹配
-            .filters(f -> f.stripPrefix(1)                 // 过滤器：去掉 /api 前缀
+            .path("/api/order/**")  // 断言：路径匹配
+            .filters(f -> f.stripPrefix(1)  // 过滤器：去掉 /api 前缀
                             .addRequestHeader("X-Trace", traceId()))
-            .uri("lb://order-service"))                   // lb:// = 走注册中心负载均衡
+            .uri("lb://order-service"))  // lb:// = 走注册中心负载均衡
         .build();
 }
 ```
@@ -76,12 +76,12 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         String token = exchange.getRequest().getHeaders().getFirst("Authorization");
         if (!JwtUtil.verify(token)) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();     // 直接拒绝，不进链
+            return exchange.getResponse().setComplete();  // 直接拒绝，不进链
         }
-        return chain.filter(exchange);                        // 放行到下一个过滤器
+        return chain.filter(exchange);  // 放行到下一个过滤器
     }
     @Override
-    public int getOrder() { return -100; }   // 越小越先执行（pre 阶段）
+    public int getOrder() { return -100; }  // 越小越先执行（pre 阶段）
 }
 ```
 
@@ -120,11 +120,11 @@ public class TimingGlobalFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         long start = System.nanoTime();
-        return chain.filter(exchange)                       // 交给下一个过滤器
-            .doFinally(sig ->                               // 全部 filter 走完后回到这里
+        return chain.filter(exchange)  // 交给下一个过滤器
+            .doFinally(sig ->  // 全部 filter 走完后回到这里
                 System.out.println("耗时 " + (System.nanoTime() - start)));
     }
-    public int getOrder() { return -1; }                    // 越靠前 → 越先 pre、越后 post
+    public int getOrder() { return -1; }  // 越靠前 → 越先 pre、越后 post
 }
 ```
 
@@ -169,7 +169,7 @@ GlobalFilter + 白名单 + 响应式回调拒绝三个姿势：
 @Component
 public class JwtAuthFilter implements GlobalFilter, Ordered {
 
-    private final ReactiveStringRedisTemplate redis;   // 用 Redis 做失效名单
+    private final ReactiveStringRedisTemplate redis;  // 用 Redis 做失效名单
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -193,19 +193,19 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
         return redis.hasKey("jwt:black:" + claims.get("jti"))
             .defaultIfEmpty(false)
             .flatMap(blacklisted -> {
-                if (blocklisted) {                         // 黑名单 → 403
+                if (blocklisted) {  // 黑名单 → 403
                     exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
                     return exchange.getResponse().setComplete();
                 }
-                exchange.getRequest().mutate()              // 把用户身份传给下游
+                exchange.getRequest().mutate()  // 把用户身份传给下游
                     .header("X-UserId", claims.get("uid").toString()).build();
-                return chain.filter(exchange);              // 放行
+                return chain.filter(exchange);  // 放行
             })
-            .subscribeOn(Schedulers.boundedElastic());      // Redis IO 走受限线程池
+            .subscribeOn(Schedulers.boundedElastic());  // Redis IO 走受限线程池
     }
 
     @Override
-    public int getOrder() { return -100; }                  // 尽量先执行
+    public int getOrder() { return -100; }  // 尽量先执行
 }
 ```
 

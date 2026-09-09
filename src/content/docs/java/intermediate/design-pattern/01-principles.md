@@ -36,7 +36,7 @@ class OrderService {
 // 反面：每加一种会员价都要改这里（改老代码 = 老逻辑可能被改坏）
 double calcPrice(String type) {
     if (type.equals("VIP")) return price * 0.8;
-    if (type.equals("SVIP")) return price * 0.6;   // 新增 = 修改
+    if (type.equals("SVIP")) return price * 0.6;  // 新增 = 修改
     return price;
 }
 
@@ -84,7 +84,7 @@ class Penguin implements Bird {
 // 正面：按能力拆
 interface Flyable { void fly(); }
 interface Swimmable { void swim(); }
-class Penguin implements Swimmable { public void swim() {} }   // 只背自己的
+class Penguin implements Swimmable { public void swim() {} }  // 只背自己的
 ```
 
 ISP 常与 LSP 联动：**胖接口是里氏替换违反的温床**。

@@ -21,10 +21,10 @@ BFS 按层扩散（最短路的基础），DFS 一条路扎到底（连通性、
 ## Java 实现
 
 ```java
-Map<Integer, List<Integer>> graph = new HashMap<>();       // 邻接表建图
+Map<Integer, List<Integer>> graph = new HashMap<>();  // 邻接表建图
 for (int[] e : edges) {
     graph.computeIfAbsent(e[0], k -> new ArrayList<>()).add(e[1]);
-    graph.computeIfAbsent(e[1], k -> new ArrayList<>()).add(e[0]);   // 无向图双向
+    graph.computeIfAbsent(e[1], k -> new ArrayList<>()).add(e[0]);  // 无向图双向
 }
 
 // BFS：队列 + visited 入队时标记（防止重复入队）
@@ -38,7 +38,7 @@ public List<Integer> bfs(int start) {
         int cur = queue.poll();
         order.add(cur);
         for (int next : graph.getOrDefault(cur, List.of())) {
-            if (visited.add(next)) {          // add 返回 false 表示已在集合，跳过
+            if (visited.add(next)) {  // add 返回 false 表示已在集合，跳过
                 queue.offer(next);
             }
         }
@@ -48,7 +48,7 @@ public List<Integer> bfs(int start) {
 
 // DFS：递归天然用调用栈
 public void dfs(int cur, Set<Integer> visited, List<Integer> order) {
-    if (!visited.add(cur)) return;            // 已访问：回退
+    if (!visited.add(cur)) return;  // 已访问：回退
     order.add(cur);
     for (int next : graph.getOrDefault(cur, List.of())) {
         dfs(next, visited, order);

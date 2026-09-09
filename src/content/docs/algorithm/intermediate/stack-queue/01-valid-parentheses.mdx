@@ -25,14 +25,14 @@ public boolean isValid(String s) {
     Deque<Character> stack = new ArrayDeque<>();
     for (char c : s.toCharArray()) {
         switch (c) {
-            case '(': case '[': case '{' -> stack.push(c);      // 左括号：入栈等待
+            case '(': case '[': case '{' -> stack.push(c);  // 左括号：入栈等待
             case ')' -> { if (stack.isEmpty() || stack.pop() != '(') return false; }
             case ']' -> { if (stack.isEmpty() || stack.pop() != '[') return false; }
             case '}' -> { if (stack.isEmpty() || stack.pop() != '{') return false; }
             default  -> { }
         }
     }
-    return stack.isEmpty();     // 扫完栈必须恰好为空（失败模式三）
+    return stack.isEmpty();  // 扫完栈必须恰好为空（失败模式三）
 }
 ```
 

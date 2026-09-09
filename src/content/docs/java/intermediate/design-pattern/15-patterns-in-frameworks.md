@@ -23,13 +23,13 @@ level: intermediate
 static Object wrap(Object target) {
     return Proxy.newProxyInstance(
         target.getClass().getClassLoader(),
-        target.getClass().getInterfaces(),       // JDK 代理要求面向接口
+        target.getClass().getInterfaces(),  // JDK 代理要求面向接口
         (proxy, method, args) -> {
             Retry r = method.getAnnotation(Retry.class);
             if (r == null) return method.invoke(target, args);  // 没标 → 直接调
             Throwable last = null;
             for (int i = 0; i < r.times(); i++) {
-                try { return method.invoke(target, args); }     // 有标 → 重试兜底
+                try { return method.invoke(target, args); }  // 有标 → 重试兜底
                 catch (Throwable e) { last = e; /* 进入下一轮重试 */ }
             }
             throw new RuntimeException("重试失败", last);

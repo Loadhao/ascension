@@ -18,11 +18,11 @@ abstract class AbstractGame {
     // 骨架：final 防子类改变流程
     public final void play() {
         initialize();
-        startPlay();     // 变化点：钩子方法
+        startPlay();  // 变化点：钩子方法
         endPlay();
     }
-    protected void initialize() { System.out.println("初始化"); }   // 公共实现
-    protected abstract void startPlay();                            // 子类填空
+    protected void initialize() { System.out.println("初始化"); }  // 公共实现
+    protected abstract void startPlay();  // 子类填空
 }
 class Cricket extends AbstractGame { protected void startPlay() { /* 板球开局 */ } }
 class Football extends AbstractGame { protected void startPlay() { /* 足球开局 */ } }

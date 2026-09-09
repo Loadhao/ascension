@@ -13,8 +13,8 @@ Spring 的依赖注入、MyBatis 的 Mapper 接口代理、JUnit 的 @Test 发�
 ### 获取 Class 的三种方式
 
 ```java
-Class<?> c1 = String.class;                    // 类字面量：编译期已知，无初始化
-Class<?> c2 = "hello".getClass();             // 对象实例：运行期最常用
+Class<?> c1 = String.class;  // 类字面量：编译期已知，无初始化
+Class<?> c2 = "hello".getClass();  // 对象实例：运行期最常用
 Class<?> c3 = Class.forName("java.lang.String");  // 全限定名：配置驱动（按名字加载）
 ```
 
@@ -26,16 +26,16 @@ Class<?> c3 = Class.forName("java.lang.String");  // 全限定名：配置驱动
 ```java
 Class<?> clazz = Class.forName("com.demo.User");
 
-Constructor<?> ctor = clazz.getConstructor(String.class);   // 构造器
-Object user = ctor.newInstance("tom");                        // 创建实例
+Constructor<?> ctor = clazz.getConstructor(String.class);  // 构造器
+Object user = ctor.newInstance("tom");  // 创建实例
 
-Method m = clazz.getMethod("getName");                        // 公有方法（含继承）
-m.setAccessible(true);                                        // 突破 private（看模块权限）
-Object name = m.invoke(user);                                 // 调用方法
+Method m = clazz.getMethod("getName");  // 公有方法（含继承）
+m.setAccessible(true);  // 突破 private（看模块权限）
+Object name = m.invoke(user);  // 调用方法
 
-Field f = clazz.getDeclaredField("age");                      // 字段（含私有）
+Field f = clazz.getDeclaredField("age");  // 字段（含私有）
 f.setAccessible(true);
-f.set(user, 18);                                              // 直接写字段
+f.set(user, 18);  // 直接写字段
 ```
 
 ```mermaid

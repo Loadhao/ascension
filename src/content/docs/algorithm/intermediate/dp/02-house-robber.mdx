@@ -23,9 +23,9 @@ DP 表逐格填出，每步说明里都写清「偷 / 不偷」两个分支各�
 
 ```java
 public int rob(int[] nums) {
-    int prev2 = 0, prev1 = 0;              // dp[i-2]、dp[i-1]，初始为「一家都没偷」
+    int prev2 = 0, prev1 = 0;  // dp[i-2]、dp[i-1]，初始为「一家都没偷」
     for (int x : nums) {
-        int cur = Math.max(prev1, prev2 + x);   // 不偷 vs 偷
+        int cur = Math.max(prev1, prev2 + x);  // 不偷 vs 偷
         prev2 = prev1;
         prev1 = cur;
     }

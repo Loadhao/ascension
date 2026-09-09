@@ -27,10 +27,10 @@ public static int[] twoSumSorted(int[] a, int target) {
     while (l < r) {
         int sum = a[l] + a[r];
         if (sum == target) return new int[]{l, r};
-        if (sum < target) l++;      // 和不够：R 左移只会更小，(l, l+1..r) 全部排除，只能 L 右移
-        else             r--;      // 和超了：L 右移只会更大，(l..r-1, r) 全部排除，只能 R 左移
+        if (sum < target) l++;  // 和不够：R 左移只会更小，(l, l+1..r) 全部排除，只能 L 右移
+        else             r--;  // 和超了：L 右移只会更大，(l..r-1, r) 全部排除，只能 R 左移
     }
-    return new int[]{-1, -1};      // 指针相遇，无解
+    return new int[]{-1, -1};  // 指针相遇，无解
 }
 ```
 

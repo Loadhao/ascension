@@ -29,13 +29,13 @@ public static void countingSort(int[] a, int[] out) {
     for (int v : a) { min = Math.min(min, v); max = Math.max(max, v); }
     int k = max - min + 1;
 
-    int[] count = new int[k];                     // 1. 计数
+    int[] count = new int[k];  // 1. 计数
     for (int v : a) count[v - min]++;
 
-    for (int i = 1; i < k; i++)                   // 2. 前缀和：count[i] 变为「值 <= i+min 的元素个数」
-        count[i] += count[i - 1];                 //    即每个值在输出数组中的结束下标（开区间）
+    for (int i = 1; i < k; i++)  // 2. 前缀和：count[i] 变为「值 <= i+min 的元素个数」
+        count[i] += count[i - 1];  //    即每个值在输出数组中的结束下标（开区间）
 
-    for (int i = a.length - 1; i >= 0; i--) {     // 3. 倒序回填：同值元素按原次序落位 → 稳定
+    for (int i = a.length - 1; i >= 0; i--) {  // 3. 倒序回填：同值元素按原次序落位 → 稳定
         int v = a[i] - min;
         out[--count[v]] = a[i];
     }

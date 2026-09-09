@@ -36,7 +36,7 @@ publisher.publishEvent(new OrderCreatedEvent(orderId));
 public void onOrderCreated(OrderCreatedEvent event) { deductStock(event); }
 
 @EventListener
-@Async                                   // 异步不阻塞主链路（MQ 篇的削峰思想）
+@Async  // 异步不阻塞主链路（MQ 篇的削峰思想）
 public void onOrderCreatedForPoints(OrderCreatedEvent event) { addPoints(event); }
 ```
 

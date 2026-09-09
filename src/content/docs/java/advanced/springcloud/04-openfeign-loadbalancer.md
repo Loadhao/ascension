@@ -125,14 +125,14 @@ spring:
 
 ```java
 @FeignClient(name = "order-service",
-             fallback = OrderClientFallback.class)   // Sentinel 熔断触发时走这里
+             fallback = OrderClientFallback.class)  // Sentinel 熔断触发时走这里
 public interface OrderClient { ... }
 
 @Component
 public class OrderClientFallback implements OrderClient {
     @Override
     public Order getOrder(Long id) {
-        return Order.degraded(id);   // 降级数据：缓存/默认值/友好提示
+        return Order.degraded(id);  // 降级数据：缓存/默认值/友好提示
     }
 }
 ```

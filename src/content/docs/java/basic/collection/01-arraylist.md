@@ -10,8 +10,8 @@ core: true
 ArrayList 就是**可扩容的对象数组**：
 
 ```java
-transient Object[] elementData;   // 真正存数据的地方，transient 不参与默认序列化
-private int size;                  // 已存元素个数（不等于 elementData.length）
+transient Object[] elementData;  // 真正存数据的地方，transient 不参与默认序列化
+private int size;  // 已存元素个数（不等于 elementData.length）
 ```
 
 无参构造默认指向 `DEFAULTCAPACITY_EMPTY_ELEMENTDATA`（一个空数组，JDK 8
@@ -25,15 +25,15 @@ public ArrayList() { elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA; }
 
 ```java
 public boolean add(E e) {
-    ensureCapacityInternal(size + 1);      // 1. 确认容量
-    elementData[size++] = e;                 // 2. 写入并自增
+    ensureCapacityInternal(size + 1);  // 1. 确认容量
+    elementData[size++] = e;  // 2. 写入并自增
     return true;
 }
 
 private void grow(int minCapacity) {
     int oldCap = elementData.length;
-    int newCap = oldCap + (oldCap >> 1);     // 1.5 倍（oldCap + oldCap/2）
-    if (newCap < minCapacity) newCap = minCapacity;   // 边界：刚构造时为 0 走默认 10
+    int newCap = oldCap + (oldCap >> 1);  // 1.5 倍（oldCap + oldCap/2）
+    if (newCap < minCapacity) newCap = minCapacity;  // 边界：刚构造时为 0 走默认 10
     elementData = Arrays.copyOf(elementData, newCap);  // 复制到新数组
 }
 ```

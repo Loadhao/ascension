@@ -81,10 +81,10 @@ Nginx 视角一行看懂：
 
 ```nginx
 upstream backend {
-    least_conn;                      # 或 round_robin（默认）/ ip_hash / hash $uri consistent
+    least_conn;  # 或 round_robin（默认）/ ip_hash / hash $uri consistent
     server 10.0.0.1 weight=3 max_fails=2 fail_timeout=10s;
     server 10.0.0.2 weight=1;
-    server 10.0.0.3 backup;          # 备节点，全员挂了才顶上
+    server 10.0.0.3 backup;  # 备节点，全员挂了才顶上
 }
 ```
 

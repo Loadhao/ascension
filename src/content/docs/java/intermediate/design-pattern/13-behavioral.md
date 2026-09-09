@@ -17,11 +17,11 @@ level: intermediate
 
 ```java
 interface OrderState {
-    OrderState pay();      // 返回下一个状态——迁移规则写在这里
+    OrderState pay();  // 返回下一个状态——迁移规则写在这里
     OrderState ship();
 }
 class Unpaid implements OrderState {
-    public OrderState pay()  { return new Paid(); }        // 合法迁移
+    public OrderState pay()  { return new Paid(); }  // 合法迁移
     public OrderState ship() { throw new IllegalStateException("未支付不能发货"); }
 }
 class Paid implements OrderState {
@@ -30,7 +30,7 @@ class Paid implements OrderState {
 }
 
 class Order {
-    private OrderState state = new Unpaid();               // 当前状态可整体替换
+    private OrderState state = new Unpaid();  // 当前状态可整体替换
     public void pay()  { state = state.pay(); }
     public void ship() { state = state.ship(); }
 }

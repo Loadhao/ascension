@@ -24,13 +24,13 @@ gap 从大到小递减，最后一步才是普通的插入排序（gap = 1）**�
 ```java
 public static void shellSort(int[] a) {
     int n = a.length;
-    for (int gap = n / 2; gap > 0; gap /= 2) {   // 常用序列：n/2 逐次减半
+    for (int gap = n / 2; gap > 0; gap /= 2) {  // 常用序列：n/2 逐次减半
         // 组内插入排序：把「相邻一格」改成「相隔 gap 格」，逻辑与插入排序完全同构
         for (int i = gap; i < n; i++) {
             int key = a[i];
             int j = i;
             while (j >= gap && a[j - gap] > key) {
-                a[j] = a[j - gap];                // 比 key 大的组内元素右移 gap 格
+                a[j] = a[j - gap];  // 比 key 大的组内元素右移 gap 格
                 j -= gap;
             }
             a[j] = key;

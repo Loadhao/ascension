@@ -60,8 +60,8 @@ sequenceDiagram
 // 库存服务
 public interface StockTcc {
     boolean tryDeduct(String orderId, int count);  // Try：冻结库存（可用 -N，冻结 +N）
-    boolean confirm(String orderId);                // Confirm：扣掉冻结（冻结 -N）—— 幂等
-    boolean cancel(String orderId);                 // Cancel：解冻归还（可用 +N）—— 幂等
+    boolean confirm(String orderId);  // Confirm：扣掉冻结（冻结 -N）—— 幂等
+    boolean cancel(String orderId);  // Cancel：解冻归还（可用 +N）—— 幂等
 }
 ```
 

@@ -228,11 +228,14 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
    - `title` 写**结论**而不是话题名（「Spring 是底层能力框架，Spring Boot 是
      工程化脚手架」✓，「Spring 和 Spring Boot 的区别」✗）；`badge` 是标题下的
      胶囊副标；
-   - 对比用 `panels`（2~3 个）：每个面板 `title` + `sub`（一句定位）+ `cells`
-     （短标题 `label` + 一行说明 `desc`，尽量按同一组维度对齐行）；恰好两栏时可加
-     `link` 说明中缝关系（如「没有替代关系，而是基于关系」）；
-   - 分层用 `layers`：自上而下每层 `title` + `sub` + `cells`，适合「线程私有 /
-     共享」「经典三层」这类分区总结；
+   - 对比用 `panels`（2~3 个）：每个面板 `title` + `sub`（一句定位）+ `icon`
+     （表情图标，画进标题前的圆角色块）+ `cells`；`cells` 尽量按**同一组维度**
+     对齐行（HashMap 卡五栏都是「结构 / 并发写 / 读 / null / 扩容」），每栏
+     `label` 短标题 + `desc` 一行说明 + 可选 `tag`（右侧小徽标，放复杂度、
+     版本、「并发」「默认选它」这类点睛词）；
+   - 分层用 `layers`：自上而下每层 `title` + `sub` + `icon` + `cells`，适合
+     「线程私有 / 共享」「四大家族」这类分区总结；
+   - 每栏 3~5 行、内容具体（给结论也给理由）——空泛的一句话行不如不放；
    - `takeaways` 放底部结论胶囊，`caption` 是卡片外的一句话总结，两者挑一个够用。
 2. 笔记改为 `.mdx`（`.md` 不支持 import），在合适的小节里
    `<AlgorithmVizIsland demo="key" />` 引用，正文一句话交代这张卡总结什么。

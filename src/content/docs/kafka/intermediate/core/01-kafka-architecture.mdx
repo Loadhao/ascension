@@ -85,9 +85,9 @@ segment 的一生（写入 → 滚动 → 读取 → 整段删除）可以按帧
 while (true) {
     ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
     for (ConsumerRecord<String, String> r : records) {
-        process(r);                       // 先处理……
+        process(r);  // 先处理……
     }
-    consumer.commitSync();                // ……后提交（手动提交，防丢的关键）
+    consumer.commitSync();  // ……后提交（手动提交，防丢的关键）
 }
 ```
 

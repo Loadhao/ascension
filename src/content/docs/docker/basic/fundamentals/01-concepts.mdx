@@ -111,8 +111,8 @@ docker tag myapp:v2 myapp:latest        # 明确打新 tag
 
 排查先确认挂载对不对，别怀疑环境：
 ```bash
-docker exec -it web sh             # 进容器看
-docker logs --tail 100 web         # 看日志
+docker exec -it web sh  # 进容器看
+docker logs --tail 100 web  # 看日志
 docker inspect web --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{"\n"}}{{end}}'
 ```
 

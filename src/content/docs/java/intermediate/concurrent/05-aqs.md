@@ -98,10 +98,10 @@ flowchart TB
 
 ```java
 public final boolean release(int arg) {
-    if (tryRelease(arg)) {                 // 子类逻辑：state 清零（可重入要减到 0）
+    if (tryRelease(arg)) {  // 子类逻辑：state 清零（可重入要减到 0）
         Node h = head;
         if (h != null && h.waitStatus != 0)
-            LockSupport.unpark(h.next.thread);   // 唤醒后继
+            LockSupport.unpark(h.next.thread);  // 唤醒后继
         return true;
     }
     return false;

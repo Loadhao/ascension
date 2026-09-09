@@ -2,16 +2,20 @@ import { Fragment } from 'react';
 
 export type SummaryTone = 'blue' | 'teal' | 'green' | 'amber' | 'rose' | 'violet' | 'slate';
 
-/** 面板/分层里的一条要点：短标题 + 一行补充 */
+/** 面板/分层里的一条要点：短标题 + 一行补充 + 可选右侧小徽标 */
 export interface SummaryCell {
 	label: string;
 	desc?: string;
+	/** 右侧小徽标：复杂度、版本、现状等点睛信息 */
+	tag?: string;
 }
 
 export interface SummaryPanel {
 	title: string;
 	/** 面板标题下的小字定位 */
 	sub?: string;
+	/** 标题前的表情图标，画进圆角色块 */
+	icon?: string;
 	tone: SummaryTone;
 	cells: SummaryCell[];
 }
@@ -19,6 +23,8 @@ export interface SummaryPanel {
 export interface SummaryLayer {
 	title: string;
 	sub?: string;
+	/** 标题前的表情图标，画进圆角色块 */
+	icon?: string;
 	tone: SummaryTone;
 	cells: SummaryCell[];
 }
@@ -60,7 +66,10 @@ const Cells = ({ cells }: { cells: SummaryCell[] }) => (
 	<div className="sum-cells">
 		{cells.map((cell) => (
 			<div key={cell.label} className="sum-cell">
-				<span className="sum-cell-label">{cell.label}</span>
+				<span className="sum-cell-label">
+					<span className="sum-cell-name">{cell.label}</span>
+					{cell.tag && <span className="sum-cell-tag">{cell.tag}</span>}
+				</span>
 				{cell.desc && <span className="sum-cell-desc">{cell.desc}</span>}
 			</div>
 		))}
@@ -89,7 +98,10 @@ export default function SummaryViz({ title, badge, panels, link, layers, takeawa
 							)}
 							<section className={`sum-panel sum-panel--${panel.tone}`}>
 								<header className="sum-panel-head">
-									<span className="sum-panel-title">{panel.title}</span>
+									<span className="sum-panel-title">
+										{panel.icon && <span className="sum-panel-icon">{panel.icon}</span>}
+										{panel.title}
+									</span>
 									{panel.sub && <span className="sum-panel-sub">{panel.sub}</span>}
 								</header>
 								<Cells cells={panel.cells} />
@@ -103,7 +115,10 @@ export default function SummaryViz({ title, badge, panels, link, layers, takeawa
 					{layers.map((layer) => (
 						<section key={layer.title} className={`sum-layer sum-layer--${layer.tone}`}>
 							<header className="sum-layer-head">
-								<span className="sum-panel-title">{layer.title}</span>
+								<span className="sum-panel-title">
+									{layer.icon && <span className="sum-panel-icon">{layer.icon}</span>}
+									{layer.title}
+								</span>
 								{layer.sub && <span className="sum-panel-sub">{layer.sub}</span>}
 							</header>
 							<Cells cells={layer.cells} />

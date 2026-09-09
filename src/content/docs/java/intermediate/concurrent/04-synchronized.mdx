@@ -102,7 +102,7 @@ flowchart LR
 
 ```java
 // 锁粗化：连续 append 各自带锁，JIT 合并成一个大同步块
-sb.append(a); sb.append(b); sb.append(c);   // StringBuffer.append 都是 synchronized
+sb.append(a); sb.append(b); sb.append(c);  // StringBuffer.append 都是 synchronized
 // 等效于 synchronized(sb){ a+b+c 一起做 }
 
 // 锁消除：逃逸分析发现 sb 不出方法，锁对象没有竞争者 → 直接删锁

@@ -86,7 +86,7 @@ public class TraceIdFilter implements Filter {
         try {
             chain.doFilter(req, res);
         } finally {
-            MDC.remove("traceId");      // 线程复用，必须清！
+            MDC.remove("traceId");  // 线程复用，必须清！
         }
     }
 }

@@ -30,10 +30,10 @@ state 是**剩余计数**，`countDown()` 减一，`await()` 卡到归零。**�
 CountDownLatch latch = new CountDownLatch(services.length);
 for (String s : services) {
     executor.submit(() -> {
-        try { check(s); } finally { latch.countDown(); }   // finally 里减，异常也减
+        try { check(s); } finally { latch.countDown(); }  // finally 里减，异常也减
     });
 }
-latch.await(10, TimeUnit.SECONDS);   // 主线程等全部就绪；带超时防死等
+latch.await(10, TimeUnit.SECONDS);  // 主线程等全部就绪；带超时防死等
 ```
 
 典型场景：**主任务等 N 个子任务全部完成**（并行初始化、聚合多个

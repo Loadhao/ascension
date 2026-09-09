@@ -22,8 +22,8 @@ native 方法。
 
 ```java
 public class HashNative {
-    static { System.loadLibrary("hashlib"); }   // ④ 加载 libhashlib.so / .dylib / .dll
-    public native long hash(byte[] data);       // ① 声明 native 方法
+    static { System.loadLibrary("hashlib"); }  // ④ 加载 libhashlib.so / .dylib / .dll
+    public native long hash(byte[] data);  // ① 声明 native 方法
 }
 ```
 

@@ -28,17 +28,17 @@ public List<List<Integer>> permute(int[] nums) {
 }
 
 private void dfs(int[] nums, boolean[] used, List<Integer> path, List<List<Integer>> res) {
-    if (path.size() == nums.length) {          // 路径满长才收集——只有叶子是答案
+    if (path.size() == nums.length) {  // 路径满长才收集——只有叶子是答案
         res.add(new ArrayList<>(path));
         return;
     }
     for (int i = 0; i < nums.length; i++) {
-        if (used[i]) continue;                 // 候选收缩：用过的跳过
-        used[i] = true;                        // 做决策
+        if (used[i]) continue;  // 候选收缩：用过的跳过
+        used[i] = true;  // 做决策
         path.add(nums[i]);
         dfs(nums, used, path, res);
-        path.remove(path.size() - 1);          // 撤销
-        used[i] = false;                       // 撤销要成对：path 和 used 一起恢复
+        path.remove(path.size() - 1);  // 撤销
+        used[i] = false;  // 撤销要成对：path 和 used 一起恢复
     }
 }
 ```

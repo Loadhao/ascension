@@ -22,26 +22,26 @@ import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland
 
 ```java
 public static void mergeSort(int[] a) {
-    int[] aux = new int[a.length];              // 辅助数组复用，避免每次 merge 都分配
+    int[] aux = new int[a.length];  // 辅助数组复用，避免每次 merge 都分配
     mergeSort(a, aux, 0, a.length - 1);
 }
 
 private static void mergeSort(int[] a, int[] aux, int low, int high) {
-    if (low >= high) return;                    // 0 或 1 个元素天然有序
+    if (low >= high) return;  // 0 或 1 个元素天然有序
     int mid = low + (high - low) / 2;
-    mergeSort(a, aux, low, mid);                // 排左半区
-    mergeSort(a, aux, mid + 1, high);           // 排右半区
-    merge(a, aux, low, mid, high);              // 合并两个有序半区
+    mergeSort(a, aux, low, mid);  // 排左半区
+    mergeSort(a, aux, mid + 1, high);  // 排右半区
+    merge(a, aux, low, mid, high);  // 合并两个有序半区
 }
 
 private static void merge(int[] a, int[] aux, int low, int mid, int high) {
     System.arraycopy(a, low, aux, low, high - low + 1);  // 暂存，a 的区间将被逐个写回覆盖
     int i = low, j = mid + 1;
     for (int k = low; k <= high; k++) {
-        if (i > mid)                     a[k] = aux[j++];        // 左半取完，搬右半剩余
-        else if (j > high)               a[k] = aux[i++];        // 右半取完，搬左半剩余
-        else if (aux[j] < aux[i])        a[k] = aux[j++];        // 右边更小，取右
-        else                             a[k] = aux[i++];        // <=：相等取左，保证稳定
+        if (i > mid)                     a[k] = aux[j++];  // 左半取完，搬右半剩余
+        else if (j > high)               a[k] = aux[i++];  // 右半取完，搬左半剩余
+        else if (aux[j] < aux[i])        a[k] = aux[j++];  // 右边更小，取右
+        else                             a[k] = aux[i++];  // <=：相等取左，保证稳定
     }
 }
 ```

@@ -10,13 +10,13 @@ level: basic
 ## 核心参数
 
 ```bash
-curl https://api.example.com/users        # 默认 GET，打印响应体
-curl -i https://api.example.com/users     # -i 显示响应头
-curl -v https://api.example.com/users     # -v 全部细节（握手/headers/体）
+curl https://api.example.com/users  # 默认 GET，打印响应体
+curl -i https://api.example.com/users  # -i 显示响应头
+curl -v https://api.example.com/users  # -v 全部细节（握手/headers/体）
 curl -X POST https://api.example.com/users -d '{"name":"a"}' -H 'Content-Type: application/json'
 curl -X PUT ... -H 'Authorization: Bearer xxx'
-curl -u user:pass https://...              # 基础认证
-curl -k https://...                        # 忽略证书（自签测试）
+curl -u user:pass https://...  # 基础认证
+curl -k https://...  # 忽略证书（自签测试）
 ```
 
 关键记忆：`-X` 指定方法（但默认就能 POST），`-d` 带请求体，`-H` 加一个

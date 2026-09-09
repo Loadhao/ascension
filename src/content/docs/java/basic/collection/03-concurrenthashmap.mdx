@@ -47,33 +47,33 @@ flowchart TB
 ```java
 final V putVal(K key, V value, boolean onlyIfAbsent) {
     if (key == null || value == null) throw new NullPointerException();  // 不允许 null
-    int hash = spread(key.hashCode());          // 扰动：高低位异或，再与 HASH_BITS 相与
-    for (Node<K,V>[] tab = table;;) {            // 自旋：失败重试
+    int hash = spread(key.hashCode());  // 扰动：高低位异或，再与 HASH_BITS 相与
+    for (Node<K,V>[] tab = table;;) {  // 自旋：失败重试
         Node<K,V> f; int n, i, fh;
         if (tab == null || (n = tab.length) == 0)
-            tab = initTable();                   // 惰性初始化
+            tab = initTable();  // 惰性初始化
         else if ((f = tabAt(tab, i = (n - 1) & hash)) == null) {
             if (casTabAt(tab, i, null, new Node<>(hash, key, value)))
-                break;                            // ① 空桶：CAS 放入，无锁成功
+                break;  // ① 空桶：CAS 放入，无锁成功
         }
         else if (f.hash == MOVED)
-            tab = helpTransfer(tab, f);           // ② ForwardingNode：正在扩容，去帮忙
+            tab = helpTransfer(tab, f);  // ② ForwardingNode：正在扩容，去帮忙
         else {
             V oldVal = null;
-            synchronized (f) {                    // ③ 非空桶：synchronized 锁头节点
-                if (tabAt(tab, i) == f) {        // double check：锁住后确认头节点没变
+            synchronized (f) {  // ③ 非空桶：synchronized 锁头节点
+                if (tabAt(tab, i) == f) {  // double check：锁住后确认头节点没变
                     if (fh >= 0) { /* 链表：遍历尾插/更新 */ }
                     else if (f instanceof TreeBin) { /* 红黑树插入 */ }
                 }
             }
-            if (binCount != 0) {                  // 链表过长 → 树化
+            if (binCount != 0) {  // 链表过长 → 树化
                 if (binCount >= TREEIFY_THRESHOLD) treeifyBin(tab, i);
                 if (oldVal != null) return oldVal;
                 break;
             }
         }
     }
-    addCount(1L, binCount);   // 计数（也可能触发扩容检查）
+    addCount(1L, binCount);  // 计数（也可能触发扩容检查）
     return null;
 }
 ```
@@ -115,7 +115,7 @@ public V get(Object key) {
     Node<K,V>[] tab; Node<K,V> e, p; int n, eh; K ek;
     int h = spread(key.hashCode());
     if ((tab = table) != null && (n = tab.length) > 0 &&
-        (e = tabAt(tab, (n - 1) & h)) != null) {     // tabAt 用 Unsafe.getObjectVolatile
+        (e = tabAt(tab, (n - 1) & h)) != null) {  // tabAt 用 Unsafe.getObjectVolatile
         if ((eh = e.hash) == h) { /* 头节点命中 */ }
         else if (eh < 0)  return (p = e.find(h, key)) != null ? p.val : null;  // 树或迁移中
         while ((e = e.next) != null) { /* 沿链表找 */ }
@@ -135,14 +135,14 @@ public V get(Object key) {
 LongAdder 的思路**分摊热点**：
 
 ```java
-private transient volatile long baseCount;              // 无竞争时用它
+private transient volatile long baseCount;  // 无竞争时用它
 private transient volatile CounterCell[] counterCells;  // 有竞争时各改各的格子
 
 public int size() {
     long n = baseCount;
     if (counterCells != null)
         for (CounterCell c : counterCells)
-            if (c != null) n += c.value;    // 最终一致性：求和瞬间可能不是精确值
+            if (c != null) n += c.value;  // 最终一致性：求和瞬间可能不是精确值
     return (int) n;
 }
 ```

@@ -32,7 +32,7 @@ fetch 阶段取）。后续每批只需凭 scrollId 定位游标、抓取 size �
 ```json
 POST /_search/scroll
 {
-  "scroll": "1m",                                  // context 有效期，每次请求续期
+  "scroll": "1m",  // context 有效期，每次请求续期
   "scroll_id": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAA5AW..."
 }
 ```
@@ -51,8 +51,8 @@ ES 5 引入，思路类似 MySQL 的"书签记录"：每页返回带 sort 值数
 GET /orders/_search
 {
   "size": 10,
-  "sort": [{ "created_at": "desc" }, { "_id": "asc" }],   // _id 兜底保证全局唯一
-  "search_after": [1725148800000, "order_10086"]            // 上一页最后一条的 sort 值
+  "sort": [{ "created_at": "desc" }, { "_id": "asc" }],  // _id 兜底保证全局唯一
+  "search_after": [1725148800000, "order_10086"]  // 上一页最后一条的 sort 值
 }
 ```
 

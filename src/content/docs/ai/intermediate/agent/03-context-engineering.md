@@ -74,7 +74,7 @@ messages = [
   { role: "system",    content: "..." },
   { role: "user",      content: "What's the current time..." },
   { role: "assistant", tool_calls: [get_current_time, get_weather] },  # 模型生成
-  { role: "tool",      tool_call_id: "call_abc", content: "{time...}" },   # 框架执行
+  { role: "tool",      tool_call_id: "call_abc", content: "{time...}" },  # 框架执行
   { role: "tool",      tool_call_id: "call_def", content: "{weather...}" },
 ]
 ```

@@ -101,7 +101,7 @@ C2 的激进假设（"这个虚调用只有一种实现"）可能被后来的类
 **验证手段**：
 
 ```bash
-java -XX:+PrintCompilation -jar app.jar    # 看 JIT 编译日志（queued/made not entrant = 去优化）
+java -XX:+PrintCompilation -jar app.jar  # 看 JIT 编译日志（queued/made not entrant = 去优化）
 # 微基准必用 JMH：手动写循环测耗时，会被死代码消除 + 内联搞得全错
 ```
 

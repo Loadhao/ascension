@@ -77,8 +77,8 @@ consumer.commitSync();   // 语义：offset 之前的一定处理完了（At Lea
 @Transactional
 public void handle(OrderEvent event) {
     if (dedupMapper.exists(event.getEventId())) return;  // 处理过，直接吞
-    dedupMapper.insert(event.getEventId());               // 占坑
-    orderMapper.insert(toOrder(event));                    // 同一本地事务
+    dedupMapper.insert(event.getEventId());  // 占坑
+    orderMapper.insert(toOrder(event));  // 同一本地事务
 }
 
 // ② 状态机：只允许合法迁移，重复消息撞在状态上自然失效

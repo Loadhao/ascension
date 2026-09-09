@@ -27,7 +27,7 @@ double calc(String type, double price) {
 
 ```java
 public interface PromotionStrategy {
-    String type();                        // 策略自报身份
+    String type();  // 策略自报身份
     double calc(double price);
 }
 
@@ -41,13 +41,13 @@ class FullReductionStrategy implements PromotionStrategy {
 public class PromotionContext {
     private final Map<String, PromotionStrategy> strategies;
 
-    public PromotionContext(List<PromotionStrategy> list) {   // Spring 注入所有实现
+    public PromotionContext(List<PromotionStrategy> list) {  // Spring 注入所有实现
         this.strategies = list.stream()
             .collect(toMap(PromotionStrategy::type, s -> s));
     }
 
     public double calc(String type, double price) {
-        return strategies.get(type).calc(price);   // 新活动 = 新类，零修改
+        return strategies.get(type).calc(price);  // 新活动 = 新类，零修改
     }
 }
 ```

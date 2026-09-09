@@ -68,27 +68,42 @@ flowchart TB
 
 ```java
 @Component
-public class LifecycleDemo implements BeanNameAware, InitializingBean, DisposableBean {
+public class LifecycleDemo
+    implements BeanNameAware, InitializingBean, DisposableBean {
 
-    public LifecycleDemo() {                       System.out.println("① 构造器：实例化"); }
+    public LifecycleDemo() {
+        System.out.println("① 构造器：实例化");
+    }
 
     @Autowired
-    public void setDao(DemoDao dao) {              System.out.println("② 属性填充"); }
+    public void setDao(DemoDao dao) {
+        System.out.println("② 属性填充");
+    }
 
     @Override
-    public void setBeanName(String name) {         System.out.println("③ Aware 回调: " + name); }
+    public void setBeanName(String name) {
+        System.out.println("③ Aware 回调: " + name);
+    }
 
     @PostConstruct
-    public void init() {                            System.out.println("④ @PostConstruct"); }
+    public void init() {
+        System.out.println("④ @PostConstruct");
+    }
 
     @Override
-    public void afterPropertiesSet() {             System.out.println("⑤ afterPropertiesSet"); }
+    public void afterPropertiesSet() {
+        System.out.println("⑤ afterPropertiesSet");
+    }
 
     @PreDestroy
-    public void preDestroy() {                     System.out.println("⑧ @PreDestroy"); }
+    public void preDestroy() {
+        System.out.println("⑧ @PreDestroy");
+    }
 
     @Override
-    public void destroy() {                        System.out.println("⑧ DisposableBean.destroy"); }
+    public void destroy() {
+        System.out.println("⑧ DisposableBean.destroy");
+    }
 }
 // 输出顺序与上图一致——注意 @PostConstruct 在 afterPropertiesSet 之前
 ```
@@ -143,8 +158,11 @@ public class TaskRunner {        // 默认 singleton
 ```java
 @Service
 public class TaskRunner {
-    private final ObjectProvider<Task> provider;   // 每次 getObject() 都是新实例
-    public TaskRunner(ObjectProvider<Task> provider) { this.provider = provider; }
+    private final ObjectProvider<Task> provider;  // 每次 getObject() 都是新实例
+
+    public TaskRunner(ObjectProvider<Task> provider) {
+        this.provider = provider;
+    }
 
     public void run() { Task t = provider.getObject(); /* 每次都新建 */ }
 }

@@ -33,7 +33,7 @@ public class Config {
 public class Config {
     private static volatile Config instance;          // volatile 防"半成品"（volatile 篇）
     public static Config getInstance() {
-        if (instance == null) {                       // 第一次检查：避免每次都抢锁
+        if (instance == null) {  // 第一次检查：避免每次都抢锁
             synchronized (Config.class) {
                 if (instance == null) instance = new Config();  // 第二次检查：防重复创建
             }
@@ -98,11 +98,11 @@ ObjectInputStream.readObject(...);
 public class Config implements Serializable {
     private static final Config INSTANCE = new Config();
     private Config() {
-        if (INSTANCE != null) {                  // 防反射：第二次调用构造器就抛
+        if (INSTANCE != null) {  // 防反射：第二次调用构造器就抛
             throw new IllegalStateException("已存在实例");
         }
     }
-    private Object readResolve() { return INSTANCE; }   // 防反序列化：还原时直接返回真身
+    private Object readResolve() { return INSTANCE; }  // 防反序列化：还原时直接返回真身
 }
 ```
 

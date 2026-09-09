@@ -18,9 +18,9 @@ level: advanced
 **查看与对照**（`:=` 表示运行时被改动过/非默认值）：
 
 ```bash
-java -XX:+PrintFlagsFinal -version | grep -i heap   # 出厂默认值
-jcmd <pid> VM.flags                                 # 线上进程实际生效参数
-java -Xlog:gc:file=gc.log -jar app.jar              # JDK 9+ 统一日志（替代 PrintGCDetails）
+java -XX:+PrintFlagsFinal -version | grep -i heap  # 出厂默认值
+jcmd <pid> VM.flags  # 线上进程实际生效参数
+java -Xlog:gc:file=gc.log -jar app.jar  # JDK 9+ 统一日志（替代 PrintGCDetails）
 ```
 
 ## 内存参数体系：预算先算总账
@@ -29,13 +29,13 @@ java -Xlog:gc:file=gc.log -jar app.jar              # JDK 9+ 统一日志（替�
 + JVM 自身**。逐项参数：
 
 ```bash
--Xms4g -Xmx4g                      # 初始堆 = 最大堆：避免运行期扩容抖动与 Full GC
--Xmn1g                             # 新生代（G1 下不建议手设，让 G1 自适应）
--Xss512k                           # 单线程栈；线程数多时总账 = N × Xss
--XX:MetaspaceSize=256m             # 首次触发元空间回收的水位（不是初始大小！）
--XX:MaxMetaspaceSize=512m          # 元空间上限（不设 = 吃本地内存没上限）
--XX:MaxDirectMemorySize=1g         # 堆外直接内存上限
--XX:ReservedCodeCacheSize=256m     # JIT 机器码缓存（JIT 篇）
+-Xms4g -Xmx4g  # 初始堆 = 最大堆：避免运行期扩容抖动与 Full GC
+-Xmn1g  # 新生代（G1 下不建议手设，让 G1 自适应）
+-Xss512k  # 单线程栈；线程数多时总账 = N × Xss
+-XX:MetaspaceSize=256m  # 首次触发元空间回收的水位（不是初始大小！）
+-XX:MaxMetaspaceSize=512m  # 元空间上限（不设 = 吃本地内存没上限）
+-XX:MaxDirectMemorySize=1g  # 堆外直接内存上限
+-XX:ReservedCodeCacheSize=256m  # JIT 机器码缓存（JIT 篇）
 ```
 
 > 经典误区：`MetaspaceSize` 被当"初始大小"调大。它实际是**扩容触发
@@ -57,9 +57,9 @@ java -Xlog:gc:file=gc.log -jar app.jar              # JDK 9+ 统一日志（替�
 G1 三个最有用的旋钮（默认 200ms 停顿目标、堆 45% 触发并发标记）：
 
 ```bash
--XX:MaxGCPauseMillis=100           # 软目标：别拍 10ms，G1 靠缩小 Region 集合逼近，太激进会积压
--XX:InitiatingHeapOccupancyPercent=40   # 并发标记触发水位；大堆/分配猛时调低提前规划
--XX:G1ReservePercent=15            # 预留防晋升失败（to-space exhausted）
+-XX:MaxGCPauseMillis=100  # 软目标：别拍 10ms，G1 靠缩小 Region 集合逼近，太激进会积压
+-XX:InitiatingHeapOccupancyPercent=40  # 并发标记触发水位；大堆/分配猛时调低提前规划
+-XX:G1ReservePercent=15  # 预留防晋升失败（to-space exhausted）
 ```
 
 ZGC 的正确期待：停顿恒定亚毫秒，但**吞吐略降**（读屏障成本）、占
@@ -72,7 +72,7 @@ ZGC 的正确期待：停顿恒定亚毫秒，但**吞吐略降**（读屏障成
    ——容器给 4G，堆只拿 1G。修复姿势：
 
    ```bash
-   -XX:MaxRAMPercentage=75.0        # 堆拿限额的 75%，留 25% 给元空间/栈/直接内存
+   -XX:MaxRAMPercentage=75.0  # 堆拿限额的 75%，留 25% 给元空间/栈/直接内存
    ```
 
 2. **`java -Xmx` 写死不如百分比**：镜像多环境复用时用 percentage，

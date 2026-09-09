@@ -45,7 +45,7 @@ case 是 yml 里的规范写法，环境变量靠下划线映射。
 
 ```java
 @ConfigurationProperties(prefix = "app.pool")
-@Validated                                        // 绑定时就能校验（联动校验篇）
+@Validated  // 绑定时就能校验（联动校验篇）
 public record PoolProps(@NotNull @Min(1) Integer core,
                         @Max(100) Integer max) {}
 ```

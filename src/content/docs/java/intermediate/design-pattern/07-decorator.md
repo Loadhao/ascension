@@ -51,7 +51,7 @@ class DiscountDecorator implements Pricer {
 }
 
 new DiscountDecorator(new DiscountDecorator(new BasePricer(), 0.8), 0.9)
-    .price(100);   // 72：叠加顺序一目了然，且随时可换组合
+    .price(100);  // 72：叠加顺序一目了然，且随时可换组合
 ```
 
 对比继承方案：`EightyPercentOffPricer`、`NinetyPercentOffPricer`、

@@ -26,7 +26,7 @@ import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland
 public boolean canJump(int[] nums) {
     int farthest = 0;
     for (int i = 0; i < nums.length; i++) {
-        if (i > farthest) return false;        // 这个格子永远到不了
+        if (i > farthest) return false;  // 这个格子永远到不了
         farthest = Math.max(farthest, i + nums[i]);
         if (farthest >= nums.length - 1) return true;
     }
@@ -36,9 +36,9 @@ public boolean canJump(int[] nums) {
 // 版本 II：最少步数——贪心分层
 public int jump(int[] nums) {
     int jumps = 0, layerEnd = 0, farthest = 0;
-    for (int i = 0; i < nums.length - 1; i++) {          // 终点格不用再起跳
+    for (int i = 0; i < nums.length - 1; i++) {  // 终点格不用再起跳
         farthest = Math.max(farthest, i + nums[i]);
-        if (i == layerEnd) {                              // 走完当前层：必须再跳一步
+        if (i == layerEnd) {  // 走完当前层：必须再跳一步
             jumps++;
             layerEnd = farthest;
             if (layerEnd >= nums.length - 1) break;

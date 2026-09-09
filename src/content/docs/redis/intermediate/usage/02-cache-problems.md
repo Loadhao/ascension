@@ -73,16 +73,16 @@ public User getUser(String key) {
     if (v != null) return parse(v);
 
     String lockKey = "lock:" + key;
-    if (tryLock(lockKey)) {              // setnx 抢锁（见分布式锁篇）
+    if (tryLock(lockKey)) {  // setnx 抢锁（见分布式锁篇）
         try {
-            v = redis.get(key);          // double check：等锁期间别人可能已重建
+            v = redis.get(key);  // double check：等锁期间别人可能已重建
             if (v != null) return parse(v);
-            User u = db.load(key);      // 只有抢到锁的这一个请求回源
+            User u = db.load(key);  // 只有抢到锁的这一个请求回源
             redis.setex(key, 300, toJson(u));
             return u;
         } finally { unlock(lockKey); }
     }
-    Thread.sleep(50);                    // 没抢到的稍等重试（或直接返回旧值兜底）
+    Thread.sleep(50);  // 没抢到的稍等重试（或直接返回旧值兜底）
     return getUser(key);
 }
 ```

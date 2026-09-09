@@ -192,7 +192,7 @@ curl -X POST http://localhost:8080/mcp \
 ```python
 # 启动时：接口 MCP Server，把它的工具并入本地工具表
 def connect_mcp_server(name, server_spec):
-    tools = mcp_client.list_tools(server_spec)     # 对应 tools/list
+    tools = mcp_client.list_tools(server_spec)  # 对应 tools/list
     for t in tools:
         TOOL_HANDLERS[prefix(name, t.name)] = lambda args, t=t: mcp_client.call(t.name, args)
     return tools

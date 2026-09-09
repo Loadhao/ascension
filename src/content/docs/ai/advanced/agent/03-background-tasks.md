@@ -85,7 +85,7 @@ ID，状态存在 `background_tasks` 字典里：
 
 ```python
 _bg_counter = 0
-background_tasks: dict[str, dict] = {}   # bg_id → {tool_use_id, command, status}
+background_tasks: dict[str, dict] = {}  # bg_id → {tool_use_id, command, status}
 background_results: dict[str, str] = {}  # bg_id → output
 background_lock = threading.Lock()
 

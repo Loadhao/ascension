@@ -63,7 +63,7 @@ CF 的异常沿链路**向下游传染**（像异常版的流水线），直到�
 
 ```java
 supplyAsync(() -> risky())
-    .exceptionally(ex -> fallbackValue())            // 换个兜底值，链继续
+    .exceptionally(ex -> fallbackValue())  // 换个兜底值，链继续
     .handle((value, ex) -> ex == null ? value : recover(ex));  // 正常/异常都能进来
 ```
 

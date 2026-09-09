@@ -82,15 +82,15 @@ public final class Money {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;                     // 1. 自判引用，快路径
+        if (this == o) return true;  // 1. 自判引用，快路径
         if (!(o instanceof Money money)) return false;  // 2. 类型检查（JDK 16 模式匹配）
-        return amount == money.amount && currency == money.currency;   // 3. 逐字段比
+        return amount == money.amount && currency == money.currency;  // 3. 逐字段比
     }
 
     @Override
     public int hashCode() {
         int result = Integer.hashCode(amount);
-        result = 31 * result + currency.hashCode();     // 31：奇素数 + 可被 JIT 优化成 (h<<5)-h
+        result = 31 * result + currency.hashCode();  // 31：奇素数 + 可被 JIT 优化成 (h<<5)-h
         return result;
     }
 }

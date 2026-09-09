@@ -29,16 +29,16 @@ public static int searchRotated(int[] a, int target) {
         int mid = low + (high - low) / 2;
         if (a[mid] == target) return mid;
 
-        if (a[low] <= a[mid]) {                          // 左半 [low, mid] 有序（<= 兼容 low==mid）
+        if (a[low] <= a[mid]) {  // 左半 [low, mid] 有序（<= 兼容 low==mid）
             if (a[low] <= target && target < a[mid])
-                high = mid - 1;                          // target 在有序左半内
+                high = mid - 1;  // target 在有序左半内
             else
-                low = mid + 1;                           // 不在，去右半
-        } else {                                         // 右半 [mid, high] 有序
+                low = mid + 1;  // 不在，去右半
+        } else {  // 右半 [mid, high] 有序
             if (a[mid] < target && target <= a[high])
-                low = mid + 1;                           // target 在有序右半内
+                low = mid + 1;  // target 在有序右半内
             else
-                high = mid - 1;                          // 不在，去左半
+                high = mid - 1;  // 不在，去左半
         }
     }
     return -1;

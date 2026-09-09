@@ -37,9 +37,9 @@ level: intermediate
 ## 线上探测
 
 ```bash
-redis-cli --bigkeys                 # 各类型采样扫描，报 top1 大 key（生产可用，SCAN 式）
-redis-cli --hotkeys                 # 热 key（需要 maxmemory-policy 为 LRU 系才有命中统计）
-MEMORY USAGE mykey                  # 精确量化单 key 体积
+redis-cli --bigkeys  # 各类型采样扫描，报 top1 大 key（生产可用，SCAN 式）
+redis-cli --hotkeys  # 热 key（需要 maxmemory-policy 为 LRU 系才有命中统计）
+MEMORY USAGE mykey  # 精确量化单 key 体积
 ```
 
 - 大规模/精确盘点：**离线分析 RDB**（redis-rdb-tools 生成 CSV 排序），

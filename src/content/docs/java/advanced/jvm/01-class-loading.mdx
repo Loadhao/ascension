@@ -70,8 +70,8 @@ Bootstrap 委派给 Ext 的职责边界）。
 
 ```java
 protected Class<?> loadClass(String name, boolean resolve) {
-    synchronized (getClassLoadingLock(name)) {          // 并行加载：锁的是类名不是全局
-        Class<?> c = findLoadedClass(name);             // ① 缓存里找
+    synchronized (getClassLoadingLock(name)) {  // 并行加载：锁的是类名不是全局
+        Class<?> c = findLoadedClass(name);  // ① 缓存里找
         if (c == null) {
             try {
                 if (parent != null) {
@@ -81,7 +81,7 @@ protected Class<?> loadClass(String name, boolean resolve) {
                 }
             } catch (ClassNotFoundException e) { /* 爹抛了不管 */ }
             if (c == null) {
-                c = findClass(name);                    // ③ 爹们都没有 → 自己找
+                c = findClass(name);  // ③ 爹们都没有 → 自己找
             }
         }
         return c;
@@ -150,7 +150,7 @@ public class DiskClassLoader extends ClassLoader {
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         byte[] bytes = Files.readAllBytes(Path.of(dir, name + ".class"));
-        return defineClass(name, bytes, 0, bytes.length);   // 必须调 defineClass
+        return defineClass(name, bytes, 0, bytes.length);  // 必须调 defineClass
     }
 }
 // 约定：只覆写 findClass（loadClass 的委派骨架保留），除非你明确要打破委派

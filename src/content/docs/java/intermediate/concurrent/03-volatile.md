@@ -33,9 +33,9 @@ JMM 规定：所有共享变量存在主内存，每线程有自己的工作内�
 // 经典死循环：主线程改了 flag，工作线程却看不到
 static boolean flag = true;
 
-new Thread(() -> { while (flag) { } }).start();   // JIT 甚至把它提升成 if(flag) while(true)
+new Thread(() -> { while (flag) { } }).start();  // JIT 甚至把它提升成 if(flag) while(true)
 Thread.sleep(100);
-flag = false;    // 线程可能永远不退出
+flag = false;  // 线程可能永远不退出
 ```
 
 ## volatile 的两个语义
@@ -82,12 +82,12 @@ volatile 的 happens-before 是**双向辐射**的：volatile 写之前的所有
 
 ```java
 public class Singleton {
-    private static volatile Singleton instance;   // 没有 volatile 就是半成品 bug
+    private static volatile Singleton instance;  // 没有 volatile 就是半成品 bug
 
     public static Singleton getInstance() {
-        if (instance == null) {                  // ① 第一次检查：无锁快路径
+        if (instance == null) {  // ① 第一次检查：无锁快路径
             synchronized (Singleton.class) {
-                if (instance == null) {          // ② 第二次检查：防止重复创建
+                if (instance == null) {  // ② 第二次检查：防止重复创建
                     instance = new Singleton();
                 }
             }

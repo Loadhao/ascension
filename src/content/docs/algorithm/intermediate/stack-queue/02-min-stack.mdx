@@ -23,27 +23,27 @@ import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland
 
 ```java
 class MinStack {
-    private final Deque<Long> stack = new ArrayDeque<>();   // 存差值，见下方变体
+    private final Deque<Long> stack = new ArrayDeque<>();  // 存差值，见下方变体
     private long min;
 
     public void push(int val) {
         if (stack.isEmpty()) {
-            stack.push(0L);            // 差值 0，min = val
+            stack.push(0L);  // 差值 0，min = val
             min = val;
         } else {
-            stack.push((long) val - min);   // 存「与当前最小值的差」
-            if (val < min) min = val;       // 差值为负：新最小值出现
+            stack.push((long) val - min);  // 存「与当前最小值的差」
+            if (val < min) min = val;  // 差值为负：新最小值出现
         }
     }
 
     public void pop() {
         long diff = stack.pop();
-        if (diff < 0) min -= diff;     // 差值是负说明弹掉的是最小值，回滚上一个最小
+        if (diff < 0) min -= diff;  // 差值是负说明弹掉的是最小值，回滚上一个最小
     }
 
     public int top() {
         long diff = stack.peek();
-        return diff >= 0 ? (int) (min + diff) : (int) min;   // 负差值时它自己就是 min
+        return diff >= 0 ? (int) (min + diff) : (int) min;  // 负差值时它自己就是 min
     }
 
     public int getMin() {

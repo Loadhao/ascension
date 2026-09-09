@@ -104,8 +104,8 @@ rebase）。所以团队内"我拉下来 rebase 再推"是常态。
 
 ```bash
 # 想看冲突全貌 / 用工具解决
-git diff --name-only --diff-filter=U   # 列出所有冲突文件
-git mergetool                          # 唤起 vimdiff 等图形工具
+git diff --name-only --diff-filter=U  # 列出所有冲突文件
+git mergetool  # 唤起 vimdiff 等图形工具
 git checkout --ours <f>                # 直接采用"我的"版本
 git checkout --theirs <f>              # 直接采用"对方的"版本（慎用，看清是 merge 还是 rebase 语境）
 ```

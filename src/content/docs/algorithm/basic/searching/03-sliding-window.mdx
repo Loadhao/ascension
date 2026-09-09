@@ -27,8 +27,8 @@ public static int minSubArrayLen(int[] a, int target) {
     int n = a.length, best = n + 1;
     int l = 0, sum = 0;
     for (int r = 0; r < n; r++) {
-        sum += a[r];                     // R 扩张：无条件吃进右端新元素
-        while (sum >= target) {          // L 收缩：约束已满足，试着吐掉左端找更短
+        sum += a[r];  // R 扩张：无条件吃进右端新元素
+        while (sum >= target) {  // L 收缩：约束已满足，试着吐掉左端找更短
             best = Math.min(best, r - l + 1);
             sum -= a[l++];
         }

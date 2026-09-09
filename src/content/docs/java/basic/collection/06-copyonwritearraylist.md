@@ -15,21 +15,21 @@ level: basic
 
 ```java
 public class CopyOnWriteArrayList<E> {
-    private transient volatile Object[] array;   // volatile：换引用对读者立即可见
+    private transient volatile Object[] array;  // volatile：换引用对读者立即可见
     private final transient ReentrantLock lock = new ReentrantLock();
 
-    public E get(int index) {                    // 读：无锁，直接读当前数组
+    public E get(int index) {  // 读：无锁，直接读当前数组
         return get(array, index);
     }
 
     public boolean add(E e) {
-        lock.lock();                             // 写：先拿锁（写写互斥）
+        lock.lock();  // 写：先拿锁（写写互斥）
         try {
             Object[] es = array;
             int len = es.length;
-            es = Arrays.copyOf(es, len + 1);     // 复制整个数组
-            es[len] = e;                         // 在副本上改
-            array = es;                          // 换引用（原子性的发布点）
+            es = Arrays.copyOf(es, len + 1);  // 复制整个数组
+            es[len] = e;  // 在副本上改
+            array = es;  // 换引用（原子性的发布点）
             return true;
         } finally { lock.unlock(); }
     }

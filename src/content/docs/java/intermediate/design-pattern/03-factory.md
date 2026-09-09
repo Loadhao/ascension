@@ -32,8 +32,8 @@ class WechatFactory implements PaymentFactory { public Payment create() { return
 
 // 抽象工厂：造"一族"相关产品——一次性换掉整个产品族
 interface CloudFactory {
-    Compute createCompute();      // 阿里云族：Ecs + Oss + Slb
-    Storage createStorage();     // AWS 族：Ec2 + S3 + Alb
+    Compute createCompute();  // 阿里云族：Ecs + Oss + Slb
+    Storage createStorage();  // AWS 族：Ec2 + S3 + Alb
     LoadBalancer createLb();
 }
 ```

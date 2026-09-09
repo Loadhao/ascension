@@ -35,10 +35,10 @@ JDK 1.2 之前，引用的定义是二元的：一块内存要么被引用、要
 
 ```java
 public abstract class Reference<T> {
-    private T referent;                                // 关联的目标对象
-    volatile ReferenceQueue<? super T> queue;          // 关联的引用队列
-    volatile Reference next;                           // ReferenceQueue 链表的下一个
-    private transient Reference<T> discovered;         // pending 链表的下一个
+    private T referent;  // 关联的目标对象
+    volatile ReferenceQueue<? super T> queue;  // 关联的引用队列
+    volatile Reference next;  // ReferenceQueue 链表的下一个
+    private transient Reference<T> discovered;  // pending 链表的下一个
 
     Reference(T referent, ReferenceQueue<? super T> queue) {
         this.referent = referent;

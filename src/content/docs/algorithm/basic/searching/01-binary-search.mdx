@@ -60,13 +60,13 @@ public static int binarySearch(int[] a, int target) {
 
 ```java
 public static int lowerBound(int[] a, int target) {
-    int low = 0, high = a.length;             // 左闭右开 [low, high)
+    int low = 0, high = a.length;  // 左闭右开 [low, high)
     while (low < high) {
         int mid = low + (high - low) / 2;
-        if (a[mid] < target) low = mid + 1;   // mid 及左侧都不够格
-        else high = mid;                      // a[mid] >= target，mid 可能是答案，不能跳过
+        if (a[mid] < target) low = mid + 1;  // mid 及左侧都不够格
+        else high = mid;  // a[mid] >= target，mid 可能是答案，不能跳过
     }
-    return low;                               // 第一个 >= target 的下标
+    return low;  // 第一个 >= target 的下标
 }
 ```
 

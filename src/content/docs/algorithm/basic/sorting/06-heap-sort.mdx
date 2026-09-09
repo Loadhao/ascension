@@ -28,7 +28,7 @@ public static void heapSort(int[] a) {
     // 2. 每轮：堆顶（当前最大值）换到无序区末尾归位，堆大小减一
     for (int end = n - 1; end > 0; end--) {
         swap(a, 0, end);
-        siftDown(a, 0, end);                    // 换上来的元素从堆顶下沉
+        siftDown(a, 0, end);  // 换上来的元素从堆顶下沉
     }
 }
 
@@ -37,12 +37,12 @@ private static void siftDown(int[] a, int start, int size) {
     int p = start;
     while (true) {
         int l = 2 * p + 1, r = l + 1;
-        if (l >= size) return;                  // 没有孩子，到叶子了
+        if (l >= size) return;  // 没有孩子，到叶子了
         int big = l;
-        if (r < size && a[r] > a[l]) big = r;   // 取较大的孩子比（大顶堆只关心最大）
-        if (a[big] <= a[p]) return;             // 父不小于最大孩子，堆性质满足
+        if (r < size && a[r] > a[l]) big = r;  // 取较大的孩子比（大顶堆只关心最大）
+        if (a[big] <= a[p]) return;  // 父不小于最大孩子，堆性质满足
         swap(a, p, big);
-        p = big;                                // 继续检查换下去的元素
+        p = big;  // 继续检查换下去的元素
     }
 }
 

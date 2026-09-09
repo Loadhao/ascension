@@ -56,8 +56,8 @@ class UserServiceProxy implements UserService {
 ```java
 UserService proxy = (UserService) Proxy.newProxyInstance(
     target.getClass().getClassLoader(),
-    target.getClass().getInterfaces(),          // 前提：面向接口
-    (p, method, args) -> {                      // 所有方法收敛到一个 InvocationHandler
+    target.getClass().getInterfaces(),  // 前提：面向接口
+    (p, method, args) -> {  // 所有方法收敛到一个 InvocationHandler
         checkPermission();
         try {
             return method.invoke(target, args);

@@ -134,8 +134,8 @@ tracer = trace.get_tracer("order-service")
 def handle_order(order_id: int):
     # 开启一个 span，context 自动进入当前线程的隐式上下文
     with tracer.start_as_current_span("handle_order") as span:
-        span.set_attribute("order.id", order_id)   # 自定义标签，供检索/绘图
-        result = do_payment(order_id)              # 自动埋点里也续在同一 Trace
+        span.set_attribute("order.id", order_id)  # 自定义标签，供检索/绘图
+        result = do_payment(order_id)  # 自动埋点里也续在同一 Trace
         span.set_status(trace.StatusCode.OK if result else trace.StatusCode.ERROR)
         return result
 ```

@@ -24,14 +24,14 @@ import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland
 ```java
 public int minEatingSpeed(int[] piles, int h) {
     int low = 1, high = 0;
-    for (int p : piles) high = Math.max(high, p);       // 上界：一次吞掉最大堆
+    for (int p : piles) high = Math.max(high, p);  // 上界：一次吞掉最大堆
 
-    while (low < high) {                                 // 区间收缩到唯一点
+    while (low < high) {  // 区间收缩到唯一点
         int mid = low + (high - low) / 2;
-        if (hoursNeeded(piles, mid) <= h) {              // 判定：mid 速度来得及吗
-            high = mid - 1;                              // 来得及：答案 ≤ mid（mid 保留候选）
+        if (hoursNeeded(piles, mid) <= h) {  // 判定：mid 速度来得及吗
+            high = mid - 1;  // 来得及：答案 ≤ mid（mid 保留候选）
         } else {
-            low = mid + 1;                               // 太慢：mid 以下全不可行
+            low = mid + 1;  // 太慢：mid 以下全不可行
         }
     }
     return low;

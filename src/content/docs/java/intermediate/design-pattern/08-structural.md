@@ -111,16 +111,16 @@ class Directory implements FileSystemNode {
 
 ```java
 // 维度一：消息类型（继承侧）；维度二：发送渠道（组合侧）
-interface Channel { void transmit(String content); }   // 短信/邮件/钉钉各一个实现
+interface Channel { void transmit(String content); }  // 短信/邮件/钉钉各一个实现
 
-abstract class Message {                                // 普通/加急各一个子类
-    protected final Channel channel;                    // 桥：组合注入
+abstract class Message {  // 普通/加急各一个子类
+    protected final Channel channel;  // 桥：组合注入
     protected Message(Channel channel) { this.channel = channel; }
     abstract String render();
     public final void send() { channel.transmit(render()); }
 }
 
-new UrgentMessage(new DingTalkChannel()).send();   // 2 × 3 = 6 组合只需 5 个类
+new UrgentMessage(new DingTalkChannel()).send();  // 2 × 3 = 6 组合只需 5 个类
 ```
 
 桥接和策略结构相似，区别在**被组合的维度本身也常是多态体系的一部分**
@@ -138,7 +138,7 @@ new UrgentMessage(new DingTalkChannel()).send();   // 2 × 3 = 6 组合只需 5 
 ```java
 // 五子棋：棋盘 400 个位置只有两种棋子
 // 内部状态：颜色（共享）；外部状态：坐标（每次传入）
-class Piece { private final Color color; }               // 内部——共享
+class Piece { private final Color color; }  // 内部——共享
 Map<Color, Piece> pool = Map.of(BLACK, new Piece(BLACK), WHITE, new Piece(WHITE));
 // place(x, y, color) → 查池，坐标作为参数走，不进对象
 ```

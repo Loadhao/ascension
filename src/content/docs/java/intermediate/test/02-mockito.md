@@ -20,9 +20,9 @@ core: true
 ## 打桩：when 与参数匹配器
 
 ```java
-@ExtendWith(MockitoExtension.class)     // 启用 @Mock/@InjectMocks 处理
+@ExtendWith(MockitoExtension.class)  // 启用 @Mock/@InjectMocks 处理
 class OrderServiceTest {
-    @Mock PaymentClient payment;        // 假依赖
+    @Mock PaymentClient payment;  // 假依赖
     @InjectMocks OrderService service;  // 被测对象，注入上面的假依赖
 
     @Test

@@ -62,11 +62,11 @@ def test_parse_bad(raw):
 import pytest
 
 @pytest.fixture
-def api_client(tmp_path):               # fixture 可以依赖 fixture
-    app.config["DATA_DIR"] = tmp_path   # tmp_path 是内置 fixture：隔离的临时目录
+def api_client(tmp_path):  # fixture 可以依赖 fixture
+    app.config["DATA_DIR"] = tmp_path  # tmp_path 是内置 fixture：隔离的临时目录
     return TestClient(app)
 
-def test_create_user(api_client):       # 按名字注入，不用继承任何基类
+def test_create_user(api_client):  # 按名字注入，不用继承任何基类
     resp = api_client.post("/users", json={"name": "ada"})
     assert resp.status_code == 201
 ```

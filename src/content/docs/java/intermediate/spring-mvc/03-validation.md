@@ -25,7 +25,7 @@ Jakarta 化身），**Hibernate Validator 是事实上的参考实现**——Spr
 
 ```java
 @RestController
-@Validated                                        // 类级：让 @PathVariable 等也能校验
+@Validated  // 类级：让 @PathVariable 等也能校验
 public class OrderController {
 
     @PostMapping("/api/orders")
@@ -36,7 +36,7 @@ public record CreateOrderReq(
         @NotBlank String sku,
         @NotNull @Min(1) @Max(999) Integer count,
         @Size(max = 200) String note,
-        @Valid Address address) {                 // 嵌套对象级联校验
+        @Valid Address address) {  // 嵌套对象级联校验
 }
 ```
 
@@ -87,12 +87,12 @@ public record UserReq(@Null(groups = OnCreate.class) Long id,
 
 ```java
 @Target(ElementType.FIELD) @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = PhoneValidator.class)      // 绑定校验器
+@Constraint(validatedBy = PhoneValidator.class)  // 绑定校验器
 public @interface Phone { String message() default "手机号不合法"; Class<?>[] groups() default {}; }
 
 public class PhoneValidator implements ConstraintValidator<Phone, String> {
     public boolean isValid(String v, ConstraintValidatorContext ctx) {
-        return v == null || v.matches("^1\\d{10}$");   // null 交给 @NotBlank 管
+        return v == null || v.matches("^1\\d{10}$");  // null 交给 @NotBlank 管
     }
 }
 ```

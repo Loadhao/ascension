@@ -42,9 +42,9 @@ outer.inner.getName();            // "b"——绑定到 inner
 三大修复姿势对应三种场景：
 
 ```js
-setTimeout(() => obj.getName(), 100);       // 箭头函数包一层：外层 this 接管
-setTimeout(obj.getName.bind(obj), 100);     // bind 固化
-setTimeout(obj.getName, 100);               // 把getName写成箭头函数属性（类字段）
+setTimeout(() => obj.getName(), 100);  // 箭头函数包一层：外层 this 接管
+setTimeout(obj.getName.bind(obj), 100);  // bind 固化
+setTimeout(obj.getName, 100);  // 把getName写成箭头函数属性（类字段）
 ```
 
 ## 显式绑定三兄弟

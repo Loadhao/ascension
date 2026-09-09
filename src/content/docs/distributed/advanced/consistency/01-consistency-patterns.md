@@ -111,12 +111,12 @@ CREATE TABLE payment (
 def handle_payment(order_id, amount):
     try:
         sql = "INSERT INTO payment(order_id, amount, status) VALUES(?,?,'NEW')"
-        cursor.execute(sql, (order_id, amount))   # 已存在 → 抛 DuplicateEntry
+        cursor.execute(sql, (order_id, amount))  # 已存在 → 抛 DuplicateEntry
         db.commit()
-        do_transfer(order_id, amount)             # 只有第一次执行
+        do_transfer(order_id, amount)  # 只有第一次执行
     except DuplicateEntry:
-        pass                                       # 重试/重复投递 → 直接返回已处理
-    return query_original_result(order_id)         # 返回原结果，保证客户端能拿到
+        pass  # 重试/重复投递 → 直接返回已处理
+    return query_original_result(order_id)  # 返回原结果，保证客户端能拿到
 ```
 
 这是防"重复扣款"最可靠的实现——正确性不依赖应用态，靠 DB 唯一约束。

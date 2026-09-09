@@ -2825,6 +2825,13 @@ html.mmd-viewer-open {
   --sum-slate-chip-bg: #2b2e37;
   --sum-slate-chip-border: #4a4f5e;
   --sum-slate-ink: #ccd1dc;
+  --sum-blue-bg2: #141d30;
+  --sum-teal-bg2: #102523;
+  --sum-green-bg2: #132312;
+  --sum-amber-bg2: #261f10;
+  --sum-rose-bg2: #291517;
+  --sum-violet-bg2: #1c1530;
+  --sum-slate-bg2: #1c1e23;
 }
 
 :root[data-theme='light'] {
@@ -2870,6 +2877,13 @@ html.mmd-viewer-open {
   --sum-slate-chip-bg: #ffffffd9;
   --sum-slate-chip-border: #c2c5cd;
   --sum-slate-ink: #343a46;
+  --sum-blue-bg2: #d6e4fa;
+  --sum-teal-bg2: #c9eae5;
+  --sum-green-bg2: #d3ecd0;
+  --sum-amber-bg2: #f4e5bf;
+  --sum-rose-bg2: #f6d8d8;
+  --sum-violet-bg2: #e0d4f6;
+  --sum-slate-bg2: #dcdee3;
 }
 
 .sum-viz {
@@ -3111,5 +3125,119 @@ html.mmd-viewer-open {
     border-right: none;
     border-bottom: 1px dashed var(--sum-border);
     padding-bottom: 6px;
+  }
+}
+
+/* --- SummaryViz 排版增强：渐变面板 / 内衬虚线框 / 图标块 / tag 徽标 --- */
+.sum-viz {
+  position: relative;
+  padding: 24px 22px 18px;
+}
+
+/* 内衬虚线框，呼应卡片插画的边框质感 */
+.sum-viz::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1px dashed var(--sl-color-gray-5);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.sum-head {
+  margin-bottom: 18px;
+}
+
+.sum-title {
+  font-size: 1.12rem;
+}
+
+.sum-cols {
+  gap: 16px;
+}
+
+.sum-panel,
+.sum-layer {
+  background: linear-gradient(155deg, var(--sum-bg) 0%, var(--sum-bg2, var(--sum-bg)) 100%);
+  padding: 16px 15px 13px;
+}
+
+.sum-panel-head,
+.sum-layer-head {
+  gap: 3px;
+}
+
+.sum-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.97rem;
+}
+
+.sum-panel-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 1.65em;
+  height: 1.65em;
+  border-radius: 9px;
+  font-size: 0.92rem;
+  line-height: 1;
+  background: var(--sum-chip-bg);
+  border: 1px solid var(--sum-chip-border);
+}
+
+.sum-cells {
+  gap: 9px;
+}
+
+.sum-cell {
+  padding: 8px 11px;
+  gap: 2px;
+}
+
+.sum-cell-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sum-cell-name {
+  font-size: 0.88rem;
+}
+
+.sum-cell-desc {
+  font-size: 0.77rem;
+}
+
+.sum-cell-tag {
+  flex: none;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: var(--sum-title);
+  border: 1px solid color-mix(in srgb, var(--sum-title) 45%, transparent);
+}
+
+.sum-layer .sum-panel-icon {
+  width: 1.9em;
+  height: 1.9em;
+  font-size: 1rem;
+}
+
+.sum-layer-head {
+  flex-basis: 142px;
+}
+
+@media (max-width: 44rem) {
+  .sum-viz {
+    padding: 18px 14px 14px;
+  }
+
+  .sum-cell-tag {
+    line-height: 1.5;
   }
 }
