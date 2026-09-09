@@ -5,6 +5,8 @@ level: basic
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 报文长什么样
 
 ```text
@@ -84,6 +86,10 @@ HTTP 无状态（请求之间互不认识），身份延续靠三层接力：
 | Cookie | **浏览器**，每次自动带上 | 服务端下发；HttpOnly 防 XSS 读、Secure 走 https |
 | Session | **服务端**，Cookie 只存 sid | 集群要共享（粘性路由/集中存储） |
 | Token/JWT | 客户端任意位置，请求头携带 | 自包含免查库、无法主动作废需黑名单 |
+
+三件套同框——存哪、安全、定位一页看全：
+
+<AlgorithmVizIsland demo="web-identity" />
 
 三者的鉴权链路全貌见[认证与单点登录](/java/intermediate/spring-boot/02-auth-sso/)。
 

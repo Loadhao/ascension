@@ -4,6 +4,8 @@ description: Object 核心方法巡礼、Cloneable 浅拷贝的坑、深拷贝�
 level: basic
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## Object 的家底：每个方法都可能是考点
 
 所有类隐式继承 `Object`，它的 11 个方法分三派：
@@ -67,6 +69,10 @@ flowchart TB
 | 递归 clone | 每个引用字段也 clone，层层覆写 | 可控但代码噪音大，字段一改全链要改 |
 | **序列化法** | JSON 或 Java 序列化走一圈，天然全量复制 | 无脑但慢，对象图有环会炸；见[序列化](/java/basic/syntax/08-serialization/) |
 | **拷贝构造/工厂** | `new Order(other)` 逐字段显式复制 | **Effective Java 推荐**：不依赖神秘机制，字段可见、可控、可测 |
+
+三法同框——按可控性与成本挑：
+
+<AlgorithmVizIsland demo="deep-copy-ways" />
 
 业务代码默认选第三种，等真正高频调用再考虑手写深拷贝优化。
 

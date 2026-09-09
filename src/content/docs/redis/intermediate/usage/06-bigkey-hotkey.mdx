@@ -4,6 +4,8 @@ description: 定义阈值与危害、线上探测命令与工具、拆分压缩�
 level: intermediate
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 为什么值得单开一篇
 
 [缓存模式篇](/redis/intermediate/usage/04-cache-patterns/)给过大 key/
@@ -33,6 +35,10 @@ level: intermediate
 某 key（或某前缀）QPS 远超其他——集群下**全部分片流量压到一个分片**
 ，CPU 打满、其余分片闲死。典型来源：爆款商品详情、明星微博、
 定时任务齐刷同一 key。
+
+两者同框对照——判定、危害、探测、治理一页看全：
+
+<AlgorithmVizIsland demo="bigkey-vs-hotkey" />
 
 ## 线上探测
 

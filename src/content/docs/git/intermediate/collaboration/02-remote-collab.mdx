@@ -4,6 +4,8 @@ description: remote 管理、fetch/pull/push、跟踪分支、PR 工作流与冲
 level: intermediate
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 远程仓库管理
 
 ```bash
@@ -93,6 +95,10 @@ merge ─┬── main: ...M1 M2 ──┴── M3（多一个"合并提交"�
 
 rebase：把功能提交重放到 main 顶端：...M1 M2 F1 F2（线性，干净）
 ```
+
+分叉 vs 线性的取舍收进一张总结卡：
+
+<AlgorithmVizIsland demo="merge-vs-rebase" />
 
 rebase 换来的是干净线性历史，代价是**重写本地提交**（已有仓库勿对公共分支
 rebase）。所以团队内"我拉下来 rebase 再推"是常态。

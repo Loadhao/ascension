@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 一张表先分清三兄弟
 
 | 故障 | 本质 | 触发条件 | 后果 |
@@ -12,6 +14,10 @@ core: true
 | **穿透** | 查**不存在**的数据 | 恶意伪造 id / 业务缺陷 | 缓存永远不命中，全打到 DB |
 | **击穿** | **热点** key 过期瞬间 | 高频 key 恰好到期 | 并发洪峰瞬间压向 DB |
 | **雪崩** | **大面积**失效或实例宕机 | 同批 TTL / Redis 挂了 | DB 被打死，服务整体雪崩 |
+
+三兄弟连对策一起同框：
+
+<AlgorithmVizIsland demo="cache-problems" />
 
 ```mermaid
 flowchart TB

@@ -466,6 +466,203 @@ const rdbVsAof: SummaryVizConfig = {
 	caption: '主从架构可把快照压力挪给从库——但空数据的主库会把从库同步成空库',
 };
 
+/** 缓存穿透 / 击穿 / 雪崩三兄弟 */
+const cacheProblems: SummaryVizConfig = {
+	title: '不存在是穿透，热点过期是击穿，大面积失效是雪崩',
+	badge: '定位口诀一句话',
+	panels: [
+		{
+			title: '穿透',
+			sub: '查不存在的数据',
+			icon: '🔍',
+			tone: 'blue',
+			cells: [
+				{ label: '触发', desc: '恶意伪造 id / 业务缺陷' },
+				{ label: '后果', desc: '缓存永远不命中，全打到 DB' },
+				{ label: '对策', desc: '布隆过滤器：判「不存在」绝对可靠；缓存空值挡重复', tag: '治本' },
+			],
+		},
+		{
+			title: '击穿',
+			sub: '单个热点 key 过期瞬间',
+			icon: '⚡',
+			tone: 'amber',
+			cells: [
+				{ label: '触发', desc: '高频 key 恰好到期，并发洪峰瞬间压向 DB' },
+				{ label: '对策', desc: '互斥锁重建（setnx + double check）', tag: '简单' },
+				{ label: '对策', desc: '逻辑过期：不设 TTL，过期写在 value 里，抢不到锁返回旧值', tag: '秒杀热点更顺' },
+			],
+		},
+		{
+			title: '雪崩',
+			sub: '大面积失效或实例宕机',
+			icon: '🌊',
+			tone: 'violet',
+			cells: [
+				{ label: '触发', desc: '同批 TTL 同时到期 / Redis 挂了' },
+				{ label: '后果', desc: 'DB 被打死，服务整体雪崩' },
+				{ label: '对策', desc: 'TTL = base + random(600) 打散；多级缓存（Caffeine）', tag: '组合拳' },
+				{ label: '对策', desc: '主从哨兵 / Cluster 高可用 + 网关限流熔断兜底' },
+			],
+		},
+	],
+	takeaways: ['互斥重建等待会堆积，逻辑过期无等待但返回旧值——一致性换吞吐的典型取舍'],
+	caption: '先更新 DB 再删缓存（Cache Aside）是另一条底线：删失败用重试队列 / binlog 订阅补偿',
+};
+
+/** 大 key vs 热 key */
+const bigkeyVsHotkey: SummaryVizConfig = {
+	title: '大 key 害在阻塞与倾斜，热 key 害在单分片打满',
+	badge: '单线程公理的两种事故形态',
+	panels: [
+		{
+			title: '大 key',
+			sub: '数据体积失控',
+			icon: '🐘',
+			tone: 'blue',
+			cells: [
+				{ label: '判定', desc: 'String > 10KB（超 1MB 必治理）；集合 > 5000 元素或 1MB' },
+				{ label: '危害', desc: 'DEL 百万元素是毫秒~秒级阻塞，单线程下全体陪葬' },
+				{ label: '探测', desc: '--bigkeys 采样；MEMORY USAGE 精确；RDB 离线分析', tag: '零线上风险' },
+				{ label: '治理', desc: '拆分段 hash、压缩 value、UNLINK 异步删', tag: '拆压异步删' },
+			],
+		},
+		{
+			title: '热 key',
+			sub: '访问流量失控',
+			icon: '🔥',
+			tone: 'rose',
+			cells: [
+				{ label: '判定', desc: '单 key QPS 远超其他，集群下流量全压一个分片' },
+				{ label: '危害', desc: '该分片 CPU 打满，其余分片闲死' },
+				{ label: '探测', desc: '--hotkeys（需 LFU/LRU 策略）；客户端/代理层统计更准', tag: 'MONITOR 禁用' },
+				{ label: '治理', desc: '本地缓存扛读（Caffeine）、打散副本 key_1..N、读写分离' },
+			],
+		},
+	],
+	link: '根源同一个：Redis 单线程模型',
+	takeaways: ['预防比治理便宜：集合写入前判规模上限、value 大小进监控、上线前过一遍 --bigkeys'],
+	caption: '本地缓存扛热 key 要接受毫秒级短时不一致——升配只能买时间，躲不过单线程公理',
+};
+
+/** Cookie / Session / Token 身份三件套 */
+const webIdentity: SummaryVizConfig = {
+	title: 'HTTP 无状态，身份靠三件套接力',
+	badge: 'Cookie 是载体，Session 是状态，Token 是凭证',
+	panels: [
+		{
+			title: 'Cookie',
+			sub: '浏览器侧的载体',
+			icon: '🍪',
+			tone: 'blue',
+			cells: [
+				{ label: '存哪', desc: '浏览器，每次请求自动带上', tag: '服务端下发' },
+				{ label: '安全', desc: 'HttpOnly 防 XSS 读、Secure 限定 https' },
+				{ label: '定位', desc: '承载 sid 或轻量偏好，本身不是鉴权方案' },
+			],
+		},
+		{
+			title: 'Session',
+			sub: '服务端的有状态会话',
+			icon: '🗄️',
+			tone: 'green',
+			cells: [
+				{ label: '存哪', desc: '服务端，Cookie 里只放 sid' },
+				{ label: '集群', desc: '要共享：粘性路由或集中存储', tag: '有状态' },
+				{ label: '定位', desc: '传统会话方案，状态扩张是集群负担' },
+			],
+		},
+		{
+			title: 'Token / JWT',
+			sub: '客户端自带的无状态凭证',
+			icon: '🎟️',
+			tone: 'violet',
+			cells: [
+				{ label: '存哪', desc: '客户端任意位置，请求头携带' },
+				{ label: '特点', desc: '自包含免查库；无法主动作废，登出靠黑名单', tag: '无状态' },
+				{ label: '定位', desc: '分布式与开放 API 的现代默认' },
+			],
+		},
+	],
+	takeaways: ['三者是接力不是互斥：JWT 也常放在 Cookie 里传输，HttpOnly 照样防窃'],
+	caption: '无状态是 HTTP 的底色，三件套都是在给「下一个请求」补身份',
+};
+
+/** 深拷贝三法 */
+const deepCopyWays: SummaryVizConfig = {
+	title: '深拷贝三法：默认拷贝构造，无脑走序列化，别爱上递归 clone',
+	badge: '按可控性与成本挑',
+	panels: [
+		{
+			title: '递归 clone',
+			sub: '每个引用字段也 clone',
+			icon: '🔁',
+			tone: 'amber',
+			cells: [
+				{ label: '思路', desc: '层层覆写 clone，引用字段逐层复制' },
+				{ label: '评价', desc: '可控但代码噪音大，字段一改全链要改' },
+			],
+		},
+		{
+			title: '序列化 round-trip',
+			sub: 'JSON / Java 序列化走一圈',
+			icon: '📦',
+			tone: 'blue',
+			cells: [
+				{ label: '思路', desc: '对象 → 字节流/JSON → 还原，天然全量复制' },
+				{ label: '评价', desc: '无脑但慢，对象图有环会炸', tag: '快照同款' },
+			],
+		},
+		{
+			title: '拷贝构造 / 工厂',
+			sub: 'new Order(other) 逐字段显式复制',
+			icon: '🏗️',
+			tone: 'green',
+			cells: [
+				{ label: '思路', desc: '构造器里显式复制每个字段，不依赖神秘机制' },
+				{ label: '评价', desc: 'Effective Java 推荐：字段可见、可控、可测', tag: '默认选它' },
+			],
+		},
+	],
+	takeaways: ['浅拷贝的坑在引用字段只抄地址；业务代码默认拷贝构造，真正高频调用再优化'],
+	caption: 'Cloneable 是 JDK 设计失败的经典案例：空接口 + 语义全靠约定',
+};
+
+/** git merge vs rebase */
+const mergeVsRebase: SummaryVizConfig = {
+	title: 'merge 保留并行的事实，rebase 换来线性的干净',
+	badge: '一个忠实记录，一个重写历史',
+	panels: [
+		{
+			title: 'merge',
+			sub: '多一个合并提交',
+			icon: '🔀',
+			tone: 'blue',
+			cells: [
+				{ label: '历史形态', desc: '...M1 M2 + F1 F2 汇成 M3，保留分叉线' },
+				{ label: '提交', desc: '原提交原样保留，不重写' },
+				{ label: '适用', desc: '合入公共分支、保留「曾并行开发」的事实' },
+				{ label: '风险', desc: '「Merge branch main of...」噪音提交刷屏' },
+			],
+		},
+		{
+			title: 'rebase',
+			sub: '重放到主线顶端',
+			icon: '📏',
+			tone: 'green',
+			cells: [
+				{ label: '历史形态', desc: '...M1 M2 F1 F2，线性干净' },
+				{ label: '提交', desc: '重写本地提交，哈希全变', tag: '危险面' },
+				{ label: '适用', desc: '团队内「拉下来 rebase 再推」的常态' },
+				{ label: '风险', desc: '公共分支勿 rebase——已推送历史被重写' },
+			],
+		},
+	],
+	link: '谁的历史：分叉 vs 线性',
+	takeaways: ['push 前先 git pull --rebase，消掉 90% 的噪音合并提交', '强推永远用 --force-with-lease：远端被别人更新过就拒绝，防覆盖同事'],
+	caption: '冲突标记的 --ours/--theirs 在 rebase 语境里语义反转——动手前先 git status 确认处境',
+};
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的总结卡注册表 */
 export const summaryDemos: Record<string, SummaryVizConfig> = {
 	'spring-vs-boot': springVsBoot,
@@ -479,4 +676,9 @@ export const summaryDemos: Record<string, SummaryVizConfig> = {
 	'gc-collectors': gcCollectors,
 	'tcp-vs-udp': tcpVsUdp,
 	'rdb-vs-aof': rdbVsAof,
+	'cache-problems': cacheProblems,
+	'bigkey-vs-hotkey': bigkeyVsHotkey,
+	'web-identity': webIdentity,
+	'deep-copy-ways': deepCopyWays,
+	'merge-vs-rebase': mergeVsRebase,
 };
