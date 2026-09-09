@@ -70,6 +70,17 @@ const inc = counter();
 inc(); inc();          // 1, 2——每个 counter() 调用产生独立的 n
 ```
 
+闭包的持有关系——函数逃逸了，出生作用域却被它拽住不放：
+
+```mermaid
+flowchart TB
+    INC["const inc = counter()<br/>返回的箭头函数（逃逸到全局）"] ==>|"闭包 = 函数 + 出生时的作用域引用"| N["counter() 那次调用的作用域<br/>let n = 0<br/>本该销毁，被引用所以存活<br/>外部无法直接触碰"]
+    INC -->|"inc(); inc(); → 1, 2<br/>每次 counter() 调用产生独立的 n"| N
+
+    class N hl
+    classDef hl stroke-width:1.5px
+```
+
 闭包的三个高频价值：
 
 | 价值 | 形态 | 现场 |

@@ -57,6 +57,22 @@ public record CreateOrderReq(
 校验不通过**不会**进 Controller 方法——抛异常被
 [全局异常处理](/java/intermediate/spring-mvc/02-exception-advice/)接住：
 
+```mermaid
+flowchart LR
+    REQ["HTTP 请求"] --> V["框架统一校验<br/>发生在进方法之前"]
+    V -->|"通过"| C["Controller 方法<br/>只剩「数据必然合法」的假设"]
+    V -->|"@RequestBody @Valid 失败"| E1["MethodArgumentNotValidException"]
+    V -->|"@ModelAttribute / 表单绑定失败"| E2["BindException"]
+    V -->|"类级 @Validated 的单参失败"| E3["ConstraintViolationException"]
+    E1 --> ADV["全局异常处理<br/>三种异常分开适配<br/>才能稳定返回字段级错误信息"]
+    E2 --> ADV
+    E3 --> ADV
+
+    class V hl
+    class ADV hl
+    classDef hl stroke-width:1.5px
+```
+
 | 场景 | 抛出的异常 |
 | --- | --- |
 | `@RequestBody @Valid` 失败 | `MethodArgumentNotValidException` |

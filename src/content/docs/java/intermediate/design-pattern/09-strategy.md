@@ -56,6 +56,20 @@ public class PromotionContext {
 三行完成"策略注册"，开闭原则（principles 篇）直接兑现——新增策略
 只是加一个 `@Component` 类，Context 一行不改。
 
+结构与分派路径——calc 方法不再认识任何具体策略：
+
+```mermaid
+flowchart TB
+    CALLER["调用方<br/>context.calc(type, price)"] --> CTX["PromotionContext<br/>构造器注入 List 接口全部实现<br/>按 type() 建成 Map 注册表"]
+    CTX -->|"strategies.get(type) 分派"| IF["PromotionStrategy 接口<br/>type() 自报身份 + calc() 计价"]
+    IF --> F["满减策略<br/>FULL_REDUCTION"]
+    IF --> D["折扣策略<br/>DISCOUNT"]
+    IF --> N["N 买赠策略<br/>N_BUY_GIFT"]
+
+    class CTX hl
+    classDef hl stroke-width:1.5px
+```
+
 ## JDK 现场
 
 | 现场 | 策略是什么 |

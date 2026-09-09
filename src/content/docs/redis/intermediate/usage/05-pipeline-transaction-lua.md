@@ -27,6 +27,25 @@ try (Pipeline p = jedis.pipelined()) {
 }
 ```
 
+逐条发与管道打包的网络差别：
+
+```mermaid
+flowchart TB
+    subgraph NAIVE["逐条发：发一条等一条，100 条 = 100 次 RTT"]
+        A1["客户端"] -->|"① SET k1（等 OK）"| A2["Redis"]
+        A1 -->|"② SET k2（等 OK）"| A2
+        A1 -->|"⋯ 共 100 次往返"| A2
+    end
+    subgraph PIPE["管道：打包发送，一次往返"]
+        B1["客户端"] -->|"100 条命令一次写入<br/>服务端仍逐条执行<br/>各命令之间可能被其他客户端插队"| B2["Redis"]
+        B2 -->|"一次读回全部结果"| B1
+    end
+
+    class B1 hl
+    class B2 hl
+    classDef hl stroke-width:1.5px
+```
+
 三个要点：
 
 - **服务端仍逐条执行**，只是客户端不等每条回应——各命令之间可能被

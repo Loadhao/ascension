@@ -19,6 +19,20 @@ level: basic
 判断流程就是查表：**有没有 new → 有没有 call/apply/bind → 是不是
 `obj.fn()` 形式 → 都不是就默认绑定**。
 
+```mermaid
+flowchart TD
+    S["函数被调用<br/>看调用形式，不看定义位置"] --> Q1{"new 调用？<br/>new Foo()"}
+    Q1 -->|"是"| R1["绑定新建的对象<br/>new 优先级最高：<br/>bind 固化的函数也能被 new 穿透"]
+    Q1 -->|"否"| Q2{"call / apply / bind<br/>显式绑定？"}
+    Q2 -->|"是"| R2["绑定指定的对象<br/>箭头函数例外：没有 this，改不了"]
+    Q2 -->|"否"| Q3{"obj.fn() 形式？<br/>隐式绑定"}
+    Q3 -->|"是"| R3["绑定 obj<br/>链式取最后一层"]
+    Q3 -->|"否"| R4["默认绑定<br/>严格模式 undefined / 非严格 window"]
+
+    class S hl
+    classDef hl stroke-width:1.5px
+```
+
 ## 隐式丢失：this 问题的九成来源
 
 隐式绑定要求"调用处带上对象前缀"，**一旦赋值/传参把调用形态改掉，

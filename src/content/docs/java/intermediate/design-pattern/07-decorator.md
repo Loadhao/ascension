@@ -38,6 +38,21 @@ class BufferedReader extends Reader {
 这就是装饰器全部的秘密：**每一层既是 Reader 又有 Reader**，能力像
 洋葱一样一层层叠上去，而接口从头到尾没变。
 
+IO 套娃的结构——每一层都实现同一接口、同时持有同接口引用：
+
+```mermaid
+flowchart TB
+    I["Reader 接口"] --- BR["BufferedReader<br/>缓冲能力：命中直接返回<br/>未命中才向内层要数据"]
+    I --- ISR["InputStreamReader<br/>字节 → 字符转换"]
+    I --- FIS["FileInputStream<br/>被装饰者：真实的字节源"]
+    BR -->|"in.read() 转发"| ISR
+    ISR -->|"转发"| FIS
+
+    class BR hl
+    class ISR hl
+    classDef hl stroke-width:1.5px
+```
+
 ## 自己写一个
 
 ```java

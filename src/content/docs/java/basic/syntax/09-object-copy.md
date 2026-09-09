@@ -41,6 +41,25 @@ public class Order implements Cloneable {
 是个空标记接口（不用 `clone` 的正确性靠运行时检查），设计上广受
 诟病。
 
+浅拷贝共享引用的现场，与深拷贝的对照：
+
+```mermaid
+flowchart TB
+    subgraph SHALLOW["浅拷贝：clone 默认只复制第一层"]
+        direction LR
+        A["o1"] -->|"基本类型：按位复制"| AF["age = 18"]
+        A -->|"引用字段：只抄地址"| AU["User 对象"]
+        B["o2 = o1.clone()<br/>新对象，o2 != o1"] -->|"地址相同——<br/>改 o2.user 会 teleport 到 o1"| AU
+    end
+    subgraph DEEP["深拷贝：拷贝构造 new Order(other)"]
+        direction LR
+        C["o3"] -->|"逐字段显式复制"| CU["新的 User / items<br/>两对象彻底独立"]
+    end
+
+    class AU bad
+    classDef bad stroke-width:1.5px
+```
+
 ## 深拷贝三法
 
 | 方法 | 思路 | 评价 |

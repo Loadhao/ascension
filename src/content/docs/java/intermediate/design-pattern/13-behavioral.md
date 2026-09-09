@@ -36,6 +36,22 @@ class Order {
 }
 ```
 
+这套状态类的迁移图——非法迁移直接拦在状态类里：
+
+```mermaid
+stateDiagram-v2
+    [*] --> Unpaid: 新订单
+    Unpaid --> Paid: pay() 返回下一个状态
+    Paid --> Paid: pay()（重复支付，返回自身）
+    Paid --> Shipped: ship()
+    Shipped --> [*]
+
+    note right of Unpaid
+        ship() 抛 IllegalStateException
+        未支付不能发货——迁移规则收敛在状态类的出口
+    end note
+```
+
 与策略结构完全同构（接口 + 一组实现 + 上下文持有），**分界在谁决定
 切换**：策略由调用方选、选完不自换；状态由迁移规则自己流转。
 `Thread.State` 六状态机（线程基础篇）是 JDK 里的语义现场；工程上
