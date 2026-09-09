@@ -659,6 +659,7 @@ export default defineConfig({
                         { label: '概览', link: '/python/basic/data-structures/' },
                         { label: 'list 与 tuple：动态数组', link: '/python/basic/data-structures/01-list-tuple/' },
                         { label: 'dict 与 set：哈希表实现', link: '/python/basic/data-structures/02-dict-set/' },
+                        { label: 'str 与 bytes：两种序列与编码', link: '/python/basic/data-structures/03-str-bytes/' },
                       ],
                     },
                     {
