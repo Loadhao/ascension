@@ -1,0 +1,30 @@
+src/content/docs/java/advanced/jvm/01-class-loading.mdx
+  h_9324126a55eff3 8-9,48-51
+src/content/docs/kafka/basic/core/03-producer-path.mdx
+  h_9324126a55eff3 8-9,36-39
+src/content/docs/mysql/advanced/performance-ha/02-replication-sharding.mdx
+  h_9324126a55eff3 7-8,32-35
+src/content/docs/network/basic/http/02-https-tls.mdx
+  h_9324126a55eff3 8-9,44-47
+src/content/docs/redis/advanced/ha/01-replication-sentinel-cluster.mdx
+  h_9324126a55eff3 8-9,63-66
+src/content/docs/rocketmq/advanced/core/01-rocketmq-features.mdx
+  h_9324126a55eff3 8-9,65-68
+src/content/docs/seata/intermediate/modes/01-at-tcc-saga.mdx
+  h_9324126a55eff3 8-9,61-64
+src/content/docs/zookeeper/basic/core/01-zookeeper-core.mdx
+  h_9324126a55eff3 8-9,58-61
+src/data/viz/flows.ts
+  h_9324126a55eff3 418-1015,1023-1030
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8a26b9d1a8923c68672ae025b1528ca053447f8e",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
