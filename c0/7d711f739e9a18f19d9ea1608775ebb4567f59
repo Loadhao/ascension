@@ -1,0 +1,16 @@
+AGENTS.md
+  h_9324126a55eff3 46-47
+src/content/docs/guide/diagrams.mdx
+  h_9324126a55eff3 13-30,452-457
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c07d711f739e9a18f19d9ea1608775ebb4567f59",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
