@@ -1,0 +1,24 @@
+src/content/docs/docker/basic/fundamentals/01-concepts.mdx
+  h_9324126a55eff3 8-9,77-80
+src/content/docs/etcd/basic/core/01-etcd-core.mdx
+  h_9324126a55eff3 8-9,58-61
+src/content/docs/mqtt/basic/core/02-qos-session.mdx
+  h_9324126a55eff3 8-9,76-79
+src/content/docs/network/basic/foundation/03-from-url-to-page.mdx
+  h_9324126a55eff3 8-9,44-47
+src/content/docs/rabbitmq/intermediate/usage/01-deadletter-delay.mdx
+  h_9324126a55eff3 8-9,40-43
+src/data/viz/flows.ts
+  h_9324126a55eff3 967,1091,1103,1110,1115,1183,1360-1711,1732-1736
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "9fa846550ae9d80f2bfc25d8b1f1803182474262",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
