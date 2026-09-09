@@ -47,6 +47,8 @@
 
 - **过程型知识点优先补「步进式流程动画」，与 mermaid 分工为「mermaid 讲结构、FlowViz 讲过程」**：请求链路、协议握手、状态机迁移、生命周期等按时间推进、状态会翻转的内容，在 `src/data/viz/flows.ts` 定义 `FlowVizConfig` 并注册到 `flowDemos`，笔记改用 `.mdx` 后以 `<AlgorithmVizIsland demo="<key>" />` 引用（字段含义与模板见图表写作指南「步进式流程动画」）；播放器、主题令牌（`--algo-*`）与算法动画共用，动画数据里不允许写颜色。静态的结构/层次/分类不要滥用动画。
 
+- **强对比 / 分层速记类内容可补「彩色总结卡」收尾**：在 `src/data/viz/summaries.ts` 定义 `SummaryVizConfig` 并注册到 `summaryDemos`，笔记改 `.mdx` 后同样以 `<AlgorithmVizIsland demo="<key>" />` 引用（模板与选型见图表写作指南「彩色总结卡」）；纯静态渲染无脚本，`title` 写结论不写话题名，颜色只允许写语义 `tone` 名（blue/teal/green/amber/rose/violet/slate），实际配色由 `custom.css` 的 `--sum-*` 令牌按亮暗主题接管。三者分工为「mermaid 讲结构、FlowViz 讲过程、SummaryViz 讲总结」，不要用总结卡复述 mermaid 已画清的结构。
+
 - 新增分类时三处同步：`<方向>/<等级>/<分类>/index.mdx` 分类页 + `astro.config.mjs` 侧边栏对应等级组内注册 + 知识点笔记放入该目录（分类项不设 `badge`；笔记页底部 ProgressMark 由 Footer 覆盖自动注入，无需手写）。
 
 - 新增方向时四处同步：建目录与 `index.mdx` 路线图 + `astro.config.mjs` 侧边栏注册 + `src/data/graphs/` 建图谱数据 + `src/lib/notes.ts` 的 `DIRECTION_ORDER` 追加方向 slug。
