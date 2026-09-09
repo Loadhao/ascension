@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 662
+src/content/docs/python/basic/data-structures/03-str-bytes.md
+  h_9324126a55eff3 1-76
+src/data/graphs/python.json
+  h_9324126a55eff3 12,66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "85909eefead95ec0c7f553776df47169897b7b43",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
