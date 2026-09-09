@@ -1,0 +1,22 @@
+src/content/docs/git/intermediate/collaboration/01-branch-merge.mdx
+  h_9324126a55eff3 8-9,60-63
+src/content/docs/nginx/basic/config/01-working-model.mdx
+  h_9324126a55eff3 93-96
+src/content/docs/redis/advanced/ha/01-replication-sentinel-cluster.mdx
+  h_9324126a55eff3 101-104
+src/content/docs/seata/intermediate/modes/01-at-tcc-saga.mdx
+  h_9324126a55eff3 75-78
+src/data/viz/flows.ts
+  h_9324126a55eff3 2038-2317,2348-2351
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "174f7d906d7e11741751b5eb8dc14ea5e2f50a67",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
