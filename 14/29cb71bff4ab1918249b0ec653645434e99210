@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1770
+src/content/docs/ai/intermediate/agent/10-agent-evaluation.md
+  h_9324126a55eff3 1-72
+src/data/graphs/ai.json
+  h_9324126a55eff3 19,71-72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1429cb71bff4ab1918249b0ec653645434e99210",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
