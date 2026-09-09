@@ -1183,6 +1183,7 @@ export default defineConfig({
                         { label: '系统设计题的答题框架', link: '/distributed/intermediate/case-studies/04-design-interview/' },
                         { label: '大文件上传：分片、断点续传与秒传', link: '/distributed/intermediate/case-studies/05-large-file-upload/' },
                         { label: '敏感词过滤：从朴素匹配到 DFA/AC 自动机', link: '/distributed/intermediate/case-studies/06-sensitive-words/' },
+                        { label: '抢红包系统：从二倍均值法到热点账户', link: '/distributed/intermediate/case-studies/07-red-packet/' },
                       ],
                     },
                   ],
