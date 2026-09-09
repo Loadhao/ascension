@@ -404,6 +404,32 @@
 - 新证据与经验：**提交归属事件（反向）**：本轮笔记 06-http-cache.md 尚未 add 时被并行会话提交 ba4712b 一并带入（推测其用了宽泛 git add）——内容完好入库、我的提交恰好补上注册，整体无损；与第 2 轮我吞他们暂存内容方向相反。教训对称成立：并行提交前各方都应确认暂存区归属，无法强制他人执行、只能自证清白（pathspec）。
 - 下一轮入口：候选池——①ai/intermediate/agent 补 Agent 评估应用层维度（advanced/eval 仅 1 篇偏架构层）；②linux/basic/commands 补进程排查类第三篇；③network HTTP 线已 6 篇成体系。每轮开工先同步+定界+体检基线。
 
+### 第 40 轮（2026-09-08，第十四次启动，内容补充模式）
+
+- 选择：ai/intermediate/agent 应用评估篇（第十篇）——勘察确认评测对齐篇只讲模型层（基准/RLHF），应用层评估（RAG 指标/LLM-as-judge/评估驱动开发）无专篇。
+- 交付：`10-agent-evaluation.md`（模型评测 ≠ 应用评估、按形态选指标表、黄金评测集/LLM-as-judge/线上验证三手段、评估驱动开发闭环图）+ 侧边栏注册 + 图谱 ageval 节点与 2 条边。
+- 验证：五连验证全绿（build 521 页/对比度 291 页——并行会话新增图表一并确认）；提交 1429cb7 已推送。
+- 结论：补功能。
+- 新证据与经验：并行会话五连提交（总结卡 16 张、外链新标签、**AGENTS 新增代码块 80 视觉列约定**——新笔记写作遵循）。
+- 下一轮入口：linux/basic/commands 第三篇（打包压缩/远程传输勘察确认仅速查一行）。
+
+### 第 41 轮（2026-09-08，第十四次启动）
+
+- 选择：linux/basic/commands 打包压缩与远程传输篇（第三篇）——运维日常刚需、面试实操常客，现有仅速查一行。
+- 交付：`03-archive-transfer.md`（tar c/x/t+v+f 口诀与解压先 -t 的安全坑、压缩算法权衡表与 Kafka 压缩思维呼应、scp 全量 vs rsync 增量原理、--delete 先 -n 预演纪律）+ 侧边栏注册 + 图谱 archive 节点与 1 条边。
+- 验证：build 522 页、语法/一致性全绿、JSON 合法；纯表格无 mermaid；提交 b2c3b86 已推送。
+- 结论：补功能。
+- 下一轮入口：python/basic/data-structures 第三篇（str/bytes，确认 stdlib 的 collections 篇无重叠）。
+
+### 第 42 轮（2026-09-08，第十四次启动）
+
+- 选择：python/basic/data-structures str 与 bytes 篇（第三篇）——UnicodeDecodeError 高频坑题，覆盖 list/tuple 与 dict/set 后的补全；str/bytes 无重叠。
+- 交付：`03-str-bytes.md`（两种序列对照表、encode/decode 方向记忆、UnicodeDecodeError 三步排查、边界上只有 bytes 的中间件衔接、Content-Length 是字节数追问）+ 侧边栏注册 + 图谱 strbytes 节点与 1 条边。
+- 验证：build 523 页、语法/一致性全绿、JSON 合法；纯表格无 mermaid；提交 85909ee 已推送。
+- 结论：补功能。
+- 新证据与经验：python 方向 basic 三个薄分类（data-structures/modules/functions）均可按此模式扩到 3-4 篇成体系。
+- 下一轮入口：候选池——①python/basic/oop（3 篇）与 functions（3 篇）勘察补全；②ai/basic/foundation 再补一篇（训练/推理分工或 scaling law 深入）；③linux/basic/filesystem 第二篇（LVM/RAID 运维向或挂载实战）。每轮开工先同步+定界+体检基线。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
