@@ -1,0 +1,24 @@
+src/content/docs/js/basic/core/05-event-loop.mdx
+  h_9324126a55eff3 8-9,34-37
+src/content/docs/mongodb/intermediate/replication/01-replication-set.mdx
+  h_9324126a55eff3 8-9,110-113
+src/content/docs/network/basic/tcp/01-three-way-handshake.mdx
+  h_9324126a55eff3 26-29
+src/content/docs/postgresql/intermediate/wal/01-wal.mdx
+  h_9324126a55eff3 8-9,38-41
+src/content/docs/rabbitmq/basic/core/02-reliable-delivery.mdx
+  h_9324126a55eff3 8-9,99-102
+src/data/viz/flows.ts
+  h_9324126a55eff3 1016-1359,1375-1379
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5611985396a43fcc9ec5ca665f4e13c938b05076",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
