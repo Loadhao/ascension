@@ -329,12 +329,19 @@ main:has(.kg-fullbleed) {
 
 /* ===== 页头：侧边栏整体收起/展开（桌面端） =====
    收起状态记在 html[data-sidebar-tree='collapsed']，初始应用由 Sidebar.astro
-   的内联脚本在正文渲染前完成，点击切换由 sidebar-tree.js 注入的页头按钮负责 */
+   的内联脚本在正文渲染前完成，点击切换由 sidebar-tree.js 注入的页头按钮负责。
+   页头只有一条导航栏高（4rem），按钮以块级流内子元素插在页头最前会把整条
+   页头网格（标题/搜索框/右侧组）顶出下沿、盖住正文，故绝对定位脱离文档流，
+   悬在页头左缘垂直居中；标题列让出按钮宽度，网格仍对称、搜索框仍居视口正中 */
 .sl-sidebar-collapse {
   display: none;
 }
 @media (min-width: 50rem) {
   .sl-sidebar-collapse {
+    position: absolute;
+    inset-inline-start: var(--sl-nav-pad-x);
+    top: 50%;
+    translate: 0 -50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -350,6 +357,9 @@ main:has(.kg-fullbleed) {
   .sl-sidebar-collapse:hover {
     color: var(--sl-color-white);
     background: var(--sl-color-hairline-light);
+  }
+  header.header > .header .title-wrapper {
+    margin-inline-start: 2.75rem;
   }
   :root[data-sidebar-tree='collapsed'] nav.sidebar {
     display: none;
