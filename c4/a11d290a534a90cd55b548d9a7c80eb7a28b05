@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1189
+src/content/docs/distributed/intermediate/case-studies/10-coupon.md
+  h_9324126a55eff3 1-73
+src/data/graphs/distributed.json
+  h_9324126a55eff3 31,88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c4a11d290a534a90cd55b548d9a7c80eb7a28b05",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
