@@ -29,6 +29,24 @@ public class TextVo implements Serializable {
 一致 → 放行；不一致 → 抛 `InvalidClassException`。与其拿到
 错乱的对象，不如 fail-fast。
 
+版本关卡的完整判定流——显式与否在序列化前就分了岔：
+
+```mermaid
+flowchart TB
+    CLS["类实现 Serializable"] --> DECL{"显式声明了<br/>serialVersionUID？"}
+    DECL -->|"是（最佳实践）"| FIX["版本号固定不变<br/>兼容改动（加字段）不 bump<br/>旧数据照常恢复"]
+    DECL -->|"否（危险）"| AUTO["JVM 按类结构自动哈希<br/>加字段 / 改签名 → 版本立刻漂移<br/>滚动升级期间新旧互读必炸"]
+    FIX --> STREAM
+    AUTO --> STREAM["序列化：字节流带着版本号<br/>跨 JVM 传输 / 落盘"]
+    STREAM --> CMP{"反序列化：<br/>流内版本 == 本地类版本？"}
+    CMP -->|"一致"| OK["放行还原<br/>新字段取默认值"]
+    CMP -->|"不一致"| EX["InvalidClassException<br/>宁拒不错，fail-fast"]
+
+    class DECL hl
+    class CMP hl
+    classDef hl stroke-width:1.5px
+```
+
 ## 不声明行不行？——行，但危险
 
 不显式声明时，JVM 会**根据类结构自动计算**一个版本号：对包名、

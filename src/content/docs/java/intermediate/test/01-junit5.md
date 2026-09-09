@@ -25,6 +25,22 @@ JUnit 5 拆成三块：`junit-jupiter-api`（写测试用）+ Jupiter Engine
 这时 @BeforeAll 不再要求 static。用例间**永远不要有隐式执行顺序依赖**，
 真要排序用 `@TestMethodOrder`，但先想想是不是设计有问题。
 
+生命周期钩子的执行结构——两头各一次、中间每个用例一圈：
+
+```mermaid
+flowchart TB
+    BA["@BeforeAll：全类一次<br/>必须 static（PER_CLASS 模式可非 static）"] --> LOOP
+    subgraph LOOP["每个测试方法跑一圈<br/>默认新建一个测试类实例，用例间隔离"]
+        direction TB
+        BE["@BeforeEach：每例前<br/>准备新鲜夹具"] --> T["@Test / @DisplayName<br/>用例本体"] --> AE["@AfterEach：对称收尾"]
+    end
+    LOOP --> AA["@AfterAll：全类一次收尾"]
+
+    class BA hl
+    class AA hl
+    classDef hl stroke-width:1.5px
+```
+
 ## 断言：用 AssertJ 的流式姿势
 
 JUnit 原生断言 `assertEquals(expected, actual)` 够用但难读难链；

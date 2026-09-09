@@ -33,6 +33,20 @@ HttpRequest req = HttpRequest.builder()
 改自己），build() 一次性校验并生成不可变目标对象**。把校验放在
 build() 而不是每个 setter，是"先攒齐再说"——避免半成品对象到处流窜。
 
+建造者的攒参与收口：
+
+```mermaid
+flowchart LR
+    F["HttpRequest.builder()<br/>工厂返回空 Builder"] --> S1[".url(...)<br/>链式 setter 只改自己"]
+    S1 --> S2[".timeout(...)"]
+    S2 --> S3[".retry(3)<br/>可选参数自由组合"]
+    S3 --> B["build()<br/>一次性校验<br/>半成品不出 Builder"]
+    B --> T["不可变目标对象"]
+
+    class B hl
+    classDef hl stroke-width:1.5px
+```
+
 Java 生态把它内化成了日常语法：
 
 - **Lombok `@Builder`**：注解生成整套模板代码；

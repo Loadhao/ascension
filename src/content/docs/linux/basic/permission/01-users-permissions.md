@@ -64,6 +64,16 @@ ls -l file   # 有 ACL 时最后会多一个 "+" 号
 **排查顺序**：`Permission denied` 时，先看 `ls -l` 的 ugo 位，再看 `getfacl`，
 必要时 `ls -Z` 检查 SELinux（安全上下文另一层）。
 
+```mermaid
+flowchart TD
+    P["Permission denied 排查<br/>进程带着 uid / gid 访问文件"] --> UGO["① 看 ugo 三档<br/>uid 命中属主 → owner 三位<br/>gid 命中属组/附加组 → group 三位<br/>都没命中 → other 三位"]
+    UGO -->|"ugo 解释不通<br/>要给特定用户/组单独授权"| ACL["② getfacl 看 ACL<br/>setfacl -m u:bob:rwx 单独授权<br/>存在 ACL 时 ls -l 末尾有 + 号"]
+    ACL -->|"还不通"| SEL["③ ls -Z 查 SELinux<br/>安全上下文是另一层"]
+
+    class UGO hl
+    classDef hl stroke-width:1.5px
+```
+
 ## sudo：最小化提权
 
 `sudo` 让普通用户临时以 root（或指定用户）执行命令，避免长期持有 root shell：

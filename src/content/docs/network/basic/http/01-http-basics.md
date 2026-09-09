@@ -28,6 +28,28 @@ Location: /api/orders/9527         ← 3xx 时才有意义
 读报文的能力是排障基本功：curl -v / 浏览器 Network 面板看到的就是
 这个（curl 实操见[命令行工具](/tools/basic/cli/02-curl/)）。
 
+报文的两半结构——行、头、体，请求响应各一套（JSON 体的花括号会被
+mermaid 当语法解析，图里写作键值对，原文见上方报文示例）：
+
+```mermaid
+flowchart LR
+    subgraph REQ["请求报文"]
+        direction TB
+        RL["请求行：方法 路径 版本<br/>POST /api/orders HTTP/1.1"] --- RH["请求头（键值对）<br/>Host / Content-Type / Cookie"]
+        RH --- RB["请求体（JSON）<br/>sku = A1，qty = 2"]
+    end
+    REQ ==>|"HTTP/1.1 201 Created"| RES
+    subgraph RES["响应报文"]
+        direction TB
+        SL["状态行：版本 状态码 短语<br/>201 Created"] --- SH["响应头<br/>Set-Cookie / Location（3xx 才有意义）"]
+        SH --- SB["响应体（JSON）<br/>id = 9527"]
+    end
+
+    class RL hl
+    class SL hl
+    classDef hl stroke-width:1.5px
+```
+
 ## 方法语义与幂等性
 
 幂等 = 同一请求执行一次与 N 次效果相同。**它是重试安全性的依据**
