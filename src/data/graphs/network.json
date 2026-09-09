@@ -9,7 +9,8 @@
     { "id": "tcpudp", "label": "TCP 与 UDP", "href": "/network/basic/tcp/03-tcp-vs-udp/", "group": "TCP" },
     { "id": "httpbasics", "label": "HTTP 基础", "href": "/network/basic/http/01-http-basics/", "group": "HTTP" },
     { "id": "https", "label": "HTTPS 与 TLS", "href": "/network/basic/http/02-https-tls/", "group": "HTTP" },
-    { "id": "httpevo", "label": "HTTP 演进", "href": "/network/basic/http/03-http-evolution/", "group": "HTTP" }
+    { "id": "httpevo", "label": "HTTP 演进", "href": "/network/basic/http/03-http-evolution/", "group": "HTTP" },
+    { "id": "authstate", "label": "登录态三件套", "href": "/network/basic/http/04-auth-state/", "group": "HTTP" }
   ],
   "edges": [
     { "source": "root", "target": "osi" },
@@ -23,6 +24,8 @@
     { "source": "handshake", "target": "tcpudp", "label": "对比记忆" },
     { "source": "httpbasics", "target": "https", "label": "安全升级" },
     { "source": "https", "target": "httpevo", "label": "TLS 1.3 与 QUIC" },
+    { "source": "httpbasics", "target": "authstate", "label": "Cookie 是载体" },
+    { "source": "authstate", "target": "httpevo", "label": "无状态与状态之争" },
     { "source": "tcpudp", "target": "httpevo", "label": "QUIC 建在 UDP 上" },
     { "source": "reliable", "target": "httpevo", "label": "TCP 队头阻塞根源" }
   ]
