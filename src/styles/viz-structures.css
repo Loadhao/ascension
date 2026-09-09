@@ -1,6 +1,6 @@
-/* ===== 算法动画组件（链表 / 二叉树 / 栈）结构画法样式 =====
+/* ===== 算法动画组件（链表 / 二叉树 / 栈 / 图 / 架构流程）结构画法样式 =====
    播放器外壳（.algo-viz-*）与主题令牌（--algo-*）定义在 custom.css，
-   本文件只放三种结构画法自己的绘图区样式。 */
+   本文件只放各结构画法自己的绘图区样式。 */
 
 /* ---- 链表 ---- */
 .algo-list-plot {
@@ -290,6 +290,179 @@
   .algo-tree-node rect,
   .algo-graph-node circle,
   .algo-graph-edge {
+    transition: none;
+  }
+}
+
+/* ---- 架构 / 流程（FlowViz）---- */
+.algo-flow-plot {
+  height: auto;
+}
+
+.algo-flow-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.algo-flow-edge {
+  fill: none;
+  stroke: var(--algo-chip-border);
+  stroke-width: 1.5;
+  transition: stroke 200ms ease;
+}
+.algo-flow-edge--dashed {
+  stroke-dasharray: 5 5;
+}
+.algo-flow-edge--hot {
+  stroke: var(--algo-bar-active);
+  stroke-width: 2.4;
+  stroke-dasharray: 8 6;
+  animation: algo-flow-march 0.8s linear infinite;
+}
+@keyframes algo-flow-march {
+  to {
+    stroke-dashoffset: -14;
+  }
+}
+.algo-flow-arrowhead {
+  fill: var(--algo-chip-border);
+}
+.algo-flow-arrowhead--hot {
+  fill: var(--algo-bar-active);
+}
+.algo-flow-elabel {
+  fill: var(--algo-chip-text);
+  font-size: 12.5px;
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+  /* 底色描边形成光晕，避免连线穿过文字 */
+  paint-order: stroke;
+  stroke: var(--algo-plot-bg);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+.algo-flow-node > :is(rect, path, ellipse) {
+  fill: var(--algo-bar);
+  stroke: var(--algo-chip-border);
+  stroke-width: 1.2;
+  transition:
+    fill 200ms ease,
+    stroke 200ms ease;
+}
+.algo-flow-node > path.algo-flow-docfold {
+  fill: none;
+}
+.algo-flow-node text {
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+  transition: fill 200ms ease;
+}
+.algo-flow-label {
+  fill: var(--algo-bar-text);
+  font-size: 15px;
+  font-weight: 600;
+}
+.algo-flow-sub {
+  fill: var(--algo-chip-text);
+  font-size: 11px;
+  opacity: 0.9;
+}
+.algo-flow-node--done > :is(rect, path, ellipse) {
+  fill: var(--algo-bar-locked);
+}
+.algo-flow-node--active > :is(rect, path, ellipse) {
+  fill: var(--algo-bar-active);
+  stroke: var(--algo-bar-active);
+  filter: drop-shadow(0 0 7px var(--algo-bar-active-glow));
+}
+.algo-flow-node--active .algo-flow-label,
+.algo-flow-node--active .algo-flow-sub {
+  fill: var(--algo-on-active);
+}
+.algo-flow-node--dim {
+  opacity: 0.32;
+}
+
+.algo-flow-badge rect {
+  fill: var(--algo-chip-bg);
+  stroke: var(--algo-chip-border);
+  stroke-width: 1;
+}
+.algo-flow-badge text {
+  fill: var(--algo-chip-text);
+  font-size: 11px;
+}
+
+.algo-flow-packet {
+  transition: transform 280ms ease;
+}
+.algo-flow-packet text {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: ui-monospace, sfmono-regular, 'sf mono', menlo, consolas, monospace;
+}
+.algo-flow-packet--req :is(rect, circle) {
+  fill: var(--algo-bar-active);
+}
+.algo-flow-packet--req text {
+  fill: var(--algo-on-active);
+}
+.algo-flow-packet--resp :is(rect, circle) {
+  fill: var(--algo-plot-bg);
+  stroke: var(--algo-bar-active);
+  stroke-width: 1.7;
+}
+.algo-flow-packet--resp text {
+  fill: var(--algo-bar-active);
+}
+.algo-flow-packet--data :is(rect, circle) {
+  fill: var(--algo-chip-bg);
+  stroke: var(--algo-chip-border);
+  stroke-width: 1.2;
+}
+.algo-flow-packet--data text {
+  fill: var(--algo-chip-text);
+}
+
+.algo-flow-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 10px;
+  color: var(--algo-chip-text);
+  font-size: 11.5px;
+}
+.algo-flow-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.algo-flow-legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.algo-flow-legend-dot--req {
+  background: var(--algo-bar-active);
+}
+.algo-flow-legend-dot--resp {
+  background: var(--algo-plot-bg);
+  border: 1.6px solid var(--algo-bar-active);
+}
+.algo-flow-legend-dot--data {
+  background: var(--algo-chip-bg);
+  border: 1px solid var(--algo-chip-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .algo-flow-edge--hot {
+    animation: none;
+  }
+  .algo-flow-packet,
+  .algo-flow-node > :is(rect, path, ellipse),
+  .algo-flow-node text,
+  .algo-flow-edge {
     transition: none;
   }
 }

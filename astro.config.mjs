@@ -168,6 +168,7 @@ export default defineConfig({
             { link: '/guide/resources/', label: '资源导航' },
             { link: '/guide/interview-cheatsheet/', label: '速答手册' },
             { link: '/guide/quiz/', label: '自测作答' },
+            { link: '/guide/animated-flows/', label: '动效演示' },
           ],
         },
         { label: '知识全景', link: '/panorama/' },

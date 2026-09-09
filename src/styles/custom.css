@@ -1688,6 +1688,8 @@ html.mmd-viewer-open {
   --algo-chip-bg: #2b2216;
   --algo-chip-border: #5c4a33;
   --algo-chip-text: #ddcfb8;
+  /* 琥珀高亮底上的文字色：两种主题都用深字保证对比 */
+  --algo-on-active: #17130f;
 }
 
 :root[data-theme='light'] {
@@ -1700,6 +1702,7 @@ html.mmd-viewer-open {
   --algo-chip-bg: #f6efe3;
   --algo-chip-border: #d8c5a5;
   --algo-chip-text: #6d5a42;
+  --algo-on-active: #2b2318;
 }
 
 .algo-viz {
