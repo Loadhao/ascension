@@ -352,6 +352,32 @@
 - 新证据与经验：①ai/intermediate/llm 分类本轮 2→4 篇成体系（LLM 本质→提示工程→落地选型→推理参数）；②本日用户定向后节奏：每轮一篇内容+五连验证+pathspec 提交，稳定可复制。
 - 下一轮入口：候选池——①ai/basic/foundation 补 Transformer/注意力篇（先看"三大经典架构"小节深度）；②linux/intermediate/system 补性能排查（vmstat/iostat/火焰图）；③python/intermediate/concurrency 勘察。每轮开工先同步+定界+体检基线。
 
+### 第 34 轮（2026-09-08，第十二次启动，内容补充模式第二轮）
+
+- 选择：ai/basic/foundation Transformer 专篇——勘察确认"三大经典架构"仅对比表+自注意力一句话，专篇缺口成立（AI 面试算法岗与应用岗共同必考）。
+- 交付：`ai/basic/foundation/03-transformer.md`（RNN 两痛点、Q/K/V 检索类比、√d 缩放与多头、位置编码、Encoder/Decoder-only 分化与 LLM 衔接）+ 侧边栏注册 + 图谱 transformer 节点与 2 条边。
+- 验证：五连验证全绿（build 515 页/对比度 268 页）；提交 fbd48b1 已推送。
+- 结论：补功能。
+- 新证据与经验：①并行会话三连大提交：FlowViz 步进动画铺开 18 个并固化「mermaid 讲结构、FlowViz 讲过程」进 AGENTS——新笔记按规范判断（机制结构类用 mermaid 合适）；②部分笔记已转 .mdx（find *.md 会漏，体检脚本两种扩展名都查、无恙）。
+- 下一轮入口：linux 性能排查（勘察确认现有 4 篇只有进程视角）。
+
+### 第 35 轮（2026-09-08，第十二次启动）
+
+- 选择：linux/intermediate/system 性能排查篇（第五篇）——CPU/内存/IO/负载四象限排查是 Linux 面试必考大题，现有篇目仅进程视角（ps/top）。
+- 交付：`05-performance.md`（load average 真实含义与"负载高 CPU 低"归因、四象限排查表、CPU 飙高四步法含 jstack 对位、free available 解读、iostat 关键列、OOM/deleted 文件追问）+ 侧边栏注册 + 图谱 perf 节点与 2 条边。
+- 验证：build 516 页、语法/一致性全绿、JSON 合法；本篇纯表格无 mermaid，跳过对比度审计；提交 5b81318 已推送。
+- 结论：补功能。
+- 下一轮入口：python/concurrency 勘察退场（三篇覆盖完整含选型），转 network 登录态缺口（grep 全站确认 JWT/CORS/Session 无专篇）。
+
+### 第 36 轮（2026-09-08，第十二次启动）
+
+- 选择：network/basic/http 登录态篇（第四篇）——"Session 和 JWT 怎么选"是后端标准必考题，全站 grep 确认无专篇。
+- 交付：`04-auth-state.md`（Cookie 安全属性表与 HttpOnly/CSRF 辨析、Session 时序图与 Redis 集中存储、JWT 三段结构与注销代价、选型对比表、OAuth2 一句话定位）+ 侧边栏注册 + 图谱 authstate 节点与 2 条边。
+- 验证：五连验证全绿（build 517 页/对比度 268 页）；提交 6a4da9d 已推送。
+- 结论：补功能。
+- 新证据与经验：①grep 全站确认主题无专篇是"互补度"判断的可靠手段（连 Java 方向都只是顺带提及）；②network 方向 HTTP 分类已 5 篇，下一个 network 缺口是 CORS/同源策略篇。
+- 下一轮入口：候选池——①network CORS 与同源策略篇（高频前端后端交界题）；②linux/intermediate/system 补容器化视角或 strace/lsof 深入；③ai/basic/agent 分类补 Agent 评估/护栏篇。每轮开工先同步+定界+体检基线。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
