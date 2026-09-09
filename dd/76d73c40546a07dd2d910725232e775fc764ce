@@ -1,0 +1,198 @@
+src/components/viz/SummaryViz.tsx
+  h_9324126a55eff3 5,9-10,17-18,26-27,69-72,101-104,118-121
+src/content/docs/ai/advanced/agent/03-background-tasks.md
+  h_9324126a55eff3 88
+src/content/docs/ai/intermediate/agent/03-context-engineering.md
+  h_9324126a55eff3 77
+src/content/docs/ai/intermediate/agent/08-mcp.md
+  h_9324126a55eff3 195
+src/content/docs/algorithm/advanced/binary-answer/01-koko-eating-bananas.mdx
+  h_9324126a55eff3 27,29,31-32,34
+src/content/docs/algorithm/advanced/graph/01-graph-traversal.mdx
+  h_9324126a55eff3 24,27,41,51
+src/content/docs/algorithm/advanced/greedy/01-jump-game.mdx
+  h_9324126a55eff3 29,39,41
+src/content/docs/algorithm/basic/searching/01-binary-search.mdx
+  h_9324126a55eff3 63,66-67,69
+src/content/docs/algorithm/basic/searching/02-two-pointers.mdx
+  h_9324126a55eff3 30-31,33
+src/content/docs/algorithm/basic/searching/03-sliding-window.mdx
+  h_9324126a55eff3 30-31
+src/content/docs/algorithm/basic/searching/04-quickselect.mdx
+  h_9324126a55eff3 30,32,34-35
+src/content/docs/algorithm/basic/searching/05-rotated-array-search.mdx
+  h_9324126a55eff3 32,34,36-37,39,41
+src/content/docs/algorithm/basic/sorting/05-merge-sort.mdx
+  h_9324126a55eff3 25,30,32-34,41-44
+src/content/docs/algorithm/basic/sorting/06-heap-sort.mdx
+  h_9324126a55eff3 31,40,42-43,45
+src/content/docs/algorithm/basic/sorting/07-shell-sort.mdx
+  h_9324126a55eff3 27,33
+src/content/docs/algorithm/basic/sorting/08-counting-sort.mdx
+  h_9324126a55eff3 32,35-36,38
+src/content/docs/algorithm/basic/sorting/09-three-way-partition.mdx
+  h_9324126a55eff3 29,31,33
+src/content/docs/algorithm/basic/techniques/03-monotonic-stack.mdx
+  h_9324126a55eff3 30,33,37
+src/content/docs/algorithm/intermediate/backtracking/01-subsets.mdx
+  h_9324126a55eff3 31,33-35
+src/content/docs/algorithm/intermediate/backtracking/02-permutations.mdx
+  h_9324126a55eff3 31,36-37,40-41
+src/content/docs/algorithm/intermediate/dp/02-house-robber.mdx
+  h_9324126a55eff3 26,28
+src/content/docs/algorithm/intermediate/dp/04-lcs.mdx
+  h_9324126a55eff3 26,30,32
+src/content/docs/algorithm/intermediate/linked-list/01-reverse-list.mdx
+  h_9324126a55eff3 44-46
+src/content/docs/algorithm/intermediate/stack-queue/01-valid-parentheses.mdx
+  h_9324126a55eff3 28,35
+src/content/docs/algorithm/intermediate/stack-queue/02-min-stack.mdx
+  h_9324126a55eff3 26,31,34-35,41,46
+src/content/docs/algorithm/intermediate/tree/04-lca.mdx
+  h_9324126a55eff3 26-30,45
+src/content/docs/distributed/advanced/consistency/01-consistency-patterns.md
+  h_9324126a55eff3 114,116,118-119
+src/content/docs/distributed/advanced/observability/01-distributed-tracing.md
+  h_9324126a55eff3 137-138
+src/content/docs/distributed/intermediate/cluster/01-load-balancing.md
+  h_9324126a55eff3 84,87
+src/content/docs/distributed/intermediate/transaction/01-distributed-transaction.md
+  h_9324126a55eff3 63-64
+src/content/docs/distributed/intermediate/transaction/02-distributed-id.md
+  h_9324126a55eff3 39,46-47
+src/content/docs/docker/basic/fundamentals/01-concepts.mdx
+  h_9324126a55eff3 114-115
+src/content/docs/elasticsearch/intermediate/usage/03-pagination.md
+  h_9324126a55eff3 35,54-55
+src/content/docs/git/basic/foundations/02-daily-commands.md
+  h_9324126a55eff3 99
+src/content/docs/git/intermediate/collaboration/02-remote-collab.md
+  h_9324126a55eff3 107-108
+src/content/docs/guide/diagrams.mdx
+  h_9324126a55eff3 231-238
+src/content/docs/java/advanced/jvm/01-class-loading.mdx
+  h_9324126a55eff3 73-74,84,153
+src/content/docs/java/advanced/jvm/04-references.md
+  h_9324126a55eff3 38-41
+src/content/docs/java/advanced/jvm/06-jit.md
+  h_9324126a55eff3 104
+src/content/docs/java/advanced/jvm/07-tuning.md
+  h_9324126a55eff3 21-23,32-38,60-62,75
+src/content/docs/java/advanced/springcloud/03-gateway.md
+  h_9324126a55eff3 40-41,43,79,81,84,123-124,127,172,196,200,202,204,208
+src/content/docs/java/advanced/springcloud/04-openfeign-loadbalancer.md
+  h_9324126a55eff3 128,135
+src/content/docs/java/advanced/springcloud/06-config-center.md
+  h_9324126a55eff3 30
+src/content/docs/java/advanced/springcloud/07-stream.md
+  h_9324126a55eff3 52,57
+src/content/docs/java/basic/collection/01-arraylist.md
+  h_9324126a55eff3 13-14,28-29,35-36
+src/content/docs/java/basic/collection/03-concurrenthashmap.mdx
+  h_9324126a55eff3 50-51,54,57,60,63-64,69,76,118,138,145
+src/content/docs/java/basic/collection/06-copyonwritearraylist.md
+  h_9324126a55eff3 18,21,26,30-32
+src/content/docs/java/basic/syntax/02-string.mdx
+  h_9324126a55eff3 17-18
+src/content/docs/java/basic/syntax/03-equals-hashcode.md
+  h_9324126a55eff3 85,87,93
+src/content/docs/java/basic/syntax/04-generics.md
+  h_9324126a55eff3 27
+src/content/docs/java/basic/syntax/05-exception.mdx
+  h_9324126a55eff3 69,72
+src/content/docs/java/basic/syntax/06-reflection-annotation.md
+  h_9324126a55eff3 16-17,29-30,32-34,36,38
+src/content/docs/java/basic/syntax/12-jni-jndi.md
+  h_9324126a55eff3 25-26
+src/content/docs/java/basic/syntax/13-lombok-apt.md
+  h_9324126a55eff3 51
+src/content/docs/java/intermediate/concurrent/03-volatile.md
+  h_9324126a55eff3 36,38,85,88,90
+src/content/docs/java/intermediate/concurrent/04-synchronized.mdx
+  h_9324126a55eff3 105
+src/content/docs/java/intermediate/concurrent/05-aqs.md
+  h_9324126a55eff3 101,104
+src/content/docs/java/intermediate/concurrent/10-concurrent-tools.md
+  h_9324126a55eff3 33,36
+src/content/docs/java/intermediate/concurrent/11-completablefuture.md
+  h_9324126a55eff3 66
+src/content/docs/java/intermediate/design-pattern/01-principles.md
+  h_9324126a55eff3 39,87
+src/content/docs/java/intermediate/design-pattern/02-singleton.md
+  h_9324126a55eff3 36,101,105
+src/content/docs/java/intermediate/design-pattern/03-factory.md
+  h_9324126a55eff3 35-36
+src/content/docs/java/intermediate/design-pattern/06-proxy.md
+  h_9324126a55eff3 59-60
+src/content/docs/java/intermediate/design-pattern/07-decorator.md
+  h_9324126a55eff3 54
+src/content/docs/java/intermediate/design-pattern/08-structural.md
+  h_9324126a55eff3 114,116-117,123,141
+src/content/docs/java/intermediate/design-pattern/09-strategy.md
+  h_9324126a55eff3 30,44,50
+src/content/docs/java/intermediate/design-pattern/10-template-method.md
+  h_9324126a55eff3 21,24-25
+src/content/docs/java/intermediate/design-pattern/11-observer.md
+  h_9324126a55eff3 39
+src/content/docs/java/intermediate/design-pattern/12-chain-of-responsibility.md
+  h_9324126a55eff3 16
+src/content/docs/java/intermediate/design-pattern/13-behavioral.md
+  h_9324126a55eff3 20,24,33
+src/content/docs/java/intermediate/design-pattern/15-patterns-in-frameworks.md
+  h_9324126a55eff3 26,32
+src/content/docs/java/intermediate/log/01-logging-system.md
+  h_9324126a55eff3 89
+src/content/docs/java/intermediate/spring-boot/03-configuration.md
+  h_9324126a55eff3 48
+src/content/docs/java/intermediate/spring-mvc/03-validation.md
+  h_9324126a55eff3 28,39,90,95
+src/content/docs/java/intermediate/spring/01-ioc-bean-lifecycle.md
+  h_9324126a55eff3 71-72,74-76,79-81,84-86,89-91,94-96,99-101,104-106,161-165
+src/content/docs/java/intermediate/stream/01-stream-principle.md
+  h_9324126a55eff3 58
+src/content/docs/java/intermediate/test/02-mockito.md
+  h_9324126a55eff3 23,25
+src/content/docs/js/basic/core/03-prototype-class.md
+  h_9324126a55eff3 44
+src/content/docs/js/basic/core/04-this-binding.md
+  h_9324126a55eff3 45-47
+src/content/docs/js/basic/core/05-event-loop.mdx
+  h_9324126a55eff3 100
+src/content/docs/js/intermediate/web/02-cors.md
+  h_9324126a55eff3 117
+src/content/docs/kafka/intermediate/core/01-kafka-architecture.mdx
+  h_9324126a55eff3 88,90
+src/content/docs/kafka/intermediate/core/02-replica-isr.md
+  h_9324126a55eff3 60-61
+src/content/docs/kafka/intermediate/core/03-reliability-idempotent.md
+  h_9324126a55eff3 80-81
+src/content/docs/nginx/intermediate/proxy/03-keepalived-ha.md
+  h_9324126a55eff3 45,47,51,53,55,57,59
+src/content/docs/python/advanced/eng/02-pytest.md
+  h_9324126a55eff3 65-66,69
+src/content/docs/python/advanced/eng/03-ruff-mypy.md
+  h_9324126a55eff3 26
+src/content/docs/redis/intermediate/usage/02-cache-problems.md
+  h_9324126a55eff3 76,78,80,85
+src/content/docs/redis/intermediate/usage/06-bigkey-hotkey.md
+  h_9324126a55eff3 40-42
+src/content/docs/rocketmq/advanced/core/01-rocketmq-features.mdx
+  h_9324126a55eff3 75,98
+src/content/docs/tools/basic/cli/02-curl.md
+  h_9324126a55eff3 13-15,18-19
+src/data/viz/summaries.ts
+  h_9324126a55eff3 16,19-22,28,31-34,39,51,54-57,63,66-69,75,78-81,97,100-102,104,110,114-115,117,134,137-138,147,150-151,153,171,174-176,182,185-188,194,197-198,214,217-219,225,228-230,236,239,241,247,250-252,268,271,279,282,290,293,311,316,323,328-329,335,341,356-357,360-363,369,372,375,381,384,387,403,410,416,421,423,440,443,445-447,453,457-458,460
+src/styles/custom.css
+  h_9324126a55eff3 2828-2834,2880-2886,3130-3243
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "dd76d73c40546a07dd2d910725232e775fc764ce",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
