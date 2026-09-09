@@ -97,6 +97,32 @@ Executor 家族）。它与 ThreadPoolExecutor 的分野在**任务结构**：
 4. `push()/pop()` 仅队列主人调用，`poll()` 仅窃取者调用；
 5. 只剩最后一个任务时仍有竞争，用 CAS 兜底。
 
+把「管道」与「并行引擎」串成一张全景图：
+
+```mermaid
+flowchart LR
+    SRC["数据源<br/>ArrayList / 数组 / IO"] --> F["filter<br/>中间操作 · 只登记"]
+    F --> M["map<br/>中间操作 · 只登记"]
+    M --> T["终端操作<br/>collect / reduce<br/>此刻才真正触发"]
+    T --> SP["Spliterator<br/>对半拆分数据块"]
+    SP --> Q1
+    SP --> Q2
+    subgraph FP["ForkJoinPool（commonPool）"]
+        Q1["Worker 1<br/>私有双端队列<br/>自己从队头 LIFO 取"]
+        Q2["Worker 2<br/>空闲者从别人队尾<br/>FIFO 窃取"]
+        Q1 <-. 工作窃取 .-> Q2
+    end
+    Q1 --> OUT["合并部分结果<br/>得到最终输出"]
+    Q2 --> OUT
+
+    class T hl
+    class SP hl
+    classDef hl stroke-width:1.5px
+```
+
+终端操作前一切是惰性登记，触发后 Spliterator 把数据切块分给各
+Worker——两端操作（主 LIFO / 窃 FIFO）把冲突概率压到最低。
+
 ## commonPool：全局共享的那口锅
 
 Java 8 给 ForkJoinPool 加了静态**通用线程池 commonPool**：

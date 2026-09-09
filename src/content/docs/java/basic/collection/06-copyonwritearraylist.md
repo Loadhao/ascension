@@ -15,7 +15,7 @@ level: basic
 
 ```java
 public class CopyOnWriteArrayList<E> {
-    private transient volatile Object[] array;  // volatile：换引用对读者立即可见
+    private transient volatile Object[] array;  // volatile：换引用读者立即可见
     private final transient ReentrantLock lock = new ReentrantLock();
 
     public E get(int index) {  // 读：无锁，直接读当前数组
@@ -47,6 +47,21 @@ public class CopyOnWriteArrayList<E> {
 3. **不可变对象 + 引用替换**与 [CAS](/java/intermediate/concurrent/09-cas-atomics/)
    是同一种思想的两条路：**不改旧值，只发布新值**——COW 用锁保证
    发布不丢，CAS 用重试保证发布不丢。
+
+读写两条路径与唯一的发布点：
+
+```mermaid
+flowchart TB
+    R["读线程 × N<br/>完全无锁"] -->|"永远只读引用当前指向的数组"| REF
+    W["写线程（排队）<br/>ReentrantLock 写写互斥"] -->|"Arrays.copyOf 复制一份<br/>在副本上修改"| NEW["新数组"]
+    NEW -->|"改完换引用<br/>volatile 保证读者立即可见"| REF["volatile Object[] array<br/>唯一的发布点"]
+    REF --> OLD["旧数组<br/>一旦发布，永不修改"]
+    IT["迭代器"] -->|"创建时抓住当时的旧数组<br/>快照语义，永不抛 CME"| OLD
+
+    class REF hl
+    class OLD hl
+    classDef hl stroke-width:1.5px
+```
 
 ## 迭代器：快照语义
 

@@ -52,6 +52,22 @@ CompletableFuture<Order> order =
         .thenCombine(stockFuture, (cart, stock) -> createOrder(cart, stock));
 ```
 
+上面下单流程的编排结构——两路异步在 Combine 处汇合，异常沿链传染、
+链尾必须有人兜底：
+
+```mermaid
+flowchart LR
+    U["supplyAsync<br/>查用户 userRpc"] -->|"thenCompose 衔接"| C["supplyAsync<br/>查购物车 cartRpc"]
+    S["supplyAsync<br/>查库存 stockFuture"] -->|"thenCombine 合并"| M["createOrder<br/>两路结果合一"]
+    C --> M
+    M --> A["thenAccept<br/>链尾收口"]
+    A -.->|"异常沿链向下游传染"| H["exceptionally / handle<br/>没人接会被静默吞掉"]
+
+    class M hl
+    class H hl
+    classDef hl stroke-width:1.5px
+```
+
 **Async 后缀**（`thenApplyAsync`）决定"这一步在哪个线程跑"：不带 =
 回调可能在上一步完成或调用线程里就近执行；带 = 强制丢线程池。需要
 线程隔离时显式加。

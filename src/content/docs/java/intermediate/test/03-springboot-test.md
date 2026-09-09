@@ -20,6 +20,19 @@ level: intermediate
 切片验证"框架接线和我的注解写对了"，全量测试只留关键路径——金字塔，
 不要冰淇淋筒。
 
+四个层级画成一张选择图：
+
+```mermaid
+flowchart LR
+    U["纯单测<br/>JUnit + Mockito<br/>不起 Spring，数量占大头"] -->|"要测框架接线"| W["@WebMvcTest<br/>只装 MVC 一角<br/>业务 Bean 用 @MockBean 顶替"]
+    U -->|"要测 SQL 映射"| D["@DataJpaTest<br/>Repository + 内嵌 H2<br/>事务自动回滚"]
+    W -->|"装配正确性 / 端到端"| F["@SpringBootTest<br/>整容器 RANDOM_PORT<br/>+ Testcontainers"]
+    D --> F
+
+    class U hl
+    classDef hl stroke-width:1.5px
+```
+
 ## @WebMvcTest：只测 Controller 这一层
 
 ```java

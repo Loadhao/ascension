@@ -22,6 +22,30 @@ synchronized (from) {            // 1: 锁 a   2: 锁 b
 单个线程"拿一把锁"永远不会死锁；**死锁是并发环境下"持有并等待"
 交织出的环**。
 
+环是怎么画出来的、顺序加锁后为什么画不出来：
+
+```mermaid
+flowchart TB
+    subgraph DEAD["死锁：持有并等待交织成环"]
+        direction LR
+        T1["线程 1<br/>transfer(a, b)"] -->|"已持有"| LA["锁 a"]
+        T2["线程 2<br/>transfer(b, a)"] -->|"已持有"| LB["锁 b"]
+        T1 -->|"等待"| LB
+        T2 -->|"等待"| LA
+    end
+    subgraph FIX["修复：全局按 id 顺序加锁，环画不出来"]
+        direction LR
+        T3["线程 1"] -->|"① 先拿小账号"| S1["锁 小账号"]
+        T4["线程 2"] -->|"① 先拿，排队等待"| S1
+        T3 -->|"② 再拿大账号"| S2["锁 大账号"]
+        T4 -->|"等 ① 释放后才拿"| S2
+    end
+
+    class LA bad
+    class LB bad
+    classDef bad stroke-width:1.5px
+```
+
 ## 四个必要条件与对应破坏法
 
 死锁成立必须**同时**满足四条件，破坏任意一个即免疫：

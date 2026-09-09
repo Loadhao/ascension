@@ -26,6 +26,22 @@ Spring Boot 的配置哲学是**外部化配置**：构建产物不变，配置�
 容器化时代这条链简化成三步：**镜像里放 application.yml 默认值 →
 K8s ConfigMap 挂环境变量/文件覆盖 → 启动参数兜底**。
 
+覆盖链画成一张图，配置中心与容器的位置也标出来：
+
+```mermaid
+flowchart TB
+    CMD["① 命令行参数<br/>--server.port=8081"] -->|"覆盖"| ENV["② 操作系统环境变量<br/>SERVER_PORT（K8s ConfigMap 注入）"]
+    ENV -->|"覆盖"| PROF["③ application-{profile}.yml"]
+    CC["配置中心<br/>Nacos / Apollo<br/>动态推送热更新"] -.->|"远程属性源插到 Environment 前部<br/>压过本地文件"| PROF
+    PROF -->|"覆盖"| BASE["④ application.yml<br/>镜像内默认值"]
+    BASE -->|"覆盖"| DEF["⑤ @PropertySource / 代码默认值"]
+
+    class CMD hl
+    class ENV hl
+    class CC hl
+    classDef hl stroke-width:1.5px
+```
+
 ## Profile：一套代码多套配置
 
 `application-dev.yml` / `application-prod.yml` 按
