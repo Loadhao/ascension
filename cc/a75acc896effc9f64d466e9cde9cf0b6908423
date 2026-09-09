@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1758
+src/content/docs/ai/intermediate/llm/05-token-cost.md
+  h_9324126a55eff3 1-88
+src/data/graphs/ai.json
+  h_9324126a55eff3 11,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cca75acc896effc9f64d466e9cde9cf0b6908423",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
