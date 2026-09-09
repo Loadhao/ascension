@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1185
+src/content/docs/distributed/intermediate/case-studies/06-sensitive-words.md
+  h_9324126a55eff3 1-79
+src/data/graphs/distributed.json
+  h_9324126a55eff3 27,80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "fe8dc05a3432743f8b63a843c73e52435f9e0c80",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
