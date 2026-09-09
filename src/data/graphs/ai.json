@@ -3,6 +3,7 @@
     { "id": "root", "label": "AI", "group": "核心" },
     { "id": "ml", "label": "机器学习基础", "href": "/ai/basic/foundation/01-machine-learning/", "group": "基础" },
     { "id": "dl", "label": "深度学习", "href": "/ai/basic/foundation/02-deep-learning/", "group": "基础" },
+    { "id": "transformer", "label": "Transformer", "href": "/ai/basic/foundation/03-transformer/", "group": "基础" },
     { "id": "llm", "label": "大模型 LLM", "href": "/ai/intermediate/llm/01-llm/", "group": "应用" },
     { "id": "prompt", "label": "提示工程", "href": "/ai/intermediate/llm/02-prompt-engineering/", "group": "应用" },
     { "id": "adapter", "label": "落地选型", "href": "/ai/intermediate/llm/03-adapter-selection/", "group": "应用" },
@@ -37,7 +38,8 @@
   "edges": [
     { "source": "root", "target": "ml" },
     { "source": "ml", "target": "dl" },
-    { "source": "dl", "target": "llm" },
+    { "source": "dl", "target": "transformer", "label": "自注意力底座" },
+    { "source": "transformer", "target": "llm", "label": "Decoder-only 即 LLM" },
     { "source": "llm", "target": "prompt" },
     { "source": "prompt", "target": "adapter", "label": "选型决策" },
     { "source": "adapter", "target": "rag", "label": "知识问题走 RAG" },
