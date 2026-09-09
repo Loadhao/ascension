@@ -4,6 +4,8 @@ description: 域名层级与解析八步、递归与迭代查询、常见记录�
 level: basic
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 域名是一棵树
 
 `api.example.com` 从右往左读层级：`com` 顶级域 → `example` 权威域
@@ -32,6 +34,10 @@ sequenceDiagram
     A-->>S: IP 地址（含 TTL）
     S-->>B: 返回并缓存
 ```
+
+递归 + 迭代的两段式问路按帧走一遍：
+
+<AlgorithmVizIsland demo="dns-lookup" />
 
 - **递归 vs 迭代**：客户端 → 本地 DNS 是**递归**（你必须给我最终
   答案）；本地 DNS → 根/顶级/权威是**迭代**（一级级问路，你自己

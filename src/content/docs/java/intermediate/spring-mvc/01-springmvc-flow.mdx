@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 先立住一个事实：MVC 的核心是个 Servlet
 
 `DispatcherServlet` 继承自 `HttpServlet`——Spring MVC 不是魔法，是
@@ -32,6 +34,10 @@ flowchart TB
     class DS hl
     classDef hl stroke-width:1.5px
 ```
+
+九步流水线按帧走一遍（两站考点：HandlerMapping 与 HandlerAdapter）：
+
+<AlgorithmVizIsland demo="springmvc-flow" />
 
 两个中间层是考点密集区：
 

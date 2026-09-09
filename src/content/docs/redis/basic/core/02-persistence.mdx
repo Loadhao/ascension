@@ -4,6 +4,8 @@ description: RDB 的 fork 与写时复制、AOF 刷盘策略与重写、混合�
 level: basic
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 两条路线
 
 内存数据库断电即失，Redis 提供两条持久化路线：
@@ -40,6 +42,10 @@ COW 让子进程拍到的永远是 fork 那一刻的"照片"，但代价是**主
 
 自动触发：`save 900 1`（15 分钟 1 次修改）、`save 300 10`、`save 60 10000`
 任一满足即 bgsave；主从全量同步也走 RDB。
+
+bgsave 的 fork + COW 与 AOF 重写按帧走一遍：
+
+<AlgorithmVizIsland demo="redis-persist" />
 
 ## AOF：命令追加 + 刷盘三档
 

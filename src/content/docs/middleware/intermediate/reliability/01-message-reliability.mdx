@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 可靠性是全链路木桶
 
 消息从生产到消费要跨三段，**每一段都可能丢**，可靠性方案 = 三段
@@ -48,6 +50,10 @@ flowchart LR
 - 处理失败：重试队列 + 死信队列（DLQ）兜底，别无限重试堵住正常
   消费。
 - 忌讳：**先 ack 再处理**——ack 后进程崩了，这条消息就永久没了。
+
+三道闸与补偿、死信兜底的全链路按帧放一遍：
+
+<AlgorithmVizIsland demo="mw-gates" />
 
 ## 二、不重：承认重复，用幂等消灭
 

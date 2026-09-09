@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 核心一句话
 
 > Explicit plans keep long-running work visible and correctable.
@@ -98,6 +100,10 @@ if rounds_since_todo >= 3 and messages:
 
 **关键洞察**：todo\_write 不给 Agent 增加任何**执行能力**，它增加的是
 **规划能力**。dispatch 机制不变，新工具仍然走 `TOOL_HANDLERS[block.name]` 分发。
+
+计划-执行-观察的循环怎么转，按帧走一遍：
+
+<AlgorithmVizIsland demo="ai-agent-loop" />
 
 ## 走查案例：一次三步重构的完整经过
 

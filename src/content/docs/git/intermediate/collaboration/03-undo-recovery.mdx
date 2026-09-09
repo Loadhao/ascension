@@ -5,6 +5,8 @@ level: intermediate
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 选型逻辑：按错误传播到的区域选命令
 
 Git 的「撤销」不是一个命令，关键问题是：**改动现在走到哪一步了？**
@@ -42,6 +44,10 @@ git reflog                          # 查看 HEAD 移动历史
 git reset --hard HEAD@{2}           # 回到两步前的位置
 git branch rescue <commit-hash>     # 或直接把可疑提交固定成分支
 ```
+
+soft / mixed / hard 各停在三层树的哪一层，按帧对照：
+
+<AlgorithmVizIsland demo="git-reset" />
 
 ## stash：临时存档
 

@@ -2315,6 +2315,541 @@ function nginxLifecycle(): FlowVizConfig {
 	};
 }
 
+/** MySQL 一条 SELECT 的旅程：连接器 → 分析/优化 → 执行器 ↔ 引擎逐行取数 */
+function mysqlQuery(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: "一条 SELECT 的旅程比 UPDATE 简单——没有日志与两阶段提交，重点在 Server 层三步与引擎取数。查询缓存 8.0 已移除：命中率极低、任何更新都清缓存，收益为负。",
+	});
+	frames.push({
+		active: ['conn'],
+		hotEdges: ['c1'],
+		packets: [{ edge: 'c1', at: 0.5, tone: 'req', label: 'SELECT …' }],
+		note: '连接器：TCP 握手、账号密码鉴权、拿到权限表快照——改权限只对新连接生效的原因。长连接省下握手，但内存随命令堆积，靠连接池或定期 reset 兜住。',
+	});
+	frames.push({
+		active: ['opt'],
+		hotEdges: ['c2'],
+		packets: [{ edge: 'c2', at: 0.5, tone: 'data', label: 'AST' }],
+		done: ['conn'],
+		note: '分析器：词法 + 语法解析出「这是一条查询」（ERROR 1064 这层抛）；优化器：决定用哪个索引、join 什么顺序——执行计划在这定型，explain 看的就是它的决策。',
+	});
+	frames.push({
+		active: ['exec'],
+		hotEdges: ['c3'],
+		packets: [{ edge: 'c3', at: 0.5, tone: 'req', label: '按计划执行' }],
+		done: ['conn', 'opt'],
+		note: '执行器：先做表级权限校验（所以存储引擎看不到鉴权逻辑），然后按计划调用 InnoDB 的接口取数。',
+	});
+	frames.push({
+		active: ['innodb'],
+		hotEdges: ['c4'],
+		packets: [{ edge: 'c4', at: 0.5, tone: 'data', label: '定位数据页' }],
+		done: ['conn', 'opt', 'exec'],
+		note: 'InnoDB：B+ 树从根到叶定位数据页——命中索引通常只要 3~4 层；按 where 过滤后逐行交还执行器。',
+	});
+	frames.push({
+		active: ['exec'],
+		hotEdges: ['c4', 'c3', 'c2', 'c1'],
+		packets: [
+			{ edge: 'c4', at: 0.25, tone: 'resp', label: '行' },
+			{ edge: 'c1', at: 0.35, tone: 'resp', label: '结果集' },
+		],
+		done: ['conn', 'opt', 'exec', 'innodb'],
+		note: '执行器与引擎逐行交互取完数据，结果集写回客户端——读路径不落 redo/binlog，没有提交环节。',
+	});
+	frames.push({
+		done: ['client', 'conn', 'opt', 'exec', 'innodb'],
+		note: '复盘：连接器一次付成本，分析/优化每条都走，执行器与引擎逐行交互。慢查询排障沿这条链看：连接数、执行计划（explain）、引擎扫描行数。',
+	});
+
+	return {
+		title: '一条 SELECT 的旅程 · Server 层与引擎交互',
+		height: 380,
+		nodes: [
+			{ id: 'client', label: '客户端', x: 0.05, y: 0.18 },
+			{ id: 'conn', label: '连接器', sub: '鉴权 · 连接管理', x: 0.27, y: 0.18 },
+			{ id: 'opt', label: '分析 + 优化器', sub: '解析 · 选执行计划', x: 0.53, y: 0.18, hw: 70 },
+			{ id: 'exec', label: '执行器', sub: '调引擎接口', x: 0.79, y: 0.18 },
+			{ id: 'innodb', label: 'InnoDB', sub: 'B+ 树取数', x: 0.6, y: 0.78, hw: 66 },
+		],
+		edges: [
+			{ id: 'c1', from: 'client', to: 'conn', both: true },
+			{ id: 'c2', from: 'conn', to: 'opt' },
+			{ id: 'c3', from: 'opt', to: 'exec' },
+			{ id: 'c4', from: 'exec', to: 'innodb', both: true },
+		],
+		frames,
+	};
+}
+
+/** DNS 八步缓存链：递归问本地，本地迭代问根/顶级/权威，缓存按 TTL */
+function dnsLookup(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: 'DNS 解析 = 两段式：客户端到本地 DNS 是递归（必须给最终答案），本地 DNS 到根/顶级/权威是迭代（一级级问路）。缓存无处不在，按记录的 TTL 过期。',
+	});
+	frames.push({
+		active: ['local'],
+		hotEdges: ['rec'],
+		packets: [{ edge: 'rec', at: 0.4, tone: 'req', label: '查 api.example.com' }],
+		badges: { browser: '缓存 miss' },
+		note: '浏览器缓存、hosts 文件都没有 → 问本地 DNS（运营商或 8.8.8.8）——递归开始：你必须给我最终答案。',
+	});
+	frames.push({
+		active: ['root'],
+		hotEdges: ['i1'],
+		packets: [{ edge: 'i1', at: 0.5, tone: 'req', label: '问根' }],
+		badges: { local: '缓存 miss' },
+		note: '本地 DNS 也没缓存 → 迭代开始：先问根服务器——「谁管 .com？」',
+	});
+	frames.push({
+		active: ['tld'],
+		hotEdges: ['i1', 'i2'],
+		packets: [
+			{ edge: 'i1', at: 0.8, tone: 'resp', label: '.com 在这' },
+			{ edge: 'i2', at: 0.4, tone: 'req', label: '问 com' },
+		],
+		note: '根服务器答：.com 顶级域的地址在这——本地 DNS 转身去问顶级域。',
+	});
+	frames.push({
+		active: ['auth'],
+		hotEdges: ['i2', 'i3'],
+		packets: [
+			{ edge: 'i2', at: 0.8, tone: 'resp', label: '权威在这' },
+			{ edge: 'i3', at: 0.35, tone: 'req', label: '问权威' },
+		],
+		note: '顶级域答：example.com 的权威 NS 在这——本地 DNS 直接问权威服务器。',
+	});
+	frames.push({
+		active: ['local'],
+		hotEdges: ['i3'],
+		packets: [{ edge: 'i3', at: 0.85, tone: 'resp', label: 'IP · TTL 300' }],
+		badges: { local: '缓存 · TTL 300' },
+		note: '权威给出 A 记录 + TTL——本地 DNS 缓存一份。「换 IP 要提前调小 TTL」的原因就在这：缓存要等它自然过期。',
+	});
+	frames.push({
+		done: ['browser', 'local', 'root', 'tld', 'auth'],
+		hotEdges: ['rec'],
+		packets: [{ edge: 'rec', at: 0.7, tone: 'resp', label: 'IP 返回' }],
+		badges: { browser: '也缓存一份' },
+		note: '本地 DNS 把答案递归返回浏览器，浏览器再缓存一层——八步缓存链走完，后续请求命中任意一层缓存都会短路。',
+	});
+
+	return {
+		title: 'DNS 解析 · 递归 + 迭代的八步缓存链',
+		height: 380,
+		nodes: [
+			{ id: 'browser', label: '浏览器', x: 0.07, y: 0.42 },
+			{ id: 'local', label: '本地 DNS', sub: '递归解析器', x: 0.34, y: 0.42 },
+			{ id: 'root', label: '根服务器', sub: '. ', x: 0.62, y: 0.1 },
+			{ id: 'tld', label: '顶级域', sub: 'com', x: 0.88, y: 0.1 },
+			{ id: 'auth', label: '权威服务器', sub: 'example.com', x: 0.88, y: 0.74 },
+		],
+		edges: [
+			{ id: 'rec', from: 'browser', to: 'local', both: true },
+			{ id: 'i1', from: 'local', to: 'root', both: true },
+			{ id: 'i2', from: 'root', to: 'tld', both: true },
+			{ id: 'i3', from: 'tld', to: 'auth', both: true },
+		],
+		frames,
+	};
+}
+
+/** SpringMVC doDispatch 九步：过滤器 → 前端控制器 → 映射/适配 → 返回值处理 */
+function springmvcFlow(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: 'SpringMVC 的核心是一个 Servlet：DispatcherServlet.doDispatch 九步流水线。走一遍，考点最密的两个中间层：HandlerMapping 与 HandlerAdapter。',
+	});
+	frames.push({
+		active: ['filter'],
+		hotEdges: ['e1'],
+		packets: [{ edge: 'e1', at: 0.4, tone: 'req', label: '请求' }],
+		note: '①过滤器链先跑——Filter 是 Servlet 容器规范的，不属于 MVC 体系，编码/鉴权常挂在这。',
+	});
+	frames.push({
+		active: ['ds'],
+		hotEdges: ['e2'],
+		packets: [{ edge: 'e2', at: 0.5, tone: 'req', label: 'doDispatch' }],
+		done: ['filter'],
+		note: '②DispatcherServlet.doDispatch 接管——前端控制器的总调度开始。',
+	});
+	frames.push({
+		active: ['hm'],
+		hotEdges: ['e3'],
+		packets: [{ edge: 'e3', at: 0.5, tone: 'data', label: '查注册表' }],
+		done: ['filter', 'ds'],
+		note: '③HandlerMapping：按 URL + 方法 + 条件匹配出 HandlerExecutionChain（Handler + 一串拦截器）——@RequestMapping 启动期就注册成了 Map。',
+	});
+	frames.push({
+		active: ['pre'],
+		hotEdges: ['e4'],
+		packets: [{ edge: 'e4', at: 0.5, tone: 'req', label: 'preHandle' }],
+		done: ['filter', 'ds', 'hm'],
+		note: '④拦截器 preHandle：登录校验这类前置逻辑，返回 false 直接短路后续所有步骤。',
+	});
+	frames.push({
+		active: ['ctrl'],
+		hotEdges: ['e5'],
+		packets: [{ edge: 'e5', at: 0.5, tone: 'req', label: '适配调用' }],
+		done: ['filter', 'ds', 'hm', 'pre'],
+		note: '⑤⑥⑦HandlerAdapter 用统一姿势调用五花八门的处理器（适配器模式的教科书现场），参数解析 / 消息转换后执行 @Controller 方法。',
+	});
+	frames.push({
+		active: ['rv'],
+		hotEdges: ['e6'],
+		packets: [{ edge: 'e6', at: 0.5, tone: 'data', label: '返回值' }],
+		done: ['filter', 'ds', 'hm', 'pre', 'ctrl'],
+		note: '⑧返回值处理：@ResponseBody 走 MessageConverter 直接写 JSON；普通返回走 ViewResolver 渲染视图。',
+	});
+	frames.push({
+		done: ['filter', 'ds', 'hm', 'pre', 'ctrl', 'rv', 'post'],
+		note: '⑨拦截器 postHandle / afterCompletion 收尾，响应回客户端。链路任何一步抛异常，都会被 @ControllerAdvice 的异常处理器兜住。',
+	});
+
+	return {
+		title: 'SpringMVC · doDispatch 九步流水线',
+		height: 400,
+		nodes: [
+			{ id: 'filter', label: '过滤器链', sub: '容器层', x: 0.06, y: 0.16 },
+			{ id: 'ds', label: 'DispatcherServlet', sub: 'doDispatch', x: 0.31, y: 0.16, hw: 78 },
+			{ id: 'hm', label: 'HandlerMapping', sub: 'URL → Handler', x: 0.58, y: 0.16, hw: 72 },
+			{ id: 'pre', label: 'preHandle', sub: '拦截器', x: 0.84, y: 0.16 },
+			{ id: 'ctrl', label: 'Controller', sub: '@RequestMapping', x: 0.84, y: 0.74 },
+			{ id: 'rv', label: '返回值处理', sub: 'JSON / 视图', x: 0.53, y: 0.74 },
+			{ id: 'post', label: 'afterCompletion', sub: '拦截器收尾', x: 0.23, y: 0.74, hw: 68 },
+		],
+		edges: [
+			{ id: 'e1', from: 'filter', to: 'ds' },
+			{ id: 'e2', from: 'ds', to: 'hm' },
+			{ id: 'e3', from: 'hm', to: 'pre' },
+			{ id: 'e4', from: 'pre', to: 'ctrl' },
+			{ id: 'e5', from: 'ctrl', to: 'rv' },
+			{ id: 'e6', from: 'rv', to: 'post' },
+		],
+		frames,
+	};
+}
+
+/** Redis 持久化：RDB 的 fork+CoW 快照与 AOF 的追加+重写 */
+function redisPersist(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: 'Redis 持久化两条路线：RDB 是某一瞬间的照片（fork + 写时复制），AOF 是每条写命令的日志（追加 + 三档刷盘）。bgsave 和 AOF 重写共享同一套 fork 魔法。',
+	});
+	frames.push({
+		active: ['child'],
+		hotEdges: ['fork'],
+		packets: [{ edge: 'fork', at: 0.5, tone: 'req', label: 'fork()' }],
+		note: 'bgsave：主进程 fork 出子进程——父子共享同一份物理内存页，子进程看到的永远是 fork 瞬间的「照片」，主进程继续服务。',
+	});
+	frames.push({
+		active: ['file'],
+		hotEdges: ['persist'],
+		packets: [{ edge: 'persist', at: 0.5, tone: 'data', label: '遍历写快照' }],
+		done: ['main'],
+		note: '子进程遍历内存数据写临时 RDB 文件，写完原子替换旧文件——期间主进程的读写完全不受阻塞。',
+	});
+	frames.push({
+		active: ['main'],
+		hotEdges: ['w'],
+		packets: [{ edge: 'w', at: 0.5, tone: 'req', label: 'SET k1 v1' }],
+		badges: { main: 'CoW：复制该页' },
+		note: '主进程这时改数据？操作系统把被改的页复制一份给主进程改——改多少复制多少，快照期间内存可能接近翻倍，部署容量要留这份余量（极端时 OOM 风险）。',
+	});
+	frames.push({
+		active: ['main'],
+		hotEdges: ['w', 'append'],
+		packets: [
+			{ edge: 'w', at: 0.4, tone: 'req', label: '写命令' },
+			{ edge: 'append', at: 0.55, tone: 'data', label: '追加' },
+		],
+		badges: { file: 'AOF 追加中' },
+		note: 'AOF 路线：每条写命令先进缓冲再追加文件。刷盘三档：always 最多丢 1 条最慢、everysec（默认）后台线程每秒刷最多丢 1 秒、no 交给 OS 最快最不安全。',
+	});
+	frames.push({
+		active: ['child'],
+		hotEdges: ['fork', 'persist'],
+		packets: [
+			{ edge: 'fork', at: 0.5, tone: 'req', label: 'fork() 重写' },
+			{ edge: 'persist', at: 0.5, tone: 'data', label: '最小命令集' },
+		],
+		badges: { file: 'AOF 重写中' },
+		note: '文件太长恢复慢 → bgrewriteaof：同样 fork 子进程，按当前内存状态反向生成最小等价命令集（100 次 incr 合并成一条 set）。期间新写命令进重写缓冲，最后补进新文件。',
+	});
+	frames.push({
+		done: ['main', 'child', 'file'],
+		badges: { file: 'RDB + AOF 混合' },
+		note: '复盘：4.0+ 推荐混合持久化——RDB 快照打底（恢复快）+ 增量 AOF（丢得少）。两者都靠 fork + COW，大实例都要给快照期间的内存翻倍留余量。',
+	});
+
+	return {
+		title: 'Redis 持久化 · RDB 快照与 AOF 重写',
+		height: 380,
+		nodes: [
+			{ id: 'main', label: 'Redis 主进程', sub: '继续服务', x: 0.18, y: 0.2 },
+			{ id: 'child', label: 'fork 子进程', sub: '写文件不阻塞主', x: 0.52, y: 0.2 },
+			{ id: 'file', label: '磁盘文件', sub: 'RDB / AOF', x: 0.84, y: 0.2, shape: 'doc' },
+			{ id: 'wreq', label: '客户端写', x: 0.18, y: 0.76 },
+		],
+		edges: [
+			{ id: 'fork', from: 'main', to: 'child' },
+			{ id: 'persist', from: 'child', to: 'file' },
+			{ id: 'w', from: 'wreq', to: 'main' },
+			{ id: 'append', from: 'main', to: 'file', dashed: true },
+		],
+		frames,
+	};
+}
+
+/** git reset 三层回退 + reflog 找回 + revert 公共分支正解 */
+function gitReset(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { wt: '改了', idx: 'add 过', repo: 'C2 已提交' },
+		note: '撤销改动的本质是操作「三棵树」：工作区 → 暂存区 → 本地仓库。reset 的三种模式区别只有一件事——回退停在哪一层。',
+	});
+	frames.push({
+		badges: { wt: '改动还在', idx: '改动还在', repo: 'HEAD → C1' },
+		note: 'reset --soft HEAD~1：只移动分支指针，暂存区与工作区原封不动——改动全留在暂存区，适合重新组织后再提交。',
+	});
+	frames.push({
+		badges: { wt: '改动还在', idx: '已清空', repo: 'HEAD → C1' },
+		note: 'reset --mixed（默认）：指针 + 暂存区一起退——改动从暂存区退回工作区，重新挑选着 add。',
+	});
+	frames.push({
+		dim: ['wt'],
+		badges: { wt: '改动消失', idx: '已清空', repo: 'HEAD → C1' },
+		note: 'reset --hard：三层全部拉回 C1——工作区未提交的改动直接消失。私有分支慎用；不可恢复？往下看 reflog。',
+	});
+	frames.push({
+		dim: ['wt'],
+		badges: { repo: 'reflog · HEAD 轨迹' },
+		note: 'reflog 记录了 HEAD 的每一次移动：git reset --hard HEAD@{2} 就能穿越回去，「丢失」的提交依然找得回——最后的救命稻草。',
+	});
+	frames.push({
+		done: ['wt', 'idx', 'repo'],
+		badges: { repo: 'revert 反向提交' },
+		note: '已 push 到公共分支？别 reset（改历史）——git revert 生成一个「反向提交」抵消旧提交，历史不被改写，是公共分支唯一正解。',
+	});
+	frames.push({
+		done: ['wt', 'idx', 'repo'],
+		badges: { repo: 'revert 反向提交' },
+		note: '复盘：soft 动一层（仓库）、mixed 动两层（+暂存）、hard 动三层（+工作区）；公共分支用 revert；stash 是第四条路——临时存档，回来再 pop。',
+	});
+
+	return {
+		title: '撤销三层树 · soft / mixed / hard 与 revert',
+		height: 350,
+		nodes: [
+			{ id: 'wt', label: '工作区', sub: '你的编辑', x: 0.16, y: 0.3 },
+			{ id: 'idx', label: '暂存区', sub: '待提交', x: 0.5, y: 0.3 },
+			{ id: 'repo', label: '本地仓库', sub: '提交历史', x: 0.84, y: 0.3 },
+		],
+		edges: [
+			{ id: 'add', from: 'wt', to: 'idx', label: 'git add' },
+			{ id: 'commit', from: 'idx', to: 'repo', label: 'git commit' },
+		],
+		frames,
+	};
+}
+
+/** MQ 可靠性三道闸：生产端确认 / Broker 持久化副本 / 消费端手动 ack */
+function mwGates(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: '消息不丢是全链路木桶：生产端、Broker、消费端三段各设一道闸——任何一段失守，消息就可能在那一环蒸发。',
+	});
+	frames.push({
+		active: ['producer'],
+		hotEdges: ['send', 'comp'],
+		packets: [
+			{ edge: 'send', at: 0.4, tone: 'req', label: '同步发送' },
+			{ edge: 'comp', at: 0.5, tone: 'data', label: '失败落地补偿' },
+		],
+		note: '闸一（生产端）：发出去才算数——RabbitMQ confirm、Kafka acks=all、RocketMQ 同步发送；失败重试，仍不行落地本地消息表定时补偿。忌讳：异步发送不关心回执。',
+	});
+	frames.push({
+		active: ['broker'],
+		done: ['producer'],
+		note: '闸二（Broker）：存下来才可靠——持久化（RabbitMQ 交换机/队列/消息三件套 durable、RocketMQ 同步刷盘）+ 副本（Kafka 3 副本 min.insync.replicas=2、主从同步复制）。刷盘与副本是「性能换可靠」的两个独立旋钮。',
+	});
+	frames.push({
+		active: ['consumer'],
+		hotEdges: ['deliver'],
+		packets: [{ edge: 'deliver', at: 0.4, tone: 'data', label: '投递' }],
+		done: ['producer', 'broker'],
+		note: '闸三（消费端）：处理完才确认——手动 ack、关自动提交位移。忌讳「先 ack 再处理」：ack 后进程崩了，这条消息就永久没了。',
+	});
+	frames.push({
+		active: ['dlq'],
+		hotEdges: ['dlq'],
+		packets: [{ edge: 'dlq', at: 0.5, tone: 'data', label: '重试耗尽 → 死信' }],
+		done: ['producer', 'broker'],
+		note: '消费失败：重试队列几轮后进死信队列兜底 + 告警——别无限重试堵住正常消费。',
+	});
+	frames.push({
+		note: '光不丢还不够——重试必然带来重复。「不重」靠幂等：唯一业务键、去重表、状态机检查——承认重复，用幂等消灭重复。',
+	});
+	frames.push({
+		done: ['producer', 'broker', 'consumer', 'comp', 'dlq'],
+		note: '三问速答：会不会丢？看三道闸。会不会重？看幂等。会不会乱？分区内有序、全局有序是奢侈品——按业务设计排序键，重试乱序靠幂等兜住。',
+	});
+
+	return {
+		title: '消息可靠性 · 三段各一道闸',
+		height: 400,
+		nodes: [
+			{ id: 'producer', label: '生产端', sub: '确认 + 重试', x: 0.1, y: 0.22 },
+			{ id: 'broker', label: 'Broker', sub: '持久化 + 副本', x: 0.5, y: 0.22, shape: 'cylinder' },
+			{ id: 'consumer', label: '消费端', sub: '手动 ack', x: 0.9, y: 0.22 },
+			{ id: 'comp', label: '本地消息表', sub: '定时补偿', x: 0.1, y: 0.78, shape: 'doc' },
+			{ id: 'dlq', label: '死信队列', sub: '兜底 + 告警', x: 0.9, y: 0.78, shape: 'doc' },
+		],
+		edges: [
+			{ id: 'send', from: 'producer', to: 'broker', both: true },
+			{ id: 'deliver', from: 'broker', to: 'consumer', both: true },
+			{ id: 'comp', from: 'producer', to: 'comp', dashed: true },
+			{ id: 'dlq', from: 'broker', to: 'dlq', dashed: true },
+		],
+		frames,
+	};
+}
+
+/** AI Agent 循环：拆解计划 → 执行工具 → 观察更新，清单即外部记忆 */
+function aiAgentLoop(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		note: 'Agent 的本质是一个循环：LLM 把目标拆成任务清单，逐个「执行 → 观察 → 更新」，直到清单全绿。看这个循环怎么转。',
+	});
+	frames.push({
+		active: ['llm'],
+		hotEdges: ['g'],
+		packets: [{ edge: 'g', at: 0.4, tone: 'req', label: '目标' }],
+		note: '用户下达目标，LLM 先读上下文，把大目标拆解成有序的小任务——没有计划的 Agent 走哪算哪，长任务必漏项。',
+	});
+	frames.push({
+		active: ['todos'],
+		hotEdges: ['plan'],
+		packets: [{ edge: 'plan', at: 0.5, tone: 'data', label: 'todo_write' }],
+		badges: { todos: '3 项 pending' },
+		note: '计划落成任务清单：每项 pending / in_progress / completed 三态——既是对外可见的进度，也是 LLM 的自我提醒。',
+	});
+	frames.push({
+		active: ['tools'],
+		hotEdges: ['exec'],
+		packets: [{ edge: 'exec', at: 0.4, tone: 'req', label: '调用工具' }],
+		badges: { todos: '1 项 in_progress' },
+		note: '取第一个任务置为 in_progress，LLM 决定调用哪个工具（bash / 读写文件……）——工具结果返回后成为新的上下文。',
+	});
+	frames.push({
+		active: ['llm'],
+		hotEdges: ['exec'],
+		packets: [{ edge: 'exec', at: 0.75, tone: 'resp', label: '观察结果' }],
+		badges: { todos: '1 completed · 2 pending' },
+		note: '观察：符合预期就勾掉当前任务；不符就修正计划——清单允许中途改写，跑偏了能拉回来。',
+	});
+	frames.push({
+		active: ['llm'],
+		badges: { todos: '1 completed · 2 pending' },
+		note: '循环继续：下一个任务 in_progress → 执行 → 观察。上下文有限，清单同时充当「外部记忆」，长任务不漏项的根基。',
+	});
+	frames.push({
+		done: ['goal', 'llm', 'todos', 'tools'],
+		badges: { todos: '全部 completed' },
+		note: '清单全绿 → 向用户汇报。计划-执行-观察的闭环，让 LLM 从「一问一答」变成能自主推进的长任务系统。',
+	});
+
+	return {
+		title: 'AI Agent 循环 · 计划、执行、观察',
+		height: 380,
+		nodes: [
+			{ id: 'goal', label: '用户目标', x: 0.08, y: 0.3 },
+			{ id: 'llm', label: 'LLM', sub: '规划 + 决策', x: 0.42, y: 0.3 },
+			{ id: 'todos', label: '任务清单', sub: '三态推进', x: 0.8, y: 0.1 },
+			{ id: 'tools', label: '工具集', sub: 'bash / 读写文件', x: 0.8, y: 0.62 },
+		],
+		edges: [
+			{ id: 'g', from: 'goal', to: 'llm' },
+			{ id: 'plan', from: 'llm', to: 'todos', both: true },
+			{ id: 'exec', from: 'llm', to: 'tools', both: true },
+		],
+		frames,
+	};
+}
+
+/** MongoDB chunk 迁移：分裂 → balancer → 四步迁移与路由切换 */
+function mongoChunk(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { cfg: 'chunk 默认 64MB' },
+		note: '分片集群里数据按分片键切成 chunk（默认 64MB），路由表在 Config Server，mongos 只是无状态入口。看一个 chunk 怎么在分片间搬家。',
+	});
+	frames.push({
+		active: ['donor'],
+		badges: { donor: 'chunk 写满 → split' },
+		note: '写入把 chunk 撑大 → 触发分裂一分为二；balancer 巡检发现分片间 chunk 数不均 → 选中一对「源 → 目标」开始迁移。',
+	});
+	frames.push({
+		active: ['recipient'],
+		hotEdges: ['mig'],
+		packets: [{ edge: 'mig', at: 0.35, tone: 'data', label: 'clone 数据' }],
+		badges: { donor: '迁移中', recipient: 'clone + 追增量' },
+		note: '迁移①：目标分片把 chunk 数据 clone 过去，随后持续追增量——期间写入仍在源上。',
+	});
+	frames.push({
+		active: ['donor'],
+		hotEdges: ['mig'],
+		packets: [{ edge: 'mig', at: 0.78, tone: 'req', label: '临界区移交' }],
+		badges: { donor: '短暂阻塞写', recipient: '追平增量' },
+		note: '迁移②：短暂临界区内阻塞该 chunk 的写入，把最后的增量搬完——这个窗口要尽量短。',
+	});
+	frames.push({
+		active: ['cfg'],
+		hotEdges: ['cm'],
+		packets: [{ edge: 'cm', at: 0.4, tone: 'req', label: '提交新路由' }],
+		badges: { cfg: '路由指向目标' },
+		note: '迁移③：Config Server 提交新路由表——chunk 的归属正式变更。',
+	});
+	frames.push({
+		done: ['cfg', 'recipient'],
+		dim: ['donor'],
+		badges: { donor: '清理残留', recipient: '接管读写' },
+		note: '迁移④：目标接管读写，源分片清理残留数据。mongos 元数据定时刷新，完成瞬间的路由重试由 driver 自动兜住。',
+	});
+	frames.push({
+		done: ['mongos', 'cfg', 'donor', 'recipient'],
+		badges: { cfg: '路由已更新' },
+		note: '运维要点：迁移吃源/目标分片的 IO 与带宽——业务高峰给 balancer 设 activeWindow 时间窗或直接停掉；分片键一次拍板，选错等于重做集群。',
+	});
+
+	return {
+		title: 'chunk 迁移 · 分裂、balancer 与四步搬家',
+		height: 380,
+		nodes: [
+			{ id: 'mongos', label: 'mongos', sub: '无状态路由入口', x: 0.08, y: 0.2 },
+			{ id: 'cfg', label: 'Config Server', sub: '路由表', x: 0.42, y: 0.2, shape: 'cylinder' },
+			{ id: 'donor', label: '源分片', sub: '迁出方', x: 0.76, y: 0.2, shape: 'cylinder' },
+			{ id: 'recipient', label: '目标分片', sub: '迁入方', x: 0.76, y: 0.76, shape: 'cylinder' },
+		],
+		edges: [
+			{ id: 'q', from: 'mongos', to: 'cfg', both: true },
+			{ id: 'mig', from: 'donor', to: 'recipient', both: true },
+			{ id: 'cm', from: 'donor', to: 'cfg', dashed: true },
+		],
+		frames,
+	};
+}
+
 /** 笔记中可通过 <AlgorithmVizIsland demo="..." /> 引用的架构/流程演示注册表 */
 export const flowDemos: Record<string, FlowVizConfig> = {
 	'mysql-2pc': mysqlTwoPhaseCommit(),
@@ -2349,4 +2884,12 @@ export const flowDemos: Record<string, FlowVizConfig> = {
 	'redis-slot': redisSlot(),
 	'seata-tcc': seataTcc(),
 	'nginx-lifecycle': nginxLifecycle(),
+	'mysql-query': mysqlQuery(),
+	'dns-lookup': dnsLookup(),
+	'springmvc-flow': springmvcFlow(),
+	'redis-persist': redisPersist(),
+	'git-reset': gitReset(),
+	'mw-gates': mwGates(),
+	'ai-agent-loop': aiAgentLoop(),
+	'mongo-chunk': mongoChunk(),
 };

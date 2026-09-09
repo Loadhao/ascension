@@ -4,6 +4,8 @@ description: Server 层与存储引擎层、连接器到执行器的链路、upd
 level: basic
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 两层架构
 
 MySQL 分 **Server 层**（所有内置功能跨引擎通用）和**存储引擎层**
@@ -50,6 +52,10 @@ select * from users where id = 7;
    "执行计划"在这定型（explain 看的就是它的决策）。
 5. **执行器**：先做权限校验（所以存储引擎看不到鉴权逻辑），然后循环
    调用存储引擎接口逐行取数、按 where 过滤、返回结果集。
+
+这条链按帧放一遍（与更新篇的两阶段提交互为对照）：
+
+<AlgorithmVizIsland demo="mysql-query" />
 
 ## 一条更新语句的额外旅程
 

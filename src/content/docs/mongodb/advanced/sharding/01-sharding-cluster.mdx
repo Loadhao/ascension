@@ -5,6 +5,8 @@ level: advanced
 core: true
 ---
 
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
 ## 垂直与水平扩展的取舍
 
 单机扛不住时有两条路：
@@ -74,6 +76,10 @@ flowchart LR
     E --> F["③ Config Server<br/>提交新路由"]
     F --> G["④ 目标接管读写<br/>源清理残留"]
 ```
+
+chunk 从分裂到四步搬家的完整旅程按帧走一遍：
+
+<AlgorithmVizIsland demo="mongo-chunk" />
 
 - 迁移占用源/目标分片的 IO 与网络带宽，**业务高峰应限制 balancer**
   （设置 activeWindow 时间窗，或 `sh.stopBalancer()`）；

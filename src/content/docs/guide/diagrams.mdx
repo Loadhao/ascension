@@ -211,6 +211,39 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 选型原则：**mermaid 讲结构，FlowViz 讲过程**——静态关系、层次、分类仍用 mermaid；
 只有「按时间推进、状态会翻转」的内容才上步进动画，一篇笔记两者混用不冲突。
+对比结论、分区速记类的收尾图另见下方「彩色总结卡」。
+
+## 彩色总结卡（SummaryViz）
+
+一篇笔记读完，把「对比 / 分层」类的结论压缩成一张彩色速记卡：标题是一句话结论，
+彩色面板各管一方，底部放结论胶囊——复习时 10 秒扫完全篇骨架。纯静态渲染，
+不带任何客户端脚本：
+
+<AlgorithmVizIsland demo="string-family" />
+
+新增一张卡三步：
+
+1. 在 `src/data/viz/summaries.ts` 写一个 `SummaryVizConfig` 并注册进 `summaryDemos`
+   （key 用短横线）：
+   - `title` 写**结论**而不是话题名（「Spring 是底层能力框架，Spring Boot 是
+     工程化脚手架」✓，「Spring 和 Spring Boot 的区别」✗）；`badge` 是标题下的
+     胶囊副标；
+   - 对比用 `panels`（2~3 个）：每个面板 `title` + `sub`（一句定位）+ `cells`
+     （短标题 `label` + 一行说明 `desc`，尽量按同一组维度对齐行）；恰好两栏时可加
+     `link` 说明中缝关系（如「没有替代关系，而是基于关系」）；
+   - 分层用 `layers`：自上而下每层 `title` + `sub` + `cells`，适合「线程私有 /
+     共享」「经典三层」这类分区总结；
+   - `takeaways` 放底部结论胶囊，`caption` 是卡片外的一句话总结，两者挑一个够用。
+2. 笔记改为 `.mdx`（`.md` 不支持 import），在合适的小节里
+   `<AlgorithmVizIsland demo="key" />` 引用，正文一句话交代这张卡总结什么。
+3. 颜色只允许写语义色调名 `tone`（blue / teal / green / amber / rose / violet /
+   slate），实际配色由 `custom.css` 的 `--sum-*` 令牌按亮暗主题接管，
+   数据里不允许出现具体颜色值。
+
+选型原则：**mermaid 讲结构，FlowViz 讲过程，SummaryViz 讲总结**——静态关系、
+层次、分类用 mermaid；按时间推进、状态会翻转的内容用 FlowViz；一篇笔记读完
+「谁和谁怎么分工、分几块各管什么」的收尾用总结卡。别用总结卡复述 mermaid
+已画清的结构，也别拿它替代正文论述——它是速记，不是教材。
 
 ## 时序图（sequenceDiagram）
 
