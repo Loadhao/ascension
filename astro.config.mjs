@@ -348,6 +348,7 @@ export default defineConfig({
                         { label: '同源策略与 CORS', link: '/network/basic/http/05-cors/' },
                         { label: 'HTTP 缓存：强缓存与协商缓存', link: '/network/basic/http/06-http-cache/' },
                         { label: 'WebSocket：全双工通信与 HTTP 的关系', link: '/network/basic/http/07-websocket/' },
+                        { label: '密码存储与传输安全', link: '/network/basic/http/08-password-storage/' },
                       ],
                     },
                   ],
