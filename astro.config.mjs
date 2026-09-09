@@ -120,6 +120,42 @@ function remarkPrefixBase(base) {
   return () => (tree) => visit(tree);
 }
 
+// 正文里的外部链接统一新开标签页：延伸阅读等外链点击后不再顶掉当前阅读现场。
+// 仅处理绝对地址（http(s):// 或协议相对 //）且非站点自身域名的 <a>，
+// 锚点、相对路径与站内链接保持当前页跳转；须放在 rehypeMermaid 之后，
+// 让 mermaid 图内 click 链接（SVG <a> 的 xlink:href）一并覆盖。
+function rehypeExternalNewTab(siteUrl) {
+  const siteHost = new URL(siteUrl).host;
+  const visit = (node) => {
+    if (Array.isArray(node)) {
+      node.forEach(visit);
+      return;
+    }
+    if (!node || typeof node !== 'object') return;
+    if (node.type === 'element' && node.tagName === 'a') {
+      const props = node.properties || (node.properties = {});
+      const href =
+        typeof props.href === 'string'
+          ? props.href
+          : typeof props.xLinkHref === 'string'
+            ? props.xLinkHref
+            : '';
+      let host = '';
+      try {
+        host = href ? new URL(href, siteUrl).host : '';
+      } catch {}
+      if (/^(https?:)?\/\//i.test(href) && host !== siteHost) {
+        props.target = '_blank';
+        props.rel = props.rel ? `${props.rel} noopener noreferrer` : 'noopener noreferrer';
+      }
+    }
+    for (const child of Object.values(node)) {
+      if (child && typeof child === 'object') visit(child);
+    }
+  };
+  return () => (tree) => visit(tree);
+}
+
 export default defineConfig({
   site: 'https://loadhao.github.io',
   base: SITE_BASE,
@@ -1926,7 +1962,10 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [remarkPrefixBase(SITE_BASE)],
-      rehypePlugins: [[rehypeMermaid, { mermaidConfig: mermaidStyle }]],
+      rehypePlugins: [
+        [rehypeMermaid, { mermaidConfig: mermaidStyle }],
+        rehypeExternalNewTab('https://loadhao.github.io'),
+      ],
     }),
     // 代码块双主题：跟随站点明暗切换（github-light / github-dark）
     syntaxHighlight: {
