@@ -1,0 +1,24 @@
+src/content/docs/java/basic/collection/06-copyonwritearraylist.md
+  h_9324126a55eff3 18,51-65
+src/content/docs/java/intermediate/concurrent/11-completablefuture.md
+  h_9324126a55eff3 55-70
+src/content/docs/java/intermediate/concurrent/12-deadlock.md
+  h_9324126a55eff3 25-48
+src/content/docs/java/intermediate/spring-boot/03-configuration.md
+  h_9324126a55eff3 29-44
+src/content/docs/java/intermediate/stream/01-stream-principle.md
+  h_9324126a55eff3 100-125
+src/content/docs/java/intermediate/test/03-springboot-test.md
+  h_9324126a55eff3 23-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "bcaca68e33b79e6030f4bbdbbad840a2e99655ca",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
