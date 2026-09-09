@@ -1,0 +1,32 @@
+src/content/docs/ai/intermediate/agent/01-todo-planning.mdx
+  h_9324126a55eff3 8-9,104-107
+src/content/docs/git/intermediate/collaboration/03-undo-recovery.mdx
+  h_9324126a55eff3 8-9,48-51
+src/content/docs/guide/diagrams.mdx
+  h_9324126a55eff3 214-246
+src/content/docs/java/intermediate/spring-mvc/01-springmvc-flow.mdx
+  h_9324126a55eff3 8-9,38-41
+src/content/docs/middleware/intermediate/reliability/01-message-reliability.mdx
+  h_9324126a55eff3 8-9,54-57
+src/content/docs/mongodb/advanced/sharding/01-sharding-cluster.mdx
+  h_9324126a55eff3 8-9,80-83
+src/content/docs/mysql/basic/core/01-sql-execution.mdx
+  h_9324126a55eff3 7-8,56-59
+src/content/docs/network/basic/foundation/02-dns.mdx
+  h_9324126a55eff3 7-8,38-41
+src/content/docs/redis/basic/core/02-persistence.mdx
+  h_9324126a55eff3 7-8,46-49
+src/data/viz/flows.ts
+  h_9324126a55eff3 2318-2852,2887-2894
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8872ed7ed527363fa8b6de31b30730e19b23303c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
