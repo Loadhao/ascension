@@ -1,0 +1,19 @@
+src/content/docs/linux/basic/commands/03-archive-transfer.md
+  s_d9003ab0f795a3::t_38d6b164be75c8 1-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b2c3b865344802576ff9ad6c61d48631d33a2106",
+  "prompts": {},
+  "sessions": {
+    "s_d9003ab0f795a3": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "6980fe89-3d44-4e98-8f05-ad791dc2453c",
+        "model": "cursor-grok-4.6-high"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
