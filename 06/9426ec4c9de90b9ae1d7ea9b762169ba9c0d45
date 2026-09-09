@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1188
+src/content/docs/distributed/intermediate/case-studies/09-sign-in.md
+  h_9324126a55eff3 1-70
+src/data/graphs/distributed.json
+  h_9324126a55eff3 30,86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "069426ec4c9de90b9ae1d7ea9b762169ba9c0d45",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
