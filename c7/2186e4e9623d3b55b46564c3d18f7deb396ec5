@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 278
+src/content/docs/linux/intermediate/system/07-cron-timer.md
+  h_9324126a55eff3 1-83
+src/data/graphs/linux.json
+  h_9324126a55eff3 17,44-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c72186e4e9623d3b55b46564c3d18f7deb396ec5",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
