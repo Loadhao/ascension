@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Vue", "group": "核心" },
+    { "id": "v-react", "label": "响应式系统", "href": "/vue/basic/core/01-reactivity/", "group": "基础" },
+    { "id": "v-comp", "label": "组件模型与数据流", "href": "/vue/basic/core/02-component-model/", "group": "基础" },
+    { "id": "v-compo", "label": "Composition API", "href": "/vue/basic/core/03-composition-api/", "group": "基础" }
+  ],
+  "edges": [
+    { "source": "root", "target": "v-react" },
+    { "source": "root", "target": "v-comp" },
+    { "source": "root", "target": "v-compo" },
+    { "source": "v-react", "target": "v-comp" },
+    { "source": "v-comp", "target": "v-compo" }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "questions": [
+    {
+      "id": "vue-react-001",
+      "noteId": "vue/basic/core/01-reactivity",
+      "type": "single",
+      "difficulty": 3,
+      "q": "Vue 3 响应式改用 Proxy 后，Vue 2 的哪些历史坑被根除？",
+      "options": [
+       "对象新增/删除属性、数组下标赋值都能被劫持并触发更新",
+       "模板编译不再需要构建步骤",
+       "组件不再需要 data 函数返回对象",
+       "computed 从此没有缓存"
+      ],
+      "answer": [0],
+      "hint": "defineProperty 只能劫持初始化时存在的属性；Proxy 拦截一切操作（含新增/删除/下标），代价是放弃 IE11。"
+    },
+    {
+      "id": "vue-destr-002",
+      "noteId": "vue/basic/core/01-reactivity",
+      "type": "single",
+      "difficulty": 4,
+      "q": "reactive 对象解构出 name 后再赋值，界面不更新，原因是？",
+      "options": [
+       "解构出来的是普通值，脱离了 Proxy 代理，依赖收集已断开",
+       "解构触发了 Proxy 的删除陷阱",
+       "Vue 的依赖表容量超限，静默失效",
+       "需要把 reactive 换成 ref 才能解构"
+      ],
+      "answer": [0],
+      "hint": "响应性挂在 Proxy 的 get/set 上：解构等于把值抄走；要保响应用 toRefs 或始终经对象访问。"
+    },
+    {
+      "id": "vue-mixin-003",
+      "noteId": "vue/basic/core/03-composition-api",
+      "type": "single",
+      "difficulty": 3,
+      "q": "组合式函数取代 mixin 的核心优势是？",
+      "options": [
+       "普通函数显式 import：来源清晰、命名隔离、类型可推导",
+       "运行时性能比 mixin 快一个数量级",
+       "只能在 <script setup> 中使用从而限制滥用",
+       "mixin 在 Vue 3 中已被移除"
+      ],
+      "answer": [0],
+      "hint": "mixin 的属性混进 this：来源不明、撞名静默覆盖、TS 难推导；组合式函数回到函数组合的朴素复用。"
+    }
+  ]
+}

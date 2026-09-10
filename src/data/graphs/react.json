@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    { "id": "root", "label": "React", "group": "核心" },
+    { "id": "r-decl", "label": "声明式 UI 与组件", "href": "/react/basic/core/01-declarative-ui/", "group": "基础" },
+    { "id": "r-hooks", "label": "Hooks 心智模型", "href": "/react/basic/core/02-hooks-mental/", "group": "基础" },
+    { "id": "r-render", "label": "渲染流程与 diff", "href": "/react/basic/core/03-render-flow/", "group": "基础" }
+  ],
+  "edges": [
+    { "source": "root", "target": "r-decl" },
+    { "source": "root", "target": "r-hooks" },
+    { "source": "root", "target": "r-render" },
+    { "source": "r-decl", "target": "r-hooks" },
+    { "source": "r-hooks", "target": "r-render" }
+  ]
+}

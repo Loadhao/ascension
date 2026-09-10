@@ -734,6 +734,52 @@ export default defineConfig({
               ],
             },
             {
+              label: 'React',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/react/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '核心概念',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/react/basic/core/' },
+                        { label: '声明式 UI 与组件模型', link: '/react/basic/core/01-declarative-ui/' },
+                        { label: 'Hooks 心智模型', link: '/react/basic/core/02-hooks-mental/' },
+                        { label: '渲染流程与 diff', link: '/react/basic/core/03-render-flow/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              label: 'Vue',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/vue/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '核心概念',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/vue/basic/core/' },
+                        { label: '响应式系统', link: '/vue/basic/core/01-reactivity/' },
+                        { label: '组件模型与单向数据流', link: '/vue/basic/core/02-component-model/' },
+                        { label: 'Composition API 与逻辑复用', link: '/vue/basic/core/03-composition-api/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
               label: 'Python',
               collapsed: true,
               items: [

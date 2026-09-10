@@ -1,0 +1,49 @@
+{
+  "questions": [
+    {
+      "id": "react-snap-001",
+      "noteId": "react/basic/core/02-hooks-mental",
+      "type": "single",
+      "difficulty": 4,
+      "q": "同一事件处理函数里连续三次 setCount(count + 1)，最终 count 只加 1，原因是？",
+      "options": [
+       "三次读到的都是本次渲染的 state 快照，需用函数式更新才会累加",
+       "React 对相同值的连续 setState 自动去重合并",
+       "后两次调用因为组件正在渲染而被丢弃",
+       "count 是常量，setCount 无法修改它"
+      ],
+      "answer": [0],
+      "hint": "每次渲染都有独立的 state 快照；setCount(c => c + 1) 把更新写成基于最新值的队列才是连续累加的正解。"
+    },
+    {
+      "id": "react-key-002",
+      "noteId": "react/basic/core/03-render-flow",
+      "type": "single",
+      "difficulty": 4,
+      "q": "列表头部插入一条数据时，用数组下标做 key 会发生什么？",
+      "options": [
+       "所有行的 key 全体错位，框架误认组件身份，状态错配且白白重渲染",
+       "框架能感知插入，自动给新行分配正确的下标 key",
+       "只是 key 冲突告警，渲染结果不受影响",
+       "列表会被整棵替换，组件状态反而不会错配"
+      ],
+      "answer": [0],
+      "hint": "key 是同层节点的身份判据：下标 key 在头部插入时全体位移，框架认为「第 0 行还是原来那个」，输入框内容等状态就会串行。"
+    },
+    {
+      "id": "react-effect-003",
+      "noteId": "react/basic/core/02-hooks-mental",
+      "type": "single",
+      "difficulty": 4,
+      "q": "useEffect 依赖数组写 [] 却在内部读取后来变化的 state，读到的是？",
+      "options": [
+       "首次渲染的旧快照——闭包捕获的是那次渲染的值，这是漏依赖的经典 bug",
+       "最新值：effect 与 state 天然同步",
+       "undefined，因为 state 在 effect 执行前被回收",
+       "随机值，取决于渲染时序"
+      ],
+      "answer": [0],
+      "hint": "effect 捕获当次渲染的闭包：依赖声明为空就只绑定首帧快照；要把后续变化纳入，就得如实写进依赖数组。"
+    }
+  ]
+}

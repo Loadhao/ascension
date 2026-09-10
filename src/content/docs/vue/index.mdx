@@ -1,0 +1,31 @@
+---
+title: Vue
+description: Vue 方向学习路线与知识地图：响应式系统与 Composition API
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/vue.json';
+
+## 学习路线
+
+点击圆点标记学习状态：○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖**基础 · 核心概念**：响应式系统的机制真相、组件模型与
+单向数据流、Composition API 与逻辑复用。定位是后端工程师的前端
+必备理解——响应式（推模式）与 React 的重渲染（拉模式）对照着学
+最能建立完整心智模型（见 [React 方向](/react/)）。
+
+<RoadmapIsland directionId="vue" />
+
+:::tip[面试冲刺]
+高频问题的一句话答案已汇总在[速答手册](/guide/interview-cheatsheet/)，复习与面试前按图索骥。
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放，右上角按钮可缩放、复位视图；悬停或点按节点可高亮关联关系；点击圆点进入对应笔记，左下图例点按可按分组筛选。
+图谱数据维护在 `src/data/graphs/vue.json`。
+:::

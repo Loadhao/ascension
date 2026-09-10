@@ -1,0 +1,31 @@
+---
+title: React
+description: React 方向学习路线与知识地图：声明式 UI 与 Hooks 心智模型
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/react.json';
+
+## 学习路线
+
+点击圆点标记学习状态：○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖**基础 · 核心概念**：声明式 UI 与组件模型、Hooks 的快照
+心智模型、渲染流程与 diff。定位是后端工程师的前端必备理解——
+机制视角与 Vue 的响应式对照学习效果更佳（见
+[Vue 方向](/vue/)）。
+
+<RoadmapIsland directionId="react" />
+
+:::tip[面试冲刺]
+高频问题的一句话答案已汇总在[速答手册](/guide/interview-cheatsheet/)，复习与面试前按图索骥。
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放，右上角按钮可缩放、复位视图；悬停或点按节点可高亮关联关系；点击圆点进入对应笔记，左下图例点按可按分组筛选。
+图谱数据维护在 `src/data/graphs/react.json`。
+:::
