@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1921
+src/content/docs/ai/intermediate/llm/08-multimodal.md
+  h_9324126a55eff3 1-72
+src/data/graphs/ai.json
+  h_9324126a55eff3 15,60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6a33cac872c1ab4130099fe17011cf11110d9abf",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
