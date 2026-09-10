@@ -1,0 +1,14 @@
+src/content/docs/java/advanced/dubbo/01-architecture.md
+  h_9324126a55eff3 12-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "851e2605cc4f29aa12aaf821426c147e1d3f2c06",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
