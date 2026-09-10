@@ -1,0 +1,19 @@
+astro.config.mjs
+  s_547d4a32939a32::t_dd08bd4a696f66 1343
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "798a186bade98cdeb1fe3993ac1878da34fa22d5",
+  "prompts": {},
+  "sessions": {
+    "s_547d4a32939a32": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "62fe3426-0d4a-4de8-a2ec-04da6d38dde4",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
