@@ -1789,6 +1789,7 @@ export default defineConfig({
                         { label: 'MCP 协议', link: '/ai/intermediate/agent/08-mcp/' },
                         { label: '子代理 Subagent', link: '/ai/intermediate/agent/09-subagent/' },
                         { label: 'Agent 应用评估', link: '/ai/intermediate/agent/10-agent-evaluation/' },
+                        { label: 'RAG 进阶：混合检索与重排', link: '/ai/intermediate/agent/11-rag-advanced/' },
                       ],
                     },
                   ],
