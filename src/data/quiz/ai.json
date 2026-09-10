@@ -390,6 +390,21 @@
       "answer": [0],
       "hint": "三层：Channels 接入 + 唯一 Gateway 收口（默认 18789）+ Workspace 隔离。数据全在自己机器，技能执行前受权限约束。",
       "difficulty": 3
+    },
+    {
+      "id": "ai-token-030",
+      "noteId": "ai/intermediate/llm/01-llm",
+      "type": "multiple",
+      "q": "关于 token 和字符（character）的区别，下列说法正确的有哪些？（多选）",
+      "options": [
+        "token 是分词器从固定词表中切出的子词片段，高频词整块、低频词拆块，每个 token 映射为整数 id 后才进模型",
+        "按字符切分不可行，主要因为序列过长（注意力 O(n²)）且单字符几乎无语义",
+        "模型数不清 strawberry 里有几个 r，是因为训练数据里 r 出现得太少",
+        "中文常见字约 1 字 1 token，而罕用字/emoji 走字节回退可能拆成多个 token，所以同样内容中文往往比英文更费 token"
+      ],
+      "answer": [0, 1, 3],
+      "hint": "字符是给人看的书写单位，token 是模型的处理单位——入口处分词器就把字符换成了 id 序列。数不清 r 不是数据少，而是 strawberry 只是一两个 token，字符级信息被压缩掉了；按词切则是词表爆炸 + OOV，BPE 才是折中。",
+      "difficulty": 3
     }
   ]
 }
