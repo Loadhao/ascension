@@ -1893,6 +1893,7 @@ export default defineConfig({
                         { label: '深度学习', link: '/ai/basic/foundation/02-deep-learning/' },
                         { label: 'Transformer 与自注意力', link: '/ai/basic/foundation/03-transformer/' },
                         { label: 'LoRA：低成本微调的原理', link: '/ai/basic/foundation/04-lora/' },
+                        { label: 'Embedding：语义的向量表示', link: '/ai/basic/foundation/05-embedding/' },
                       ],
                     },
                     {
