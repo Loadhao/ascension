@@ -1933,6 +1933,45 @@ export default defineConfig({
               ],
             },
             {
+              label: 'Kubernetes',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/kubernetes/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '核心概念',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/kubernetes/basic/core/' },
+                        { label: '架构与声明式 API', link: '/kubernetes/basic/core/01-architecture/' },
+                        { label: 'Pod 与对象模型', link: '/kubernetes/basic/core/02-pod-object-model/' },
+                        { label: 'Deployment 与滚动发布', link: '/kubernetes/basic/core/03-deployment-rollout/' },
+                        { label: 'ConfigMap 与 Secret', link: '/kubernetes/basic/core/04-config-secret/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '运维要点',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/kubernetes/intermediate/ops/' },
+                        { label: '探针与生命周期', link: '/kubernetes/intermediate/ops/01-probes-lifecycle/' },
+                        { label: 'Service 与 Ingress', link: '/kubernetes/intermediate/ops/02-service-ingress/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
               label: 'Git',
               collapsed: true,
               items: [

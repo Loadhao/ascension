@@ -1,0 +1,70 @@
+---
+title: Deployment 与滚动发布
+description: 副本维持、滚动更新 maxSurge/maxUnavailable、回滚：无状态服务的标配
+level: basic
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+## 为什么 Pod 之上还要有 Controller
+
+Pod 是「一次性」的：节点挂了 Pod 就没了，不会在别处重建——**自身
+没有自愈能力**。自愈来自上层控制器：
+
+> Deployment → 管理 ReplicaSet → ReplicaSet 维持 Pod 副本
+
+- **ReplicaSet**：盯着「指定模板的 Pod 副本数」，少了就补——但
+  直接用它升级镜像会很别扭（换镜像 = 换模板 = 全量重建）
+- **Deployment**：在 ReplicaSet 之上管**版本**。每次改镜像，新建
+  一个 ReplicaSet，新旧副本**此消彼长**地滚动替换，旧 RS 保留
+  ——这就是滚动发布与回滚的全部秘密
+
+## 滚动发布的两个旋钮
+
+```yaml
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1        # 期望数之上最多多出几个（预算）
+      maxUnavailable: 1  # 期间最多允许多少个不可用（保底）
+```
+
+- `maxSurge` 控制**资源代价**：更新期间最多额外多起几个 Pod
+- `maxUnavailable` 控制**可用性下限**：替换时最多容许多少个不在线
+- 两者可设为数字或百分比；`maxUnavailable=0` 意味着「新 Pod 必须
+  Ready 才准动旧的」——零停机发布的前提是资源预算给足
+
+新旧副本交替的逐帧过程：
+
+<AlgorithmVizIsland demo="k8s-rollout" />
+
+关键细节：新 Pod 必须通过 readiness 探针才算 Ready，Service 才会
+把流量切给它——**发布安全与探针配置直接挂钩**（见
+[探针与生命周期](/kubernetes/intermediate/ops/01-probes-lifecycle/)）。
+
+## 回滚与历史
+
+```bash
+kubectl rollout history deployment/web      # 每个 RS 就是一个版本
+kubectl rollout undo deployment/web         # 回到上一版
+kubectl rollout undo deployment/web \
+  --to-revision=2                           # 回到指定版本
+```
+
+旧 ReplicaSet 不删除（默认保留 `revisionHistoryLimit: 10` 个），
+回滚只是把旧 RS 的副本数调回来、新 RS 归零——**回滚也是一次滚动
+发布**，同样平滑。
+
+## 要点备忘
+
+- Deployment 管 ReplicaSet 管 Pod：版本在 Deployment 层，副本在 RS 层
+- maxSurge 是预算、maxUnavailable 是保底，两者共同决定发布节奏
+- 新 Pod Ready（readiness 通过）才接流量；探针配错 = 发布事故
+- 回滚零成本的前提：别把 revisionHistoryLimit 设成 0
+
+## 延伸阅读
+
+- [Kubernetes 官方文档 · Deployment](https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/)

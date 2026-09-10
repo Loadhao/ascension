@@ -1,0 +1,24 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Kubernetes", "group": "核心" },
+    { "id": "k8s-arch", "label": "架构与声明式 API", "href": "/kubernetes/basic/core/01-architecture/", "group": "基础" },
+    { "id": "k8s-pod", "label": "Pod 与对象模型", "href": "/kubernetes/basic/core/02-pod-object-model/", "group": "基础" },
+    { "id": "k8s-deploy", "label": "Deployment 滚动发布", "href": "/kubernetes/basic/core/03-deployment-rollout/", "group": "基础" },
+    { "id": "k8s-config", "label": "ConfigMap 与 Secret", "href": "/kubernetes/basic/core/04-config-secret/", "group": "基础" },
+    { "id": "k8s-probe", "label": "探针与生命周期", "href": "/kubernetes/intermediate/ops/01-probes-lifecycle/", "group": "运维" },
+    { "id": "k8s-svc", "label": "Service 与 Ingress", "href": "/kubernetes/intermediate/ops/02-service-ingress/", "group": "运维" }
+  ],
+  "edges": [
+    { "source": "root", "target": "k8s-arch" },
+    { "source": "root", "target": "k8s-pod" },
+    { "source": "root", "target": "k8s-deploy" },
+    { "source": "root", "target": "k8s-config" },
+    { "source": "root", "target": "k8s-probe" },
+    { "source": "root", "target": "k8s-svc" },
+    { "source": "k8s-arch", "target": "k8s-pod" },
+    { "source": "k8s-pod", "target": "k8s-deploy" },
+    { "source": "k8s-deploy", "target": "k8s-probe" },
+    { "source": "k8s-probe", "target": "k8s-svc" },
+    { "source": "k8s-config", "target": "k8s-deploy" }
+  ]
+}

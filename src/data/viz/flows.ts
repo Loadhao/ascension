@@ -2850,6 +2850,60 @@ function lcAgentLoop(): FlowVizConfig {
 	};
 }
 
+/** Kubernetes 滚动发布：Deployment 驱动新旧 ReplicaSet 副本此消彼长 */
+function k8sRollout(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { v1: '3 副本', v2: '0 副本' },
+		note: '初始状态：ReplicaSet v1 维持 3 个 v1 Pod，Service 只把流量打到 Ready 的 Pod。现在把 Deployment 的镜像改成 v2。',
+	});
+	frames.push({
+		active: ['v2'],
+		hotEdges: ['dv2'],
+		packets: [{ edge: 'dv2', at: 0.5, tone: 'req', label: '创建新 RS' }],
+		badges: { v1: '3 副本', v2: '1 启动中' },
+		note: 'Deployment 发现模板变了：不改建成的 v1，而是创建 ReplicaSet v2。maxSurge=1 → v2 先起 1 个新 Pod（总数临时 4）。',
+	});
+	frames.push({
+		active: ['v2'],
+		badges: { v1: '3 副本', v2: '1 Ready' },
+		note: '新 Pod 通过 readiness 探针成为 Ready——它才开始接流量。探针没过，这里就会一直卡住，直到发布超时。',
+	});
+	frames.push({
+		active: ['v1'],
+		hotEdges: ['dv1'],
+		packets: [{ edge: 'dv1', at: 0.6, tone: 'req', label: '缩容 1' }],
+		badges: { v1: '2 副本', v2: '1 Ready' },
+		note: 'maxUnavailable=1 → v1 现在才被砍掉 1 个旧 Pod：先保证可用性下限，再腾位置。新 Pod Ready 与旧 Pod 缩减交替进行。',
+	});
+	frames.push({
+		badges: { v1: '0 副本', v2: '3 Ready' },
+		note: '循环往复：v2 扩 1 → 等 Ready → v1 缩 1，直到 v1 归零。Service 全程只把流量给 Ready 的 Pod，业务无感。',
+	});
+	frames.push({
+		done: ['deploy', 'v1', 'v2'],
+		badges: { v1: '保留 0 副本', v2: '3 副本' },
+		note: '收尾：v1 的 ReplicaSet 不删除（revisionHistoryLimit），副本归零待命。回滚 = 把旧 RS 副本调回来——回滚本身就是又一次滚动发布。',
+	});
+
+	return {
+		title: '滚动发布 · 新旧 ReplicaSet 此消彼长',
+		height: 380,
+		nodes: [
+			{ id: 'deploy', label: 'Deployment', sub: '管版本与节奏', x: 0.42, y: 0.08 },
+			{ id: 'v1', label: 'ReplicaSet v1', sub: '旧模板', x: 0.12, y: 0.66 },
+			{ id: 'v2', label: 'ReplicaSet v2', sub: '新模板', x: 0.76, y: 0.66 },
+		],
+		edges: [
+			{ id: 'dv1', from: 'deploy', to: 'v1', label: '副本数' },
+			{ id: 'dv2', from: 'deploy', to: 'v2', label: '副本数' },
+			{ id: 'sw', from: 'v1', to: 'v2', label: '交替', dashed: true },
+		],
+		frames,
+	};
+}
+
 /** MongoDB chunk 迁移：分裂 → balancer → 四步迁移与路由切换 */
 function mongoChunk(): FlowVizConfig {
 	const frames: FlowFrame[] = [];
@@ -2956,5 +3010,6 @@ export const flowDemos: Record<string, FlowVizConfig> = {
 	'mw-gates': mwGates(),
 	'ai-agent-loop': aiAgentLoop(),
 	'lc-agent-loop': lcAgentLoop(),
+	'k8s-rollout': k8sRollout(),
 	'mongo-chunk': mongoChunk(),
 };

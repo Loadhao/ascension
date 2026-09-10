@@ -1,0 +1,79 @@
+{
+  "questions": [
+    {
+      "id": "k8s-arch-001",
+      "noteId": "kubernetes/basic/core/01-architecture",
+      "type": "single",
+      "difficulty": 3,
+      "q": "kube-scheduler 挂了 10 分钟，期间集群里正在运行的业务容器会怎样？",
+      "options": [
+        "继续运行不受影响，但新 Pod 不会被调度到任何节点",
+        "所有 Pod 被逐出并等待 scheduler 恢复后重新拉起",
+        "kubelet 会接管调度职责，把新 Pod 均衡到各节点",
+        "业务容器停止运行，恢复后按 etcd 里的记录逐一重启"
+      ],
+      "answer": [0],
+      "hint": "调度只发生在 Pod 创建时刻；kubelet 按已下发到节点的指令看护容器，各组件只对 apiserver 负责，互不依赖存活。"
+    },
+    {
+      "id": "k8s-pod-002",
+      "noteId": "kubernetes/basic/core/02-pod-object-model",
+      "type": "single",
+      "difficulty": 3,
+      "q": "同一 Pod 内两个容器互相访问对方监听的端口，用的是什么地址？",
+      "options": [
+        "localhost，因为共享同一个网络命名空间",
+        "Pod IP，因为容器各自有独立 IP",
+        "Service 名，Pod 内内建了 DNS 转发",
+        "127.0.0.2，pause 容器分配的内部回环"
+      ],
+      "answer": [0],
+      "hint": "pause 容器持有网络命名空间，Pod 内容器共享同一 IP 与端口空间——也因此端口不能冲突。"
+    },
+    {
+      "id": "k8s-rollout-003",
+      "noteId": "kubernetes/basic/core/03-deployment-rollout",
+      "type": "single",
+      "difficulty": 4,
+      "q": "replicas=3，maxSurge=1，maxUnavailable=0，滚动更新过程中 Pod 总数最多是多少？",
+      "options": [
+        "4：新 Pod Ready 之前旧的必须保住 3 个",
+        "3：总数永远等于期望副本数",
+        "6：新旧 RS 各自维持 3 副本",
+        "2：先缩后扩，允许临时低于期望值"
+      ],
+      "answer": [0],
+      "hint": "maxSurge=1 允许超出期望 1 个；maxUnavailable=0 禁止低于期望——所以新 RS 加 1 时旧 RS 还得是 3。"
+    },
+    {
+      "id": "k8s-probe-004",
+      "noteId": "kubernetes/intermediate/ops/01-probes-lifecycle",
+      "type": "single",
+      "difficulty": 4,
+      "q": "下游数据库抖动导致 /ready 失败、/healthz 仍正常，此时发生什么？",
+      "options": [
+        "Pod 被从 Service endpoints 摘除，容器本身不重启",
+        "kubelet 重启容器，等数据库恢复后自然拉起",
+        "Deployment 触发回滚到上一个版本",
+        "节点被驱逐，Pod 迁移到其他健康节点"
+      ],
+      "answer": [0],
+      "hint": "readiness 失败只摘流不重启——重启是 liveness 的动作；把依赖健康放进 liveness 才会导致连环重启雪崩。"
+    },
+    {
+      "id": "k8s-svc-005",
+      "noteId": "kubernetes/intermediate/ops/02-service-ingress",
+      "type": "single",
+      "difficulty": 4,
+      "q": "ClusterIP 在节点的 iptables/IPVS 规则里做目标地址转换，它真实存在于哪里？",
+      "options": [
+        "哪都不存在：只是转发规则里的虚拟 IP，没有网络设备持有它",
+        "每个节点的 kube-proxy 进程里",
+        "apiserver 分配的一块特殊网卡上",
+        "Service 对应的某个后端 Pod 上"
+      ],
+      "answer": [0],
+      "hint": "ClusterIP 是规则层面的逻辑地址，ping 不通很正常；流量在出节点前被 DNAT 到某个 Ready 的 Pod IP。"
+    }
+  ]
+}
