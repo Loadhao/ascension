@@ -207,6 +207,23 @@
       ],
       "hint": 4,
       "difficulty": "「遮盖」与「预填充」是两种挂载最大的行为差异——配置被盖掉多半是 bind 空目录惹的祸；备份卷的做法是起个临时容器把卷内容 tar 出来。docker-vol-005 考生产挂载选型，本题考行为细节与坑。"
+    },
+    {
+      "id": "docker-stuckrun-011",
+      "noteId": "docker/basic/fundamentals/03-lifecycle",
+      "type": "single",
+      "q": "一个 nginx 容器 docker run 后立即退出（Exited），docker logs 也没有报错。按笔记最可能的根因与指向是？",
+      "options": [
+        "主进程后台化了——nginx 默认 daemon 模式让 PID 1 退出、容器随之退出；应加 daemon off 或用官方镜像的前台方式",
+        "端口被占用，容器进入 Paused 状态等待端口释放",
+        "镜像分层损坏，需要 docker rmi 后重新 pull",
+        "容器进入 Exited 后可写层数据已被删除，只能重新 run"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "容器生死由主进程决定——「让容器常驻 = 前台跑一个不退出的进程」；Exited ≠ 删除，docker start 可复活（可写层还在），docker cp 仍能取文件；--rm 适合一次性任务，别用于需要排查的服务容器。docker-life-006 考状态与退出码归属，本题考「起不来」的排查流程。"
     }
   ]
 }

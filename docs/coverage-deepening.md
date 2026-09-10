@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] java/basic/io/03-tcp-sticky-packets — 第二题考「LengthFieldBasedFrameDecoder 的 adjustment 口诀与 maxFrameLength 防恶意大包」
-- [ ] docker/basic/fundamentals/03-lifecycle — 第二题考「stop 先 SIGTERM 再 SIGKILL，退出码 137 是被 SIGKILL」
-- [ ] java/advanced/jvm/03-garbage-collection — 第二题考「G1 的 Region 化与可预测停顿，CMS/G1 的分界」
 - [ ] middleware/intermediate/reliability/01-message-reliability — 第二题考「三段防丢对齐到 Kafka：acks=all + min.insync.replicas + 手动提交位移」
 - [ ] seata/basic/core/01-seata-core — 第二题考「TC/TM/RM 三角色分工与 XID 传播」
+- [ ] java/intermediate/concurrent/03-volatile — 第二题考「禁止指令重排的实现（内存屏障）与 double-checked locking 为什么要 volatile」
+- [ ] js/basic/core/03-prototype-class — 第二题考「new 的四件事：建空对象链到 prototype、绑 this 执行、显式返回对象时覆盖、instanceof 沿链查找」
+- [ ] network/basic/foundation/01-osi-tcpip — 第二题考「OSI 七层与 TCP/IP 四层的对应关系与分层意义」
 
 ### b 类：旧题返修
 
@@ -52,6 +52,8 @@
 - 2026-09-09 · 第十二轮：3 道核心笔记第二题（java-casadder-104 / java-poolargs-105 / rabbit-confirmtack-006，difficulty 4/3/3）· 本轮提交主题：feat: 题库深化第十二轮
 
 - 2026-09-09 · 第十三轮：3 道核心笔记第二题（js-tdz-011 / js-preflight-012 / git-ourstheirs-005，difficulty 3/3/4；git 条目原定角度与 git-remote-004 撞车，换 ours/theirs 语境反转）· 本轮提交主题：feat: 题库深化第十三轮
+
+- 2026-09-09 · 第十四轮：3 道核心笔记第二题（java-framedec-104 / java-tricolor-105 / docker-stuckrun-007，difficulty 4/5/4；docker 与 GC 两条原定角度均与现有题撞车，分别换「起不来排查」与「三色标记修正流派」）· 本轮提交主题：feat: 题库深化第十四轮
 
 ## 经验与规则
 

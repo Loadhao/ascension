@@ -1780,6 +1780,40 @@
       ],
       "hint": 3,
       "difficulty": "两类 OOM 温床——无界队列堆任务、无限线程数堆线程；正确姿势是有界队列（ArrayBlockingQueue）+ 显式拒绝策略 + 线程命名便于排查。java-thread-pool-001 考「先入队后扩线程」的执行流程，本题考禁用工厂方法的原因。"
+    },
+    {
+      "id": "java-framedec-105",
+      "noteId": "java/basic/io/03-tcp-sticky-packets",
+      "type": "single",
+      "q": "协议头为「2B 魔数 + 2B 类型 + 4B 长度 + body」（长度字段值只算 body），用 LengthFieldBasedFrameDecoder 解析时参数怎么取？",
+      "options": [
+        "lengthFieldOffset=4（长度字段从第 4 字节起）、lengthFieldLength=4、adjustment=0（长度值只算 body 无需修正）、initialBytesToStrip=8（剥整个头）——口诀：净数据起点 = 长度字段偏移 + 长度字段本身长 + adjustment",
+        "offset=0、strip=4、adjustment=8：长度字段永远从 0 开始",
+        "offset=8、strip=4、adjustment=8：头有多长 offset 就设多大",
+        "offset=4、strip=0、adjustment=-8：adjustment 恒为负数用来剥头"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "maxFrameLength 是单包上限、防恶意大包；adjustment 用于「长度值不含头里其他内容」时的补偿——若长度值把前面的头也算进去，就要用负值修正。java-sticky-044 考三大分界方案，本题考 Netty 长度域解码器的参数推导。"
+    },
+    {
+      "id": "java-tricolor-105",
+      "noteId": "java/advanced/jvm/03-garbage-collection",
+      "type": "single",
+      "q": "并发标记时「灰→白的引用被删」与「黑新增了到该白对象的路径」同时发生会漏标——CMS 与 G1 分别用什么思路补救？",
+      "options": [
+        "CMS 用增量更新：黑新增引用时记录、重新标记重扫一遍；G1 用原始快照 SATB：灰→白删除引用时记录快照、按旧图重标——代价是可能多标浮动垃圾，下轮再收",
+        "CMS 用 SATB、G1 用增量更新，两家正好相反",
+        "两家都靠全程 STW 避免并发标记，从根上消除漏标",
+        "漏标无解，只能靠事后 Full GC 重扫全堆兜底"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 5,
+      "difficulty": "漏标的两个条件必须同时发生；SATB 按删除时刻的旧图重标，多标的「浮动垃圾」下轮再收——这是 G1 用它换并发性的取舍。java-g1-010 考 G1 Region 化取舍，本题考并发标记的正确性修正。"
     }
   ]
 }
