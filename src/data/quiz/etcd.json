@@ -12,9 +12,7 @@
         "所有节点必须 ack，否则回滚（2PC）",
         "客户端直接写任意节点，异步同步"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "etcd 是 Raft 的著名落地：任期区分领袖、过半提交；不要把它说成 2PC 全员 ack。"
     },
     {
@@ -29,11 +27,7 @@
         "Watch 可按 start_revision 续传，断线默认不丢事件",
         "linearizable 读直接读 follower 本地快照，延迟最低"
       ],
-      "answer": [
-        0,
-        1,
-        2
-      ],
+      "answer": [0, 1, 2],
       "hint": "linearizable（默认）要走 Raft 确认读到最新；serializable 才读本地快照。Watch 撞 compaction 则必须全量重拉。"
     },
     {
@@ -42,13 +36,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "etcd 的 Txn 把多个 Compare 与 then/else 压成一条 Raft 日志，因此 check-then-act 是原子的。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "选主、抢锁都靠这条迷你 CAS；若拆成先 get 再 put，中间必有窗口。"
     },
     {
@@ -63,9 +52,7 @@
         "只有 Leader 处理写，写操作追加为日志同步到多数派后才提交；任期（term）用于区分领袖更替",
         "5 节点的 etcd 集群可以容忍 3 个节点同时故障"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "写必须走 Leader 并复制到多数派；term 正是领袖更替的任期编号；按 2f+1 容 f，5 节点只能容忍 (5-1)/2=2 个故障。"
     },
     {
@@ -80,9 +67,7 @@
         "revision 不合法，应从 0 开始重新订阅全部事件",
         "应放弃 Watch 改用 serializable 读轮询替代"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "compacted 不是抖动重试能解决的——压缩点之前的版本数据已被删，续传位点永远追不上；K8s informer 的 List+Watch+resync 就是标准兜底套路。"
     },
     {

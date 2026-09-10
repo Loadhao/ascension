@@ -12,9 +12,7 @@
         "PG 没有 redo log，脏页直接写表导致页数增长",
         "PG 的 WAL 是逻辑日志，空间回收依赖备库回放"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "「旧版本放 undo log、purge 清理」恰恰是 InnoDB 的做法，PG 是表内多版本共存、靠 VACUUM 回收；WAL 是物理日志且与表膨胀无关——两个干扰项都是用 MySQL 视角制造的错觉。"
     },
     {
@@ -23,13 +21,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "Pgpool-II 的复制负载均衡对写请求同样有效，写操作也可以按权重分发到备库。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "负载均衡只对读有效，写永远只走主库——Pgpool-II 本质是代理，不改变单主写架构，这正是它与 Postgres-XL（写可水平扩展）的本质分界。"
     },
     {
@@ -38,15 +31,8 @@
       "type": "single",
       "difficulty": 5,
       "q": "流复制场景下，业务要求事务提交返回时「备库已把 WAL 回放完成、可立即对外查询」，synchronous_commit 应设为哪一档？",
-      "options": [
-        "local",
-        "remote_write",
-        "on",
-        "remote_apply"
-      ],
-      "answer": [
-        3
-      ],
+      "options": ["local", "remote_write", "on", "remote_apply"],
+      "answer": [3],
       "hint": "local 只保证主库本地持久化；remote_write 只到备库 OS 缓存（未 fsync）；on 等的是备库 WAL 持久化而不是回放完成——只差「已落盘」和「已可查」这一步，最容易错选 on。"
     },
     {
@@ -62,11 +48,7 @@
         "ANALYZE 负责回收死元组空间，autovacuum 负责更新统计信息",
         "autovacuum_vacuum_scale_factor 调得越大，清理触发得越频繁"
       ],
-      "answer": [
-        0,
-        1,
-        2
-      ],
+      "answer": [0, 1, 2],
       "hint": "第 4 项把分工说反了——ANALYZE 只更新统计信息、不做空间回收；第 5 项方向反了，scale_factor 是死元组占比的触发阈值，大表要调小到 0.01~0.05 才清得更勤。"
     },
     {
@@ -81,9 +63,7 @@
         "默认 Read Uncommitted，因此可以脏读",
         "默认 Serializable，写冲突排队等待"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "和 MySQL 默认 RR 正好反着。PG 的 RR/Serializable 才是事务级快照，写冲突以 serialization failure 重试收场，不是排队。"
     },
     {
@@ -98,11 +78,7 @@
         "xid 是 32 位，freeze 被长事务或废弃复制槽挡住时，库可能拒绝新写以防回卷",
         "旧版本存放在 undo log 里，由 purge 线程清理"
       ],
-      "answer": [
-        0,
-        1,
-        2
-      ],
+      "answer": [0, 1, 2],
       "hint": "undo log + purge 是 InnoDB 的模型，不要把 MySQL 答案搬过来。"
     },
     {
@@ -117,9 +93,7 @@
         "BRIN，因为它最小",
         "Hash，只服务等值所以最快"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "BRIN 要求堆物理顺序与列值相关，适合时序追加表，不适合 JSON 包含。Hash 只有 =。"
     },
     {
@@ -128,13 +102,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "EXPLAIN 里出现 Bitmap Index Scan → Bitmap Heap Scan，说明没走索引、应该改成强制 Index Scan。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "Bitmap 路径是中等选择性或多条件 OR/AND 的正常计划：先在内存里按 tid 建位图，再按页顺序回表，往往比随机 Index Scan 更便宜。"
     },
     {
@@ -149,9 +118,7 @@
         "替代 synchronous_commit，客户端提交不必等 WAL fsync",
         "压缩 WAL，降低归档体积"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "半页写会让『只记字节增量』的重放越放越错。提交成功靠 WAL fsync，checkpoint 只决定崩溃后从哪重放、要重放多久。"
     },
     {
@@ -160,13 +127,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "时间点恢复只需要一份 PGDATA 目录拷贝，不必连续归档 WAL。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "PITR = 基础备份 + 备份点之后连续的 WAL 归档；缺一段就只能恢复到缺口。废弃复制槽会夹住 WAL 把盘写满。"
     },
     {
@@ -181,14 +143,9 @@
         "PG 的 BRIN 是块级范围索引，适合时序大表的最小代价方案",
         "PG 不支持部分索引，必须全表统一索引结构"
       ],
-      "answer": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "hint": 3,
-      "difficulty": "末项反了——PG 支持 Hash/部分索引/表达式索引按需创建（如只给未归档订单建部分索引）；索引家族是笔记总结的 PG 对 MySQL 四大差异中的碾压项。"
+      "answer": [0, 1, 2, 3],
+      "hint": "末项反了——PG 支持 Hash/部分索引/表达式索引按需创建（如只给未归档订单建部分索引）；索引家族是笔记总结的 PG 对 MySQL 四大差异中的碾压项。",
+      "difficulty": 3
     },
     {
       "id": "pg-rejoin-011",
@@ -201,11 +158,9 @@
         "保留老主原数据目录，删掉 standby.signal 后以主库身份重启",
         "先 pcp_attach_node 入集群，再手工向老主补同步缺失的数据"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "老主数据已分叉/落后，必须从新主全量重建——pg_basebackup -R 顺便生成 standby.signal，属主不对起不来是高频坑；PG 12 起 recovery.conf 被移除（数据目录存在它则起不来）。pg-sync-003 考 synchronous_commit 五档，本题考故障后的重入流程。"
+      "answer": [0],
+      "hint": "老主数据已分叉/落后，必须从新主全量重建——pg_basebackup -R 顺便生成 standby.signal，属主不对起不来是高频坑；PG 12 起 recovery.conf 被移除（数据目录存在它则起不来）。pg-sync-003 考 synchronous_commit 五档，本题考故障后的重入流程。",
+      "difficulty": 4
     }
   ]
 }

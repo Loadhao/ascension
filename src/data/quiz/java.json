@@ -6,15 +6,8 @@
       "type": "single",
       "difficulty": 3,
       "q": "向线程池提交任务且核心线程已满时，任务接下来会？",
-      "options": [
-        "立即创建非核心线程执行",
-        "先进入阻塞队列排队",
-        "直接触发拒绝策略",
-        "抛出异常由调用方处理"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["立即创建非核心线程执行", "先进入阻塞队列排队", "直接触发拒绝策略", "抛出异常由调用方处理"],
+      "answer": [1],
       "hint": "执行顺序是：核心线程 → 队列 → 非核心线程 → 拒绝策略。队列没满之前不会开非核心线程；拒绝只在队列和非核心线程都满时发生。"
     },
     {
@@ -23,13 +16,8 @@
       "type": "judge",
       "difficulty": 2,
       "q": "用 volatile 修饰计数变量后，多线程 i++ 就是线程安全的。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "volatile 只保证可见性与禁止指令重排，不保证原子性；i++ 是读-改-写三步，需要 AtomicInteger 或加锁。"
     },
     {
@@ -44,9 +32,7 @@
         "偏向锁 → 无锁 → 重量级锁 → 轻量级锁",
         "轻量级锁 → 偏向锁 → 无锁 → 重量级锁"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "按竞争激烈程度逐级膨胀：几乎无竞争用偏向锁，短暂自旋用轻量级，竞争加剧才膨胀到依赖操作系统 mutex 的重量级锁。"
     },
     {
@@ -61,11 +47,7 @@
         "线程池的核心线程长期存活，放大了残留",
         "每次调用 get() 都会完整清理该线程的所有过期 Entry"
       ],
-      "answer": [
-        0,
-        1,
-        2
-      ],
+      "answer": [0, 1, 2],
       "hint": "泄漏根源是 key 被回收后 value 仍被强引用链持有，线程池线程长存让残留持续积累；get/set 只顺带清理碰到的过期项，根治是用完 finally remove()。"
     },
     {
@@ -80,9 +62,7 @@
         "限制自旋次数后重试",
         "把变量声明为 volatile"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "ABA 的本质是「值变回来了」被误判为没变过；附加上版本号或时间戳后，每次修改都能被识别出来。"
     },
     {
@@ -91,13 +71,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "JDK 1.8 的 HashMap 改用头插法，解决了并发扩容的链表成环问题。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "方向反了：1.7 是头插才会在并发扩容时成环，1.8 改为尾插解决了问题。HashMap 本就不是线程安全的，并发场景应换 ConcurrentHashMap。"
     },
     {
@@ -112,9 +87,7 @@
         "CAS 初始化/扩容 + synchronized 锁单个桶头",
         "读写锁分离"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "分段锁是 1.7 的方案；1.8 取消 Segment，粒度细化到桶——空桶 CAS 插入，非空桶 synchronized 锁桶头，size 用 CounterCell 分散计数。"
     },
     {
@@ -123,19 +96,8 @@
       "type": "multiple",
       "difficulty": 2,
       "q": "下列属于死锁四个必要条件的是？（多选）",
-      "options": [
-        "互斥",
-        "持有并等待",
-        "不可剥夺",
-        "循环等待",
-        "可重入"
-      ],
-      "answer": [
-        0,
-        1,
-        2,
-        3
-      ],
+      "options": ["互斥", "持有并等待", "不可剥夺", "循环等待", "可重入"],
+      "answer": [0, 1, 2, 3],
       "hint": "互斥、持有并等待、不可剥夺、循环等待四者缺一不可，破坏任意一条即可预防死锁（如一次性申请所有资源破坏持有等待）；可重入与死锁条件无关。"
     },
     {
@@ -150,9 +112,7 @@
         "分段的 ReentrantLock 数组",
         "无锁的 CAS 链表"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "volatile int state 表示同步状态，获取失败的线程进入 CLH 变体的 FIFO 队列排队；独占/共享两种模板，ReentrantLock、信号量、CountDownLatch 都基于它。"
     },
     {
@@ -167,9 +127,7 @@
         "全堆标记整理，停顿时间最短",
         "单线程回收，避免线程竞争"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "G1 把堆划成等大的 Region，按 MaxGCPauseMillis 停顿目标对区域做垃圾价值排序，优先回收「性价比」最高的区域——用可预测停顿换整体吞吐。"
     },
     {
@@ -184,9 +142,7 @@
         "必须改成红黑树才能按时间排序",
         "accessOrder=false 时 get 也会把节点移到尾部"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "哈希表 O(1) 定位 + 独立双向链表记顺序；默认插入序不会因 get 改变位置。"
     },
     {
@@ -195,13 +151,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "CopyOnWriteArrayList 读路径不加锁，写时复制整份数组再换 volatile 引用，适合读多写少；迭代器看到的是创建时的快照。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "写写仍互斥；写极多时复制成本不可接受。快照迭代器不会 ConcurrentModificationException，但也不反映迭代期间的新写。"
     },
     {
@@ -216,9 +167,7 @@
         "擦除后每个 get 都不再做任何转换",
         "只有数组保留泛型，集合不擦除"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "编译期检查 + 插入转换；反射能往 List<String> 里塞 Integer。不要用 instanceof 带泛型参数。"
     },
     {
@@ -227,13 +176,8 @@
       "type": "judge",
       "difficulty": 1,
       "q": "String 不可变是因为 final 类 + 内部字符序列不可改，常量池可复用，拼接大量字符串应改用 StringBuilder。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "不可变带来线程安全与哈希缓存；循环里用 + 仍会反复造中间对象。"
     },
     {
@@ -248,9 +192,7 @@
         "必须通过 Spring 容器才能发现扩展",
         "靠 JNI 在本地库里注册实现"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "这是 Dubbo/Spring Boot 自动配置的源头思路；SPI 本身不依赖 Spring。"
     },
     {
@@ -265,11 +207,7 @@
         "方法不是 public，CGLIB/JDK 代理拦不到",
         "只要加了注解，传播行为怎么配都不会失效"
       ],
-      "answer": [
-        0,
-        1,
-        2
-      ],
+      "answer": [0, 1, 2],
       "hint": "本质都是代理没拦到或没按预期回滚；传播行为误配也会让事务边界错位。"
     },
     {
@@ -284,9 +222,7 @@
         "任意循环，包括 prototype 作用域",
         "只有 @Lazy 才能解，三级缓存是过时设计"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "构造还没完成就无法把「自己」让别人注入；setter 可以先实例化再填充。"
     },
     {
@@ -301,9 +237,7 @@
         "销毁之后做额外清理",
         "只在 prototype bean 第一次 get 时"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "实例化 → 属性填充 → Aware → BPP 前置 → init → BPP 后置 → 销毁；AOP 代理常在后置里换掉原始对象。"
     },
     {
@@ -312,13 +246,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "LongAdder 用分段 Cell 分散热点写，sum 是弱一致的——高并发写计数场景通常比 AtomicLong 更合适。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "要的是精确瞬时值且写不多，AtomicLong 更简单；写极多时才需要分段。"
     },
     {
@@ -333,9 +262,7 @@
         "两者等价，只是别名",
         "thenCombine 只能用于异常恢复"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "thenApply 映射值、thenCompose 平铺 Future，避免 CF<CF<T>>；allOf 才是多任务汇聚等待。"
     },
     {
@@ -350,9 +277,7 @@
         "GC 年龄上限从 15 变成无限；对齐可以关掉",
         "包装类型与基本类型占用相同，不必在意集合里的 Integer"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "压缩靠「8 字节对齐 + 4 字节偏移」寻址约 32G。Mark Word 按锁状态复用，分代年龄 4 bit 所以晋升上限 15。包装类型开销 4~6 倍是集合内存第一刀。"
     },
     {
@@ -367,11 +292,7 @@
         "容器里用 MaxRAMPercentage，避免默认 25% 太抠或总额超限被 OOM Killer 杀掉",
         "调优一次只改一个变量，应用层优化优先于乱拧 GC 旋钮"
       ],
-      "answer": [
-        0,
-        2,
-        3
-      ],
+      "answer": [0, 2, 3],
       "hint": "MetaspaceSize 是首次触发元空间回收的水位，不是初始容量。Xms=Xmx 抗扩容抖动。G1 下不建议手设 -Xmn。"
     },
     {
@@ -386,9 +307,7 @@
         "缺少 CAFEBABE；重载也是运行期绑定",
         "javap 版本不对；invokedynamic 只用于异常表"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "52.0 = Java 8。常量池是符号引用地址簿，解析阶段变成直接引用。invokedynamic 撑起 Lambda 与现代字符串拼接。重载是静态分派，重写是动态绑定。"
     },
     {
@@ -403,9 +322,7 @@
         "Netflix OSS 全家桶是 2024 年新项目的默认选择",
         "拆得越细越好，网关和追踪都可以省"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "核心四件套：注册中心找得到、网关进得来、Feign 调得动、熔断挂得起。Spring Cloud 是规范+胶水，组件可插拔；新项目绕开停更的 Netflix 栈。"
     },
     {
@@ -420,9 +337,7 @@
         "编译期生成 REST 客户端源码；超时可以不配",
         "走 JVM 进程内接口，不经过网络，所以没有超时"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "Ribbon 已退场，LoadBalancer 默认轮询。fallback 要提前设计，别把堆栈扔给用户。服务名对应注册中心的 key，不要硬编码 IP。"
     },
     {
@@ -437,9 +352,7 @@
         "把配置写进环境变量就自动热更新",
         "DataId 必须等于类名，否则无法绑定"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "三级组织：Namespace / Group / DataId。配置中心的价值是收拢配置 + 免去全量重启发版。Boot 2.4+ 常用 spring.config.import。"
     },
     {
@@ -454,11 +367,7 @@
         "异步线程会自动继承 MDC/Trace 上下文，不必显式传播",
         "采样是为了控制成本，全量上报在高 QPS 下不现实"
       ],
-      "answer": [
-        0,
-        1,
-        3
-      ],
+      "answer": [0, 1, 3],
       "hint": "trace 全链路唯一，span 构成调用树。线上排查固定套路：指标发现 → 链路定位跳 → 日志归因。线程池里丢上下文是高频坑。"
     },
     {
@@ -473,9 +382,7 @@
         "重写编译期定，重载运行期定；接口不能多实现",
         "封装等于给字段加 getter/setter，与不变量无关"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "封装好坏看改内部字段时有多少外部要跟着改。is-a 才继承；has-a / can-do 用组合或接口。接口定义契约可多实现，抽象类承载状态且单继承。"
     },
     {
@@ -490,9 +397,7 @@
         "抛出异常，因为不能同时 return；finally 不执行",
         "未定义行为，取决于 JIT"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "Error 不该 catch。受检异常是调用方有能力恢复的外部问题；RuntimeException 是 bug 信号。finally 几乎总会跑，但不要在里面 return。"
     },
     {
@@ -507,11 +412,7 @@
         "sleep 与 wait 一样会释放持有的监视器锁",
         "线程私有程序计数器/虚拟机栈/本地方法栈，堆与方法区共享"
       ],
-      "answer": [
-        0,
-        1,
-        3
-      ],
+      "answer": [0, 1, 3],
       "hint": "sleep 不释放锁，wait 释放锁并进入等待集。上下文切换有成本，线程池的本质是摊销创建与切换。进程是资源分配单位，线程是调度单位。"
     },
     {
@@ -526,9 +427,7 @@
         "BFPP 只处理 @PostConstruct；BPP 只替换占位符 ${}",
         "FactoryBean 取出的就是工厂本身，MyBatis Mapper 直接 new"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "占位符替换在 BFPP；@MapperScan 动态加定义靠 RegistryPostProcessor。Aware → @PostConstruct → BPP after。事件默认同步，别当 MQ 用。"
     },
     {
@@ -543,9 +442,7 @@
         "a=1，B=2（静态变量都在准备期完成赋值）",
         "a=1，B=0（final 常量要到初始化才赋值）"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "准备阶段的原则是设零值，但存在例外——编译期 final 常量带 ConstantValue 属性会提前赋好；普通静态变量的赋值语句属于 <clinit>，要等初始化才执行。"
     },
     {
@@ -554,13 +451,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "直接内存不足时抛出的 OutOfMemoryError 不带 \"Java heap space\" 字样，且该内存不占用 -Xmx 设定的堆空间。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "直接内存由本地内存提供，归 MaxDirectMemorySize 管而不归堆参数管；这类 OOM 发生时堆看起来正常、进程却可能被杀，排查时别漏掉堆外这个大分项。"
     },
     {
@@ -575,9 +467,7 @@
         "虚引用的 get() 恒返回 null，唯一作用是配合 ReferenceQueue 拿回收通知",
         "强引用在内存不足时会被优先回收以避免 OOM"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "软、弱两种引用的回收条件正好说反了——一个见 GC 就收、一个内存不够才收；强引用宁可 OOM 也不收；虚引用不决定对象生死，只负责事后通知。"
     },
     {
@@ -592,9 +482,7 @@
         "对象不逃逸时干脆不创建对象，把字段拆成局部变量放入寄存器/栈帧",
         "逃逸分析对全局逃逸的对象优化收益最大，对不逃逸的对象无能为力"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "HotSpot 的实际做法不是给对象挪个地方，而是让它根本不存在；一旦对象被存进静态字段/堆集合或被覆写方法接收，所有相关优化作废、退回普通堆分配。"
     },
     {
@@ -609,9 +497,7 @@
         "jstat -gcutil → 观察 FGC 增长 → 调大 -Xmx → 重启",
         "jstack 全量抓栈 → grep BLOCKED → thread -b → 生成火焰图"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "CPU 飙高的主角是某个具体线程，链路是「进程 → 线程 → 线程号转 16 进制对上 jstack 的 nid」；dump 是 OOM 场景的主角，GC 统计是 GC 风暴场景的入口。"
     },
     {
@@ -626,9 +512,7 @@
         "if 在响应中断时会抛 InterruptedException 导致死锁",
         "while 是历史遗留写法，换成 if 功能完全相同"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "关键在于醒来那一刻条件未必还成立——从 signal 到重新拿回锁之间存在窗口，别的线程可能先消费/先生产，虚假唤醒也是来源；这是使用条件变量的通用铁律。"
     },
     {
@@ -643,9 +527,7 @@
         "升级和降级都不允许，必须全部释放后重新按需获取",
         "锁降级指把写锁自动切换成共享模式而无需重新加锁"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "升级被禁的原因：两个读线程都想升级又互不放掉手里的读锁，只能互相死等；降级强调操作顺序——先拿读锁再放写锁，保证写完的数据立刻能被自己读到且中途不被插写。"
     },
     {
@@ -660,9 +542,7 @@
         "elementData 里的元素不支持默认序列化协议，必须逐个手写写出逻辑",
         "防止反序列化时 size 与数组长度不一致导致越界"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "动机来自「容量 ≠ 元素个数」这个错位——数组里扩容留下的空位没有业务含义；序列化时按 size 循环逐个写出即可，不必带上空闲槽位。"
     },
     {
@@ -677,9 +557,7 @@
         "每个节点到根的路径上红节点数量相同 + 根节点是黑色",
         "左右子树高度差不超过 1 + 黑高相同"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "最短路径是全黑、最长是红黑相间——红不能挨红限制了红色密度，黑高相同锁住了黑色底线，两者相除就得到 2 倍上限；高度差 ≤1 是 AVL 的严格平衡标准。"
     },
     {
@@ -694,9 +572,7 @@
         "桶内节点随扩容不断增删，红黑树比 AVL 的严格平衡调整成本更低更划算",
         "AVL 树无法支持 headMap/tailMap 这类范围查询"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "两者查找都是对数级，差距在写路径的代价——AVL 为严格平衡频繁旋转，红黑树放宽平衡少转几次；HashMap 桶里增删（尤其扩容搬移）太频繁，调整成本才是主要矛盾。"
     },
     {
@@ -711,9 +587,7 @@
         "epoll 注册一次（红黑树），就绪 fd 由回调挂到就绪链表，事件就绪才返回，复杂度 O(1)",
         "select 与 epoll 性能相当，只是 API 风格不同"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "1024 上限是 select 的短板（poll 恰恰是用链表去掉上限的）；epoll 的本质优势在于「谁就绪」的判断被下放给内核、且只返回就绪的那部分，而不是把扫描做得更快。"
     },
     {
@@ -722,13 +596,8 @@
       "type": "judge",
       "difficulty": 4,
       "q": "零拷贝指数据从磁盘到网卡全程一次拷贝都没有发生，连 DMA 拷贝也被消除了。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "「零」砍掉的只是 CPU 参与的、数据在用户空间进出的无意义搬运；DMA 负责外设与内存间的直接搬运且不占 CPU，在最优方案下依然有两次。"
     },
     {
@@ -743,9 +612,7 @@
         "只要接收端及时调用 read，粘包拆包就不会出现",
         "消息边界必须由应用层自己定义，定长/分隔符/长度域三种方案中长度域是主流"
       ],
-      "answer": [
-        3
-      ],
+      "answer": [3],
       "hint": "字节流不维护边界是协议的天然表现而非缺陷；UDP 一次发送就是一个 datagram，不存在粘包（代价是丢包乱序）；及时读取只能缓解接收端排队这一种成因，Nagle 攒包和 MSS 切段照样发生。"
     },
     {
@@ -760,9 +627,7 @@
         "返回 null：两个 equals 相等的对象 hash 不同、落进不同桶，get 根本走不到 equals 那一步",
         "抛出 ClassCastException：取出的 value 类型与预期不符"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "HashMap 的查找是两段式——先按 hash 找到桶，桶内才轮到 equals 精确比对；hash 不一致意味着连候选桶都找错了，equals 写得再标准也没有执行机会。"
     },
     {
@@ -777,9 +642,7 @@
         "JDK 动态代理基于接口（Proxy + InvocationHandler），CGLIB 基于继承生成子类，final 类/方法无法被 CGLIB 代理",
         "两者都只能代理接口，无接口的类一律无法被代理"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "两者实现路线正好相反——一个要求目标实现接口、运行期生成实现同一接口的 $Proxy0；一个靠继承覆写，被 final 修饰的类与方法成了天然屏障。Spring 事务对有无接口的目标分别走哪条路可作为记忆锚点。"
     },
     {
@@ -794,9 +657,7 @@
         "事务切面 Order 值太小，调大 @Order 即可",
         "Spring AOP 只支持接口方法，给类补一个接口即可"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "根因是「外部调用先经过代理」没有发生，this 直达原始对象；final/static/private 是另外的失效场景；也可自注入代理或 AopContext.currentProxy()（需 exposeProxy=true）。"
     },
     {
@@ -811,9 +672,7 @@
         "每个请求线程都会创建一个新的 SqlSessionTemplate 实例",
         "它强制把 ExecutorType 换成线程安全的 BATCH"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "单例的只是壳；不是加锁也不是每请求换 Template；且 ExecutorType 在同一事务内不可中途切换。"
     },
     {
@@ -828,9 +687,7 @@
         "ContextRefreshedEvent 在建厂段发布",
         "Boot 内嵌 Tomcat 在 finishBeanFactoryInitialization 阶段启动"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "建厂段只产图纸不产对象；预实例化在实例化段；ContextRefreshedEvent 在收尾段 finishRefresh；Tomcat 在 onRefresh 起动。"
     },
     {
@@ -845,9 +702,7 @@
         "@Inherited 能让接口实现类继承接口上的注解",
         "@Primary 与 @Qualifier 同时存在时 @Primary 优先"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "查组合注解要用 findMergedAnnotation；@Inherited 只认类继承不传接口；@Qualifier 优先于 @Primary。"
     },
     {
@@ -863,12 +718,7 @@
         "@ConfigurationProperties 前缀与 yml 不一致，整组绑定不上",
         "自动配置失败时启动会明确报错指出哪个条件不满足，查日志即可，与上述无关"
       ],
-      "answer": [
-        0,
-        1,
-        2,
-        3
-      ],
+      "answer": [0, 1, 2, 3],
       "hint": "自动配置是「条件让路，不是无条件注入」，条件不满足时配置类被跳过且不报错——最后一项与笔记相反；引入依赖没生效，九成是条件不满足，而不是代码写错。"
     },
     {
@@ -883,9 +733,7 @@
         "code 比 token 更长，放在 URL 里更安全",
         "为了兼容不支持 Cookie 的浏览器"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "两次回传（code → token）是安全设计的精髓；把 OAuth2 的 token 直接当登录态是常见误用，认证要上 OIDC。"
     },
     {
@@ -894,13 +742,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "配置中心已推送新值，即使 Bean 没标 @RefreshScope，里面已注入的配置字段也会自动更新。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "热更新的落地是 @RefreshScope，不标它 Environment 变了 Bean 里的字段还是旧值；远程配置优先级压过本地 yml 说的是覆盖关系，不等于字段热更新。"
     },
     {
@@ -915,9 +758,7 @@
         "为了兼容 JDK 8 以下的老版本",
         "为了让 fat jar 能被其他应用当作普通依赖引用"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "这正是 fat jar 不能被别的应用当依赖引用的原因；想复用要走解压 + -cp 启动（分层镜像优化点）。"
     },
     {
@@ -932,9 +773,7 @@
         "env、beans 这类端点信息量大，建议直接对公网开放",
         "health 的 show-details 默认是 always，对所有人生效"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "默认暴露面极小是安全设计；show-details 配 when-authorized，env/beans 是信息泄露大户绝不对外。"
     },
     {
@@ -943,13 +782,8 @@
       "type": "judge",
       "difficulty": 4,
       "q": "拦截器 preHandle 返回 false 时，Controller 与 postHandle 被跳过，但已执行的那些 preHandle 对应的 afterCompletion 仍会倒序补偿执行。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "放行过的都要收尾，afterCompletion 倒序补偿；别以为 preHandle 返回 false 就什么都不执行了。"
     },
     {
@@ -964,9 +798,7 @@
         "抛出 MyException 时一定落到 Exception 的兜底方法",
         "多个 Advice 之间按方法名字典序决定先后"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "就近原则是局部覆盖全局；只要 MyException 被声明过，就不会落到 Exception 兜底；Advice 顺序由 @Order 决定。"
     },
     {
@@ -981,9 +813,7 @@
         "表单绑定失败抛 MethodArgumentNotValidException",
         "三种场景统一都抛 BindException"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "三种异常取错结构不同（前两者从 getBindingResult() 取 FieldError），统一异常处理里分开适配才能返回字段级错误——这是校验提示不友好的头号原因。"
     },
     {
@@ -992,13 +822,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "Eureka 进入自我保护（心跳续约数低于阈值）后，会停止剔除所有实例、保留可能已死的条目，把「不存在但还在表里」的问题交给调用方的重试与熔断处理。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "这是 CAP 选 A 舍 C 的工程落地；触发靠的是续约总量断崖式下跌（网络分区），偶发掉线不会触发；大量 503 时要查自我保护 + 熔断兜底。"
     },
     {
@@ -1013,9 +838,7 @@
         "什么都不会打印，因为 filter 立即返回",
         "会阻塞 EventLoop 直到响应完成"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "嵌套链里 chain.filter 返回不等于下游完成；另记 getOrder 越小越先 pre 越后 post；碰 IO 要切 boundedElastic，否则 EventLoop 被阻塞、无关请求全变慢。"
     },
     {
@@ -1030,9 +853,7 @@
         "对低流量冷门接口完全不起作用",
         "必须配合线程池隔离才能使用"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "滑动窗口把窗口切小格滚动、统计相邻格之和来抹平突刺；注意与漏桶的绝对均匀、无法应对突发区分。"
     },
     {
@@ -1041,13 +862,8 @@
       "type": "judge",
       "difficulty": 4,
       "q": "配置了 Kafka Binder 的手动 ack（ackMode: MANUAL）之后，就能保证消息不重复消费。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "Stream 只保证至少一次；不丢看 broker + 确认，不重看业务幂等（唯一键去重）——Stream 只是替你摆好开关位置，不改变责任边界。"
     },
     {
@@ -1062,11 +878,7 @@
         "调用方被迫用 instanceof 判断子类",
         "子类新增了父类没有声明过的方法"
       ],
-      "answer": [
-        0,
-        1,
-        2
-      ],
+      "answer": [0, 1, 2],
       "hint": "新增方法不是违反信号——LSP 说子类可以加强行为、不能削弱/改变父类承诺的语义。"
     },
     {
@@ -1081,9 +893,7 @@
         "自己 new 出来的对象同样受 Spring 容器管辖保证唯一",
         "Spring singleton 天然防反射与反序列化破坏"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "单例模式的唯一性是类级别、构造器私有的；Spring 的唯一性是容器级别、由 SingletonBeanRegistry 保证，同一个类完全可以容器里一个、外面随便 new。"
     },
     {
@@ -1092,13 +902,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "Spring AOP 自调用失效（同类内 this 调用 @Transactional 方法事务不生效）的根因是：代理只拦截「从外部进入对象」的调用，对象内部 this 直达原始对象、不经过代理。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "不是注解失效或代理没创建——代理控制的是入口调用，this 不走代理；解法是拆类、自注入或 AopContext.currentProxy()。"
     },
     {
@@ -1113,9 +918,7 @@
         "策略运行期不可替换，状态可以",
         "状态模式是策略模式在并发场景下的变体"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "别答结构不同——两者同构；分界是切换的决定者（strategies.get(type) 是外部选，订单 UNPAID→PAID→SHIPPED 是对象自己流转）。"
     },
     {
@@ -1130,11 +933,7 @@
         "Spring 事件具备持久化、重试、死信能力，可放心跨进程投递",
         "java.util.Observable/Observer 自 JDK 9 起已废弃"
       ],
-      "answer": [
-        0,
-        1,
-        3
-      ],
+      "answer": [0, 1, 3],
       "hint": "Spring 事件是单进程内的，进程挂了事件就没了，跨进程解耦应使用 MQ。"
     },
     {
@@ -1149,9 +948,7 @@
         "桥接——抽象与实现两维度独立演化",
         "享元——内部状态共享"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "不是责任链——责任链对应的是 Gateway 过滤器链/OkHttp Interceptor；骨架稳定+钩子开放是模板方法的标志。"
     },
     {
@@ -1166,9 +963,7 @@
         "匿名内部类会被 JVM 内联优化掉",
         "Lambda 通过反射调用所以开销更小"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "方向别记反——生成 class 文件、真 new 对象的是匿名内部类；Lambda 的实现由 JVM 延迟织入。"
     },
     {
@@ -1183,9 +978,7 @@
         "var 是动态类型，实际类型运行期才确定",
         "允许声明后延迟赋值（var list; list = ...）"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "var 是编译期语法糖，字节码里仍是确切类型，不是动态类型；仅限有初始化器的局部变量。"
     },
     {
@@ -1200,11 +993,7 @@
         "equals/hashCode 按全部字段生成",
         "紧凑构造器只做参数校验/规整，不用手抄赋值"
       ],
-      "answer": [
-        0,
-        2,
-        3
-      ],
+      "answer": [0, 2, 3],
       "hint": "record 不能继承其他类（隐含继承 java.lang.Record），是字段全 final 的不可变数据载体。"
     },
     {
@@ -1219,9 +1008,7 @@
         "pin 只发生在 CPU 密集任务中",
         "把载体线程池调大就能根治 pin"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "笔记明确不池化虚拟线程，载体池大小设 CPU 核数即可、调大无害也无益；pin 的主要来源是 synchronized 内阻塞（22 起 JEP 491 已修复）。"
     },
     {
@@ -1236,9 +1023,7 @@
         "ForkJoinPool 会对阻塞等待自动补偿扩容线程",
         "调大 common.parallelism 参数即可安全地在并行流里做阻塞 I/O"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "ForkJoinPool 不补偿阻塞等待，调大参数治标不治本；共享意味着互相影响，阻塞任务必须隔离。"
     },
     {
@@ -1252,9 +1037,7 @@
         "补码下右移 1 位等价于除以 2 向负无穷取整，所以这是 JVM 的 bug",
         "`>>>` 只对正数有定义，负数会先取绝对值再移位"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "-2 的 32 位补码是 111...1110；`>>>` 高位补 0 得到 0111...1111 = 2147483647。`>>` 才会补符号位得到 -1。",
       "difficulty": 4
     },
@@ -1269,9 +1052,7 @@
         "反序列化会静默丢掉不认识的字段，不会抛异常",
         "JSON 序列化同样依赖 serialVersionUID，Jackson 也会因此失败"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "最佳实践是显式声明；结构兼容改动不 bump，破坏性改动才改号。JSON 无此机制，靠字段名匹配。",
       "difficulty": 5
     },
@@ -1280,13 +1061,8 @@
       "noteId": "java/basic/syntax/09-object-copy",
       "type": "judge",
       "q": "`Integer a = 128; Integer b = 128;` 之后 `a == b` 为 true，因为自动装箱总是返回同一缓存对象。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "缓存池只覆盖 -128~127（可用 AutoBoxCacheMax 调 Integer 上限）；128 各自 new。包装类型比较必须 equals；clone 默认还是浅拷贝。",
       "difficulty": 4
     },
@@ -1301,9 +1077,7 @@
         "TreeSet 内部转成 HashSet 再按 equals 去重",
         "BigDecimal 覆写了 hashCode 使两者被视为同一对象"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "compareTo 与 equals 最好保持一致。Comparable 是类内自然顺序，Comparator 是类外规则。",
       "difficulty": 4
     },
@@ -1318,9 +1092,7 @@
         "SLF4J 桥接包把日志转发到远程 syslog",
         "Tomcat 的 JNDI 数据源默认允许远程 codebase"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "永远不要把不可信字符串交给 lookup / 日志的 JNDI 解析；JDK 8u191+ 默认关掉远程 codebase 加载。",
       "difficulty": 5
     },
@@ -1335,9 +1107,7 @@
         "Lombok 改的是新文件而不是原类，Jackson 找错了 Class",
         "必须把 @Builder 改成 @Data 才能反序列化"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "经典三连 @Builder + @NoArgsConstructor + @AllArgsConstructor。Lombok 走 SOURCE + 改语法树；@Data 上 JPA 实体另有 hashCode/懒加载坑。",
       "difficulty": 4
     },
@@ -1352,9 +1122,7 @@
         "SpringMVC 绕过了 Servlet，直接对接 Netty",
         "微服务时代必须用外置 Tomcat 才能跑多个 war"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "DispatcherServlet 本身就是一个 Servlet；Boot 把容器嵌进应用进程，从平台退化为库。",
       "difficulty": 2
     },
@@ -1369,9 +1137,7 @@
         "Jetty 9 仍以 BIO 为主，Tomcat 才全面 NIO",
         "两者都没有 Acceptor，连接直接由业务线程 accept"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "Jetty = Connector + Handler + 一个全局线程池，无 Service 概念；定位是轻量可嵌入 vs Tomcat 独立部署稳健。",
       "difficulty": 3
     },
@@ -1386,9 +1152,7 @@
         "简单工厂是 GoF 23 之一，工厂方法反而不是",
         "BeanFactory 和 FactoryBean 是同一个东西的两个名字"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "简单工厂不是 GoF 23。BeanFactory 是容器本身，FactoryBean 是让你手写复杂对象工厂的扩展点（getObject() 才是真正暴露的 Bean）。",
       "difficulty": 3
     },
@@ -1397,13 +1161,8 @@
       "noteId": "java/intermediate/design-pattern/04-creational",
       "type": "judge",
       "q": "Spring 的 prototype scope 就是原型模式：每次 getBean 都 clone 已有实例。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "同名不同义——prototype scope 是每次新建，与克隆无关。原型模式才是复制现成对象；工程上优先拷贝构造，慎用 Cloneable。",
       "difficulty": 3
     },
@@ -1418,9 +1177,7 @@
         "适配器同接口转发，装饰器换接口",
         "外观控制访问，代理只负责翻译"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "适配器的前提是老代码改不了；写法永远选组合（对象适配器）。HandlerAdapter 是 Spring MVC 最值得记的现场。",
       "difficulty": 3
     },
@@ -1435,9 +1192,7 @@
         "责任链：每一层决定放行或拦截",
         "桥接：把字节流和字符流拆成两个独立维度"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "装饰器是运行期自由拼装，调用方主动选择怎么包；顺序敏感，反包语义会变。Collections.unmodifiableList 是最短现场。",
       "difficulty": 3
     },
@@ -1452,9 +1207,7 @@
         "线程池是享元，Integer 缓存是对象池",
         "享元必须配合线程池才能省内存"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "享元把状态拆成内部（可共享）与外部（调用时传入）。桥接的教科书现场是 JDBC：DriverManager 与 Driver 经 Connection 解耦。",
       "difficulty": 4
     },
@@ -1469,9 +1222,7 @@
         "模板方法与策略模式没有区别，都是整体替换算法",
         "AQS 的 acquire 是钩子，tryAcquire 才是骨架"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "AQS 的 acquire() 骨架写死，tryAcquire 留给子类。与策略的边界是「变一步 vs 变全套」。",
       "difficulty": 3
     },
@@ -1486,9 +1237,7 @@
         "post 逻辑在独立线程并行跑，无顺序",
         "Gateway 没有 post 阶段，then() 会被忽略"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "责任链接力、节点自决拦截；观察者才是广播。「要不要走完」是两者的试金石。",
       "difficulty": 4
     },
@@ -1503,9 +1252,7 @@
         "把 ArrayList 换成 LinkedList 就不会 CME",
         "CME 只在多线程下出现，单线程 remove 是合法的"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "fail-fast 是尽力而为的 early-warning，没有并发保证。状态模式与策略同构，分界在谁决定切换。",
       "difficulty": 3
     },
@@ -1520,9 +1267,7 @@
         "与策略完全相同，都是整体替换算法",
         "双分派让 Java 变成多方法语言，没有适用边界"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "双分派：accept 按对象实际类型、visit 按访问者重载。Files.walkFileTree、ASM Visitor 都是此现场。中介者把 N² 交互收成星状。",
       "difficulty": 4
     },
@@ -1537,9 +1282,7 @@
         "只要用 AsyncAppender 就会自动继承父线程 MDC",
         "SLF4J 门面自带分布式追踪，不必自己 put"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "Multiple bindings = 实现不唯一；一个实现都没有则进 NOPLogger 静默丢日志。占位符 `{}` 代替字符串拼接。",
       "difficulty": 4
     },
@@ -1548,13 +1291,8 @@
       "noteId": "java/intermediate/spring/00-family-map",
       "type": "judge",
       "q": "Spring Boot 已经取代了 Spring Framework，学 IoC/AOP/事务在 Boot 3 时代不再是核心面试题。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "Boot 只是自动装配 + 内嵌容器的脚手架，内核仍是 Framework。依赖单向叠加：Framework→MVC→Boot→Cloud；Boot 3.x = JDK 17 + jakarta。",
       "difficulty": 2
     },
@@ -1569,9 +1307,7 @@
         "把方法改成 package-private 即可",
         "只有配合 @ParameterizedTest 才能用实例 @BeforeAll"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "默认每个测试方法新建实例以隔离状态。异常用 assertThrows 拿对象再断言，替代老的 @Test(expected=...)。",
       "difficulty": 3
     },
@@ -1586,9 +1322,7 @@
         "必须先 @InjectMocks 才能 spy",
         "Mockito 5 起 when 对 spy 非法，只能 mockStatic"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "mock 全假、spy 半真。匹配器要么全用要么全不用；打桩困难往往是被测代码把依赖藏太深。",
       "difficulty": 4
     },
@@ -1603,9 +1337,7 @@
         "@MockBean 可以随便反复替换同一 Bean，不会拖慢 CI",
         "@WebMvcTest 会装载全部业务 Bean，不必再 @MockBean"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "@MockBean 会替换容器 Bean 并可能重建上下文，同一 Bean 反复替换是 CI 慢的常见根源。",
       "difficulty": 4
     },
@@ -1620,11 +1352,9 @@
         "元空间在 JDK8 起移入堆内，受 -Xmx 约束",
         "String.intern() 会把常量池搬进堆外直接内存，与 GC 彻底解耦"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "两代迁移各对应一类「不是 heap 的 OOM」——Metaspace OOM 多来自动态代理/CGLib 无限生成类；堆与堆外（直接内存、元空间）要一起算资源预算，别只看 -Xmx；滥用 intern 反而撑大常驻常量池。"
+      "answer": [0],
+      "hint": "两代迁移各对应一类「不是 heap 的 OOM」——Metaspace OOM 多来自动态代理/CGLib 无限生成类；堆与堆外（直接内存、元空间）要一起算资源预算，别只看 -Xmx；滥用 intern 反而撑大常驻常量池。",
+      "difficulty": 4
     },
     {
       "id": "java-classidentity-097",
@@ -1637,11 +1367,9 @@
         "c1 == c2 为 false，但两者实例之间可以正常互相强转",
         "第二个加载器会直接返回第一个加载器已加载的 Class，不会重复加载"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "「类相等 = 类加载器 + 类全名都相同」正是双亲委派「防重复」的判定依据；Tomcat 给每个 webapp 一套 WebappClassLoader 才能实现同 war 多版本共存。java-prepare-032 考准备阶段，本题考类的唯一性。"
+      "answer": [0],
+      "hint": "「类相等 = 类加载器 + 类全名都相同」正是双亲委派「防重复」的判定依据；Tomcat 给每个 webapp 一套 WebappClassLoader 才能实现同 war 多版本共存。java-prepare-032 考准备阶段，本题考类的唯一性。",
+      "difficulty": 4
     },
     {
       "id": "java-adviceorder-098",
@@ -1654,11 +1382,9 @@
         "@Before → 目标方法 → @AfterThrowing 就结束，@Around 的后半段无从谈起",
         "@After 最先执行（finally 语义），然后才轮到 @AfterThrowing"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "@Around 手里握着 proceed()——可以改参数、改返回值、吞异常、干脆不执行目标方法，日志统计选它、Spring 事务也是它；@After 是「必然执行」的最终通知。java-aop-self-047 考自调用失效，本题考通知编排顺序。"
+      "answer": [0],
+      "hint": "@Around 手里握着 proceed()——可以改参数、改返回值、吞异常、干脆不执行目标方法，日志统计选它、Spring 事务也是它；@After 是「必然执行」的最终通知。java-aop-self-047 考自调用失效，本题考通知编排顺序。",
+      "difficulty": 3
     },
     {
       "id": "java-refqueue-099",
@@ -1671,11 +1397,9 @@
         "finalize 执行时机确定且可靠，仍是释放资源的首选",
         "Cleaner 是 finalize 的别名，两者底层机制完全不同"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "GC 把 Reference 挂 pending 链、ReferenceHandler 守护线程头插法入队——ReferenceQueue 名为队列实为 head 单链表，不「存」引用；Cleaner 是虚引用机制的产品化，DirectByteBuffer 的堆外内存就靠它释放。java-ref-034 考四种引用回收时机，本题考通知机制与 finalize 的坑。"
+      "answer": [0],
+      "hint": "GC 把 Reference 挂 pending 链、ReferenceHandler 守护线程头插法入队——ReferenceQueue 名为队列实为 head 单链表，不「存」引用；Cleaner 是虚引用机制的产品化，DirectByteBuffer 的堆外内存就靠它释放。java-ref-034 考四种引用回收时机，本题考通知机制与 finalize 的坑。",
+      "difficulty": 4
     },
     {
       "id": "java-treeify-100",
@@ -1688,11 +1412,9 @@
         "树化阈值只看数组容量，链表长度无所谓",
         "链表到 8 就同时树化并把数组翻倍，两件事一起做"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "TREEIFY_THRESHOLD=8 与 MIN_TREEIFY_CAPACITY=64 两个常量缺一不可——容量不到 64 先扩容缓解冲突（扩容可能把链表拆短），树化把桶内查询从 O(n) 提到 O(log n)。java-hashmap-006 考头插/尾插演进，本题考树化条件。"
+      "answer": [0],
+      "hint": "TREEIFY_THRESHOLD=8 与 MIN_TREEIFY_CAPACITY=64 两个常量缺一不可——容量不到 64 先扩容缓解冲突（扩容可能把链表拆短），树化把桶内查询从 O(n) 提到 O(log n)。java-hashmap-006 考头插/尾插演进，本题考树化条件。",
+      "difficulty": 3
     },
     {
       "id": "java-fakedead-101",
@@ -1705,11 +1427,9 @@
         "假死只能重启恢复，jstack 看不出任何有用信息",
         "先 dump 堆找大对象——假死的本质是内存不足"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "假死 = 线程都被堵住，归因看「堵在哪」：锁、下游慢、连接池三种栈形态对应三种处理；arthas 的 trace '#cost > 200ms' 能逐层定位慢段。java-cpu-036 考 CPU 飙高四步链，本题考 CPU 不高的假死场景。"
+      "answer": [0],
+      "hint": "假死 = 线程都被堵住，归因看「堵在哪」：锁、下游慢、连接池三种栈形态对应三种处理；arthas 的 trace '#cost > 200ms' 能逐层定位慢段。java-cpu-036 考 CPU 飙高四步链，本题考 CPU 不高的假死场景。",
+      "difficulty": 4
     },
     {
       "id": "java-inline-102",
@@ -1722,11 +1442,9 @@
         "JMH 的作用是让代码跑得更热，从而触发更多 JIT 编译",
         "手写循环测出的耗时就是真实性能，JMH 只是统计方式更精细"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "内联预算：小方法 ≤35B（MaxInlineSize）随手内联，大方法要足够热 ≤325B（FreqInlineSize）；「你写的基准测试可能被 JIT 优化没了」——不隔离、不消费返回值，测的是空转。java-escape-035 考逃逸分析，本题考内联与测试纪律。"
+      "answer": [0],
+      "hint": "内联预算：小方法 ≤35B（MaxInlineSize）随手内联，大方法要足够热 ≤325B（FreqInlineSize）；「你写的基准测试可能被 JIT 优化没了」——不隔离、不消费返回值，测的是空转。java-escape-035 考逃逸分析，本题考内联与测试纪律。",
+      "difficulty": 3
     },
     {
       "id": "java-zcp3gen-103",
@@ -1739,13 +1457,9 @@
         "sendfile+gather 更进一步：Socket 缓冲区里不放数据，只追加位置和长度，DMA 直接从 PageCache 取",
         "Kafka 的消费路径与 RocketMQ 的 CommitLog 都走 sendfile，两家选型一致"
       ],
-      "answer": [
-        0,
-        1,
-        2
-      ],
-      "hint": 4,
-      "difficulty": "RocketMQ 混合存储用 mmap（CommitLog 映射读写），Kafka 消费走 sendfile——两家选型相反、各取所长；传统 read+write 是 4 次拷贝 4 次切换，中间 2 次 CPU 拷贝纯属「进用户空间转一圈什么都没变」。java-zerocopy-043 考「零拷贝 ≠ 无 DMA」，本题考演进与选型。"
+      "answer": [0, 1, 2],
+      "hint": "RocketMQ 混合存储用 mmap（CommitLog 映射读写），Kafka 消费走 sendfile——两家选型相反、各取所长；传统 read+write 是 4 次拷贝 4 次切换，中间 2 次 CPU 拷贝纯属「进用户空间转一圈什么都没变」。java-zerocopy-043 考「零拷贝 ≠ 无 DMA」，本题考演进与选型。",
+      "difficulty": 4
     },
     {
       "id": "java-casadder-104",
@@ -1758,11 +1472,9 @@
         "AtomicLong 的 CAS 失败后会阻塞挂起，不存在空转问题",
         "两者性能完全一致，差别只在 API 风格"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "CAS 失败不挂起、由调用方自旋——激烈竞争时它是「CPU 火葬场」；LongAdder 分流的本质是把一个热点变量拆成多段。java-cas-005 考 ABA 与版本戳，本题考自旋开销与选型边界。"
+      "answer": [0],
+      "hint": "CAS 失败不挂起、由调用方自旋——激烈竞争时它是「CPU 火葬场」；LongAdder 分流的本质是把一个热点变量拆成多段。java-cas-005 考 ABA 与版本戳，本题考自旋开销与选型边界。",
+      "difficulty": 4
     },
     {
       "id": "java-poolargs-104",
@@ -1775,11 +1487,9 @@
         "Executors 是老版本 API，JDK 17 起已被移除",
         "手动 new 能让线程池启动更快，性能差异是主因"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "两类 OOM 温床——无界队列堆任务、无限线程数堆线程；正确姿势是有界队列（ArrayBlockingQueue）+ 显式拒绝策略 + 线程命名便于排查。java-thread-pool-001 考「先入队后扩线程」的执行流程，本题考禁用工厂方法的原因。"
+      "answer": [0],
+      "hint": "两类 OOM 温床——无界队列堆任务、无限线程数堆线程；正确姿势是有界队列（ArrayBlockingQueue）+ 显式拒绝策略 + 线程命名便于排查。java-thread-pool-001 考「先入队后扩线程」的执行流程，本题考禁用工厂方法的原因。",
+      "difficulty": 3
     },
     {
       "id": "java-framedec-105",
@@ -1792,11 +1502,9 @@
         "offset=8、strip=4、adjustment=8：头有多长 offset 就设多大",
         "offset=4、strip=0、adjustment=-8：adjustment 恒为负数用来剥头"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "maxFrameLength 是单包上限、防恶意大包；adjustment 用于「长度值不含头里其他内容」时的补偿——若长度值把前面的头也算进去，就要用负值修正。java-sticky-044 考三大分界方案，本题考 Netty 长度域解码器的参数推导。"
+      "answer": [0],
+      "hint": "maxFrameLength 是单包上限、防恶意大包；adjustment 用于「长度值不含头里其他内容」时的补偿——若长度值把前面的头也算进去，就要用负值修正。java-sticky-044 考三大分界方案，本题考 Netty 长度域解码器的参数推导。",
+      "difficulty": 4
     },
     {
       "id": "java-tricolor-105",
@@ -1809,11 +1517,9 @@
         "两家都靠全程 STW 避免并发标记，从根上消除漏标",
         "漏标无解，只能靠事后 Full GC 重扫全堆兜底"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 5,
-      "difficulty": "漏标的两个条件必须同时发生；SATB 按删除时刻的旧图重标，多标的「浮动垃圾」下轮再收——这是 G1 用它换并发性的取舍。java-g1-010 考 G1 Region 化取舍，本题考并发标记的正确性修正。"
+      "answer": [0],
+      "hint": "漏标的两个条件必须同时发生；SATB 按删除时刻的旧图重标，多标的「浮动垃圾」下轮再收——这是 G1 用它换并发性的取舍。java-g1-010 考 G1 Region 化取舍，本题考并发标记的正确性修正。",
+      "difficulty": 5
     },
     {
       "id": "java-dcl-106",
@@ -1826,11 +1532,39 @@
         "不加 volatile 只影响可见性，拿到的对象一定是完整初始化的",
         "synchronized 本身已经禁止了 ②③ 重排，volatile 是多余的"
       ],
-      "answer": [
-        0
+      "answer": [0],
+      "hint": "synchronized 保证同一时刻只有一个线程进入，但重排发生在拿到锁的线程内部——锁管不了；volatile 靠内存屏障（写后 StoreLoad）禁止跨越重排。更省心的替代是静态内部类或枚举单例。java-volatile-002 考 volatile 不保证原子性，本题考禁止重排与 DCL。",
+      "difficulty": 4
+    },
+    {
+      "id": "java-dubboarch-108",
+      "noteId": "java/advanced/dubbo/01-architecture",
+      "type": "single",
+      "difficulty": 4,
+      "q": "注册中心整个挂掉后，Dubbo 存量调用会怎样？",
+      "options": [
+        "照常进行：双方用本地缓存的地址列表直连，只有新上下线感知受影响",
+        "全部调用立即失败，直到注册中心恢复",
+        "自动降级为 HTTP 直连 Provider 的 IP 白名单",
+        "Consumer 停止接收新请求，处理完在途调用后下线"
       ],
-      "hint": 4,
-      "difficulty": "synchronized 保证同一时刻只有一个线程进入，但重排发生在拿到锁的线程内部——锁管不了；volatile 靠内存屏障（写后 StoreLoad）禁止跨越重排。更省心的替代是静态内部类或枚举单例。java-volatile-002 考 volatile 不保证原子性，本题考禁止重排与 DCL。"
+      "answer": [0],
+      "hint": "注册中心只是地址簿：注册/订阅/推送，不参与调用；Consumer 持有全量地址缓存，中心故障只损失增量感知。"
+    },
+    {
+      "id": "java-dubbfail-109",
+      "noteId": "java/advanced/dubbo/02-governance",
+      "type": "single",
+      "difficulty": 4,
+      "q": "下单接口用 Dubbo Failover（retries=2）调库存扣减，超时重试导致重复扣减，最合理的修复是？",
+      "options": [
+        "写接口改 Failfast 或把扣减做成幂等，重试才安全",
+        "把 retries 调大到 5，确保总有一次成功",
+        "把超时调小，让重试更快发生",
+        "换成 Forking 并行调多台，取最快返回"
+      ],
+      "answer": [0],
+      "hint": "Failover 的自动重试对非幂等写是放大器：要么断掉自动重试（Failfast），要么让重复调用无副作用（幂等）。"
     }
   ]
 }

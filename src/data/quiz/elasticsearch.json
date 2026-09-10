@@ -12,9 +12,7 @@
         "只对主键建哈希，关键词走全表扫描",
         "把文档向量化后用余弦相似度替代分词"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "LIKE '%关键词%' 在关系库必然全表扫；ES 的 Analyzer（字符过滤→分词→词过滤）把文本变成可检索词项。"
     },
     {
@@ -23,13 +21,8 @@
       "type": "judge",
       "difficulty": 2,
       "q": "创建索引后可以随时改 number_of_shards，集群会自动按新分片数重哈希路由。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "主分片数按 _id 哈希路由，改了路由全对不上；要做大得 reindex。加副本才能横向扩展读。"
     },
     {
@@ -44,9 +37,7 @@
         "只能用 ids 查询",
         "用 aggregations 代替 query"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "经典误区是拿 term 查 text——text 已被分词，term 要求整个字段值等于某词项。精确等于才用 term 且字段得是 keyword。"
     },
     {
@@ -61,9 +52,7 @@
         "search_after 必须先把全量文档加载进协调节点内存",
         "max_result_window 默认 10，超过即集群变 red"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "这正是默认卡 10000 的原因；深翻页改 search_after/scroll。max_result_window 默认是 10000 不是 10。"
     },
     {
@@ -78,11 +67,7 @@
         "7.x 起 quorum 按 eligible 数自动算，不必手写 minimum_master_nodes",
         "green 要求主分片和副本分片都就位"
       ],
-      "answer": [
-        0,
-        2,
-        3
-      ],
+      "answer": [0, 2, 3],
       "hint": "yellow 是「主分片全好、有副本没分配」，读写不受影响；red 才是有主分片不可用。"
     },
     {
@@ -91,13 +76,8 @@
       "type": "judge",
       "difficulty": 2,
       "q": "terms 聚合应对 keyword（或 text 的 .keyword 子字段）做精确值分组，而不是对已分词的 text 正文分组。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "对 text 做 terms 会按词项零散分组，结果没有业务含义；度量/桶/管道三大家族也不要和 query 打分混为一谈。"
     },
     {
@@ -112,9 +92,7 @@
         "3 台分区也能选出 master，因为 7.x 的 minimum_master_nodes 默认值就是 3",
         "两边都选不出 master，整个集群停止读写"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "quorum 保证至多一个分区在当主；master 缺位只挡元数据变更、读写照常，不会全停；7.x 已内建自动计算，不存在默认配 3 的手配项。"
     },
     {
@@ -129,9 +107,7 @@
         "text 已被分词成多个词项，而 term 要求整个字段值等于某词项，所以几乎匹配不上",
         "term 查询默认只返回第一页数据，需要加分页参数"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "根因是分词：text 存的是词项列表，term 是整值精确等于——想「包含某词」用 match，想精确等于得 term 且字段是 keyword。"
     },
     {
@@ -146,9 +122,7 @@
         "把 size 设为 1 反而能拿到全局最准确的桶",
         "terms 聚合的精确度只与集群节点数有关，与 size 无关"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "别把聚合当绝对精确的 GROUP BY——分片只交局部 top-N，size 越小合并越容易丢全局高频桶；size=1 只会让丢桶更严重；聚合字段要用 keyword。"
     },
     {
@@ -162,13 +136,9 @@
         "DELETE 只是标记删除，磁盘空间真正释放要等 merge；想立刻缩容手动 _forcemerge（重写 segment，代价大）",
         "flush 与 refresh 是同一件事的两个名字，都只让数据可搜索"
       ],
-      "answer": [
-        0,
-        1,
-        2
-      ],
-      "hint": 4,
-      "difficulty": "flush 是「segment 刷盘 + 清空 translog」，让数据可持久，与 refresh（可搜索）分工不同；refresh_interval 可调小换更低延迟但别设 0——每次写入都 refresh，写放大剧增。es-shard-002 考分片数不可改，本题考写路径四动作。"
+      "answer": [0, 1, 2],
+      "hint": "flush 是「segment 刷盘 + 清空 translog」，让数据可持久，与 refresh（可搜索）分工不同；refresh_interval 可调小换更低延迟但别设 0——每次写入都 refresh，写放大剧增。es-shard-002 考分片数不可改，本题考写路径四动作。",
+      "difficulty": 4
     }
   ]
 }

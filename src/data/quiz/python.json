@@ -12,9 +12,7 @@
         "[[1, 2], [3, 4, 99]]",
         "抛出 TypeError：列表元素不可哈希"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "把 copy() 当深拷贝是最大误区——浅拷贝只复制第一层容器，内层子列表仍与原列表共享，对 b[0] 的修改直接落到 a 身上；完整隔离要用 copy.deepcopy。"
     },
     {
@@ -30,11 +28,7 @@
         "numpy、hashlib 等 C 扩展进入长计算前会自行释放 GIL，重计算可以部分并行",
         "CPU 密集任务开多线程可能比单线程更慢，因为多线程抢 GIL 反而增加切换开销"
       ],
-      "answer": [
-        1,
-        3,
-        4
-      ],
+      "answer": [1, 3, 4],
       "hint": "GIL 是 CPython 的实现选择、不是语言规范（PEP 703 的 free-threaded 构建正在移除它）；+= 是多步字节码的组合操作，GIL 保证不了原子性，锁照加。"
     },
     {
@@ -49,9 +43,7 @@
         "装饰后 train.__name__ 必然还是 'train'，与是否使用 functools.wraps 无关",
         "wrapper 内不写 *args, **kwargs 也能装饰任意签名的函数"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "装饰器不是魔法，就是一次函数调用加重绑定；不写 functools.wraps 时 __name__ 会变成 'wrapper'（文档、调试器、序列化全会被骗）；透传任意签名全靠 *args/**kwargs。"
     },
     {
@@ -60,13 +52,8 @@
       "type": "judge",
       "difficulty": 2,
       "q": "调用含 yield 的函数（如 g = countdown(3)）时，函数体会立即开始执行，直到运行到第一个 yield 才暂停。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "把普通函数「调用即执行」的直觉套到生成器上了——调用含 yield 的函数一行代码都不跑，只创建并返回生成器对象，要等第一次 next() 才推进到 yield 处。"
     },
     {
@@ -81,9 +68,7 @@
         "[[1], [2]]",
         "抛出 TypeError"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "默认值在 def 时求值一次，所有调用共享同一个 list；修法是哨兵 None，每次调用新建。"
     },
     {
@@ -92,13 +77,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "CPython 的分代 GC 是内存回收的主力，引用计数只在循环引用时才启用。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "正好说反：引用计数归零立即释放是主力；分代 GC 只兜循环引用（互相 append 后 del 仍收不掉的那种）。"
     },
     {
@@ -113,9 +93,7 @@
         "自动在新线程里跑",
         "语法错误，async def 必须同时写 await"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "与生成器「调用含 yield 的函数不执行」同源；一万条连接靠单线程事件循环在 IO 时让出，不是开一万线程。"
     },
     {
@@ -130,9 +108,7 @@
         "运行时按调用栈动态找最近的基类",
         "等价于显式写 Parent.method(self)，与 MRO 无关"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "super 不是「父类」的语法糖，是 MRO 的下一站；菱形继承靠 C3 保证子类在前、公共父类最后。"
     },
     {
@@ -141,13 +117,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "CPython dict 用开放寻址解决冲突，装载因子超过约 2/3 就 resize；3.7+ 的插入有序是紧凑 dict 的实现效果。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "不要拿 Java HashMap 拉链法来套；可哈希性（__hash__/__eq__ 成对）是能进 dict/set 的前提。"
     },
     {
@@ -162,9 +133,7 @@
         "与 Java 泛型一样擦除后插入强制转换指令",
         "只有 dataclass 字段的标注会在运行时校验"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "渐进式类型；运行时要强制校验边界数据，那是 Pydantic 的职责，不是 typing 本身。"
     },
     {
@@ -173,13 +142,8 @@
       "type": "judge",
       "difficulty": 2,
       "q": "Pydantic 把类型标注升级为运行时强制执行，适合校验 HTTP 请求体、配置和第三方 JSON。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "typing 给 IDE 看，Pydantic 在边界处拦脏数据；两者不要当成同一层。"
     },
     {
@@ -194,9 +158,7 @@
         "asyncio.gather 并行计算",
         "把 for 循环改成推导式即可并行"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "线程绕不开 GIL；asyncio 遇 CPU 计算会堵住循环；进程才有真正的多核，但通信要 pickle。"
     },
     {
@@ -211,9 +173,7 @@
         "lock 文件不能提交，每人本地生成一份",
         "venv 已经隔离，不再需要 lock"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "uv add/remove 改依赖，uv run 跑命令，uvx 一次性跑工具。隔离靠 venv，可复现靠 lock。"
     },
     {
@@ -228,11 +188,7 @@
         "测试函数必须继承 unittest.TestCase 才能被收集",
         "参数化加用例主要是加数据行，而不是复制测试函数"
       ],
-      "answer": [
-        0,
-        1,
-        3
-      ],
+      "answer": [0, 1, 3],
       "hint": "发现规则靠 test_ 前缀。pytest.raises 断言异常。mark 分组让慢测试与网络测试可过滤，保住本地反馈速度。"
     },
     {
@@ -247,9 +203,7 @@
         "mypy 必须一次 disallow 全仓库，否则没有意义",
         "lint 与 format 冲突时关掉 format，保留全部 lint 规则"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "冲突规则关 lint 侧、让 format 说了算。CI 顺序：ruff check → format --check → mypy → pytest。本地保存即跑 ruff。"
     },
     {
@@ -264,9 +218,7 @@
         "元类拦截的是实例构造 __init__，不是 class 语句",
         "实例字典永远覆盖数据描述符"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "class 语句 = 元类调用，拦截的是「类的创建」（注册、注入、校验）。能不用元类就不用。"
     },
     {
@@ -281,11 +233,7 @@
         "单元素 tuple 写成 (1) 即可，括号能创造元组",
         "tuple 可哈希（元素也可哈希时）因而能当 dict key"
       ],
-      "answer": [
-        0,
-        1,
-        3
-      ],
+      "answer": [0, 1, 3],
       "hint": "单元素必须 (1,) 带逗号。tuple 是结构固定的记录，省内存。list 不适合当 set 用。"
     },
     {
@@ -300,9 +248,7 @@
         "由 GIL 决定执行次数；循环导入是语法错误无法运行",
         "exec 与 import 无关，顶层副作用没有坏处"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "import 是运行时执行，sys.path 决定搜索位置。__name__=='__main__' 让文件兼任库与脚本。模块顶层避免副作用。"
     },
     {
@@ -317,9 +263,7 @@
         "删掉 __init__.py，Python 3 不再需要包",
         "测试去 import 源码树里未经安装的包，避免 src 布局"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "包 = 带 __init__.py 的目录，门面收敛对外 API。src 布局让测试 import 的是安装后的包，而不是碰巧的本地路径。"
     },
     {
@@ -334,9 +278,7 @@
         "两者完全等价，CPython 会合并",
         "只有继承 object 时才有 __new__"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "类属性查找链是实例 dict → 类 → 基类。运算符是魔术方法协议，不必继承接口。__repr__ 给开发者，__str__ 给用户。"
     },
     {
@@ -351,9 +293,7 @@
         "只能用 namedtuple，dataclass 不支持默认值",
         "frozen=True 与 slots 冲突，不能同时用"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "值对象首选 frozen=True（不可变 + 可哈希 + 线程安全）。dataclass 生成 __init__/__repr__/__eq__，消灭样板。"
     },
     {
@@ -368,9 +308,7 @@
         "任意负载都线性加速；锁越细越好",
         "只能用 multiprocessing，线程在 Python 里无效"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "GIL 使多线程无法并行执行字节码，但 IO 等待会释放。+= 仍是多步字节码，要显式锁。CPU 密集换多进程。"
     },
     {
@@ -385,9 +323,7 @@
         "声明为 async def，内部用 requests 同步请求后返回",
         "声明为 async def，插入 time.sleep 让事件循环喘口气"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "async 路由里一个同步阻塞（requests、time.sleep）就冻结全服务；async 只给 IO 密集并发用，CPU 密集走同步 def 让框架进线程池。"
     },
     {
@@ -403,12 +339,7 @@
         "N+1 的解法是 selectinload 显式预加载，与 JPA 的 fetch join/EntityGraph 一致",
         "生产环境建表也推荐 Base.metadata.create_all(engine)，不需要迁移工具"
       ],
-      "answer": [
-        0,
-        1,
-        2,
-        3
-      ],
+      "answer": [0, 1, 2, 3],
       "hint": "create_all 只用于开发期，生产必须用 Alembic 迁移；其余四条分别是 Engine/Session 生命周期纪律、脏检查、DetachedInstanceError 陷阱与 selectinload 预加载。"
     },
     {
@@ -423,9 +354,7 @@
         "pop(0) 是 O(1)，popleft() 是 O(n)",
         "都是 O(n)"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "list 头部删除要全员平移是 O(n)；deque 的双端结构保证两端进出都是 O(1)，这也是滑动窗口、BFS 队列选 deque(maxlen=n) 的原因。"
     },
     {
@@ -434,13 +363,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "itertools.groupby 可以直接对未排序的日志列表按 level 分组，不必先排序。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "groupby 只合并相邻的相同项，不先 sorted(logs, key=level) 拿到的是碎片；另外所有 itertools 产物都是一次性迭代器。"
     },
     {
@@ -455,9 +379,7 @@
         "['2026', '09', '2026', '10']",
         "[('2026-09',), ('2026-10',)]"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "findall 遇到分组返回的是组而不是整体——多个组返回元组列表，这是 findall 的第二大坑。"
     },
     {
@@ -473,11 +395,7 @@
         "吞掉异常时才记日志；处理不了要上抛的，只 log 后 raise，让最外层统一记录",
         "库里调 basicConfig 帮应用统一日志格式是最佳实践"
       ],
-      "answer": [
-        0,
-        2,
-        3
-      ],
+      "answer": [0, 2, 3],
       "hint": "log.exception 只在 except 块里用；库擅自 basicConfig 会抢走应用的配置权，是日志格式混乱的十有八九元凶。"
     },
     {
@@ -492,9 +410,7 @@
         "宽的放前面会直接抛 SyntaxError",
         "只是风格约定，与捕获行为无关"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "异常捕获是按顺序逐个匹配的；同理裸 except: 连 KeyboardInterrupt 和系统退出信号都吞。"
     },
     {
@@ -509,9 +425,7 @@
         "两者都是含子调用的耗时，只是默认排序不同",
         "tottime 是墙钟时间，cumtime 是 CPU 时间"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "tottime 大 = 函数自身慢（计算热点），cumtime 大 = 调用链条上游；另注意 cProfile 有 30%+ 探针开销，只找相对热点、不测绝对耗时。"
     },
     {
@@ -525,9 +439,7 @@
         "只要循环结束（含 break）都走 else",
         "else 是 for 语法错误，只有 if-else 合法"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "被 break 打断就不进 else。match-case 主场是解构嵌套结构，简单值比较仍用 if-elif。",
       "difficulty": 2
     },
@@ -542,9 +454,7 @@
         "应改用 f-string 循环累加",
         "只有 bytes 不可变必须 join，str 可以放心 +="
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "少量几次 += 无所谓。乱码九成来自 encode/decode 编码不一致，文件 IO 永远显式 encoding=\"utf-8\"。",
       "difficulty": 3
     },
@@ -560,12 +470,7 @@
         "csv 写文件应传 newline=\"\"，否则 Windows 下可能多空行",
         "json 模块会按类型注解自动校验，不必再上 Pydantic"
       ],
-      "answer": [
-        0,
-        1,
-        2,
-        3
-      ],
+      "answer": [0, 1, 2, 3],
       "hint": "结构化校验是 Pydantic 的主场。选型：机器之间 JSON，人看的表格 CSV，人写的配置 TOML/YAML。",
       "difficulty": 3
     },
@@ -580,9 +485,7 @@
         "每次 requests.get 都会自动复用连接，Session 只是语法糖",
         "在 FastAPI 的 async 路由里用 requests.get 是推荐写法"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "异步代码禁用同步 HTTP 客户端，应换 httpx.AsyncClient。重试只给幂等方法 + 明确可重试状态码，配指数退避。",
       "difficulty": 4
     },
@@ -597,9 +500,7 @@
         "必须用 os.path.join，Path 的 / 会按除法求值",
         "with 只在正常路径 close，异常仍要手写 finally"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "with 的 __exit__ 无论是否异常都会执行。read_text/write_text 适合小文件；大文件仍要流式读。",
       "difficulty": 3
     },
@@ -614,9 +515,7 @@
         "naive 与 aware 混合比较会静默按本地时区转换",
         "timestamp() 与 Java Instant 一样是毫秒"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "naive 和 aware 混合比较直接 TypeError。对外传输一律 isoformat；对接 Java 注意秒 vs 毫秒差三个数量级。",
       "difficulty": 4
     },
@@ -625,13 +524,8 @@
       "noteId": "python/advanced/eng/04-packaging",
       "type": "judge",
       "q": "Python 的 wheel 和 Java fat jar 一样会把依赖打进构件，安装时不再解析 lockfile。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "wheel 不打包依赖，只描述需要什么；安装环境按 lockfile 解决。Docker 应先拷 pyproject+uv.lock，再 uv sync --frozen。",
       "difficulty": 3
     },
@@ -646,11 +540,9 @@
         "free-threaded 已是 3.13 的默认构建，所有项目应立即切换",
         "现有多线程代码必须整体重写才能在 free-threaded 构建下运行"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "free-threaded 不是免费多核——单线程有原子计数的额外开销、C 扩展要等生态跟进；它改的是实现（分片计数+延迟回收）而不是并发语义，成熟前多核正路仍是多进程。"
+      "answer": [0],
+      "hint": "free-threaded 不是免费多核——单线程有原子计数的额外开销、C 扩展要等生态跟进；它改的是实现（分片计数+延迟回收）而不是并发语义，成熟前多核正路仍是多进程。",
+      "difficulty": 3
     },
     {
       "id": "py-mutparam-032",
@@ -663,11 +555,9 @@
         "这是解释器的实现 bug，只有 list 受影响",
         "只有全局变量才会被函数修改，作为参数传入的列表是安全的"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "变量是贴在对象上的名字标签，传参即多贴一个名字——「可变默认值绝不能做参数默认值」是同源纪律；不可变对象（int/str/tuple）的「改」是换新对象，因此能安全共享、可做 dict key。"
+      "answer": [0],
+      "hint": "变量是贴在对象上的名字标签，传参即多贴一个名字——「可变默认值绝不能做参数默认值」是同源纪律；不可变对象（int/str/tuple）的「改」是换新对象，因此能安全共享、可做 dict key。",
+      "difficulty": 3
     }
   ]
 }

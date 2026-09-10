@@ -12,11 +12,7 @@
         "工程上应永远用 ===，隐式转换只用来读题",
         "== 时 null 与 undefined 互相相等且不转型"
       ],
-      "answer": [
-        0,
-        2,
-        3
-      ],
+      "answer": [0, 2, 3],
       "hint": "NaN 不等于自身，判 NaN 用 Number.isNaN()；== 的 null/undefined 特例和其余转数字比，是隐式转换的高频坑。"
     },
     {
@@ -31,9 +27,7 @@
         "箭头函数没有自己的 i，只能读到 3",
         "事件循环会合并相同回调，只执行最后一次"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "用 let 每轮新绑定，或 IIFE 捕获当轮值即可修复；箭头函数与宏/微任务不是这道题的原因。"
     },
     {
@@ -48,9 +42,7 @@
         "__proto__ 在每个对象上指向原型；prototype 在每个函数上，是 new 出来实例的原型",
         "class extends 不再使用原型链"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "两根指针方向最容易反：实例靠 [[Prototype]]/__proto__ 找原型，函数的 prototype 才是给实例挂的那张原型对象；class 只是语法糖。"
     },
     {
@@ -65,9 +57,7 @@
         "obj.fn() > new > bind > 独立调用",
         "箭头函数的 this 也按这四条在调用时确定"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "硬绑定后再 new，new 仍然优先；箭头函数没有 this，沿词法作用域取外层，不走这张表。"
     },
     {
@@ -76,15 +66,8 @@
       "type": "single",
       "difficulty": 3,
       "q": "setTimeout(() => console.log(1)); Promise.resolve().then(() => console.log(2)); console.log(3); 输出顺序是？",
-      "options": [
-        "1 2 3",
-        "3 1 2",
-        "3 2 1",
-        "2 3 1"
-      ],
-      "answer": [
-        2
-      ],
+      "options": ["1 2 3", "3 1 2", "3 2 1", "2 3 1"],
+      "answer": [2],
       "hint": "同步代码先跑完（3），当前宏任务结束后清空整个微任务队列（2），然后才轮到 setTimeout 宏任务（1）。"
     },
     {
@@ -93,13 +76,8 @@
       "type": "judge",
       "difficulty": 4,
       "q": "浏览器同源策略会阻止跨域 AJAX 请求发出去，所以服务端收不到这类请求，CSRF 因此被天然防住。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "请求其实发出去了，被拦的是「读取响应」；表单跨域提交、CSRF 正是因为发送没被禁止。"
     },
     {
@@ -114,9 +92,7 @@
         "改用 UDP，不再需要握手",
         "服务端返回 301 把协议升级到 wss"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "只在握手阶段借用 HTTP；101 之后这条连接上跑的是 WebSocket 帧，双方随时互发，不是再套一层 HTTP 响应。"
     },
     {
@@ -131,10 +107,7 @@
         "事件委托把监听挂到父元素，靠 event.target 分辨来源",
         "focus/blur 等不冒泡的事件也可以直接委托"
       ],
-      "answer": [
-        0,
-        2
-      ],
+      "answer": [0, 2],
       "hint": "默认 useCapture 为 false，挂在冒泡段；没有冒泡的事件委托不了，这是委托的边界。"
     },
     {
@@ -143,13 +116,8 @@
       "type": "judge",
       "difficulty": 4,
       "q": "process.memoryUsage() 的 heapUsed 上涨才代表泄漏；RSS 涨而 heapUsed 不涨，应先怀疑堆外（Buffer/内存映射）。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "Node 进程内存 ≠ V8 堆；只盯 heapUsed 会漏掉 C++ Buffer 和 libuv 占用。"
     },
     {
@@ -163,11 +131,9 @@
         "await 之后的代码同步立即执行，不需要排队",
         "await 之后的代码被包成宏任务，排在 setTimeout 之后"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "两条准确的调度语义——「async 函数首次调用同步执行到第一个 await」与「await 之后 = .then 回调 = 微任务」：所以 await 后的代码排在同步代码之后、任何 setTimeout 之前。js-eventloop-005 考宏微任务输出顺序，本题考 await 本身的语义。"
+      "answer": [0],
+      "hint": "两条准确的调度语义——「async 函数首次调用同步执行到第一个 await」与「await 之后 = .then 回调 = 微任务」：所以 await 后的代码排在同步代码之后、任何 setTimeout 之前。js-eventloop-005 考宏微任务输出顺序，本题考 await 本身的语义。",
+      "difficulty": 4
     },
     {
       "id": "js-tdz-011",
@@ -180,11 +146,9 @@
         "const 声明的对象，其属性也不能再修改",
         "var 的提升会把赋值语句一起提到作用域顶部"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "var 的提升是「声明与初始化分离」，赋值还留在原地；const 锁的是绑定（引用不可换）；另一个细节——函数声明整体提升、函数表达式只提升变量名。js-closure-002 考 var 循环打印，本题考 TDZ 与提升细节。"
+      "answer": [0],
+      "hint": "var 的提升是「声明与初始化分离」，赋值还留在原地；const 锁的是绑定（引用不可换）；另一个细节——函数声明整体提升、函数表达式只提升变量名。js-closure-002 考 var 循环打印，本题考 TDZ 与提升细节。",
+      "difficulty": 3
     },
     {
       "id": "js-preflight-011",
@@ -197,11 +161,9 @@
         "简单请求也要先预检，只是预检结果被缓存了",
         "预检失败时真实请求照样发出，只是响应被浏览器拦截"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "简单请求 = GET/POST/HEAD 且头部限于安全集合（Content-Type 仅 text/plain、form-data、x-www-form-urlencoded 等）；带 token 自定义头、application/json、PUT/DELETE 都触发预检；`*` 与 credentials:true 互斥，带 Cookie 必须回显具体域名。js-cors-006 考「拦的是读取不是发送」，本题考预检分类。"
+      "answer": [0],
+      "hint": "简单请求 = GET/POST/HEAD 且头部限于安全集合（Content-Type 仅 text/plain、form-data、x-www-form-urlencoded 等）；带 token 自定义头、application/json、PUT/DELETE 都触发预检；`*` 与 credentials:true 互斥，带 Cookie 必须回显具体域名。js-cors-006 考「拦的是读取不是发送」，本题考预检分类。",
+      "difficulty": 3
     },
     {
       "id": "js-new-012",
@@ -214,11 +176,9 @@
         "instanceof Object 判断构造器是否执行成功，失败时返回默认对象",
         "ret 是返回值的深拷贝，避免外部修改影响实例"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "new 四件事——① 建空对象链到 prototype、② 绑 this 执行构造逻辑、③ 构造器显式返回对象时覆盖、④ 否则返回 obj；顺带的推论：原始值永远 instanceof 为 false（没有原型链可走），判数组用 Array.isArray。js-proto-003 考两根指针，本题考 new 的完整语义。"
+      "answer": [0],
+      "hint": "new 四件事——① 建空对象链到 prototype、② 绑 this 执行构造逻辑、③ 构造器显式返回对象时覆盖、④ 否则返回 obj；顺带的推论：原始值永远 instanceof 为 false（没有原型链可走），判数组用 Array.isArray。js-proto-003 考两根指针，本题考 new 的完整语义。",
+      "difficulty": 3
     }
   ]
 }

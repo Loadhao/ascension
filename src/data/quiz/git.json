@@ -12,9 +12,7 @@
         "中央仓库是 Git 架构上的必需品，断网后本地无法提交",
         "分支是一个 40 字节文件，内容为它指向的 commit 哈希，创建成本几乎为零"
       ],
-      "answer": [
-        3
-      ],
+      "answer": [3],
       "hint": "文件名由 tree 记录、blob 只存内容；Git 是快照+指针复用而非差异存储，看历史 O(1)；Git 是分布式的——本地就是完整仓库，断网照样提交。"
     },
     {
@@ -23,13 +21,8 @@
       "type": "judge",
       "difficulty": 3,
       "q": "使用 git merge --squash 合并 feature 分支后，可以直接用 git branch -d feature 删除该分支。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "squash 没有生成合并提交，Git 判定该分支处于未合并状态会拒绝 -d——这正是它需要 -D 强删的原因。"
     },
     {
@@ -44,9 +37,7 @@
         "git restore --staged <file> 会把文件移出暂存区并丢弃工作区修改",
         "被 reset --hard 清掉的未提交修改，一定能通过 reflog 找回"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "reset 改历史、只能用于私有分支，公共分支必须用 revert；restore --staged 移出暂存区但修改保留；reflog 救的是提交历史——未提交的修改被 --hard 清掉就真没了。"
     },
     {
@@ -61,9 +52,7 @@
         "强制用远端覆盖工作区，丢弃本地提交",
         "等价于 git push --force-with-lease"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "fetch 才是「只取不合并」；pull 会改当前分支。覆盖历史是 push --force 那一类操作。"
     },
     {
@@ -72,13 +61,8 @@
       "type": "judge",
       "difficulty": 2,
       "q": "rebase / filter-branch 等改写历史会让提交哈希全变，已推送的公共分支上做这些等于让所有人的本地历史分叉。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "改历史只留给尚未共享的提交；公共分支用 revert。"
     },
     {
@@ -93,9 +77,7 @@
         "前者只看未跟踪文件，后者只看冲突",
         "--staged 会把文件移出暂存区"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "add 把工作区推进暂存区，commit 把暂存区写成历史。add -p 可以逐块挑选，避免把调试打印一并提交。--amend 只用于尚未 push 的最近一次提交。"
     },
     {
@@ -110,11 +92,7 @@
         "多个 worktree 共享同一份 .git 对象，各有独立工作区文件",
         "大文件用 LFS 存指针，避免仓库膨胀"
       ],
-      "answer": [
-        0,
-        2,
-        3
-      ],
+      "answer": [0, 2, 3],
       "hint": "worktree 的卖点正是共享对象库、省一份 clone。submodule 记录的是子仓某个 commit 指针；能用普通依赖就别上子模块。"
     },
     {
@@ -129,9 +107,7 @@
         "每人长期个人分支永不合并；禁止一切强推",
         "只允许在 main 上直接 commit --amend 改历史"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "从简是趋势：真需要发版/hotfix 再加 release 分支，不必先上 Git Flow。--force-with-lease 会拒绝覆盖别人新推的提交；裸 -f 可能抹掉同事的工作。"
     },
     {
@@ -145,11 +121,9 @@
         "checkout 必须配合 mergetool 使用，单独用会随机选边",
         "该文件并没有真正冲突，--theirs 只是恢复了未修改的版本"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "merge 与 rebase 的 ours/theirs 指代相反，是经典坑；另一条安全线——永远用 --force-with-lease 替代裸 --force（远端被别人更新过时拒绝执行，防覆盖同事工作）。git-remote-004 考 pull 的组成，本题考冲突工具的语境陷阱。"
+      "answer": [0],
+      "hint": "merge 与 rebase 的 ours/theirs 指代相反，是经典坑；另一条安全线——永远用 --force-with-lease 替代裸 --force（远端被别人更新过时拒绝执行，防覆盖同事工作）。git-remote-004 考 pull 的组成，本题考冲突工具的语境陷阱。",
+      "difficulty": 4
     }
   ]
 }

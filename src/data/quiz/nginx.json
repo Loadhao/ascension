@@ -12,9 +12,7 @@
         "worker 是单线程 epoll 事件循环，向 upstream 发起连接后不干等 IO，转去处理其他连接",
         "多个 worker 之间可以靠共享内存变量实现跨请求状态（如共享计数器）"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "worker 是单线程，核数才等于并行度，配多了反而上下文切换变多；worker_connections 是「每个 worker」的上限；worker 间默认不共享内存变量，跨请求状态要放 Redis/DB。"
     },
     {
@@ -23,13 +21,8 @@
       "type": "judge",
       "difficulty": 4,
       "q": "配置 location /api/ { proxy_pass http://backend; }（proxy_pass 不带尾斜杠）时，请求 /api/users 会被转发为 http://backend/users（location 前缀被去掉）。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        1
-      ],
+      "options": ["正确", "错误"],
+      "answer": [1],
       "hint": "只有 proxy_pass 自身带了 URI 部分/尾斜杠才会替换前缀；不带斜杠时完整原始 URI 原样转发，与 location 写法无关——「代理后 404」多半是把这个决定因素安错了地方。"
     },
     {
@@ -44,11 +37,7 @@
         "限流超限后 Nginx 返回 503，在入口就把流量挡住",
         "缓存串数据的元凶通常是 cache_key 没带全影响结果的参数/头"
       ],
-      "answer": [
-        0,
-        2,
-        3
-      ],
+      "answer": [0, 2, 3],
       "hint": "nodelay 的语义说反了——nodelay 是「积压也立刻放」（消耗 burst 配额），去掉 nodelay 才是排队限速流出。"
     },
     {
@@ -63,9 +52,7 @@
         "/var/www/site/a.png，alias 被 root 覆盖",
         "只能用 try_files，alias 不能配静态目录"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "root 追加完整 URI，alias 剥掉前缀再替换——混用是静态 404 的第一嫌疑。SPA 刷新还要靠 try_files 回退 index.html。"
     },
     {
@@ -74,13 +61,8 @@
       "type": "judge",
       "difficulty": 2,
       "q": "CDN 把静态内容缓存在边缘节点，回源只在未命中时发生；动态 API 默认不该整站交给 CDN 当源站缓存。",
-      "options": [
-        "正确",
-        "错误"
-      ],
-      "answer": [
-        0
-      ],
+      "options": ["正确", "错误"],
+      "answer": [0],
       "hint": "缓存键和 Cache-Control 决定能不能缓存；把带 Cookie 的个性化接口缓在边缘会串数据。"
     },
     {
@@ -95,9 +77,7 @@
         "探上游业务接口；脑裂时 VRRP 会自动 fencing 对端",
         "探 VIP 是否在本机；有状态的 MySQL 主从也该用同一套 VRRP 管选主"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "weight 扣到低于备机 priority 才会切换。无状态入口用 keepalived 做 IP 漂移；有状态主从交给哨兵/ZK，VRRP 不懂复制。脑裂防护：独立心跳 + 仲裁 + fencing。"
     },
     {
@@ -111,11 +91,9 @@
         "命中 = /favicon.ico：精确匹配是所有请求的兜底",
         "三个都命中，响应按配置出现的先后顺序合并"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "/api/logo.png 先按前缀记住 /api/，但正则优先级更高、最终命中图片缓存规则——「前缀之后正则可以反超」是经典案例；指令放错上下文层级是最隐蔽的坑（limit_conn 写在 location 却想全站生效就做不到）。nginx-worker-001 考 worker/连接模型，本题考匹配规则。"
+      "answer": [0],
+      "hint": "/api/logo.png 先按前缀记住 /api/，但正则优先级更高、最终命中图片缓存规则——「前缀之后正则可以反超」是经典案例；指令放错上下文层级是最隐蔽的坑（limit_conn 写在 location 却想全站生效就做不到）。nginx-worker-001 考 worker/连接模型，本题考匹配规则。",
+      "difficulty": 3
     }
   ]
 }

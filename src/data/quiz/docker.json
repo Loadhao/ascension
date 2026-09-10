@@ -12,9 +12,7 @@
         "容器删除后可写层随之丢弃，需要持久化的数据必须放数据卷",
         "同一镜像起多个容器，每个容器都会在磁盘上完整复制一份镜像层"
       ],
-      "answer": [
-        2
-      ],
+      "answer": [2],
       "hint": "写入走写时复制——读共享镜像层、写只复制到自己的可写层，互不干扰；「完整复制一份镜像」把「只多一份可写层」误当成整份拷贝；镜像只读、可写层随容器销毁，所以持久化必须用数据卷。"
     },
     {
@@ -29,11 +27,7 @@
         "Namespace 负责限制「能用多少」，Cgroups 负责隔离「看得见什么」",
         "overlay2 驱动中，可写层对应 upperdir，镜像只读层对应 lowerdir"
       ],
-      "answer": [
-        0,
-        1,
-        3
-      ],
+      "answer": [0, 1, 3],
       "hint": "第 3 项把两大机制的职责说反了——Namespace 管隔离视图「看得见什么」，Cgroups 管资源配额「能用多少」。"
     },
     {
@@ -48,9 +42,7 @@
         "RUN 和 CMD 都在容器运行期执行",
         "写了 EXPOSE 3000 后容器即可被外部访问，无需 -p 映射"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "args 对 ENTRYPOINT 是追加不是替换（典型组合：ENTRYPOINT 定主命令、CMD 给默认参数）；RUN 是构建期、CMD/ENTRYPOINT 是运行期；EXPOSE 只是声明，真正生效靠 docker run -p。"
     },
     {
@@ -65,10 +57,7 @@
         "host 模式下配置 -p 端口映射依然有效",
         "容器出外网的 SNAT 与外部访问容器的 DNAT 都体现在 iptables 的 nat 表里"
       ],
-      "answer": [
-        1,
-        3
-      ],
+      "answer": [1, 3],
       "hint": "-p 8080:80 的顺序是宿主:容器；host 模式直接监听宿主端口，-p 发布规则不适用；服务互连用自定义 bridge + 容器名（内置 DNS），别写死会变的容器 IP。"
     },
     {
@@ -83,9 +72,7 @@
         "tmpfs，避免磁盘磨损",
         "不挂载，让数据留在容器可写层以便随镜像分发"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "可写层随容器删除丢失；bind 适合配置/热加载；tmpfs 在内存里，不适合库表。"
     },
     {
@@ -100,9 +87,7 @@
         "退出码 137 表示被 SIGTERM，属于正常 stop",
         "Paused 状态的容器已被 rm，只能重新 run"
       ],
-      "answer": [
-        0
-      ],
+      "answer": [0],
       "hint": "stop 先 SIGTERM 默认等 10s 再 SIGKILL；137 是 SIGKILL（OOM 或 docker kill），143 才是 SIGTERM。pause 只是暂停，unpause 可恢复。"
     },
     {
@@ -117,9 +102,7 @@
         "Compose V2 已删除 depends_on，必须改用 links",
         "只要在同一自定义网络里，启动顺序无所谓，DNS 会重试到成功"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "服务名即 DNS 名（Compose 自动建自定义网络）。version 字段在 Compose V2 已废弃。down 默认不删具名卷，加 -v 才会。"
     },
     {
@@ -134,10 +117,7 @@
         "生产 USER 非 root；基础镜像尽量 pin 到 digest 防仓库漂移",
         "EXPOSE 了端口就等于对外可访问，不必再 -p"
       ],
-      "answer": [
-        0,
-        2
-      ],
+      "answer": [0, 2],
       "hint": "ENV/ARG 里的密钥会永久留在层里。多阶段构建让编译器不进最终镜像；.dockerignore 减构建上下文。EXPOSE 只是声明。"
     },
     {
@@ -152,9 +132,7 @@
         "-p 两边可以随便写，Docker 会自动对调；--rm 删除镜像",
         "80 必须等于 EXPOSE，否则 -p 无效"
       ],
-      "answer": [
-        1
-      ],
+      "answer": [1],
       "hint": "记住「宿主:容器」。pull 拉的是只读层，run 在上面叠可写层才成为容器。docker ps 默认只看运行中，-a 才含已停止。"
     },
     {
@@ -168,11 +146,9 @@
         "docker exec 会自动补发信号，无需应用处理",
         "内核会替 PID 1 回收僵尸进程，不需要应用关心"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "PID 1 的两个职责——转发信号、回收僵尸进程：漏了前者 stop 超时强杀、后者僵尸堆积。另记：容器共享宿主内核（所以 Windows 容器跑不了 Linux 镜像），--privileged 等于放弃 Namespace 隔离仅调试用。"
+      "answer": [0],
+      "hint": "PID 1 的两个职责——转发信号、回收僵尸进程：漏了前者 stop 超时强杀、后者僵尸堆积。另记：容器共享宿主内核（所以 Windows 容器跑不了 Linux 镜像），--privileged 等于放弃 Namespace 隔离仅调试用。",
+      "difficulty": 4
     },
     {
       "id": "docker-latest-005",
@@ -185,11 +161,9 @@
         "应该用 docker commit 在每次改动后生成新镜像来代替 tag 管理",
         "docker rmi 删除 latest 后会自动回滚到上一个版本"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 3,
-      "difficulty": "「改了 build 还是旧镜像」九成是构建缓存或旧 tag 指向——--no-cache 重建、明确打新 tag；看分层用 docker history（每层构建记录与大小）与 image inspect（分层信息）。"
+      "answer": [0],
+      "hint": "「改了 build 还是旧镜像」九成是构建缓存或旧 tag 指向——--no-cache 重建、明确打新 tag；看分层用 docker history（每层构建记录与大小）与 image inspect（分层信息）。",
+      "difficulty": 3
     },
     {
       "id": "docker-voltrap-010",
@@ -202,11 +176,9 @@
         "bind mount 与具名卷行为完全一致，只是写法不同",
         "docker volume prune 会把正在被容器使用的卷一并删除"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "「遮盖」与「预填充」是两种挂载最大的行为差异——配置被盖掉多半是 bind 空目录惹的祸；备份卷的做法是起个临时容器把卷内容 tar 出来。docker-vol-005 考生产挂载选型，本题考行为细节与坑。"
+      "answer": [0],
+      "hint": "「遮盖」与「预填充」是两种挂载最大的行为差异——配置被盖掉多半是 bind 空目录惹的祸；备份卷的做法是起个临时容器把卷内容 tar 出来。docker-vol-005 考生产挂载选型，本题考行为细节与坑。",
+      "difficulty": 4
     },
     {
       "id": "docker-stuckrun-011",
@@ -219,11 +191,9 @@
         "镜像分层损坏，需要 docker rmi 后重新 pull",
         "容器进入 Exited 后可写层数据已被删除，只能重新 run"
       ],
-      "answer": [
-        0
-      ],
-      "hint": 4,
-      "difficulty": "容器生死由主进程决定——「让容器常驻 = 前台跑一个不退出的进程」；Exited ≠ 删除，docker start 可复活（可写层还在），docker cp 仍能取文件；--rm 适合一次性任务，别用于需要排查的服务容器。docker-life-006 考状态与退出码归属，本题考「起不来」的排查流程。"
+      "answer": [0],
+      "hint": "容器生死由主进程决定——「让容器常驻 = 前台跑一个不退出的进程」；Exited ≠ 删除，docker start 可复活（可写层还在），docker cp 仍能取文件；--rm 适合一次性任务，别用于需要排查的服务容器。docker-life-006 考状态与退出码归属，本题考「起不来」的排查流程。",
+      "difficulty": 4
     }
   ]
 }
