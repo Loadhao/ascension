@@ -1967,6 +1967,25 @@
       ],
       "hint": "传播行为是代理拦截时的决策——自调用绕过代理、注解形同虚设（笔记例 2：扣库存与下单同一事务一起回滚）；REQUIRES_NEW 与 NESTED 的真正差异是「两个独立连接」vs「同一连接的 savepoint」，前提都是经过代理。java-tx-016 多选考失效清单，本题考传播行为与自调用的组合失效。",
       "difficulty": 4
+    },
+    {
+      "id": "java-stringpool-116",
+      "noteId": "java/basic/syntax/02-string",
+      "type": "multiple",
+      "q": "关于 String 的常量池与拼接行为，下列说法正确的有？（多选）",
+      "options": [
+        "字面量赋值先查常量池、池中有则复用；new String 无论池中有没有都在堆里新建一个对象",
+        "\"he\" + \"llo\" 两个字面量相加在编译期常量折叠为 \"hello\" 入池；含变量的拼接在运行期新建对象",
+        "循环里用 + 拼接每轮都新建 StringBuilder 并生成新 String，是 O(n²) 级对象创建反模式，应换成单个 StringBuilder",
+        "String 的 hash 每次调用 hashCode 都要重新计算，这是它做 HashMap key 的代价"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "hash 算一次就缓存在 private int hash 字段——这正是不可变的三大动机之一（常量池前提/线程安全/hash 缓存）；JDK 9 起纯 Latin-1 字符串用 byte[] 紧凑存储省一半内存。",
+      "difficulty": 3
     }
   ]
 }

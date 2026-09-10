@@ -241,6 +241,23 @@
       ],
       "hint": "关键是「工具链不下进 runtime」；配套：.dockerignore 排除 node_modules/.git 减少上下文与缓存污染，同层安装后立即清理（清理层无法缩小下层体积）。docker-dockerfile-003 考 RUN/CMD/ENTRYPOINT 时机与覆盖，本题考多阶段构建的瘦身原理。",
       "difficulty": 3
+    },
+    {
+      "id": "docker-layertrap-013",
+      "noteId": "docker/advanced/orchestration/03-image-optimization",
+      "type": "single",
+      "q": "Dockerfile 后段写了 RUN rm -rf /var/lib/apt/lists/* 想清掉前段 RUN apt-get update 装的缓存，最终镜像体积没变小。按笔记的原因是？",
+      "options": [
+        "删除只发生在当前层——文件仍留在前面那层的历史里，合并后镜像体积不变；必须回到产生文件的同一层内「安装后立即清理」",
+        "rm 命令拼写有误，镜像构建实际失败了一半",
+        "需要先用 docker rmi 删掉旧层再重新构建",
+        "镜像推送时层会被自动压缩回收，push 完就变小了"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "层是只读快照、只能追加——这正是「合并 RUN + 层内清理」存在的原因；更彻底的路线是多阶段构建让垃圾根本不进最终镜像；另外 ENV SECRET 也会永久留在层里（docker history 可见），敏感数据要用 BuildKit secrets。docker-opt-008 考瘦身定位与安全基线，本题考「层内清理时机」。",
+      "difficulty": 4
     }
   ]
 }

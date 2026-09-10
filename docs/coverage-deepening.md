@@ -6,10 +6,10 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] redis/basic/core/03-thread-model — 第二题考「6.0 起网络 IO 多线程但命令执行仍单线程的原因」
-- [ ] java/basic/syntax/03-strings — 第二题考「String 不可变的三重好处与 StringBuilder 的适用场景」
-- [ ] docker/advanced/orchestration/03-image-optimization — 第二题考「镜像瘦身分层策略：alpine 基底/合并 RUN/清理缓存时机」
 - [ ] kafka/intermediate/core/03-reliability-idempotent — 第二题考「生产端幂等的会话边界：PID 换了序列号就作废，跨会话要事务」
+- [ ] java/basic/syntax/10-spi — 第二题考「SPI 与双亲委派的打破：JDBC DriverManager 用线程上下文类加载器反向加载」
+- [ ] network/basic/tcp/03-tcp-vs-udp — 第二题考「UDP 的定位：实时音视频/QUIC 自建可靠性，代价是丢包乱序自己兜」
+- [ ] mysql/basic/theory/01-normal-forms — 第二题考「三范式逐级消除什么依赖，反范式是读性能的主动取舍」
 
 ### b 类：旧题返修
 
@@ -65,6 +65,8 @@
 - 2026-09-10 · 第十九轮：3 道核心笔记第二题（docker-multistage-008 / java-embedtomcat-113 / java-metasize-114，difficulty 3/3/4；etcd 条目弃置——笔记已被 3 题覆盖无独立角度；tomcat 条目原定「连接器演进」事实在 io-model 篇，换考嵌入式容器取舍）· 本轮提交主题：feat: 题库深化第十九轮
 
 - 2026-09-10 · 第二十轮：3 道核心笔记第二题（rabbit-headblock-007 / net-connid-014 / java-propagation-115，difficulty 4/3/4；http-evolution 与 transaction 两条原定角度与并行新题撞车换角；剔除 jvm/07-tuning 回填残留——java-metasize-114 上轮已完成）· 本轮提交主题：feat: 题库深化第二十轮
+
+- 2026-09-10 · 第二十一轮：3 道核心笔记第二题（redis-slowcmd-010 / java-stringpool-115 / docker-layertrap-013，difficulty 4/3/4；thread-model 条目原定角度与并行新题 redis-thread-005 撞车，换考单线程三瓶颈）· 本轮提交主题：feat: 题库深化第二十一轮
 
 ## 经验与规则
 
