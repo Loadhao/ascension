@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1896
+src/content/docs/ai/basic/foundation/05-embedding.md
+  h_9324126a55eff3 1-76
+src/data/graphs/ai.json
+  h_9324126a55eff3 8,53,55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3479b3557205cb4b032874835629815b8c8bc68b",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
