@@ -1192,6 +1192,7 @@ export default defineConfig({
                         { label: '搜索联想：输入框背后的前缀匹配', link: '/distributed/intermediate/case-studies/12-search-suggest/' },
                         { label: '消息推送系统：通道选型与必达语义', link: '/distributed/intermediate/case-studies/13-push/' },
                         { label: '购物车：多端同步与合并策略', link: '/distributed/intermediate/case-studies/14-cart/' },
+                        { label: '订单超时自动关闭：延迟任务的四种姿势', link: '/distributed/intermediate/case-studies/15-order-timeout/' },
                       ],
                     },
                   ],
