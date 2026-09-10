@@ -557,6 +557,31 @@
 - 新证据与经验：①case-studies 系列到 14 篇，电商链（优惠券/购物车）与社交链（Feed/点赞/签到）双线并进；②grep 排查法持续产出（本轮三题全部零覆盖确认），选题池深度充足。
 - 下一轮入口：候选池——①电商订单链场景（订单超时关闭/库存扣减时机）grep 排查；②linux/basic/permission 第二篇（chattr/setcap，grep 0 篇已确认）；③ai/basic/agent 或 llm 间歇。每轮开工先同步+定界+体检基线。
 
+### 第 58 轮（2026-09-08，第二十一次启动，内容补充模式）
+
+- 选择：订单超时自动关闭（case-studies 第 15 篇）——电商订单链核心；grep 确认仅秒杀篇一句带过延迟消息，延迟任务四方案对比与关单/支付撞车未覆盖。
+- 交付：`15-order-timeout.md`（四方案对比表（轮询/内存队列/Redis 过期监听/MQ 延迟消息）与"过期监听不可达"辨析、关单支付撞车的 CAS 条件更新与已关闭自动退款、回补幂等）+ 侧边栏注册 + 图谱 ordertimeout 节点与 1 条边。
+- 验证：五连验证全绿（build 539 页/对比度 298 页）；提交 477b64f 已推送。
+- 结论：补功能。
+- 下一轮入口：库存扣减时机（勘察确认秒杀篇未一般化该主题）。
+
+### 第 59 轮（2026-09-08，第二十一次启动）
+
+- 选择：库存扣减时机（case-studies 第 16 篇）——下单减/支付减/预扣三时机的超卖少卖权衡，秒杀篇只讲预扣骨架未一般化。
+- 交付：`16-stock-deduction.md`（三时机对比表、Redis 预扣+DB 条件更新+回补幂等的三层组合、对账兜底、热点 SKU 库存分桶）+ 侧边栏注册 + 图谱 stockdeduct 节点与 1 条边。
+- 验证：五连验证全绿（build 540 页/对比度 299 页）；提交 0f5db52 已推送。
+- 结论：补功能。
+- 下一轮入口：linux permission 第二篇（既定候选，grep 0 篇）。
+
+### 第 60 轮（2026-09-08，第二十一次启动）
+
+- 选择：文件不可变属性与 capabilities（linux/basic/permission 第 2 篇）——"chmod 777 也删不掉"经典反直觉题、容器安全基线入口知识，全站零覆盖。
+- 交付：`02-immutable-capabilities.md`（权限四层模型（chmod→ACL→chattr→capabilities）、+i 锁配置 +a 护日志、setcap 非 root 绑 80、容器默认 drop 的安全基线）+ 侧边栏注册 + 图谱 caps 节点与 1 条边。
+- 验证：五连验证全绿（build 541 页/对比度 299 页）；提交 b639c7f 已推送。
+- 结论：补功能。
+- 新证据与经验：①并行会话题库第十三轮出了 CORS 篇与 git ours/theirs 题——两线内容引用持续加深；②linux basic 四分类成对完成（commands 3/filesystem 2/permission 2），linux 方向 11 篇。
+- 下一轮入口：候选池——①场景题：限流矩阵（单机/分布式/多维度）grep 排查；②ai/basic/llm 或 agent 线；③linux/intermediate/system 第 6 篇候选（日志管理 logrotate）。每轮开工先同步+定界+体检基线。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
