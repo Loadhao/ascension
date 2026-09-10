@@ -1,0 +1,31 @@
+astro.config.mjs
+  s_c882f73fdfc6b1::t_9cf5c667f1aa16 1940
+src/content/docs/ai/intermediate/agent/12-structured-output.md
+  s_ec6513784a0f3c::t_6e33e8f5658049 1-71
+src/data/graphs/ai.json
+  s_c882f73fdfc6b1::t_e65f71b8a63e73 26,86-87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "af355a59c2ea34622a35c2beca925a14543cadc4",
+  "prompts": {},
+  "sessions": {
+    "s_c882f73fdfc6b1": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "30254fb5-c762-4273-871b-8e9cc63bedb5",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_ec6513784a0f3c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "ba8198a8-5121-4244-bdb6-817f042e134a",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
