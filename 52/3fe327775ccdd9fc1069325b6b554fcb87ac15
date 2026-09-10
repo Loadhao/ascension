@@ -1,0 +1,38 @@
+astro.config.mjs
+  h_9324126a55eff3 359-397
+src/content/docs/security/basic/core/01-xss.md
+  h_9324126a55eff3 1-50
+src/content/docs/security/basic/core/02-csrf.md
+  h_9324126a55eff3 1-54
+src/content/docs/security/basic/core/03-sql-injection.md
+  h_9324126a55eff3 1-68
+src/content/docs/security/basic/core/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/security/index.mdx
+  h_9324126a55eff3 1-32
+src/content/docs/security/intermediate/core/01-session-attack.md
+  h_9324126a55eff3 1-54
+src/content/docs/security/intermediate/core/02-broken-access.md
+  h_9324126a55eff3 1-59
+src/content/docs/security/intermediate/core/03-api-signature.md
+  h_9324126a55eff3 1-59
+src/content/docs/security/intermediate/core/index.mdx
+  h_9324126a55eff3 1-14
+src/data/graphs/security.json
+  h_9324126a55eff3 1-23
+src/data/quiz/security.json
+  h_9324126a55eff3 1-79
+src/lib/notes.ts
+  h_9324126a55eff3 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "523fe327775ccdd9fc1069325b6b554fcb87ac15",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
