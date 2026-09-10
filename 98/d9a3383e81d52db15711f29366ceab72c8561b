@@ -1,0 +1,40 @@
+astro.config.mjs
+  h_9324126a55eff3 1935-1973
+src/content/docs/kubernetes/basic/core/01-architecture.md
+  h_9324126a55eff3 1-80
+src/content/docs/kubernetes/basic/core/02-pod-object-model.md
+  h_9324126a55eff3 1-75
+src/content/docs/kubernetes/basic/core/03-deployment-rollout.mdx
+  h_9324126a55eff3 1-70
+src/content/docs/kubernetes/basic/core/04-config-secret.md
+  h_9324126a55eff3 1-69
+src/content/docs/kubernetes/basic/core/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/kubernetes/index.mdx
+  h_9324126a55eff3 1-32
+src/content/docs/kubernetes/intermediate/ops/01-probes-lifecycle.md
+  h_9324126a55eff3 1-74
+src/content/docs/kubernetes/intermediate/ops/02-service-ingress.md
+  h_9324126a55eff3 1-74
+src/content/docs/kubernetes/intermediate/ops/index.mdx
+  h_9324126a55eff3 1-14
+src/data/graphs/kubernetes.json
+  h_9324126a55eff3 1-24
+src/data/quiz/kubernetes.json
+  h_9324126a55eff3 1-79
+src/data/viz/flows.ts
+  h_9324126a55eff3 2853-2906,3013
+src/lib/notes.ts
+  h_9324126a55eff3 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "98d9a3383e81d52db15711f29366ceab72c8561b",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
