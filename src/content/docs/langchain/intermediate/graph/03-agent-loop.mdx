@@ -1,0 +1,91 @@
+---
+title: Agent 循环实战
+description: '@tool 加条件边手搭 ReAct 循环，create_agent 一行收敛，循环过程逐帧放一遍'
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+## 概念回顾
+
+[Agent Loop](/ai/basic/agent/01-agent-loop/) 的核心公式：**Agent =
+LLM + 上下文 + 工具**。模型负责决策（调不调工具、调哪个），框架
+负责执行与回传。本篇看这条循环在 LangGraph 里长什么样：先手搭一遍
+理解机制，再看 `create_agent` 如何一行收敛。
+
+## 第一步：@tool 定义工具
+
+```python
+from langchain.tools import tool
+
+@tool
+def search_order(order_id: str) -> str:
+    """按订单号查询订单当前状态。"""
+    return db.query(order_id).status
+```
+
+函数签名就是参数 schema，**docstring 就是工具描述**——模型全靠它
+决定什么时候用、怎么用这个工具。写不好 docstring 等于给模型发错地图。
+
+## 第二步：手搭循环
+
+```python
+from langgraph.graph import StateGraph, MessagesState, START, END
+from langgraph.prebuilt import ToolNode
+
+def call_model(state):
+    bound = model.bind_tools([search_order])
+    return {"messages": [bound.invoke(state["messages"])]}
+
+g = StateGraph(MessagesState)
+g.add_node("model", call_model)
+g.add_node("tools", ToolNode([search_order]))   # 执行并回传 ToolMessage
+g.add_edge(START, "model")
+g.add_conditional_edges(
+    "model",
+    lambda s: "tools" if s["messages"][-1].tool_calls else END,
+)
+g.add_edge("tools", "model")     # 结果送回模型，循环闭合
+agent = g.compile()
+```
+
+对照[状态图三要素](/langchain/intermediate/graph/01-state-graph/)：
+循环就是 `tools → model` 这条回头边，退出条件就是条件边返回 END。
+`MessagesState` 是预置的单字段状态（messages 挂 add_messages
+reducer），纯对话场景不用自己定义 State。
+
+## create_agent：同一循环的开箱版
+
+```python
+from langchain.agents import create_agent
+
+agent = create_agent(
+    model="openai:gpt-4o-mini",
+    tools=[search_order],
+    system_prompt="你是订单助手，只回答订单相关问题。",
+)
+```
+
+内部就是上面那张图：model 节点 + ToolNode + 条件边。返回的依然是
+LangGraph 图——checkpointer、自定义节点、子图都能继续往上挂。
+从开箱到深度定制是**渐进升级**，不是推倒重来。
+
+## 循环过程逐帧看
+
+<AlgorithmVizIsland demo="lc-agent-loop" />
+
+两轮循环里 messages 一直在长：第 1 轮模型请求工具，第 2 轮带着
+ToolMessage 收敛决策——「每轮都送完整历史」这条铁律在框架里
+同样成立。
+
+## 要点备忘
+
+- @tool：签名即 schema、docstring 即描述，工具质量的一半在文档
+- 手搭循环三件套：bind_tools、条件边判 tool_calls、ToolNode 回传
+- create_agent 不是黑盒，就是一张标准 LangGraph 图
+- 生产必配循环上限（config 的 recursion_limit），防工具死循环烧钱
+
+## 延伸阅读
+
+- [LangChain: Quickstart（create_agent）](https://docs.langchain.com/oss/python/langchain/quickstart/)

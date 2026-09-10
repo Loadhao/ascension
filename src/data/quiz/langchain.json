@@ -1,0 +1,94 @@
+{
+  "questions": [
+    {
+      "id": "lc-pkg-001",
+      "noteId": "langchain/basic/core/01-langchain-overview",
+      "type": "single",
+      "difficulty": 2,
+      "q": "init_chat_model(\"anthropic:claude-sonnet-4-6\") 改成 \"openai:gpt-4o-mini\" 就能换供应商，这依赖的是？",
+      "options": [
+        "ChatModel 统一接口：invoke/stream/batch 在所有伙伴包上一致",
+        "OpenAI SDK 内置了 Anthropic 的兼容层",
+        "LangChain 在运行时把 Anthropic 请求转发给 OpenAI 网关",
+        "两个包共享同一份 HTTP 客户端实现"
+      ],
+      "answer": [0],
+      "hint": "分层的关键在 langchain-core 定义的抽象：各伙伴包只做接入实现，业务代码面向统一接口编程。"
+    },
+    {
+      "id": "lc-structout-002",
+      "noteId": "langchain/basic/core/02-prompts-structured-output",
+      "type": "single",
+      "difficulty": 3,
+      "q": "with_structured_output(Review) 返回的对象可靠，核心原因是？",
+      "options": [
+        "框架把 schema 交给模型约束生成，并做了校验解析，失败可重试",
+        "它会把模型输出多请求几次，用多数投票选出正确 JSON",
+        "Review 类的字段顺序恰好和模型输出顺序一致",
+        "它关闭了模型的其他输出能力，只允许输出纯 JSON 字符"
+      ],
+      "answer": [0],
+      "hint": "可靠来自「约束 + 校验」两步：schema 进 prompt/工具约束，解析不过把错误回喂模型重试，而不是靠运气。"
+    },
+    {
+      "id": "lc-lcel-003",
+      "noteId": "langchain/basic/core/03-lcel-runnable",
+      "type": "multiple",
+      "difficulty": 3,
+      "q": "prompt | model | parser 拼出的整条链依然具备的能力有？（多选）",
+      "options": [
+        "stream：流式吐出增量",
+        "batch：一批输入并发执行",
+        "自动记住历史消息并按 thread_id 续跑",
+        "with_fallbacks：主组件失败自动切备用"
+      ],
+      "answer": [0, 1, 3],
+      "hint": "这些能力都来自 Runnable 协议逐级向上传递；而「历史续跑」是 LangGraph checkpointer 的能力，链没有状态。"
+    },
+    {
+      "id": "lc-graph-004",
+      "noteId": "langchain/intermediate/graph/01-state-graph",
+      "type": "single",
+      "difficulty": 4,
+      "q": "LangGraph 节点返回 {\"messages\": [msg]} 后，这个增量如何进入 State？",
+      "options": [
+        "交给 messages 字段配置的 reducer（如 add_messages）合并",
+        "直接整体覆盖 State 并清空其他字段",
+        "节点必须返回完整 State，增量写法会编译报错",
+        "由下一个节点决定要不要采纳这个增量"
+      ],
+      "answer": [0],
+      "hint": "节点只交增量、合并归 reducer：并行节点写同一字段时，合并规则无歧义正是并行安全的基础。"
+    },
+    {
+      "id": "lc-ckpt-005",
+      "noteId": "langchain/intermediate/graph/02-checkpointer-interrupt",
+      "type": "single",
+      "difficulty": 4,
+      "q": "interrupt() 挂起后隔天恢复，正确姿势是？",
+      "options": [
+        "用同一 thread_id 的 config 调 invoke(Command(resume=...))",
+        "重新 invoke 原始输入，图会跳过已完成的节点",
+        "把 interrupt 的 payload 重新作为输入传给 START",
+        "调用 node 单函数手动传入用户答复"
+      ],
+      "answer": [0],
+      "hint": "暂停的本质是状态已存 checkpoint：定位靠 thread_id，恢复靠 Command(resume)，其值作为 interrupt 返回值传回节点。"
+    },
+    {
+      "id": "lc-agent-006",
+      "noteId": "langchain/intermediate/graph/03-agent-loop",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "手搭 Agent 循环图，哪些件缺一不可？（多选）",
+      "options": [
+        "model 节点里 bind_tools 绑定工具定义",
+        "条件边按 AIMessage 是否带 tool_calls 决定去 tools 还是 END",
+        "tools 节点执行工具并回传 ToolMessage",
+        "tools 到 model 的回头边，让循环闭合"
+      ],
+      "answer": [0, 1, 2, 3],
+      "hint": "四件合起来才是完整循环：绑定工具、按请求路由、执行回传、回头边闭合；create_agent 内部正是这张标准图。"
+    }
+  ]
+}

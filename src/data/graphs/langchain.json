@@ -1,0 +1,24 @@
+{
+  "nodes": [
+    { "id": "root", "label": "LangChain", "group": "核心" },
+    { "id": "lc-models", "label": "生态与 ChatModel", "href": "/langchain/basic/core/01-langchain-overview/", "group": "基础" },
+    { "id": "lc-prompt", "label": "Prompt 与结构化输出", "href": "/langchain/basic/core/02-prompts-structured-output/", "group": "基础" },
+    { "id": "lc-lcel", "label": "LCEL 与 Runnable", "href": "/langchain/basic/core/03-lcel-runnable/", "group": "基础" },
+    { "id": "lc-graph", "label": "状态图三要素", "href": "/langchain/intermediate/graph/01-state-graph/", "group": "编排" },
+    { "id": "lc-ckpt", "label": "持久化与人机协同", "href": "/langchain/intermediate/graph/02-checkpointer-interrupt/", "group": "编排" },
+    { "id": "lc-agent", "label": "Agent 循环实战", "href": "/langchain/intermediate/graph/03-agent-loop/", "group": "编排" }
+  ],
+  "edges": [
+    { "source": "root", "target": "lc-models" },
+    { "source": "root", "target": "lc-prompt" },
+    { "source": "root", "target": "lc-lcel" },
+    { "source": "root", "target": "lc-graph" },
+    { "source": "root", "target": "lc-ckpt" },
+    { "source": "root", "target": "lc-agent" },
+    { "source": "lc-models", "target": "lc-prompt" },
+    { "source": "lc-prompt", "target": "lc-lcel" },
+    { "source": "lc-lcel", "target": "lc-graph" },
+    { "source": "lc-graph", "target": "lc-ckpt" },
+    { "source": "lc-ckpt", "target": "lc-agent" }
+  ]
+}

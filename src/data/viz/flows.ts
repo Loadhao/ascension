@@ -2786,6 +2786,70 @@ function aiAgentLoop(): FlowVizConfig {
 	};
 }
 
+/** LangChain Agent 循环：tool_calls 路由 → ToolNode 执行 → ToolMessage 回传 → 循环闭合 */
+function lcAgentLoop(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { model: '第 1 轮' },
+		note: '订单查询问题进入 messages。Agent 循环每一轮都把完整消息历史 + 工具 schema 发给模型——模型只做决策，不执行工具。',
+	});
+	frames.push({
+		active: ['model'],
+		hotEdges: ['tc'],
+		packets: [{ edge: 'tc', at: 0.5, tone: 'req', label: 'tool_calls' }],
+		badges: { model: '要工具' },
+		note: '模型返回 AIMessage(tool_calls)：「我要查 search_order(order_id=…)」。注意它只是发出调用请求，真正执行的是图上的 ToolNode。',
+	});
+	frames.push({
+		active: ['tools'],
+		badges: { model: '要工具', tools: '执行中' },
+		note: '条件边看到 tool_calls 就把控制权交给 tools 节点：ToolNode 执行 search_order，把结果包装成 ToolMessage（按 tool_call_id 对应）。',
+	});
+	frames.push({
+		active: ['model'],
+		hotEdges: ['tr'],
+		packets: [{ edge: 'tr', at: 0.6, tone: 'data', label: 'ToolMessage' }],
+		badges: { model: '第 2 轮', tools: '已完成' },
+		note: 'ToolMessage 追加进 messages，回头边把执行送回 model——循环闭合。第 2 轮模型带着工具结果继续推理。',
+	});
+	frames.push({
+		active: ['model'],
+		badges: { model: '收敛', tools: '已完成' },
+		note: '证据够了：第 2 轮模型不再请求工具，直接产出最终回答——条件边这次返回 END，循环退出。',
+	});
+	frames.push({
+		active: ['user'],
+		hotEdges: ['ans'],
+		packets: [{ edge: 'ans', at: 0.6, tone: 'resp', label: '最终回答' }],
+		dim: ['tools'],
+		badges: { model: 'END', tools: '已完成' },
+		note: '回答流出循环。create_agent 就是把这张图开箱化：model 节点 + ToolNode + 条件边，返回的依然是可继续定制的 LangGraph 图。',
+	});
+	frames.push({
+		done: ['user', 'model', 'tools'],
+		badges: { model: 'END', tools: '已完成' },
+		note: '复盘：循环 = bind_tools 绑定 + 条件边判 tool_calls + ToolNode 回传 + 回头边闭合。生产必配 recursion_limit，防工具死循环烧钱。',
+	});
+
+	return {
+		title: 'LangGraph Agent 循环 · tool_calls 的去与回',
+		height: 380,
+		nodes: [
+			{ id: 'user', label: '用户', sub: '问题 / 最终回答', x: 0.08, y: 0.3 },
+			{ id: 'model', label: 'model 节点', sub: 'bind_tools 决策', x: 0.45, y: 0.3 },
+			{ id: 'tools', label: 'ToolNode', sub: '执行 + ToolMessage', x: 0.8, y: 0.68 },
+		],
+		edges: [
+			{ id: 'q', from: 'user', to: 'model', label: 'invoke' },
+			{ id: 'ans', from: 'model', to: 'user', dashed: true },
+			{ id: 'tc', from: 'model', to: 'tools', label: 'tool_calls' },
+			{ id: 'tr', from: 'tools', to: 'model', dashed: true },
+		],
+		frames,
+	};
+}
+
 /** MongoDB chunk 迁移：分裂 → balancer → 四步迁移与路由切换 */
 function mongoChunk(): FlowVizConfig {
 	const frames: FlowFrame[] = [];
@@ -2891,5 +2955,6 @@ export const flowDemos: Record<string, FlowVizConfig> = {
 	'git-reset': gitReset(),
 	'mw-gates': mwGates(),
 	'ai-agent-loop': aiAgentLoop(),
+	'lc-agent-loop': lcAgentLoop(),
 	'mongo-chunk': mongoChunk(),
 };

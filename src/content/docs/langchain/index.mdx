@@ -1,0 +1,32 @@
+---
+title: LangChain
+description: LangChain 方向学习路线与知识地图：核心抽象与 LangGraph 状态编排
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/langchain.json';
+
+## 学习路线
+
+点击圆点标记学习状态：○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖两层：**基础 · 核心抽象**——统一模型接口、prompt 模板与
+结构化输出、LCEL 组合协议；**中级 · LangGraph 编排**——状态图
+三要素、Checkpointer 持久化与 interrupt 人机协同、Agent 循环实战
+（手搭 + `create_agent` 开箱对照）。概念层（Agent Loop、RAG、
+多 Agent 范式）见「AI」方向，两边互相引用。
+
+<RoadmapIsland directionId="langchain" />
+
+:::tip[面试冲刺]
+高频问题的一句话答案已汇总在[速答手册](/guide/interview-cheatsheet/)，复习与面试前按图索骥。
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放，右上角按钮可缩放、复位视图；悬停或点按节点可高亮关联关系；点击圆点进入对应笔记，左下图例点按可按分组筛选。
+图谱数据维护在 `src/data/graphs/langchain.json`。
+:::

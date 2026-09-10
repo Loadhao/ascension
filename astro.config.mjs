@@ -1832,6 +1832,45 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: 'LangChain',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/langchain/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '核心抽象',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/langchain/basic/core/' },
+                        { label: 'LangChain 生态与 ChatModel', link: '/langchain/basic/core/01-langchain-overview/' },
+                        { label: 'Prompt 模板与结构化输出', link: '/langchain/basic/core/02-prompts-structured-output/' },
+                        { label: 'LCEL 与 Runnable 协议', link: '/langchain/basic/core/03-lcel-runnable/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: 'LangGraph 编排',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/langchain/intermediate/graph/' },
+                        { label: '状态图三要素', link: '/langchain/intermediate/graph/01-state-graph/' },
+                        { label: '持久化与人机协同', link: '/langchain/intermediate/graph/02-checkpointer-interrupt/' },
+                        { label: 'Agent 循环实战', link: '/langchain/intermediate/graph/03-agent-loop/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
