@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1344
+src/content/docs/distributed/intermediate/case-studies/16-analytics.md
+  h_9324126a55eff3 1-69
+src/data/graphs/distributed.json
+  h_9324126a55eff3 41,108
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2e702cf45cb3aebe900becc687a7a03a10d4c70c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
