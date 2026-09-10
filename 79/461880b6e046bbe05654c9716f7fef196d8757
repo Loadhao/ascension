@@ -1,0 +1,28 @@
+astro.config.mjs
+  h_9324126a55eff3 249-258
+src/content/docs/linux/basic/theory/01-process-thread.md
+  h_9324126a55eff3 1-64
+src/content/docs/linux/basic/theory/02-virtual-memory.md
+  h_9324126a55eff3 1-65
+src/content/docs/linux/basic/theory/03-io-multiplexing.mdx
+  h_9324126a55eff3 1-69
+src/content/docs/linux/basic/theory/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/linux.json
+  h_9324126a55eff3 16-19,22-27
+src/data/quiz/linux.json
+  h_9324126a55eff3 168-218,221
+src/data/viz/flows.ts
+  h_9324126a55eff3 2967-3027,3136
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "79461880b6e046bbe05654c9716f7fef196d8757",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
