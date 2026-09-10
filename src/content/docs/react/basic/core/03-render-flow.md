@@ -9,7 +9,7 @@ core: true
 
 ```mermaid
 flowchart LR
-    T[触发<br/>setState] --> R["render 阶段<br/>重新执行组件函数<br/>生成新的 UI 描述"]
+    T[触发<br/>setState] --> R["render 阶段<br/>重跑组件函数<br/>生成 UI 描述"]
     R --> D["协调 Reconciler<br/>新旧树 diff"]
     D --> C["commit 阶段<br/>把差异落到真实 DOM"]
     C --> S[浏览器绘制]

@@ -7,8 +7,8 @@ core: true
 
 ## 本篇的定位
 
-[HTTPS](/network/basic/http/02-https-tls.md) 已保证传输加密、
-[密码存储](/network/basic/http/08-password-storage.md)已讲口令哈希；
+[HTTPS](/network/basic/http/02-https-tls/) 已保证传输加密、
+[密码存储](/network/basic/http/08-password-storage/)已讲口令哈希；
 本篇讲剩余一块：**开放 API 场景**（服务间调用、开放平台）如何用
 密码学积木自证请求可信——它不替代 HTTPS，而是解决「传输之外」
 的三个问题：**身份可信、内容没改、包没有被重放**。

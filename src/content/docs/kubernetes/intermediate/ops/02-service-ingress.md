@@ -12,7 +12,7 @@ Pod 一个稳定的虚拟 IP + DNS 名**，后端成员靠 selector 动态发现
 
 ```mermaid
 flowchart LR
-    C[客户端] -- "web.default.svc.cluster.local" --> SVC[Service<br/>ClusterIP 虚拟 IP]
+    C[客户端] -- "web.ns.svc.cluster.local" --> SVC[Service 虚拟 IP]
     SVC --> EP[endpoints<br/>只含 Ready 的 Pod]
     EP --> P1[Pod 10.1.0.11]
     EP --> P2[Pod 10.1.0.12]

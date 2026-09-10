@@ -26,7 +26,7 @@ core: true
 
 这就是「同进程线程池优于多进程」的性能根源；而系统线程与协程的
 差价（内核切换 vs 用户态切换）是同一逻辑的再现——
-[Python 线程与 GIL](/python/intermediate/concurrency/01-threading.md)、
+[Python 线程与 GIL](/python/intermediate/concurrency/01-threading/)、
 Go 协程的讨论都建立在这笔账上。
 
 ## 进程间通信（IPC）怎么选
