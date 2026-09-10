@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 248
+src/content/docs/linux/basic/permission/02-immutable-capabilities.md
+  h_9324126a55eff3 1-74
+src/data/graphs/linux.json
+  h_9324126a55eff3 10,25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b639c7fce450464201b8499454bd65d001bb75b6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
