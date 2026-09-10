@@ -1773,6 +1773,7 @@ export default defineConfig({
                         { label: '落地选型：提示工程、RAG 还是微调', link: '/ai/intermediate/llm/03-adapter-selection/' },
                         { label: '推理参数：temperature、top_p 与输出控制', link: '/ai/intermediate/llm/04-inference-params/' },
                         { label: 'Token 计费与上下文成本优化', link: '/ai/intermediate/llm/05-token-cost/' },
+                        { label: '模型推理服务：vLLM 与吞吐优化', link: '/ai/intermediate/llm/06-vllm/' },
                       ],
                     },
                     {
