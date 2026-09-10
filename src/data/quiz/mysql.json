@@ -12,7 +12,9 @@
         "叶子节点间用双向链表串联，省出了指针空间",
         "根节点常驻 Buffer Pool，所以能放更多索引项"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "「非叶子也存整行」是 B 树的形态，正是 B+ 树刻意避免的（单页键变少→树更高）；链表和根常驻内存影响的是范围扫描与实际 IO 次数，不改变单页能容纳多少索引项。"
     },
     {
@@ -21,8 +23,13 @@
       "type": "judge",
       "difficulty": 2,
       "q": "二级索引的叶子节点存的是整行数据，所以按普通索引查询不需要回表。",
-      "options": ["正确", "错误"],
-      "answer": [1],
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
       "hint": "叶子存整行的是聚簇索引；二级索引叶子只存「索引列+主键值」，拿到主键还要回聚簇索引查整行——这正是回表，只有覆盖索引才能免掉。"
     },
     {
@@ -37,7 +44,11 @@
         "RR 下快照读靠 MVCC 防幻读、当前读靠 Next-Key Lock，但两者混用仍可能出现幻读",
         "RR 下普通 select 属于当前读，读到的是最新已提交版本"
       ],
-      "answer": [0, 1, 2],
+      "answer": [
+        0,
+        1,
+        2
+      ],
       "hint": "第 4 项正好说反——普通 select 是快照读，沿版本链读历史快照；会升级成当前读的是 for update/lock in share mode 和 insert/update/delete 这些加锁操作。"
     },
     {
@@ -52,7 +63,9 @@
         "看 undo log 里是否存在反向操作，存在则回滚",
         "看该事务修改的数据页是否已经刷盘，已刷则提交"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "直接重放会破坏与 binlog 的一致性（从库会多一笔或少一笔），这正是需要两阶段提交的原因；undo 和数据页刷盘进度都不参与裁决，裁决依据只有 binlog 完整性。"
     },
     {
@@ -67,7 +80,9 @@
         "先查 binlog 再查 InnoDB",
         "优化器只对 DDL 生效，DML 直接执行"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "查询缓存已在 8.0 移除；面试还答「先看缓存」会暴露版本停在 5.7。"
     },
     {
@@ -82,7 +97,11 @@
         "唯一索引等值命中的 for update 会退化成只锁该记录",
         "MDL 只在显式 lock tables 时才加"
       ],
-      "answer": [0, 1, 2],
+      "answer": [
+        0,
+        1,
+        2
+      ],
       "hint": "查询自动加 MDL 读锁，所以长事务会堵住在线 DDL；意向锁让加表锁的人不必逐行扫。"
     },
     {
@@ -91,8 +110,13 @@
       "type": "judge",
       "difficulty": 1,
       "q": "3NF 消除传递依赖；反范式是为读性能主动冗余，不是设计失误。",
-      "options": ["正确", "错误"],
-      "answer": [0],
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        0
+      ],
       "hint": "1NF 原子、2NF 消部分依赖、3NF 消传递依赖；业务读多写少时反范式是取舍。"
     },
     {
@@ -107,7 +131,9 @@
         "只看 filtered 百分比",
         "优先看 warnings 里的字符集"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "函数、隐式转换导致索引失效也会体现在 type/key 上；先 explain 再谈加机器。"
     },
     {
@@ -122,7 +148,9 @@
         "半同步要求所有从库执行完才返回，必然延迟",
         "分库分表之后复制会自动变成全同步"
       ],
-      "answer": [1],
+      "answer": [
+        1
+      ],
       "hint": "三个线程里最容易成为瓶颈的是从库 SQL 重放。对策：拆大事务、并行复制、延迟敏感读打主库。分库分表是最后一步，不是复制延迟的默认解。"
     },
     {
@@ -137,7 +165,11 @@
         "长事务持有 MDL 读锁会让 DDL 卡住，后续 DML 再排在 DDL 后面形成整表雪崩",
         "数亿行大表即便 INPLACE 也可能主从延迟/磁盘翻倍，业界常用 gh-ost 拉 binlog 做影子表"
       ],
-      "answer": [0, 2, 3],
+      "answer": [
+        0,
+        2,
+        3
+      ],
       "hint": "INPLACE 允许并发读写，但 DDL 开始/结束仍要拿 MDL 写锁。8.0 INSTANT 加列只改元数据；改列类型/字符集基本仍是 COPY。gh-ost 无触发器、可暂停限流，是当前主流。"
     },
     {
@@ -151,7 +183,9 @@
         "只要查询带了 a 或 b 中任意一个，三列就全部生效",
         "范围列放前面、等值列放后面才能让后续列继续命中"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "失效的本质只有一条：条件必须能翻译成「B+ 树上连续的一段」——对列用函数/运算、隐式类型转换（varchar 比数字）、前导 % 都让条件失去连续定位能力；index(a,b,c) 相当于建了 (a)(a,b)(a,b,c) 三套索引。",
       "difficulty": 4
     },
@@ -166,8 +200,27 @@
         "差异来自 Oracle 的许可限制，MySQL 在兼容性上必须用 RR",
         "RC 生成 ReadView 更频繁是为了省内存，与主从复制无关"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "「RC 和 RR 只差照片拍几次」——RR 的世界从第一次快照读起定格，所以可重复读；statement 格式下语句在从库重放的结果依赖提交顺序，RC 的间隙提交会乱序。mysql-mvcc-003 多选考 ReadView 细节，本题考默认值差异的来龙去脉。",
+      "difficulty": 4
+    },
+    {
+      "id": "mysql-updatewal-013",
+      "noteId": "mysql/basic/core/01-sql-execution",
+      "type": "single",
+      "q": "一条 update 在 InnoDB 里的日志写入顺序，按笔记正确的是？binlog 与 redo 分别属于哪一层？",
+      "options": [
+        "执行器调引擎：先写 undo log（旧值）→ 改 Buffer Pool 脏页 → 写 redo log（prepare）→ 写 binlog → redo 置 commit 才返回成功；binlog 属 Server 层、redo/undo 属 InnoDB 引擎层",
+        "先写 binlog 再写 redo：binlog 是崩溃恢复的第一依据",
+        "redo 与 binlog 同时原子写入，不存在先后与 prepare 状态",
+        "update 不写 undo log，undo 只在 delete 时需要"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "「先写日志后写数据页」是 WAL 的灵魂——顺序 IO 快几个数量级；两阶段提交（redo prepare → binlog → commit）保证 redo 与 binlog 一致，崩溃恢复时 redo 停在 prepare 就看 binlog 完整性裁决。mysql-sql-005 考查询链路，本题考更新语句的日志协议。",
       "difficulty": 4
     }
   ]

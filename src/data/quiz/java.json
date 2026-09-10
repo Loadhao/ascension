@@ -1882,6 +1882,40 @@
       ],
       "hint": "事件循环铁律：Reactor 线程不能跑慢业务，否则这条线程上的全部连接陪葬；NIO 的「非阻塞」指 read 不死等，不是没有等待。java-epoll-042 考三代多路复用实现，本题考 BIO 成本账与 Reactor 演化。",
       "difficulty": 3
+    },
+    {
+      "id": "java-threecache-111",
+      "noteId": "java/intermediate/spring/03-circular-dependency",
+      "type": "single",
+      "q": "循环依赖场景下只用两级缓存为什么不行？按笔记与 AOP 的关系是？",
+      "options": [
+        "两级只有两种做法都不可行：实例化后立刻建代理（所有 Bean 被迫提前代理，违背「代理尽量晚」）或二级放原始对象后替换（B 攥着的老引用不会变）；第三级的 ObjectFactory 按需生产——无循环依赖永不调用、有循环依赖才提前生成代理且全局唯一",
+        "两级缓存完全够用，第三级只是历史兼容的遗留设计",
+        "第三级缓存存的是代理对象本体，与第一级重复",
+        "两级方案的唯一缺陷是性能，功能上完全等价"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "灵魂在「第三级缓存存的是工厂、工厂与是否需要 AOP 代理绑定」——既保证代理尽量晚创建，又保证循环依赖发生时唯一代理。构造器循环无解的根源是实例化与属性填充分离的时间差不存在。java-circ-017 考三级缓存能解决的范围，本题考「为什么必须是三级」。",
+      "difficulty": 4
+    },
+    {
+      "id": "java-markword-112",
+      "noteId": "java/advanced/jvm/05-object-layout",
+      "type": "single",
+      "q": "对象在 Survivor 之间复制的年龄上限为什么最大只能是 15？从 Mark Word 的角度解释是？",
+      "options": [
+        "分代年龄在 Mark Word 里只占 4 bit（0~15）——它要与哈希码、偏向线程 ID 抢同一格空间；同理调用过 hashCode() 的对象无法进入偏向态",
+        "15 是无数次压测得到的经验最优值，与存储位宽无关",
+        "年龄上限由 MaxTenuringThreshold 任意设置，15 只是默认值可以调大",
+        "4 bit 存的是 GC次数的对数，实际可表示 2 的 15 次方次"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Mark Word 按锁状态复用同一格：无锁态是 hashcode 31bit + 分代年龄 4bit + 锁标志——哈希与偏向线程 ID 抢空间解释了「算过 hashCode 就偏向不了」。java-layout-021 考压缩指针与三段式，本题考 Mark Word 的位级分配。",
+      "difficulty": 4
     }
   ]
 }
