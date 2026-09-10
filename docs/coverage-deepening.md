@@ -6,7 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] network/basic/http/01-http-basics — 第二题考「常见状态码分类：301/302 与缓存语义、502/504 网关差异」
+- [ ] java/intermediate/spring/03-circular-dependency — 第二题考「三级缓存各自存什么、构造器循环依赖为什么无解」
+- [ ] java/advanced/jvm/05-object-layout — 第二题考「对象头里有什么：Mark Word（哈希/GC 分代年龄/锁标志）与类型指针」
+- [ ] mysql/basic/core/01-sql-execution — 第二题考「8.0 移除查询缓存的原因与 undo/redo/binlog 在执行流程中的位置」
+- [ ] docker/intermediate/practice/01-dockerfile — 第二题考「多阶段构建 COPY --from 只拷产物；EXPOSE 只是声明」
+- [ ] etcd/basic/core/02-etcd-lease-txn-watch — 第二题考「txn 把 check-then-act 压成一条 Raft 日志的原子性」
 
 ### b 类：旧题返修
 
@@ -55,10 +59,13 @@
 
 - 2026-09-09 · 第十六轮：3 道核心笔记第二题（java-biocost-107 / linux-strictmode-008 / net-osimodel-007，difficulty 3/3/3）；剔除演进任务回填的 js prototype 重复条目（js-new-013 上轮已完成）· 本轮提交主题：feat: 题库深化第十六轮
 
+- 2026-09-10 · 第十七轮：a 类 1 题（net-redirect-013，difficulty 3；net-http-009 已覆盖 502/504 故聚焦 3xx/304）+ b 类自查发现并修复上轮 3 题 hint/difficulty 字段错位（校验脚本已补类型检查）· 本轮提交主题：feat: 题库深化第十七轮
+
 ## 经验与规则
 
 - core: true 共 234 篇：`grep -rl "^core: true" src/content/docs`；难度定级锚点——1~2 概念识别、3 原理理解、4 边界/易错点、5 生产权衡/深挖。
 - 新题红线：考点必须与该笔记现有题不同（入队时写明差异角度）；judge 固定 ["正确","错误"]；字段沿用所在文件格式；新题一律带 difficulty。
+- 校验脚本必须检查字段类型（hint 为 str、difficulty 为 1~5 整数），仅检查字段存在会漏掉参数顺序错位（第十六轮事故）。
 - 已完成记录不内嵌自身提交 hash（自指问题），以「本轮提交主题」字段配合 git log --grep 反查。
 - 与并行会话（cursor/自主演进）撞车时：内容并集去重合并，绝不覆盖对方改动；只暂存本轮自己改的文件。
 - 事故记录（第十六轮提交 097a205）：演进任务的 cron 在本轮构建窗口内编辑了共享题库文件，git add 时将其已写完但未提交的 7 道题（java-dubboarch-108/dubbfail-109、linux-ctx-008/virt-009/epoll-010、net-http-009/finwait-010）一并扫入提交。已核验全部完整有效、build 通过，保留不回退；教训：add 前必须在同一命令里重新 git status 并 diff --cached 核对暂存内容，发现他人改动立即中止并改用 git add -p 或stash 分离。

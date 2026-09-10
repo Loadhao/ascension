@@ -231,8 +231,8 @@
       "answer": [
         0
       ],
-      "hint": 3,
-      "difficulty": "配套纪律——退出码 0 成功/非 0 失败要显式 exit，配合 set -e 外部调用方才能正确捕获；排错用 bash -x 逐步打印、shellcheck 静态检查抓低级 bug。linux-shell-002 考赋值等号空格，本题考严格模式三开关。"
+      "hint": "配套纪律——退出码 0 成功/非 0 失败要显式 exit，配合 set -e 外部调用方才能正确捕获；排错用 bash -x 逐步打印、shellcheck 静态检查抓低级 bug。linux-shell-002 考赋值等号空格，本题考严格模式三开关。",
+      "difficulty": 3
     }
   ]
 }

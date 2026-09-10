@@ -1880,8 +1880,8 @@
       "answer": [
         0
       ],
-      "hint": 3,
-      "difficulty": "事件循环铁律：Reactor 线程不能跑慢业务，否则这条线程上的全部连接陪葬；NIO 的「非阻塞」指 read 不死等，不是没有等待。java-epoll-042 考三代多路复用实现，本题考 BIO 成本账与 Reactor 演化。"
+      "hint": "事件循环铁律：Reactor 线程不能跑慢业务，否则这条线程上的全部连接陪葬；NIO 的「非阻塞」指 read 不死等，不是没有等待。java-epoll-042 考三代多路复用实现，本题考 BIO 成本账与 Reactor 演化。",
+      "difficulty": 3
     }
   ]
 }
