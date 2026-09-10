@@ -133,6 +133,23 @@
         1
       ],
       "hint": "从简是趋势：真需要发版/hotfix 再加 release 分支，不必先上 Git Flow。--force-with-lease 会拒绝覆盖别人新推的提交；裸 -f 可能抹掉同事的工作。"
+    },
+    {
+      "id": "git-ourstheirs-009",
+      "noteId": "git/intermediate/collaboration/02-remote-collab",
+      "type": "single",
+      "q": "解决冲突时用了 git checkout --theirs <file>，却拿到了「自己分支」的内容。最可能的原因是？",
+      "options": [
+        "当前处于 rebase 而不是 merge——--ours/--theirs 的语义会互换：rebase 里 theirs 指向自己正被重放的提交；用时先 git status 确认处于 merge 还是 rebase",
+        "--theirs 参数拼写有误，git 会静默回退成 --ours",
+        "checkout 必须配合 mergetool 使用，单独用会随机选边",
+        "该文件并没有真正冲突，--theirs 只是恢复了未修改的版本"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 4,
+      "difficulty": "merge 与 rebase 的 ours/theirs 指代相反，是经典坑；另一条安全线——永远用 --force-with-lease 替代裸 --force（远端被别人更新过时拒绝执行，防覆盖同事工作）。git-remote-004 考 pull 的组成，本题考冲突工具的语境陷阱。"
     }
   ]
 }

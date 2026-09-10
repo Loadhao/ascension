@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] js/basic/core/02-scope-closure — 第二题考「TDZ 与 var 提升：let/const 块级作用域，声明前访问抛 ReferenceError」
-- [ ] git/intermediate/collaboration/02-remote-collab — 第二题考「fetch 只更新远端快照不动工作区；pull = fetch + merge（或 rebase）」
-- [ ] js/intermediate/web/02-cors — 第二题考「简单请求 vs 复杂请求：复杂请求先发 OPTIONS 预检」
 - [ ] java/basic/io/03-tcp-sticky-packets — 第二题考「LengthFieldBasedFrameDecoder 的 adjustment 口诀与 maxFrameLength 防恶意大包」
 - [ ] docker/basic/fundamentals/03-lifecycle — 第二题考「stop 先 SIGTERM 再 SIGKILL，退出码 137 是被 SIGKILL」
+- [ ] java/advanced/jvm/03-garbage-collection — 第二题考「G1 的 Region 化与可预测停顿，CMS/G1 的分界」
+- [ ] middleware/intermediate/reliability/01-message-reliability — 第二题考「三段防丢对齐到 Kafka：acks=all + min.insync.replicas + 手动提交位移」
+- [ ] seata/basic/core/01-seata-core — 第二题考「TC/TM/RM 三角色分工与 XID 传播」
 
 ### b 类：旧题返修
 
@@ -50,6 +50,8 @@
 - 2026-09-09 · 第十一轮：3 道核心笔记第二题（rmq-silentdrop-005 / mq-cost-004 / net-dnsttl-006，difficulty 4/3/3）· 本轮提交主题：feat: 题库深化第十一轮
 
 - 2026-09-09 · 第十二轮：3 道核心笔记第二题（java-casadder-104 / java-poolargs-105 / rabbit-confirmtack-006，difficulty 4/3/3）· 本轮提交主题：feat: 题库深化第十二轮
+
+- 2026-09-09 · 第十三轮：3 道核心笔记第二题（js-tdz-011 / js-preflight-012 / git-ourstheirs-005，difficulty 3/3/4；git 条目原定角度与 git-remote-004 撞车，换 ours/theirs 语境反转）· 本轮提交主题：feat: 题库深化第十三轮
 
 ## 经验与规则
 

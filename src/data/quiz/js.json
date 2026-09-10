@@ -168,6 +168,40 @@
       ],
       "hint": 4,
       "difficulty": "两条准确的调度语义——「async 函数首次调用同步执行到第一个 await」与「await 之后 = .then 回调 = 微任务」：所以 await 后的代码排在同步代码之后、任何 setTimeout 之前。js-eventloop-005 考宏微任务输出顺序，本题考 await 本身的语义。"
+    },
+    {
+      "id": "js-tdz-011",
+      "noteId": "js/basic/core/02-scope-closure",
+      "type": "single",
+      "q": "按 let/const 与 var 的行为差异，下列说法正确的是？",
+      "options": [
+        "let/const 有块级作用域与 TDZ——声明前访问直接抛 ReferenceError，而不是像 var 那样静默返回 undefined",
+        "let 声明的变量也会提升且可访问，只是值是 undefined",
+        "const 声明的对象，其属性也不能再修改",
+        "var 的提升会把赋值语句一起提到作用域顶部"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "var 的提升是「声明与初始化分离」，赋值还留在原地；const 锁的是绑定（引用不可换）；另一个细节——函数声明整体提升、函数表达式只提升变量名。js-closure-002 考 var 循环打印，本题考 TDZ 与提升细节。"
+    },
+    {
+      "id": "js-preflight-011",
+      "noteId": "js/intermediate/web/02-cors",
+      "type": "single",
+      "q": "前端用 fetch 发 PUT 请求并带自定义头 token，跨域时浏览器先发了 OPTIONS——为什么？预检失败会怎样？",
+      "options": [
+        "PUT/自定义头不满足「简单请求」条件（GET/POST/HEAD 且安全头部），浏览器先发 OPTIONS 问服务器「这些头/方法行不行」，通过才发真实请求；预检不通过则真实请求不发出、控制台报错",
+        "OPTIONS 是浏览器探测服务器是否在线的保活机制，与跨域无关",
+        "简单请求也要先预检，只是预检结果被缓存了",
+        "预检失败时真实请求照样发出，只是响应被浏览器拦截"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "简单请求 = GET/POST/HEAD 且头部限于安全集合（Content-Type 仅 text/plain、form-data、x-www-form-urlencoded 等）；带 token 自定义头、application/json、PUT/DELETE 都触发预检；`*` 与 credentials:true 互斥，带 Cookie 必须回显具体域名。js-cors-006 考「拦的是读取不是发送」，本题考预检分类。"
     }
   ]
 }
