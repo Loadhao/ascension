@@ -582,6 +582,31 @@
 - 新证据与经验：①并行会话题库第十三轮出了 CORS 篇与 git ours/theirs 题——两线内容引用持续加深；②linux basic 四分类成对完成（commands 3/filesystem 2/permission 2），linux 方向 11 篇。
 - 下一轮入口：候选池——①场景题：限流矩阵（单机/分布式/多维度）grep 排查；②ai/basic/llm 或 agent 线；③linux/intermediate/system 第 6 篇候选（日志管理 logrotate）。每轮开工先同步+定界+体检基线。
 
+### 第 61 轮（2026-09-08，第二十二次启动，内容补充模式）
+
+- 选择：支付系统（case-studies 第 17 篇）——限流矩阵排查退场（令牌桶/漏桶/滑动窗口/分布式限流均有覆盖）；支付主题分散提及但无体系化专篇（grep"支付系统"零命中），电商订单链收口篇。
+- 交付：`17-payment.md`（渠道抽象统一网关、支付状态机图（含"支付中"中间态）、回调四纪律（验签/校单/幂等/ACK）、掉单两层兜底、长款短款对账）+ 侧边栏注册 + 图谱 payment 节点与 1 条边。
+- 验证：五连验证全绿（build 542 页/对比度 300 页）；提交 6dd14bc 已推送。
+- 结论：补功能。
+- 下一轮入口：RAG 进阶（勘察确认 RAG 篇未覆盖混合检索/重排）。
+
+### 第 62 轮（2026-09-08，第二十二次启动）
+
+- 选择：RAG 进阶：混合检索与重排（ai/intermediate/agent 第 11 篇）——纯向量检索的结构性盲区（精确 token/否定语义）与生产标配方案，AI 应用上升期高频。
+- 交付：`11-rag-advanced.md`（BM25+向量双路召回与 RRF 融合图、rerank cross-encoder 两阶段精排、查询改写、分块超参、评测回归衔接）+ 侧边栏注册 + 图谱 ragadv 节点与 2 条边。
+- 验证：五连验证全绿（build 543 页/对比度 301 页）；提交 9e611de 已推送。
+- 结论：补功能。
+- 下一轮入口：linux 日志管理（grep logrotate 仅 1 篇顺带确认）。
+
+### 第 63 轮（2026-09-08，第二十二次启动）
+
+- 选择：日志管理 logrotate（linux/intermediate/system 第 6 篇）——日志无限增长/删了不释放/轮转丢日志三事故无专篇，与磁盘排查、lsof deleted、journalctl 三处形成追问链。
+- 交付：`06-logrotate.md`（两种轮转方式对比图（copytruncate 有损 vs create+信号无损）、df-du 不一致根因、应用内滚动二选一、容器 stdout 反模式）+ 侧边栏注册 + 图谱 logmgr 节点与 1 条边。
+- 验证：五连验证全绿（build 544 页/对比度 302 页）；提交 060716e 已推送。
+- 结论：补功能。
+- 新证据与经验：①linux/intermediate/system 到 6 篇（脚本/进程/服务/网络/排查/日志），linux 方向 12 篇；②ai/intermediate/agent 到 11 篇（RAG 基础→进阶+评估闭环）。
+- 下一轮入口：候选池——①场景题：分布式限流的多维度组合（grep 显示有基础篇，看是否缺"多维度组合/热点参数"角度）；②ai/intermediate/agent 第 12 篇（Function Calling 与 MCP 对比已覆盖，看结构化输出/函数生成缺口）；③linux/basic/commands 第 4 篇（系统信息查看类）。每轮开工先同步+定界+体检基线。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
