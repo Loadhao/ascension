@@ -1,0 +1,23 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Web 安全", "group": "核心" },
+    { "id": "sec-xss", "label": "XSS 脚本注入", "href": "/security/basic/core/01-xss/", "group": "基础" },
+    { "id": "sec-csrf", "label": "CSRF 伪造请求", "href": "/security/basic/core/02-csrf/", "group": "基础" },
+    { "id": "sec-sqli", "label": "SQL 注入与参数化", "href": "/security/basic/core/03-sql-injection/", "group": "基础" },
+    { "id": "sec-session", "label": "会话安全的攻与防", "href": "/security/intermediate/core/01-session-attack/", "group": "进阶" },
+    { "id": "sec-authz", "label": "越权与访问控制", "href": "/security/intermediate/core/02-broken-access/", "group": "进阶" },
+    { "id": "sec-sign", "label": "签名与防重放", "href": "/security/intermediate/core/03-api-signature/", "group": "进阶" }
+  ],
+  "edges": [
+    { "source": "root", "target": "sec-xss" },
+    { "source": "root", "target": "sec-csrf" },
+    { "source": "root", "target": "sec-sqli" },
+    { "source": "root", "target": "sec-session" },
+    { "source": "root", "target": "sec-authz" },
+    { "source": "root", "target": "sec-sign" },
+    { "source": "sec-xss", "target": "sec-session" },
+    { "source": "sec-csrf", "target": "sec-session" },
+    { "source": "sec-session", "target": "sec-authz" },
+    { "source": "sec-authz", "target": "sec-sign" }
+  ]
+}

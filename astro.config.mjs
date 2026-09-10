@@ -356,6 +356,45 @@ export default defineConfig({
                     },
                   ],
                 },
+                {
+                  label: 'Web 安全',
+                  collapsed: true,
+                  items: [
+                    { label: '学习路线', link: '/security/' },
+                    {
+                      label: '基础',
+                      collapsed: true,
+                      items: [
+                        {
+                          label: '注入类攻击',
+                          collapsed: false,
+                          items: [
+                            { label: '概览', link: '/security/basic/core/' },
+                            { label: 'XSS：脚本注入', link: '/security/basic/core/01-xss/' },
+                            { label: 'CSRF：伪造请求', link: '/security/basic/core/02-csrf/' },
+                            { label: 'SQL 注入与参数化', link: '/security/basic/core/03-sql-injection/' },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      label: '中级',
+                      collapsed: true,
+                      items: [
+                        {
+                          label: '认证授权攻防',
+                          collapsed: false,
+                          items: [
+                            { label: '概览', link: '/security/intermediate/core/' },
+                            { label: '会话安全的攻与防', link: '/security/intermediate/core/01-session-attack/' },
+                            { label: '越权与访问控制', link: '/security/intermediate/core/02-broken-access/' },
+                            { label: '摘要、签名与防重放', link: '/security/intermediate/core/03-api-signature/' },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
               ],
             },
           ],

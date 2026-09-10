@@ -1,0 +1,32 @@
+---
+title: Web 安全
+description: Web 安全方向学习路线与知识地图：注入类攻击与认证授权攻防
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/security.json';
+
+## 学习路线
+
+点击圆点标记学习状态：○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖两层：**基础 · 注入类攻击**——XSS、CSRF、SQL 注入的原理
+与防御主战场；**中级 · 认证授权攻防**——会话安全、越权与 RBAC、
+开放 API 签名与防重放。机制概念（Cookie/Session/JWT、HTTPS、密码
+哈希、CORS）见「网络」方向的 [HTTP 系列](/network/basic/http/01-http-basics/)，
+本方向站在它之上专讲攻防。
+
+<RoadmapIsland directionId="security" />
+
+:::tip[面试冲刺]
+高频问题的一句话答案已汇总在[速答手册](/guide/interview-cheatsheet/)，复习与面试前按图索骥。
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放，右上角按钮可缩放、复位视图；悬停或点按节点可高亮关联关系；点击圆点进入对应笔记，左下图例点按可按分组筛选。
+图谱数据维护在 `src/data/graphs/security.json`。
+:::

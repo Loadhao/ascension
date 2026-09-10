@@ -1,0 +1,79 @@
+{
+  "questions": [
+    {
+      "id": "sec-xss-001",
+      "noteId": "security/basic/core/01-xss",
+      "type": "single",
+      "difficulty": 3,
+      "q": "评论区存储型 XSS 的根本防御手段是？",
+      "options": [
+        "数据输出到 HTML 上下文时做转义，让标签变实体不再被执行",
+        "把输入里的 script 关键字过滤或替换为空",
+        "给 Cookie 设置 SameSite=Lax",
+        "接口全部改成 POST 提交"
+      ],
+      "answer": [0],
+      "hint": "XSS = 数据被当代码，防线在输出口按上下文转义；黑名单过滤可被编码绕过，SameSite/POST 是 CSRF 的防御。"
+    },
+    {
+      "id": "sec-csrf-002",
+      "noteId": "security/basic/core/02-csrf",
+      "type": "single",
+      "difficulty": 3,
+      "q": "CSRF 攻击能成功，最关键的前提是？",
+      "options": [
+        "浏览器对跨站请求自动附带目标站点的 Cookie",
+        "攻击者拿到了用户的登录密码",
+        "目标站没有对 SQL 参数做预编译",
+        "用户的浏览器禁用了 JavaScript"
+      ],
+      "answer": [0],
+      "hint": "CSRF 不偷凭证——借浏览器「自动带 Cookie」的标准行为冒名发请求；所以 Authorization 头架构基本免疫。"
+    },
+    {
+      "id": "sec-sqli-003",
+      "noteId": "security/basic/core/03-sql-injection",
+      "type": "single",
+      "difficulty": 4,
+      "q": "预编译（参数化查询）能根治 SQL 注入，原理是？",
+      "options": [
+        "SQL 结构先定型，用户输入只作为值绑定，永不进入语法解析",
+        "占位符会对输入里的引号做黑名单替换",
+        "预编译把 SQL 发送到数据库前做了加密",
+        "驱动会自动把危险语句重写成安全语句"
+      ],
+      "answer": [0],
+      "hint": "参数化让输入永远是「数据」而非「语法」——输入里有分号引号也只是字符串内容。"
+    },
+    {
+      "id": "sec-authz-004",
+      "noteId": "security/intermediate/core/02-broken-access",
+      "type": "single",
+      "difficulty": 4,
+      "q": "用户把请求里的 orderId 从自己的 1001 改成别人的 1002 依然能查到订单，这属于？",
+      "options": [
+        "水平越权：只校验了登录，没校验资源归属",
+        "垂直越权：普通用户执行了管理员功能",
+        "未授权访问：接口没有做登录校验",
+        "会话固定：登录后未更换 session id"
+      ],
+      "answer": [0],
+      "hint": "同级用户之间的横向摸是水平越权；修法是身份取自登录态 + 资源归属校验，数据层查询再兜底。"
+    },
+    {
+      "id": "sec-sign-005",
+      "noteId": "security/intermediate/core/03-api-signature",
+      "type": "single",
+      "difficulty": 5,
+      "q": "接口已带 HMAC 签名，抓包者原样重放仍能成功，缺的防御是？",
+      "options": [
+        "timestamp 时间窗 + nonce 服务端去重，让同一请求只被接受一次",
+        "把 HMAC 换成 RSA 签名就能防重放",
+        "把 secret 换成更长的高强度密钥",
+        "签名串里加上用户的 IP 就万无一失"
+      ],
+      "answer": [0],
+      "hint": "签名防「改」不防「重发」：内容没变签名当然合法——防重放要时间窗加 nonce 去重，业务层再幂等兜底。"
+    }
+  ]
+}
