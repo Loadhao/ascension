@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 267
+src/content/docs/linux/intermediate/system/06-logrotate.md
+  h_9324126a55eff3 1-83
+src/data/graphs/linux.json
+  h_9324126a55eff3 15-16,33-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "060716e602ae2ae3ae634ce5e5d60b47a75fbfa6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
