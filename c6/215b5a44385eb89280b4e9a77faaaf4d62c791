@@ -1,0 +1,23 @@
+astro.config.mjs
+  s_87485c435dd980::t_16c292786f40df 1345
+src/content/docs/distributed/intermediate/case-studies/17-excel.md
+  s_87485c435dd980::t_5d65aa8aef1013 1-74
+src/data/graphs/distributed.json
+  s_87485c435dd980::t_d0a55afbf383b3 42,110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c6215b5a44385eb89280b4e9a77faaaf4d62c791",
+  "prompts": {},
+  "sessions": {
+    "s_87485c435dd980": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a08a87-1738-7062-a50c-7506c47fa334",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
