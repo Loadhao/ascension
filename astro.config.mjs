@@ -1195,6 +1195,7 @@ export default defineConfig({
                         { label: '购物车：多端同步与合并策略', link: '/distributed/intermediate/case-studies/14-cart/' },
                         { label: '订单超时自动关闭：延迟任务的四种姿势', link: '/distributed/intermediate/case-studies/15-order-timeout/' },
                         { label: '库存扣减时机：下单减、支付减还是预扣', link: '/distributed/intermediate/case-studies/16-stock-deduction/' },
+                        { label: '支付系统：渠道、状态机与对账', link: '/distributed/intermediate/case-studies/17-payment/' },
                       ],
                     },
                   ],
