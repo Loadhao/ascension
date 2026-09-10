@@ -1,0 +1,20 @@
+src/content/docs/kubernetes/intermediate/ops/02-service-ingress.md
+  h_9324126a55eff3 15
+src/content/docs/linux/basic/theory/01-process-thread.md
+  h_9324126a55eff3 29
+src/content/docs/react/basic/core/03-render-flow.md
+  h_9324126a55eff3 12
+src/content/docs/security/intermediate/core/03-api-signature.md
+  h_9324126a55eff3 10-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "be5a44dab3989b17cb444f7478deb265d45f590e",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
