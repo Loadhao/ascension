@@ -1,0 +1,19 @@
+src/data/graphs/distributed.json
+  s_6e9a87f0e27536::t_93554949489050 33,92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "7f6dfaa0905c954b8ccea27fbab669cd168e08cd",
+  "prompts": {},
+  "sessions": {
+    "s_6e9a87f0e27536": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "0d1881a0-5283-483d-a92d-b017b3b2bf40",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
