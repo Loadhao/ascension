@@ -6,11 +6,11 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] docker/intermediate/practice/01-dockerfile — 第二题考「多阶段构建 COPY --from 只拷产物；EXPOSE 只是声明」
-- [ ] etcd/basic/core/02-etcd-lease-txn-watch — 第二题考「txn 把 check-then-act 压成一条 Raft 日志的原子性」
-- [ ] java/basic/tomcat/01-web-container — 第二题考「Tomcat 连接器演进：BIO → NIO（Poller 即 Reactor）→ APR」
 - [ ] rabbitmq/intermediate/usage/01-deadletter-delay — 第二题考「TTL+死信实现延迟队列的队头阻塞缺陷」
 - [ ] java/advanced/jvm/07-tuning — 第二题考「GC 停顿与吞吐的取舍参数」（执行时按笔记内容核准角度）
+- [ ] network/basic/http/03-http-evolution — 第二题考「HTTP/2 二进制分帧把队头阻塞移到 TCP 层、3 用 QUIC 基于 UDP」
+- [ ] java/intermediate/spring/04-transaction — 第二题考「@Transactional 失效场景：自调用/吞异常/非 public/传播行为误配」
+- [ ] redis/basic/core/03-thread-model — 第二题考「6.0 起网络 IO 多线程但命令执行仍单线程的原因」
 
 ### b 类：旧题返修
 
@@ -63,12 +63,15 @@
 
 - 2026-09-10 · 第十八轮：3 道核心笔记第二题（mysql-updatewal-007 / java-threecache-111 / java-markword-112，difficulty 4/4/4；出题脚本新增 hint/difficulty 参数顺序自动纠正；三条原定角度均与并行会话新题不同程度撞车，分别换「WAL 更新时序」「为何必须三级」「Mark Word 位级分配」）· 本轮提交主题：feat: 题库深化第十八轮
 
+- 2026-09-10 · 第十九轮：3 道核心笔记第二题（docker-multistage-008 / java-embedtomcat-113 / java-metasize-114，difficulty 3/3/4；etcd 条目弃置——笔记已被 3 题覆盖无独立角度；tomcat 条目原定「连接器演进」事实在 io-model 篇，换考嵌入式容器取舍）· 本轮提交主题：feat: 题库深化第十九轮
+
 ## 经验与规则
 
 - core: true 共 234 篇：`grep -rl "^core: true" src/content/docs`；难度定级锚点——1~2 概念识别、3 原理理解、4 边界/易错点、5 生产权衡/深挖。
 - 新题红线：考点必须与该笔记现有题不同（入队时写明差异角度）；judge 固定 ["正确","错误"]；字段沿用所在文件格式；新题一律带 difficulty。
 - 校验脚本必须检查字段类型（hint 为 str、difficulty 为 1~5 整数），仅检查字段存在会漏掉参数顺序错位（第十六轮事故）。
 - 追加题库时匹配原文件的 JSON 格式风格（紧凑数组 vs 缩进数组）：交替重排会让每次写入产生整文件 diff，淹没真实变更、干扰暂存核对。
+- 出题 helper 内置 hint/difficulty 参数顺序自动纠正——写题时按「答案、难度、提示」的自然顺序传参也不会再产生字段错位。
 - 已完成记录不内嵌自身提交 hash（自指问题），以「本轮提交主题」字段配合 git log --grep 反查。
 - 与并行会话（cursor/自主演进）撞车时：内容并集去重合并，绝不覆盖对方改动；只暂存本轮自己改的文件。
 - 事故记录（第十六轮提交 097a205）：演进任务的 cron 在本轮构建窗口内编辑了共享题库文件，git add 时将其已写完但未提交的 7 道题（java-dubboarch-108/dubbfail-109、linux-ctx-008/virt-009/epoll-010、net-http-009/finwait-010）一并扫入提交。已核验全部完整有效、build 通过，保留不回退；教训：add 前必须在同一命令里重新 git status 并 diff --cached 核对暂存内容，发现他人改动立即中止并改用 git add -p 或stash 分离。

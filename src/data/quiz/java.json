@@ -1916,6 +1916,40 @@
       ],
       "hint": "Mark Word 按锁状态复用同一格：无锁态是 hashcode 31bit + 分代年龄 4bit + 锁标志——哈希与偏向线程 ID 抢空间解释了「算过 hashCode 就偏向不了」。java-layout-021 考压缩指针与三段式，本题考 Mark Word 的位级分配。",
       "difficulty": 4
+    },
+    {
+      "id": "java-embedtomcat-113",
+      "noteId": "java/basic/tomcat/01-web-container",
+      "type": "single",
+      "q": "微服务时代「每个应用内嵌一个 Web 容器」替代了「一台 Tomcat 跑多个 war」，按笔记这笔账怎么算？SpringMVC 与容器的关系是？",
+      "options": [
+        "独立容器的内存/CPU 开销与应用-容器版本绑定的部署复杂度变得刺眼——嵌入式让容器退化成一个库随应用发布，代价是失去 JNDI/虚拟主机/管理控制台这类容器级集中管理；而 SpringMVC 本身就是一个 Servlet（DispatcherServlet）",
+        "嵌入式是为了省内存：内嵌 Tomcat 比独立 Tomcat 进程的 CPU 占用更低",
+        "SpringMVC 绕过了 Servlet 规范，直接处理网络请求",
+        "嵌入式后就没有 Filter 链和 Listener 了，这些是外置容器专属能力"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "「HTTP 服务器 + Servlet 容器」的组合没变，变的是部署形态；Filter 链、Listener、异步 Servlet（AsyncContext）能力都从容器契约长出来，嵌入式一样有。java-servlet-080 考 Servlet 回调机制与容器组成，本题考部署形态演变与 SpringMVC 定位。",
+      "difficulty": 3
+    },
+    {
+      "id": "java-metasize-114",
+      "noteId": "java/advanced/jvm/07-tuning",
+      "type": "single",
+      "q": "动态类多的应用启动期连环 Full GC（日志里 Metadata GC Threshold），按笔记最该调的参数与常见误区是？",
+      "options": [
+        "调大 -XX:MetaspaceSize 到预期稳态水位——它是「首次触发元空间 GC 的起始水位」而不是初始大小；不设时默认很小，启动期就连环触发",
+        "调大 -Xmx：元空间不够时堆会自动让位给它",
+        "把 MaxMetaspaceSize 设得非常大甚至不设，反正元空间用的是本地内存",
+        "关闭类卸载（-XX:-ClassUnloading），类加载后永不回收"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "经典误区正是把 MetaspaceSize 当「初始大小」调大；元空间吃本地内存，MaxMetaspaceSize 不设就没有上限——总账 = 堆 + 元空间 + 栈×线程数 + 直接内存，缺一项都可能被 OOM Killer 直接杀。本篇独有参数语义题。",
+      "difficulty": 4
     }
   ]
 }
