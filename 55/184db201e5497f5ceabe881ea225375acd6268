@@ -1,0 +1,22 @@
+astro.config.mjs
+  h_9324126a55eff3 636-644
+src/content/docs/java/advanced/dubbo/01-architecture.md
+  h_9324126a55eff3 1-73
+src/content/docs/java/advanced/dubbo/02-governance.md
+  h_9324126a55eff3 1-62
+src/content/docs/java/advanced/dubbo/index.mdx
+  h_9324126a55eff3 1-15
+src/data/graphs/java.json
+  h_9324126a55eff3 58-59,212-213
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "55184db201e5497f5ceabe881ea225375acd6268",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
