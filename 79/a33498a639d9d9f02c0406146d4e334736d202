@@ -1,0 +1,38 @@
+astro.config.mjs
+  h_9324126a55eff3 591-628
+src/content/docs/netty/basic/core/01-reactor-boss-worker.md
+  h_9324126a55eff3 1-66
+src/content/docs/netty/basic/core/02-channel-pipeline.mdx
+  h_9324126a55eff3 1-81
+src/content/docs/netty/basic/core/03-bytebuf.md
+  h_9324126a55eff3 1-72
+src/content/docs/netty/basic/core/index.mdx
+  h_9324126a55eff3 1-14
+src/content/docs/netty/index.mdx
+  h_9324126a55eff3 1-32
+src/content/docs/netty/intermediate/core/01-heartbeat-idle.md
+  h_9324126a55eff3 1-61
+src/content/docs/netty/intermediate/core/02-refcount-leak.md
+  h_9324126a55eff3 1-63
+src/content/docs/netty/intermediate/core/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/netty.json
+  h_9324126a55eff3 1-21
+src/data/quiz/netty.json
+  h_9324126a55eff3 1-79
+src/data/viz/flows.ts
+  h_9324126a55eff3 2907-2966,3074
+src/lib/notes.ts
+  h_9324126a55eff3 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "79a33498a639d9d9f02c0406146d4e334736d202",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
