@@ -1,0 +1,14 @@
+docs/coverage-deepening.md
+  h_9324126a55eff3 64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2697ddfc5be9b97414b94d8d8df795b4f82d3220",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
