@@ -9,12 +9,12 @@ core: true
 
 ```mermaid
 flowchart LR
-    C[Consumer] -- 1.订阅 --> R[(注册中心)]
-    P[Provider] -- 1.注册 --> R
-    R -- 2.地址变更推送 --> C
-    C -- 3.直连调用（Dubbo 协议） --> P
-    C -. 4.统计上报 .-> M[Monitor]
-    P -. 4.统计上报 .-> M
+    C[Consumer] -- "1.订阅" --> R[(注册中心)]
+    P[Provider] -- "1.注册" --> R
+    R -- "2.地址变更推送" --> C
+    C -- "3.直连调用（Dubbo 协议）" --> P
+    C -. "4.统计上报" .-> M[Monitor]
+    P -. "4.统计上报" .-> M
 ```
 
 注册中心**只管地址簿**（注册/订阅/推送变更），不参与调用——
