@@ -202,6 +202,23 @@
       ],
       "hint": 3,
       "difficulty": "简单请求 = GET/POST/HEAD 且头部限于安全集合（Content-Type 仅 text/plain、form-data、x-www-form-urlencoded 等）；带 token 自定义头、application/json、PUT/DELETE 都触发预检；`*` 与 credentials:true 互斥，带 Cookie 必须回显具体域名。js-cors-006 考「拦的是读取不是发送」，本题考预检分类。"
+    },
+    {
+      "id": "js-new-012",
+      "noteId": "js/basic/core/03-prototype-class",
+      "type": "single",
+      "q": "手写 new 的实现里 return ret instanceof Object ? ret : obj; 对应 new 的哪条规则？",
+      "options": [
+        "构造器显式返回一个对象时，new 的结果用它覆盖默认的 obj；否则返回新建并链好原型的 obj",
+        "构造函数的返回值永远被忽略，这条判断是防御性冗余",
+        "instanceof Object 判断构造器是否执行成功，失败时返回默认对象",
+        "ret 是返回值的深拷贝，避免外部修改影响实例"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "new 四件事——① 建空对象链到 prototype、② 绑 this 执行构造逻辑、③ 构造器显式返回对象时覆盖、④ 否则返回 obj；顺带的推论：原始值永远 instanceof 为 false（没有原型链可走），判数组用 Array.isArray。js-proto-003 考两根指针，本题考 new 的完整语义。"
     }
   ]
 }

@@ -122,6 +122,23 @@
       ],
       "hint": 4,
       "difficulty": "全局锁按「表名 + 主键」粒度，竞争同一行就退化为串行——秒杀库存/账户余额正是典型热点行；@GlobalLock 是读已提交的手段、不是热点解药；调参只权衡失败率，不改串行本质。seata-lock-002 考注解失效四坑，本题考全局锁的代价边界。"
+    },
+    {
+      "id": "seata-roles-008",
+      "noteId": "seata/basic/core/01-seata-core",
+      "type": "single",
+      "q": "关于 Seata 的 TC/TM/RM 三角色分工，按笔记正确的是？",
+      "options": [
+        "TC 维护全局事务状态（Seata Server 独立部署）；TM 发起/提交/回滚全局事务（业务发起方）；RM 管理各分支事务（各参与服务）——TM 向 TC 开启全局事务拿到 XID",
+        "TC 部署在每个业务服务里，随服务一起启动",
+        "RM 负责开启全局事务，TM 只负责执行本地 SQL",
+        "三角色必须部署在同一台机器上才能传递 XID"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": 3,
+      "difficulty": "XID 是全局事务的唯一标识，由 TM 向 TC 申请、随调用链传播到各 RM；TM/RM 是职责抽象、与部署位置无关。seata-at-001 考一阶段行为，本题考三角色模型。"
     }
   ]
 }
