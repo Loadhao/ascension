@@ -633,6 +633,15 @@ export default defineConfig({
                         { label: '链路追踪：从 MDC 到分布式', link: '/java/advanced/springcloud/08-tracing/' },
                       ],
                     },
+                    {
+                      label: 'Dubbo',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/java/advanced/dubbo/' },
+                        { label: 'Dubbo 架构与 SPI', link: '/java/advanced/dubbo/01-architecture/' },
+                        { label: '集群容错与流量治理', link: '/java/advanced/dubbo/02-governance/' },
+                      ],
+                    },
                   ],
                 },
               ],
