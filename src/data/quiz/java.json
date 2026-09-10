@@ -1950,6 +1950,23 @@
       ],
       "hint": "经典误区正是把 MetaspaceSize 当「初始大小」调大；元空间吃本地内存，MaxMetaspaceSize 不设就没有上限——总账 = 堆 + 元空间 + 栈×线程数 + 直接内存，缺一项都可能被 OOM Killer 直接杀。本篇独有参数语义题。",
       "difficulty": 4
+    },
+    {
+      "id": "java-propagation-115",
+      "noteId": "java/intermediate/spring/04-transaction",
+      "type": "single",
+      "q": "记录审计日志要求「即使主流程回滚也独立落库」：方法 A（有事务）调用方法 B（REQUIRES_NEW）。若 B 是 A 的同类方法且通过 this 调用，实际行为是？",
+      "options": [
+        "REQUIRES_NEW 失效——自调用不走代理，B 与 A 跑在同一个事务里，A 回滚 B 一起回滚；正解是把 B 拆到另一个 Bean（或注入自身代理）",
+        "REQUIRES_NEW 照常生效，B 用独立连接提交，不受 A 回滚影响",
+        "B 会挂起 A 的事务新开 T2，只是提交时机推迟到 A 提交之后",
+        "抛出事务嵌套超限异常，两个方法都无法执行"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "传播行为是代理拦截时的决策——自调用绕过代理、注解形同虚设（笔记例 2：扣库存与下单同一事务一起回滚）；REQUIRES_NEW 与 NESTED 的真正差异是「两个独立连接」vs「同一连接的 savepoint」，前提都是经过代理。java-tx-016 多选考失效清单，本题考传播行为与自调用的组合失效。",
+      "difficulty": 4
     }
   ]
 }

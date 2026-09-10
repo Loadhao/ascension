@@ -6,11 +6,10 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] rabbitmq/intermediate/usage/01-deadletter-delay — 第二题考「TTL+死信实现延迟队列的队头阻塞缺陷」
-- [ ] java/advanced/jvm/07-tuning — 第二题考「GC 停顿与吞吐的取舍参数」（执行时按笔记内容核准角度）
-- [ ] network/basic/http/03-http-evolution — 第二题考「HTTP/2 二进制分帧把队头阻塞移到 TCP 层、3 用 QUIC 基于 UDP」
-- [ ] java/intermediate/spring/04-transaction — 第二题考「@Transactional 失效场景：自调用/吞异常/非 public/传播行为误配」
 - [ ] redis/basic/core/03-thread-model — 第二题考「6.0 起网络 IO 多线程但命令执行仍单线程的原因」
+- [ ] java/basic/syntax/03-strings — 第二题考「String 不可变的三重好处与 StringBuilder 的适用场景」
+- [ ] docker/advanced/orchestration/03-image-optimization — 第二题考「镜像瘦身分层策略：alpine 基底/合并 RUN/清理缓存时机」
+- [ ] kafka/intermediate/core/03-reliability-idempotent — 第二题考「生产端幂等的会话边界：PID 换了序列号就作废，跨会话要事务」
 
 ### b 类：旧题返修
 
@@ -64,6 +63,8 @@
 - 2026-09-10 · 第十八轮：3 道核心笔记第二题（mysql-updatewal-007 / java-threecache-111 / java-markword-112，difficulty 4/4/4；出题脚本新增 hint/difficulty 参数顺序自动纠正；三条原定角度均与并行会话新题不同程度撞车，分别换「WAL 更新时序」「为何必须三级」「Mark Word 位级分配」）· 本轮提交主题：feat: 题库深化第十八轮
 
 - 2026-09-10 · 第十九轮：3 道核心笔记第二题（docker-multistage-008 / java-embedtomcat-113 / java-metasize-114，difficulty 3/3/4；etcd 条目弃置——笔记已被 3 题覆盖无独立角度；tomcat 条目原定「连接器演进」事实在 io-model 篇，换考嵌入式容器取舍）· 本轮提交主题：feat: 题库深化第十九轮
+
+- 2026-09-10 · 第二十轮：3 道核心笔记第二题（rabbit-headblock-007 / net-connid-014 / java-propagation-115，difficulty 4/3/4；http-evolution 与 transaction 两条原定角度与并行新题撞车换角；剔除 jvm/07-tuning 回填残留——java-metasize-114 上轮已完成）· 本轮提交主题：feat: 题库深化第二十轮
 
 ## 经验与规则
 
