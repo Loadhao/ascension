@@ -1347,6 +1347,7 @@ export default defineConfig({
                         { label: '审批流：从状态机到工作流引擎', link: '/distributed/intermediate/case-studies/18-approval-flow/' },
                         { label: '数据权限：行级过滤的实现', link: '/distributed/intermediate/case-studies/19-data-permission/' },
                         { label: '对账体系：最后的防线', link: '/distributed/intermediate/case-studies/20-reconciliation/' },
+                        { label: '排队系统：把洪峰变成秩序', link: '/distributed/intermediate/case-studies/21-queue/' },
                       ],
                     },
                   ],
