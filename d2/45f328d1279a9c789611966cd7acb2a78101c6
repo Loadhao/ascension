@@ -1,0 +1,14 @@
+src/content/docs/linux/basic/theory/03-io-multiplexing.mdx
+  h_9324126a55eff3 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "d245f328d1279a9c789611966cd7acb2a78101c6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
