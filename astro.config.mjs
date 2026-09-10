@@ -1937,6 +1937,7 @@ export default defineConfig({
                         { label: '子代理 Subagent', link: '/ai/intermediate/agent/09-subagent/' },
                         { label: 'Agent 应用评估', link: '/ai/intermediate/agent/10-agent-evaluation/' },
                         { label: 'RAG 进阶：混合检索与重排', link: '/ai/intermediate/agent/11-rag-advanced/' },
+                        { label: '结构化输出：让 LLM 稳定吐 JSON', link: '/ai/intermediate/agent/12-structured-output/' },
                       ],
                     },
                   ],
