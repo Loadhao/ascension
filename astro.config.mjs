@@ -1929,6 +1929,7 @@ export default defineConfig({
                         { label: '模型量化：用精度换显存', link: '/ai/intermediate/llm/07-quantization/' },
                         { label: '多模态 LLM：图片怎么变成 token', link: '/ai/intermediate/llm/08-multimodal/' },
                         { label: '语音交互：ASR 与 TTS 的流水线', link: '/ai/intermediate/llm/09-voice/' },
+                        { label: 'LLM 网关：多模型路由与统一管控', link: '/ai/intermediate/llm/10-gateway/' },
                       ],
                     },
                     {
