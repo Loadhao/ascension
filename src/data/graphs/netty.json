@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Netty", "group": "核心" },
+    { "id": "nt-reactor", "label": "主从 Reactor 与 EventLoop", "href": "/netty/basic/core/01-reactor-boss-worker/", "group": "基础" },
+    { "id": "nt-pipeline", "label": "Pipeline 入站与出站", "href": "/netty/basic/core/02-channel-pipeline/", "group": "基础" },
+    { "id": "nt-bytebuf", "label": "ByteBuf 与引用计数", "href": "/netty/basic/core/03-bytebuf/", "group": "基础" },
+    { "id": "nt-idle", "label": "心跳保活与连接假死", "href": "/netty/intermediate/core/01-heartbeat-idle/", "group": "进阶" },
+    { "id": "nt-leak", "label": "ByteBuf 泄漏排查", "href": "/netty/intermediate/core/02-refcount-leak/", "group": "进阶" }
+  ],
+  "edges": [
+    { "source": "root", "target": "nt-reactor" },
+    { "source": "root", "target": "nt-pipeline" },
+    { "source": "root", "target": "nt-bytebuf" },
+    { "source": "root", "target": "nt-idle" },
+    { "source": "root", "target": "nt-leak" },
+    { "source": "nt-reactor", "target": "nt-pipeline" },
+    { "source": "nt-pipeline", "target": "nt-bytebuf" },
+    { "source": "nt-bytebuf", "target": "nt-leak" },
+    { "source": "nt-reactor", "target": "nt-idle" }
+  ]
+}

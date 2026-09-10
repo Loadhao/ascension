@@ -2904,6 +2904,66 @@ function k8sRollout(): FlowVizConfig {
 	};
 }
 
+/** Netty Pipeline：入站事件头到尾、出站事件尾到头的双向流动 */
+function nettyPipeline(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: {},
+		note: '一条 Channel 一条流水线：Handler 链上的事件分两股——入站（数据到达）从 head 向 tail 流，出站（write）从 tail 向 head 流。',
+	});
+	frames.push({
+		active: ['dec'],
+		hotEdges: ['in1'],
+		packets: [{ edge: 'in1', at: 0.5, tone: 'data', label: '字节流' }],
+		badges: { dec: '解出 Msg' },
+		note: '入站：网卡字节流经 head 进入流水线，解码器把字节切成业务消息——粘包拆包就在这一步解决。',
+	});
+	frames.push({
+		active: ['biz'],
+		hotEdges: ['in2'],
+		packets: [{ edge: 'in2', at: 0.5, tone: 'data', label: 'fireChannelRead' }],
+		badges: { dec: '已解出', biz: '处理中' },
+		note: '解码器 fireChannelRead 把消息传给业务 Handler——不主动 fire 就是截断链路，后置 Handler 将收不到事件。',
+	});
+	frames.push({
+		active: ['enc'],
+		hotEdges: ['out1'],
+		packets: [{ edge: 'out1', at: 0.5, tone: 'req', label: 'write(响应)' }],
+		badges: { biz: '已响应', enc: '编码中' },
+		note: '业务调 ctx.writeAndFlush：出站事件从当前位置逆流——先命中编码器，把 Msg 对象写回字节。',
+	});
+	frames.push({
+		active: ['sock'],
+		hotEdges: ['out2'],
+		packets: [{ edge: 'out2', at: 0.5, tone: 'resp', label: 'TCP 报文' }],
+		badges: { enc: '已写出' },
+		note: '编码后的字节经 head 写回 socket。注意 ctx.write 从当前 Handler 出发、channel.write 从 tail 出发——起点不同，途经的出站 Handler 不同。',
+	});
+	frames.push({
+		done: ['sock', 'dec', 'biz', 'enc'],
+		note: '复盘：入站头→尾（解码、业务），出站尾→头（编码、写出）。addLast 顺序 + 事件方向，共同决定每个 Handler 的执行时机。',
+	});
+
+	return {
+		title: 'Netty Pipeline · 入站与出站的双向流动',
+		height: 380,
+		nodes: [
+			{ id: 'sock', label: 'Socket', sub: '网卡', x: 0.08, y: 0.3, shape: 'cylinder' },
+			{ id: 'dec', label: '解码器', sub: '入站', x: 0.36, y: 0.3 },
+			{ id: 'biz', label: '业务 Handler', sub: '入站', x: 0.68, y: 0.3 },
+			{ id: 'enc', label: '编码器', sub: '出站', x: 0.36, y: 0.76 },
+		],
+		edges: [
+			{ id: 'in1', from: 'sock', to: 'dec', label: '入站' },
+			{ id: 'in2', from: 'dec', to: 'biz', label: '入站' },
+			{ id: 'out1', from: 'biz', to: 'enc', label: '出站', dashed: true },
+			{ id: 'out2', from: 'enc', to: 'sock', label: '出站', dashed: true },
+		],
+		frames,
+	};
+}
+
 /** MongoDB chunk 迁移：分裂 → balancer → 四步迁移与路由切换 */
 function mongoChunk(): FlowVizConfig {
 	const frames: FlowFrame[] = [];
@@ -3011,5 +3071,6 @@ export const flowDemos: Record<string, FlowVizConfig> = {
 	'ai-agent-loop': aiAgentLoop(),
 	'lc-agent-loop': lcAgentLoop(),
 	'k8s-rollout': k8sRollout(),
+	'netty-pipeline': nettyPipeline(),
 	'mongo-chunk': mongoChunk(),
 };

@@ -1,0 +1,79 @@
+{
+  "questions": [
+    {
+      "id": "netty-boss-001",
+      "noteId": "netty/basic/core/01-reactor-boss-worker",
+      "type": "single",
+      "difficulty": 3,
+      "q": "Netty 里 Handler 里做同步 DB 查询耗时 200ms，最直接的后果是？",
+      "options": [
+        "该 EventLoop 线程被阻塞，它名下所有连接的读写事件一起排队",
+        "只影响当前这一条连接，其他连接由其他线程处理",
+        "Netty 检测到阻塞会自动把任务转交业务线程池",
+        "连接被 Boss 组接管，由新线程重试"
+      ],
+      "answer": [0],
+      "hint": "Channel 与 EventLoop 终身绑定，串行无锁的另一面是绝不能阻塞——慢任务要外抛线程池。"
+    },
+    {
+      "id": "netty-pipe-002",
+      "noteId": "netty/basic/core/02-channel-pipeline",
+      "type": "single",
+      "difficulty": 4,
+      "q": "pipeline 依次 addLast(A 入站, B 出站, C 入站)，Biz 在 C 里调 ctx.write()，出站事件先经过谁？",
+      "options": [
+        "B：出站事件从当前位置逆流到 head，途中命中 B",
+        "A：出站事件也按 addLast 顺序从头流到尾",
+        "谁都不经过，直接写 socket",
+        "A 和 B 都经过，顺序同 addLast"
+      ],
+      "answer": [0],
+      "hint": "入站 head→tail、出站 tail→head；ctx.write 从当前节点逆流，C 之前的出站 Handler（B）先被命中。"
+    },
+    {
+      "id": "netty-buf-003",
+      "noteId": "netty/basic/core/03-bytebuf",
+      "type": "single",
+      "difficulty": 3,
+      "q": "自定义入站 Handler 继承 ChannelInboundHandlerAdapter 且 channelRead 里只是转发了业务，最常见的泄漏修法是？",
+      "options": [
+        "换 SimpleChannelInboundHandler 自动释放，或 finally 里 release",
+        "把 ByteBuf 改成 Unpooled 包装就自然回收",
+        "调用 discardReadBytes 把已读区清掉",
+        "调大 -XX:MaxDirectMemorySize 扩容堆外内存"
+      ],
+      "answer": [0],
+      "hint": "泄漏是所有权没终点：SimpleChannelInboundHandler 读完自动 release；扩容只是让崩得晚一点。"
+    },
+    {
+      "id": "netty-idle-004",
+      "noteId": "netty/intermediate/core/01-heartbeat-idle",
+      "type": "single",
+      "difficulty": 4,
+      "q": "服务端 60s 未收到任何数据就断开连接，空闲检测该怎么配？",
+      "options": [
+        "IdleStateHandler readerIdleTime=60，收到 IdleStateEvent 后 close",
+        "IdleStateHandler writerIdleTime=60，主动写一个探测包再断开",
+        "开启 SO_KEEPALIVE 并把间隔调成 60 秒",
+        "用 allIdleTime=60，全空闲即踢"
+      ],
+      "answer": [0],
+      "hint": "「没收到数据」是读空闲：readerIdle 触发事件后由 Handler 决定踢人；keepalive 语义是 TCP 连通性且周期太长。"
+    },
+    {
+      "id": "netty-leak-005",
+      "noteId": "netty/intermediate/core/02-refcount-leak",
+      "type": "single",
+      "difficulty": 4,
+      "q": "生产日志偶发 LEAK: ByteBuf.release() was not called，最合理的动作是？",
+      "options": [
+        "临时切 ADVANCED 级拿分配调用栈，定位所有权断点后修复",
+        "直接关掉泄漏检测让日志干净",
+        "调大直接内存上限并加内存告警阈值",
+        "把 ByteBuf 全部换成堆内 byte[] 一劳永逸"
+      ],
+      "answer": [0],
+      "hint": "LEAK 日志是 Netty 内建哨兵在报真问题：ADVANCED 采样附分配栈；扩容/关日志只是掩盖症状。"
+    }
+  ]
+}

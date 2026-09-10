@@ -1,0 +1,32 @@
+---
+title: Netty
+description: Netty 方向学习路线与知识地图：Reactor 线程模型与生产实战
+---
+
+import RoadmapIsland from '../../../components/learn/RoadmapIsland.astro';
+import KnowledgeGraph from '../../../components/KnowledgeGraph';
+import graph from '../../../data/graphs/netty.json';
+
+## 学习路线
+
+点击圆点标记学习状态：○ 未学 → ◐ 学习中 → ● 已掌握。
+
+当前覆盖两层：**基础 · 核心组件**——主从 Reactor 与 EventLoop 线程
+模型、Pipeline 双向责任链、ByteBuf 内存模型；**中级 · 生产实战**——
+心跳保活与连接假死、引用计数泄漏排查。IO 模型、零拷贝、TCP 粘包
+拆包的概念与解码器细节见「Java」方向的 [IO](/java/basic/io/01-io-model/)
+系列，本方向专注 Netty 自身的模型与生产纪律。
+
+<RoadmapIsland directionId="netty" />
+
+:::tip[面试冲刺]
+高频问题的一句话答案已汇总在[速答手册](/guide/interview-cheatsheet/)，复习与面试前按图索骥。
+
+## 知识图谱
+
+<KnowledgeGraph client:visible data={graph} />
+
+:::note[图谱说明]
+节点可拖拽、滚轮/双指缩放，右上角按钮可缩放、复位视图；悬停或点按节点可高亮关联关系；点击圆点进入对应笔记，左下图例点按可按分组筛选。
+图谱数据维护在 `src/data/graphs/netty.json`。
+:::

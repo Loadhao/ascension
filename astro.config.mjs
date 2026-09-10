@@ -589,6 +589,44 @@ export default defineConfig({
               ],
             },
             {
+              label: 'Netty',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/netty/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '核心组件',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/netty/basic/core/' },
+                        { label: '主从 Reactor 与 EventLoop', link: '/netty/basic/core/01-reactor-boss-worker/' },
+                        { label: 'ChannelPipeline 入站与出站', link: '/netty/basic/core/02-channel-pipeline/' },
+                        { label: 'ByteBuf 与引用计数', link: '/netty/basic/core/03-bytebuf/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '生产实战',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/netty/intermediate/core/' },
+                        { label: '心跳保活与连接假死', link: '/netty/intermediate/core/01-heartbeat-idle/' },
+                        { label: 'ByteBuf 泄漏排查', link: '/netty/intermediate/core/02-refcount-leak/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
               label: 'JS',
               collapsed: true,
               items: [

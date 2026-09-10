@@ -1,0 +1,13 @@
+---
+title: 生产实战
+description: 心跳保活与连接假死、引用计数泄漏排查：Netty 长连接服务的两道生死题
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+长连接服务跑在生产上，生死题就两道：**连接还会不会假死**
+（IdleStateHandler 心跳与判死）与**内存会不会悄悄漏光**
+（引用计数失衡与 LeakDetector）。前置的组件模型见
+[核心组件](/netty/basic/core/)。点击右侧圆点可标记学习状态。
+
+<CategoryNotesIsland categoryId="netty/intermediate/core" />
