@@ -607,6 +607,31 @@
 - 新证据与经验：①linux/intermediate/system 到 6 篇（脚本/进程/服务/网络/排查/日志），linux 方向 12 篇；②ai/intermediate/agent 到 11 篇（RAG 基础→进阶+评估闭环）。
 - 下一轮入口：候选池——①场景题：分布式限流的多维度组合（grep 显示有基础篇，看是否缺"多维度组合/热点参数"角度）；②ai/intermediate/agent 第 12 篇（Function Calling 与 MCP 对比已覆盖，看结构化输出/函数生成缺口）；③linux/basic/commands 第 4 篇（系统信息查看类）。每轮开工先同步+定界+体检基线。
 
+### 第 64 轮（2026-09-08，第二十三次启动，内容补充模式）
+
+- 选择：vLLM 推理服务（ai/intermediate/llm 第 6 篇）——grep 确认 vLLM/PagedAttention/连续批处理全站零覆盖；自部署 LLM 推理优化的新晋高频题，推理参数/Token 成本篇的部署层延伸。
+- 交付：`06-vllm.md`（裸推理两大浪费、PagedAttention 分页原理与 CoW、continuous batching 对比图、前缀缓存、TTFT/TPOT 的 SLA 权衡）+ 侧边栏注册 + 图谱 vllm 节点与 1 条边。
+- 验证：五连验证全绿（build 545 页/对比度 303 页）；提交 acb2e7c 已推送。
+- 结论：补功能。
+- 下一轮入口：IM 聊天（grep 确认消息模型无专篇）。
+
+### 第 65 轮（2026-09-08，第二十三次启动）
+
+- 选择：IM 聊天：会话模型与消息可靠性（case-studies 第 18 篇）——读扩散/写扩散仅 Feed 流篇提及，IM 的消息可靠性/多端同步无专篇；实时系统设计集大成场景。
+- 交付：`18-im.md`（服务端单调 seq 秩序、推拉结合链路图与 ACK 位点、多端各自位点同步、群聊读写扩散（与 Feed 流推拉同构）、messageId 去重）+ 侧边栏注册 + 图谱 im 节点与 1 条边。
+- 验证：五连验证全绿（build 546 页/对比度 304 页）；提交 8579f97 已推送。
+- 结论：补功能。
+- 下一轮入口：模型量化（vLLM 篇与 QLoRA 都提量化但无原理篇）。
+
+### 第 66 轮（2026-09-08，第二十三次启动）
+
+- 选择：模型量化（ai/intermediate/llm 第 7 篇）——FP16→INT4 显存账、PTQ/QAT 路线、GPTQ/AWQ、KV Cache 量化、"量化后必须评测回归"；vLLM 与 QLoRA 的公共底座。
+- 交付：`07-quantization.md`（四档位显存账表、PTQ 主流与 QAT 成本、任务敏感度差异（数学/代码敏感）、GGUF 追问）+ 侧边栏注册 + 图谱 quant 节点与 1 条边。
+- 验证：五连验证全绿（build 547 页/对比度 305 页）；提交 f118588 已推送。
+- 结论：补功能。
+- 新证据与经验：①ai/intermediate/llm 分类 2→7 篇成体系（本质→提示→选型→参数→成本→部署→量化），AI 应用主线完整；②并行会话题库第十四轮（Netty/GC 三色/容器排查）持续，两线零冲突。
+- 下一轮入口：候选池——①场景题：订单履约（发货/物流单）grep 排查；②ai/intermediate/agent 结构化输出与约束解码缺口；③linux/basic/commands 第 4 篇候选（用户/进程快捷查询）。每轮开工先同步+定界+体检基线。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
