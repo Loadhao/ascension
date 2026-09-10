@@ -1,0 +1,21 @@
+src/data/quiz/java.json
+  s_1b7aa5f0ff753b::t_0a25cd5fef90d2 1885-1918
+src/data/quiz/mysql.json
+  s_1b7aa5f0ff753b::t_186031d066adb9 15-17,26-32,47-51,66-68,83-85,100-104,113-119,134-136,151-153,168-172,186-188,203-205,208-224
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "864202dfb255f930bda9509103b481afc30fee99",
+  "prompts": {},
+  "sessions": {
+    "s_1b7aa5f0ff753b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2c5b5752-ad85-4a56-9ff9-95df1a5f7c58",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
