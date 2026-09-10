@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1931
+src/content/docs/ai/intermediate/llm/09-voice.md
+  h_9324126a55eff3 1-68
+src/data/graphs/ai.json
+  h_9324126a55eff3 17,66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8b2d070746b993157f0d3e7180a0e434482918d8",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
