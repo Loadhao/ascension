@@ -264,6 +264,7 @@ export default defineConfig({
                         { label: '系统服务与 systemd', link: '/linux/intermediate/system/03-system-service/' },
                         { label: '网络', link: '/linux/intermediate/system/04-network/' },
                         { label: '性能排查：CPU、内存、磁盘 IO 与负载', link: '/linux/intermediate/system/05-performance/' },
+                        { label: '日志管理：logrotate 与磁盘治理', link: '/linux/intermediate/system/06-logrotate/' },
                       ],
                     },
                   ],
