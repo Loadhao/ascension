@@ -1340,6 +1340,7 @@ export default defineConfig({
                         { label: '库存扣减时机：下单减、支付减还是预扣', link: '/distributed/intermediate/case-studies/16-stock-deduction/' },
                         { label: '支付系统：渠道、状态机与对账', link: '/distributed/intermediate/case-studies/17-payment/' },
                         { label: 'IM 聊天：会话模型与消息可靠性', link: '/distributed/intermediate/case-studies/18-im/' },
+                        { label: '评论系统：两级结构与热评排序', link: '/distributed/intermediate/case-studies/15-comments/' },
                       ],
                     },
                   ],
