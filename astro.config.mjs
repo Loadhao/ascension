@@ -245,6 +245,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/linux/basic/permission/' },
                         { label: '用户与权限体系', link: '/linux/basic/permission/01-users-permissions/' },
+                        { label: '文件不可变属性与 capabilities', link: '/linux/basic/permission/02-immutable-capabilities/' },
                       ],
                     },
                   ],
