@@ -1,0 +1,40 @@
+astro.config.mjs
+  h_9324126a55eff3 1832-1870
+src/content/docs/langchain/basic/core/01-langchain-overview.md
+  h_9324126a55eff3 1-77
+src/content/docs/langchain/basic/core/02-prompts-structured-output.md
+  h_9324126a55eff3 1-71
+src/content/docs/langchain/basic/core/03-lcel-runnable.md
+  h_9324126a55eff3 1-78
+src/content/docs/langchain/basic/core/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/langchain/index.mdx
+  h_9324126a55eff3 1-32
+src/content/docs/langchain/intermediate/graph/01-state-graph.md
+  h_9324126a55eff3 1-87
+src/content/docs/langchain/intermediate/graph/02-checkpointer-interrupt.md
+  h_9324126a55eff3 1-84
+src/content/docs/langchain/intermediate/graph/03-agent-loop.mdx
+  h_9324126a55eff3 1-91
+src/content/docs/langchain/intermediate/graph/index.mdx
+  h_9324126a55eff3 1-14
+src/data/graphs/langchain.json
+  h_9324126a55eff3 1-24
+src/data/quiz/langchain.json
+  h_9324126a55eff3 1-94
+src/data/viz/flows.ts
+  h_9324126a55eff3 2789-2852,2958
+src/lib/notes.ts
+  h_9324126a55eff3 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3baeade7af3c4c8e6dd637aa0cb482fbf38bed60",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
