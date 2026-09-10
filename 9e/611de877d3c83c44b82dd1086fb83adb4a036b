@@ -1,0 +1,19 @@
+src/data/graphs/ai.json
+  s_87e8d3bad3a6db::t_220d08bff012ad 22,78-79
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "9e611de877d3c83c44b82dd1086fb83adb4a036b",
+  "prompts": {},
+  "sessions": {
+    "s_87e8d3bad3a6db": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "d804e2b4-cd04-41e4-9d29-f7608e165ab5",
+        "model": "cursor-grok-4.6-high"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
