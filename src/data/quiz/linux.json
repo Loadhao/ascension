@@ -165,6 +165,57 @@
       ],
       "hint": 4,
       "difficulty": "「df -h 有余但写入仍报 No space left」十有八九是 inode 被海量小文件吃光；「删了日志空间不释放」是进程还握着文件描述符——lsof +L1 定位后重启/重开持有进程。linux-mount-006 考单一目录树，本题考磁盘满排查。"
+    },
+    {
+      "id": "linux-ctx-008",
+      "noteId": "linux/basic/theory/01-process-thread",
+      "type": "single",
+      "difficulty": 4,
+      "q": "进程切换比同进程线程切换贵得多的关键原因是？",
+      "options": [
+        "进程切换要更换页表基址，TLB 地址翻译缓存随之失效",
+        "进程的寄存器数量比线程多，保存恢复更慢",
+        "线程切换不需要保存栈指针",
+        "进程切换必须经过用户态确认，多一次系统调用"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "换地址空间 = 换页表 = TLB 全冷，切换后一段时间访存变慢；线程共享地址空间，只换栈与寄存器。"
+    },
+    {
+      "id": "linux-virt-009",
+      "noteId": "linux/basic/theory/02-virtual-memory",
+      "type": "single",
+      "difficulty": 3,
+      "q": "top 里 Java 进程 VIRT 高达几十 G 而 RES 只有几 G，结论是？",
+      "options": [
+        "正常：VIRT 是含预留与映射的虚拟地址空间，真实占用看 RES",
+        "内存泄漏，必须立刻重启进程",
+        "swap 被打爆，VIRT 才会远大于 RES",
+        "堆配置太大，应把 -Xmx 调小到 RES 附近"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "VIRT 只是地址空间假象（堆预留、mmap 都算），RES 是真实物理页占用；告警与优化判断都看 RES 与 GC。"
+    },
+    {
+      "id": "linux-epoll-010",
+      "noteId": "linux/basic/theory/03-io-multiplexing",
+      "type": "single",
+      "difficulty": 4,
+      "q": "epoll 相比 select 省掉的三笔全量开销是？",
+      "options": [
+        "每轮拷贝 fd 集合、内核线性扫描、应用遍历找就绪——三项都免",
+        "省掉了系统调用，全程无需陷入内核",
+        "省掉了网卡中断，靠轮询直达用户态",
+        "省掉了用户态缓冲区拷贝，数据直达应用"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "epoll 注册一次常驻红黑树、事件回调填就绪链表、wait 只返回就绪项——把「问遍所有」改成「只收就绪」。"
     }
   ]
 }

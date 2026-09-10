@@ -248,6 +248,16 @@ export default defineConfig({
                         { label: '文件不可变属性与 capabilities', link: '/linux/basic/permission/02-immutable-capabilities/' },
                       ],
                     },
+                    {
+                      label: '操作系统理论',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/linux/basic/theory/' },
+                        { label: '进程与线程', link: '/linux/basic/theory/01-process-thread/' },
+                        { label: '虚拟内存', link: '/linux/basic/theory/02-virtual-memory/' },
+                        { label: 'IO 多路复用与 epoll', link: '/linux/basic/theory/03-io-multiplexing/' },
+                      ],
+                    },
                   ],
                 },
                 {

@@ -2964,6 +2964,67 @@ function nettyPipeline(): FlowVizConfig {
 	};
 }
 
+/** epoll 全过程：注册进红黑树、数据到达回调入就绪链表、wait 只取就绪 */
+function linuxEpoll(): FlowVizConfig {
+	const frames: FlowFrame[] = [];
+
+	frames.push({
+		badges: { a: '空闲', b: '空闲', c: '空闲' },
+		note: '一个线程要看护三条连接（放到一万条也一样）：select 的做法是每次调用都带着全部 fd 重新问一遍内核。epoll 换了一种思路——先注册，后等通知。',
+	});
+	frames.push({
+		active: ['kernel'],
+		hotEdges: ['ra', 'rb', 'rc'],
+		packets: [{ edge: 'rb', at: 0.5, tone: 'req', label: 'EPOLL_CTL_ADD' }],
+		badges: { kernel: '红黑树已建' },
+		note: 'epoll_ctl 把连接注册进红黑树，一次注册常驻内核——对比 select：每轮调用都要把整个 fd 集合重新拷进内核。',
+	});
+	frames.push({
+		active: ['sockb'],
+		hotEdges: ['dat'],
+		packets: [{ edge: 'dat', at: 0.5, tone: 'data', label: '数据到达' }],
+		badges: { kernel: 'B 就绪', b: '有数据' },
+		note: 'sockB 的数据到了：网卡中断触发内核回调，把 sockB 挂进就绪链表——不需要遍历任何其他连接。',
+	});
+	frames.push({
+		active: ['app'],
+		hotEdges: ['ready'],
+		packets: [{ edge: 'ready', at: 0.6, tone: 'resp', label: '就绪列表' }],
+		badges: { kernel: '就绪 1 个', app: '处理 B' },
+		note: 'epoll_wait 返回，线程只拿到就绪列表——直接处理 sockB。没有全量扫描、没有应用侧遍历，事件复杂度与总连接数无关。',
+	});
+	frames.push({
+		active: ['app'],
+		badges: { kernel: '继续监听', app: '回到 wait' },
+		note: '处理完回到 epoll_wait 继续睡。select 的账单在此刻最刺眼：上万连接时它要拷贝上万 fd、内核线性扫上万、应用再遍历上万，而 epoll 三项全免。',
+	});
+	frames.push({
+		done: ['app', 'kernel', 'socka', 'sockb', 'sockc'],
+		badges: { kernel: '红黑树 + 就绪链表' },
+		note: '复盘：epoll = 注册一次（红黑树）+ 数据到达回调入就绪链表 + wait 只取就绪。Redis、Nginx、Netty 的高并发底座都是它。',
+	});
+
+	return {
+		title: 'epoll · 从「问遍所有」到「只收就绪」',
+		height: 400,
+		nodes: [
+			{ id: 'socka', label: '连接 A', sub: '空闲', x: 0.1, y: 0.12, shape: 'cylinder' },
+			{ id: 'sockb', label: '连接 B', sub: '有数据到达', x: 0.1, y: 0.5, shape: 'cylinder' },
+			{ id: 'sockc', label: '连接 C', sub: '空闲', x: 0.1, y: 0.88, shape: 'cylinder' },
+			{ id: 'kernel', label: 'epoll 实例', sub: '红黑树 + 就绪链表', x: 0.48, y: 0.5 },
+			{ id: 'app', label: '应用线程', sub: 'epoll_wait', x: 0.86, y: 0.5 },
+		],
+		edges: [
+			{ id: 'ra', from: 'socka', to: 'kernel', dashed: true },
+			{ id: 'rb', from: 'sockb', to: 'kernel', label: '注册' },
+			{ id: 'rc', from: 'sockc', to: 'kernel', dashed: true },
+			{ id: 'dat', from: 'sockb', to: 'kernel', label: '数据到达', dashed: true },
+			{ id: 'ready', from: 'kernel', to: 'app', label: '只给就绪' },
+		],
+		frames,
+	};
+}
+
 /** MongoDB chunk 迁移：分裂 → balancer → 四步迁移与路由切换 */
 function mongoChunk(): FlowVizConfig {
 	const frames: FlowFrame[] = [];
@@ -3072,5 +3133,6 @@ export const flowDemos: Record<string, FlowVizConfig> = {
 	'lc-agent-loop': lcAgentLoop(),
 	'k8s-rollout': k8sRollout(),
 	'netty-pipeline': nettyPipeline(),
+	'linux-epoll': linuxEpoll(),
 	'mongo-chunk': mongoChunk(),
 };

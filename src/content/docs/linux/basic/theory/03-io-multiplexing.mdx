@@ -1,0 +1,69 @@
+---
+title: IO 多路复用与 epoll
+description: select/poll/epoll 的内核机制对比：注册一次、回调就绪、O(1) 取事件
+level: intermediate
+core: true
+---
+
+import AlgorithmVizIsland from '../../../../../components/viz/AlgorithmVizIsland.astro';
+
+## 前置：两个视角的分工
+
+「一个线程为什么能管上万条连接」这个问题有两半：应用侧的
+Reactor 骨架见 [IO 模型](/java/basic/io/01-io-model/)；本篇讲内核侧
+的机制演进——**select 怎么不够用、epoll 到底优化了什么**。
+
+## select：能用，但每次都是全量劳动
+
+```c
+fd_set readfds;                    // 位图，默认上限 1024
+FD_SET(sock, &readfds);
+select(maxfd + 1, &readfds, NULL, NULL, timeout);
+// 返回后：应用遍历整个集合找出就绪的那几个
+```
+
+每次调用都要做三件全量活：**fd 集合从用户态拷到内核态 → 内核
+线性扫描所有 fd 检查就绪 → 返回后应用再遍历一遍找就绪者**。
+连接数上万时，三次全量劳动里 99% 都花在不相关的连接上。
+poll 用链表解掉了 1024 上限，其余照旧。
+
+## epoll：注册一次，回调就绪
+
+```c
+int ep = epoll_create1(0);
+epoll_ctl(ep, EPOLL_CTL_ADD, sock, &ev);  // 注册一次，进红黑树
+struct epoll_event out[64];
+int n = epoll_wait(ep, out, 64, timeout); // 只返回就绪的
+```
+
+三个系统调用各司其职：
+
+- `epoll_create`：建一个 epoll 实例（红黑树 + 就绪链表）
+- `epoll_ctl`：连接注册**一次**，常驻内核，不随调用反复传递
+- `epoll_wait`：只拿**就绪链表**——网卡数据到达时中断回调把
+  对应 fd 挂进去，内核不用扫全量
+
+注册、等待、唤醒三步的全过程：
+
+<AlgorithmVizIsland demo="linux-epoll" />
+
+## LT 与 ET：两种提醒方式
+
+| 模式            | 行为                     | 编程负担             |
+| ------------- | ------------------------ | ---------------- |
+| LT 水平触发（默认） | 只要还有数据没读完，每次 wait 都提醒 | 稳，读不干净下回还来     |
+| ET 边缘触发      | 只在状态**变化**时提醒一次          | 必须一次读到 EAGAIN，配非阻塞 fd |
+
+Netty/Nginx 的高性能路径多用 ET（少一轮次空提醒），代价是把
+「读干净」的纪律转嫁给应用。
+
+## 要点备忘
+
+- select/poll 的三笔全量账：拷贝、内核扫描、应用遍历；epoll 全免
+- epoll 快的本质是**把「问」改成「等通知」**：回调填就绪链表
+- ET 要求非阻塞 + 循环读到 EAGAIN，漏读就饿死事件
+- Redis、Nginx、Netty 单机扛几十万连接，底座都是这套机制
+
+## 延伸阅读
+
+- 《Unix 网络编程 卷 1》第 6 章（I/O 复用）
