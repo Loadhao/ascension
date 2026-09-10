@@ -1,0 +1,44 @@
+astro.config.mjs
+  h_9324126a55eff3 736-781
+src/content/docs/react/basic/core/01-declarative-ui.md
+  h_9324126a55eff3 1-60
+src/content/docs/react/basic/core/02-hooks-mental.md
+  h_9324126a55eff3 1-66
+src/content/docs/react/basic/core/03-render-flow.md
+  h_9324126a55eff3 1-61
+src/content/docs/react/basic/core/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/react/index.mdx
+  h_9324126a55eff3 1-31
+src/content/docs/vue/basic/core/01-reactivity.md
+  h_9324126a55eff3 1-69
+src/content/docs/vue/basic/core/02-component-model.md
+  h_9324126a55eff3 1-73
+src/content/docs/vue/basic/core/03-composition-api.md
+  h_9324126a55eff3 1-63
+src/content/docs/vue/basic/core/index.mdx
+  h_9324126a55eff3 1-13
+src/content/docs/vue/index.mdx
+  h_9324126a55eff3 1-31
+src/data/graphs/react.json
+  h_9324126a55eff3 1-15
+src/data/graphs/vue.json
+  h_9324126a55eff3 1-15
+src/data/quiz/react.json
+  h_9324126a55eff3 1-49
+src/data/quiz/vue.json
+  h_9324126a55eff3 1-49
+src/lib/notes.ts
+  h_9324126a55eff3 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b4eefb3274977906474cff173fca1500372254f7",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
