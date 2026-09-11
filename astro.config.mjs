@@ -277,6 +277,7 @@ export default defineConfig({
                         { label: '性能排查：CPU、内存、磁盘 IO 与负载', link: '/linux/intermediate/system/05-performance/' },
                         { label: '日志管理：logrotate 与磁盘治理', link: '/linux/intermediate/system/06-logrotate/' },
                         { label: '定时任务：crontab 与 systemd timer', link: '/linux/intermediate/system/07-cron-timer/' },
+                        { label: 'SSH 隧道与端口转发', link: '/linux/intermediate/system/08-ssh-tunnel/' },
                       ],
                     },
                   ],

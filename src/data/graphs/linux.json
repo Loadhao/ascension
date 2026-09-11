@@ -16,6 +16,7 @@
     { "id": "perf", "label": "性能排查", "href": "/linux/intermediate/system/05-performance/", "group": "进阶" },
     { "id": "logmgr", "label": "日志管理", "href": "/linux/intermediate/system/06-logrotate/", "group": "进阶" },
     { "id": "cronsched", "label": "定时任务", "href": "/linux/intermediate/system/07-cron-timer/", "group": "进阶" },
+    { "id": "tunnel", "label": "SSH 隧道", "href": "/linux/intermediate/system/08-ssh-tunnel/", "group": "进阶" },
     { "id": "osthread", "label": "进程与线程", "href": "/linux/basic/theory/01-process-thread/", "group": "原理" },
     { "id": "vmem", "label": "虚拟内存", "href": "/linux/basic/theory/02-virtual-memory/", "group": "原理" },
     { "id": "iomux", "label": "IO 多路复用与 epoll", "href": "/linux/basic/theory/03-io-multiplexing/", "group": "原理" }
@@ -36,6 +37,7 @@
     { "source": "root", "target": "perm" },
     { "source": "perm", "target": "caps", "label": "更高两层权限" },
     { "source": "caps", "target": "ssh", "label": "访问安全延伸" },
+    { "source": "ssh", "target": "tunnel", "label": "隧道的载体" },
     { "source": "basics", "target": "shell", "label": "进阶" },
     { "source": "fs", "target": "perm", "label": "inode 权限" },
     { "source": "root", "target": "proc" },
