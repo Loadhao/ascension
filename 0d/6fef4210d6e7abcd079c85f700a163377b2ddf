@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1363
+src/content/docs/distributed/intermediate/case-studies/23-timezone.md
+  h_9324126a55eff3 1-67
+src/data/graphs/distributed.json
+  h_9324126a55eff3 47,123
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "0d6fef4210d6e7abcd079c85f700a163377b2ddf",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
