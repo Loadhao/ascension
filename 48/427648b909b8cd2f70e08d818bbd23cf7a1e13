@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1969
+src/content/docs/ai/intermediate/agent/15-knowledge-base.md
+  h_9324126a55eff3 1-65
+src/data/graphs/ai.json
+  h_9324126a55eff3 35,102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "48427648b909b8cd2f70e08d818bbd23cf7a1e13",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
