@@ -1898,6 +1898,7 @@ export default defineConfig({
                         { label: 'Transformer 与自注意力', link: '/ai/basic/foundation/03-transformer/' },
                         { label: 'LoRA：低成本微调的原理', link: '/ai/basic/foundation/04-lora/' },
                         { label: 'Embedding：语义的向量表示', link: '/ai/basic/foundation/05-embedding/' },
+                        { label: 'GPU 与算力：为什么 AI 都长在它上面', link: '/ai/basic/foundation/06-gpu/' },
                       ],
                     },
                     {
