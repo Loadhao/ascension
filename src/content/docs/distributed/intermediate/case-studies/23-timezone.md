@@ -1,7 +1,7 @@
 ---
 title: 时区处理：存储、传输与展示的纪律
 description: 三层分离黄金法则、数据库时区行为、夏令时与服务器时区坑、"时间差 8 小时"排查清单
-level: basic
+level: intermediate
 core: true
 ---
 
