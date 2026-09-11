@@ -1909,6 +1909,7 @@ export default defineConfig({
                         { label: 'Embedding：语义的向量表示', link: '/ai/basic/foundation/05-embedding/' },
                         { label: 'GPU 与算力：为什么 AI 都长在它上面', link: '/ai/basic/foundation/06-gpu/' },
                         { label: '多卡并行：数据、张量、流水线与 ZeRO', link: '/ai/basic/foundation/07-multi-gpu/' },
+                        { label: 'Tokenizer：模型眼里的文字', link: '/ai/basic/foundation/08-tokenizer/' },
                       ],
                     },
                     {
@@ -1945,6 +1946,7 @@ export default defineConfig({
                         { label: '语音交互：ASR 与 TTS 的流水线', link: '/ai/intermediate/llm/09-voice/' },
                         { label: 'LLM 网关：多模型路由与统一管控', link: '/ai/intermediate/llm/10-gateway/' },
                         { label: 'LLM 应用架构：设计一个 ChatGPT 类应用', link: '/ai/intermediate/llm/11-architecture/' },
+                        { label: '幻觉：为什么 LLM 会一本正经地胡说', link: '/ai/intermediate/llm/12-hallucination/' },
                       ],
                     },
                     {
