@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 249
+src/content/docs/linux/basic/permission/03-ssh-access.md
+  h_9324126a55eff3 1-71
+src/data/graphs/linux.json
+  h_9324126a55eff3 11,38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b193d937296acf20c16004cc7f5aa408f12205b2",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
