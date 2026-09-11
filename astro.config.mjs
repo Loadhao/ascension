@@ -1934,6 +1934,7 @@ export default defineConfig({
                         { label: '多模态 LLM：图片怎么变成 token', link: '/ai/intermediate/llm/08-multimodal/' },
                         { label: '语音交互：ASR 与 TTS 的流水线', link: '/ai/intermediate/llm/09-voice/' },
                         { label: 'LLM 网关：多模型路由与统一管控', link: '/ai/intermediate/llm/10-gateway/' },
+                        { label: 'LLM 应用架构：设计一个 ChatGPT 类应用', link: '/ai/intermediate/llm/11-architecture/' },
                       ],
                     },
                     {
