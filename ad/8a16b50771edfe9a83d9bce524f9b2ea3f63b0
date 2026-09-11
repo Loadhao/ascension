@@ -1,0 +1,20 @@
+docs/coverage-deepening.md
+  h_9324126a55eff3 10-12,71-72
+src/data/quiz/java.json
+  h_9324126a55eff3 1989-2005
+src/data/quiz/kafka.json
+  h_9324126a55eff3 15-17,26-32,41-51,60-66,81-83,98-100,115-119,134-136,151-153,168-170,185-187,201-203,206-222
+src/data/quiz/network.json
+  h_9324126a55eff3 240-254
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ad8a16b50771edfe9a83d9bce524f9b2ea3f63b0",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
