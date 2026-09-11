@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1937
+src/content/docs/ai/intermediate/llm/11-architecture.md
+  h_9324126a55eff3 1-72
+src/data/graphs/ai.json
+  h_9324126a55eff3 20,74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "7764b5f321b00e6e98213fafb55111e598df2c4f",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
