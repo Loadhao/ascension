@@ -976,6 +976,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/mysql/intermediate/connection-pool/' },
                         { label: '数据库连接池：HikariCP 为什么快', link: '/mysql/intermediate/connection-pool/01-hikaricp/' },
+                        { label: '读写分离：连接路由与主从延迟', link: '/mysql/intermediate/connection-pool/02-read-write-split/' },
                       ],
                     },
                   ],
