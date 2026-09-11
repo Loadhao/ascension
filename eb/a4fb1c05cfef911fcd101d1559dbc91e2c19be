@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 972-979
+src/content/docs/mysql/intermediate/connection-pool/01-hikaricp.md
+  h_9324126a55eff3 1-78
+src/content/docs/mysql/intermediate/connection-pool/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/mysql.json
+  h_9324126a55eff3 10,28-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "eba4fb1c05cfef911fcd101d1559dbc91e2c19be",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
