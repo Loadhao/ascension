@@ -1,0 +1,19 @@
+src/data/graphs/distributed.json
+  s_87485c435dd980::t_3781199d956914 46,121
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "0d2b3cc176f1bcac8658e5aa9eeaf64447588021",
+  "prompts": {},
+  "sessions": {
+    "s_87485c435dd980": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a08a87-1738-7062-a50c-7506c47fa334",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
