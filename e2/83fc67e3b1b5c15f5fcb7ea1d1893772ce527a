@@ -1,0 +1,14 @@
+src/content/docs/ai/basic/foundation/07-multi-gpu.md
+  h_9324126a55eff3 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "e283fc67e3b1b5c15f5fcb7ea1d1893772ce527a",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
