@@ -1,7 +1,7 @@
 ---
 title: 多卡并行：数据、张量、流水线与 ZeRO
 description: 显存墙与时间墙、三种并行切分维度、ZeRO 三级分片、3D 并行组合
-level: intermediate
+level: basic
 core: true
 ---
 
