@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 280
+src/content/docs/linux/intermediate/system/08-ssh-tunnel.md
+  h_9324126a55eff3 1-80
+src/data/graphs/linux.json
+  h_9324126a55eff3 19,40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "030091f3ed7f39fe7aec527905279868e948b19d",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
