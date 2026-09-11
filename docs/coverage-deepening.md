@@ -6,10 +6,10 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] mysql/basic/theory/01-normal-forms — 第二题考「三范式逐级消除什么依赖，反范式是读性能的主动取舍」
-- [ ] java/advanced/jvm/07-tuning — 第二题考「容器里 OOM Killer 比 Java OOM 先来：dmesg 找 Killed process，MaxRAMPercentage 调到 75」
-- [ ] network/basic/foundation/03-from-url-to-page — 第二题考「整条链路的排障映射：DNS→TCP→TLS→HTTP 逐层二分」
 - [ ] java/intermediate/concurrent/11-completablefuture — 第二题考「thenApply/thenCompose 串行、allOf 汇聚、异常沿链传播」
+- [ ] js/basic/core/04-this-binding — 第二题考「箭头函数没有自己的 this；call/apply/bind 的差异与使用时机」
+- [ ] docker/advanced/orchestration/01-compose — 第二题考「compose 服务编排：depends_on 只管启动顺序，不等健康就绪」
+- [ ] java/intermediate/concurrent/07-longadder — 第二题考「sum() 弱一致的语义与分段 Cell 的合并时机」
 
 ### b 类：旧题返修
 
@@ -69,6 +69,8 @@
 - 2026-09-10 · 第二十一轮：3 道核心笔记第二题（redis-slowcmd-010 / java-stringpool-115 / docker-layertrap-013，difficulty 4/3/4；thread-model 条目原定角度与并行新题 redis-thread-005 撞车，换考单线程三瓶颈）· 本轮提交主题：feat: 题库深化第二十一轮
 
 - 2026-09-10 · 第二十二轮：3 道核心笔记第二题（kafka-pidboundary-013 / java-ctxloader-115 / net-boundary-015，difficulty 4/4/3；tcp-vs-udp 条目原定角度与 net-udp-004 答案重合，换考边界维度）· 本轮提交主题：feat: 题库深化第二十二轮
+
+- 2026-09-10 · 第二十三轮：3 道核心笔记第二题（mysql-2nf-014 / java-g1knob-118 / net-urldebug-016，difficulty 3/4/3；normal-forms 条目原定角度与 mysql-nf-007 完全撞车，换考 2NF 部分依赖判定与键层级）· 本轮提交主题：feat: 题库深化第二十三轮
 
 ## 经验与规则
 

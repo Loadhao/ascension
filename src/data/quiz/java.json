@@ -2003,6 +2003,23 @@
       ],
       "hint": "SPI 的两个高频追问点在这里交汇：META-INF/services 约定 + 上下文类加载器「反向委派」；实现类必须有 public 无参构造（JDK 9 可用 Provider 静态工厂绕开）。java-spi-015 考加载方式，本题考与类加载的交叉死结。",
       "difficulty": 4
+    },
+    {
+      "id": "java-g1knob-118",
+      "noteId": "java/advanced/jvm/07-tuning",
+      "type": "single",
+      "q": "G1 调优的三个核心旋钮及其使用纪律，按笔记正确的是？",
+      "options": [
+        "MaxGCPauseMillis 是软目标（默认 200ms，别拍 10ms——G1 靠缩 Region 逼近，太激进会积压）、InitiatingHeapOccupancyPercent 是并发标记触发水位（默认 45%，大堆/分配猛时提前调低）、G1ReservePercent 预留空间防晋升失败（to-space exhausted）",
+        "三个参数都是硬上限，设了就必须精确达到",
+        "MaxGCPauseMillis 设得越小性能一定越好",
+        "InitiatingHeapOccupancyPercent 控制 Full GC 后的堆收缩比例"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "「软目标」的含义是尽力而为而非保证；参数三层前缀（-/ -X/-XX）里 -XX 属于不稳定调优参数；多数服务默认 G1 即可，先怀疑代码再拧旋钮。java-tuning-022 考内存账本与容器姿势、java-metasize-114 考 MetaspaceSize 水位，本题考 G1 三旋钮。",
+      "difficulty": 4
     }
   ]
 }
