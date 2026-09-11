@@ -2039,6 +2039,40 @@
       ],
       "hint": "Async 后缀正是用来强制线程隔离的（不带则可能在上一步完成或调用线程就近执行）；生产三铁律——自定义线程池（commonPool 与 parallelStream 同源会互相饿死）、中途不阻塞、ThreadLocal 上下文显式传递。java-cf-020 考 Compose/Combine 分工，本题考异常传播与聚合。",
       "difficulty": 4
+    },
+    {
+      "id": "java-contended-121",
+      "noteId": "java/intermediate/concurrent/07-longadder",
+      "type": "single",
+      "q": "LongAdder 的 Cell 数组为什么要加 @Contended 注解？cells 扩容的上限是什么？",
+      "options": [
+        "Cell 是热点变量——相邻 Cell 落在同一 64B 缓存行会互相失效缓存行（伪共享），注解让每个 Cell 独占缓存行；扩容上限是 CPU 核数，同一时刻真正并行的线程就这么多，再分段只浪费内存",
+        "@Contended 用于压缩对象头省内存；扩容上限是 Integer.MAX_VALUE",
+        "注解的作用是禁止 GC 移动 Cell 数组；扩容没有上限",
+        "扩容上限由 -XX:MaxCellsSize 控制，默认 1024"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "cellsBusy 只锁「初始化与扩容」这类结构变化，写路径仍全 CAS 无锁；CAS 再失败是换槽重试（probe 重新散列）而不是原地自旋。java-longadder-019 判断题考分段与弱一致选型，本题考伪共享填充与扩容上限两个源码级细节。",
+      "difficulty": 4
+    },
+    {
+      "id": "java-arrgrow-120",
+      "noteId": "java/basic/collection/01-arraylist",
+      "type": "single",
+      "q": "关于 ArrayList 的扩容与 Fail-Fast 机制，按笔记正确的是？",
+      "options": [
+        "扩容是 oldCap + (oldCap >> 1) 即 1.5 倍（不够再用 minCapacity 兜底）；fail-fast 靠 modCount 与 expectedModCount 比对，对不上时下一次 next() 抛 CME——它是尽力而为的早期警告，不能当线程安全依据",
+        "扩容固定翻倍，与 HashMap 的做法一致",
+        "无参构造会立即分配 10 个元素的空间",
+        "遍历中其他线程修改集合一定检测不到，CME 只在单线程出现"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "JDK 8 无参构造指向空数组，延迟到首次 add 才扩容到 10；fail-fast 并发场景换 CopyOnWriteArrayList；已知容量时 new ArrayList<>(expectedSize) 能免多次扩容与复制。java-arraylist-039 考 transient 序列化，本题考扩容与 fail-fast。",
+      "difficulty": 3
     }
   ]
 }

@@ -6,10 +6,10 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] java/intermediate/concurrent/07-longadder — 第二题考「sum() 弱一致的语义与分段 Cell 的合并时机」
-- [ ] java/basic/collection/01-arraylist — 第二题考「扩容 1.5 倍的计算与 fail-fast 的 modCount 机制」
-- [ ] js/basic/core/01-js-fundamentals — 第二题考「== 的隐式转换规则：为什么工程上永远用 ===」
 - [ ] kafka/basic/core/01-why-mq — 第二题考「MQ 的代价清单与 At Least Once + 幂等的默认组合拳」
+- [ ] js/intermediate/node/01-node-gc-memory — 第二题考「heapUsed 只是 V8 堆：RSS 涨而堆不涨先怀疑 Buffer 等堆外」
+- [ ] js/basic/modules/01-modules-import — 第二题考「import 是运行时执行且 sys.modules 缓存只跑一次」
+- [ ] elasticsearch/intermediate/usage/03-pagination — 第二题考「search_after 与 scroll 的适用边界：实时翻页 vs 导出」
 
 ### b 类：旧题返修
 
@@ -73,6 +73,8 @@
 - 2026-09-10 · 第二十三轮：3 道核心笔记第二题（mysql-2nf-014 / java-g1knob-118 / net-urldebug-016，difficulty 3/4/3；normal-forms 条目原定角度与 mysql-nf-007 完全撞车，换考 2NF 部分依赖判定与键层级）· 本轮提交主题：feat: 题库深化第二十三轮
 
 - 2026-09-10 · 第二十四轮：3 道核心笔记第二题（java-cfall-119 / js-arrowbind-013 / docker-downvol-013，difficulty 4/3/3；compose 条目原定角度与 docker-compose-007 完全撞车，换考卷与项目生命周期）· 本轮提交主题：feat: 题库深化第二十四轮
+
+- 2026-09-10 · 第二十五轮：3 道核心笔记第二题（java-contended-119 / java-arrgrow-120 / js-implicit-014，difficulty 4/3/3；longadder 条目原定角度与 java-longadder-019 完全撞车，换考伪共享填充与扩容上限）· 本轮提交主题：feat: 题库深化第二十五轮
 
 ## 经验与规则
 
