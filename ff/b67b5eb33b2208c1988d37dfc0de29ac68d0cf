@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1956
+src/content/docs/ai/intermediate/agent/14-agent-observability.md
+  h_9324126a55eff3 1-67
+src/data/graphs/ai.json
+  h_9324126a55eff3 31,94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ffb67b5eb33b2208c1988d37dfc0de29ac68d0cf",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
