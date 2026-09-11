@@ -970,6 +970,14 @@ export default defineConfig({
                         { label: '三大日志与两阶段提交', link: '/mysql/intermediate/transaction-lock/03-redo-undo-binlog/' },
                       ],
                     },
+                    {
+                      label: '连接池',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/mysql/intermediate/connection-pool/' },
+                        { label: '数据库连接池：HikariCP 为什么快', link: '/mysql/intermediate/connection-pool/01-hikaricp/' },
+                      ],
+                    },
                   ],
                 },
                 {
