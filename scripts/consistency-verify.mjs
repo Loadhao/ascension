@@ -40,6 +40,8 @@ const report = {};
   let graphDead = [];
   const dupIds = [];
   const danglingEdges = [];
+  const dupEdges = new Set();
+  const dupEdgesInfo = [];
   const connected = new Set();
   const allNodeIds = [];
   for (const g of readdirSync(ROOT + '/src/data/graphs').filter((f) => f.endsWith('.json'))) {
@@ -56,6 +58,9 @@ const report = {};
     for (const e of d.edges || []) {
       connected.add(`${g}|${e.source}`);
       connected.add(`${g}|${e.target}`);
+      const edgeKey = `${g}|${e.source}->${e.target}|${e.label || ''}`;
+      if (dupEdges.has(edgeKey)) dupEdgesInfo.push(`${g}: 边重复 ${e.source}->${e.target}（${e.label || '无标签'}）`);
+      dupEdges.add(edgeKey);
       if (!ids.has(e.source) || !ids.has(e.target)) {
         danglingEdges.push(`${g}: ${e.source}->${e.target}（端点不存在于节点表）`);
       }
@@ -64,7 +69,7 @@ const report = {};
   report['3.图谱死链'] = { ok: graphDead.length === 0, detail: '25+ 份图谱', bad: graphDead };
   const uncovered = notes.filter((f) => !graphHrefs.has(f.replace(/^src\/content\/docs\//, '').replace(/\.(md|mdx)$/, '')));
   report['4.图谱覆盖率'] = { ok: uncovered.length === 0, detail: `${((notes.length - uncovered.length) / notes.length * 100).toFixed(1)}%`, bad: uncovered };
-  report['9.图谱结构（重复id/悬空边）'] = { ok: dupIds.length + danglingEdges.length === 0, detail: '节点唯一、边端点有效', bad: [...dupIds, ...danglingEdges] };
+  report['9.图谱结构（重复id/悬空边/重复边）'] = { ok: dupIds.length + danglingEdges.length + dupEdgesInfo.length === 0, detail: '节点唯一、边端点有效、边不重复', bad: [...dupIds, ...danglingEdges, ...dupEdgesInfo] };
   var orphanWarnings = allNodeIds.filter((id) => !connected.has(id));
 
   const brokenLinks = [];
