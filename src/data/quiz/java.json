@@ -1986,6 +1986,23 @@
       ],
       "hint": "hash 算一次就缓存在 private int hash 字段——这正是不可变的三大动机之一（常量池前提/线程安全/hash 缓存）；JDK 9 起纯 Latin-1 字符串用 byte[] 紧凑存储省一半内存。",
       "difficulty": 3
+    },
+    {
+      "id": "java-ctxloader-117",
+      "noteId": "java/basic/syntax/10-spi",
+      "type": "single",
+      "q": "JDBC 4.0 起不用再写 Class.forName(\"com.mysql.jdbc.Driver\")，驱动却能自动注册——这背后的 SPI 机制与类加载死结是什么？",
+      "options": [
+        "驱动 jar 里带 META-INF/services/java.sql.Driver，DriverManager（rt.jar，Bootstrap 加载）用 ServiceLoader 扫描 classpath 自动注册——它本「看不见」classpath 驱动类，靠线程上下文类加载器反向委派解死结",
+        "JDK 把常见驱动内置进了 rt.jar，所以不需要注册",
+        "ServiceLoader 由应用类加载器直接加载驱动，与双亲委派无关",
+        "驱动注册靠 JVM 启动参数 -Djdbc.drivers 显式列出，SPI 只是文档说法"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "SPI 的两个高频追问点在这里交汇：META-INF/services 约定 + 上下文类加载器「反向委派」；实现类必须有 public 无参构造（JDK 9 可用 Provider 静态工厂绕开）。java-spi-015 考加载方式，本题考与类加载的交叉死结。",
+      "difficulty": 4
     }
   ]
 }

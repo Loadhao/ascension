@@ -6,10 +6,10 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] kafka/intermediate/core/03-reliability-idempotent — 第二题考「生产端幂等的会话边界：PID 换了序列号就作废，跨会话要事务」
-- [ ] java/basic/syntax/10-spi — 第二题考「SPI 与双亲委派的打破：JDBC DriverManager 用线程上下文类加载器反向加载」
-- [ ] network/basic/tcp/03-tcp-vs-udp — 第二题考「UDP 的定位：实时音视频/QUIC 自建可靠性，代价是丢包乱序自己兜」
 - [ ] mysql/basic/theory/01-normal-forms — 第二题考「三范式逐级消除什么依赖，反范式是读性能的主动取舍」
+- [ ] java/advanced/jvm/07-tuning — 第二题考「容器里 OOM Killer 比 Java OOM 先来：dmesg 找 Killed process，MaxRAMPercentage 调到 75」
+- [ ] network/basic/foundation/03-from-url-to-page — 第二题考「整条链路的排障映射：DNS→TCP→TLS→HTTP 逐层二分」
+- [ ] java/intermediate/concurrent/11-completablefuture — 第二题考「thenApply/thenCompose 串行、allOf 汇聚、异常沿链传播」
 
 ### b 类：旧题返修
 
@@ -67,6 +67,8 @@
 - 2026-09-10 · 第二十轮：3 道核心笔记第二题（rabbit-headblock-007 / net-connid-014 / java-propagation-115，difficulty 4/3/4；http-evolution 与 transaction 两条原定角度与并行新题撞车换角；剔除 jvm/07-tuning 回填残留——java-metasize-114 上轮已完成）· 本轮提交主题：feat: 题库深化第二十轮
 
 - 2026-09-10 · 第二十一轮：3 道核心笔记第二题（redis-slowcmd-010 / java-stringpool-115 / docker-layertrap-013，difficulty 4/3/4；thread-model 条目原定角度与并行新题 redis-thread-005 撞车，换考单线程三瓶颈）· 本轮提交主题：feat: 题库深化第二十一轮
+
+- 2026-09-10 · 第二十二轮：3 道核心笔记第二题（kafka-pidboundary-013 / java-ctxloader-115 / net-boundary-015，difficulty 4/4/3；tcp-vs-udp 条目原定角度与 net-udp-004 答案重合，换考边界维度）· 本轮提交主题：feat: 题库深化第二十二轮
 
 ## 经验与规则
 
