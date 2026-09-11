@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 979
+src/content/docs/mysql/intermediate/connection-pool/02-read-write-split.md
+  h_9324126a55eff3 1-78
+src/data/graphs/mysql.json
+  h_9324126a55eff3 11,30-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ab2f60a5a6e7f80ee14a6de36e75187b1e1aa751",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
