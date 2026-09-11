@@ -1,0 +1,19 @@
+docs/evolution.md
+  s_87485c435dd980::t_5769fb5dda97cc 710-734
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f0bf5e4d21f50bc4648e356af248c877c537c752",
+  "prompts": {},
+  "sessions": {
+    "s_87485c435dd980": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a08a87-1738-7062-a50c-7506c47fa334",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
