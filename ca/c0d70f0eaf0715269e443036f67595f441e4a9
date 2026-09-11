@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1910
+src/content/docs/ai/basic/foundation/07-multi-gpu.md
+  h_9324126a55eff3 1-70
+src/data/graphs/ai.json
+  h_9324126a55eff3 10,64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cac0d70f0eaf0715269e443036f67595f441e4a9",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
