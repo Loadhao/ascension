@@ -1907,6 +1907,7 @@ export default defineConfig({
                         { label: 'LoRA：低成本微调的原理', link: '/ai/basic/foundation/04-lora/' },
                         { label: 'Embedding：语义的向量表示', link: '/ai/basic/foundation/05-embedding/' },
                         { label: 'GPU 与算力：为什么 AI 都长在它上面', link: '/ai/basic/foundation/06-gpu/' },
+                        { label: '多卡并行：数据、张量、流水线与 ZeRO', link: '/ai/basic/foundation/07-multi-gpu/' },
                       ],
                     },
                     {
