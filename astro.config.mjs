@@ -246,6 +246,7 @@ export default defineConfig({
                         { label: '概览', link: '/linux/basic/permission/' },
                         { label: '用户与权限体系', link: '/linux/basic/permission/01-users-permissions/' },
                         { label: '文件不可变属性与 capabilities', link: '/linux/basic/permission/02-immutable-capabilities/' },
+                        { label: 'SSH 密钥与远程访问安全', link: '/linux/basic/permission/03-ssh-access/' },
                       ],
                     },
                     {
