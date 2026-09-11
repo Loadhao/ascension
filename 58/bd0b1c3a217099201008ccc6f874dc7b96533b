@@ -1,0 +1,16 @@
+src/content/docs/distributed/intermediate/case-studies/23-timezone.md
+  h_9324126a55eff3 4
+src/content/docs/distributed/intermediate/case-studies/24-archive.md
+  h_9324126a55eff3 1-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "58bd0b1c3a217099201008ccc6f874dc7b96533b",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
