@@ -6,10 +6,10 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] java/intermediate/concurrent/11-completablefuture — 第二题考「thenApply/thenCompose 串行、allOf 汇聚、异常沿链传播」
-- [ ] js/basic/core/04-this-binding — 第二题考「箭头函数没有自己的 this；call/apply/bind 的差异与使用时机」
-- [ ] docker/advanced/orchestration/01-compose — 第二题考「compose 服务编排：depends_on 只管启动顺序，不等健康就绪」
 - [ ] java/intermediate/concurrent/07-longadder — 第二题考「sum() 弱一致的语义与分段 Cell 的合并时机」
+- [ ] java/basic/collection/01-arraylist — 第二题考「扩容 1.5 倍的计算与 fail-fast 的 modCount 机制」
+- [ ] js/basic/core/01-js-fundamentals — 第二题考「== 的隐式转换规则：为什么工程上永远用 ===」
+- [ ] kafka/basic/core/01-why-mq — 第二题考「MQ 的代价清单与 At Least Once + 幂等的默认组合拳」
 
 ### b 类：旧题返修
 
@@ -71,6 +71,8 @@
 - 2026-09-10 · 第二十二轮：3 道核心笔记第二题（kafka-pidboundary-013 / java-ctxloader-115 / net-boundary-015，difficulty 4/4/3；tcp-vs-udp 条目原定角度与 net-udp-004 答案重合，换考边界维度）· 本轮提交主题：feat: 题库深化第二十二轮
 
 - 2026-09-10 · 第二十三轮：3 道核心笔记第二题（mysql-2nf-014 / java-g1knob-118 / net-urldebug-016，difficulty 3/4/3；normal-forms 条目原定角度与 mysql-nf-007 完全撞车，换考 2NF 部分依赖判定与键层级）· 本轮提交主题：feat: 题库深化第二十三轮
+
+- 2026-09-10 · 第二十四轮：3 道核心笔记第二题（java-cfall-119 / js-arrowbind-013 / docker-downvol-013，difficulty 4/3/3；compose 条目原定角度与 docker-compose-007 完全撞车，换考卷与项目生命周期）· 本轮提交主题：feat: 题库深化第二十四轮
 
 ## 经验与规则
 

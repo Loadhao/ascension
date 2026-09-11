@@ -258,6 +258,23 @@
       ],
       "hint": "层是只读快照、只能追加——这正是「合并 RUN + 层内清理」存在的原因；更彻底的路线是多阶段构建让垃圾根本不进最终镜像；另外 ENV SECRET 也会永久留在层里（docker history 可见），敏感数据要用 BuildKit secrets。docker-opt-008 考瘦身定位与安全基线，本题考「层内清理时机」。",
       "difficulty": 4
+    },
+    {
+      "id": "docker-downvol-014",
+      "noteId": "docker/advanced/orchestration/01-compose",
+      "type": "single",
+      "q": "用 docker compose down 清理环境后，数据库里的数据没了。按笔记原因与避免方式是？",
+      "options": [
+        "down 默认删除容器与网络但保留卷；顶层 volumes 的具名卷只有 down -v 才会删——数据没了多半是加过 -v；项目名默认取目录名，-p 可显式指定隔离多套环境",
+        "down 默认连具名卷一起删，必须改用 docker compose stop 代替",
+        "具名卷的数据存在容器可写层里，容器删了数据自然没了",
+        "down 只停止进程，数据丢失是 PostgreSQL 自身的问题"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "服务名即 DNS 名——Compose 自动建好自定义网络，api 直连 db:5432；排查用 docker compose logs + ps 定位是哪个服务挂了；version 字段在 V2 已废弃新文件直接省略；敏感信息走 .env 或 secrets。docker-compose-007 考 depends_on 语义，本题考卷与项目的生命周期。",
+      "difficulty": 3
     }
   ]
 }

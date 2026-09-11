@@ -2020,6 +2020,25 @@
       ],
       "hint": "「软目标」的含义是尽力而为而非保证；参数三层前缀（-/ -X/-XX）里 -XX 属于不稳定调优参数；多数服务默认 G1 即可，先怀疑代码再拧旋钮。java-tuning-022 考内存账本与容器姿势、java-metasize-114 考 MetaspaceSize 水位，本题考 G1 三旋钮。",
       "difficulty": 4
+    },
+    {
+      "id": "java-cfall-119",
+      "noteId": "java/intermediate/concurrent/11-completablefuture",
+      "type": "multiple",
+      "q": "关于 CompletableFuture 的异常传播与多任务聚合，正确的有？（多选）",
+      "options": [
+        "异常沿链向下游传染，直到被 exceptionally/handle 接住；没人接会被静默吞进未完成状态——链尾不加兜底连日志都没有",
+        "exceptionally 只在异常时生效、换个兜底值链继续；handle 无论成败都回调且能改结果",
+        "allOf 等全员完成但返回值是 Void——结果要自己从各个 CF 里取，任何一个抛异常在 join() 处统一炸出",
+        "thenApplyAsync 的 Async 后缀只是风格偏好，线程归属完全随机无法控制"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "Async 后缀正是用来强制线程隔离的（不带则可能在上一步完成或调用线程就近执行）；生产三铁律——自定义线程池（commonPool 与 parallelStream 同源会互相饿死）、中途不阻塞、ThreadLocal 上下文显式传递。java-cf-020 考 Compose/Combine 分工，本题考异常传播与聚合。",
+      "difficulty": 4
     }
   ]
 }
