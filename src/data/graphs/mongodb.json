@@ -1,26 +1,125 @@
 {
   "nodes": [
-    { "id": "root", "label": "MongoDB", "group": "核心" },
-    { "id": "docmodel", "label": "文档模型与选型", "href": "/mongodb/basic/core/01-document-model/", "group": "基础" },
-    { "id": "replication", "label": "复制集原理", "href": "/mongodb/intermediate/replication/01-replication-set/", "group": "使用进阶" },
-    { "id": "aggregation", "label": "聚合管道", "href": "/mongodb/intermediate/usage/01-aggregation/", "group": "使用进阶" },
-    { "id": "mongopage", "label": "分页与游标", "href": "/mongodb/intermediate/usage/02-pagination/", "group": "使用进阶" },
-    { "id": "ttl", "label": "TTL 索引", "href": "/mongodb/intermediate/usage/03-ttl-index/", "group": "使用进阶" },
-    { "id": "sharding", "label": "分片集群", "href": "/mongodb/advanced/sharding/01-sharding-cluster/", "group": "高可用" },
-    { "id": "capacity", "label": "容量规划", "href": "/mongodb/advanced/operations/01-capacity-planning/", "group": "高可用" },
-    { "id": "performance", "label": "性能优化与启动加载", "href": "/mongodb/advanced/operations/02-performance/", "group": "高可用" }
+    {
+      "id": "root",
+      "label": "MongoDB",
+      "group": "核心"
+    },
+    {
+      "id": "docmodel",
+      "label": "文档模型与选型",
+      "href": "/mongodb/basic/core/01-document-model/",
+      "group": "基础"
+    },
+    {
+      "id": "replication",
+      "label": "复制集原理",
+      "href": "/mongodb/intermediate/replication/01-replication-set/",
+      "group": "使用进阶"
+    },
+    {
+      "id": "aggregation",
+      "label": "聚合管道",
+      "href": "/mongodb/intermediate/usage/01-aggregation/",
+      "group": "使用进阶"
+    },
+    {
+      "id": "mongopage",
+      "label": "分页与游标",
+      "href": "/mongodb/intermediate/usage/02-pagination/",
+      "group": "使用进阶"
+    },
+    {
+      "id": "ttl",
+      "label": "TTL 索引",
+      "href": "/mongodb/intermediate/usage/03-ttl-index/",
+      "group": "使用进阶"
+    },
+    {
+      "id": "readpref",
+      "label": "读偏好与读写关注",
+      "href": "/mongodb/intermediate/usage/04-read-preference/",
+      "group": "使用进阶"
+    },
+    {
+      "id": "sharding",
+      "label": "分片集群",
+      "href": "/mongodb/advanced/sharding/01-sharding-cluster/",
+      "group": "高可用"
+    },
+    {
+      "id": "capacity",
+      "label": "容量规划",
+      "href": "/mongodb/advanced/operations/01-capacity-planning/",
+      "group": "高可用"
+    },
+    {
+      "id": "performance",
+      "label": "性能优化与启动加载",
+      "href": "/mongodb/advanced/operations/02-performance/",
+      "group": "高可用"
+    }
   ],
   "edges": [
-    { "source": "root", "target": "docmodel" },
-    { "source": "docmodel", "target": "replication", "label": "读多写少选型后落地" },
-    { "source": "docmodel", "target": "aggregation", "label": "$lookup 频繁是建模警报" },
-    { "source": "root", "target": "replication" },
-    { "source": "root", "target": "sharding" },
-    { "source": "root", "target": "capacity" },
-    { "source": "root", "target": "performance" },
-    { "source": "replication", "target": "sharding", "label": "每个分片是一个复制集" },
-    { "source": "replication", "target": "capacity", "label": "副本数放大容量" },
-    { "source": "sharding", "target": "capacity", "label": "分片数预估" },
-    { "source": "capacity", "target": "performance", "label": "工作集决定缓存参数" }
+    {
+      "source": "root",
+      "target": "docmodel"
+    },
+    {
+      "source": "docmodel",
+      "target": "replication",
+      "label": "读多写少选型后落地"
+    },
+    {
+      "source": "docmodel",
+      "target": "aggregation",
+      "label": "$lookup 频繁是建模警报"
+    },
+    {
+      "source": "root",
+      "target": "replication"
+    },
+    {
+      "source": "root",
+      "target": "sharding"
+    },
+    {
+      "source": "root",
+      "target": "capacity"
+    },
+    {
+      "source": "root",
+      "target": "performance"
+    },
+    {
+      "source": "replication",
+      "target": "sharding",
+      "label": "每个分片是一个复制集"
+    },
+    {
+      "source": "replication",
+      "target": "capacity",
+      "label": "副本数放大容量"
+    },
+    {
+      "source": "sharding",
+      "target": "capacity",
+      "label": "分片数预估"
+    },
+    {
+      "source": "capacity",
+      "target": "performance",
+      "label": "工作集决定缓存参数"
+    },
+    {
+      "source": "replication",
+      "target": "readpref",
+      "label": "副本怎么用"
+    },
+    {
+      "source": "readpref",
+      "target": "aggregation",
+      "label": "重查询走从库"
+    }
   ]
 }
