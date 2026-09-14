@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1202
+src/content/docs/mongodb/intermediate/usage/07-schema-patterns.md
+  h_9324126a55eff3 1-71
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 56-61,151-155
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "82ba2108ddf15c774208277f3913de743a13113b",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
