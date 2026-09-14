@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1422
+src/content/docs/distributed/intermediate/case-studies/29-leaderboard.md
+  h_9324126a55eff3 1-57
+src/data/graphs/distributed.json
+  h_9324126a55eff3 53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ef78e5b9005d1e6bf2e5a757a6e838b85a4f9c67",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
