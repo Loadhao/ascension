@@ -94,6 +94,12 @@
       "label": "性能优化与启动加载",
       "href": "/mongodb/advanced/operations/02-performance/",
       "group": "高可用"
+    },
+    {
+      "id": "sec",
+      "label": "认证与角色",
+      "href": "/mongodb/intermediate/usage/11-security/",
+      "group": "使用进阶"
     }
   ],
   "edges": [
@@ -186,6 +192,11 @@
       "source": "backup",
       "target": "changestream",
       "label": "PITR 靠 oplog 重放"
+    },
+    {
+      "source": "backup",
+      "target": "sec",
+      "label": "备份也要管权限"
     }
   ]
 }

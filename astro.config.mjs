@@ -1203,6 +1203,7 @@ export default defineConfig({
                         { label: '索引进阶：部分、稀疏与通配符索引', link: '/mongodb/intermediate/usage/08-index-advanced/' },
                         { label: '多键索引：数组的索引', link: '/mongodb/intermediate/usage/09-multikey-index/' },
                         { label: '数据备份与恢复', link: '/mongodb/intermediate/usage/10-backup/' },
+                        { label: '安全：认证与角色', link: '/mongodb/intermediate/usage/11-security/' },
                       ],
                     },
                   ],
