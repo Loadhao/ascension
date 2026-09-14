@@ -54,6 +54,12 @@
       "group": "使用进阶"
     },
     {
+      "id": "backup",
+      "label": "备份与恢复",
+      "href": "/mongodb/intermediate/usage/10-backup/",
+      "group": "使用进阶"
+    },
+    {
       "id": "schemapattern",
       "label": "Schema 设计模式",
       "href": "/mongodb/intermediate/usage/07-schema-patterns/",
@@ -175,6 +181,11 @@
       "source": "idxadv",
       "target": "multikey",
       "label": "数组字段的索引"
+    },
+    {
+      "source": "backup",
+      "target": "changestream",
+      "label": "PITR 靠 oplog 重放"
     }
   ]
 }

@@ -1202,6 +1202,7 @@ export default defineConfig({
                         { label: 'Schema 设计模式：子集、扩展引用与桶', link: '/mongodb/intermediate/usage/07-schema-patterns/' },
                         { label: '索引进阶：部分、稀疏与通配符索引', link: '/mongodb/intermediate/usage/08-index-advanced/' },
                         { label: '多键索引：数组的索引', link: '/mongodb/intermediate/usage/09-multikey-index/' },
+                        { label: '数据备份与恢复', link: '/mongodb/intermediate/usage/10-backup/' },
                       ],
                     },
                   ],
