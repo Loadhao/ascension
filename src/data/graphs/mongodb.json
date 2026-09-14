@@ -66,6 +66,12 @@
       "group": "使用进阶"
     },
     {
+      "id": "multikey",
+      "label": "多键索引",
+      "href": "/mongodb/intermediate/usage/09-multikey-index/",
+      "group": "使用进阶"
+    },
+    {
       "id": "sharding",
       "label": "分片集群",
       "href": "/mongodb/advanced/sharding/01-sharding-cluster/",
@@ -164,6 +170,11 @@
       "source": "aggregation",
       "target": "idxadv",
       "label": "聚合走索引"
+    },
+    {
+      "source": "idxadv",
+      "target": "multikey",
+      "label": "数组字段的索引"
     }
   ]
 }
