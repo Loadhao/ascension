@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1402
+src/content/docs/distributed/intermediate/case-studies/27-risk-control.md
+  h_9324126a55eff3 1-77
+src/data/graphs/distributed.json
+  h_9324126a55eff3 51,110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ee02c9cf242c49dfabfd85e1f68e114934f0bf48",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
