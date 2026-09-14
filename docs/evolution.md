@@ -894,6 +894,15 @@
 - 新证据与经验：①**环境故障处置实录**：a) pull 无法 ff（本地与远端各有 1 提交）→ git rebase --autostash；b) autostash pop 后 distributed.json UU 冲突（两边都加了 archive 相关边）→ 三边全保留合并；c) **node/pnpm 从 PATH 消失**（nvm 路径未加载）→ 每命令显式 export PATH 恢复——三条全部按预案处置，零损失；②nvm 环境教训：Bash 非交互 shell 不加载 nvm，后续每条命令需 PATH 前缀。
 - 下一轮入口：候选池——①场景题/ai 线继续；②环境若稳定可建议用户把 nvm 初始化写进 shell profile。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 99 轮（2026-09-08，第三十四次启动，内容补充模式）
+
+- 选择：多租户架构：SaaS 的隔离与共享（case-studies 第 26 篇）——多租户 5 篇分散、SaaS 零覆盖；三种隔离方案光谱 + 强制租户过滤 + 噪声邻居治理，与数据权限篇（行级过滤同构）互链。
+- 交付：`26-multi-tenant.md`（三方案对比表与混合策略、拦截器强制租户过滤、tenant_id 索引纪律、噪声邻居三件治理、迁移路径）+ 侧边栏注册 + 图谱 multitenant 节点与 1 条边（dataperm→multitenant"行级过滤同构"）。
+- 验证：五连验证全绿（build 631 页）；提交 1106f81 已推送（本篇纯表格）。**过程小错即改：文件编号 25 撞 CDC 篇，mv 修正为 26。**
+- 结论：补功能。
+- 新证据与经验：①case-studies 系列到 26 篇，SaaS/电商/UGC/数据四大场景链齐备；②文件编号撞车自查（ls 目录比 grep 更快发现）。
+- 下一轮入口：候选池——①场景题 grep：分布式文件同步/消息幂等细化；②ai 线间歇（llm 12/agent 15 已厚）；③linux 线歇。每轮开工先同步+定界+体检基线+PATH 前缀。
+
 ### 第 98 轮（2026-09-08，第三十四次启动，内容补充模式）
 
 - 选择：大促保障：从压测到复盘（distributed/advanced/availability 第 7 篇）——大促/预案/值班分散提及无体系化篇；混沌/灰度/限流/可观测/Feature Flag 各篇的大促场景总装。
