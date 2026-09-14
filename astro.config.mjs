@@ -1188,6 +1188,14 @@ export default defineConfig({
                         { label: '复制集原理', link: '/mongodb/intermediate/replication/01-replication-set/' },
                       ],
                     },
+                    {
+                      label: '聚合与查询进阶',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/mongodb/intermediate/usage/' },
+                        { label: '聚合管道：从 $match 到 $lookup', link: '/mongodb/intermediate/usage/01-aggregation/' },
+                      ],
+                    },
                   ],
                 },
                 {
