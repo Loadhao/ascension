@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 2013
+src/content/docs/ai/intermediate/agent/16-tool-design.md
+  h_9324126a55eff3 1-71
+src/data/graphs/ai.json
+  h_9324126a55eff3 38,87-88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5f717d4354720c5af5b08618fe557fd2a63a04e6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
