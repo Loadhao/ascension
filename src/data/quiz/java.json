@@ -2073,6 +2073,25 @@
       ],
       "hint": "JDK 8 无参构造指向空数组，延迟到首次 add 才扩容到 10；fail-fast 并发场景换 CopyOnWriteArrayList；已知容量时 new ArrayList<>(expectedSize) 能免多次扩容与复制。java-arraylist-039 考 transient 序列化，本题考扩容与 fail-fast。",
       "difficulty": 3
+    },
+    {
+      "id": "java-biasedremove-122",
+      "noteId": "java/intermediate/concurrent/04-synchronized",
+      "type": "multiple",
+      "q": "关于偏向锁的撤销与 JIT 的锁优化，按笔记正确的有？（多选）",
+      "options": [
+        "偏向锁被第二个线程竞争时才撤销，要等全局安全点检查原线程状态——撤销的 STW 成本让 JDK 15 把它移除（现代应用普遍多线程，得不偿失）",
+        "锁粗化：StringBuffer 连续 append 各自带锁，JIT 合并成一个大同步块",
+        "锁消除：逃逸分析证明 StringBuffer 局部变量不逃逸，锁没有竞争者，直接删锁",
+        "锁一旦升级为重量级，后续竞争会降级回轻量级锁自旋"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "锁只能升级不能降级（实际极少触发）；wait/notify 必须配 synchronized——wait 会释放锁进 WaitSet（对比 sleep 抱着锁睡）。java-sync-003 考升级顺序，本题考撤销成本与 JIT 两件套。",
+      "difficulty": 4
     }
   ]
 }

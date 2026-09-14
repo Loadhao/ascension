@@ -270,6 +270,23 @@
       ],
       "hint": "老生代才用标记清除/标记整理（碎片化严重才整理）；全量标记数百毫秒停顿靠增量标记 + 并发标记摊薄。js-gc-009 考 heapUsed 与 RSS 的边界，本题考分代回收机制本体。",
       "difficulty": 4
+    },
+    {
+      "id": "js-preventstop-016",
+      "noteId": "js/intermediate/web/03-dom-events",
+      "type": "single",
+      "q": "点击弹窗内的链接：既要阻止跳转、又不让外层 document 的关闭监听器收到这个事件——两个诉求分别用什么？passive 又是干什么的？",
+      "options": [
+        "preventDefault 管默认行为（不跳转）、stopPropagation 管传播（外层收不到）——两者正交互不影响；passive 用于滚动类监听，承诺不调 preventDefault 换浏览器立即滚动不掉帧",
+        "两个诉求都用 preventDefault：它同时阻止跳转和事件传播",
+        "stopPropagation 会顺带取消默认行为，只需调它一个",
+        "passive 用于让事件不冒泡，与滚动性能无关"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "stopImmediatePropagation 更进一步——连同一元素上后注册的监听器也不执行；委托用 closest 向上找、兼容子层嵌套。js-event-008 多选考事件流与委托原理，本题考两个 API 的正交分工与 passive。",
+      "difficulty": 3
     }
   ]
 }
