@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1204
+src/content/docs/mongodb/intermediate/usage/09-multikey-index.md
+  h_9324126a55eff3 1-65
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 68-73,173-177
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "88a8f7d930349f73e150f9df473d802efd6388c8",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
