@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1201
+src/content/docs/mongodb/intermediate/usage/06-change-streams.md
+  h_9324126a55eff3 1-71
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 50-55,140-144
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f9f78ba13768f02dc5a32e2b9186fc4c27c512a6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
