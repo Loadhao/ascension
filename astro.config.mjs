@@ -1418,6 +1418,7 @@ export default defineConfig({
                         { label: '数据订阅与 CDC：让数据库变更自己广播', link: '/distributed/intermediate/case-studies/25-cdc/' },
                         { label: '多租户架构：SaaS 的隔离与共享', link: '/distributed/intermediate/case-studies/26-multi-tenant/' },
                         { label: '风控系统：从名单到实时决策', link: '/distributed/intermediate/case-studies/27-risk-control/' },
+                        { label: '售后退款：逆向流程的状态机与资金一致', link: '/distributed/intermediate/case-studies/28-refund/' },
                       ],
                     },
                   ],
