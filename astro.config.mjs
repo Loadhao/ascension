@@ -1198,6 +1198,7 @@ export default defineConfig({
                         { label: 'TTL 索引与数据过期', link: '/mongodb/intermediate/usage/03-ttl-index/' },
                         { label: '读偏好与读写关注', link: '/mongodb/intermediate/usage/04-read-preference/' },
                         { label: '多文档事务：语法、前提与正确姿势', link: '/mongodb/intermediate/usage/05-transactions/' },
+                        { label: 'Change Streams：原生变更监听', link: '/mongodb/intermediate/usage/06-change-streams/' },
                       ],
                     },
                   ],

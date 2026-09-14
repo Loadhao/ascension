@@ -48,6 +48,12 @@
       "group": "使用进阶"
     },
     {
+      "id": "changestream",
+      "label": "Change Streams",
+      "href": "/mongodb/intermediate/usage/06-change-streams/",
+      "group": "使用进阶"
+    },
+    {
       "id": "sharding",
       "label": "分片集群",
       "href": "/mongodb/advanced/sharding/01-sharding-cluster/",
@@ -131,6 +137,11 @@
       "source": "readpref",
       "target": "txn",
       "label": "事务的前提组合"
+    },
+    {
+      "source": "txn",
+      "target": "changestream",
+      "label": "提交后事件可见"
     }
   ]
 }
