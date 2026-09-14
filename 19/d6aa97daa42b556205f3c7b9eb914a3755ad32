@@ -1,0 +1,14 @@
+docs/evolution.md
+  h_9324126a55eff3 275-277
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "19d6aa97daa42b556205f3c7b9eb914a3755ad32",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
