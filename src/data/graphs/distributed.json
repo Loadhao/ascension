@@ -124,6 +124,7 @@
     { "source": "fflag", "target": "tz", "label": "时间也讲纪律" },
     { "source": "sharding", "target": "archive", "label": "容量与时间正交两刀" },
     { "source": "scheduler", "target": "archive", "label": "定时归档的载体" },
+    { "source": "tz", "target": "archive", "label": "时间维度的拆分" },
     { "source": "tracing", "target": "gray", "label": "透传同机制" },
     { "source": "ha", "target": "chaos", "label": "预案的验证场" },
     { "source": "ha", "target": "cell", "label": "多活的终态" },
