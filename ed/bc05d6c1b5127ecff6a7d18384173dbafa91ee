@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1198
+src/content/docs/mongodb/intermediate/usage/03-ttl-index.md
+  h_9324126a55eff3 1-65
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "edbc05d6c1b5127ecff6a7d18384173dbafa91ee",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
