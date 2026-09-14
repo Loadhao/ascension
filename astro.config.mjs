@@ -1397,6 +1397,7 @@ export default defineConfig({
                         { label: '功能开关：Feature Flag 的设计与治理', link: '/distributed/intermediate/case-studies/22-feature-flag/' },
                         { label: '时区处理：存储、传输与展示的纪律', link: '/distributed/intermediate/case-studies/23-timezone/' },
                         { label: '数据归档：冷热分离的完整设计', link: '/distributed/intermediate/case-studies/24-archive/' },
+                        { label: '数据订阅与 CDC：让数据库变更自己广播', link: '/distributed/intermediate/case-studies/25-cdc/' },
                       ],
                     },
                   ],
