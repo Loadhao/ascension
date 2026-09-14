@@ -4,6 +4,41 @@ import react from '@astrojs/react';
 import starlight from '@astrojs/starlight';
 import { unified } from '@astrojs/markdown-remark';
 import rehypeMermaid from 'rehype-mermaid';
+import { chromium } from 'playwright';
+
+// —— mermaid 构建渲染的内存治理 ——
+// Vite 并发转换多个含 mermaid 的 MDX 时，rehype-mermaid 为每个文件各启停
+// chromium 并开独立渲染页，进程叠加可瞬间吃掉 2GB+；在 4GB cgroup 构建机上
+// 与 node 堆相加必然 OOM。两手治理：
+//   1) 自定义 browserType（鸭子类型实现 playwright BrowserType.launch）：
+//      整场构建复用同一 chromium 实例，context 按批开关，浏览器进程在
+//      node 退出时由 playwright 统一回收；
+//   2) 串行化 rehype 调用：promise 链排队，任意时刻只有 1 个渲染页。
+const sharedChromium = (() => {
+  let browserPromise;
+  return {
+    launch(launchOptions) {
+      browserPromise ??= chromium.launch(launchOptions);
+      return browserPromise.then((browser) => ({
+        newContext: (...args) => browser.newContext(...args),
+        close: () => {}, // 假关闭：跨批次复用，进程随构建结束回收
+      }));
+    },
+  };
+})();
+
+function rehypeMermaidSerialized(options) {
+  const inner = rehypeMermaid(options);
+  let queue = Promise.resolve();
+  return (ast, file) => {
+    const run = queue.then(() => inner(ast, file));
+    queue = run.then(
+      () => {},
+      () => {}
+    );
+    return run;
+  };
+}
 
 // Mermaid 图表风格：暖琥珀低饱和；这里写入亮色基准值，
 // 暗色由 custom.css 的 CSS 变量覆盖（跟随 Starlight 主题切换）
@@ -1361,6 +1396,7 @@ export default defineConfig({
                         { label: '排队系统：把洪峰变成秩序', link: '/distributed/intermediate/case-studies/21-queue/' },
                         { label: '功能开关：Feature Flag 的设计与治理', link: '/distributed/intermediate/case-studies/22-feature-flag/' },
                         { label: '时区处理：存储、传输与展示的纪律', link: '/distributed/intermediate/case-studies/23-timezone/' },
+                        { label: '数据归档：冷热分离的完整设计', link: '/distributed/intermediate/case-studies/24-archive/' },
                       ],
                     },
                   ],
@@ -2244,7 +2280,16 @@ export default defineConfig({
     processor: unified({
       remarkPlugins: [remarkPrefixBase(SITE_BASE)],
       rehypePlugins: [
-        [rehypeMermaid, { mermaidConfig: mermaidStyle }],
+        [
+          rehypeMermaidSerialized,
+          {
+            browserType: sharedChromium,
+            launchOptions: {
+              args: ['--disable-gpu', '--disable-dev-shm-usage'],
+            },
+            mermaidConfig: mermaidStyle,
+          },
+        ],
         rehypeExternalNewTab('https://loadhao.github.io'),
       ],
     }),
