@@ -683,6 +683,23 @@
       ],
       "hint": "正因为 import 是执行：模块级初始化（连接池/注册表）天然单例、模块顶层不要放有副作用的长逻辑；循环导入其次的解法是函数体内延迟导入。py-forelse-031 等题考语法，本题考 import 的运行时语义。",
       "difficulty": 3
+    },
+    {
+      "id": "py-closurebind-039",
+      "noteId": "python/basic/functions/01-functions-closures",
+      "type": "single",
+      "q": "[lambda: i for i in range(3)] 逐个调用输出 [2, 2, 2]，而 [lambda i=i: i ...] 输出 [0, 1, 2]。按笔记的解释与修复本质是？",
+      "options": [
+        "闭包捕获的是变量本身（同一个 cell）而非当时的值，循环结束时它停在终值 2；lambda i=i 让默认值在定义时求值，把当时的值固化进函数",
+        "lambda 在列表推导里每次都创建新变量 i，[2,2,2] 是解释器 bug",
+        "两种写法完全等价，输出差异受 GIL 调度影响",
+        "修复靠 nonlocal 把 i 逐个声明为局部变量"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "修复的本质是「把变量地址换成定义时的值快照」；nonlocal 是改写 enclosing 层变量的钥匙（LEGB 查找链 Local→Enclosing→Global→Built-in，找到即停），与固定值无关。py-default-005 考可变默认值（同一坑的参数形态），本题考闭包延迟绑定。",
+      "difficulty": 4
     }
   ]
 }

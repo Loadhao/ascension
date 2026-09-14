@@ -2092,6 +2092,25 @@
       ],
       "hint": "锁只能升级不能降级（实际极少触发）；wait/notify 必须配 synchronized——wait 会释放锁进 WaitSet（对比 sleep 抱着锁睡）。java-sync-003 考升级顺序，本题考撤销成本与 JIT 两件套。",
       "difficulty": 4
+    },
+    {
+      "id": "java-reflection-123",
+      "noteId": "java/basic/syntax/06-reflection-annotation",
+      "type": "multiple",
+      "q": "关于反射 API 的细节与 Retention 三档，正确的有？（多选）",
+      "options": [
+        "getMethod 只取公有方法（含继承），getDeclaredMethod 能拿私有但不含继承",
+        "Class.forName 会触发类初始化执行 static 块，类字面量（String.class）不会",
+        "Retention 三档：SOURCE 编译即丢弃（@Override）、CLASS 进 class 文件但运行期不可见、RUNTIME 反射可读——Spring/JUnit/MyBatis 依赖 RUNTIME",
+        "JDK 9 模块化后 setAccessible 对任何模块的私有成员都能用，不再有限制"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——对未 opens 的模块调 setAccessible 抛 InaccessibleObjectException，需要 --add-opens 放行；高频反射先缓存 Method 对象，追求极致换 MethodHandle。java-proxy-046 考 JDK/CGLIB 代理，本题考反射 API 与注解保留期。",
+      "difficulty": 4
     }
   ]
 }

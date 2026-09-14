@@ -186,6 +186,23 @@
       ],
       "hint": "from+size 深翻页线性劣化（第 99000 页 117ms，search_after 全程 7~8ms）；scrollId 是历史快照、排序键必须全局唯一（通常加 _id 兜底）。es-page-004 考 from+size 爆炸原因，本题考四种方案的边界选择。",
       "difficulty": 4
+    },
+    {
+      "id": "es-analyzer-009",
+      "noteId": "elasticsearch/basic/core/01-inverted-index",
+      "type": "single",
+      "q": "用 match 查询搜「Elasticsearch 实战」却搜不到明明存在的文档，按笔记最可能的原因与 Analyzer 的正确理解是？",
+      "options": [
+        "查询词与索引词必须用同一个分析器处理才能匹配——Analyzer 三步（字符过滤→分词→词过滤），用错分词器是「搜不到」的高发原因；text 会分词、keyword 不分词，选错类型同样搜不到",
+        "倒排索引只记录文档 ID 不记录词项，查询需要全表扫描",
+        "match 查询不做分词，必须手工拆词后再用 term 查询",
+        "文档写入后立即可搜，不存在近实时窗口"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Analyzer 三步：字符过滤 → 分词（Tokenizer）→ 词过滤（大小写/停用词/词干化）；text 支持 match 全文、keyword 适合 term/过滤/排序/聚合；写入要等 refresh 到 segment 才可检索。es-invert-001 考倒排 vs B+树，本题考分析器与类型选择。",
+      "difficulty": 3
     }
   ]
 }

@@ -6,7 +6,6 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] python/basic/modules/02-packages-layout — 第二题考「包内相对导入 vs 跨包绝对导入；跑脚本破坏相对导入时用 python -m」
 
 ### b 类：旧题返修
 
@@ -78,6 +77,8 @@
 - 2026-09-10 · 第二十七轮：3 道核心笔记第二题（es-scrollafter-008 / docker-exec-013 / redis-lua-015，difficulty 4/3/3）；补记第二十六轮事故——未推送的 81a54ac 被并行会话历史整理抹除，内容已随其进入远端并核验完整 · 本轮提交主题：feat: 题库深化第二十七轮
 
 - 2026-09-10 · 第二十八轮：3 道核心笔记第二题（java-biasedremove-121 / js-preventstop-015 / mysql-replfix-015，difficulty 4/3/3；dom-events 条目与 js-event-008 主题重合，换考 preventDefault/stopPropagation 正交与 passive）· 本轮提交主题：feat: 题库深化第二十八轮
+
+- 2026-09-10 · 第二十九轮：3 道核心笔记第二题（py-closurebind-039 / es-analyzer-009 / java-reflection-123，difficulty 4/3/4）；packages-layout 条目弃置——并行会话 py-pkg-019 已完全覆盖 · 本轮提交主题：feat: 题库深化第二十九轮
 
 ## 经验与规则
 
