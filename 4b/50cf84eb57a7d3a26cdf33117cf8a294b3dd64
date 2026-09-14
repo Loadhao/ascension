@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1197
+src/content/docs/mongodb/intermediate/usage/02-pagination.md
+  h_9324126a55eff3 1-62
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "4b50cf84eb57a7d3a26cdf33117cf8a294b3dd64",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
