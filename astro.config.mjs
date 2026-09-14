@@ -2000,6 +2000,7 @@ export default defineConfig({
                         { label: 'LLM 网关：多模型路由与统一管控', link: '/ai/intermediate/llm/10-gateway/' },
                         { label: 'LLM 应用架构：设计一个 ChatGPT 类应用', link: '/ai/intermediate/llm/11-architecture/' },
                         { label: '幻觉：为什么 LLM 会一本正经地胡说', link: '/ai/intermediate/llm/12-hallucination/' },
+                        { label: '语义缓存：相似问题直接返回', link: '/ai/intermediate/llm/13-semantic-cache/' },
                       ],
                     },
                     {

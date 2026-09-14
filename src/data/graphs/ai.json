@@ -1,128 +1,674 @@
 {
   "nodes": [
-    { "id": "root", "label": "AI", "group": "核心" },
-    { "id": "ml", "label": "机器学习基础", "href": "/ai/basic/foundation/01-machine-learning/", "group": "基础" },
-    { "id": "dl", "label": "深度学习", "href": "/ai/basic/foundation/02-deep-learning/", "group": "基础" },
-    { "id": "transformer", "label": "Transformer", "href": "/ai/basic/foundation/03-transformer/", "group": "基础" },
-    { "id": "lora", "label": "LoRA 微调", "href": "/ai/basic/foundation/04-lora/", "group": "基础" },
-    { "id": "emb", "label": "Embedding", "href": "/ai/basic/foundation/05-embedding/", "group": "基础" },
-    { "id": "gpu", "label": "GPU 与算力", "href": "/ai/basic/foundation/06-gpu/", "group": "基础" },
-    { "id": "multigpu", "label": "多卡并行", "href": "/ai/basic/foundation/07-multi-gpu/", "group": "基础" },
-    { "id": "tokenizer", "label": "Tokenizer", "href": "/ai/basic/foundation/08-tokenizer/", "group": "基础" },
-    { "id": "llm", "label": "大模型 LLM", "href": "/ai/intermediate/llm/01-llm/", "group": "应用" },
-    { "id": "prompt", "label": "提示工程", "href": "/ai/intermediate/llm/02-prompt-engineering/", "group": "应用" },
-    { "id": "adapter", "label": "落地选型", "href": "/ai/intermediate/llm/03-adapter-selection/", "group": "应用" },
-    { "id": "inference", "label": "推理参数", "href": "/ai/intermediate/llm/04-inference-params/", "group": "应用" },
-    { "id": "tokencost", "label": "Token 成本", "href": "/ai/intermediate/llm/05-token-cost/", "group": "应用" },
-    { "id": "vllm", "label": "vLLM 推理服务", "href": "/ai/intermediate/llm/06-vllm/", "group": "应用" },
-    { "id": "quant", "label": "模型量化", "href": "/ai/intermediate/llm/07-quantization/", "group": "应用" },
-    { "id": "multimodal", "label": "多模态 LLM", "href": "/ai/intermediate/llm/08-multimodal/", "group": "应用" },
-    { "id": "voice", "label": "语音交互", "href": "/ai/intermediate/llm/09-voice/", "group": "应用" },
-    { "id": "gw", "label": "LLM 网关", "href": "/ai/intermediate/llm/10-gateway/", "group": "应用" },
-    { "id": "arch", "label": "应用总装架构", "href": "/ai/intermediate/llm/11-architecture/", "group": "应用" },
-    { "id": "halluc", "label": "幻觉治理", "href": "/ai/intermediate/llm/12-hallucination/", "group": "应用" },
-    { "id": "agent", "label": "Agent 智能体", "href": "/ai/basic/agent/", "group": "应用" },
-    { "id": "agentloop", "label": "Agent Loop", "href": "/ai/basic/agent/01-agent-loop/", "group": "应用" },
-    { "id": "tools", "label": "工具调用", "href": "/ai/basic/agent/02-tool-use/", "group": "应用" },
-    { "id": "permission", "label": "权限闸门", "href": "/ai/basic/agent/03-permission/", "group": "应用" },
-    { "id": "hooks", "label": "钩子机制", "href": "/ai/basic/agent/04-hooks/", "group": "应用" },
-    { "id": "guardrails", "label": "Agent 护栏", "href": "/ai/basic/agent/05-guardrails/", "group": "应用" },
-    { "id": "planning", "label": "任务规划", "href": "/ai/intermediate/agent/01-todo-planning/", "group": "应用" },
-    { "id": "subagent", "label": "子代理 Subagent", "href": "/ai/intermediate/agent/09-subagent/", "group": "应用" },
-    { "id": "ageval", "label": "应用评估", "href": "/ai/intermediate/agent/10-agent-evaluation/", "group": "应用" },
-    { "id": "ragadv", "label": "RAG 进阶", "href": "/ai/intermediate/agent/11-rag-advanced/", "group": "应用" },
-    { "id": "structout", "label": "结构化输出", "href": "/ai/intermediate/agent/12-structured-output/", "group": "应用" },
-    { "id": "compuse", "label": "视觉 Agent", "href": "/ai/intermediate/agent/13-computer-use/", "group": "应用" },
-    { "id": "agentobs", "label": "Agent 可观测性", "href": "/ai/intermediate/agent/14-agent-observability/", "group": "应用" },
-    { "id": "kb", "label": "企业知识库", "href": "/ai/intermediate/agent/15-knowledge-base/", "group": "应用" },
-    { "id": "tooldesign", "label": "工具集设计", "href": "/ai/intermediate/agent/16-tool-design/", "group": "应用" },
-    { "id": "sysprompt", "label": "提示组装", "href": "/ai/intermediate/agent/02-system-prompt/", "group": "应用" },
-    { "id": "context", "label": "上下文工程", "href": "/ai/intermediate/agent/03-context-engineering/", "group": "应用" },
-    { "id": "memory", "label": "记忆系统", "href": "/ai/intermediate/agent/04-memory/", "group": "应用" },
-    { "id": "skill", "label": "技能加载", "href": "/ai/intermediate/agent/05-skill-loading/", "group": "应用" },
-    { "id": "rag", "label": "RAG 检索增强", "href": "/ai/intermediate/agent/06-rag/", "group": "应用" },
-    { "id": "recovery", "label": "错误恢复", "href": "/ai/intermediate/agent/07-error-recovery/", "group": "应用" },
-    { "id": "mcp", "label": "MCP 协议", "href": "/ai/intermediate/agent/08-mcp/", "group": "应用" },
-    { "id": "multiagent", "label": "多 Agent 协作", "href": "/ai/advanced/agent/01-multi-agent/", "group": "应用" },
-    { "id": "tasksystem", "label": "任务系统", "href": "/ai/advanced/agent/02-task-system/", "group": "应用" },
-    { "id": "background", "label": "后台任务", "href": "/ai/advanced/agent/03-background-tasks/", "group": "应用" },
-    { "id": "cron", "label": "定时调度", "href": "/ai/advanced/agent/04-cron-scheduler/", "group": "应用" },
-    { "id": "teams", "label": "Agent 团队", "href": "/ai/advanced/agent/05-agent-teams/", "group": "应用" },
-    { "id": "protocols", "label": "团队协议", "href": "/ai/advanced/agent/06-team-protocols/", "group": "应用" },
-    { "id": "autonomous", "label": "自主智能体", "href": "/ai/advanced/agent/07-autonomous-agents/", "group": "应用" },
-    { "id": "worktree", "label": "Worktree 隔离", "href": "/ai/advanced/agent/08-worktree-isolation/", "group": "应用" },
-    { "id": "comprehensive", "label": "综合 Harness", "href": "/ai/advanced/agent/09-comprehensive-agent/", "group": "应用" },
-    { "id": "frameworks", "label": "Agent 框架", "href": "/ai/advanced/agent/10-agent-frameworks/", "group": "应用" },
-    { "id": "openclaw", "label": "OpenClaw", "href": "/ai/advanced/agent/11-openclaw/", "group": "应用" },
-    { "id": "eval", "label": "评测与对齐", "href": "/ai/advanced/eval/01-evaluation-align/", "group": "应用" }
+    {
+      "id": "root",
+      "label": "AI",
+      "group": "核心"
+    },
+    {
+      "id": "ml",
+      "label": "机器学习基础",
+      "href": "/ai/basic/foundation/01-machine-learning/",
+      "group": "基础"
+    },
+    {
+      "id": "dl",
+      "label": "深度学习",
+      "href": "/ai/basic/foundation/02-deep-learning/",
+      "group": "基础"
+    },
+    {
+      "id": "transformer",
+      "label": "Transformer",
+      "href": "/ai/basic/foundation/03-transformer/",
+      "group": "基础"
+    },
+    {
+      "id": "lora",
+      "label": "LoRA 微调",
+      "href": "/ai/basic/foundation/04-lora/",
+      "group": "基础"
+    },
+    {
+      "id": "emb",
+      "label": "Embedding",
+      "href": "/ai/basic/foundation/05-embedding/",
+      "group": "基础"
+    },
+    {
+      "id": "gpu",
+      "label": "GPU 与算力",
+      "href": "/ai/basic/foundation/06-gpu/",
+      "group": "基础"
+    },
+    {
+      "id": "multigpu",
+      "label": "多卡并行",
+      "href": "/ai/basic/foundation/07-multi-gpu/",
+      "group": "基础"
+    },
+    {
+      "id": "tokenizer",
+      "label": "Tokenizer",
+      "href": "/ai/basic/foundation/08-tokenizer/",
+      "group": "基础"
+    },
+    {
+      "id": "llm",
+      "label": "大模型 LLM",
+      "href": "/ai/intermediate/llm/01-llm/",
+      "group": "应用"
+    },
+    {
+      "id": "prompt",
+      "label": "提示工程",
+      "href": "/ai/intermediate/llm/02-prompt-engineering/",
+      "group": "应用"
+    },
+    {
+      "id": "adapter",
+      "label": "落地选型",
+      "href": "/ai/intermediate/llm/03-adapter-selection/",
+      "group": "应用"
+    },
+    {
+      "id": "inference",
+      "label": "推理参数",
+      "href": "/ai/intermediate/llm/04-inference-params/",
+      "group": "应用"
+    },
+    {
+      "id": "tokencost",
+      "label": "Token 成本",
+      "href": "/ai/intermediate/llm/05-token-cost/",
+      "group": "应用"
+    },
+    {
+      "id": "vllm",
+      "label": "vLLM 推理服务",
+      "href": "/ai/intermediate/llm/06-vllm/",
+      "group": "应用"
+    },
+    {
+      "id": "quant",
+      "label": "模型量化",
+      "href": "/ai/intermediate/llm/07-quantization/",
+      "group": "应用"
+    },
+    {
+      "id": "multimodal",
+      "label": "多模态 LLM",
+      "href": "/ai/intermediate/llm/08-multimodal/",
+      "group": "应用"
+    },
+    {
+      "id": "voice",
+      "label": "语音交互",
+      "href": "/ai/intermediate/llm/09-voice/",
+      "group": "应用"
+    },
+    {
+      "id": "gw",
+      "label": "LLM 网关",
+      "href": "/ai/intermediate/llm/10-gateway/",
+      "group": "应用"
+    },
+    {
+      "id": "arch",
+      "label": "应用总装架构",
+      "href": "/ai/intermediate/llm/11-architecture/",
+      "group": "应用"
+    },
+    {
+      "id": "halluc",
+      "label": "幻觉治理",
+      "href": "/ai/intermediate/llm/12-hallucination/",
+      "group": "应用"
+    },
+    {
+      "id": "semcache",
+      "label": "语义缓存",
+      "href": "/ai/intermediate/llm/13-semantic-cache/",
+      "group": "应用"
+    },
+    {
+      "id": "agent",
+      "label": "Agent 智能体",
+      "href": "/ai/basic/agent/",
+      "group": "应用"
+    },
+    {
+      "id": "agentloop",
+      "label": "Agent Loop",
+      "href": "/ai/basic/agent/01-agent-loop/",
+      "group": "应用"
+    },
+    {
+      "id": "tools",
+      "label": "工具调用",
+      "href": "/ai/basic/agent/02-tool-use/",
+      "group": "应用"
+    },
+    {
+      "id": "permission",
+      "label": "权限闸门",
+      "href": "/ai/basic/agent/03-permission/",
+      "group": "应用"
+    },
+    {
+      "id": "hooks",
+      "label": "钩子机制",
+      "href": "/ai/basic/agent/04-hooks/",
+      "group": "应用"
+    },
+    {
+      "id": "guardrails",
+      "label": "Agent 护栏",
+      "href": "/ai/basic/agent/05-guardrails/",
+      "group": "应用"
+    },
+    {
+      "id": "planning",
+      "label": "任务规划",
+      "href": "/ai/intermediate/agent/01-todo-planning/",
+      "group": "应用"
+    },
+    {
+      "id": "subagent",
+      "label": "子代理 Subagent",
+      "href": "/ai/intermediate/agent/09-subagent/",
+      "group": "应用"
+    },
+    {
+      "id": "ageval",
+      "label": "应用评估",
+      "href": "/ai/intermediate/agent/10-agent-evaluation/",
+      "group": "应用"
+    },
+    {
+      "id": "ragadv",
+      "label": "RAG 进阶",
+      "href": "/ai/intermediate/agent/11-rag-advanced/",
+      "group": "应用"
+    },
+    {
+      "id": "structout",
+      "label": "结构化输出",
+      "href": "/ai/intermediate/agent/12-structured-output/",
+      "group": "应用"
+    },
+    {
+      "id": "compuse",
+      "label": "视觉 Agent",
+      "href": "/ai/intermediate/agent/13-computer-use/",
+      "group": "应用"
+    },
+    {
+      "id": "agentobs",
+      "label": "Agent 可观测性",
+      "href": "/ai/intermediate/agent/14-agent-observability/",
+      "group": "应用"
+    },
+    {
+      "id": "kb",
+      "label": "企业知识库",
+      "href": "/ai/intermediate/agent/15-knowledge-base/",
+      "group": "应用"
+    },
+    {
+      "id": "tooldesign",
+      "label": "工具集设计",
+      "href": "/ai/intermediate/agent/16-tool-design/",
+      "group": "应用"
+    },
+    {
+      "id": "sysprompt",
+      "label": "提示组装",
+      "href": "/ai/intermediate/agent/02-system-prompt/",
+      "group": "应用"
+    },
+    {
+      "id": "context",
+      "label": "上下文工程",
+      "href": "/ai/intermediate/agent/03-context-engineering/",
+      "group": "应用"
+    },
+    {
+      "id": "memory",
+      "label": "记忆系统",
+      "href": "/ai/intermediate/agent/04-memory/",
+      "group": "应用"
+    },
+    {
+      "id": "skill",
+      "label": "技能加载",
+      "href": "/ai/intermediate/agent/05-skill-loading/",
+      "group": "应用"
+    },
+    {
+      "id": "rag",
+      "label": "RAG 检索增强",
+      "href": "/ai/intermediate/agent/06-rag/",
+      "group": "应用"
+    },
+    {
+      "id": "recovery",
+      "label": "错误恢复",
+      "href": "/ai/intermediate/agent/07-error-recovery/",
+      "group": "应用"
+    },
+    {
+      "id": "mcp",
+      "label": "MCP 协议",
+      "href": "/ai/intermediate/agent/08-mcp/",
+      "group": "应用"
+    },
+    {
+      "id": "multiagent",
+      "label": "多 Agent 协作",
+      "href": "/ai/advanced/agent/01-multi-agent/",
+      "group": "应用"
+    },
+    {
+      "id": "tasksystem",
+      "label": "任务系统",
+      "href": "/ai/advanced/agent/02-task-system/",
+      "group": "应用"
+    },
+    {
+      "id": "background",
+      "label": "后台任务",
+      "href": "/ai/advanced/agent/03-background-tasks/",
+      "group": "应用"
+    },
+    {
+      "id": "cron",
+      "label": "定时调度",
+      "href": "/ai/advanced/agent/04-cron-scheduler/",
+      "group": "应用"
+    },
+    {
+      "id": "teams",
+      "label": "Agent 团队",
+      "href": "/ai/advanced/agent/05-agent-teams/",
+      "group": "应用"
+    },
+    {
+      "id": "protocols",
+      "label": "团队协议",
+      "href": "/ai/advanced/agent/06-team-protocols/",
+      "group": "应用"
+    },
+    {
+      "id": "autonomous",
+      "label": "自主智能体",
+      "href": "/ai/advanced/agent/07-autonomous-agents/",
+      "group": "应用"
+    },
+    {
+      "id": "worktree",
+      "label": "Worktree 隔离",
+      "href": "/ai/advanced/agent/08-worktree-isolation/",
+      "group": "应用"
+    },
+    {
+      "id": "comprehensive",
+      "label": "综合 Harness",
+      "href": "/ai/advanced/agent/09-comprehensive-agent/",
+      "group": "应用"
+    },
+    {
+      "id": "frameworks",
+      "label": "Agent 框架",
+      "href": "/ai/advanced/agent/10-agent-frameworks/",
+      "group": "应用"
+    },
+    {
+      "id": "openclaw",
+      "label": "OpenClaw",
+      "href": "/ai/advanced/agent/11-openclaw/",
+      "group": "应用"
+    },
+    {
+      "id": "eval",
+      "label": "评测与对齐",
+      "href": "/ai/advanced/eval/01-evaluation-align/",
+      "group": "应用"
+    }
   ],
   "edges": [
-    { "source": "root", "target": "ml" },
-    { "source": "ml", "target": "dl" },
-    { "source": "dl", "target": "transformer", "label": "自注意力底座" },
-    { "source": "transformer", "target": "lora", "label": "低成本微调" },
-    { "source": "lora", "target": "llm", "label": "领域适配落点" },
-    { "source": "emb", "target": "rag", "label": "向量检索的底座" },
-    { "source": "gpu", "target": "lora", "label": "显存账的底层" },
-    { "source": "gpu", "target": "multigpu", "label": "单卡不够时" },
-    { "source": "tokenizer", "target": "llm", "label": "模型吃的最小单元" },
-    { "source": "transformer", "target": "llm", "label": "Decoder-only 即 LLM" },
-    { "source": "llm", "target": "prompt" },
-    { "source": "prompt", "target": "adapter", "label": "选型决策" },
-    { "source": "adapter", "target": "rag", "label": "知识问题走 RAG" },
-    { "source": "adapter", "target": "inference", "label": "参数稳定输出" },
-    { "source": "inference", "target": "tokencost", "label": "输出越长越贵" },
-    { "source": "tokencost", "target": "vllm", "label": "自部署的降本层" },
-    { "source": "quant", "target": "vllm", "label": "量化底座进推理" },
-    { "source": "transformer", "target": "multimodal", "label": "视觉 token 同机制" },
-    { "source": "multimodal", "target": "voice", "label": "多模态的另一模态" },
-    { "source": "tokencost", "target": "gw", "label": "成本管控的落点" },
-    { "source": "gw", "target": "arch", "label": "接入层总装" },
-    { "source": "arch", "target": "halluc", "label": "质量红线治理" },
-    { "source": "llm", "target": "rag" },
-    { "source": "llm", "target": "agent" },
-    { "source": "agent", "target": "agentloop", "label": "起点" },
-    { "source": "agentloop", "target": "tools", "label": "dispatch map" },
-    { "source": "tools", "target": "permission", "label": "执行前加门" },
-    { "source": "tools", "target": "tooldesign", "label": "工具集设计原则" },
-    { "source": "tooldesign", "target": "structout", "label": "动作格式约束" },
-    { "source": "permission", "target": "hooks", "label": "检查挂上钩子" },
-    { "source": "permission", "target": "guardrails", "label": "最小授权是骨架" },
-    { "source": "hooks", "target": "guardrails", "label": "事件点挂检查" },
-    { "source": "hooks", "target": "planning", "label": "先计划再动手" },
-    { "source": "tools", "target": "mcp", "label": "标准化" },
-    { "source": "prompt", "target": "sysprompt", "label": "运行时组装" },
-    { "source": "sysprompt", "target": "skill", "label": "目录常驻" },
-    { "source": "sysprompt", "target": "memory", "label": "索引常驻" },
-    { "source": "llm", "target": "context" },
-    { "source": "context", "target": "memory", "label": "压缩丢细节" },
-    { "source": "context", "target": "rag", "label": "知识注入" },
-    { "source": "rag", "target": "agent", "label": "工具组合" },
-    { "source": "agentloop", "target": "recovery", "label": "错误分类重试" },
-    { "source": "planning", "target": "multiagent", "label": "任务图" },
-    { "source": "agent", "target": "multiagent", "label": "规模化" },
-    { "source": "planning", "target": "subagent", "label": "大任务拆小" },
-    { "source": "subagent", "target": "tasksystem", "label": "目标变任务图" },
-    { "source": "ageval", "target": "rag", "label": "先量化检索" },
-    { "source": "agentobs", "target": "ageval", "label": "坏 case 回流评测" },
-    { "source": "ragadv", "target": "kb", "label": "技术装配成场景" },
-    { "source": "rag", "target": "ragadv", "label": "检索质量进阶" },
-    { "source": "ragadv", "target": "structout", "label": "输出层约束" },
-    { "source": "multimodal", "target": "compuse", "label": "看屏操作" },
-    { "source": "structout", "target": "compuse", "label": "动作格式约束" },
-    { "source": "structout", "target": "ageval", "label": "校验重试后回归" },
-    { "source": "ragadv", "target": "ageval", "label": "调优用评测回归" },
-    { "source": "adapter", "target": "ageval", "label": "改动要有分数" },
-    { "source": "tasksystem", "target": "background", "label": "慢操作异步" },
-    { "source": "background", "target": "cron", "label": "定时触发" },
-    { "source": "cron", "target": "teams", "label": "一个不够组队" },
-    { "source": "teams", "target": "protocols", "label": "消息契约" },
-    { "source": "protocols", "target": "autonomous", "label": "自主认领" },
-    { "source": "autonomous", "target": "worktree", "label": "目录隔离" },
-    { "source": "worktree", "target": "comprehensive", "label": "全部归位" },
-    { "source": "mcp", "target": "comprehensive", "label": "外部工具池" },
-    { "source": "comprehensive", "target": "frameworks", "label": "生产级化" },
-    { "source": "frameworks", "target": "openclaw", "label": "落地产品" },
-    { "source": "llm", "target": "eval" }
+    {
+      "source": "root",
+      "target": "ml"
+    },
+    {
+      "source": "ml",
+      "target": "dl"
+    },
+    {
+      "source": "dl",
+      "target": "transformer",
+      "label": "自注意力底座"
+    },
+    {
+      "source": "transformer",
+      "target": "lora",
+      "label": "低成本微调"
+    },
+    {
+      "source": "lora",
+      "target": "llm",
+      "label": "领域适配落点"
+    },
+    {
+      "source": "emb",
+      "target": "rag",
+      "label": "向量检索的底座"
+    },
+    {
+      "source": "gpu",
+      "target": "lora",
+      "label": "显存账的底层"
+    },
+    {
+      "source": "gpu",
+      "target": "multigpu",
+      "label": "单卡不够时"
+    },
+    {
+      "source": "tokenizer",
+      "target": "llm",
+      "label": "模型吃的最小单元"
+    },
+    {
+      "source": "transformer",
+      "target": "llm",
+      "label": "Decoder-only 即 LLM"
+    },
+    {
+      "source": "llm",
+      "target": "prompt"
+    },
+    {
+      "source": "prompt",
+      "target": "adapter",
+      "label": "选型决策"
+    },
+    {
+      "source": "adapter",
+      "target": "rag",
+      "label": "知识问题走 RAG"
+    },
+    {
+      "source": "adapter",
+      "target": "inference",
+      "label": "参数稳定输出"
+    },
+    {
+      "source": "inference",
+      "target": "tokencost",
+      "label": "输出越长越贵"
+    },
+    {
+      "source": "tokencost",
+      "target": "vllm",
+      "label": "自部署的降本层"
+    },
+    {
+      "source": "quant",
+      "target": "vllm",
+      "label": "量化底座进推理"
+    },
+    {
+      "source": "transformer",
+      "target": "multimodal",
+      "label": "视觉 token 同机制"
+    },
+    {
+      "source": "multimodal",
+      "target": "voice",
+      "label": "多模态的另一模态"
+    },
+    {
+      "source": "tokencost",
+      "target": "gw",
+      "label": "成本管控的落点"
+    },
+    {
+      "source": "gw",
+      "target": "arch",
+      "label": "接入层总装"
+    },
+    {
+      "source": "arch",
+      "target": "halluc",
+      "label": "质量红线治理"
+    },
+    {
+      "source": "llm",
+      "target": "rag"
+    },
+    {
+      "source": "llm",
+      "target": "agent"
+    },
+    {
+      "source": "agent",
+      "target": "agentloop",
+      "label": "起点"
+    },
+    {
+      "source": "agentloop",
+      "target": "tools",
+      "label": "dispatch map"
+    },
+    {
+      "source": "tools",
+      "target": "permission",
+      "label": "执行前加门"
+    },
+    {
+      "source": "tools",
+      "target": "tooldesign",
+      "label": "工具集设计原则"
+    },
+    {
+      "source": "tooldesign",
+      "target": "structout",
+      "label": "动作格式约束"
+    },
+    {
+      "source": "permission",
+      "target": "hooks",
+      "label": "检查挂上钩子"
+    },
+    {
+      "source": "permission",
+      "target": "guardrails",
+      "label": "最小授权是骨架"
+    },
+    {
+      "source": "hooks",
+      "target": "guardrails",
+      "label": "事件点挂检查"
+    },
+    {
+      "source": "hooks",
+      "target": "planning",
+      "label": "先计划再动手"
+    },
+    {
+      "source": "tools",
+      "target": "mcp",
+      "label": "标准化"
+    },
+    {
+      "source": "prompt",
+      "target": "sysprompt",
+      "label": "运行时组装"
+    },
+    {
+      "source": "sysprompt",
+      "target": "skill",
+      "label": "目录常驻"
+    },
+    {
+      "source": "sysprompt",
+      "target": "memory",
+      "label": "索引常驻"
+    },
+    {
+      "source": "llm",
+      "target": "context"
+    },
+    {
+      "source": "context",
+      "target": "memory",
+      "label": "压缩丢细节"
+    },
+    {
+      "source": "context",
+      "target": "rag",
+      "label": "知识注入"
+    },
+    {
+      "source": "rag",
+      "target": "agent",
+      "label": "工具组合"
+    },
+    {
+      "source": "agentloop",
+      "target": "recovery",
+      "label": "错误分类重试"
+    },
+    {
+      "source": "planning",
+      "target": "multiagent",
+      "label": "任务图"
+    },
+    {
+      "source": "agent",
+      "target": "multiagent",
+      "label": "规模化"
+    },
+    {
+      "source": "planning",
+      "target": "subagent",
+      "label": "大任务拆小"
+    },
+    {
+      "source": "subagent",
+      "target": "tasksystem",
+      "label": "目标变任务图"
+    },
+    {
+      "source": "ageval",
+      "target": "rag",
+      "label": "先量化检索"
+    },
+    {
+      "source": "agentobs",
+      "target": "ageval",
+      "label": "坏 case 回流评测"
+    },
+    {
+      "source": "ragadv",
+      "target": "kb",
+      "label": "技术装配成场景"
+    },
+    {
+      "source": "rag",
+      "target": "ragadv",
+      "label": "检索质量进阶"
+    },
+    {
+      "source": "ragadv",
+      "target": "structout",
+      "label": "输出层约束"
+    },
+    {
+      "source": "multimodal",
+      "target": "compuse",
+      "label": "看屏操作"
+    },
+    {
+      "source": "structout",
+      "target": "compuse",
+      "label": "动作格式约束"
+    },
+    {
+      "source": "structout",
+      "target": "ageval",
+      "label": "校验重试后回归"
+    },
+    {
+      "source": "ragadv",
+      "target": "ageval",
+      "label": "调优用评测回归"
+    },
+    {
+      "source": "adapter",
+      "target": "ageval",
+      "label": "改动要有分数"
+    },
+    {
+      "source": "tasksystem",
+      "target": "background",
+      "label": "慢操作异步"
+    },
+    {
+      "source": "background",
+      "target": "cron",
+      "label": "定时触发"
+    },
+    {
+      "source": "cron",
+      "target": "teams",
+      "label": "一个不够组队"
+    },
+    {
+      "source": "teams",
+      "target": "protocols",
+      "label": "消息契约"
+    },
+    {
+      "source": "protocols",
+      "target": "autonomous",
+      "label": "自主认领"
+    },
+    {
+      "source": "autonomous",
+      "target": "worktree",
+      "label": "目录隔离"
+    },
+    {
+      "source": "worktree",
+      "target": "comprehensive",
+      "label": "全部归位"
+    },
+    {
+      "source": "mcp",
+      "target": "comprehensive",
+      "label": "外部工具池"
+    },
+    {
+      "source": "comprehensive",
+      "target": "frameworks",
+      "label": "生产级化"
+    },
+    {
+      "source": "frameworks",
+      "target": "openclaw",
+      "label": "落地产品"
+    },
+    {
+      "source": "llm",
+      "target": "eval"
+    },
+    {
+      "source": "halluc",
+      "target": "semcache",
+      "label": "降低重复调用的幻觉暴露"
+    }
   ]
 }
