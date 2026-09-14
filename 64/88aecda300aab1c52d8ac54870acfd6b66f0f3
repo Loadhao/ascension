@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 2003
+src/content/docs/ai/intermediate/llm/13-semantic-cache.md
+  h_9324126a55eff3 1-71
+src/data/graphs/ai.json
+  h_9324126a55eff3 3-337,340-672
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6488aecda300aab1c52d8ac54870acfd6b66f0f3",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
