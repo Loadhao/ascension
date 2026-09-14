@@ -266,6 +266,8 @@
 
 ### 第 108 轮（2026-09-08，第三十九次启动）：Change Streams（mongodb/usage 第 6 篇）——oplog 结构化订阅、resume token 断点续听、与外部 CDC 选型对比。五连验证全绿，提交 f9f78ba 已推送。mongodb/usage 6 篇成对（聚合/分页/TTL/读偏好/事务/变更监听）。
 
+### 第 109 轮（2026-09-08，第三十九次启动，内容补充模式）：Schema 设计模式（mongodb/usage 第 7 篇）——子集模式/扩展引用/桶模式/Outlier 兜底，Mongo 建模进阶套路；grep 确认零覆盖。五连验证全绿，提交 82ba210 已推送。mongodb/usage 7 篇（聚合/分页/TTL/读偏好/事务/变更监听/Schema 模式）。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
