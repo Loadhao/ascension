@@ -1199,6 +1199,7 @@ export default defineConfig({
                         { label: '读偏好与读写关注', link: '/mongodb/intermediate/usage/04-read-preference/' },
                         { label: '多文档事务：语法、前提与正确姿势', link: '/mongodb/intermediate/usage/05-transactions/' },
                         { label: 'Change Streams：原生变更监听', link: '/mongodb/intermediate/usage/06-change-streams/' },
+                        { label: 'Schema 设计模式：子集、扩展引用与桶', link: '/mongodb/intermediate/usage/07-schema-patterns/' },
                       ],
                     },
                   ],

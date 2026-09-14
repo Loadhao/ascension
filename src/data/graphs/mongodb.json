@@ -54,6 +54,12 @@
       "group": "使用进阶"
     },
     {
+      "id": "schemapattern",
+      "label": "Schema 设计模式",
+      "href": "/mongodb/intermediate/usage/07-schema-patterns/",
+      "group": "使用进阶"
+    },
+    {
       "id": "sharding",
       "label": "分片集群",
       "href": "/mongodb/advanced/sharding/01-sharding-cluster/",
@@ -142,6 +148,11 @@
       "source": "txn",
       "target": "changestream",
       "label": "提交后事件可见"
+    },
+    {
+      "source": "docmodel",
+      "target": "schemapattern",
+      "label": "基础建模的进阶套路"
     }
   ]
 }
