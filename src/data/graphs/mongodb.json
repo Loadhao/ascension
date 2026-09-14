@@ -5,6 +5,7 @@
     { "id": "replication", "label": "复制集原理", "href": "/mongodb/intermediate/replication/01-replication-set/", "group": "使用进阶" },
     { "id": "aggregation", "label": "聚合管道", "href": "/mongodb/intermediate/usage/01-aggregation/", "group": "使用进阶" },
     { "id": "mongopage", "label": "分页与游标", "href": "/mongodb/intermediate/usage/02-pagination/", "group": "使用进阶" },
+    { "id": "ttl", "label": "TTL 索引", "href": "/mongodb/intermediate/usage/03-ttl-index/", "group": "使用进阶" },
     { "id": "sharding", "label": "分片集群", "href": "/mongodb/advanced/sharding/01-sharding-cluster/", "group": "高可用" },
     { "id": "capacity", "label": "容量规划", "href": "/mongodb/advanced/operations/01-capacity-planning/", "group": "高可用" },
     { "id": "performance", "label": "性能优化与启动加载", "href": "/mongodb/advanced/operations/02-performance/", "group": "高可用" }

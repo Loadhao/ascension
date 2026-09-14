@@ -1195,6 +1195,7 @@ export default defineConfig({
                         { label: '概览', link: '/mongodb/intermediate/usage/' },
                         { label: '聚合管道：从 $match 到 $lookup', link: '/mongodb/intermediate/usage/01-aggregation/' },
                         { label: '分页与游标：深翻页的 Mongo 版', link: '/mongodb/intermediate/usage/02-pagination/' },
+                        { label: 'TTL 索引与数据过期', link: '/mongodb/intermediate/usage/03-ttl-index/' },
                       ],
                     },
                   ],
