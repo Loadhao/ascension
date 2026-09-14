@@ -6,10 +6,10 @@
 
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
-- [ ] kafka/basic/core/01-why-mq — 第二题考「MQ 的代价清单与 At Least Once + 幂等的默认组合拳」
-- [ ] js/intermediate/node/01-node-gc-memory — 第二题考「heapUsed 只是 V8 堆：RSS 涨而堆不涨先怀疑 Buffer 等堆外」
-- [ ] js/basic/modules/01-modules-import — 第二题考「import 是运行时执行且 sys.modules 缓存只跑一次」
 - [ ] elasticsearch/intermediate/usage/03-pagination — 第二题考「search_after 与 scroll 的适用边界：实时翻页 vs 导出」
+- [ ] docker/basic/fundamentals/02-commands — 第二题考「exec vs attach、logs --tail、inspect 的 --format 模板」
+- [ ] redis/intermediate/usage/05-pipeline-transaction-lua — 第二题考「管道省 RTT；MULTI/EXEC 与 Lua 的原子性差异」
+- [ ] python/basic/modules/02-packages-layout — 第二题考「包内相对导入 vs 跨包绝对导入；跑脚本破坏相对导入时用 python -m」
 
 ### b 类：旧题返修
 
@@ -75,6 +75,8 @@
 - 2026-09-10 · 第二十四轮：3 道核心笔记第二题（java-cfall-119 / js-arrowbind-013 / docker-downvol-013，difficulty 4/3/3；compose 条目原定角度与 docker-compose-007 完全撞车，换考卷与项目生命周期）· 本轮提交主题：feat: 题库深化第二十四轮
 
 - 2026-09-10 · 第二十五轮：3 道核心笔记第二题（java-contended-119 / java-arrgrow-120 / js-implicit-014，difficulty 4/3/3；longadder 条目原定角度与 java-longadder-019 完全撞车，换考伪共享填充与扩容上限）· 本轮提交主题：feat: 题库深化第二十五轮
+
+- 2026-09-10 · 第二十六轮：3 道核心笔记第二题（kafka-semantics-014 / js-scavenge-015 / py-import-038，difficulty 3/4/3；kafka why-mq 原「代价清单」角度与 kafka-why-007 重合换选型维度；js modules-import 条目为入队笔误（js 无该笔记）改执行 python 同名笔记）· 本轮提交主题：feat: 题库深化第二十六轮
 
 ## 经验与规则
 
