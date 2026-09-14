@@ -50,6 +50,7 @@
     { "id": "multitenant", "label": "多租户架构", "href": "/distributed/intermediate/case-studies/26-multi-tenant/", "group": "案例" },
     { "id": "riskctl", "label": "风控系统", "href": "/distributed/intermediate/case-studies/27-risk-control/", "group": "案例" },
     { "id": "refund", "label": "售后退款", "href": "/distributed/intermediate/case-studies/28-refund/", "group": "案例" },
+    { "id": "leaderboard", "label": "排行榜", "href": "/distributed/intermediate/case-studies/29-leaderboard/", "group": "案例" },
     { "id": "queuesys", "label": "排队系统", "href": "/distributed/intermediate/case-studies/21-queue/", "group": "案例" },
     { "id": "scheduler", "label": "分布式任务调度", "href": "/distributed/intermediate/coordination/03-distributed-scheduler/", "group": "协调" },
     { "id": "consistency", "label": "数据一致性", "href": "/distributed/advanced/consistency/01-consistency-patterns/", "group": "一致" },

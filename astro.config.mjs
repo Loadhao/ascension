@@ -1419,6 +1419,7 @@ export default defineConfig({
                         { label: '多租户架构：SaaS 的隔离与共享', link: '/distributed/intermediate/case-studies/26-multi-tenant/' },
                         { label: '风控系统：从名单到实时决策', link: '/distributed/intermediate/case-studies/27-risk-control/' },
                         { label: '售后退款：逆向流程的状态机与资金一致', link: '/distributed/intermediate/case-studies/28-refund/' },
+                        { label: '排行榜：实时排名的方案矩阵', link: '/distributed/intermediate/case-studies/29-leaderboard/' },
                       ],
                     },
                   ],
