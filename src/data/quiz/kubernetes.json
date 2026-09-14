@@ -12,7 +12,9 @@
         "kubelet 会接管调度职责，把新 Pod 均衡到各节点",
         "业务容器停止运行，恢复后按 etcd 里的记录逐一重启"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "调度只发生在 Pod 创建时刻；kubelet 按已下发到节点的指令看护容器，各组件只对 apiserver 负责，互不依赖存活。"
     },
     {
@@ -27,7 +29,9 @@
         "Service 名，Pod 内内建了 DNS 转发",
         "127.0.0.2，pause 容器分配的内部回环"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "pause 容器持有网络命名空间，Pod 内容器共享同一 IP 与端口空间——也因此端口不能冲突。"
     },
     {
@@ -42,7 +46,9 @@
         "6：新旧 RS 各自维持 3 副本",
         "2：先缩后扩，允许临时低于期望值"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "maxSurge=1 允许超出期望 1 个；maxUnavailable=0 禁止低于期望——所以新 RS 加 1 时旧 RS 还得是 3。"
     },
     {
@@ -57,7 +63,9 @@
         "Deployment 触发回滚到上一个版本",
         "节点被驱逐，Pod 迁移到其他健康节点"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "readiness 失败只摘流不重启——重启是 liveness 的动作；把依赖健康放进 liveness 才会导致连环重启雪崩。"
     },
     {
@@ -72,8 +80,27 @@
         "apiserver 分配的一块特殊网卡上",
         "Service 对应的某个后端 Pod 上"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "ClusterIP 是规则层面的逻辑地址，ping 不通很正常；流量在出节点前被 DNAT 到某个 Ready 的 Pod IP。"
+    },
+    {
+      "id": "k8s-declarative-006",
+      "noteId": "kubernetes/basic/core/01-architecture",
+      "type": "single",
+      "q": "kubectl apply 提交 Deployment 后立刻返回，Pod 并未全部就绪——按笔记的声明式模型与调谐循环怎么理解？",
+      "options": [
+        "apply 只是改了 etcd 里的期望状态；controller-manager 的 Deployment 控制器发现「副本数不够」就补，Pod 挂了调谐循环会再次拉起——观测现状、对比期望、消除差异、循环往复",
+        "kubectl apply 是同步命令，返回时应该已完成部署，没就绪说明部署失败",
+        "副本维持由 kubelet 直接负责，它与 Deployment 控制器点对点通信",
+        "需要再执行一次 kubectl status 才会触发控制器开始工作"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "组件间零直连、全靠监听 apiserver——任何组件重启都不丢状态（状态在 etcd）；排障第一问：这个对象对应的控制器在哪个循环里、期望状态是什么。k8s-arch-001 考 scheduler 故障影响，本题考声明式调谐模型。",
+      "difficulty": 3
     }
   ]
 }

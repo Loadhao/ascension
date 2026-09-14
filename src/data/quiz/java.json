@@ -2111,6 +2111,23 @@
       ],
       "hint": "末项反了——对未 opens 的模块调 setAccessible 抛 InaccessibleObjectException，需要 --add-opens 放行；高频反射先缓存 Method 对象，追求极致换 MethodHandle。java-proxy-046 考 JDK/CGLIB 代理，本题考反射 API 与注解保留期。",
       "difficulty": 4
+    },
+    {
+      "id": "java-dubbospi-124",
+      "noteId": "java/advanced/dubbo/01-architecture",
+      "type": "single",
+      "q": "Dubbo 的 SPI 与 JDK SPI 的关键差异是什么？@Adaptive 与 URL 的关系是？",
+      "options": [
+        "JDK SPI 一次性实例化所有实现、无法按名取用；Dubbo SPI 按 key 加载单个实现，@Adaptive 在运行时按 URL 参数决定用哪个实现——URL 是 Dubbo 的全局总线（地址/协议/序列化都在它身上）",
+        "Dubbo SPI 完全兼容 JDK SPI 的配置文件格式与行为，只是换了目录",
+        "@Adaptive 是编译期注解，扩展实现的选择在编译时就固定了",
+        "URL 只承载服务地址，协议与序列化方式由独立配置文件管理"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "扩展实现按约定放在 META-INF/dubbo/接口全限定名（key=实现类）；Dubbo3 把接口级发现升级为应用级发现，注册数据量降一个数量级。java-dubboarch-108 考注册中心故障影响，本题考 SPI 与自适应扩展。",
+      "difficulty": 4
     }
   ]
 }

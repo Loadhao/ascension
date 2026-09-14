@@ -13,6 +13,10 @@
 - [ ] kubernetes/basic/core/02-pod-object-model — 第二题考「Pod 内容器共享网络与生命周期的边界」
 - [ ] security/basic/core/02-csrf — 第二题考「CSRF 与 XSS 的攻击面差异：伪造请求 vs 执行脚本」
 
+- [ ] vue/basic/core/01-declarative-ui — 第二题考「响应式数据驱动视图的边界与手写 DOM 的分界」
+- [ ] java/advanced/dubbo/02-governance — 第二题考「集群容错策略与负载均衡的选型」
+- [ ] langchain/basic/core/03-lcel-runnable — 第二题考「LCEL 管道组合与 Runnable 协议」
+
 ### b 类：旧题返修
 
 - [ ] 抽查 hint 质量：hint 复述答案、干扰项不成立的就地返修（每条记录原因）
@@ -87,6 +91,8 @@
 - 2026-09-10 · 第二十九轮：3 道核心笔记第二题（py-closurebind-039 / es-analyzer-009 / java-reflection-123，difficulty 4/3/4）；packages-layout 条目弃置——并行会话 py-pkg-019 已完全覆盖 · 本轮提交主题：feat: 题库深化第二十九轮
 
 - 2026-09-10 · 第三十一轮：3 道核心笔记第二题（mongo-agg-014 / sec-mybatis-007 / lc-layer-014，difficulty 4/4/3；上轮队列 3 条已被并行会话执行，双向消费正常）· 本轮提交主题：feat: 题库深化第三十一轮
+
+- 2026-09-10 · 第三十二轮：3 道核心笔记第二题（k8s-declarative-003 / netty-bufptr-007 / java-dubbospi-124，difficulty 3/4/4；队列空按池重新选点执行）· 本轮提交主题：feat: 题库深化第三十二轮
 
 ## 经验与规则
 

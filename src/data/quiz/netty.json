@@ -101,6 +101,23 @@
       ],
       "hint": "EventLoop 本质 = 线程 + Selector + 任务队列三合一；耗时任务丢回业务线程池，结果用 EventLoop.execute() 安全送回原线程收尾——这是 Netty 编程的第一纪律。netty 方向首题。",
       "difficulty": 3
+    },
+    {
+      "id": "netty-bufptr-007",
+      "noteId": "netty/basic/core/03-bytebuf",
+      "type": "single",
+      "q": "关于 ByteBuf 的双指针设计与所有权转移，按笔记正确的是？",
+      "options": [
+        "readerIndex 与 writerIndex 分离告别 flip；把 ByteBuf 传给异步任务前要先 retain() 再转交（EventLoop 侧可能已 release），slice() 出来的视图与原 Buffer 共享底层内存、改一处等于改全部",
+        "双指针仍需手动 flip 切换读写模式",
+        "传给异步任务不需要 retain，EventLoop 会替你保活到底",
+        "slice 出来的视图有独立的底层内存拷贝，互不影响"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "泄漏报告（LEAK: ByteBuf.release() was not called）要当 P1 查，排查期把 ResourceLeakDetector 调到 ADVANCED/PARANOID；discardReadBytes 有内存搬移成本，别在高频路径滥用。netty-buf-003 考泄漏处置，本题考双指针与所有权。",
+      "difficulty": 4
     }
   ]
 }
