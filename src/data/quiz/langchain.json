@@ -12,7 +12,9 @@
         "LangChain 在运行时把 Anthropic 请求转发给 OpenAI 网关",
         "两个包共享同一份 HTTP 客户端实现"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "分层的关键在 langchain-core 定义的抽象：各伙伴包只做接入实现，业务代码面向统一接口编程。"
     },
     {
@@ -27,7 +29,9 @@
         "Review 类的字段顺序恰好和模型输出顺序一致",
         "它关闭了模型的其他输出能力，只允许输出纯 JSON 字符"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "可靠来自「约束 + 校验」两步：schema 进 prompt/工具约束，解析不过把错误回喂模型重试，而不是靠运气。"
     },
     {
@@ -42,7 +46,11 @@
         "自动记住历史消息并按 thread_id 续跑",
         "with_fallbacks：主组件失败自动切备用"
       ],
-      "answer": [0, 1, 3],
+      "answer": [
+        0,
+        1,
+        3
+      ],
       "hint": "这些能力都来自 Runnable 协议逐级向上传递；而「历史续跑」是 LangGraph checkpointer 的能力，链没有状态。"
     },
     {
@@ -57,7 +65,9 @@
         "节点必须返回完整 State，增量写法会编译报错",
         "由下一个节点决定要不要采纳这个增量"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "节点只交增量、合并归 reducer：并行节点写同一字段时，合并规则无歧义正是并行安全的基础。"
     },
     {
@@ -72,7 +82,9 @@
         "把 interrupt 的 payload 重新作为输入传给 START",
         "调用 node 单函数手动传入用户答复"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "暂停的本质是状态已存 checkpoint：定位靠 thread_id，恢复靠 Command(resume)，其值作为 interrupt 返回值传回节点。"
     },
     {
@@ -87,8 +99,32 @@
         "tools 节点执行工具并回传 ToolMessage",
         "tools 到 model 的回头边，让循环闭合"
       ],
-      "answer": [0, 1, 2, 3],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
       "hint": "四件合起来才是完整循环：绑定工具、按请求路由、执行回传、回头边闭合；create_agent 内部正是这张标准图。"
+    },
+    {
+      "id": "lc-layer-007",
+      "noteId": "langchain/basic/core/01-langchain-overview",
+      "type": "multiple",
+      "q": "关于 LangChain 的包分层与消息模型，正确的有？（多选）",
+      "options": [
+        "分层记忆点：core 定义抽象（消息/ChatModel 接口）、伙伴包给实现、langchain 给高层封装、langgraph 给运行时——换模型供应商不动业务代码",
+        "一次带工具的调用 = System + Human + AI(tool_calls) + Tool(结果) + AI(最终回答) 按序排列",
+        "ToolMessage 携带工具执行结果，按 tool_call_id 与 AI 发起的调用一一对应",
+        "业务代码应直接 import 各伙伴包（langchain-openai 等）以获得最佳性能"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——业务只 import langchain 与 langgraph，换供应商只改 init_chat_model 的一个字符串；LLMChain/AgentExecutor 在 1.0 已淘汰，搜资料认准 1.0 文档。lc-pkg-001 考 init_chat_model 统一入口，本题考分层与消息模型。",
+      "difficulty": 3
     }
   ]
 }

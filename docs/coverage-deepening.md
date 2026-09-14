@@ -12,7 +12,6 @@
 - [ ] netty/basic/core/02-channel-pipeline — 第二题考「pipeline 的入站出站与 handler 顺序」
 - [ ] kubernetes/basic/core/02-pod-object-model — 第二题考「Pod 内容器共享网络与生命周期的边界」
 - [ ] security/basic/core/02-csrf — 第二题考「CSRF 与 XSS 的攻击面差异：伪造请求 vs 执行脚本」
-- [ ] mongodb/intermediate/usage/01-aggregation — 第二题考「聚合管道的阶段顺序与 $match 前置优化」
 
 ### b 类：旧题返修
 
@@ -86,6 +85,8 @@
 - 2026-09-10 · 第二十八轮：3 道核心笔记第二题（java-biasedremove-121 / js-preventstop-015 / mysql-replfix-015，difficulty 4/3/3；dom-events 条目与 js-event-008 主题重合，换考 preventDefault/stopPropagation 正交与 passive）· 本轮提交主题：feat: 题库深化第二十八轮
 
 - 2026-09-10 · 第二十九轮：3 道核心笔记第二题（py-closurebind-039 / es-analyzer-009 / java-reflection-123，difficulty 4/3/4）；packages-layout 条目弃置——并行会话 py-pkg-019 已完全覆盖 · 本轮提交主题：feat: 题库深化第二十九轮
+
+- 2026-09-10 · 第三十一轮：3 道核心笔记第二题（mongo-agg-014 / sec-mybatis-007 / lc-layer-014，difficulty 4/4/3；上轮队列 3 条已被并行会话执行，双向消费正常）· 本轮提交主题：feat: 题库深化第三十一轮
 
 ## 经验与规则
 

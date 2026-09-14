@@ -101,6 +101,23 @@
       ],
       "hint": "dangerouslySetInnerHTML/v-html 会绕过框架默认转义，凡用必审输入源；富文本用服务端白名单净化（DOMPurify），别自己写正则。security 方向首题。",
       "difficulty": 3
+    },
+    {
+      "id": "sec-mybatis-007",
+      "noteId": "security/basic/core/03-sql-injection",
+      "type": "single",
+      "q": "MyBatis 里 ORDER BY ${orderColumn} 为什么危险？与 #{} 的本质区别和补救是？",
+      "options": [
+        "#{} 是预编译占位符（参数绑定），${} 是字符串替换进 SQL——等于手工拼接；动态表名/列名无法参数化才用它，且必须白名单校验枚举值",
+        "${} 是 MyBatis 二级缓存的开关，与 SQL 安全无关",
+        "两者都是预编译，${} 只是写法更简洁",
+        "危险来自 ${} 性能差，换成 #{} 后动态列名也能正常工作"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "纵深还包括：最小权限（应用账号禁 DDL）、不回显 SQL 异常原文（防盲注探测结构）；黑名单过滤是安慰剂。sec-sqli-003 考预编译原理，本题考 MyBatis 落点与纵深。",
+      "difficulty": 4
     }
   ]
 }
