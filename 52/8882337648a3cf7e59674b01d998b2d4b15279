@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1203
+src/content/docs/mongodb/intermediate/usage/08-index-advanced.md
+  h_9324126a55eff3 1-67
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 62-67,162-166
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "528882337648a3cf7e59674b01d998b2d4b15279",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
