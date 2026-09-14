@@ -7,6 +7,13 @@
 ### a 类：核心笔记第二题（core:true 且仅单一考点角度，全站约 200 篇候选，按方向分批入队）
 
 
+### a 类：核心笔记第二题（重新入队）
+
+- [ ] netty/basic/core/02-channel-pipeline — 第二题考「pipeline 的入站出站与 handler 顺序」
+- [ ] kubernetes/basic/core/02-pod-object-model — 第二题考「Pod 内容器共享网络与生命周期的边界」
+- [ ] security/basic/core/02-csrf — 第二题考「CSRF 与 XSS 的攻击面差异：伪造请求 vs 执行脚本」
+- [ ] mongodb/intermediate/usage/01-aggregation — 第二题考「聚合管道的阶段顺序与 $match 前置优化」
+
 ### b 类：旧题返修
 
 - [ ] 抽查 hint 质量：hint 复述答案、干扰项不成立的就地返修（每条记录原因）

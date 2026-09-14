@@ -258,6 +258,23 @@
       ],
       "hint": "Redis 事务没有回滚（只有 EXEC 前入队错误才整队放弃）；集群上 Lua 访问的所有 key 必须落在同一槽（hash tag 强制）；Pipeline 只省往返、不保证原子。redis-pipe-010 多选考三者边界，本题考 Lua 的核心价值：原子 + 可编程。",
       "difficulty": 3
+    },
+    {
+      "id": "redis-hotrebuild-016",
+      "noteId": "redis/intermediate/usage/02-cache-problems",
+      "type": "single",
+      "q": "热点 key 击穿的两种方案——互斥锁重建与逻辑过期，按笔记的取舍正确的是？",
+      "options": [
+        "互斥锁简单但等待会堆积（没抢到的 sleep 重试）；逻辑过期 key 永不设 TTL、过期时间写进 value，抢到锁的异步重建、没抢到的先返回旧数据——牺牲一致性保吞吐，热点明确（秒杀商品）用它更顺",
+        "逻辑过期没有一致性代价，是互斥锁的严格升级版",
+        "互斥锁方案里所有请求都会去查库，只是先后有序",
+        "逻辑过期的 key 不设 TTL 是为了省一次 EXPIRE 命令"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "double check 是互斥方案的必需步骤（等锁期间别人可能已重建）；随机 TTL 打散治的是雪崩——击穿是单个热点，别混淆。redis-bloom-004 考穿透与布隆过滤器，本题考击穿的两种重建策略。",
+      "difficulty": 4
     }
   ]
 }

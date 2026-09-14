@@ -12,7 +12,9 @@
         "Netty 检测到阻塞会自动把任务转交业务线程池",
         "连接被 Boss 组接管，由新线程重试"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "Channel 与 EventLoop 终身绑定，串行无锁的另一面是绝不能阻塞——慢任务要外抛线程池。"
     },
     {
@@ -27,7 +29,9 @@
         "谁都不经过，直接写 socket",
         "A 和 B 都经过，顺序同 addLast"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "入站 head→tail、出站 tail→head；ctx.write 从当前节点逆流，C 之前的出站 Handler（B）先被命中。"
     },
     {
@@ -42,7 +46,9 @@
         "调用 discardReadBytes 把已读区清掉",
         "调大 -XX:MaxDirectMemorySize 扩容堆外内存"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "泄漏是所有权没终点：SimpleChannelInboundHandler 读完自动 release；扩容只是让崩得晚一点。"
     },
     {
@@ -57,7 +63,9 @@
         "开启 SO_KEEPALIVE 并把间隔调成 60 秒",
         "用 allIdleTime=60，全空闲即踢"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "「没收到数据」是读空闲：readerIdle 触发事件后由 Handler 决定踢人；keepalive 语义是 TCP 连通性且周期太长。"
     },
     {
@@ -72,8 +80,27 @@
         "调大直接内存上限并加内存告警阈值",
         "把 ByteBuf 全部换成堆内 byte[] 一劳永逸"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "hint": "LEAK 日志是 Netty 内建哨兵在报真问题：ADVANCED 采样附分配栈；扩容/关日志只是掩盖症状。"
+    },
+    {
+      "id": "netty-reactor-006",
+      "noteId": "netty/basic/core/01-reactor-boss-worker",
+      "type": "single",
+      "q": "Netty 主从 Reactor 的分工与 EventLoop 绑定规则，按笔记正确的是？",
+      "options": [
+        "Boss 组只干 accept，把新 Channel 注册给 Worker 组的某个 EventLoop；Channel 生命周期内绑定唯一 EventLoop——同一连接的读写事件天然串行，Handler 无需加锁，但绝不能阻塞（否则这条线程上所有连接一起卡死）",
+        "Boss 组负责 accept 和已连接套接字的读写，Worker 组只做业务逻辑",
+        "Channel 每次读写事件可能被分到不同 EventLoop，Handler 必须自己加锁",
+        "EventLoop = 线程 + 数据库连接池 + 任务队列三合一"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "EventLoop 本质 = 线程 + Selector + 任务队列三合一；耗时任务丢回业务线程池，结果用 EventLoop.execute() 安全送回原线程收尾——这是 Netty 编程的第一纪律。netty 方向首题。",
+      "difficulty": 3
     }
   ]
 }
