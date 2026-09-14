@@ -260,6 +260,13 @@
 
 ### 第 105 轮（2026-09-08，第三十八次启动，内容补充模式）：读偏好与读写关注（mongodb/usage 第 4 篇）——readPreference 五档、writeConcern/readConcern 权衡、与 MySQL 读写分离对照；资金类 majority 三件套、报表走 secondary 的组合矩阵。五连验证全绿，提交 5a75554 已推送。mongodb/usage 4 篇成对（聚合/分页/TTL/读偏好）。
 
+### 第 106 轮（2026-09-08，第三十九次启动，内容补充模式）：多文档事务（mongodb/usage 第 5 篇）——4.0/4.2 演进、session 语法三步、snapshot+majority 前提、限制表（60s/16MB/并发代价）、单文档原子优先纪律。五连验证全绿（首轮验证卡死重跑恢复），提交 c862b0d 已推送。
+
+### 第 107 轮（2026-09-08，第三十九次启动）：语义缓存（ai/intermediate/llm 第 13 篇）——grep 语义缓存/semantic cache 零覆盖；向量相似当缓存键、与提示缓存的层次区别、阈值两难、不可缓存场景。提交 6488aec 已推送。**提交后验证发现 ai.json 被 JSON.stringify 重排格式（+740 行 diff）——节点/边内容等价验证通过，虚惊排除**。
+
+### 第 108 轮（2026-09-08，第三十九次启动）：Change Streams（mongodb/usage 第 6 篇）——oplog 结构化订阅、resume token 断点续听、与外部 CDC 选型对比。五连验证全绿，提交 f9f78ba 已推送。mongodb/usage 6 篇成对（聚合/分页/TTL/读偏好/事务/变更监听）。
+- 下一轮入口：候选池——①mongodb/usage 第 7 篇候选（schema 设计进阶）或歇；②场景题 grep 非同构；③ai 线间歇。每轮开工先同步+定界+体检基线+PATH 前缀。
+
 ### 第 106 轮（2026-09-08，第三十九次启动，内容补充模式）：多文档事务（mongodb/usage 第 5 篇）——grep 确认事务仅 2 篇顺带无专篇；4.0/4.2 演进、session 语法三步、snapshot+majority 前提、限制表（60s/16MB/并发代价）、单文档原子优先纪律。五连验证全绿（首轮跑卡死后重跑恢复——残留进程清理），提交 c862b0d 已推送。mongodb/usage 5 篇成对（聚合/分页/TTL/读偏好/事务）。
 - 下一轮入口：候选池——①mongodb/usage 第 6 篇候选（$lookup 深入/changeStream）或歇；②场景题 grep 非同构；③ai 线间歇。每轮开工先同步+定界+体检基线+PATH 前缀。
 - 下一轮入口：候选池——①mongodb/usage 第 5 篇候选（多文档事务）或歇；②场景题 grep 非同构；③ai 线间歇。每轮开工先同步+定界+体检基线+PATH 前缀。
