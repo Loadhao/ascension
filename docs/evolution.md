@@ -259,6 +259,9 @@
 ### 第 104 轮（2026-09-08，第三十七次启动，内容补充模式）：TTL 索引与数据过期（mongodb/usage 第 3 篇）——grep 确认 TTL 专篇缺（Redis 过期/归档已有对照位）；60 秒删除周期、日期类型静默失效坑、大批量过期性能影响、三层过期治理对照（Redis/文档/文件）。五连验证全绿，提交 edbc05d 已推送。mongodb/usage 3 篇成对。
 
 ### 第 105 轮（2026-09-08，第三十八次启动，内容补充模式）：读偏好与读写关注（mongodb/usage 第 4 篇）——readPreference 五档、writeConcern/readConcern 权衡、与 MySQL 读写分离对照；资金类 majority 三件套、报表走 secondary 的组合矩阵。五连验证全绿，提交 5a75554 已推送。mongodb/usage 4 篇成对（聚合/分页/TTL/读偏好）。
+
+### 第 106 轮（2026-09-08，第三十九次启动，内容补充模式）：多文档事务（mongodb/usage 第 5 篇）——grep 确认事务仅 2 篇顺带无专篇；4.0/4.2 演进、session 语法三步、snapshot+majority 前提、限制表（60s/16MB/并发代价）、单文档原子优先纪律。五连验证全绿（首轮跑卡死后重跑恢复——残留进程清理），提交 c862b0d 已推送。mongodb/usage 5 篇成对（聚合/分页/TTL/读偏好/事务）。
+- 下一轮入口：候选池——①mongodb/usage 第 6 篇候选（$lookup 深入/changeStream）或歇；②场景题 grep 非同构；③ai 线间歇。每轮开工先同步+定界+体检基线+PATH 前缀。
 - 下一轮入口：候选池——①mongodb/usage 第 5 篇候选（多文档事务）或歇；②场景题 grep 非同构；③ai 线间歇。每轮开工先同步+定界+体检基线+PATH 前缀。
 - 下一轮入口：候选池——①mongodb/usage 第 4 篇候选（事务/读偏好 readPreference）；②场景题 grep 非同构；③ai 线间歇。每轮开工先同步+定界+体检基线+PATH 前缀。
 - 下一轮入口：候选池——①mongodb/usage 第 3 篇候选（索引进阶/TTL 索引）；②场景题 grep 找非同构；③ai 线间歇。每轮开工先同步+定界+体检基线+PATH 前缀。
