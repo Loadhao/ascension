@@ -2010,6 +2010,7 @@ export default defineConfig({
                         { label: '视觉 Agent：看屏幕操作的计算机使用', link: '/ai/intermediate/agent/13-computer-use/' },
                         { label: 'Agent 可观测性：给非确定性系统装仪表盘', link: '/ai/intermediate/agent/14-agent-observability/' },
                         { label: '企业知识库：RAG 落地全流程', link: '/ai/intermediate/agent/15-knowledge-base/' },
+                        { label: '工具集设计：粒度、描述与错误返回', link: '/ai/intermediate/agent/16-tool-design/' },
                       ],
                     },
                   ],
