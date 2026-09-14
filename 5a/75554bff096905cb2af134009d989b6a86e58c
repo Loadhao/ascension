@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1199
+src/content/docs/mongodb/intermediate/usage/04-read-preference.md
+  h_9324126a55eff3 1-64
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 3-61,64-123
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5a75554bff096905cb2af134009d989b6a86e58c",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
