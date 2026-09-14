@@ -241,6 +241,23 @@
       ],
       "hint": "一切性能优化回到单线程公理——别让任何一条命令跑太久；4.0 的 UNLINK/异步 FLUSHALL 就是把大 key 释放挪出主线程；io-threads 只分担读写解析，执行仍排队。redis-thread-005 考 6.0 IO 多线程模型，本题考单线程的三个瓶颈。",
       "difficulty": 4
+    },
+    {
+      "id": "redis-lua-015",
+      "noteId": "redis/intermediate/usage/05-pipeline-transaction-lua",
+      "type": "single",
+      "q": "读-改-写场景（先 GET 判断再 INCR）为什么推荐用 Lua 而不是 MULTI/EXEC 事务？",
+      "options": [
+        "Lua 脚本整段原子执行，还能在脚本里写判断逻辑（读值再决定写什么）——MULTI/EXEC 只是命令打包顺序执行、不保证中间不被插队，也没有 if 分支能力",
+        "Lua 脚本执行更快是因为它跳过了命令解析环节",
+        "MULTI/EXEC 事务有回滚能力，Lua 反而没有",
+        "Lua 脚本在集群上可以访问任意槽位的 key"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Redis 事务没有回滚（只有 EXEC 前入队错误才整队放弃）；集群上 Lua 访问的所有 key 必须落在同一槽（hash tag 强制）；Pipeline 只省往返、不保证原子。redis-pipe-010 多选考三者边界，本题考 Lua 的核心价值：原子 + 可编程。",
+      "difficulty": 3
     }
   ]
 }

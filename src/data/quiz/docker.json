@@ -275,6 +275,23 @@
       ],
       "hint": "服务名即 DNS 名——Compose 自动建好自定义网络，api 直连 db:5432；排查用 docker compose logs + ps 定位是哪个服务挂了；version 字段在 V2 已废弃新文件直接省略；敏感信息走 .env 或 secrets。docker-compose-007 考 depends_on 语义，本题考卷与项目的生命周期。",
       "difficulty": 3
+    },
+    {
+      "id": "docker-exec-013",
+      "noteId": "docker/basic/fundamentals/02-commands",
+      "type": "single",
+      "q": "容器起不来或异常退出，按笔记的排障顺序与 exec/attach 的区别，正确的是？",
+      "options": [
+        "排查顺序：先 docker logs（看应用输出）→ docker ps -a（看退出码）→ docker inspect（看挂载/端口）；exec 是新开一个进程进入，attach 是接入主进程——exit 会把容器带崩，一般用 exec",
+        "排查先 docker rmi 重建镜像，排除镜像层损坏",
+        "exec 与 attach 等价，都是新开一个进程，随便用",
+        "attach 接入主进程后 exit 只退出 attach 本身，容器不受影响"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "容器生命周期 = 主进程（PID 1）生命周期——「跑完就退」的命令让容器当场退出不是 bug；最反直觉一条之外还有 port is already allocated（ss -ltnp 查占用）。docker-cmd-009 考 -p/--rm，本题考排障顺序与 exec/attach 边界。",
+      "difficulty": 3
     }
   ]
 }
