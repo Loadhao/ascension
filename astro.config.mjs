@@ -1197,6 +1197,7 @@ export default defineConfig({
                         { label: '分页与游标：深翻页的 Mongo 版', link: '/mongodb/intermediate/usage/02-pagination/' },
                         { label: 'TTL 索引与数据过期', link: '/mongodb/intermediate/usage/03-ttl-index/' },
                         { label: '读偏好与读写关注', link: '/mongodb/intermediate/usage/04-read-preference/' },
+                        { label: '多文档事务：语法、前提与正确姿势', link: '/mongodb/intermediate/usage/05-transactions/' },
                       ],
                     },
                   ],

@@ -42,6 +42,12 @@
       "group": "使用进阶"
     },
     {
+      "id": "txn",
+      "label": "多文档事务",
+      "href": "/mongodb/intermediate/usage/05-transactions/",
+      "group": "使用进阶"
+    },
+    {
       "id": "sharding",
       "label": "分片集群",
       "href": "/mongodb/advanced/sharding/01-sharding-cluster/",
@@ -120,6 +126,11 @@
       "source": "readpref",
       "target": "aggregation",
       "label": "重查询走从库"
+    },
+    {
+      "source": "readpref",
+      "target": "txn",
+      "label": "事务的前提组合"
     }
   ]
 }
