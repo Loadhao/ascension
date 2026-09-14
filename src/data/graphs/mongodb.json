@@ -60,6 +60,12 @@
       "group": "使用进阶"
     },
     {
+      "id": "idxadv",
+      "label": "索引进阶",
+      "href": "/mongodb/intermediate/usage/08-index-advanced/",
+      "group": "使用进阶"
+    },
+    {
       "id": "sharding",
       "label": "分片集群",
       "href": "/mongodb/advanced/sharding/01-sharding-cluster/",
@@ -153,6 +159,11 @@
       "source": "docmodel",
       "target": "schemapattern",
       "label": "基础建模的进阶套路"
+    },
+    {
+      "source": "aggregation",
+      "target": "idxadv",
+      "label": "聚合走索引"
     }
   ]
 }

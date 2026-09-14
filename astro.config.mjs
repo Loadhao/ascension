@@ -1200,6 +1200,7 @@ export default defineConfig({
                         { label: '多文档事务：语法、前提与正确姿势', link: '/mongodb/intermediate/usage/05-transactions/' },
                         { label: 'Change Streams：原生变更监听', link: '/mongodb/intermediate/usage/06-change-streams/' },
                         { label: 'Schema 设计模式：子集、扩展引用与桶', link: '/mongodb/intermediate/usage/07-schema-patterns/' },
+                        { label: '索引进阶：部分、稀疏与通配符索引', link: '/mongodb/intermediate/usage/08-index-advanced/' },
                       ],
                     },
                   ],
