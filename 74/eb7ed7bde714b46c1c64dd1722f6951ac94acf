@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 1205
+src/content/docs/mongodb/intermediate/usage/10-backup.md
+  h_9324126a55eff3 1-66
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 56-61,184-188
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "74eb7ed7bde714b46c1c64dd1722f6951ac94acf",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
