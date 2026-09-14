@@ -1428,6 +1428,7 @@ export default defineConfig({
                         { label: '全链路灰度：泳道与流量染色', link: '/distributed/advanced/availability/04-full-link-gray/' },
                         { label: '混沌工程：主动制造故障', link: '/distributed/advanced/availability/05-chaos-engineering/' },
                         { label: '单元化部署：异地多活的终态', link: '/distributed/advanced/availability/06-cell-based/' },
+                        { label: '大促保障：从压测到复盘', link: '/distributed/advanced/availability/07-promo-readiness/' },
                       ],
                     },
                     {
