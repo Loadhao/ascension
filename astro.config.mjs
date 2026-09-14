@@ -1420,6 +1420,7 @@ export default defineConfig({
                         { label: '风控系统：从名单到实时决策', link: '/distributed/intermediate/case-studies/27-risk-control/' },
                         { label: '售后退款：逆向流程的状态机与资金一致', link: '/distributed/intermediate/case-studies/28-refund/' },
                         { label: '排行榜：实时排名的方案矩阵', link: '/distributed/intermediate/case-studies/29-leaderboard/' },
+                        { label: '敏感数据：加密存储与盲索引查询', link: '/distributed/intermediate/case-studies/30-data-masking/' },
                       ],
                     },
                   ],
