@@ -2128,6 +2128,25 @@
       ],
       "hint": "扩展实现按约定放在 META-INF/dubbo/接口全限定名（key=实现类）；Dubbo3 把接口级发现升级为应用级发现，注册数据量降一个数量级。java-dubboarch-108 考注册中心故障影响，本题考 SPI 与自适应扩展。",
       "difficulty": 4
+    },
+    {
+      "id": "java-dubbgov-125",
+      "noteId": "java/advanced/dubbo/02-governance",
+      "type": "multiple",
+      "q": "关于 Dubbo 集群容错与流量治理，正确的有？（多选）",
+      "options": [
+        "容错按「失败的业务代价」选：读接口 Failover、写接口 Failfast、旁路打点 Failsafe",
+        "客户端超时应略大于服务端，否则服务端还在跑、客户端已放弃，线程与连接被白白占用",
+        "mock=fail:return null 让旁路依赖挂掉时不拖垮主流程，适合「登录后拉用户偏好」这类调用",
+        "失败放大系数 = retries + 1 只在理论存在，实际下游抖动不会放大流量"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——重试是流量放大器，超时与重试次数必须按下游容量一起算；一致性哈希负载均衡对缓存友好（同参数落同台机器）。java-dubbfail-109 考 Failover 重试扣款事故，本题考治理全景。",
+      "difficulty": 3
     }
   ]
 }

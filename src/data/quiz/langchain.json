@@ -125,6 +125,23 @@
       ],
       "hint": "末项反了——业务只 import langchain 与 langgraph，换供应商只改 init_chat_model 的一个字符串；LLMChain/AgentExecutor 在 1.0 已淘汰，搜资料认准 1.0 文档。lc-pkg-001 考 init_chat_model 统一入口，本题考分层与消息模型。",
       "difficulty": 3
+    },
+    {
+      "id": "lc-pipe-008",
+      "noteId": "langchain/basic/core/03-lcel-runnable",
+      "type": "single",
+      "q": "LangChain 里 prompt | model | parser 用「|」连接成链——这个语法的机制与「什么时候用链、什么时候上图（LangGraph）」的分界是？",
+      "options": [
+        "所有组件都实现 Runnable 协议，「|」把前一步输出接为下一步输入、整条链仍是 Runnable（流式/并发/降级顺着协议向上传递）；链适合确定性流水线，需要循环/条件分支/中途暂停才上 LangGraph",
+        "「|」是 shell 管道调用，链的每一步在独立进程里执行",
+        "LCEL 链等价于 Agent：模型可以在链中自主决定下一步调用什么工具",
+        "LCEL 只支持 prompt 到 model 两段连接，解析器必须写在链外"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "链是编译期定型的静态流水线、图才是运行期可变的控制流——分界线是「下一步谁说了算」；dict 隐式构成 RunnableParallel（RAG 链第一步 context 走检索、question 透传）。lc-lcel-003 考 Runnable 能力，本题考组合语法与链/图分工。",
+      "difficulty": 3
     }
   ]
 }
