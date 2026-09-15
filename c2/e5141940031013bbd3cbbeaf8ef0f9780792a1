@@ -1,0 +1,25 @@
+docs/coverage-deepening.md
+  s_25361eeba9a974::t_4427120b8cb94e 7,93-94
+src/data/quiz/network.json
+  s_25361eeba9a974::t_f54136a1b0d1c8 272-288
+src/data/quiz/python.json
+  s_25361eeba9a974::t_792a480b2c6a93 703-719
+src/data/quiz/vue.json
+  s_25361eeba9a974::t_9f89575bc80013 87-103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c2e5141940031013bbd3cbbeaf8ef0f9780792a1",
+  "prompts": {},
+  "sessions": {
+    "s_25361eeba9a974": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "7a4220ff-9a26-4fc6-9843-473f290dc177",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
