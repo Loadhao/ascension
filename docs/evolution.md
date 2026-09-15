@@ -294,6 +294,8 @@
 
 ### 第 120 轮（2026-09-08，第四十五次启动，内容补充模式）：Stream 流处理（js/intermediate/node 第 4 篇）——grep 确认 Stream 在 node 分类零覆盖；四种流类型、背压自动调节（pipe vs 手动 data/drain）、pipeline 错误传播、内存 O(1) vs O(文件大小) 对比。五连验证全绿，提交 53c2911 已推送。js/intermediate/node 4 篇成对（GC/模块/EventEmitter/Stream），Node 主线闭环。
 
+### 第 121 轮（2026-09-08，第四十六次启动，内容补充模式）：中间件模型（js/intermediate/node 第 5 篇）——洋葱模型 grep 零覆盖；Express 线性回调 vs Koa 洋葱圈 await、compose 手写（递归+Promise）、响应后逻辑的能力差异、四参数错误中间件陷阱。五连验证全绿，提交 85a7624 已推送。js/intermediate/node 5 篇。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
