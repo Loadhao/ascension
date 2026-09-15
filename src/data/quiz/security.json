@@ -118,6 +118,23 @@
       ],
       "hint": "纵深还包括：最小权限（应用账号禁 DDL）、不回显 SQL 异常原文（防盲注探测结构）；黑名单过滤是安慰剂。sec-sqli-003 考预编译原理，本题考 MyBatis 落点与纵深。",
       "difficulty": 4
+    },
+    {
+      "id": "sec-csrfdef-008",
+      "noteId": "security/basic/core/02-csrf",
+      "type": "single",
+      "q": "防 CSRF 的三层递进手段与「token 认证架构天然免疫」的说法，按笔记正确的是？",
+      "options": [
+        "优先级 SameSite Cookie（Lax 默认够用）→ CSRF Token（与会话绑定、一次或短期有效）→ 高危二次确认；Authorization 头带 token 的架构基本免疫 CSRF（头不会被浏览器自动附带），但 token 暴露给 JS 就换来 XSS 风险——安全是交换",
+        "CSRF Token 应该长期有效并且所有接口共用一个，方便管理",
+        "Referer 校验是第一道也是唯一可靠的防线",
+        "换成 JWT 就彻底没有安全代价，XSS 与 CSRF 同时消失"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "状态变更接口统一 POST/PUT/DELETE，别用 GET 改数据；Referer 可被策略隐藏、不能当唯一防线；与 XSS 的分界——XSS 偷凭证执行代码、CSRF 不偷凭证借浏览器发请求。sec-csrf-002 考攻击前提，本题考防御与交换。",
+      "difficulty": 3
     }
   ]
 }

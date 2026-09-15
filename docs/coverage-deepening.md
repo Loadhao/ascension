@@ -9,6 +9,10 @@
 
 
 
+- [ ] mongodb/intermediate/usage/02-pagination — 第二题考「MongoDB 深分页的游标方案」
+- [ ] python/basic/data-structures/01-list-tuple — 第二题考「tuple 不可变与可哈希的边界」
+- [ ] rocketmq/advanced/core/01-rocketmq-features — 第二题考「事务消息半消息与回查机制」
+
 ### b 类：旧题返修
 
 - [ ] 抽查 hint 质量：hint 复述答案、干扰项不成立的就地返修（每条记录原因）
@@ -91,6 +95,8 @@
 - 2026-09-10 · 第三十四轮：3 道核心笔记第二题（vue-dataflow-005 / lc-template-016 / k8s-undo-007，difficulty 3/4/3；vue-component-model 与 langchain prompts、k8s rollout 均为首题或与现有题取不重叠面）· 本轮提交主题：feat: 题库深化第三十四轮
 
 - 2026-09-10 · 第三十五轮：3 道核心笔记第二题（vue-context-006 / py-magicmethod-039 / net-cors-016，difficulty 3/4/3；python class-basics 原定角度与 py-oop-020 重合换魔术方法协议；顺带清理状态文件重复小节与已执行残留条目）· 本轮提交主题：feat: 题库深化第三十五轮
+
+- 2026-09-10 · 第三十六轮：3 道核心笔记第二题（lc-superstep-016 / java-jettyconn-126 / sec-csrfdef-008，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第三十六轮
 
 ## 经验与规则
 

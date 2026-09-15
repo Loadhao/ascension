@@ -2147,6 +2147,23 @@
       ],
       "hint": "末项反了——重试是流量放大器，超时与重试次数必须按下游容量一起算；一致性哈希负载均衡对缓存友好（同参数落同台机器）。java-dubbfail-109 考 Failover 重试扣款事故，本题考治理全景。",
       "difficulty": 3
+    },
+    {
+      "id": "java-jettyconn-126",
+      "noteId": "java/basic/tomcat/02-jetty-architecture",
+      "type": "single",
+      "q": "Jetty Connector 的三件套分工与「ManagedSelector 返回 Runnable」的设计意图，按笔记正确的是？",
+      "options": [
+        "Acceptor 阻塞 accept（接入期简单可靠，接入后转事件驱动）、ManagedSelector 管理 SelectionKey 并让 EndPoint 返回 Runnable 交线程池执行（事件检测与业务处理解耦）、Connection 负责协议解析出 Request 交 Handler——Jetty 用回调模拟异步 IO",
+        "Acceptor 非阻塞轮询新连接，SelectorManager 负责协议解析",
+        "Connection 直接操作 socket 写业务响应，绕过 Handler",
+        "三件套各自持有独立线程池，互不共享"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "全局唯一线程池是 Jetty 与 Tomcat 的最大结构差异（省资源 vs 隔离性）；Server = 多 Connector + 多 Handler + 一个线程池，无 Service 概念。java-jetty-081 考线程模型分野，本题考 Connector 内部三件套。",
+      "difficulty": 4
     }
   ]
 }

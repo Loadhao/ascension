@@ -159,6 +159,23 @@
       ],
       "hint": "校验不过框架会把错误回喂给模型重试（ToolStrategy）；关键字段给默认值或 Optional，别让一次解析失败打断主流程——「约束交给 schema，不交给措辞」是 prompt 工程化的分水岭。lc-structout-002 考 with_structured_output 可靠的原因，本题考模板资产化与约束写法。",
       "difficulty": 4
+    },
+    {
+      "id": "lc-superstep-010",
+      "noteId": "langchain/intermediate/graph/01-state-graph",
+      "type": "single",
+      "q": "LangGraph 把 Agent 的 while 循环显式化为图——节点、边与「循环」分别怎么表达？并行节点写同一普通字段会怎样？",
+      "options": [
+        "节点返回增量 dict、字段可配 reducer 决定合并方式；「循环」就是回头边（条件边函数返回下一个节点名）；无 reducer 的普通字段被并行节点同时写会直接报错——框架逼你在 schema 上写清合并意图",
+        "循环由节点内部 while 语句实现，图只表达顺序流程",
+        "并行写同一字段会静默合并成一个 dict",
+        "所有字段默认追加合并，不需要配置 reducer"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "State 定合并、Node 定行为、Edge 定走向——三张表读懂任何一张图；compile() 之后依然是 Runnable，invoke/stream 与链完全一致。lc-graph-004 考 reducer 合并增量，本题考执行模型与显式控制流。",
+      "difficulty": 4
     }
   ]
 }
