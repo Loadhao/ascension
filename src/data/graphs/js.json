@@ -78,6 +78,12 @@
       "group": "运行时"
     },
     {
+      "id": "envconfig",
+      "label": "环境变量与配置",
+      "href": "/js/intermediate/node/07-env-config/",
+      "group": "运行时"
+    },
+    {
       "id": "websocket",
       "label": "WebSocket 原理",
       "href": "/js/intermediate/web/01-websocket/",
@@ -187,6 +193,11 @@
       "source": "middleware",
       "target": "cluster",
       "label": "服务层的多核"
+    },
+    {
+      "source": "cluster",
+      "target": "envconfig",
+      "label": "部署配置注入"
     }
   ]
 }
