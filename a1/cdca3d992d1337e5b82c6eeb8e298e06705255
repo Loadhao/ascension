@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 764
+src/content/docs/js/intermediate/node/07-env-config.md
+  h_9324126a55eff3 1-71
+src/data/graphs/js.json
+  h_9324126a55eff3 80-85,196-200
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a1cdca3d992d1337e5b82c6eeb8e298e06705255",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
