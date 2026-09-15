@@ -1428,6 +1428,7 @@ export default defineConfig({
                         { label: '售后退款：逆向流程的状态机与资金一致', link: '/distributed/intermediate/case-studies/28-refund/' },
                         { label: '排行榜：实时排名的方案矩阵', link: '/distributed/intermediate/case-studies/29-leaderboard/' },
                         { label: '敏感数据：加密存储与盲索引查询', link: '/distributed/intermediate/case-studies/30-data-masking/' },
+                        { label: '布隆过滤器：空间高效的存在性判断', link: '/distributed/intermediate/case-studies/31-bloom-filter/' },
                       ],
                     },
                   ],

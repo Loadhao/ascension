@@ -294,6 +294,12 @@
       "group": "案例"
     },
     {
+      "id": "bloom",
+      "label": "布隆过滤器",
+      "href": "/distributed/intermediate/case-studies/31-bloom-filter/",
+      "group": "案例"
+    },
+    {
       "id": "refund",
       "label": "售后退款",
       "href": "/distributed/intermediate/case-studies/28-refund/",
@@ -885,6 +891,11 @@
       "source": "masking",
       "target": "recon",
       "label": "泄露必被发现"
+    },
+    {
+      "source": "flashsale",
+      "target": "bloom",
+      "label": "缓存穿透防护"
     }
   ]
 }
