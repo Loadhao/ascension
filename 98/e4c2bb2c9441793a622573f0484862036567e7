@@ -1,0 +1,18 @@
+src/content/docs/js/intermediate/node/07-env-config.md
+  h_9324126a55eff3 4
+src/data/graphs/distributed.json
+  h_9324126a55eff3 3-427,430-888
+src/data/graphs/mongodb.json
+  h_9324126a55eff3 200-209
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "98e4c2bb2c9441793a622573f0484862036567e7",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
