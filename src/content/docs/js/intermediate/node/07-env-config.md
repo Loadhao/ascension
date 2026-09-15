@@ -1,7 +1,7 @@
 ---
 title: 环境变量与配置管理
 description: process.env 的特性与陷阱、.env 文件与 dotenv、配置分层策略、敏感配置不入库
-level: basic
+level: intermediate
 core: true
 ---
 

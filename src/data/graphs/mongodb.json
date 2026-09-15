@@ -197,6 +197,16 @@
       "source": "backup",
       "target": "sec",
       "label": "备份也要管权限"
+    },
+    {
+      "source": "aggregation",
+      "target": "mongopage",
+      "label": "聚合结果分页"
+    },
+    {
+      "source": "mongopage",
+      "target": "ttl",
+      "label": "过期数据清理"
     }
   ]
 }
