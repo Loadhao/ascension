@@ -72,6 +72,12 @@
       "group": "运行时"
     },
     {
+      "id": "cluster",
+      "label": "cluster 与 workers",
+      "href": "/js/intermediate/node/06-cluster-workers/",
+      "group": "运行时"
+    },
+    {
       "id": "websocket",
       "label": "WebSocket 原理",
       "href": "/js/intermediate/web/01-websocket/",
@@ -176,6 +182,11 @@
       "source": "stream",
       "target": "middleware",
       "label": "响应流的框架层"
+    },
+    {
+      "source": "middleware",
+      "target": "cluster",
+      "label": "服务层的多核"
     }
   ]
 }
