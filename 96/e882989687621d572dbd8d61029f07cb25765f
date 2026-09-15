@@ -1,0 +1,20 @@
+docs/coverage-deepening.md
+  h_9324126a55eff3 12-15,99-100
+src/data/quiz/java.json
+  h_9324126a55eff3 2150-2166
+src/data/quiz/langchain.json
+  h_9324126a55eff3 162-178
+src/data/quiz/security.json
+  h_9324126a55eff3 121-137
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "96e882989687621d572dbd8d61029f07cb25765f",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
