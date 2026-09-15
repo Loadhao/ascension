@@ -292,6 +292,8 @@
 
 ### 第 119 轮（2026-09-08，第四十四次启动，内容补充模式）：EventEmitter 发布订阅（js/intermediate/node 第 3 篇）——grep 确认 EventEmitter/洋葱模型/发布订阅零覆盖；Map 事件表手写、once 包装技巧、error 事件特殊地位、监听器泄漏。五连验证全绿，提交 184dbec 已推送。js/intermediate/node 3 篇。
 
+### 第 120 轮（2026-09-08，第四十五次启动，内容补充模式）：Stream 流处理（js/intermediate/node 第 4 篇）——grep 确认 Stream 在 node 分类零覆盖；四种流类型、背压自动调节（pipe vs 手动 data/drain）、pipeline 错误传播、内存 O(1) vs O(文件大小) 对比。五连验证全绿，提交 53c2911 已推送。js/intermediate/node 4 篇成对（GC/模块/EventEmitter/Stream），Node 主线闭环。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
