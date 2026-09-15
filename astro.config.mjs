@@ -741,6 +741,7 @@ export default defineConfig({
                         { label: '原型链与继承', link: '/js/basic/core/03-prototype-class/' },
                         { label: 'this 与箭头函数', link: '/js/basic/core/04-this-binding/' },
                         { label: '事件循环与异步演进', link: '/js/basic/core/05-event-loop/' },
+                        { label: '防抖与节流：控制执行频率', link: '/js/basic/core/06-debounce-throttle/' },
                       ],
                     },
                   ],

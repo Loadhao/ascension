@@ -36,6 +36,12 @@
       "group": "核心"
     },
     {
+      "id": "debounce",
+      "label": "防抖与节流",
+      "href": "/js/basic/core/06-debounce-throttle/",
+      "group": "核心"
+    },
+    {
       "id": "gcmemory",
       "label": "GC 与内存管理",
       "href": "/js/intermediate/node/01-node-gc-memory/",
@@ -132,6 +138,11 @@
       "source": "modules",
       "target": "gcmemory",
       "label": "require 缓存与内存"
+    },
+    {
+      "source": "eventloop",
+      "target": "debounce",
+      "label": "高频事件的解药"
     }
   ]
 }
