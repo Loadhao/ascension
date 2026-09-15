@@ -290,6 +290,8 @@
 
 ### 第 118 轮（2026-09-08，第四十三次启动，内容补充模式）：防抖与节流（js/basic/core 第 6 篇）——grep 确认防抖/节流仅闭包篇顺带无专篇；防抖「最后一次说了算」vs 节流「固定频率」、闭包保存 timer 手写实现、immediate 变体、场景选择矩阵。五连验证全绿，提交 8f725e2 已推送。js/basic/core 6 篇。
 
+### 第 119 轮（2026-09-08，第四十四次启动，内容补充模式）：EventEmitter 发布订阅（js/intermediate/node 第 3 篇）——grep 确认 EventEmitter/洋葱模型/发布订阅零覆盖；Map 事件表手写、once 包装技巧、error 事件特殊地位、监听器泄漏。五连验证全绿，提交 184dbec 已推送。js/intermediate/node 3 篇。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
