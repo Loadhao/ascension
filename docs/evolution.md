@@ -284,8 +284,6 @@
 - 下一轮入口：候选池——①mongodb/usage 11 篇已厚，歇；②场景题 grep 非同构；③ai 线间歇。每轮开工先同步+定界+体检基线+PATH 前缀。
 - 下一轮入口：候选池——①mongodb/usage 第 11 篇候选（安全：认证与角色）或歇；②场景题 grep 非同构；③ai 线间歇。每轮开工先同步+定界+体检基线+PATH 前缀。
 
-### 第 117 轮（2026-09-08，第四十二次启动，内容补充模式）：Node 模块系统（js/intermediate/node 第 2 篇）——CJS 运行时加载与循环引用部分导出、ESM 静态分析与活绑定/tree-shaking、互操作三坑（type:module/__dirname/require ESM）；过程小错即改：description 含 "type: module" 裸冒号触发 YAML 解析错误，加引号修复。五连验证全绿，提交 d1c6767 已推送。js/intermediate/node 2 篇。
-
 ## 经验与判断沉淀
 
 ### 工作纪律
