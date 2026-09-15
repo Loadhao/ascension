@@ -1,0 +1,22 @@
+docs/coverage-deepening.md
+  h_9324126a55eff3 16-19,105-107
+src/data/quiz/mongodb.json
+  h_9324126a55eff3 170-186
+src/data/quiz/python.json
+  h_9324126a55eff3 720-770
+src/data/quiz/redis.json
+  h_9324126a55eff3 278-294
+src/data/quiz/rocketmq.json
+  h_9324126a55eff3 15-17,32-36,51-53,68-70,79-85,100-102,111-117,132-134,149-151,160-166,181-183,198-202,204-220
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3d1ab04b90e4a5e5b6c0a0c3eeba22311944fda1",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
