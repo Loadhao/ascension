@@ -757,6 +757,7 @@ export default defineConfig({
                         { label: '概览', link: '/js/intermediate/node/' },
                         { label: 'GC 与内存管理', link: '/js/intermediate/node/01-node-gc-memory/' },
                         { label: '模块系统：CommonJS 与 ESM', link: '/js/intermediate/node/02-modules/' },
+                        { label: 'EventEmitter：发布订阅模式', link: '/js/intermediate/node/03-event-emitter/' },
                       ],
                     },
                     {

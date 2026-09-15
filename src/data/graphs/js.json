@@ -54,6 +54,12 @@
       "group": "运行时"
     },
     {
+      "id": "emitter",
+      "label": "EventEmitter",
+      "href": "/js/intermediate/node/03-event-emitter/",
+      "group": "运行时"
+    },
+    {
       "id": "websocket",
       "label": "WebSocket 原理",
       "href": "/js/intermediate/web/01-websocket/",
@@ -143,6 +149,11 @@
       "source": "eventloop",
       "target": "debounce",
       "label": "高频事件的解药"
+    },
+    {
+      "source": "modules",
+      "target": "emitter",
+      "label": "Node 异步的底座"
     }
   ]
 }
