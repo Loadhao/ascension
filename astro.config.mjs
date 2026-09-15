@@ -759,6 +759,7 @@ export default defineConfig({
                         { label: '模块系统：CommonJS 与 ESM', link: '/js/intermediate/node/02-modules/' },
                         { label: 'EventEmitter：发布订阅模式', link: '/js/intermediate/node/03-event-emitter/' },
                         { label: 'Stream：处理大文件的正确姿势', link: '/js/intermediate/node/04-stream/' },
+                        { label: '中间件模型：从 Express 到 Koa 的洋葱', link: '/js/intermediate/node/05-middleware/' },
                       ],
                     },
                     {

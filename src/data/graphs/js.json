@@ -66,6 +66,12 @@
       "group": "运行时"
     },
     {
+      "id": "middleware",
+      "label": "中间件模型",
+      "href": "/js/intermediate/node/05-middleware/",
+      "group": "运行时"
+    },
+    {
       "id": "websocket",
       "label": "WebSocket 原理",
       "href": "/js/intermediate/web/01-websocket/",
@@ -165,6 +171,11 @@
       "source": "emitter",
       "target": "stream",
       "label": "流基于事件"
+    },
+    {
+      "source": "stream",
+      "target": "middleware",
+      "label": "响应流的框架层"
     }
   ]
 }
