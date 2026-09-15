@@ -84,6 +84,23 @@
       ],
       "hint": "组件内 defineModel()（3.4+）可以少写样板、多个 v-model 用参数区分；跨多层传递用 provide/inject，别把 props 链拉成穿山隧道；模板编译为渲染函数并做静态提升——静态内容只创建一次。vue 方向第二题。",
       "difficulty": 3
+    },
+    {
+      "id": "vue-context-006",
+      "noteId": "vue/basic/core/03-composition-api",
+      "type": "single",
+      "q": "组合式函数 useMouse 里 onMounted/onUnmounted 注册了监听器，为什么在组件 setup 中调用它能正确清理？在异步回调里再注册生命周期钩子会怎样？",
+      "options": [
+        "生命周期钩子必须在 setup 同步执行时注册——此时「组件实例正在初始化」的上下文存在；组合式函数在 setup 里调用即拿到该上下文，异步回调里再注册会失联",
+        "生命周期钩子是全局的，任何时机注册都能关联到最近的组件",
+        "onUnmounted 的清理靠 GC 自动完成，无需显式注册",
+        "组合式函数必须在 <script setup> 里定义才能使用生命周期"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "组合式函数本质是普通函数——状态+生命周期打包复用（useMouse 返回 {x, y}）；按「功能」组织代码取代 Options API 按「类型」归堆。vue-mixin-003 考组合式优于 mixin 的原因，本题考 setup 上下文与注册时机。",
+      "difficulty": 3
     }
   ]
 }

@@ -269,6 +269,23 @@
       ],
       "hint": "「URL 到页面」不只是背诵题，是排障地图——与分层排障同一思想：沿链定位、逐段收缩；服务端高频故障点：网关 502/504、慢 SQL、线程池打满。net-url-007 多选考链路顺序，本题考排障应用。",
       "difficulty": 3
+    },
+    {
+      "id": "net-cors-017",
+      "noteId": "network/basic/http/05-cors",
+      "type": "single",
+      "q": "「接口在 Postman 里好好的，浏览器里就跨域报错」——按笔记的正确理解与带 Cookie 跨域的配置要求是？",
+      "options": [
+        "跨域不是服务器拒绝请求，是浏览器把响应扣下不给 JS（服务器日志里请求正常到达）；带 Cookie 跨域三条件缺一不可：Allow-Origin 明确写来源（不能 *）+ Allow-Credentials: true + Cookie 的 SameSite/Secure 配合",
+        "Postman 与浏览器的差异是 Postman 会自动加 CORS 响应头",
+        "跨域时请求根本不会到达服务器，服务器日志里看不到",
+        "只要把 Allow-Origin 设为 * 就能支持带 Cookie 的跨域"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "同源 = 协议+域名+端口全等；非简单请求（带 Authorization/JSON/PUT DELETE）先发 OPTIONS 预检；CORS 防「读」、CSRF 防「写」，两者互补。network 方向 CORS 笔记首题。",
+      "difficulty": 3
     }
   ]
 }

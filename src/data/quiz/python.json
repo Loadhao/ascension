@@ -700,6 +700,23 @@
       ],
       "hint": "修复的本质是「把变量地址换成定义时的值快照」；nonlocal 是改写 enclosing 层变量的钥匙（LEGB 查找链 Local→Enclosing→Global→Built-in，找到即停），与固定值无关。py-default-005 考可变默认值（同一坑的参数形态），本题考闭包延迟绑定。",
       "difficulty": 4
+    },
+    {
+      "id": "py-magicmethod-040",
+      "noteId": "python/basic/oop/01-class-basics",
+      "type": "single",
+      "q": "自定义 __eq__ 时返回 NotImplemented（不是 NotImplementedError），它的含义与配套要求是？",
+      "options": [
+        "表示「我不会比这个类型」——解释器转而尝试对面的 __eq__；放进 set/dict 作 key 还要同时重写 __hash__；只写一个显示方法时优先 __repr__（__str__ 缺省回落到它）",
+        "NotImplemented 是一个异常，抛出后调用方应捕获并降级",
+        "重写 __eq__ 后默认的 hash 仍可用，无需关心 __hash__",
+        "__repr__ 面向用户、__str__ 面向开发者，两者不能只写一个"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "重写 __eq__ 会把 __hash__ 置为 None（对象变不可哈希），所以成对重写；实现了 __getitem__ 的类即使没有 __iter__ 也能被 for 迭代——鸭子协议看行为不看类型。py-oop-020 考 __new__/__init__ 分工，本题考魔术方法协议。",
+      "difficulty": 4
     }
   ]
 }
