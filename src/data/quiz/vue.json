@@ -67,6 +67,23 @@
       ],
       "hint": "依赖收集是「组件渲染读到 state.count 时记进依赖表」，修改时按表精准通知——渲染粒度细的根源；ref 是基本类型的包装（.value 是依赖收集的钩子）；与 React 对照记：推模式 vs 拉模式。vue 方向首题。",
       "difficulty": 3
+    },
+    {
+      "id": "vue-dataflow-005",
+      "noteId": "vue/basic/core/02-component-model",
+      "type": "single",
+      "q": "Vue 的单向数据流与 v-model 的关系，按笔记正确的是？",
+      "options": [
+        "子组件不能改 props（数据只有所有者能改），要改就 emit 事件由父组件动手；v-model 只是「传 :modelValue + 监听 @update:modelValue」的语法糖，没有破坏单向数据流",
+        "v-model 实现了真正的双向绑定，子组件可以直接修改父组件的数据",
+        "props 是可变的引用，子组件修改后会自动同步回父组件",
+        "v-model 只能用于原生 input 元素，自定义组件无法使用"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "组件内 defineModel()（3.4+）可以少写样板、多个 v-model 用参数区分；跨多层传递用 provide/inject，别把 props 链拉成穿山隧道；模板编译为渲染函数并做静态提升——静态内容只创建一次。vue 方向第二题。",
+      "difficulty": 3
     }
   ]
 }

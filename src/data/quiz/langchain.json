@@ -142,6 +142,23 @@
       ],
       "hint": "链是编译期定型的静态流水线、图才是运行期可变的控制流——分界线是「下一步谁说了算」；dict 隐式构成 RunnableParallel（RAG 链第一步 context 走检索、question 透传）。lc-lcel-003 考 Runnable 能力，本题考组合语法与链/图分工。",
       "difficulty": 3
+    },
+    {
+      "id": "lc-template-009",
+      "noteId": "langchain/basic/core/02-prompts-structured-output",
+      "type": "single",
+      "q": "按 prompt 模板与结构化输出的工程化思路，正确的做法是？",
+      "options": [
+        "模板 = 固定骨架 + 变量字典（invoke 出标准消息与模型解耦），few-shot 与历史用 MessagesPlaceholder 注入；结构化输出把约束写进 Pydantic Field（范围/枚举/description），比在 prompt 里喊「请输出 JSON」可靠",
+        "变量应该用 f-string 直接拼进 prompt 字符串，更直观",
+        "结构化输出校验失败就直接抛异常终止主流程，重试没有意义",
+        "Pydantic 的 Field 约束只是文档说明，运行时不起作用"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "校验不过框架会把错误回喂给模型重试（ToolStrategy）；关键字段给默认值或 Optional，别让一次解析失败打断主流程——「约束交给 schema，不交给措辞」是 prompt 工程化的分水岭。lc-structout-002 考 with_structured_output 可靠的原因，本题考模板资产化与约束写法。",
+      "difficulty": 4
     }
   ]
 }

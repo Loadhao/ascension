@@ -14,6 +14,10 @@
 - [ ] security/basic/core/02-csrf — 第二题考「CSRF 与 XSS 的攻击面差异：伪造请求 vs 执行脚本」
 
 
+- [ ] vue/basic/core/03-composition-api — 第二题考「组合式函数的复用边界与响应式解包」
+- [ ] python/basic/oop/01-class-basics — 第二题考「__new__ 与 __init__ 的分工」
+- [ ] network/basic/http/05-cors — 第二题考「CORS 预检与简单请求的判定」（执行时核准角度）
+
 ### b 类：旧题返修
 
 - [ ] 抽查 hint 质量：hint 复述答案、干扰项不成立的就地返修（每条记录原因）
@@ -92,6 +96,8 @@
 - 2026-09-10 · 第三十二轮：3 道核心笔记第二题（k8s-declarative-003 / netty-bufptr-007 / java-dubbospi-124，difficulty 3/4/4；队列空按池重新选点执行）· 本轮提交主题：feat: 题库深化第三十二轮
 
 - 2026-09-10 · 第三十三轮：3 道核心笔记第二题（vue-proxy-004 / java-dubbgov-124 / lc-pipe-015，difficulty 3/3/3；vue 条目原记 declarative-ui 实为 reactivity 笔记；lcel 与 langchain/java 两条各与现有题取不重叠面）· 本轮提交主题：feat: 题库深化第三十三轮
+
+- 2026-09-10 · 第三十四轮：3 道核心笔记第二题（vue-dataflow-005 / lc-template-016 / k8s-undo-007，difficulty 3/4/3；vue-component-model 与 langchain prompts、k8s rollout 均为首题或与现有题取不重叠面）· 本轮提交主题：feat: 题库深化第三十四轮
 
 ## 经验与规则
 

@@ -101,6 +101,21 @@
       ],
       "hint": "组件间零直连、全靠监听 apiserver——任何组件重启都不丢状态（状态在 etcd）；排障第一问：这个对象对应的控制器在哪个循环里、期望状态是什么。k8s-arch-001 考 scheduler 故障影响，本题考声明式调谐模型。",
       "difficulty": 3
+    },
+    {
+      "id": "k8s-undo-007",
+      "noteId": "kubernetes/basic/core/03-deployment-rollout",
+      "type": "judge",
+      "q": "kubectl rollout undo 回滚是一次「全新发布」，需要重新构建镜像并中断流量。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "回滚只是把旧 ReplicaSet 的副本数调回来、新 RS 归零——同样平滑滚动；旧 RS 默认保留 revisionHistoryLimit: 10 个，设成 0 就没有可回滚的版本了；发布安全与 readiness 探针直接挂钩。k8s-rollout-003 考滚动过程的 Pod 总数计算，本题考回滚机制。",
+      "difficulty": 3
     }
   ]
 }
