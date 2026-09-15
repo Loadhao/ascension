@@ -296,6 +296,8 @@
 
 ### 第 121 轮（2026-09-08，第四十六次启动，内容补充模式）：中间件模型（js/intermediate/node 第 5 篇）——洋葱模型 grep 零覆盖；Express 线性回调 vs Koa 洋葱圈 await、compose 手写（递归+Promise）、响应后逻辑的能力差异、四参数错误中间件陷阱。五连验证全绿，提交 85a7624 已推送。js/intermediate/node 5 篇。
 
+### 第 122 轮（2026-09-08，第四十七次启动，内容补充模式）：cluster 与 worker_threads（js/intermediate/node 第 6 篇）——单线程准确含义、多进程 vs 多线程对比选型、CPU 密集解法；过程小错即改：description 首引号致 YAML 解析错误，构建拦截后修复。五连验证全绿，提交 c63ca06 已推送。js/intermediate/node 6 篇。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
