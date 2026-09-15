@@ -717,6 +717,57 @@
       ],
       "hint": "重写 __eq__ 会把 __hash__ 置为 None（对象变不可哈希），所以成对重写；实现了 __getitem__ 的类即使没有 __iter__ 也能被 for 迭代——鸭子协议看行为不看类型。py-oop-020 考 __new__/__init__ 分工，本题考魔术方法协议。",
       "difficulty": 4
+    },
+    {
+      "id": "py-listgrow-041",
+      "noteId": "python/basic/data-structures/01-list-tuple",
+      "type": "single",
+      "q": "CPython list 的扩容策略与 append 均摊 O(1) 的来源，按笔记正确的是？",
+      "options": [
+        "容量按「新容量 ≈ 1.125 × 旧容量 + 6」阶梯式过度分配；每次扩容搬移 O(n) 的开销被均摊到后续多次 append 上，所以 append 是均摊 O(1)；insert(0, x) 是 O(n) 全员平移",
+        "list 每次扩容精确翻倍，且扩容不发生内存搬移",
+        "append 是严格 O(1)，从不触发任何搬移",
+        "insert(0, x) 也是 O(1)，因为底层是链表"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "头部进出的队列用 collections.deque；tuple 被低估的特性是省内存、CPython 对小 tuple 缓存复用、可哈希可作 dict key；单元素 tuple 必须带逗号 (1,)。py-list-017 多选考选型与坑，本题考扩容机制与均摊来源。",
+      "difficulty": 3
+    },
+    {
+      "id": "py-mrocollab-042",
+      "noteId": "python/basic/oop/02-inheritance-mro",
+      "type": "single",
+      "q": "菱形继承（D 继承 B、C，B/C 都继承 A）里，每个类的 __init__ 都写 super().__init__(**kwargs)，结果是什么？",
+      "options": [
+        "协作式调用沿 C3 线性化的 MRO 逐站传递，A 只被执行一次；mixin 之间统一 **kwargs 透传，谁消费谁取——签名对不上是多继承崩溃的头号原因",
+        "A 的 __init__ 会被执行两次（B 和 C 各调一次）",
+        "super() 固定跳到直接父类，D 的 MRO 与调用顺序无关",
+        "菱形继承在 Python 里是语法错误，必须借助接口类"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "super() 是「MRO 的下一站」而不是「父类」——在 D 的 MRO 上下文里 B 的 super() 可能到 C；多继承主要价值是 mixin（正交能力单元），真正的 is-a 链保持单线。py-mro-008 考 super 的含义，本题考协作式调用的完整姿势。",
+      "difficulty": 4
+    },
+    {
+      "id": "py-hashpair-043",
+      "noteId": "python/basic/data-structures/02-dict-set",
+      "type": "single",
+      "q": "重写了 __eq__ 的自定义类对象放进 set 报 TypeError: unhashable——按笔记的原因与正确修法是？",
+      "options": [
+        "重写 __eq__ 会把 __hash__ 置为 None（对象变不可哈希），必须成对重写 __hash__（如 hash((self.x, self.y))）；哈希碰撞不会出错只会退化性能，PYTHONHASHSEED 每次启动随机化是防哈希碰撞攻击",
+        "set 只接受内置类型，自定义类一律不能放入",
+        "把 __eq__ 删掉恢复默认实现即可，不必写 __hash__",
+        "需要给对象加 @hashable 装饰器开启哈希能力"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "dict/set 是开放寻址哈希表、装载因子超 2/3 扩容；3.7+ dict 保持插入有序是语言保证；频繁 O(1) 成员判断与集合代数是 set 的存在意义。本篇首题。",
+      "difficulty": 4
     }
   ]
 }

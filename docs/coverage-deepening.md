@@ -13,6 +13,10 @@
 - [ ] python/basic/data-structures/01-list-tuple — 第二题考「tuple 不可变与可哈希的边界」
 - [ ] rocketmq/advanced/core/01-rocketmq-features — 第二题考「事务消息半消息与回查机制」
 
+- [ ] network/basic/http/04-auth-state — 第二题考「Cookie/Session/Token 三件套的存哪与失效」
+- [ ] security/basic/core/04-password-storage — 第二题考「密码哈希加盐与慢哈希」
+- [ ] js/basic/core/06-debounce-throttle — 第二题考「防抖与节流的场景分界」
+
 ### b 类：旧题返修
 
 - [ ] 抽查 hint 质量：hint 复述答案、干扰项不成立的就地返修（每条记录原因）
@@ -97,6 +101,9 @@
 - 2026-09-10 · 第三十五轮：3 道核心笔记第二题（vue-context-006 / py-magicmethod-039 / net-cors-016，difficulty 3/4/3；python class-basics 原定角度与 py-oop-020 重合换魔术方法协议；顺带清理状态文件重复小节与已执行残留条目）· 本轮提交主题：feat: 题库深化第三十五轮
 
 - 2026-09-10 · 第三十六轮：3 道核心笔记第二题（lc-superstep-016 / java-jettyconn-126 / sec-csrfdef-008，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第三十六轮
+
+- 2026-09-10 · 第三十七轮：3 道核心笔记第二题（mongo-cursor-008 / py-listgrow-041 / rmq-delaylvl-016，difficulty 4/3/4；rocketmq-features 原定「回查」角度与 rmq-tx-003 撞车，换考延迟消息定时轮）· 本轮提交主题：feat: 题库深化第三十七、三十八轮
+- 2026-09-10 · 第三十八轮（定时触发两次合并执行）：3 道核心笔记第二题（py-mrocollab-042 / py-hashpair-043 / redis-sentinelconf-017，difficulty 4/4/4；js dict-set 条目为入队方向笔误改执行 python 同名笔记）
 
 ## 经验与规则
 

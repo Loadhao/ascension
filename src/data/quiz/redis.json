@@ -275,6 +275,23 @@
       ],
       "hint": "double check 是互斥方案的必需步骤（等锁期间别人可能已重建）；随机 TTL 打散治的是雪崩——击穿是单个热点，别混淆。redis-bloom-004 考穿透与布隆过滤器，本题考击穿的两种重建策略。",
       "difficulty": 4
+    },
+    {
+      "id": "redis-sentinelconf-017",
+      "noteId": "redis/advanced/ha/01-replication-sentinel-cluster",
+      "type": "single",
+      "q": "哨兵的两个容易混的数（quorum 与 leader 选举）以及脑裂残留风险的缓解参数，按笔记正确的是？",
+      "options": [
+        "quorum 只用于「认定客观下线」（门槛可低）；leader 选举必须过半哨兵 majority——所以哨兵部署奇数个 ≥3；脑裂缓解靠 min-replicas-to-write/min-replicas-max-lag 让主库在失联时拒绝写入",
+        "quorum 用于选 leader，majority 用于认定客观下线，两者含义相同",
+        "脑裂无法缓解，分区期间的写入丢失只能靠人工对账修复",
+        "哨兵部署 2 个就够，多数派决策天然成立"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "挑新主四步：排除断线 → replica-priority 优先级 → 复制 offset 最新 → runid 最小；Cluster 用 16384 槽 + MOVED/ASK 重定向 + Gossip 探活。redis-repl-008 考三层递进，本题考哨兵细节与脑裂缓解。",
+      "difficulty": 4
     }
   ]
 }
