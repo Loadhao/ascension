@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 744
+src/content/docs/js/basic/core/06-debounce-throttle.md
+  h_9324126a55eff3 1-81
+src/data/graphs/js.json
+  h_9324126a55eff3 38-43,141-145
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8f725e2d9ac608651406df867a30b61466237064",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
