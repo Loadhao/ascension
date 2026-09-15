@@ -60,6 +60,12 @@
       "group": "运行时"
     },
     {
+      "id": "stream",
+      "label": "Stream 流",
+      "href": "/js/intermediate/node/04-stream/",
+      "group": "运行时"
+    },
+    {
       "id": "websocket",
       "label": "WebSocket 原理",
       "href": "/js/intermediate/web/01-websocket/",
@@ -154,6 +160,11 @@
       "source": "modules",
       "target": "emitter",
       "label": "Node 异步的底座"
+    },
+    {
+      "source": "emitter",
+      "target": "stream",
+      "label": "流基于事件"
     }
   ]
 }
