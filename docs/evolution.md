@@ -298,6 +298,8 @@
 
 ### 第 122 轮（2026-09-08，第四十七次启动，内容补充模式）：cluster 与 worker_threads（js/intermediate/node 第 6 篇）——单线程准确含义、多进程 vs 多线程对比选型、CPU 密集解法；过程小错即改：description 首引号致 YAML 解析错误，构建拦截后修复。五连验证全绿，提交 c63ca06 已推送。js/intermediate/node 6 篇。
 
+### 第 123 轮（2026-09-08，第四十八次启动，内容补充模式）：环境变量与配置管理（js/intermediate/node 第 7 篇）——环境变量 config grep 零确认；process.env 全字符串陷阱、.env 不入库红线、配置分层（代码默认<.env<环境变量）、fail-fast 校验。五连验证全绿，提交 a1cdca3 已推送。js/intermediate/node 7 篇，Node 主线完整（GC/模块/EventEmitter/Stream/中间件/cluster/配置）。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
