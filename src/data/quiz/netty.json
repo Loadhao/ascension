@@ -118,6 +118,23 @@
       ],
       "hint": "泄漏报告（LEAK: ByteBuf.release() was not called）要当 P1 查，排查期把 ResourceLeakDetector 调到 ADVANCED/PARANOID；discardReadBytes 有内存搬移成本，别在高频路径滥用。netty-buf-003 考泄漏处置，本题考双指针与所有权。",
       "difficulty": 4
+    },
+    {
+      "id": "netty-heartbeat-008",
+      "noteId": "netty/intermediate/core/01-heartbeat-idle",
+      "type": "single",
+      "q": "连接假死（对端 hang 死但 TCP 还是 ESTABLISHED）为什么 SO_KEEPALIVE 兜不住？应用层心跳的经典分工与容错纪律是？",
+      "options": [
+        "keepalive 默认 2 小时才出手且只证明「TCP 通」不证明「应用活着」；经典分工是客户端 WRITER_IDLE 定时发 ping、服务端 READER_IDLE 超时 close——判死阈值要容忍 2~3 个周期防误杀，恢复靠重连退避",
+        "keepalive 探测周期默认 5 秒，足够替代应用层心跳",
+        "服务端该用 WRITER_IDLE 发心跳、客户端 READER_IDLE 判死——方向反了也没差",
+        "发现假死后由心跳机制自动恢复连接，无需重连逻辑"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "IdleStateHandler 只产用户事件（写空闲发 ping、读空闲判死），动作由你的 Handler 决定；假死来源还有 NAT 映射超时回收。netty 心跳篇第二题。",
+      "difficulty": 4
     }
   ]
 }

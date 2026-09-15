@@ -9,13 +9,8 @@
 
 
 
-- [ ] mongodb/intermediate/usage/02-pagination — 第二题考「MongoDB 深分页的游标方案」
-- [ ] python/basic/data-structures/01-list-tuple — 第二题考「tuple 不可变与可哈希的边界」
-- [ ] rocketmq/advanced/core/01-rocketmq-features — 第二题考「事务消息半消息与回查机制」
 
-- [ ] network/basic/http/04-auth-state — 第二题考「Cookie/Session/Token 三件套的存哪与失效」
 - [ ] security/basic/core/04-password-storage — 第二题考「密码哈希加盐与慢哈希」
-- [ ] js/basic/core/06-debounce-throttle — 第二题考「防抖与节流的场景分界」
 
 ### b 类：旧题返修
 
@@ -104,6 +99,8 @@
 
 - 2026-09-10 · 第三十七轮：3 道核心笔记第二题（mongo-cursor-008 / py-listgrow-041 / rmq-delaylvl-016，difficulty 4/3/4；rocketmq-features 原定「回查」角度与 rmq-tx-003 撞车，换考延迟消息定时轮）· 本轮提交主题：feat: 题库深化第三十七、三十八轮
 - 2026-09-10 · 第三十八轮（定时触发两次合并执行）：3 道核心笔记第二题（py-mrocollab-042 / py-hashpair-043 / redis-sentinelconf-017，difficulty 4/4/4；js dict-set 条目为入队方向笔误改执行 python 同名笔记）
+
+- 2026-09-10 · 第三十九轮：3 道核心笔记第二题（net-httponly-018 / js-debounce-015 / netty-heartbeat-008，difficulty 3/3/4）；password-storage 条目弃置（笔记尚不存在，并行会话计划中）· 本轮提交主题：feat: 题库深化第三十九轮
 
 ## 经验与规则
 

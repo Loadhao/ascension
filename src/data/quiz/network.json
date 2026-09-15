@@ -286,6 +286,23 @@
       ],
       "hint": "同源 = 协议+域名+端口全等；非简单请求（带 Authorization/JSON/PUT DELETE）先发 OPTIONS 预检；CORS 防「读」、CSRF 防「写」，两者互补。network 方向 CORS 笔记首题。",
       "difficulty": 3
+    },
+    {
+      "id": "net-httponly-018",
+      "noteId": "network/basic/http/04-auth-state",
+      "type": "single",
+      "q": "「Cookie 加了 HttpOnly 就不怕 CSRF 了」与「JWT 天然适合注销场景」——这两个说法按笔记正确的是？",
+      "options": [
+        "都不对：HttpOnly 防 XSS 偷 Cookie、不防 CSRF（CSRF 靠 SameSite 与 Token——攻击者拿不到但浏览器会自动带上）；JWT 签发后无法主动废止，注销/踢人要黑名单或短效+Refresh，混合方案是生产常态",
+        "都正确：HttpOnly 阻止跨站请求伪造，JWT 随时可以被服务端废止",
+        "HttpOnly 防 CSRF 正确；JWT 注销容易这一点正确",
+        "CSRF 靠 HttpOnly 防；JWT 注销靠删除客户端本地存储即可"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Cookie 安全属性各管一摊——HttpOnly 防 XSS 偷凭证、Secure 防明文、SameSite 防 CSRF；选型句式「要控制力选 Session，要无状态扩展选 JWT」；OAuth2 管授权不管会话。本篇首题。",
+      "difficulty": 3
     }
   ]
 }

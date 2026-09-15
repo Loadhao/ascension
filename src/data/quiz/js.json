@@ -287,6 +287,23 @@
       ],
       "hint": "stopImmediatePropagation 更进一步——连同一元素上后注册的监听器也不执行；委托用 closest 向上找、兼容子层嵌套。js-event-008 多选考事件流与委托原理，本题考两个 API 的正交分工与 passive。",
       "difficulty": 3
+    },
+    {
+      "id": "js-debounce-017",
+      "noteId": "js/basic/core/06-debounce-throttle",
+      "type": "single",
+      "q": "搜索联想用节流、滚动加载用防抖——按笔记这两个选择错在哪？正确的方向与实现要点是？",
+      "options": [
+        "方向反了：搜索联想要「最终输入」用防抖（停止 300ms 才发），滚动加载要「持续响应」用节流（每 200ms 一次）；手写实现核心都是闭包保存状态（timer/last），节流选定时器版保证尾部执行",
+        "两者等价，只是命名不同，随便选",
+        "防抖保证固定频率执行，节流保证停止后执行",
+        "手写实现必须用全局变量保存 timer，闭包做不到"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "immediate 变体（首次立即、后续防抖）适合按钮防连点；lodash 的 debounce/throttle 支持 immediate/尾部执行选项，生产可直接用。js-debounce 方向第二题。",
+      "difficulty": 3
     }
   ]
 }
