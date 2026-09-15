@@ -1,0 +1,19 @@
+astro.config.mjs
+  s_75e592980285ce::t_a5d2e817f28e2c 761
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "53c2911c32dd382c7ddf6d5026029fcacd1c72b8",
+  "prompts": {},
+  "sessions": {
+    "s_75e592980285ce": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "f8382422-2767-4a2d-b3cb-2c9f12d75872",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
