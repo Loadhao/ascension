@@ -1,0 +1,19 @@
+src/content/docs/distributed/intermediate/case-studies/31-bloom-filter.md
+  s_4f1e4bb0080c4c::t_29c949a8a5520f 1-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "fcaca1d59e6f52d9756d9f00b0c1006963b045b8",
+  "prompts": {},
+  "sessions": {
+    "s_4f1e4bb0080c4c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "f48d9cda-adc4-490b-8d37-d274697154c4",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
