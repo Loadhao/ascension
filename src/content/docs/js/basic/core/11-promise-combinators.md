@@ -1,7 +1,7 @@
 ---
 title: Promise 组合器与并发控制
 description: all/allSettled/race/any 四兄弟的差异与选型、手写并发限制器、fail-fast 与全量收集的业务场景
-level: intermediate
+level: basic
 core: true
 ---
 
