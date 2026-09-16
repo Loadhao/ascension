@@ -317,8 +317,6 @@
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 - **状态文件压缩说明（第 135 轮）**：第 130-134 轮的详细记录被并行会话的状态文件压缩操作删除（单行摘要替代详述），内容对应的代码提交均在 git 历史中（3c6be5a/5f717d4/b8a2107/60e4a35/28a9cd4），git log 可追溯。接受并行会话的压缩行为，不恢复——旧记录的详情通过 git log -- docs/evolution.md 可查。
 
-### 第 136 轮（2026-09-08，第五十二次启动，内容补充模式）：crypto 模块（js/intermediate/node 第 9 篇）——grep 确认 crypto 在 node 分类零覆盖；哈希/加密/HMAC 三组 API、scrypt 密码哈希、AES-GCM 与 IV 陷阱。五连验证全绿，提交 8cb93d6 已推送。js/intermediate/node 9 篇。
-
 ## 经验与判断沉淀
 
 ### 工作纪律
