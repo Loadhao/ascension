@@ -1,0 +1,25 @@
+docs/coverage-deepening.md
+  s_b50e8a5799058b::t_c4d27a7ad39b9e 15-18,109-110
+src/data/quiz/kubernetes.json
+  s_b50e8a5799058b::t_fb7b81eb597d6d 119-137
+src/data/quiz/react.json
+  s_b50e8a5799058b::t_9c7ee6aff9055b 10-16,27-33,44-50,53-69
+src/data/quiz/security.json
+  s_b50e8a5799058b::t_bdfeb3d461594b 138-154
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "087e12ef115c895a9189f60bcd31ca147f0a07e9",
+  "prompts": {},
+  "sessions": {
+    "s_b50e8a5799058b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "1aad58d8-916b-41c3-be6c-016c0ad3e655",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
