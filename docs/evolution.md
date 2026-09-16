@@ -315,10 +315,6 @@
 
 ### 第 130 轮（2026-09-08，第五十一次启动，内容补充模式）：Proxy 与 Reflect（js/basic/core 第 10 篇）——grep 确认 Proxy/Reflect 在 js 方向零覆盖；Vue 3 响应式换代理由、13 种拦截陷阱、Reflect receiver、defineProperty 对比。五连验证全绿，提交 3c6be5a 已推送。js/basic/core 10 篇。
 
-### 第 130 轮（2026-09-08，第五十二次启动，内容补充模式）：Proxy 与 Reflect（js/basic/core 第 10 篇）——grep 确认 Proxy/Reflect 在 js 方向零覆盖；Vue 3 响应式换代理由、13 种拦截陷阱、Reflect receiver、defineProperty 对比。五连验证全绿，提交 3c6be5a 已推送。js/basic/core 10 篇。
-
-### 第 131 轮（2026-09-08，第五十二次启动）：Promise 组合器与并发控制（js/basic/core 第 11 篇）——grep 确认 Promise.all/allSettled/race/any 仅 event-loop 篇 1 次提及无专篇；四组合器差异表、超时控制 race 模式、手写并发限制器。五连验证全绿，提交 5f717d4 已推送。js/basic/core 11 篇。**过程小错即改：Proxy 篇 level 笔误第四次，体检拦截后修复——根因不变，frontmatter 写完必须核对 level 与目录等级一致。**
-
 ## 经验与判断沉淀
 
 ### 工作纪律
