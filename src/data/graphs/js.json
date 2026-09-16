@@ -66,6 +66,12 @@
       "group": "核心"
     },
     {
+      "id": "combinators",
+      "label": "Promise 组合器",
+      "href": "/js/basic/core/11-promise-combinators/",
+      "group": "核心"
+    },
+    {
       "id": "gcmemory",
       "label": "GC 与内存管理",
       "href": "/js/intermediate/node/01-node-gc-memory/",
@@ -242,6 +248,11 @@
       "source": "proxy",
       "target": "generator",
       "label": "ES6 元编程"
+    },
+    {
+      "source": "combinators",
+      "target": "proxy",
+      "label": "ES6 进阶"
     }
   ]
 }

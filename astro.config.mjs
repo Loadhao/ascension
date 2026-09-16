@@ -746,6 +746,7 @@ export default defineConfig({
                         { label: '错误处理：Error 类型与全局捕获', link: '/js/basic/core/08-error-handling/' },
                         { label: '迭代器与生成器：能暂停的函数', link: '/js/basic/core/09-generators/' },
                         { label: 'Proxy 与 Reflect：拦截对象操作', link: '/js/basic/core/10-proxy-reflect/' },
+                        { label: 'Promise 组合器与并发控制', link: '/js/basic/core/11-promise-combinators/' },
                       ],
                     },
                   ],
