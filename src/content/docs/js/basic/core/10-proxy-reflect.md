@@ -1,7 +1,7 @@
 ---
 title: Proxy 与 Reflect：拦截对象操作
 description: Proxy 的 13 种拦截陷阱、Reflect 的设计初衷、Vue 3 响应式的底层原理、与 Object.defineProperty 的对比
-level: intermediate
+level: basic
 core: true
 ---
 
