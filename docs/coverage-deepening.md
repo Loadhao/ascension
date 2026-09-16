@@ -10,15 +10,12 @@
 
 
 
-- [ ] security/basic/core/04-password-storage — 第二题考「密码哈希加盐与慢哈希」
 
-- [ ] langchain/intermediate/graph/02-checkpointer-interrupt — 第二题考「checkpointer 持久化与 interrupt 人工审批」
-- [ ] security/intermediate/core/03-api-signature — 第二题考「API 签名防重放：timestamp + nonce」
-- [ ] kubernetes/intermediate/ops/02-service-ingress — 第二题考「Service 与 Ingress 的分工」
 
-- [ ] security/intermediate/core/01-session-attack — 首题考「会话固定与劫持」
-- [ ] kubernetes/basic/core/04-config-secret — 首题考「ConfigMap 与 Secret 的边界」
-- [ ] react/basic/core/01-declarative-ui — 首题考「声明式 UI 与命令式 DOM 的对比」
+
+- [ ] react/basic/core/02-hooks-mental — 第二题考「useEffect 的依赖数组心智」
+- [ ] netty/intermediate/core/02-refcount-leak — 第二题考「引用计数泄漏的排查与定位」
+- [ ] mongodb/advanced/operations/01-capacity-planning — 第二题考「容量规划与硬件配置」
 
 ### b 类：旧题返修
 
@@ -113,6 +110,8 @@
 - 2026-09-10 · 第四十轮：3 道核心笔记第二题（sec-authzdisc-008 / k8s-probemisuse-008 / react-renderstage-003，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第四十轮
 
 - 2026-09-10 · 第四十一轮：3 道核心笔记第二题（lc-ckpt2-011 / sec-sigflow-009 / k8s-svctypes-009，difficulty 4/3/3）· 本轮提交主题：feat: 题库深化第四十一轮
+
+- 2026-09-10 · 第四十二轮：3 道首题（sec-sessionattack-010 / k8s-cfgsecret-010 / react-declarative-005，difficulty 4/4/3）；password-storage 条目确认笔记不存在正式弃置；清理队列残留与重复小节 · 本轮提交主题：feat: 题库深化第四十二轮
 
 ## 经验与规则
 

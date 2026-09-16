@@ -169,6 +169,23 @@
       ],
       "hint": "三种积木分工——摘要管完整指纹、HMAC 管防篡改+身份、非对称管开放验签；签名防「改」不防「原样重发」，防重放三件套（时间窗+nonce+业务幂等）另算。sec-sign-005 考防重放，本题考积木分工与规范化。",
       "difficulty": 3
+    },
+    {
+      "id": "sec-sessionattack-011",
+      "noteId": "security/intermediate/core/01-session-attack",
+      "type": "single",
+      "q": "token 放 Cookie（HttpOnly）还是 localStorage？按笔记的攻防交换与三个经典攻击点，正确的是？",
+      "options": [
+        "Cookie（HttpOnly）读不到偷不走但有 CSRF 风险（自动附带），localStorage 基本无 CSRF 但 JS 可读、中 XSS 即丢号——没有两全的位置，按自身 XSS 水位选；登录成功必须换发 session id 防会话固定",
+        "localStorage 比 Cookie 更安全，是无脑的升级选择",
+        "会话固定指攻击者改掉了用户的密码，与 session id 无关",
+        "JWT 的签名保证了「还有效」，登出后自然失效"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "安全设计常态是交换而非消灭风险；JWT 签名只保「没被改过」不保「还有效」——注销/封号靠短有效期 + Refresh 轮换或服务端黑名单；敏感操作永远二次确认。本篇首题。",
+      "difficulty": 4
     }
   ]
 }

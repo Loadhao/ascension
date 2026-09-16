@@ -67,6 +67,23 @@
       ],
       "hint": "「重渲染便宜、DOM 操作才贵」——优化方向是状态下沉、组件拆分、memo，列表大上虚拟滚动；key 只需兄弟间唯一。react-key-002 考下标 key 错配，本题考三段流程与性能账本。",
       "difficulty": 4
+    },
+    {
+      "id": "react-declarative-005",
+      "noteId": "react/basic/core/01-declarative-ui",
+      "type": "single",
+      "q": "「UI = f(state)」的声明式范式与「组件函数会被反复执行」，对写代码的直接约束是？",
+      "options": [
+        "你只描述状态对应的界面、更新由框架推导；组件函数每次状态变化都重跑，函数体里不能有副作用——请求/订阅/DOM 操作必须交给 useEffect 这类专门入口",
+        "组件函数只执行一次，后续更新由框架 diff 虚拟 DOM 完成",
+        "副作用可以直接写在组件函数体里，React 会自动去重",
+        "声明式意味着不需要状态管理，必要时仍应手写 DOM 操作"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "对后端读者的锚点——props 像构造器注入的不可变配置、state 赋值必须走 setter、re-render 只是生成 UI 描述（便宜）；与 K8s 的调谐思想异曲同工。react 方向首题。",
+      "difficulty": 3
     }
   ]
 }

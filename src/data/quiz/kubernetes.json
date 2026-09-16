@@ -154,6 +154,23 @@
       ],
       "hint": "ExternalName 只是 CNAME 到外部域名、无代理；kube-proxy 三模式里大规模集群首选 IPVS（内核哈希表+真实负载均衡算法）。k8s-svc-005 考 ClusterIP 的本质，本题考类型与 Ingress。",
       "difficulty": 3
+    },
+    {
+      "id": "k8s-cfgsecret-010",
+      "noteId": "kubernetes/basic/core/04-config-secret",
+      "type": "single",
+      "q": "改了 ConfigMap 后应用没生效，且数据库密码的 Secret 安全性被质疑——按笔记的正确解释是？",
+      "options": [
+        "env 环境变量注入只在容器启动时生效一次（改 ConfigMap 要重启 Pod），卷挂载才会自动同步（有分钟级延迟、子路径例外）；Secret 的值只是 base64 编码不是加密，真正防线是 RBAC + etcd 静态加密 + 外部 KMS",
+        "env 注入会随 ConfigMap 自动更新，无需重启",
+        "Secret 用 base64 存储已经是加密状态，无额外风险",
+        "卷挂载的配置也是启动时一次性读取，之后不更新"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "选型口诀「要热更新用卷挂载，简单开关用 env」；Pod 以 checksum 注解引用配置可触发滚动更新；大小上限约 1MB——它是配置不是文件存储。k8s 方向 config-secret 首题。",
+      "difficulty": 4
     }
   ]
 }
