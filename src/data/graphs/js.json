@@ -60,6 +60,12 @@
       "group": "核心"
     },
     {
+      "id": "proxy",
+      "label": "Proxy 与 Reflect",
+      "href": "/js/basic/core/10-proxy-reflect/",
+      "group": "核心"
+    },
+    {
       "id": "gcmemory",
       "label": "GC 与内存管理",
       "href": "/js/intermediate/node/01-node-gc-memory/",
@@ -231,6 +237,11 @@
       "source": "errhandle",
       "target": "generator",
       "label": "JS 进阶"
+    },
+    {
+      "source": "proxy",
+      "target": "generator",
+      "label": "ES6 元编程"
     }
   ]
 }
