@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 745
+src/content/docs/js/basic/core/07-collection-types.md
+  h_9324126a55eff3 1-84
+src/data/graphs/js.json
+  h_9324126a55eff3 44-49,207-211
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "dc51223389cabb0760e197da71f136c98318a1f7",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
