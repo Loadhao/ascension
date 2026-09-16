@@ -176,6 +176,23 @@
       ],
       "hint": "State 定合并、Node 定行为、Edge 定走向——三张表读懂任何一张图；compile() 之后依然是 Runnable，invoke/stream 与链完全一致。lc-graph-004 考 reducer 合并增量，本题考执行模型与显式控制流。",
       "difficulty": 4
+    },
+    {
+      "id": "lc-ckpt2-011",
+      "noteId": "langchain/intermediate/graph/02-checkpointer-interrupt",
+      "type": "single",
+      "q": "关于 Checkpointer 与 thread_id 的会话持久化、时间旅行，按笔记正确的是？",
+      "options": [
+        "同一 thread_id 再次 invoke 自动从最近 checkpoint 续跑（消息历史延续）；生产换 SqliteSaver/PostgresSaver 只改编译参数；从任意历史 checkpoint 用 invoke(None, config) 重放——已完成节点不重算",
+        "thread_id 只用于日志追踪，与状态恢复无关",
+        "换 Checkpointer 实现需要重写图的所有节点代码",
+        "时间旅行会从零重算整张图的所有节点"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "interrupt 的前提是配了 checkpointer——「暂停」的本质是状态已存档、等一条 resume 指令；时间旅行的代价是 checkpoint 全量历史增长，注意 Saver 的存储。lc-ckpt-005 考 interrupt 恢复姿势，本题考持久化与时间旅行。",
+      "difficulty": 4
     }
   ]
 }

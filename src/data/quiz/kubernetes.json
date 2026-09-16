@@ -135,6 +135,25 @@
       ],
       "hint": "startupProbe 成功前暂停的是另两个探针（给慢启动宽限），不是加速；摘除与 SIGTERM 并发进行、注册中心有滞后——preStop sleep 几秒是标准操作。k8s-probe-004 考 readiness 摘除，本题考误用姿势与优雅退出。",
       "difficulty": 4
+    },
+    {
+      "id": "k8s-svctypes-009",
+      "noteId": "kubernetes/intermediate/ops/02-service-ingress",
+      "type": "multiple",
+      "q": "关于 Service 类型与 Ingress，正确的有？（多选）",
+      "options": [
+        "endpoints 只收 Ready 的 Pod——readiness 探针失败即摘除，这是发布摘流的落点",
+        "Ingress 声明七层路由规则，但实际执行靠 Ingress Controller——只写 Ingress 资源不装 Controller 是没有流量的",
+        "LoadBalancer 每个 Service 挂一个云厂商 LB 成本高；NodePort 在每节点开 30000-32767 端口，适合演示与兜底",
+        "ExternalName 类型会为外部域名创建代理转发层"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "ExternalName 只是 CNAME 到外部域名、无代理；kube-proxy 三模式里大规模集群首选 IPVS（内核哈希表+真实负载均衡算法）。k8s-svc-005 考 ClusterIP 的本质，本题考类型与 Ingress。",
+      "difficulty": 3
     }
   ]
 }

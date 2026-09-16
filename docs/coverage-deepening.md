@@ -16,6 +16,10 @@
 - [ ] security/intermediate/core/03-api-signature — 第二题考「API 签名防重放：timestamp + nonce」
 - [ ] kubernetes/intermediate/ops/02-service-ingress — 第二题考「Service 与 Ingress 的分工」
 
+- [ ] security/intermediate/core/01-session-attack — 首题考「会话固定与劫持」
+- [ ] kubernetes/basic/core/04-config-secret — 首题考「ConfigMap 与 Secret 的边界」
+- [ ] react/basic/core/01-declarative-ui — 首题考「声明式 UI 与命令式 DOM 的对比」
+
 ### b 类：旧题返修
 
 - [ ] 抽查 hint 质量：hint 复述答案、干扰项不成立的就地返修（每条记录原因）
@@ -107,6 +111,8 @@
 - 2026-09-10 · 第三十九轮：3 道核心笔记第二题（net-httponly-018 / js-debounce-015 / netty-heartbeat-008，difficulty 3/3/4）；password-storage 条目弃置（笔记尚不存在，并行会话计划中）· 本轮提交主题：feat: 题库深化第三十九轮
 
 - 2026-09-10 · 第四十轮：3 道核心笔记第二题（sec-authzdisc-008 / k8s-probemisuse-008 / react-renderstage-003，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第四十轮
+
+- 2026-09-10 · 第四十一轮：3 道核心笔记第二题（lc-ckpt2-011 / sec-sigflow-009 / k8s-svctypes-009，difficulty 4/3/3）· 本轮提交主题：feat: 题库深化第四十一轮
 
 ## 经验与规则
 
