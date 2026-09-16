@@ -193,6 +193,23 @@
       ],
       "hint": "interrupt 的前提是配了 checkpointer——「暂停」的本质是状态已存档、等一条 resume 指令；时间旅行的代价是 checkpoint 全量历史增长，注意 Saver 的存储。lc-ckpt-005 考 interrupt 恢复姿势，本题考持久化与时间旅行。",
       "difficulty": 4
+    },
+    {
+      "id": "lc-toolloop-012",
+      "noteId": "langchain/intermediate/graph/03-agent-loop",
+      "type": "single",
+      "q": "关于 @tool 工具定义与 create_agent 的关系，按笔记正确的是？",
+      "options": [
+        "函数签名即参数 schema、docstring 即工具描述（模型靠它决定怎么用）；create_agent 内部就是 model+ToolNode+条件边的标准 LangGraph 图，返回的图还能继续挂 checkpointer 与子图；生产必配 recursion_limit 防工具死循环",
+        "工具描述靠函数名猜出来，docstring 仅供开发者阅读",
+        "create_agent 是黑盒封装，无法再挂 checkpointer 或自定义节点",
+        "recursion_limit 是可选的装饰性配置，工具循环不可能失控"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "从手搭到 create_agent 是渐进升级不是推倒重来；MessagesState 是预置的单字段状态（messages 挂 add_messages reducer），纯对话场景不用自己定义 State。lc-agent-006 多选考手搭循环四件套，本题考工具定义质量与开箱收敛。",
+      "difficulty": 4
     }
   ]
 }
