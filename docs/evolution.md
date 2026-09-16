@@ -306,6 +306,8 @@
 
 ### 第 126 轮（2026-09-08，第四十九次启动，状态文件维护）：轮次记录编号修复——第 124/125 轮编号错乱（布隆过滤器篇同时标 124 和 125），去重后 125 轮记录补充状态同步与下一轮入口。
 
+### 第 127 轮（2026-09-08，第五十次启动，内容补充模式）：Map/Set 与 Symbol（js/basic/core 第 7 篇）——grep 确认 Symbol/WeakMap/WeakSet/迭代器全站零覆盖；Map vs Object 选型表、Set 集合运算、WeakMap 弱引用与 GC 互链、Symbol 三大用途。五连验证全绿，提交 dc51223 已推送。js/basic/core 7 篇。
+
 ### 第 128 轮（2026-09-08，第五十次启动，内容补充模式）：错误处理（js/basic/core 第 8 篇）——Error 类型/全局捕获/未处理 rejection grep 零覆盖；Error 体系表、try/catch/finally 行为细节、全局三入口、自定义 Error 类。五连验证全绿，提交 ce15ffd 已推送。js/basic/core 8 篇。
 
 ## 经验与判断沉淀
