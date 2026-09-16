@@ -72,6 +72,12 @@
       "group": "核心"
     },
     {
+      "id": "coercion",
+      "label": "类型转换",
+      "href": "/js/basic/core/12-type-coercion/",
+      "group": "核心"
+    },
+    {
       "id": "gcmemory",
       "label": "GC 与内存管理",
       "href": "/js/intermediate/node/01-node-gc-memory/",
@@ -275,6 +281,11 @@
       "source": "nodesec",
       "target": "crypto",
       "label": "加密 API 实战"
+    },
+    {
+      "source": "combinators",
+      "target": "coercion",
+      "label": "== 的底层"
     }
   ]
 }
