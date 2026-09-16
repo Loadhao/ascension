@@ -1,0 +1,14 @@
+src/content/docs/js/basic/core/11-promise-combinators.md
+  h_9324126a55eff3 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b8a210781ea5f62bc1a6fa64b5f2232f764ad1b1",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
