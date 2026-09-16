@@ -135,6 +135,25 @@
       ],
       "hint": "IdleStateHandler 只产用户事件（写空闲发 ping、读空闲判死），动作由你的 Handler 决定；假死来源还有 NAT 映射超时回收。netty 心跳篇第二题。",
       "difficulty": 4
+    },
+    {
+      "id": "netty-leakpose-009",
+      "noteId": "netty/intermediate/core/02-refcount-leak",
+      "type": "multiple",
+      "q": "关于 ByteBuf 泄漏的常见姿势与排查纪律，正确的有？（多选）",
+      "options": [
+        "自定义入站 Handler 只读不放是头号姿势——换 SimpleChannelInboundHandler 自动释放或 finally 里 release",
+        "ByteBuf 丢给异步线程池后两边都不管——转交前 retain、约定唯一释放方",
+        "触发异常分支提前 return 绕过释放代码——用 try/finally 包住所有权终点",
+        "出现 LEAK 日志应先调大直接内存上限缓解，排查可以延后"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项是「缓冲症状」——LEAK 日志是内建哨兵，出现就该当 P1 查；tail 侧缓存消息做重试时缓存的是 ByteBuf 本体，要拷出 byte[] 或 retain/释放成对；评审自定义 Handler 固定问一句：所有权最终归谁、在哪一行释放。netty-leak-005 考 LEAK 日志的处置级别，本题考泄漏姿势对照。",
+      "difficulty": 4
     }
   ]
 }

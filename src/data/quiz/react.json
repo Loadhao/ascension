@@ -84,6 +84,23 @@
       ],
       "hint": "对后端读者的锚点——props 像构造器注入的不可变配置、state 赋值必须走 setter、re-render 只是生成 UI 描述（便宜）；与 K8s 的调谐思想异曲同工。react 方向首题。",
       "difficulty": 3
+    },
+    {
+      "id": "react-jsxflow-006",
+      "noteId": "react/basic/core/01-declarative-ui",
+      "type": "single",
+      "q": "关于 JSX 与 React 的数据流向，按笔记正确的是？",
+      "options": [
+        "JSX 不是模板，编译为函数调用（createElement）——if/map/三元直接可用；数据经 props 自上而下流动、事件经回调向上，props 是每次父组件重渲染都会传新的只读入参",
+        "JSX 是模板字符串，运行时解析插值",
+        "props 可以在子组件里重新赋值，用于接收父组件的最新数据",
+        "组件树的数据可以双向流动，子组件直接改父组件状态更高效"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "组件函数每次渲染都会重跑——纯函数纪律是性能与正确性的前提；状态提升或上下文解决跨层级共享。react-declarative-005 考 UI=f(state) 与纯函数纪律，本题考 JSX 本质与数据流向。",
+      "difficulty": 4
     }
   ]
 }

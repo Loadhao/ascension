@@ -184,6 +184,23 @@
       ],
       "hint": "与 MySQL LIMIT/ES from+size 同构——三大存储的深翻页根因都是「扫描并丢弃」；总条数显示用 estimatedDocumentCount 或异步计数器，别用 countDocuments 全量扫。本篇首题。",
       "difficulty": 4
+    },
+    {
+      "id": "mongo-workset-009",
+      "noteId": "mongodb/advanced/operations/01-capacity-planning",
+      "type": "single",
+      "q": "MongoDB 的「工作集」与内存的关系，按笔记的正确说法是？",
+      "options": [
+        "WiredTiger 缓存默认约为 (RAM − 1GB) 的 50%，单节点内存 ≈ 2× 工作集——工作集放不下会频繁 eviction、磁盘读放大、延迟毛刺；分片有时是硬件约束逼出来的，不是数据量逼出来的",
+        "WiredTiger 缓存默认占 RAM 的 90%，工作集几乎总是放得下",
+        "冷数据躺在磁盘上也会显著拖慢读延迟，所以总数据量决定一切",
+        "工作集是常数，上线时估算一次就永远有效"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "比总数据量更重要的是工作集（热数据+索引）；用 db.serverStatus() 的 wiredTiger.cache 持续观察；新索引/用户增长都会推大工作集——按一年后的工作集算，不是今天的。mongo-cap-005 考磁盘放大系数，本题考工作集与内存。",
+      "difficulty": 4
     }
   ]
 }

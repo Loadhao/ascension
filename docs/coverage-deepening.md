@@ -13,9 +13,10 @@
 
 
 
-- [ ] react/basic/core/02-hooks-mental — 第二题考「useEffect 的依赖数组心智」
-- [ ] netty/intermediate/core/02-refcount-leak — 第二题考「引用计数泄漏的排查与定位」
-- [ ] mongodb/advanced/operations/01-capacity-planning — 第二题考「容量规划与硬件配置」
+
+- [ ] langchain/intermediate/graph/03-agent-loop — 第二题考「create_agent 与 LangGraph 的关系」（执行时核准角度）
+- [ ] mqtt/basic/core/01-mqtt-protocol — 第二题考「遗嘱与保留消息的语义」
+- [ ] mqtt/intermediate/usage/01-broker-emqx — 第二题考「Broker 选型与 EMQX 部署要点」
 
 ### b 类：旧题返修
 
@@ -112,6 +113,8 @@
 - 2026-09-10 · 第四十一轮：3 道核心笔记第二题（lc-ckpt2-011 / sec-sigflow-009 / k8s-svctypes-009，difficulty 4/3/3）· 本轮提交主题：feat: 题库深化第四十一轮
 
 - 2026-09-10 · 第四十二轮：3 道首题（sec-sessionattack-010 / k8s-cfgsecret-010 / react-declarative-005，difficulty 4/4/3）；password-storage 条目确认笔记不存在正式弃置；清理队列残留与重复小节 · 本轮提交主题：feat: 题库深化第四十二轮
+
+- 2026-09-10 · 第四十三轮：3 道核心笔记第二题（netty-leakpose-009 / mongo-workset-009 / react-jsxflow-006，difficulty 4/4/4；react/02-hooks-mental 已被并行会话加到 2 题（快照+依赖闭包）角度饱和弃置，react 改从 01-declarative-ui 出第二题）· 本轮提交主题：feat: 题库深化第四十三轮
 
 ## 经验与规则
 
