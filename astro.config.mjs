@@ -742,6 +742,7 @@ export default defineConfig({
                         { label: 'this 与箭头函数', link: '/js/basic/core/04-this-binding/' },
                         { label: '事件循环与异步演进', link: '/js/basic/core/05-event-loop/' },
                         { label: '防抖与节流：控制执行频率', link: '/js/basic/core/06-debounce-throttle/' },
+                        { label: 'Map/Set 与 Symbol：ES6 的数据结构', link: '/js/basic/core/07-collection-types/' },
                       ],
                     },
                   ],

@@ -42,6 +42,12 @@
       "group": "核心"
     },
     {
+      "id": "collections",
+      "label": "Map/Set/Symbol",
+      "href": "/js/basic/core/07-collection-types/",
+      "group": "核心"
+    },
+    {
       "id": "gcmemory",
       "label": "GC 与内存管理",
       "href": "/js/intermediate/node/01-node-gc-memory/",
@@ -198,6 +204,11 @@
       "source": "cluster",
       "target": "envconfig",
       "label": "部署配置注入"
+    },
+    {
+      "source": "debounce",
+      "target": "collections",
+      "label": "ES6 数据结构"
     }
   ]
 }
