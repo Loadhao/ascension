@@ -743,6 +743,7 @@ export default defineConfig({
                         { label: '事件循环与异步演进', link: '/js/basic/core/05-event-loop/' },
                         { label: '防抖与节流：控制执行频率', link: '/js/basic/core/06-debounce-throttle/' },
                         { label: 'Map/Set 与 Symbol：ES6 的数据结构', link: '/js/basic/core/07-collection-types/' },
+                        { label: '错误处理：Error 类型与全局捕获', link: '/js/basic/core/08-error-handling/' },
                       ],
                     },
                   ],

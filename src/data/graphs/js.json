@@ -48,6 +48,12 @@
       "group": "核心"
     },
     {
+      "id": "errhandle",
+      "label": "错误处理",
+      "href": "/js/basic/core/08-error-handling/",
+      "group": "核心"
+    },
+    {
       "id": "gcmemory",
       "label": "GC 与内存管理",
       "href": "/js/intermediate/node/01-node-gc-memory/",
@@ -209,6 +215,11 @@
       "source": "debounce",
       "target": "collections",
       "label": "ES6 数据结构"
+    },
+    {
+      "source": "collections",
+      "target": "errhandle",
+      "label": "类型体系"
     }
   ]
 }
