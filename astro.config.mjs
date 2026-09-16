@@ -748,6 +748,7 @@ export default defineConfig({
                         { label: 'Proxy 与 Reflect：拦截对象操作', link: '/js/basic/core/10-proxy-reflect/' },
                         { label: 'Promise 组合器与并发控制', link: '/js/basic/core/11-promise-combinators/' },
                         { label: '类型转换与相等判断', link: '/js/basic/core/12-type-coercion/' },
+                        { label: '解构赋值与展开运算符', link: '/js/basic/core/13-destructuring-spread/' },
                       ],
                     },
                   ],

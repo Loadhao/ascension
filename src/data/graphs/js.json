@@ -78,6 +78,12 @@
       "group": "核心"
     },
     {
+      "id": "destructuring",
+      "label": "解构与展开",
+      "href": "/js/basic/core/13-destructuring-spread/",
+      "group": "核心"
+    },
+    {
       "id": "gcmemory",
       "label": "GC 与内存管理",
       "href": "/js/intermediate/node/01-node-gc-memory/",
@@ -286,6 +292,11 @@
       "source": "combinators",
       "target": "coercion",
       "label": "== 的底层"
+    },
+    {
+      "source": "destructuring",
+      "target": "coercion",
+      "label": "同属类型操作"
     }
   ]
 }
