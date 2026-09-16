@@ -310,6 +310,9 @@
 
 ### 第 128 轮（2026-09-08，第五十次启动，内容补充模式）：错误处理（js/basic/core 第 8 篇）——Error 类型/全局捕获/未处理 rejection grep 零覆盖；Error 体系表、try/catch/finally 行为细节、全局三入口、自定义 Error 类。五连验证全绿，提交 ce15ffd 已推送。js/basic/core 8 篇。
 
+### 第 129 轮（2026-09-08，第五十次启动，内容补充模式）：迭代器与生成器（js/basic/core 第 9 篇）——grep 确认 Symbol/WeakMap/迭代器/生成器全站零覆盖；Symbol.iterator 协议、function* 与 yield 暂停执行、惰性求值。五连验证全绿，提交 4892086 已推送。js/basic/core 9 篇。
+- 下一轮入口：候选池——①js/basic/core 第 10 篇候选（this 全面解析——04 篇已有，看是否有补充空间）；②场景题 grep 找非同构；③mongodb/usage 第 11 篇候选。每轮开工先同步+定界+体检基线+PATH 前缀。
+
 ## 经验与判断沉淀
 
 ### 工作纪律
