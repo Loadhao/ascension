@@ -54,6 +54,12 @@
       "group": "核心"
     },
     {
+      "id": "generator",
+      "label": "迭代器与生成器",
+      "href": "/js/basic/core/09-generators/",
+      "group": "核心"
+    },
+    {
       "id": "gcmemory",
       "label": "GC 与内存管理",
       "href": "/js/intermediate/node/01-node-gc-memory/",
@@ -220,6 +226,11 @@
       "source": "collections",
       "target": "errhandle",
       "label": "类型体系"
+    },
+    {
+      "source": "errhandle",
+      "target": "generator",
+      "label": "JS 进阶"
     }
   ]
 }
