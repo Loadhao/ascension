@@ -1,0 +1,20 @@
+docs/coverage-deepening.md
+  h_9324126a55eff3 19-22,115-116
+src/data/quiz/kubernetes.json
+  h_9324126a55eff3 138-156
+src/data/quiz/langchain.json
+  h_9324126a55eff3 179-195
+src/data/quiz/security.json
+  h_9324126a55eff3 155-171
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "521489fc64520a87f3ed21a29aeb72aa6517a0a6",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
