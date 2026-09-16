@@ -1,0 +1,18 @@
+astro.config.mjs
+  h_9324126a55eff3 749
+src/content/docs/js/basic/core/11-promise-combinators.md
+  h_9324126a55eff3 1-84
+src/data/graphs/js.json
+  h_9324126a55eff3 68-73,251-255
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "60e4a3576575e80181e6a5b81474ae5d0da67e7e",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
