@@ -114,6 +114,12 @@
       "group": "运行时"
     },
     {
+      "id": "nodesec",
+      "label": "Node 安全实践",
+      "href": "/js/intermediate/node/08-security/",
+      "group": "运行时"
+    },
+    {
       "id": "websocket",
       "label": "WebSocket 原理",
       "href": "/js/intermediate/web/01-websocket/",
@@ -253,6 +259,11 @@
       "source": "combinators",
       "target": "proxy",
       "label": "ES6 进阶"
+    },
+    {
+      "source": "nodesec",
+      "target": "envconfig",
+      "label": "密钥管理的实践层"
     }
   ]
 }

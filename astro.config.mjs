@@ -767,6 +767,7 @@ export default defineConfig({
                         { label: '中间件模型：从 Express 到 Koa 的洋葱', link: '/js/intermediate/node/05-middleware/' },
                         { label: 'cluster 与 worker_threads：Node 的多核利用', link: '/js/intermediate/node/06-cluster-workers/' },
                         { label: '环境变量与配置管理', link: '/js/intermediate/node/07-env-config/' },
+                        { label: 'Node 安全最佳实践', link: '/js/intermediate/node/08-security/' },
                       ],
                     },
                     {
