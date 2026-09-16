@@ -12,6 +12,10 @@
 
 - [ ] security/basic/core/04-password-storage — 第二题考「密码哈希加盐与慢哈希」
 
+- [ ] langchain/intermediate/graph/02-checkpointer-interrupt — 第二题考「checkpointer 持久化与 interrupt 人工审批」
+- [ ] security/intermediate/core/03-api-signature — 第二题考「API 签名防重放：timestamp + nonce」
+- [ ] kubernetes/intermediate/ops/02-service-ingress — 第二题考「Service 与 Ingress 的分工」
+
 ### b 类：旧题返修
 
 - [ ] 抽查 hint 质量：hint 复述答案、干扰项不成立的就地返修（每条记录原因）
@@ -101,6 +105,8 @@
 - 2026-09-10 · 第三十八轮（定时触发两次合并执行）：3 道核心笔记第二题（py-mrocollab-042 / py-hashpair-043 / redis-sentinelconf-017，difficulty 4/4/4；js dict-set 条目为入队方向笔误改执行 python 同名笔记）
 
 - 2026-09-10 · 第三十九轮：3 道核心笔记第二题（net-httponly-018 / js-debounce-015 / netty-heartbeat-008，difficulty 3/3/4）；password-storage 条目弃置（笔记尚不存在，并行会话计划中）· 本轮提交主题：feat: 题库深化第三十九轮
+
+- 2026-09-10 · 第四十轮：3 道核心笔记第二题（sec-authzdisc-008 / k8s-probemisuse-008 / react-renderstage-003，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第四十轮
 
 ## 经验与规则
 

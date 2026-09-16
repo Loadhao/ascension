@@ -116,6 +116,25 @@
       ],
       "hint": "回滚只是把旧 ReplicaSet 的副本数调回来、新 RS 归零——同样平滑滚动；旧 RS 默认保留 revisionHistoryLimit: 10 个，设成 0 就没有可回滚的版本了；发布安全与 readiness 探针直接挂钩。k8s-rollout-003 考滚动过程的 Pod 总数计算，本题考回滚机制。",
       "difficulty": 3
+    },
+    {
+      "id": "k8s-probemisuse-008",
+      "noteId": "kubernetes/intermediate/ops/01-probes-lifecycle",
+      "type": "multiple",
+      "q": "关于探针误用与优雅退出，按笔记正确的有？（多选）",
+      "options": [
+        "liveness 检查了下游依赖（数据库连不上就失败）→ 依赖抖动引发所有实例连环重启雪崩——liveness 只该反映进程自身是否僵死",
+        "慢启动应用（Java 冷启动 2 分钟）没配 startupProbe，liveness 第 30 秒开始判死 → 启动即重启死循环",
+        "优雅退出三件套：preStop 钩子 sleep 让在途请求跑完 + terminationGracePeriodSeconds 宽限期 + readiness 摘流",
+        "startupProbe 成功前其余探针照常运行，用于加速启动检测"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "startupProbe 成功前暂停的是另两个探针（给慢启动宽限），不是加速；摘除与 SIGTERM 并发进行、注册中心有滞后——preStop sleep 几秒是标准操作。k8s-probe-004 考 readiness 摘除，本题考误用姿势与优雅退出。",
+      "difficulty": 4
     }
   ]
 }

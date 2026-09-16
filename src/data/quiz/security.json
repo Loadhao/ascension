@@ -135,6 +135,23 @@
       ],
       "hint": "状态变更接口统一 POST/PUT/DELETE，别用 GET 改数据；Referer 可被策略隐藏、不能当唯一防线；与 XSS 的分界——XSS 偷凭证执行代码、CSRF 不偷凭证借浏览器发请求。sec-csrf-002 考攻击前提，本题考防御与交换。",
       "difficulty": 3
+    },
+    {
+      "id": "sec-authzdisc-009",
+      "noteId": "security/intermediate/core/02-broken-access",
+      "type": "single",
+      "q": "防水平越权，按笔记的编码纪律，下列做法正确的是？",
+      "options": [
+        "userId 一律取自认证上下文而非前端参数，查询条件强制带 owner（WHERE id=? AND user_id=?）做数据层兜底；前端隐藏按钮只是体验不是控制",
+        "把 orderId 改成不可预测的 UUID，前端就改不了别人的 ID 了",
+        "在前端路由里校验角色，越权请求根本发不出来",
+        "接口返回前把别人的数据字段置空即可，无需校验归属"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "水平越权最隐蔽——测试全绿，只有改自己的资源 ID 才能测出来；数据层兜底是即便漏了应用层校验也拿不走别人的数据；RBAC 管角色、数据权限按归属过滤，两套都要。sec-authz-004 考越权类型识别，本题考编码纪律。",
+      "difficulty": 4
     }
   ]
 }
