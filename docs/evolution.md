@@ -313,6 +313,16 @@
 ### 第 129 轮（2026-09-08，第五十次启动，内容补充模式）：迭代器与生成器（js/basic/core 第 9 篇）——grep 确认 Symbol/WeakMap/迭代器/生成器全站零覆盖；Symbol.iterator 协议、function* 与 yield 暂停执行、惰性求值。五连验证全绿，提交 4892086 已推送。js/basic/core 9 篇。
 - 下一轮入口：候选池——①js/basic/core 第 10 篇候选（this 全面解析——04 篇已有，看是否有补充空间）；②场景题 grep 找非同构；③mongodb/usage 第 11 篇候选。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 130 轮（2026-09-08，第五十一次启动，内容补充模式）：Proxy 与 Reflect（js/basic/core 第 10 篇）——Vue 3 响应式换代理由、13 种拦截陷阱、Reflect receiver、defineProperty 对比。提交 3c6be5a 已推送。js/basic/core 10 篇。
+
+### 第 131 轮（2026-09-08，第五十一次启动）：Promise 组合器与并发控制（js/basic/core 第 11 篇）——all/allSettled/race/any 四组合器、超时控制 race 模式、手写并发限制器。提交 5f717d4 已推送（后被并行会话 reset 移除，60e4a35 重新入库）。
+
+### 第 132 轮（2026-09-08，第五十一次启动，状态文件维护）：轮次记录重排与去重——130/131 轮补记后顺序修复。提交 3d99396 已推送。
+
+### 第 133 轮（2026-09-08，第五十二次启动，环境恢复+内容补充）：PATH 恢复（nvm 路径显式化）+ distributed.json 冲突解决 + CDC 篇重新入库。提交 60e4a35 已推送。
+
+### 第 134 轮（2026-09-08，第五十二次启动）：Promise 组合器篇 level 笔误修正（intermediate→basic）。提交 b8a2107 已推送。
+
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 - **状态文件压缩说明（第 137 轮）**：第 130-134 轮详细记录在并行会话的多次 reset/rebase 中丢失，代码提交均在 git 历史可查（Proxy/Reflect 3c6be5a、Promise 组合器 60e4a35、Node 安全 28a9cd4 等）。不恢复旧记录——当前状态足以恢复现场。
