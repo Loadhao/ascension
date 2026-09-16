@@ -120,6 +120,12 @@
       "group": "运行时"
     },
     {
+      "id": "crypto",
+      "label": "crypto 模块",
+      "href": "/js/intermediate/node/09-crypto/",
+      "group": "运行时"
+    },
+    {
       "id": "websocket",
       "label": "WebSocket 原理",
       "href": "/js/intermediate/web/01-websocket/",
@@ -264,6 +270,11 @@
       "source": "nodesec",
       "target": "envconfig",
       "label": "密钥管理的实践层"
+    },
+    {
+      "source": "nodesec",
+      "target": "crypto",
+      "label": "加密 API 实战"
     }
   ]
 }
