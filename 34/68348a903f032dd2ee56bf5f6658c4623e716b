@@ -1,0 +1,19 @@
+src/content/docs/js/basic/core/13-destructuring-spread.md
+  s_eafc58bf676860::t_722fa62fe85a20 1-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3468348a903f032dd2ee56bf5f6658c4623e716b",
+  "prompts": {},
+  "sessions": {
+    "s_eafc58bf676860": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "03c20f3e-62ff-497b-b563-e9ebf23813a6",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
