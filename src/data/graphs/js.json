@@ -154,6 +154,12 @@
       "label": "DOM 事件与委托",
       "href": "/js/intermediate/web/03-dom-events/",
       "group": "网络"
+    },
+    {
+      "id": "renderpipe",
+      "label": "渲染管线与重绘回流",
+      "href": "/js/intermediate/web/04-browser-render/",
+      "group": "网络"
     }
   ],
   "edges": [
@@ -297,6 +303,16 @@
       "source": "destructuring",
       "target": "coercion",
       "label": "同属类型操作"
+    },
+    {
+      "source": "domevents",
+      "target": "renderpipe",
+      "label": "同属浏览器平台机制"
+    },
+    {
+      "source": "eventloop",
+      "target": "renderpipe",
+      "label": "rAF 与帧对齐的并发基础"
     }
   ]
 }
