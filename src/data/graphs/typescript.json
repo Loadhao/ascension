@@ -16,6 +16,12 @@
       "label": "interface、type 与泛型",
       "href": "/typescript/basic/core/02-interfaces-generics/",
       "group": "类型系统"
+    },
+    {
+      "id": "strictconf",
+      "label": "严格模式与工程配置",
+      "href": "/typescript/basic/core/03-strict-config/",
+      "group": "类型系统"
     }
   ],
   "edges": [
@@ -27,6 +33,11 @@
       "source": "typesys",
       "target": "ifacetype",
       "label": "世界观之上的日常写法"
+    },
+    {
+      "source": "typesys",
+      "target": "strictconf",
+      "label": "严格档位是完整战力"
     }
   ]
 }

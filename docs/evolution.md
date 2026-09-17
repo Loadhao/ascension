@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 145 轮（2026-09-17，内容补充模式）：严格模式与工程配置（typescript/basic/core 第 3 篇）——勘察确认 tsconfig/strict/路径别名/类型断言逃逸全站零专篇（strict 提及 3 处均非 TS 篇）。内容：strict 开关构成图与两大主力（noImplicitAny 堵静默失效、strictNullChecks 把空值搬进编译期）、noUncheckedIndexedAccess 单独推荐、?. 与 ?? 正牌工具 vs !/as 逃逸口纪律、双重断言=建模错误味道、路径别名编译与运行两界（tsc 不重写 import 的必踩坑）、新项目全开 vs 老项目文件级渐进+CI 门禁。1 张 mermaid 开关构成图、3 段代码。构建 680 页、mermaid 513 块、一致性 8 项全绿。typescript/basic/core 3 篇。
+- 下一轮入口：候选池——①TS 第 4 篇：类型编程入门（映射/条件类型/infer，勘察 3 处提及是否实质覆盖）；②netty/middleware/mongodb advanced 勘察；③收尾 contrast 审计。
+
 ### 第 144 轮（2026-09-17，内容补充模式）：interface、type 与泛型入门（typescript/basic/core 第 2 篇）——内容：两种声明的等价为主与能力边界表（interface 声明合并补第三方类型、type 独占联合/映射/条件类型）、选型口径、泛型第一性「类型参数化表达类型间关联」与实参推导、extends 形状约束与结构化类型同世界观、Partial/Record/Pick/Omit 工具类型即官方泛型教材、何时该写泛型的判据（有关联才写）。1 张 mermaid 类型推导流动图、1 张能力边界表。构建 679 页、mermaid 512 块、一致性 8 项全绿。typescript/basic/core 2 篇。
 - 下一轮入口：候选池——①TS 第 3 篇：tsconfig 严格档位与工程实践（strict 全家桶、路径别名）或类型编程入门（映射/条件类型）；②netty/middleware/mongodb advanced 勘察；③收尾需 contrast 审计（142/143/144 各新增 1 块 mermaid）。
 
