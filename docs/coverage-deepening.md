@@ -17,9 +17,10 @@
 
 
 
-- [ ] ai/advanced/agent/01-multi-agent — 第二题考「多 Agent 的上下文隔离与并行动机」
-- [ ] algorithm/advanced/graph/01-graph-traversal — 第二题考「BFS 与 DFS 的选择依据」
-- [ ] js/intermediate/web/01-websocket — 第二题考「帧格式与掩码、ping/pong 保活」
+
+- [ ] ai/advanced/agent/02-task-system — 第二题考「任务图与 TodoWrite 的分界」
+- [ ] algorithm/advanced/graph/02-topological-sort — 第二题考「Kahn 入度与字典序」
+- [ ] kafka/intermediate/core/04-high-throughput — 第二题考「页缓存与批量压缩参数」（执行时核准角度）
 
 ### b 类：旧题返修
 
@@ -124,6 +125,8 @@
 - 2026-09-10 · 第四十五轮：3 道核心笔记第二题（py-fixture-044 / mysql-poolsize-016 / py-uvx-045，difficulty 4/4/3；pytest 条目原定角度与 py-pytest-014 重合，换考 fixture 依赖图与 scope）· 本轮提交主题：feat: 题库深化第四十五轮
 
 - 2026-09-10 · 第四十六轮：3 道核心笔记第二题（py-descform-046 / py-fourgates-047 / py-awarearith-048，difficulty 4/3/4）· 本轮提交主题：feat: 题库深化第四十六轮
+
+- 2026-09-10 · 第四十七轮：3 道核心笔记第二题（ai-paradigm-014 / algo-graphmark-040 / js-wsframe-018，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第四十七轮
 
 ## 经验与规则
 

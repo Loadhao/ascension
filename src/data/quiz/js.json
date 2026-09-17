@@ -304,6 +304,25 @@
       ],
       "hint": "immediate 变体（首次立即、后续防抖）适合按钮防连点；lodash 的 debounce/throttle 支持 immediate/尾部执行选项，生产可直接用。js-debounce 方向第二题。",
       "difficulty": 3
+    },
+    {
+      "id": "js-wsframe-018",
+      "noteId": "js/intermediate/web/01-websocket",
+      "type": "multiple",
+      "q": "关于 WebSocket 的帧协议与选型边界，正确的有？（多选）",
+      "options": [
+        "帧头部最小 2 字节，Opcode 区分文本/二进制/关闭/ping-pong；客户端→服务端的帧必须带 4 字节掩码，防缓存投毒攻击",
+        "穿 nginx 等代理时，proxy_read_timeout 要与心跳间隔对齐，否则空闲连接被中间层掐掉",
+        "只需服务器单向推（通知、日志尾随）用 SSE 更简单；低频刷新轮询足矣",
+        "WebSocket 帧没有分片机制，大消息必须一次发完"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "大消息可拆多帧（fin 标志收尾）；「用有状态长连接换全双工低延迟」——重连、心跳、连接数上限、网关配置都是成本。js-ws-007 考握手与传输模型，本题考帧协议细节与选型。",
+      "difficulty": 4
     }
   ]
 }
