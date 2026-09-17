@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 137 轮（2026-09-17，内容补充模式）：浏览器存储全家桶（js/intermediate/web 第 5 篇）——勘察确认 Cookie/Web Storage/IndexedDB 横向对比全站零专篇（cart/cors/session-attack 仅顺带提及，security 方向 HttpOnly/SameSite 仅 5 处轻覆盖，边界划在平台存储视角不复述 CSRF 防御）。内容：四代存储横向对比表（容量/生命周期/随请求发送/API 形态/动机）、Cookie 四属性与凭证承载、localStorage vs sessionStorage 标签页隔离与 storage 事件跨标签页通信、IndexedDB 异步事务定位与 Cache API 分工、token 存放 XSS vs CSRF 权衡选型。1 张 mermaid 选型决策图、1 张对比表、storage 事件代码示例。构建 670 页、mermaid 505 块、一致性 8 项全绿。js/intermediate/web 5 篇。
+- 下一轮入口：候选池——①Web Worker 全站零覆盖（js/intermediate/web 第 6 篇，与 event-loop 篇互补讲多线程边界）；②下轮收尾跑 contrast 审计（136/137 各新增 mermaid）。
+
 ### 第 136 轮（2026-09-17，内容补充模式）：渲染管线与重绘回流（js/intermediate/web 第 4 篇）——grep 勘察确认重绘回流/合成层/布局抖动/defer 属性全站零专篇（CSSOM 仅 network 的 URL-to-page 篇概览提及）。内容：关键渲染路径五步、CSS/JS 阻塞渲染差异与 defer/async 对比表、回流>重绘>合成三档开销、transform/opacity 走合成线程原理、布局抖动读写交错与批量读再写修复、display 三兄弟渲染差异对比。2 张 mermaid（管线流程+属性路由决策）。构建 669 页、mermaid 504 块、一致性 8 项全绿。js/intermediate/web 4 篇。
 - 下一轮入口：候选池——①浏览器存储专篇（Cookie/localStorage/sessionStorage/IndexedDB 全站零专篇，cart/session-attack/cors 仅顺带提及）；②Web Worker 全站零覆盖；③补记：解构篇提交 3468348 的轮次记录又被并行会话压缩丢失（6824c98 声称 136 轮连续，实际现存 135 条），本条按文件现存编号续写。
 - **状态文件压缩说明（第 137 轮）**：第 130-134 轮详细记录在并行会话的多次 reset/rebase 中丢失，代码提交均在 git 历史可查（Proxy/Reflect 3c6be5a、Promise 组合器 60e4a35、Node 安全 28a9cd4 等）。不恢复旧记录——当前状态足以恢复现场。

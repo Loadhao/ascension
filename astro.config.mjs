@@ -782,6 +782,7 @@ export default defineConfig({
                         { label: '同源策略与九种跨域方案', link: '/js/intermediate/web/02-cors/' },
                         { label: 'DOM 事件机制与委托', link: '/js/intermediate/web/03-dom-events/' },
                         { label: '渲染管线与重绘回流', link: '/js/intermediate/web/04-browser-render/' },
+                        { label: '浏览器存储全家桶', link: '/js/intermediate/web/05-storage/' },
                       ],
                     },
                   ],
