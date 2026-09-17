@@ -184,6 +184,12 @@
       "label": "Node 事件循环相位",
       "href": "/js/intermediate/node/10-event-loop/",
       "group": "Node"
+    },
+    {
+      "id": "abortsig",
+      "label": "请求取消与超时",
+      "href": "/js/intermediate/web/08-abort/",
+      "group": "网络"
     }
   ],
   "edges": [
@@ -387,6 +393,21 @@
       "source": "nodeeventloop",
       "target": "cluster",
       "label": "单进程循环之上的多进程"
+    },
+    {
+      "source": "combinators",
+      "target": "abortsig",
+      "label": "race 假取消的正解"
+    },
+    {
+      "source": "spafee",
+      "target": "abortsig",
+      "label": "SPA 请求生命周期管理"
+    },
+    {
+      "source": "domevents",
+      "target": "abortsig",
+      "label": "signal 管事件监听"
     }
   ]
 }

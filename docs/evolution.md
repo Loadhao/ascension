@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 152 轮（2026-09-18，内容补充模式）：请求的取消与超时（js/intermediate/web 第 8 篇）——勘察确认 AbortController/请求取消全站零专篇（仅组合器篇缺口式提及，防重复提交 2 处顺带）。内容：race 假取消 vs AbortController 真取消对比图、三件套（controller/signal/abort）与 AbortError 按 e.name 分流防误报、AbortSignal.timeout 标准件与 AbortSignal.any 多源合并、搜索联想「新请求 abort 旧请求」防重复提交标杆实现（防抖管少发、abort 管作废互补）、signal 同时管理请求与事件监听的一行卸载收尾。1 张 mermaid 对比图、4 段代码。构建 688 页、mermaid 518 块、一致性 8 项全绿。js/intermediate/web 8 篇。
+- 下一轮入口：候选池——①TS .d.ts 与类型声明（basic 第 5 篇，全站零覆盖：declare/module declaration/@types 机制）；②收尾 contrast 审计（152 新增 1 图）。
+
 ### 第 151 轮（2026-09-18，内容补充模式）：模板字面量类型（typescript/intermediate/typing 第 2 篇）——勘察确认模板字面量类型全站零覆盖（限流/熔断候选均有专篇退场，ai 方向活跃不轻碰）。内容：类型层字符串拼接与联合笛卡尔积、Uppercase/Capitalize 的内置语法糖本质、infer 拆字符串（前缀匹配/对半拆/递归深度上限）、路由路径推导参数对象实战（模板+条件+映射三构件合体，框架类型安全地基）、可读性税呼应。无 mermaid（代码承载），构建 687 页、mermaid 517 块持平、一致性 8 项全绿。typescript/intermediate/typing 2 篇。
 - 下一轮入口：候选池——①请求的取消与超时（js/intermediate/web 第 8 篇，AbortController 仅被组合器篇缺口式提及）；②TS .d.ts 与类型声明（basic 第 5 篇）；③收尾 contrast 审计（本轮无新图）。
 
