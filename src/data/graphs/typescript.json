@@ -40,6 +40,12 @@
       "label": "模板字面量类型",
       "href": "/typescript/intermediate/typing/02-template-literal-types/",
       "group": "类型编程"
+    },
+    {
+      "id": "dtsdecl",
+      "label": "类型声明与 .d.ts",
+      "href": "/typescript/basic/core/05-declaration-files/",
+      "group": "类型系统"
     }
   ],
   "edges": [
@@ -71,6 +77,16 @@
       "source": "typeprog",
       "target": "tmpliteral",
       "label": "字符串维度的类型编程"
+    },
+    {
+      "source": "enumasconst",
+      "target": "dtsdecl",
+      "label": "运行时与类型层的边界实践"
+    },
+    {
+      "source": "typesys",
+      "target": "dtsdecl",
+      "label": "ambient 声明的语义"
     }
   ]
 }

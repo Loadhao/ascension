@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 153 轮（2026-09-18，内容补充模式）：类型声明与 .d.ts（typescript/basic/core 第 5 篇）——勘察确认 declare/.d.ts/@types 全站零覆盖。内容：ambient 声明的「只登记不生成代码」语义、.d.ts 定位、类型三来源按序命中（包自带 types 字段→@types/DefinitelyTyped→手写 declare module）、给无类型库补声明的三要点（include 范围/空壳兜底 TODO/CSS 图片通配声明）、库作者的 types 字段即 API 发布。无 mermaid（代码承载），构建 689 页、mermaid 518 块持平、一致性 8 项全绿。typescript/basic/core 5 篇、全方向 7 篇，本次启动 TS 线 +2 收口。
+- 下一轮入口：候选池——①收尾 contrast 审计（152 新增 1 图）；②场景题/ai 线间歇；③web 线第 9 篇候选（浏览器缓存策略实践？与 network http-cache 篇需勘察边界）。
+
 ### 第 152 轮（2026-09-18，内容补充模式）：请求的取消与超时（js/intermediate/web 第 8 篇）——勘察确认 AbortController/请求取消全站零专篇（仅组合器篇缺口式提及，防重复提交 2 处顺带）。内容：race 假取消 vs AbortController 真取消对比图、三件套（controller/signal/abort）与 AbortError 按 e.name 分流防误报、AbortSignal.timeout 标准件与 AbortSignal.any 多源合并、搜索联想「新请求 abort 旧请求」防重复提交标杆实现（防抖管少发、abort 管作废互补）、signal 同时管理请求与事件监听的一行卸载收尾。1 张 mermaid 对比图、4 段代码。构建 688 页、mermaid 518 块、一致性 8 项全绿。js/intermediate/web 8 篇。
 - 下一轮入口：候选池——①TS .d.ts 与类型声明（basic 第 5 篇，全站零覆盖：declare/module declaration/@types 机制）；②收尾 contrast 审计（152 新增 1 图）。
 

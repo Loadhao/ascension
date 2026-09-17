@@ -812,6 +812,7 @@ export default defineConfig({
                         { label: 'interface、type 与泛型入门', link: '/typescript/basic/core/02-interfaces-generics/' },
                         { label: '严格模式与工程配置', link: '/typescript/basic/core/03-strict-config/' },
                         { label: '枚举、字面量与 as const', link: '/typescript/basic/core/04-enum-asconst/' },
+                        { label: '类型声明与 .d.ts', link: '/typescript/basic/core/05-declaration-files/' },
                       ],
                     },
                   ],
