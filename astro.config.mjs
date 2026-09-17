@@ -807,6 +807,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/typescript/basic/core/' },
                         { label: '类型系统第一性', link: '/typescript/basic/core/01-type-system/' },
+                        { label: 'interface、type 与泛型入门', link: '/typescript/basic/core/02-interfaces-generics/' },
                       ],
                     },
                   ],

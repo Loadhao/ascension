@@ -1,9 +1,32 @@
 {
   "nodes": [
-    { "id": "root", "label": "TypeScript", "group": "类型系统" },
-    { "id": "typesys", "label": "类型系统第一性", "href": "/typescript/basic/core/01-type-system/", "group": "类型系统" }
+    {
+      "id": "root",
+      "label": "TypeScript",
+      "group": "类型系统"
+    },
+    {
+      "id": "typesys",
+      "label": "类型系统第一性",
+      "href": "/typescript/basic/core/01-type-system/",
+      "group": "类型系统"
+    },
+    {
+      "id": "ifacetype",
+      "label": "interface、type 与泛型",
+      "href": "/typescript/basic/core/02-interfaces-generics/",
+      "group": "类型系统"
+    }
   ],
   "edges": [
-    { "source": "root", "target": "typesys" }
+    {
+      "source": "root",
+      "target": "typesys"
+    },
+    {
+      "source": "typesys",
+      "target": "ifacetype",
+      "label": "世界观之上的日常写法"
+    }
   ]
 }
