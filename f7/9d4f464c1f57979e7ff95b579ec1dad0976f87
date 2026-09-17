@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 828
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/typescript/intermediate/typing/02-template-literal-types.md
+  h_9324126a55eff3 1-99
+src/data/graphs/typescript.json
+  h_9324126a55eff3 37-42,69-73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f79d4f464c1f57979e7ff95b579ec1dad0976f87",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
