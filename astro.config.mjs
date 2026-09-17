@@ -793,6 +793,27 @@ export default defineConfig({
               ],
             },
             {
+              label: 'TypeScript',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/typescript/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '类型系统',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/typescript/basic/core/' },
+                        { label: '类型系统第一性', link: '/typescript/basic/core/01-type-system/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
               label: 'React',
               collapsed: true,
               items: [

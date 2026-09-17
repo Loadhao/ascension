@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 143 轮（2026-09-17，内容补充模式）：新建 TypeScript 方向 + 首篇类型系统第一性（typescript/basic/core 第 1 篇）——勘察确认 TS 全站仅 1 处顺带提及，前端面试主力线结构性缺失，按「新增方向四处同步」执行：方向首页 RoadmapIsland + basic/core 分类页 + graphs/typescript.json（顶层键核对为 nodes/edges，修正了初稿多余的 root 键）+ 侧边栏插在 JS 与 React 组之间 + notes.ts DIRECTION_ORDER 在 js 后插入 typescript。首篇内容：类型擦除与 tsc 管线（类型不进运行时、TS 不替代运行时校验两推论）、结构化类型与名义类型对比、any/unknown/never/void 四兄弟辨析表、never 穷尽检查、收窄四手法与判别字段建模、面试答法框架。1 张 mermaid 编译管线图、2 张表。构建 678 页、mermaid 511 块、一致性 8 项全绿。
+- 下一轮入口：候选池——①TS 第 2 篇：interface vs type 与泛型入门；②netty/middleware 勘察；③收尾需 contrast 审计（142/143 各新增 mermaid）。
+
 ### 第 142 轮（2026-09-17，内容补充模式）：映射与分词器：term 为什么查不到 text（elasticsearch/intermediate/usage 第 5 篇）——勘察确认动态映射/_analyze 全站零覆盖，text vs keyword 仅倒排篇一张浅表，term 查 text 落空根因零覆盖；候选「refresh/flush/translog 刷盘语义」因 shard-replica 篇已有写路径深挖+四件套表退场，场景题系列经典角度（优惠券/超时取消/库存/feed 流）均已有承载篇。内容：mapping 写死难改与 reindex、text/keyword 分工表与 multi-field 子字段、term 查 text 落空根因（倒排查词项）与「term 对 keyword，match 对 text」口诀、分词器三段流水线与 _analyze 调试、中文 IK 双配置（索引 max_word/搜索 smart）、动态映射三档与 date 猜型陷阱。1 张 mermaid 流水线图、2 张表、3 段代码。构建 675 页、mermaid 510 块、一致性 8 项全绿。elasticsearch 8 篇。
 - 下一轮入口：候选池——①ES usage 已 5 篇，剩 refresh 调优细节偏运维（可选 basic/core 第 3 篇？勘察后再定）；②mqtt/netty/middleware 勘察；③TS 线未开。
 

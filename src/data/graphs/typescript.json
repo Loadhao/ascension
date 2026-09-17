@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    { "id": "root", "label": "TypeScript", "group": "类型系统" },
+    { "id": "typesys", "label": "类型系统第一性", "href": "/typescript/basic/core/01-type-system/", "group": "类型系统" }
+  ],
+  "edges": [
+    { "source": "root", "target": "typesys" }
+  ]
+}
