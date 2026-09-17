@@ -178,6 +178,12 @@
       "label": "前端路由与 History",
       "href": "/js/intermediate/web/07-route/",
       "group": "网络"
+    },
+    {
+      "id": "nodeeventloop",
+      "label": "Node 事件循环相位",
+      "href": "/js/intermediate/node/10-event-loop/",
+      "group": "Node"
     }
   ],
   "edges": [
@@ -366,6 +372,21 @@
       "source": "cors",
       "target": "spafee",
       "label": "同源策略下的 URL 机制"
+    },
+    {
+      "source": "eventloop",
+      "target": "nodeeventloop",
+      "label": "同一模型在 Node 的深挖"
+    },
+    {
+      "source": "emitter",
+      "target": "nodeeventloop",
+      "label": "nextTick 驱动的错误冒泡"
+    },
+    {
+      "source": "nodeeventloop",
+      "target": "cluster",
+      "label": "单进程循环之上的多进程"
     }
   ]
 }

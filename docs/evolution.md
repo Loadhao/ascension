@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 140 轮（2026-09-17，内容补充模式）：Node 事件循环与浏览器差异深挖（js/intermediate/node 第 10 篇，Node 主线十篇收口）——勘察确认 timers/poll/check 相位模型全站零专篇（basic 事件循环篇仅 4 行小结并显式留「深入另见」接口，边界互认不重复）。内容：libuv 六阶段模型与 poll 枢纽、process.nextTick 特权队列 vs Promise 微任务、setImmediate vs setTimeout(0) 主模块竞态与 I/O 回调内确定序、浏览器/Node 六维对比表（逐个 vs 分组的本质差异）、unref 与进程退出生命周期。1 张 mermaid 相位循环图、2 张表。构建 673 页、mermaid 508 块、一致性 8 项全绿。过程教训：图谱边端点 id 凭记忆写 eventemitter 被体检第 9 项拦截（实际是 emitter）——图谱 id 必须先查 JSON 再引用，与 old_string 禁凭记忆教训同源。js/intermediate/node 10 篇。
+- 下一轮入口：候选池——①network 方向缺 intermediate 层（HTTP 缓存已有专篇退场，可勘察 HTTP/2/3 或 Web 安全网关向）；②TS 线未开（全站仅 1 篇提及）；③场景题/ai 线间歇。
+
 ### 第 139 轮（2026-09-17，内容补充模式）：前端路由与 History API（js/intermediate/web 第 7 篇）——勘察确认 pushState/popstate/History API 全站零覆盖（hashchange 提及均为 MQ 分片路由/CORS 场景顺带，非前端路由）。内容：后端路由 vs 前端路由分野、hash 路由锚点壳与 hashchange 全自动、history 路由 pushState 不触发 popstate 的手动渲染、刷新 404 根因与服务器 fallback（Nginx try_files）、两路由选型表、框架路由=两套内核+工程化外设。1 张 mermaid 事件分工图、1 张对比表。构建 672 页、mermaid 507 块、一致性 8 项全绿。js/intermediate/web 7 篇。
 - 下一轮入口：候选池——①js/intermediate/web 7 篇已相当厚，后续轮转其他方向勘察（network 的 HTTP 缓存深挖、前端安全 referrer/CSP 在 security 的覆盖勘察）；②场景题/ai 线间歇。
 

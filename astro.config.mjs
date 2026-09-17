@@ -771,6 +771,7 @@ export default defineConfig({
                         { label: '环境变量与配置管理', link: '/js/intermediate/node/07-env-config/' },
                         { label: 'Node 安全最佳实践', link: '/js/intermediate/node/08-security/' },
                         { label: 'crypto 模块：Node 的加密工具箱', link: '/js/intermediate/node/09-crypto/' },
+                        { label: 'Node 事件循环与浏览器差异', link: '/js/intermediate/node/10-event-loop/' },
                       ],
                     },
                     {
