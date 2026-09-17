@@ -24,9 +24,10 @@
 
 
 
-- [ ] ai/advanced/agent/05-agent-teams — 第二题考「文件收件箱与常驻队友线程」
-- [ ] python/advanced/internals/02-memory-gc — 第二题考「引用计数主力与分代 GC 兜底」
-- [ ] algorithm/basic/techniques/02-difference-array — 第二题考「区间加 v 只改两端点」
+
+- [ ] ai/advanced/agent/07-autonomous-agents — 第二题考「看板认领的原子性」
+- [ ] python/basic/oop/03-dataclass-slots — 第二题考「frozen 与 slots 的组合」（执行时核准）
+- [ ] python/basic/syntax/03-strings — 第二题考「不可变的底层与常用方法」（执行时核准）
 
 ### b 类：旧题返修
 
@@ -145,6 +146,8 @@
 - 2026-09-10 · 第五十二轮：3 道核心笔记第二题（algo-rotvar-041 / java-feignproxy-128 / ai-harnesspos-035，difficulty 4/4/4；comprehensive-agent 原定角度与 ai-harness-028 重合，换考位置感与分工）· 本轮提交主题：feat: 题库深化第五十二轮
 
 - 2026-09-10 · 第五十三轮：3 道核心笔记第二题（java-threadstate-132 / algo-jumpclimb-043 / py-protocol-049，difficulty 4/4/4；jump-game 原定可达性角度与 algo-jump-020 撞车，换考版本 II 分层）· 本轮提交主题：feat: 题库深化第五十三轮
+
+- 2026-09-10 · 第五十四轮：3 道核心笔记第二题（ai-msgbus-036 / py-gcpairs-051 / algo-diffedge-044，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第五十四轮
 
 ## 经验与规则
 

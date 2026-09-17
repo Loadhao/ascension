@@ -887,6 +887,25 @@
       ],
       "hint": "TypeVar 表达的是类型间的约束关系（first(seq: list[T]) -> T）；再往上一步是 Pydantic 的运行时校验。py-type-010 考运行时行为，本题考 Protocol 与 TypedDict。",
       "difficulty": 4
+    },
+    {
+      "id": "py-gcpairs-051",
+      "noteId": "python/advanced/internals/02-memory-gc",
+      "type": "multiple",
+      "q": "关于 CPython 分代 GC 的语义、weakref 与 __slots__，正确的有？（多选）",
+      "options": [
+        "分代 GC 专收循环引用——普通对象靠引用计数就死了，根本不进 GC 议题，所以 Python 的 GC 触发频率低、单次也轻",
+        "weakref 引用不增加计数——缓存、监听器注册表用它避免「被缓存而免死」",
+        "__slots__ 声明后实例没有 __dict__，海量小对象省一半以上内存，代价是不能动态加属性",
+        "__slots__ 声明后仍允许动态添加新属性，只是访问变慢"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——__slots__ 锁死属性集合，加新属性直接 AttributeError；排查三板斧 getsizeof 看单体、tracemalloc 看增长、objgraph 看引用链。py-gc-006 考主力与兜底的分工，本题考 weakref 与 __slots__。",
+      "difficulty": 4
     }
   ]
 }

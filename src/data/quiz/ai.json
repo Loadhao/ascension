@@ -584,6 +584,23 @@
       ],
       "hint": "权限、日志、审计共用 PreToolUse 一个挂点——hook 是统一的扩展面；压缩管线先压大输出再裁历史再压旧 tool_result。「机制很多，循环一个」。ai-harness-028 考循环不变，本题考位置感与分工。",
       "difficulty": 4
+    },
+    {
+      "id": "ai-msgbus-036",
+      "noteId": "ai/advanced/agent/05-agent-teams",
+      "type": "single",
+      "q": "Agent 团队的 MessageBus 为什么用文件收件箱而不是内存队列？常驻队友与子 Agent 的分工、权限冒泡，按笔记正确的是？",
+      "options": [
+        "文件收件箱直观、跨线程可观察、可恢复（消费式读完删除）；子 Agent 是一次性临时工只回结论，常驻队友多轮协作能随时通信；权限冒泡让队友的危险操作仍路由到 Lead 经用户审批——多 Agent 不等于失控",
+        "文件收件箱比内存队列性能更好，是纯性能优化",
+        "常驻队友和子 Agent 生命周期相同，都是用完销毁",
+        "权限冒泡让队友自动获得所有权限，无需人工审批"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "教学版 read_inbox 有 read+unlink 竞态，真实 CC 加 proper-lockfile；队友有简化工具集、限轮数，真实 CC 用 idle loop 等 inbox。ai-team-016 考协调不靠共享内存，本题考 MessageBus 与权限冒泡。",
+      "difficulty": 4
     }
   ]
 }
