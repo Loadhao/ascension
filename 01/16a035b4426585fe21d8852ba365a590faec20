@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 2271
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/kubernetes/intermediate/ops/04-autoscaling-hpa.md
+  h_9324126a55eff3 1-115
+src/data/graphs/kubernetes.json
+  h_9324126a55eff3 49-54,111-115
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "0116a035b4426585fe21d8852ba365a590faec20",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
