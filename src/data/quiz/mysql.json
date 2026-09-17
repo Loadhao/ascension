@@ -258,6 +258,23 @@
       ],
       "hint": "半同步只是「至少一个从库收到 binlog 才返回」、不解决重放堆积；「写后读走主库」是业务侧绕开延迟的标准姿势。mysql-repl-009 考延迟的结构性根因，本题考三层对策。",
       "difficulty": 3
+    },
+    {
+      "id": "mysql-poolsize-016",
+      "noteId": "mysql/intermediate/connection-pool/01-hikaricp",
+      "type": "single",
+      "q": "「数据库连接池设越大越好」为什么是错的？HikariCP 又快在哪？",
+      "options": [
+        "池是限流阀不是加速器——大小 ≈ 核数×2+有效盘数，池再大只是把队列搬个位置；HikariCP 快在把 JDBC 调用路径上的抽象开销全抠掉：无锁 ConcurrentBag + 字节码替代反射 + FastList",
+        "池越大吞吐越高，因为数据库能同时处理更多连接",
+        "HikariCP 快是因为它内置了 SQL 优化器，查询本身就变快了",
+        "池内死锁的根因是数据库锁，与池大小无关"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "MySQL 每个连接占一个线程，多了上下文切换反而降吞吐；池内死锁——一事务先拿 A 又借 B，池空时 A 等 B、B 等 A，纪律是一事务一连接；泄漏用 leakDetectionThreshold 抓。mysql 方向 hikaricp 首题。",
+      "difficulty": 4
     }
   ]
 }

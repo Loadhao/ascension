@@ -768,6 +768,38 @@
       ],
       "hint": "dict/set 是开放寻址哈希表、装载因子超 2/3 扩容；3.7+ dict 保持插入有序是语言保证；频繁 O(1) 成员判断与集合代数是 set 的存在意义。本篇首题。",
       "difficulty": 4
+    },
+    {
+      "id": "py-fixture-044",
+      "noteId": "python/advanced/eng/02-pytest",
+      "type": "single",
+      "q": "重资源的数据库容器 fixture 想全程只建一次，而测试之间又要隔离——pytest 的机制怎么用？",
+      "options": [
+        "fixture 可依赖 fixture（按依赖图解析、构建顺序自动满足）；scope 四级 session→module→class→function（默认），重资源标 scope=\"session\" 全程一次，默认 function 级每测重建隔离优先；共享放 conftest.py 不需 import",
+        "scope 只有三档且默认是 session，隔离性天然最强",
+        "fixture 之间不能互相依赖，必须各自独立声明",
+        "共享 fixture 必须 import 才能在测试里使用"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "pytest.raises 上下文管理器断言异常；mark 分组（-m \"not slow\" 快慢分离）+ pytest-xdist 并行是本地反馈速度的前提。py-pytest-014 多选考基础三板斧，本题考 fixture 依赖图与 scope。",
+      "difficulty": 4
+    },
+    {
+      "id": "py-uvx-045",
+      "noteId": "python/advanced/eng/01-venv-uv",
+      "type": "judge",
+      "q": "uvx ruff check . 会把 ruff 安装进当前项目的虚拟环境，方便后续复用。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "uvx 是「临时环境运行工具、不装进任何项目」——替代 pip install --user 与 pipx；工具不落地才是它的价值。py-uv-013 考声明与锁定的分工，本题考 uvx 的定位。",
+      "difficulty": 3
     }
   ]
 }

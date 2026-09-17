@@ -15,9 +15,10 @@
 
 
 
-- [ ] python/advanced/eng/02-pytest — 第二题考「fixture 按名注入与 conftest.py」（执行时核准角度）
-- [ ] mysql/intermediate/connection-pool/01-hikaricp — 第二题考「HikariCP 快的原因与连接池参数」
-- [ ] python/advanced/eng/01-venv-uv — 第二题考「venv 隔离与 uv 锁定的分工」
+
+- [ ] python/advanced/internals/03-descriptors-metaclass — 第二题考「描述符协议与 ORM 字段的本体」
+- [ ] python/advanced/eng/03-ruff-mypy — 第二题考「ruff 与 mypy 的分工与 CI 门禁」
+- [ ] python/intermediate/stdlib/05-datetime — 第二题考「naive/aware 与时区纪律」
 
 ### b 类：旧题返修
 
@@ -118,6 +119,8 @@
 - 2026-09-10 · 第四十三轮：3 道核心笔记第二题（netty-leakpose-009 / mongo-workset-009 / react-jsxflow-006，difficulty 4/4/4；react/02-hooks-mental 已被并行会话加到 2 题（快照+依赖闭包）角度饱和弃置，react 改从 01-declarative-ui 出第二题）· 本轮提交主题：feat: 题库深化第四十三轮
 
 - 2026-09-10 · 第四十四轮：3 道核心笔记第二题（lc-toolloop-011 / mqtt-varlen-006 / mqtt-acl-007，difficulty 4/4/4；langchain 条目 lc-agent-006 已考手搭四件套，换考工具定义质量与 create_agent 收敛）· 本轮提交主题：feat: 题库深化第四十四轮
+
+- 2026-09-10 · 第四十五轮：3 道核心笔记第二题（py-fixture-044 / mysql-poolsize-016 / py-uvx-045，difficulty 4/4/3；pytest 条目原定角度与 py-pytest-014 重合，换考 fixture 依赖图与 scope）· 本轮提交主题：feat: 题库深化第四十五轮
 
 ## 经验与规则
 
