@@ -716,6 +716,7 @@ export default defineConfig({
                         { label: '概览', link: '/netty/intermediate/core/' },
                         { label: '心跳保活与连接假死', link: '/netty/intermediate/core/01-heartbeat-idle/' },
                         { label: 'ByteBuf 泄漏排查', link: '/netty/intermediate/core/02-refcount-leak/' },
+                        { label: 'Netty 中的 WebSocket', link: '/netty/intermediate/core/03-websocket/' },
                       ],
                     },
                   ],

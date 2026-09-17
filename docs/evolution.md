@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 149 轮（2026-09-17，内容补充模式）：Netty 中的 WebSocket：握手与帧（netty/intermediate/core 第 3 篇）——勘察确认 WebSocket 与 netty 集成、HttpServerCodec/HttpObjectAggregator 在 netty 内零提及（js 与 network 方向的 WebSocket 篇管协议与浏览器侧，本篇管服务端实现，边界互补）。内容：四件套 handler 链与各司一职（Aggregator 拼完整请求、升级处理器 101 换道移除 HTTP handler）、帧六类型分流表、Continuation 分片与 WebSocketFrameAggregator 重组、协议层 Ping/Pong 证连接活性 vs 应用层心跳证业务健康的两层分工（呼应心跳篇）。1 张 mermaid 换道图、1 张帧类型表、2 段代码。构建 685 页、mermaid 517 块、一致性 8 项全绿。过程：netty 图谱边端点 id 再次凭记忆猜错（netty-pipeline→实际 nt-pipeline），被一致性体检第 9 项拦截后修正——教训再次确认：图谱 id 必须先查 JSON。netty 6 篇。
+- 下一轮入口：候选池——①TS basic 第 4 篇（枚举与 as const / 函数重载，收口 basic 线）；②场景题/ai 线间歇；③收尾 contrast 审计（148/149 各新增 mermaid）。
+
 ### 第 148 轮（2026-09-17，内容补充模式）：弹性伸缩与 HPA（kubernetes/intermediate/ops 第 4 篇）——勘察确认 HPA/弹性伸缩/VPA/CA 全站零覆盖（HPA 提及仅 network 篇 HTTP 语境误命中）。内容：HPA 控制器定位与调谐回路图、目标值比例算法（ceil 公式+多指标取最大，可当场推导）、Utilization 分母是 requests 的高频坑与生效前提链（requests→metrics-server→指标可查）、缩容稳定窗口 5 分钟看峰值与 behavior 步长、扩容激进缩容保守的不对称设计、HPA/VPA/CA 三层分工表与 KEDA 定位。1 张 mermaid 回路图、1 张 yaml、1 张分工表。构建 684 页、mermaid 516 块、一致性 8 项全绿。kubernetes 8 篇。
 - 下一轮入口：候选池——①netty WebSocket 集成（intermediate/core 第 3 篇，0 覆盖）；②TS 线收口（basic 第 4 篇：枚举/as const 或函数重载）；③场景题或 ai 线间歇。
 
