@@ -34,6 +34,12 @@
       "label": "枚举与 as const",
       "href": "/typescript/basic/core/04-enum-asconst/",
       "group": "类型系统"
+    },
+    {
+      "id": "tmpliteral",
+      "label": "模板字面量类型",
+      "href": "/typescript/intermediate/typing/02-template-literal-types/",
+      "group": "类型编程"
     }
   ],
   "edges": [
@@ -60,6 +66,11 @@
       "source": "typesys",
       "target": "enumasconst",
       "label": "类型擦除的著名例外"
+    },
+    {
+      "source": "typeprog",
+      "target": "tmpliteral",
+      "label": "字符串维度的类型编程"
     }
   ]
 }

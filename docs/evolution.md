@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 151 轮（2026-09-18，内容补充模式）：模板字面量类型（typescript/intermediate/typing 第 2 篇）——勘察确认模板字面量类型全站零覆盖（限流/熔断候选均有专篇退场，ai 方向活跃不轻碰）。内容：类型层字符串拼接与联合笛卡尔积、Uppercase/Capitalize 的内置语法糖本质、infer 拆字符串（前缀匹配/对半拆/递归深度上限）、路由路径推导参数对象实战（模板+条件+映射三构件合体，框架类型安全地基）、可读性税呼应。无 mermaid（代码承载），构建 687 页、mermaid 517 块持平、一致性 8 项全绿。typescript/intermediate/typing 2 篇。
+- 下一轮入口：候选池——①请求的取消与超时（js/intermediate/web 第 8 篇，AbortController 仅被组合器篇缺口式提及）；②TS .d.ts 与类型声明（basic 第 5 篇）；③收尾 contrast 审计（本轮无新图）。
+
 ### 第 150 轮（2026-09-17，内容补充模式）：枚举、字面量类型与 as const（typescript/basic/core 第 4 篇，basic 线收口）——勘察确认 enum/as const/字面量联合在 TS 方向零覆盖。内容：enum 是 TS 少数不擦除的构造（数字枚举双向映射、字符串单向、tree-shaking 不友好）、const enum 内联与 isolatedModules 兼容坑、as const 三板斧组合（typeof/keyof/索引访问推字面量联合）、三方案对比表与选型共识（as const 对象/字面量联合为主、enum 留给双向映射）。本篇无 mermaid（表格+代码承载），构建 686 页、mermaid 517 块持平、一致性 8 项全绿。typescript/basic/core 4 篇收口，全方向 6 篇。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②netty/TS intermediate/typing 第 2 篇（模板字面量类型）；③收尾 contrast 审计（148/149 各新增 mermaid，150 无图）。
 

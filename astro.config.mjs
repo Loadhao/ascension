@@ -825,6 +825,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/typescript/intermediate/typing/' },
                         { label: '类型编程入门：映射、条件与 infer', link: '/typescript/intermediate/typing/01-type-programming/' },
+                        { label: '模板字面量类型', link: '/typescript/intermediate/typing/02-template-literal-types/' },
                       ],
                     },
                   ],
