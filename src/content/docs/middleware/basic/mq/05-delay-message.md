@@ -1,7 +1,7 @@
 ---
 title: 延迟消息：三大 MQ 的实现与选型
 description: RocketMQ 延迟级别 vs RabbitMQ TTL+DLX vs Kafka 无原生支持——延迟消息的场景与选型
-level: intermediate
+level: basic
 core: true
 ---
 

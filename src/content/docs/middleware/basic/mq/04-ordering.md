@@ -1,7 +1,7 @@
 ---
 title: 消息队列的顺序消费
 description: 为什么需要顺序、分区的有序性保证、消费端并行与顺序的矛盾、Kafka/RocketMQ/RabbitMQ 的实现差异
-level: intermediate
+level: basic
 core: true
 ---
 
