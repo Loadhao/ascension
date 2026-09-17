@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 142 轮（2026-09-17，内容补充模式）：映射与分词器：term 为什么查不到 text（elasticsearch/intermediate/usage 第 5 篇）——勘察确认动态映射/_analyze 全站零覆盖，text vs keyword 仅倒排篇一张浅表，term 查 text 落空根因零覆盖；候选「refresh/flush/translog 刷盘语义」因 shard-replica 篇已有写路径深挖+四件套表退场，场景题系列经典角度（优惠券/超时取消/库存/feed 流）均已有承载篇。内容：mapping 写死难改与 reindex、text/keyword 分工表与 multi-field 子字段、term 查 text 落空根因（倒排查词项）与「term 对 keyword，match 对 text」口诀、分词器三段流水线与 _analyze 调试、中文 IK 双配置（索引 max_word/搜索 smart）、动态映射三档与 date 猜型陷阱。1 张 mermaid 流水线图、2 张表、3 段代码。构建 675 页、mermaid 510 块、一致性 8 项全绿。elasticsearch 8 篇。
+- 下一轮入口：候选池——①ES usage 已 5 篇，剩 refresh 调优细节偏运维（可选 basic/core 第 3 篇？勘察后再定）；②mqtt/netty/middleware 勘察；③TS 线未开。
+
 ### 第 141 轮（2026-09-17，内容补充模式）：相关性打分与 BM25（elasticsearch/intermediate/usage 第 4 篇）——勘察确认 BM25/相关性打分在 ES 内仅 2 行顺带提及，深挖题「ES 怎么决定谁排第一」零专篇；候选 etcd 第 5 篇与 ZK/RabbitMQ 深化均因大纲覆盖扎实退场。内容：搜索是排序问题、TF-IDF 两因子与两偏差（无饱和/无长度归一）、BM25 三要素与 k1/b 参数直觉、为什么换掉 TF-IDF、filter 不算分可缓存与 must 的分工、boost/function_score/业务重排三条干预路、_explain 排查。1 张 mermaid 三因子构成图、1 段 bool 查询 JSON。构建 674 页、mermaid 509 块、一致性 8 项全绿。elasticsearch 7 篇。
 - 下一轮入口：本轮收尾需 pnpm preview + contrast 审计（139/140/141 各新增 1 块 mermaid）。候选池——①ES 剩余缺口：refresh/flush/translog 刷盘语义（写路径篇有底子）、分词器专篇（覆盖 1 篇浅）；②mqtt/netty/middleware 各 4-5 篇待勘察；③TS 线未开。
 

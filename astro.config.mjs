@@ -1287,6 +1287,7 @@ export default defineConfig({
                         { label: '聚合分析：度量、桶与管道', link: '/elasticsearch/intermediate/usage/02-aggregation/' },
                         { label: '深翻页方案与查询性能优化', link: '/elasticsearch/intermediate/usage/03-pagination/' },
                         { label: '相关性打分与 BM25', link: '/elasticsearch/intermediate/usage/04-bm25-scoring/' },
+                        { label: '映射与分词器', link: '/elasticsearch/intermediate/usage/05-mapping-analyzer/' },
                       ],
                     },
                     {

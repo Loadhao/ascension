@@ -46,6 +46,12 @@
       "label": "相关性打分与 BM25",
       "href": "/elasticsearch/intermediate/usage/04-bm25-scoring/",
       "group": "使用"
+    },
+    {
+      "id": "mapping",
+      "label": "映射与分词器",
+      "href": "/elasticsearch/intermediate/usage/05-mapping-analyzer/",
+      "group": "使用"
     }
   ],
   "edges": [
@@ -105,6 +111,21 @@
       "source": "inverted",
       "target": "bm25",
       "label": "倒排之上的排序标准"
+    },
+    {
+      "source": "inverted",
+      "target": "mapping",
+      "label": "分词决定倒排里存什么词项"
+    },
+    {
+      "source": "query",
+      "target": "mapping",
+      "label": "term 对 keyword，match 对 text"
+    },
+    {
+      "source": "bm25",
+      "target": "mapping",
+      "label": "算分发生在分词之后的词项上"
     }
   ]
 }
