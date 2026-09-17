@@ -765,6 +765,23 @@
       ],
       "hint": "找最小值的不变量是「最小值始终在 [low, high] 内」；测试至少覆盖 target=首元素、尾元素、旋转点本身。algo-rotated-018 考有序半区判断的依据，本题考变体族与手写坑。",
       "difficulty": 4
+    },
+    {
+      "id": "algo-jumpclimb-043",
+      "noteId": "algorithm/advanced/greedy/01-jump-game",
+      "type": "single",
+      "q": "跳跃游戏 II 求最少步数的贪心分层怎么理解？与 BFS 的关系和手写坑是？",
+      "options": [
+        "把「步数 k 能到达的下标」看成一层的层定义——层内所有格子同步数可达；i 走到 layerEnd 时必须再跳一步并把 layerEnd 推进到 farthest；循环上界是 length−1（站在终点不用跳）；贪心正确性靠交换论证",
+        "分层就是按数组值分组，每组内部排序后再跳",
+        "版本 II 的双层循环是 O(n²)，只是常量比 DP 小",
+        "循环上界用 length 也能得到正确结果"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "「贪心分层 ≈ 省掉队列的 BFS」是本题点睛话术；带负数步数贪心失效要回退 DP；版本 I 的 i > farthest 判断要在更新 farthest 之前。algo-jump-020 考版本 I 可行性，本题考版本 II 分层。",
+      "difficulty": 4
     }
   ]
 }

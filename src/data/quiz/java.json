@@ -2251,6 +2251,23 @@
       ],
       "hint": "默认 feign.Client 走 JDK HttpURLConnection 无连接池，高并发换 OkHttp/Apache；「Feign 报 404」多是拼 URL 与 Controller 路径没对齐，在代理展开第 3 步打日志。java-feign-025 考底层三步与重试边界，本题考 Bean 生成与横切透传。",
       "difficulty": 4
+    },
+    {
+      "id": "java-threadstate-132",
+      "noteId": "java/intermediate/concurrent/01-thread-basics",
+      "type": "single",
+      "q": "线程 6 状态里为什么 OS 层面的 READY/RUNNING 在 Java 中统称 RUNNABLE？wait() 为什么定义在 Object？",
+      "options": [
+        "JVM 层面只有 RUNNABLE 一个运行态（OS 的 READY/RUNNING 由调度器管理、Thread.State 不反映）；wait 语义是「让持有对象锁的线程等待并释放该锁」——锁属于对象，所以 wait 定义在 Object；sleep 不涉及锁所以放 Thread",
+        "JVM 区分 READY 与 RUNNING 两个状态，与 OS 一一对应",
+        "wait 定义在 Thread 因为它操作的是当前线程",
+        "sleep 与 wait 一样会释放监视器锁"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "一个 Java 程序天生多线程（main 只是其中之一）；上下文切换有真实成本——线程池复用是在摊销这笔成本。java-thb-030 多选考创建方式与状态归属，本题考状态归并与 wait 的设计。",
+      "difficulty": 4
     }
   ]
 }

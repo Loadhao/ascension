@@ -870,6 +870,23 @@
       ],
       "hint": "校验规则和字段定义写在同一行、错了有字段级错误报告；v2 校验核心 Rust 重写快 5~50 倍，校验开销通常不是瓶颈。py-pydantic-011 考运行时强制的定位，本题考边界管线细节。",
       "difficulty": 4
+    },
+    {
+      "id": "py-protocol-050",
+      "noteId": "python/intermediate/stdlib/04-typing",
+      "type": "single",
+      "q": "Protocol 的结构化判定与 TypedDict 的用途，按笔记正确的是？",
+      "options": [
+        "Protocol 按「长得像」判定，不要求显式继承——没继承 Closeable 的类只要有 close() 就通过检查，这让给第三方库打类型补丁成为可能；TypedDict 把裸 dict 约束成有形状的类型，是 JSON 边界处的类型护栏",
+        "Protocol 要求显式继承才能通过静态检查，与 Java 接口一致",
+        "TypedDict 在运行时校验 dict 的键值类型",
+        "TypeVar 表达的是「任意类型都可以」，没有约束关系"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "TypeVar 表达的是类型间的约束关系（first(seq: list[T]) -> T）；再往上一步是 Pydantic 的运行时校验。py-type-010 考运行时行为，本题考 Protocol 与 TypedDict。",
+      "difficulty": 4
     }
   ]
 }

@@ -23,9 +23,10 @@
 
 
 
-- [ ] java/intermediate/concurrent/01-thread-basics — 首题考「线程创建方式与生命周期」（执行时核准）
-- [ ] algorithm/advanced/greedy/01-jump-game — 第二题考「贪心的可达性不变量」
-- [ ] python/intermediate/stdlib/04-typing — 第二题考「标注给 IDE/mypy 看」
+
+- [ ] ai/advanced/agent/05-agent-teams — 第二题考「文件收件箱与常驻队友线程」
+- [ ] python/advanced/internals/02-memory-gc — 第二题考「引用计数主力与分代 GC 兜底」
+- [ ] algorithm/basic/techniques/02-difference-array — 第二题考「区间加 v 只改两端点」
 
 ### b 类：旧题返修
 
@@ -142,6 +143,8 @@
 - 2026-09-10 · 第五十一轮：3 道核心笔记第二题（py-boundary-049 / java-transient-128 / java-deepcopy-129，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第五十一轮
 
 - 2026-09-10 · 第五十二轮：3 道核心笔记第二题（algo-rotvar-041 / java-feignproxy-128 / ai-harnesspos-035，difficulty 4/4/4；comprehensive-agent 原定角度与 ai-harness-028 重合，换考位置感与分工）· 本轮提交主题：feat: 题库深化第五十二轮
+
+- 2026-09-10 · 第五十三轮：3 道核心笔记第二题（java-threadstate-132 / algo-jumpclimb-043 / py-protocol-049，difficulty 4/4/4；jump-game 原定可达性角度与 algo-jump-020 撞车，换考版本 II 分层）· 本轮提交主题：feat: 题库深化第五十三轮
 
 ## 经验与规则
 
