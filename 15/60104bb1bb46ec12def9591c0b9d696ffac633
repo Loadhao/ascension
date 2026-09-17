@@ -1,0 +1,16 @@
+src/content/docs/middleware/basic/mq/04-ordering.md
+  h_9324126a55eff3 4
+src/content/docs/middleware/basic/mq/05-delay-message.md
+  h_9324126a55eff3 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1560104bb1bb46ec12def9591c0b9d696ffac633",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
