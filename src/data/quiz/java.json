@@ -2234,6 +2234,23 @@
       ],
       "hint": "Cloneable 是空标记接口、设计上广受诟病；序列化法无脑但有环与性能问题；包装类型永远 equals。java-intcache-076 考缓存边界，本题考拷贝体系。",
       "difficulty": 4
+    },
+    {
+      "id": "java-feignproxy-131",
+      "noteId": "java/advanced/springcloud/04-openfeign-loadbalancer",
+      "type": "single",
+      "q": "「注入的是动态代理」背后 FeignClientFactoryBean 干了什么？traceId 跨服务传递靠什么？",
+      "options": [
+        "@EnableFeignClients 扫描接口注册 FeignClientFactoryBean，@Autowired 触发 getObject() 时才生成 JDK 动态代理；token/traceId 用 RequestInterceptor 统一注入 header（横切零侵入），下游再把收到的 traceId 写回 MDC 链路才连续",
+        "接口有隐藏实现类，Spring 直接实例化注入",
+        "traceId 由 OkHttp 自动生成并携带，无需拦截器",
+        "换 OkHttp 只是为了省代码，连接池无关紧要"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "默认 feign.Client 走 JDK HttpURLConnection 无连接池，高并发换 OkHttp/Apache；「Feign 报 404」多是拼 URL 与 Controller 路径没对齐，在代理展开第 3 步打日志。java-feign-025 考底层三步与重试边界，本题考 Bean 生成与横切透传。",
+      "difficulty": 4
     }
   ]
 }

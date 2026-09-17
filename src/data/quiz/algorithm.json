@@ -748,6 +748,23 @@
       ],
       "hint": "手写坑：入度数组要初始化到每个节点；判断环比较的是「输出计数」而非队列是否为空。algo-topo-009 考环判定的正确说法，本题考建图方向与实现变体。",
       "difficulty": 4
+    },
+    {
+      "id": "algo-rotvar-042",
+      "noteId": "algorithm/basic/searching/05-rotated-array-search",
+      "type": "single",
+      "q": "旋转数组二分的变体与手写坑——LC 153 找最小值怎么判断方向？含重复元素为什么退化？",
+      "options": [
+        "找最小值比较 a[mid] 与 a[high]（mid > high 说明最小值在右半 mid+1 起）；含重复时 a[low]==a[mid]==a[high] 无法判断哪半有序，只能 low++ 缩边、最坏退化 O(n)；边界判断的 <=/< 取等方向写反在端点用例必错",
+        "找最小值比较 a[mid] 与 a[low]，与找 target 完全同构",
+        "含重复元素不影响二分判定，仍稳定 O(log n)",
+        "边界取等方向无关紧要，两种写法结果一致"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "找最小值的不变量是「最小值始终在 [low, high] 内」；测试至少覆盖 target=首元素、尾元素、旋转点本身。algo-rotated-018 考有序半区判断的依据，本题考变体族与手写坑。",
+      "difficulty": 4
     }
   ]
 }

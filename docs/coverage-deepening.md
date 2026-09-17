@@ -22,9 +22,10 @@
 
 
 
-- [ ] algorithm/basic/searching/05-rotated-array-search — 第二题考「旋转数组的二分判定」（执行时核准角度）
-- [ ] java/advanced/springcloud/04-openfeign-loadbalancer — 第二题考「OpenFeign 与负载均衡」（执行时核准角度）
-- [ ] ai/advanced/agent/09-comprehensive-agent — 第二题考「多机制归位后的循环不变量」
+
+- [ ] java/intermediate/concurrent/01-thread-basics — 首题考「线程创建方式与生命周期」（执行时核准）
+- [ ] algorithm/advanced/greedy/01-jump-game — 第二题考「贪心的可达性不变量」
+- [ ] python/intermediate/stdlib/04-typing — 第二题考「标注给 IDE/mypy 看」
 
 ### b 类：旧题返修
 
@@ -139,6 +140,8 @@
 - 2026-09-10 · 第五十轮：3 道核心笔记第二题（java-cassso-128 / net-pwdstore-018 / mysql-deeppage-017，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第五十轮
 
 - 2026-09-10 · 第五十一轮：3 道核心笔记第二题（py-boundary-049 / java-transient-128 / java-deepcopy-129，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第五十一轮
+
+- 2026-09-10 · 第五十二轮：3 道核心笔记第二题（algo-rotvar-041 / java-feignproxy-128 / ai-harnesspos-035，difficulty 4/4/4；comprehensive-agent 原定角度与 ai-harness-028 重合，换考位置感与分工）· 本轮提交主题：feat: 题库深化第五十二轮
 
 ## 经验与规则
 

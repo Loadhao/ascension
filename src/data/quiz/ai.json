@@ -567,6 +567,23 @@
       ],
       "hint": "两个人改同一个 config.py 互相覆盖且无法干净回滚，是 worktree 解决的问题；生命周期事件写 JSONL 可审计；不自动 complete task——完成由队友显式触发。ai-worktree-027 考绑定与删除语义，本题考隔离递进与设计意图。",
       "difficulty": 4
+    },
+    {
+      "id": "ai-harnesspos-035",
+      "noteId": "ai/advanced/agent/09-comprehensive-agent",
+      "type": "single",
+      "q": "综合 Harness 里各机制的「位置感」与两层计划/两种 delegation 的分工，按笔记正确的是？",
+      "options": [
+        "位置感比功能列表重要：LLM 前注入 cron/通知并压缩历史、工具前 PreToolUse 拦权限、工具后 PostToolUse 处理结果；todo_write（会话内轻量）与 task graph（跨会话看板）、subagent（一次性隔离）与 teammate（持久并行）各司其职不是冗余",
+        "所有机制围绕 LLM 调用均匀分布，挂哪个位置效果一样",
+        "task graph 是 todo_write 的替代品，两者只能留一个",
+        "subagent 与 teammate 是同一机制的两个名字"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "权限、日志、审计共用 PreToolUse 一个挂点——hook 是统一的扩展面；压缩管线先压大输出再裁历史再压旧 tool_result。「机制很多，循环一个」。ai-harness-028 考循环不变，本题考位置感与分工。",
+      "difficulty": 4
     }
   ]
 }
