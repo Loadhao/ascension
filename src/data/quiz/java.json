@@ -2164,6 +2164,23 @@
       ],
       "hint": "全局唯一线程池是 Jetty 与 Tomcat 的最大结构差异（省资源 vs 隔离性）；Server = 多 Connector + 多 Handler + 一个线程池，无 Service 概念。java-jetty-081 考线程模型分野，本题考 Connector 内部三件套。",
       "difficulty": 4
+    },
+    {
+      "id": "java-macode-127",
+      "noteId": "java/basic/syntax/07-bit-operations",
+      "type": "single",
+      "q": "原码→反码→补码的演化各自修了什么坑？源码里 hash & (n-1) 的前提是什么？",
+      "options": [
+        "原码有 ±0 两个零且符号要特判；反码修了符号参与运算但结果系统性差 1（-0 占坑）；补码零唯一、范围白赚 -128，减法统一成加法——hash & (n-1) 等价取模的前提是 n 是 2 的幂",
+        "反码的坑是溢出，补码通过扩展位宽解决",
+        "hash & (n-1) 对任意 n 都等价于取模",
+        "补码的范围是 -127~+127，与原码相同"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "-0 的坑让 8 bit 反码范围只有 -127~+127；补码把 -0 的位置让给 -128；线程池 ctl 用一个 int 打包 workerCount 与 state 是位标志的典型现场。java-bit-074 考 >>> 的具体推导，本题考码制演化与源码用法。",
+      "difficulty": 4
     }
   ]
 }

@@ -533,6 +533,40 @@
       ],
       "hint": "claim 前要重新读取任务（防 TOCTOU）；高水位标文件防 ID 重用；教学版 claim 与开始工作合一步，真实 CC 的 claimTask 只设 owner。ai-task-014 考 Task System vs TodoWrite 的升级，本题考并发认领与状态机。",
       "difficulty": 4
+    },
+    {
+      "id": "ai-bgjudge-033",
+      "noteId": "ai/advanced/agent/03-background-tasks",
+      "type": "single",
+      "q": "Agent 怎么判断一条命令该不该丢后台？后台线程的生命周期是？按笔记正确的是？",
+      "options": [
+        "主路径是模型显式请求（bash 工具的 run_in_background 参数），关键词启发式只是兜底；后台线程 daemon=True——主进程退出线程跟着退，不留孤儿进程",
+        "启发式关键词是主路径，模型请求只是可选优化",
+        "daemon=False，确保主进程退出后任务必须跑完",
+        "判断完全靠关键词列表，模型无法表达后台意愿"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "慢操作先回占位 tool_result、完成走独立 task_notification（一个 tool_use 只对应一个 tool_result）；通知与当前轮 tool_result 合并成一条 user 消息，模型一次看到全部新信息。ai-bg-015 考占位与通知通道，本题考判断主路径与线程生命周期。",
+      "difficulty": 4
+    },
+    {
+      "id": "ai-wtpose-034",
+      "noteId": "ai/advanced/agent/08-worktree-isolation",
+      "type": "single",
+      "q": "并行 Agent 为什么需要 worktree 隔离？「绑定不改任务状态」的设计意图与 keep/remove 的语义是？",
+      "options": [
+        "隔离三层递进：对话隔离（Subagent）→ 任务隔离（Task System）→ 目录隔离（Worktree）——「在哪干」是并行的最后一公里；绑定只写 worktree 字段保持 pending，Lead 可提前建好等队友认领；keep 留分支等人工 review，remove 有改动默认拒绝",
+        "worktree 让两个 Agent 共享同一个工作目录但用不同分支，互不干扰",
+        "绑定后任务直接 in_progress，因为目录已经准备好了",
+        "remove 默认强制删除，discard_changes 只是提升性能的选项"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "两个人改同一个 config.py 互相覆盖且无法干净回滚，是 worktree 解决的问题；生命周期事件写 JSONL 可审计；不自动 complete task——完成由队友显式触发。ai-worktree-027 考绑定与删除语义，本题考隔离递进与设计意图。",
+      "difficulty": 4
     }
   ]
 }

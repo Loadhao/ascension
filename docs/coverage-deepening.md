@@ -19,9 +19,10 @@
 
 
 
-- [ ] ai/advanced/agent/03-background-tasks — 第二题考「占位结果与完成通知的双通道」
-- [ ] ai/advanced/agent/08-worktree-isolation — 第二题考「worktree 绑定与删除时的改动保护」
-- [ ] java/basic/syntax/07-bit-operations — 第二题考「>>> 与 >> 的符号位差异」
+
+- [ ] java/intermediate/spring-boot/02-auth-sso — 第二题考「CAS 双票据与 OAuth2 授权码」（执行时核准角度）
+- [ ] network/basic/http/08-password-storage — 首题考「密码存储：哈希加盐与慢哈希」
+- [ ] mysql/advanced/performance-ha/01-optimization — 第二题考「慢 SQL 优化路径与执行计划」
 
 ### b 类：旧题返修
 
@@ -130,6 +131,8 @@
 - 2026-09-10 · 第四十七轮：3 道核心笔记第二题（ai-paradigm-014 / algo-graphmark-040 / js-wsframe-018，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第四十七轮
 
 - 2026-09-10 · 第四十八轮：3 道核心笔记第二题（ai-claimlock-032 / algo-topobuild-041 / kafka-pagecache-014，difficulty 4/4/4；task-system 条目 ai-task-014 已覆盖升级语义，换考并发认领锁与状态机）· 本轮提交主题：feat: 题库深化第四十八轮
+
+- 2026-09-10 · 第四十九轮：3 道核心笔记第二题（ai-bgjudge-033 / ai-wtpose-034 / java-macode-124，difficulty 4/4/4；三条原定角度均与并行新题撞车换角）· 本轮提交主题：feat: 题库深化第四十九轮
 
 ## 经验与规则
 
