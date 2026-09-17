@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 1290
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/elasticsearch/intermediate/usage/05-mapping-analyzer.md
+  h_9324126a55eff3 1-127
+src/data/graphs/elasticsearch.json
+  h_9324126a55eff3 49-54,114-128
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6967ec8bf1a181b3de6101513c7db240fcea910b",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
