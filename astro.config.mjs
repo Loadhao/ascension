@@ -784,6 +784,7 @@ export default defineConfig({
                         { label: '渲染管线与重绘回流', link: '/js/intermediate/web/04-browser-render/' },
                         { label: '浏览器存储全家桶', link: '/js/intermediate/web/05-storage/' },
                         { label: 'Web Worker 与多线程', link: '/js/intermediate/web/06-worker/' },
+                        { label: '前端路由与 History API', link: '/js/intermediate/web/07-route/' },
                       ],
                     },
                   ],

@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 139 轮（2026-09-17，内容补充模式）：前端路由与 History API（js/intermediate/web 第 7 篇）——勘察确认 pushState/popstate/History API 全站零覆盖（hashchange 提及均为 MQ 分片路由/CORS 场景顺带，非前端路由）。内容：后端路由 vs 前端路由分野、hash 路由锚点壳与 hashchange 全自动、history 路由 pushState 不触发 popstate 的手动渲染、刷新 404 根因与服务器 fallback（Nginx try_files）、两路由选型表、框架路由=两套内核+工程化外设。1 张 mermaid 事件分工图、1 张对比表。构建 672 页、mermaid 507 块、一致性 8 项全绿。js/intermediate/web 7 篇。
+- 下一轮入口：候选池——①js/intermediate/web 7 篇已相当厚，后续轮转其他方向勘察（network 的 HTTP 缓存深挖、前端安全 referrer/CSP 在 security 的覆盖勘察）；②场景题/ai 线间歇。
+
 ### 第 138 轮（2026-09-17，内容补充模式）：Web Worker 与多线程逃生门（js/intermediate/web 第 6 篇，js/intermediate/web 六篇成体系收口）——grep 确认 Web Worker 全站零覆盖。内容：单线程长任务冻结与 Worker 逃生门定位（呼应 event-loop 与 renderpipe 两篇）、三段式基本用法、结构化克隆与 Transferable 零拷贝、能力边界清单表（DOM/Web Storage 禁用，fetch/IndexedDB 可用）、50ms 判据与 SharedWorker/Service Worker 一句话划界。1 张 mermaid 双线程通信图。构建 671 页、mermaid 506 块、一致性 8 项全绿。附带修正第 137 轮存储篇 security 内链层级（01-session-attack 在 intermediate 不在 basic，体检第 5 项拦截）。js/intermediate/web 6 篇。
 - 下一轮入口：本轮收尾需 pnpm preview + contrast 审计（136/137/138 各新增 mermaid，共 4 块）。后续候选池——①js/intermediate/web 已 6 篇成体系，转向其他方向勘察；②defer 深挖、前端路由 hash vs history（待勘察）；③场景题/ai 线间歇。
 

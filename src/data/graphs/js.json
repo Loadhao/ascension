@@ -172,6 +172,12 @@
       "label": "Web Worker 多线程",
       "href": "/js/intermediate/web/06-worker/",
       "group": "网络"
+    },
+    {
+      "id": "spafee",
+      "label": "前端路由与 History",
+      "href": "/js/intermediate/web/07-route/",
+      "group": "网络"
     }
   ],
   "edges": [
@@ -350,6 +356,16 @@
       "source": "webworker",
       "target": "webstorage",
       "label": "Worker 禁用同步 Web Storage"
+    },
+    {
+      "source": "webworker",
+      "target": "spafee",
+      "label": "同为 SPA 平台能力"
+    },
+    {
+      "source": "cors",
+      "target": "spafee",
+      "label": "同源策略下的 URL 机制"
     }
   ]
 }
