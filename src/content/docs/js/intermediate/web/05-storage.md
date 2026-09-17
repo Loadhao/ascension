@@ -111,7 +111,7 @@ flowchart TD
 
 现代主流是 **HttpOnly Cookie 优先**（XSS 更难防于 CSRF），把「为什么」讲
 清两层攻击面比背结论更得分。深化阅读：
-[Session 与 Cookie 攻击面](/security/basic/core/01-session-attack/)。
+[Session 与 Cookie 攻击面](/security/intermediate/core/01-session-attack/)。
 
 ## 小结
 

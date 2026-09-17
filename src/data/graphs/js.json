@@ -166,6 +166,12 @@
       "label": "浏览器存储全家桶",
       "href": "/js/intermediate/web/05-storage/",
       "group": "网络"
+    },
+    {
+      "id": "webworker",
+      "label": "Web Worker 多线程",
+      "href": "/js/intermediate/web/06-worker/",
+      "group": "网络"
     }
   ],
   "edges": [
@@ -329,6 +335,21 @@
       "source": "renderpipe",
       "target": "webstorage",
       "label": "同为浏览器平台机制"
+    },
+    {
+      "source": "eventloop",
+      "target": "webworker",
+      "label": "单线程长任务的逃生门"
+    },
+    {
+      "source": "renderpipe",
+      "target": "webworker",
+      "label": "主线程冻结影响渲染的解法"
+    },
+    {
+      "source": "webworker",
+      "target": "webstorage",
+      "label": "Worker 禁用同步 Web Storage"
     }
   ]
 }

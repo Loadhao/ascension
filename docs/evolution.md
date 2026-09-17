@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 138 轮（2026-09-17，内容补充模式）：Web Worker 与多线程逃生门（js/intermediate/web 第 6 篇，js/intermediate/web 六篇成体系收口）——grep 确认 Web Worker 全站零覆盖。内容：单线程长任务冻结与 Worker 逃生门定位（呼应 event-loop 与 renderpipe 两篇）、三段式基本用法、结构化克隆与 Transferable 零拷贝、能力边界清单表（DOM/Web Storage 禁用，fetch/IndexedDB 可用）、50ms 判据与 SharedWorker/Service Worker 一句话划界。1 张 mermaid 双线程通信图。构建 671 页、mermaid 506 块、一致性 8 项全绿。附带修正第 137 轮存储篇 security 内链层级（01-session-attack 在 intermediate 不在 basic，体检第 5 项拦截）。js/intermediate/web 6 篇。
+- 下一轮入口：本轮收尾需 pnpm preview + contrast 审计（136/137/138 各新增 mermaid，共 4 块）。后续候选池——①js/intermediate/web 已 6 篇成体系，转向其他方向勘察；②defer 深挖、前端路由 hash vs history（待勘察）；③场景题/ai 线间歇。
+
 ### 第 137 轮（2026-09-17，内容补充模式）：浏览器存储全家桶（js/intermediate/web 第 5 篇）——勘察确认 Cookie/Web Storage/IndexedDB 横向对比全站零专篇（cart/cors/session-attack 仅顺带提及，security 方向 HttpOnly/SameSite 仅 5 处轻覆盖，边界划在平台存储视角不复述 CSRF 防御）。内容：四代存储横向对比表（容量/生命周期/随请求发送/API 形态/动机）、Cookie 四属性与凭证承载、localStorage vs sessionStorage 标签页隔离与 storage 事件跨标签页通信、IndexedDB 异步事务定位与 Cache API 分工、token 存放 XSS vs CSRF 权衡选型。1 张 mermaid 选型决策图、1 张对比表、storage 事件代码示例。构建 670 页、mermaid 505 块、一致性 8 项全绿。js/intermediate/web 5 篇。
 - 下一轮入口：候选池——①Web Worker 全站零覆盖（js/intermediate/web 第 6 篇，与 event-loop 篇互补讲多线程边界）；②下轮收尾跑 contrast 审计（136/137 各新增 mermaid）。
 

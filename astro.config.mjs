@@ -783,6 +783,7 @@ export default defineConfig({
                         { label: 'DOM 事件机制与委托', link: '/js/intermediate/web/03-dom-events/' },
                         { label: '渲染管线与重绘回流', link: '/js/intermediate/web/04-browser-render/' },
                         { label: '浏览器存储全家桶', link: '/js/intermediate/web/05-storage/' },
+                        { label: 'Web Worker 与多线程', link: '/js/intermediate/web/06-worker/' },
                       ],
                     },
                   ],
