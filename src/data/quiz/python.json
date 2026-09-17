@@ -853,6 +853,23 @@
       ],
       "hint": "Python 用 TypeError 强制你面对时区问题（naive/aware 混合比较直接抛错）；timestamp 是秒、Java Instant 是毫秒，对接差三个数量级。py-naive-036 考 now() 的 naive 本质，本题考 aware 运算纪律。",
       "difficulty": 4
+    },
+    {
+      "id": "py-boundary-049",
+      "noteId": "python/intermediate/libs/02-pydantic",
+      "type": "single",
+      "q": "Pydantic 在边界处做了什么？嵌套模型与敏感字段的处理，按笔记正确的是？",
+      "options": [
+        "model_validate 在入口把不可信 dict 转成强类型模型（\"123\" 宽松强制转为 int）；嵌套模型整树递归解析；password 等敏感字段用 Field(exclude=True) 在 model_dump 时天然消失",
+        "model_validate 要求输入类型完全正确，\"123\" 会直接 ValidationError",
+        "嵌套模型的内层需要手动逐层调用校验",
+        "敏感字段要手工从 model_dump 的结果里删除"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "校验规则和字段定义写在同一行、错了有字段级错误报告；v2 校验核心 Rust 重写快 5~50 倍，校验开销通常不是瓶颈。py-pydantic-011 考运行时强制的定位，本题考边界管线细节。",
+      "difficulty": 4
     }
   ]
 }

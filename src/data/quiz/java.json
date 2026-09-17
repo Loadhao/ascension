@@ -2198,6 +2198,42 @@
       ],
       "hint": "OAuth2 是授权框架不是认证协议，认证要上 OIDC（颁发 id_token）；企业组合拳是 LDAP 账号源 + CAS/OIDC 互通 + 网关 JWT 验签。java-oauth-052 考授权码绕一道的原因，本题考 CAS 双票据与登出分界。",
       "difficulty": 4
+    },
+    {
+      "id": "java-transient-129",
+      "noteId": "java/basic/syntax/08-serialization",
+      "type": "multiple",
+      "q": "关于序列化的版本关卡与 transient，按笔记正确的有？（多选）",
+      "options": [
+        "serialVersionUID 一致才放行反序列化，不一致抛 InvalidClassException——宁拒不错 fail-fast",
+        "结构兼容的改动（加字段）不 bump 版本号，反序列化时新字段取默认值；破坏性改动才主动改版本号",
+        "transient 标记「此字段不进字节流」，与 serialVersionUID 是一对搭档（HashSet 自定义 writeObject 只存元素）",
+        "JSON 序列化同样带版本关卡，跨版本靠 serialVersionUID 匹配"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——JSON 序列化无版本机制，靠字段名匹配；深拷贝技巧（序列化走一圈）是同 JVM 同版本，不需要版本控制。java-serial-075 考不声明的事故，本题考版本关卡全貌。",
+      "difficulty": 4
+    },
+    {
+      "id": "java-deepcopy-130",
+      "noteId": "java/basic/syntax/09-object-copy",
+      "type": "single",
+      "q": "关于 clone 浅拷贝与深拷贝三法，按笔记正确的是？",
+      "options": [
+        "clone 默认只复制第一层（引用字段只抄地址，改 o2.items 会 teleport 到 o1）；深拷贝首选拷贝构造 new Order(other) 逐字段显式复制——Effective Java 推荐；包装类型与 int 混合 == 会拆箱（null 直接 NPE）",
+        "clone 是深拷贝，引用字段也会递归复制",
+        "序列化法深拷贝性能最好，是首选方案",
+        "Integer 与 int 混合比较是引用比较，永远不会 NPE"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Cloneable 是空标记接口、设计上广受诟病；序列化法无脑但有环与性能问题；包装类型永远 equals。java-intcache-076 考缓存边界，本题考拷贝体系。",
+      "difficulty": 4
     }
   ]
 }

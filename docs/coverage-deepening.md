@@ -21,9 +21,10 @@
 
 
 
-- [ ] python/intermediate/libs/02-pydantic — 第二题考「Field 约束与类型强制的边界」
-- [ ] java/basic/syntax/08-serialization — 第二题考「writeObject 定制与 serialVersionUID 之外」
-- [ ] java/basic/syntax/09-object-copy — 第二题考「浅拷贝与 clone 的坑」
+
+- [ ] algorithm/basic/searching/05-rotated-array-search — 第二题考「旋转数组的二分判定」（执行时核准角度）
+- [ ] java/advanced/springcloud/04-openfeign-loadbalancer — 第二题考「OpenFeign 与负载均衡」（执行时核准角度）
+- [ ] ai/advanced/agent/09-comprehensive-agent — 第二题考「多机制归位后的循环不变量」
 
 ### b 类：旧题返修
 
@@ -136,6 +137,8 @@
 - 2026-09-10 · 第四十九轮：3 道核心笔记第二题（ai-bgjudge-033 / ai-wtpose-034 / java-macode-124，difficulty 4/4/4；三条原定角度均与并行新题撞车换角）· 本轮提交主题：feat: 题库深化第四十九轮
 
 - 2026-09-10 · 第五十轮：3 道核心笔记第二题（java-cassso-128 / net-pwdstore-018 / mysql-deeppage-017，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第五十轮
+
+- 2026-09-10 · 第五十一轮：3 道核心笔记第二题（py-boundary-049 / java-transient-128 / java-deepcopy-129，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第五十一轮
 
 ## 经验与规则
 
