@@ -2268,6 +2268,7 @@ export default defineConfig({
                         { label: '探针与生命周期', link: '/kubernetes/intermediate/ops/01-probes-lifecycle/' },
                         { label: 'Service 与 Ingress', link: '/kubernetes/intermediate/ops/02-service-ingress/' },
                         { label: '声明式 API 与 List-Watch', link: '/kubernetes/intermediate/ops/03-declarative-listwatch/' },
+                        { label: '弹性伸缩与 HPA', link: '/kubernetes/intermediate/ops/04-autoscaling-hpa/' },
                       ],
                     },
                   ],

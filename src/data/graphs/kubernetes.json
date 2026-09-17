@@ -46,6 +46,12 @@
       "label": "声明式与 List-Watch",
       "href": "/kubernetes/intermediate/ops/03-declarative-listwatch/",
       "group": "运维实战"
+    },
+    {
+      "id": "k8s-hpa",
+      "label": "弹性伸缩与 HPA",
+      "href": "/kubernetes/intermediate/ops/04-autoscaling-hpa/",
+      "group": "运维实战"
     }
   ],
   "edges": [
@@ -102,6 +108,11 @@
       "source": "k8s-listwatch",
       "target": "k8s-probe",
       "label": "kubelet 拉容器前的接力"
+    },
+    {
+      "source": "k8s-listwatch",
+      "target": "k8s-hpa",
+      "label": "HPA 也是调谐控制器"
     }
   ]
 }
