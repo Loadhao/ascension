@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 790
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/js/intermediate/web/08-abort.md
+  h_9324126a55eff3 1-131
+src/data/graphs/js.json
+  h_9324126a55eff3 187-192,396-410
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f224cb44201eb8ea64e8f7aa8cc9c0a3d08b8eb9",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
