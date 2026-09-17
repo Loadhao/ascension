@@ -275,6 +275,23 @@
       ],
       "hint": "MySQL 每个连接占一个线程，多了上下文切换反而降吞吐；池内死锁——一事务先拿 A 又借 B，池空时 A 等 B、B 等 A，纪律是一事务一连接；泄漏用 leakDetectionThreshold 抓。mysql 方向 hikaricp 首题。",
       "difficulty": 4
+    },
+    {
+      "id": "mysql-deeppage-017",
+      "noteId": "mysql/advanced/performance-ha/01-optimization",
+      "type": "single",
+      "q": "深分页 LIMIT 1000000, 10 的优化与 count(*) 的原理，按笔记正确的是？",
+      "options": [
+        "深分页用延迟关联（先覆盖索引拿 id 再回表 10 行）或游标书签；count(*) 与 count(1) 同级最优——InnoDB 没有 MVCC 下的总数缓存，每个事务看到的行数都不同",
+        "用 SQL_CALC_FOUND_ROWS 一起算总数，性能最好",
+        "count(主键) 永远是最快的，这是官方指定写法",
+        "加 covering index 后深分页可以直接跳过扫描阶段"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "延迟关联的核心是先拿 id（覆盖索引）再回表；count(普通列) 要判 NULL 逐行取值所以最慢；join 优化口诀「小表驱动大表，被驱动表关联列必须有索引」。mysql-opt-008 考 explain 列，本题考深分页与 count。",
+      "difficulty": 4
     }
   ]
 }

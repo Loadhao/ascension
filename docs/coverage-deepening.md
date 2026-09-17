@@ -20,9 +20,10 @@
 
 
 
-- [ ] java/intermediate/spring-boot/02-auth-sso — 第二题考「CAS 双票据与 OAuth2 授权码」（执行时核准角度）
-- [ ] network/basic/http/08-password-storage — 首题考「密码存储：哈希加盐与慢哈希」
-- [ ] mysql/advanced/performance-ha/01-optimization — 第二题考「慢 SQL 优化路径与执行计划」
+
+- [ ] python/intermediate/libs/02-pydantic — 第二题考「Field 约束与类型强制的边界」
+- [ ] java/basic/syntax/08-serialization — 第二题考「writeObject 定制与 serialVersionUID 之外」
+- [ ] java/basic/syntax/09-object-copy — 第二题考「浅拷贝与 clone 的坑」
 
 ### b 类：旧题返修
 
@@ -133,6 +134,8 @@
 - 2026-09-10 · 第四十八轮：3 道核心笔记第二题（ai-claimlock-032 / algo-topobuild-041 / kafka-pagecache-014，difficulty 4/4/4；task-system 条目 ai-task-014 已覆盖升级语义，换考并发认领锁与状态机）· 本轮提交主题：feat: 题库深化第四十八轮
 
 - 2026-09-10 · 第四十九轮：3 道核心笔记第二题（ai-bgjudge-033 / ai-wtpose-034 / java-macode-124，difficulty 4/4/4；三条原定角度均与并行新题撞车换角）· 本轮提交主题：feat: 题库深化第四十九轮
+
+- 2026-09-10 · 第五十轮：3 道核心笔记第二题（java-cassso-128 / net-pwdstore-018 / mysql-deeppage-017，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第五十轮
 
 ## 经验与规则
 

@@ -303,6 +303,23 @@
       ],
       "hint": "Cookie 安全属性各管一摊——HttpOnly 防 XSS 偷凭证、Secure 防明文、SameSite 防 CSRF；选型句式「要控制力选 Session，要无状态扩展选 JWT」；OAuth2 管授权不管会话。本篇首题。",
       "difficulty": 3
+    },
+    {
+      "id": "net-pwdstore-019",
+      "noteId": "network/basic/http/08-password-storage",
+      "type": "single",
+      "q": "「密码加盐了为什么还要用慢哈希」「前端先 MD5 再传行不行」——按笔记的正确答案是？",
+      "options": [
+        "盐防预计算（彩虹表），慢哈希防现场穷举（故意设计几十毫秒一次，GPU 爆破成本暴涨）——两者缺一不可；前端 MD5 是自欺欺人：攻击者拿到 md5(密码) 直接重放即可登录，传输保护交给 HTTPS",
+        "加盐之后彩虹表和暴力破解都不用担心了，MD5 也够用",
+        "前端 MD5 后服务端再解密还原，等于多一层加密",
+        "SHA-256 比 MD5 慢得多，换成 SHA-256 就能防穷举"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "SHA-256 一样快、一样被彩虹表覆盖——「换个哈希算法」不是解药，需要「故意很慢」的 bcrypt/argon2；登录失败提示模糊化（分开提示等于帮攻击者确认账号存在）。本篇首题。",
+      "difficulty": 4
     }
   ]
 }

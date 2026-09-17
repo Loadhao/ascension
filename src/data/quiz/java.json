@@ -2181,6 +2181,23 @@
       ],
       "hint": "-0 的坑让 8 bit 反码范围只有 -127~+127；补码把 -0 的位置让给 -128；线程池 ctl 用一个 int 打包 workerCount 与 state 是位标志的典型现场。java-bit-074 考 >>> 的具体推导，本题考码制演化与源码用法。",
       "difficulty": 4
+    },
+    {
+      "id": "java-cassso-128",
+      "noteId": "java/intermediate/spring-boot/02-auth-sso",
+      "type": "single",
+      "q": "CAS 单点登录的双票据机制与 JWT 体系的登出差异，按笔记正确的是？",
+      "options": [
+        "TGT/TGC 是全局会话存 CAS 侧；ST 是子系统凭证、一次性用后即焚防重放；CAS 销毁 TGT 即可全系统登出——JWT 体系登出难（黑名单又变回有状态），这就是两者的核心分界",
+        "ST 与 TGT 等价，都长期有效存在子系统侧",
+        "JWT 的 SSO 天然支持销毁令牌实现全系统登出",
+        "OAuth2 本身就是认证协议，拿 access_token 即登录态"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "OAuth2 是授权框架不是认证协议，认证要上 OIDC（颁发 id_token）；企业组合拳是 LDAP 账号源 + CAS/OIDC 互通 + 网关 JWT 验签。java-oauth-052 考授权码绕一道的原因，本题考 CAS 双票据与登出分界。",
+      "difficulty": 4
     }
   ]
 }
