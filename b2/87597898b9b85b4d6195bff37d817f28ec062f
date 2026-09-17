@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 813
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/typescript/basic/core/04-enum-asconst.md
+  h_9324126a55eff3 1-111
+src/data/graphs/typescript.json
+  h_9324126a55eff3 31-36,58-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b287597898b9b85b4d6195bff37d817f28ec062f",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
