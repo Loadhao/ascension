@@ -516,6 +516,23 @@
       ],
       "hint": "三地基——任务图（可观察）、消息契约（可预期）、文件隔离（不冲突）；最终形态仍是一个循环，只是周围长满了生产可用的系统。ai-multi-013 考第一动机，本题考范式与顺序。",
       "difficulty": 4
+    },
+    {
+      "id": "ai-claimlock-032",
+      "noteId": "ai/advanced/agent/02-task-system",
+      "type": "single",
+      "q": "多 Agent 场景下两个 Agent 同时 claim 同一个任务，Task System 靠什么防重复认领？状态机是？",
+      "options": [
+        "双重锁（任务文件锁防 TOCTOU + 锁内重新读取复核）——owner 只设一次，状态机 pending→in_progress→completed；teammate 终止时 unassign 清 owner 重置回 pending 供他人认领",
+        "靠时间戳先后，先到的 claim 覆盖后到的",
+        "任务认领后不可变更，teammate 终止任务就永远卡死",
+        "靠各 Agent 本地内存加互斥锁，与文件无关"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "claim 前要重新读取任务（防 TOCTOU）；高水位标文件防 ID 重用；教学版 claim 与开始工作合一步，真实 CC 的 claimTask 只设 owner。ai-task-014 考 Task System vs TodoWrite 的升级，本题考并发认领与状态机。",
+      "difficulty": 4
     }
   ]
 }

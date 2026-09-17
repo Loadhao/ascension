@@ -731,6 +731,23 @@
       ],
       "hint": "「无权最短路 = BFS」是铁律，一步带权立刻换 Dijkstra；连通块计数外层扫格子发起遍历计数。algo-graph-019 多选考两套框架基础，本题考标记时机与环检测细节。",
       "difficulty": 4
+    },
+    {
+      "id": "algo-topobuild-041",
+      "noteId": "algorithm/advanced/graph/02-topological-sort",
+      "type": "single",
+      "q": "拓扑排序的建图方向、结果唯一性与环检测的另一种视角，按笔记正确的是？",
+      "options": [
+        "prerequisites=[course, prereq] 建图从 prereq 指向 course、入度记在 course 上；同时入度为 0 的节点顺序任意，要字典序最小把队列换小顶堆；DFS 三色标记的完成序逆序也是一组合法拓扑序",
+        "建图从 course 指向 prereq，入度记在 prereq 头上",
+        "拓扑序唯一，不同实现结果一定相同",
+        "DFS 做不了拓扑排序，只有 Kahn 一种解法"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "手写坑：入度数组要初始化到每个节点；判断环比较的是「输出计数」而非队列是否为空。algo-topo-009 考环判定的正确说法，本题考建图方向与实现变体。",
+      "difficulty": 4
     }
   ]
 }

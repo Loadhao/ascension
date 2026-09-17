@@ -237,6 +237,23 @@
       ],
       "hint": "三问框架（是什么/为什么/代价是什么）是所有 MQ 面试题的入口；代价里「强一致场景别用 MQ、接受最终一致 + 对账兜底」是加分项。kafka-why-007 多选考价值与代价对照，本题考选型维度的完整度。",
       "difficulty": 3
+    },
+    {
+      "id": "kafka-pagecache-015",
+      "noteId": "kafka/intermediate/core/04-high-throughput",
+      "type": "single",
+      "q": "Kafka 为什么把缓存交给 OS PageCache 而不放 JVM 堆？零拷贝什么时候失效？",
+      "options": [
+        "三条理由：堆内几十 GB 缓存一次 Full GC 全抖、进程重启后 OS 页缓存依然热、省去堆内→socket 的多余拷贝；零拷贝在开启 SSL/TLS 时失效——加密必须在用户态改写字节，链路断掉吞吐明显下降",
+        "PageCache 是 Kafka 自己管理的堆内缓存，重启后由 checkpoint 恢复",
+        "零拷贝在 SSL 下依然有效，加密由网卡硬件完成",
+        "PageCache 只对写有用，读消息总是走磁盘"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "攒批的隐藏收益是「一批里消息越相似压缩率越高」；linger.ms=0 不是不攒批——批满了照样发，linger 只是没满再多等一会。kafka-tp-008 考独立 fsync 的后果，本题考页缓存理由与零拷贝失效。",
+      "difficulty": 4
     }
   ]
 }
