@@ -22,6 +22,12 @@
       "label": "严格模式与工程配置",
       "href": "/typescript/basic/core/03-strict-config/",
       "group": "类型系统"
+    },
+    {
+      "id": "typeprog",
+      "label": "类型编程三构件",
+      "href": "/typescript/intermediate/typing/01-type-programming/",
+      "group": "类型编程"
     }
   ],
   "edges": [
@@ -38,6 +44,11 @@
       "source": "typesys",
       "target": "strictconf",
       "label": "严格档位是完整战力"
+    },
+    {
+      "source": "ifacetype",
+      "target": "typeprog",
+      "label": "类型运算的正体"
     }
   ]
 }

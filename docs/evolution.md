@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 146 轮（2026-09-17，内容补充模式）：类型编程入门：映射、条件与 infer（typescript/intermediate/typing 第 1 篇，新建 TS 第一个中级分类）——勘察确认映射/条件类型/infer 全站仅本方向 2 处顺带提及，零专篇。新建 intermediate/typing 分类三件套（分类页 index.mdx + 侧边栏中级组 + 图谱类型编程组）。内容：映射类型（in 遍历、T[K] 索引访问、?/-?/readonly 修饰符，手写 Partial）、条件类型与分布式条件类型（裸联合自动分发、[T] 包裹关闭、never 吸收陷阱与 IsNever 正确写法）、infer 模式匹配槽位（手写 ReturnType/Element）、三构件总结图、可读性税纪律（两层以上封装成命名工具类型）。1 张 mermaid 三构件图、2 段代码。构建 682 页、mermaid 514 块、一致性 8 项全绿。typescript 4 篇。
+- 下一轮入口：候选池——①mongodb advanced 勘察（11 篇全在 basic/intermediate，advanced 层空缺：分片集群/副本集选举深挖？）；②netty/middleware 勘察；③TS 线可歇；④收尾 contrast 审计（145/146 各新增 mermaid）。
+
 ### 第 145 轮（2026-09-17，内容补充模式）：严格模式与工程配置（typescript/basic/core 第 3 篇）——勘察确认 tsconfig/strict/路径别名/类型断言逃逸全站零专篇（strict 提及 3 处均非 TS 篇）。内容：strict 开关构成图与两大主力（noImplicitAny 堵静默失效、strictNullChecks 把空值搬进编译期）、noUncheckedIndexedAccess 单独推荐、?. 与 ?? 正牌工具 vs !/as 逃逸口纪律、双重断言=建模错误味道、路径别名编译与运行两界（tsc 不重写 import 的必踩坑）、新项目全开 vs 老项目文件级渐进+CI 门禁。1 张 mermaid 开关构成图、3 段代码。构建 680 页、mermaid 513 块、一致性 8 项全绿。typescript/basic/core 3 篇。
 - 下一轮入口：候选池——①TS 第 4 篇：类型编程入门（映射/条件类型/infer，勘察 3 处提及是否实质覆盖）；②netty/middleware/mongodb advanced 勘察；③收尾 contrast 审计。
 

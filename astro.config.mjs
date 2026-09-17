@@ -813,6 +813,20 @@ export default defineConfig({
                     },
                   ],
                 },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '类型编程',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/typescript/intermediate/typing/' },
+                        { label: '类型编程入门：映射、条件与 infer', link: '/typescript/intermediate/typing/01-type-programming/' },
+                      ],
+                    },
+                  ],
+                },
               ],
             },
             {
