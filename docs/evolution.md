@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 150 轮（2026-09-17，内容补充模式）：枚举、字面量类型与 as const（typescript/basic/core 第 4 篇，basic 线收口）——勘察确认 enum/as const/字面量联合在 TS 方向零覆盖。内容：enum 是 TS 少数不擦除的构造（数字枚举双向映射、字符串单向、tree-shaking 不友好）、const enum 内联与 isolatedModules 兼容坑、as const 三板斧组合（typeof/keyof/索引访问推字面量联合）、三方案对比表与选型共识（as const 对象/字面量联合为主、enum 留给双向映射）。本篇无 mermaid（表格+代码承载），构建 686 页、mermaid 517 块持平、一致性 8 项全绿。typescript/basic/core 4 篇收口，全方向 6 篇。
+- 下一轮入口：候选池——①场景题/ai 线间歇；②netty/TS intermediate/typing 第 2 篇（模板字面量类型）；③收尾 contrast 审计（148/149 各新增 mermaid，150 无图）。
+
 ### 第 149 轮（2026-09-17，内容补充模式）：Netty 中的 WebSocket：握手与帧（netty/intermediate/core 第 3 篇）——勘察确认 WebSocket 与 netty 集成、HttpServerCodec/HttpObjectAggregator 在 netty 内零提及（js 与 network 方向的 WebSocket 篇管协议与浏览器侧，本篇管服务端实现，边界互补）。内容：四件套 handler 链与各司一职（Aggregator 拼完整请求、升级处理器 101 换道移除 HTTP handler）、帧六类型分流表、Continuation 分片与 WebSocketFrameAggregator 重组、协议层 Ping/Pong 证连接活性 vs 应用层心跳证业务健康的两层分工（呼应心跳篇）。1 张 mermaid 换道图、1 张帧类型表、2 段代码。构建 685 页、mermaid 517 块、一致性 8 项全绿。过程：netty 图谱边端点 id 再次凭记忆猜错（netty-pipeline→实际 nt-pipeline），被一致性体检第 9 项拦截后修正——教训再次确认：图谱 id 必须先查 JSON。netty 6 篇。
 - 下一轮入口：候选池——①TS basic 第 4 篇（枚举与 as const / 函数重载，收口 basic 线）；②场景题/ai 线间歇；③收尾 contrast 审计（148/149 各新增 mermaid）。
 

@@ -28,6 +28,12 @@
       "label": "类型编程三构件",
       "href": "/typescript/intermediate/typing/01-type-programming/",
       "group": "类型编程"
+    },
+    {
+      "id": "enumasconst",
+      "label": "枚举与 as const",
+      "href": "/typescript/basic/core/04-enum-asconst/",
+      "group": "类型系统"
     }
   ],
   "edges": [
@@ -49,6 +55,11 @@
       "source": "ifacetype",
       "target": "typeprog",
       "label": "类型运算的正体"
+    },
+    {
+      "source": "typesys",
+      "target": "enumasconst",
+      "label": "类型擦除的著名例外"
     }
   ]
 }
