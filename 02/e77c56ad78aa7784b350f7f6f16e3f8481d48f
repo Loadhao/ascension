@@ -1,0 +1,22 @@
+astro.config.mjs
+  h_9324126a55eff3 816-829
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/typescript/intermediate/typing/01-type-programming.md
+  h_9324126a55eff3 1-105
+src/content/docs/typescript/intermediate/typing/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/typescript.json
+  h_9324126a55eff3 25-30,47-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "02e77c56ad78aa7784b350f7f6f16e3f8481d48f",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
