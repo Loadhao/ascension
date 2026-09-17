@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 811
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/typescript/basic/core/03-strict-config.md
+  h_9324126a55eff3 1-107
+src/data/graphs/typescript.json
+  h_9324126a55eff3 19-24,36-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "0870fab97b947a4a3723fdda65d681174eb8eecd",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
