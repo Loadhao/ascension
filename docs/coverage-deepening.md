@@ -16,9 +16,10 @@
 
 
 
-- [ ] python/advanced/internals/03-descriptors-metaclass — 第二题考「描述符协议与 ORM 字段的本体」
-- [ ] python/advanced/eng/03-ruff-mypy — 第二题考「ruff 与 mypy 的分工与 CI 门禁」
-- [ ] python/intermediate/stdlib/05-datetime — 第二题考「naive/aware 与时区纪律」
+
+- [ ] ai/advanced/agent/01-multi-agent — 第二题考「多 Agent 的上下文隔离与并行动机」
+- [ ] algorithm/advanced/graph/01-graph-traversal — 第二题考「BFS 与 DFS 的选择依据」
+- [ ] js/intermediate/web/01-websocket — 第二题考「帧格式与掩码、ping/pong 保活」
 
 ### b 类：旧题返修
 
@@ -121,6 +122,8 @@
 - 2026-09-10 · 第四十四轮：3 道核心笔记第二题（lc-toolloop-011 / mqtt-varlen-006 / mqtt-acl-007，difficulty 4/4/4；langchain 条目 lc-agent-006 已考手搭四件套，换考工具定义质量与 create_agent 收敛）· 本轮提交主题：feat: 题库深化第四十四轮
 
 - 2026-09-10 · 第四十五轮：3 道核心笔记第二题（py-fixture-044 / mysql-poolsize-016 / py-uvx-045，difficulty 4/4/3；pytest 条目原定角度与 py-pytest-014 重合，换考 fixture 依赖图与 scope）· 本轮提交主题：feat: 题库深化第四十五轮
+
+- 2026-09-10 · 第四十六轮：3 道核心笔记第二题（py-descform-046 / py-fourgates-047 / py-awarearith-048，difficulty 4/3/4）· 本轮提交主题：feat: 题库深化第四十六轮
 
 ## 经验与规则
 

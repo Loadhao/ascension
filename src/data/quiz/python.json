@@ -800,6 +800,59 @@
       ],
       "hint": "uvx 是「临时环境运行工具、不装进任何项目」——替代 pip install --user 与 pipx；工具不落地才是它的价值。py-uv-013 考声明与锁定的分工，本题考 uvx 的定位。",
       "difficulty": 3
+    },
+    {
+      "id": "py-descform-046",
+      "noteId": "python/advanced/internals/03-descriptors-metaclass",
+      "type": "multiple",
+      "q": "关于描述符的实战形态与元类注册器，正确的有？（多选）",
+      "options": [
+        "描述符实例放在类属性位置，__set_name__ 在类创建时自动拿到字段名——校验写在描述符里，字段声明处自动生效（Pydantic 字段、SQLAlchemy Column 的本体）",
+        "property 是描述符的官方语法糖，c.area 触发的是 __get__",
+        "元类 Registry 在 __new__ 里把子类自动收进注册表——插件注册不靠手工登记",
+        "元类是日常首选，dataclass 和 Pydantic v2 都改用了元类实现"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——dataclass 与 Pydantic v2 改用更轻的 __init_subclass__/装饰器；力量层级：先属性、再类装饰器/__init_subclass__，元类是最后手段。py-desc-016 考协议与层级，本题考实战形态。",
+      "difficulty": 4
+    },
+    {
+      "id": "py-fourgates-047",
+      "noteId": "python/advanced/eng/03-ruff-mypy",
+      "type": "single",
+      "q": "关于 ruff 的规则组与 CI 门禁的分工，按笔记正确的是？",
+      "options": [
+        "ruff format 只管排版不做价值判断，lint 管代码质量——冲突的规则（如行长 E501）关掉 lint 侧交给 format；mypy 看类型对不对、pytest 看行为对不对，四道闸互不重叠缺一不可",
+        "ruff format 会顺手修复类型错误，mypy 可以省掉",
+        "UP 规则组是强制迁移回旧写法的规则，保持向后兼容",
+        "老项目用 overrides 把新代码也降级为 ignore_errors，全仓库统一宽松"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "UP 规则组是宝藏——自动提示旧写法新形态（Optional[X] → X | None）；B（bugbear）能抓可变默认参数这类真 bug；灰度是老代码 ignore、新代码全严格。py-ruff-015 考渐进策略，本题考四道闸分工。",
+      "difficulty": 3
+    },
+    {
+      "id": "py-awarearith-048",
+      "noteId": "python/intermediate/stdlib/05-datetime",
+      "type": "single",
+      "q": "aware datetime 做时间运算与比较时，按笔记的纪律正确的是？",
+      "options": [
+        "两个不同时区的 aware 对象可以直接比较/相减（绝对时间意义）；aware + timedelta 是墙上时间运算，跨夏令时边界要先 astimezone(UTC) 再算；对外传输一律 isoformat（无损往返）",
+        "aware 对象必须先转字符串才能比较",
+        "aware + timedelta 是绝对时间运算，天然处理夏令时",
+        "isoformat 会丢失时区信息，传输前必须转成 timestamp"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Python 用 TypeError 强制你面对时区问题（naive/aware 混合比较直接抛错）；timestamp 是秒、Java Instant 是毫秒，对接差三个数量级。py-naive-036 考 now() 的 naive 本质，本题考 aware 运算纪律。",
+      "difficulty": 4
     }
   ]
 }
