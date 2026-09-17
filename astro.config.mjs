@@ -1619,6 +1619,7 @@ export default defineConfig({
                         { label: '为什么需要消息队列', link: '/middleware/basic/mq/01-why-mq/' },
                         { label: 'Kafka、RocketMQ 与 RabbitMQ 选型', link: '/middleware/basic/mq/02-mq-comparison/' },
                         { label: '消息队列的顺序消费', link: '/middleware/basic/mq/04-ordering/' },
+                        { label: '延迟消息：三大 MQ 的实现与选型', link: '/middleware/basic/mq/05-delay-message/' },
                       ],
                     },
                   ],

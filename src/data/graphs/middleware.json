@@ -52,6 +52,12 @@
       "label": "顺序消费",
       "href": "/middleware/basic/mq/04-ordering/",
       "group": "消息队列"
+    },
+    {
+      "id": "delaymsg",
+      "label": "延迟消息",
+      "href": "/middleware/basic/mq/05-delay-message/",
+      "group": "消息队列"
     }
   ],
   "edges": [
@@ -93,6 +99,11 @@
       "source": "reliability",
       "target": "ordering",
       "label": "不乱序的深化"
+    },
+    {
+      "source": "reliability",
+      "target": "delaymsg",
+      "label": "可靠投递的延伸"
     }
   ]
 }
