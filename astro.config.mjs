@@ -2267,6 +2267,7 @@ export default defineConfig({
                         { label: '概览', link: '/kubernetes/intermediate/ops/' },
                         { label: '探针与生命周期', link: '/kubernetes/intermediate/ops/01-probes-lifecycle/' },
                         { label: 'Service 与 Ingress', link: '/kubernetes/intermediate/ops/02-service-ingress/' },
+                        { label: '声明式 API 与 List-Watch', link: '/kubernetes/intermediate/ops/03-declarative-listwatch/' },
                       ],
                     },
                   ],

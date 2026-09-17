@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 147 轮（2026-09-17，内容补充模式）：声明式 API 与 List-Watch 机制（kubernetes/intermediate/ops 第 3 篇）——勘察确认 List-Watch/Informer/resourceVersion 全站零覆盖，kubectl apply 旅程是 K8s 最经典深挖题；候选 mongodb advanced（实际 13 篇已含分片/副本集/运维，状态文件记载过期）、docker（9 篇满编）、k8s HPA（0 覆盖但价值中等）依次勘察后退场。内容：kubectl apply 完整旅程图（API Server 唯一写入口+组件接力）、List 全量+Watch 增量与 resourceVersion 续传/compaction、Informer 三件套（Reflector/DeltaFIFO/本地缓存）与 workqueue、边缘触发+幂等调谐设计、三连追问（etcd 挂了能跑不能改/为何围着 API Server/为何本地缓存）。1 张 mermaid 旅程图、1 张组件表。构建 683 页、mermaid 515 块、一致性 8 项全绿。kubernetes 7 篇。
+- 下一轮入口：候选池——①k8s HPA/扩缩容（0 覆盖）；②netty WebSocket 集成（0 覆盖但价值中）；③middleware 第 6 篇（积压通用篇边际价值低已排除）；④收尾 contrast 审计（145/146/147 各新增 mermaid）。
+
 ### 第 146 轮（2026-09-17，内容补充模式）：类型编程入门：映射、条件与 infer（typescript/intermediate/typing 第 1 篇，新建 TS 第一个中级分类）——勘察确认映射/条件类型/infer 全站仅本方向 2 处顺带提及，零专篇。新建 intermediate/typing 分类三件套（分类页 index.mdx + 侧边栏中级组 + 图谱类型编程组）。内容：映射类型（in 遍历、T[K] 索引访问、?/-?/readonly 修饰符，手写 Partial）、条件类型与分布式条件类型（裸联合自动分发、[T] 包裹关闭、never 吸收陷阱与 IsNever 正确写法）、infer 模式匹配槽位（手写 ReturnType/Element）、三构件总结图、可读性税纪律（两层以上封装成命名工具类型）。1 张 mermaid 三构件图、2 段代码。构建 682 页、mermaid 514 块、一致性 8 项全绿。typescript 4 篇。
 - 下一轮入口：候选池——①mongodb advanced 勘察（11 篇全在 basic/intermediate，advanced 层空缺：分片集群/副本集选举深挖？）；②netty/middleware 勘察；③TS 线可歇；④收尾 contrast 审计（145/146 各新增 mermaid）。
 
