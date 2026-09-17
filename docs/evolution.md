@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 141 轮（2026-09-17，内容补充模式）：相关性打分与 BM25（elasticsearch/intermediate/usage 第 4 篇）——勘察确认 BM25/相关性打分在 ES 内仅 2 行顺带提及，深挖题「ES 怎么决定谁排第一」零专篇；候选 etcd 第 5 篇与 ZK/RabbitMQ 深化均因大纲覆盖扎实退场。内容：搜索是排序问题、TF-IDF 两因子与两偏差（无饱和/无长度归一）、BM25 三要素与 k1/b 参数直觉、为什么换掉 TF-IDF、filter 不算分可缓存与 must 的分工、boost/function_score/业务重排三条干预路、_explain 排查。1 张 mermaid 三因子构成图、1 段 bool 查询 JSON。构建 674 页、mermaid 509 块、一致性 8 项全绿。elasticsearch 7 篇。
+- 下一轮入口：本轮收尾需 pnpm preview + contrast 审计（139/140/141 各新增 1 块 mermaid）。候选池——①ES 剩余缺口：refresh/flush/translog 刷盘语义（写路径篇有底子）、分词器专篇（覆盖 1 篇浅）；②mqtt/netty/middleware 各 4-5 篇待勘察；③TS 线未开。
+
 ### 第 140 轮（2026-09-17，内容补充模式）：Node 事件循环与浏览器差异深挖（js/intermediate/node 第 10 篇，Node 主线十篇收口）——勘察确认 timers/poll/check 相位模型全站零专篇（basic 事件循环篇仅 4 行小结并显式留「深入另见」接口，边界互认不重复）。内容：libuv 六阶段模型与 poll 枢纽、process.nextTick 特权队列 vs Promise 微任务、setImmediate vs setTimeout(0) 主模块竞态与 I/O 回调内确定序、浏览器/Node 六维对比表（逐个 vs 分组的本质差异）、unref 与进程退出生命周期。1 张 mermaid 相位循环图、2 张表。构建 673 页、mermaid 508 块、一致性 8 项全绿。过程教训：图谱边端点 id 凭记忆写 eventemitter 被体检第 9 项拦截（实际是 emitter）——图谱 id 必须先查 JSON 再引用，与 old_string 禁凭记忆教训同源。js/intermediate/node 10 篇。
 - 下一轮入口：候选池——①network 方向缺 intermediate 层（HTTP 缓存已有专篇退场，可勘察 HTTP/2/3 或 Web 安全网关向）；②TS 线未开（全站仅 1 篇提及）；③场景题/ai 线间歇。
 
