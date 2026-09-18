@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 1361
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/elasticsearch/advanced/architecture/02-ilms-lifecycle.md
+  h_9324126a55eff3 1-104
+src/data/graphs/elasticsearch.json
+  h_9324126a55eff3 61-66,151-160
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "39afe690ae308d11c3029e0f3f655a304df5599b",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
