@@ -1,0 +1,22 @@
+astro.config.mjs
+  h_9324126a55eff3 801-808
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/js/intermediate/engineering/01-bundlers.md
+  h_9324126a55eff3 1-99
+src/content/docs/js/intermediate/engineering/index.mdx
+  h_9324126a55eff3 1-13
+src/data/graphs/js.json
+  h_9324126a55eff3 229-234,533-547
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "296dd77ddbb8cbb4db80e5e78c3b4a1b13d56f85",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
