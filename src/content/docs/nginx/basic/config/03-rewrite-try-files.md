@@ -5,7 +5,7 @@ level: basic
 ---
 
 [工作模型](/nginx/basic/config/01-working-model/)篇管请求怎么进
-location，[静态服务](/nginx/basic/config/02-static-server.md)篇管
+location，[静态服务](/nginx/basic/config/02-static-server/)篇管
 location 怎么匹配——这一篇管**匹配之后文件从哪来、URI 怎么被改写**。
 `root`/`alias`/`try_files`/`rewrite` 四个指令是 Nginx 配置错误的四大
 高发区，也是 SPA 部署、灰度跳转这些日常操作的底层。
