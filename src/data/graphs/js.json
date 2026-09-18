@@ -190,6 +190,12 @@
       "label": "请求取消与超时",
       "href": "/js/intermediate/web/08-abort/",
       "group": "网络"
+    },
+    {
+      "id": "serviceworker",
+      "label": "Service Worker",
+      "href": "/js/intermediate/web/09-service-worker/",
+      "group": "网络"
     }
   ],
   "edges": [
@@ -408,6 +414,21 @@
       "source": "domevents",
       "target": "abortsig",
       "label": "signal 管事件监听"
+    },
+    {
+      "source": "webworker",
+      "target": "serviceworker",
+      "label": "Worker 家族的代理形态"
+    },
+    {
+      "source": "webstorage",
+      "target": "serviceworker",
+      "label": "Cache API 与存储分工"
+    },
+    {
+      "source": "abortsig",
+      "target": "serviceworker",
+      "label": "请求链路的代理层"
     }
   ]
 }

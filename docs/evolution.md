@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 154 轮（2026-09-18，内容补充模式）：Service Worker 与离线缓存（js/intermediate/web 第 9 篇）——勘察确认 SW 生命周期/缓存策略/Cache API 全站零专篇（仅 worker/storage 篇各一句定位提及），network http-cache 篇管协议层与本篇分层互补不重叠。内容：SW 代理线程定位与 HTTPS 强制理由、三阶段生命周期与「一个 SW 服务一个页面」的绕圈根源、skipWaiting 接管、fetch 拦截与三策略表（Cache First/Network First/Stale-While-Revalidate）、res.clone 必踩坑、SW 拦截先于 HTTP 缓存的分层关系、PWA=SW+Manifest+HTTPS 组合答法。1 张 mermaid 生命周期图、1 张策略表、1 段代码。构建 690 页、mermaid 519 块、一致性 8 项全绿。js/intermediate/web 9 篇。
+- 下一轮入口：候选池——①Web 性能指标与监控（web 第 10 篇，Web Vitals/PerformanceObserver/错误捕获全站零覆盖）；②错误监控上报（可与性能指标合篇或拆篇）；③收尾 contrast 审计（154 新增 1 图）。
+
 ### 第 153 轮（2026-09-18，内容补充模式）：类型声明与 .d.ts（typescript/basic/core 第 5 篇）——勘察确认 declare/.d.ts/@types 全站零覆盖。内容：ambient 声明的「只登记不生成代码」语义、.d.ts 定位、类型三来源按序命中（包自带 types 字段→@types/DefinitelyTyped→手写 declare module）、给无类型库补声明的三要点（include 范围/空壳兜底 TODO/CSS 图片通配声明）、库作者的 types 字段即 API 发布。无 mermaid（代码承载），构建 689 页、mermaid 518 块持平、一致性 8 项全绿。typescript/basic/core 5 篇、全方向 7 篇，本次启动 TS 线 +2 收口。
 - 下一轮入口：候选池——①收尾 contrast 审计（152 新增 1 图）；②场景题/ai 线间歇；③web 线第 9 篇候选（浏览器缓存策略实践？与 network http-cache 篇需勘察边界）。
 

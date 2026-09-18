@@ -788,6 +788,7 @@ export default defineConfig({
                         { label: 'Web Worker 与多线程', link: '/js/intermediate/web/06-worker/' },
                         { label: '前端路由与 History API', link: '/js/intermediate/web/07-route/' },
                         { label: '请求的取消与超时', link: '/js/intermediate/web/08-abort/' },
+                        { label: 'Service Worker 与离线缓存', link: '/js/intermediate/web/09-service-worker/' },
                       ],
                     },
                   ],
