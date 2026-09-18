@@ -214,6 +214,12 @@
       "label": "属性描述符与冻结",
       "href": "/js/basic/core/14-property-descriptors/",
       "group": "语言核心"
+    },
+    {
+      "id": "deepclone",
+      "label": "深浅拷贝与手写",
+      "href": "/js/basic/core/15-deep-clone/",
+      "group": "语言核心"
     }
   ],
   "edges": [
@@ -482,6 +488,21 @@
       "source": "propdesc",
       "target": "proxy",
       "label": "defineProperty 到 Proxy 的演进"
+    },
+    {
+      "source": "langcore",
+      "target": "deepclone",
+      "label": "引用语义的直接后果"
+    },
+    {
+      "source": "deepclone",
+      "target": "collections",
+      "label": "WeakMap 防循环引用"
+    },
+    {
+      "source": "webworker",
+      "target": "deepclone",
+      "label": "结构化克隆算法同源"
     }
   ]
 }

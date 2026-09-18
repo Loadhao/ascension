@@ -752,6 +752,7 @@ export default defineConfig({
                         { label: '类型转换与相等判断', link: '/js/basic/core/12-type-coercion/' },
                         { label: '解构赋值与展开运算符', link: '/js/basic/core/13-destructuring-spread/' },
                         { label: '属性描述符与冻结三兄弟', link: '/js/basic/core/14-property-descriptors/' },
+                        { label: '深浅拷贝与手写深拷贝', link: '/js/basic/core/15-deep-clone/' },
                       ],
                     },
                   ],
