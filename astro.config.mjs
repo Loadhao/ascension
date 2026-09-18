@@ -790,6 +790,7 @@ export default defineConfig({
                         { label: '请求的取消与超时', link: '/js/intermediate/web/08-abort/' },
                         { label: 'Service Worker 与离线缓存', link: '/js/intermediate/web/09-service-worker/' },
                         { label: 'Web 性能指标与采集', link: '/js/intermediate/web/10-web-vitals/' },
+                        { label: '前端错误监控与上报', link: '/js/intermediate/web/11-error-monitoring/' },
                       ],
                     },
                   ],
