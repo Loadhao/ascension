@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 793
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/js/intermediate/web/11-error-monitoring.md
+  h_9324126a55eff3 1-89
+src/data/graphs/js.json
+  h_9324126a55eff3 205-210,454-468
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "e4e80485944b9c9825bab2d803574ed147eeb0eb",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
