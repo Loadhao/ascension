@@ -654,6 +654,23 @@
       ],
       "hint": "末项反了——双塔结构 query 和文档分别编码再比相似度，拼接改变语义分布；拼一起精算的是 cross-encoder。追问：embedding vs one-hot（稠密低维语义可计算 vs 正交无语义）、维度减半内存近半、recall@k 不达标再谈微调。",
       "difficulty": 4
+    },
+    {
+      "id": "ai-tokenizer-040",
+      "noteId": "ai/basic/foundation/08-tokenizer",
+      "type": "single",
+      "q": "BPE 分词器的切分逻辑与三个著名「翻车」的根源，按笔记正确的是？",
+      "options": [
+        "BPE 从字符开始反复把最高频相邻对合并成新词元直到词表达标——高频英文词整词进表、低频词切成子词；模型只看 token 没有字符级视图（数不准 strawberry 的 r）、数字切分不按位对齐（算术易错）、中文/小语种子词少（同样内容切出更多 token 成本高）",
+        "BPE 按固定规则把每个单词切成等长的子词，token 与字符是 1:1 映射",
+        "词表越大越好——序列短且 embedding 表不受影响",
+        "上下文窗口按字符数计，max_tokens 限的是输出字符数"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "词表大→embedding 表大（词表 × 维度），是权衡不是越大越好；中文约 1 字 ≈ 1 token、英文约 4 字符 ≈ 1 token；字符级精确任务可用空格分隔补偿（\"s t r a w b e r r y\"）；跨模型对比 token 数要用各自 tokenizer 实测。",
+      "difficulty": 4
     }
   ]
 }

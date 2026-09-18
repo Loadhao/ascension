@@ -340,6 +340,25 @@
       ],
       "hint": "Symbol.for(\"id\") 才是全局注册表版本（跨模块共享），Symbol 每次新建；Symbol 属性不会被 for...in 遍历、JSON.stringify 也忽略；Object 属性查找走原型链、Map 是纯哈希表——频繁动态增删差距明显。",
       "difficulty": 3
+    },
+    {
+      "id": "js-error-020",
+      "noteId": "js/basic/core/08-error-handling",
+      "type": "multiple",
+      "q": "关于 JS 的 try/catch 边界与全局错误捕获三入口，正确的有？（多选）",
+      "options": [
+        "try/catch 只捕获同步异常——异步回调里的 throw 和 Promise 的 rejection 都不会被外面的 try/catch 捕获，要用 .catch() 或 await 包进 try",
+        "finally 总是执行（即使 try/catch 里有 return/throw），但 finally 里的 return 会覆盖 try/catch 的返回值——清理逻辑别写 return",
+        "资源加载失败（img/script 的 error）要走捕获阶段的 window error 监听才能拦到——用 e.target !== window 区分资源错误",
+        "判断错误类型用 err.name 最可靠，instanceof 在有子类继承时会失效"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——instanceof 比 err.name 可靠，name 可能被子类覆写；三入口分工：error 捕同步、unhandledrejection 捕 Promise 拒绝（Node 15+ 未处理直接崩溃进程）、捕获阶段 error 捕资源加载失败。",
+      "difficulty": 4
     }
   ]
 }
