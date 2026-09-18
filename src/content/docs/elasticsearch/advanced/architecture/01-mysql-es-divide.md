@@ -1,7 +1,7 @@
 ---
 title: ES 与 MySQL 的分工与数据同步
 description: 检索与事务的职责分野、双写与 binlog 订阅三方案对比、最终一致的延迟预期、对账修复与删除事件订阅、为什么不用 LIKE 的回答框架
-level: intermediate
+level: advanced
 ---
 
 「有了 MySQL 为什么还要 ES」「两边数据怎么保持一致」——这是 ES 落地
