@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 165 轮（2026-09-18，内容补充模式）：npm、pnpm 与依赖管理（js/intermediate/engineering 第 2 篇）——勘察确认 pnpm 仅 2 处顺带提及、幽灵依赖全站零覆盖。内容：node_modules 两代结构（嵌套地狱→扁平化 hoist）、幽灵依赖成因与「能跑≠声明过」、pnpm 三件套（内容寻址 store+硬链接省空间+符号链接严格边界）与快省一体、lockfile 可复现语义与必须提交纪律、npm ci vs install 与 frozen-lockfile。1 张 mermaid 两代结构对比图。git add -N 后体检，构建 703 页、mermaid 528 块、一致性 8 项全绿。js/intermediate/engineering 2 篇。
+- 下一轮入口：候选池——①工程化第 3 篇候选（Monorepo/CI-CD 流水线，待勘察）；②middleware/netty/场景题/ai 间歇；③收尾 contrast 审计（163/164/165 各新增 1 图）。
+
 ### 第 164 轮（2026-09-18，内容补充模式）：打包器：从 Webpack 到 Vite（js/intermediate/engineering 第 1 篇，新建 js 工程化分类）——勘察确认 Webpack/Vite 仅 4-5 处顺带提及、tree-shaking 零覆盖，「Webpack 与 Vite 的区别」是前端前五高频题。内容：打包器四件事、Webpack 万物皆模块与 loader/plugin 分工、Vite 双引擎（开发态原生 ESM 按需编译+esbuild 预构建、生产 Rollup 照常打包）、tree-shaking 依赖 ESM 静态结构与 sideEffects 声明、HMR 模块级替换、import() 代码分割服务 LCP、选型口径。1 张 mermaid 双引擎图。新建分类三件套（分类页+侧边栏工程化组+图谱工程化组）。过程：构建再次挂起（缓存脏数据，第二次复现），kill+rm node_modules/.astro 后 2m06s 通过——**清缓存成为挂起的固化疗法**；首版侧边栏锚点未命中（js 中级组实际结构先 node 后网络组），按实际结构重插。git add -N 后体检，构建 702 页、mermaid 527 块、一致性 8 项全绿。js 17 篇。
 - 下一轮入口：候选池——①轮 165 收官：候选勘察（npm 包管理 pnpm 机制？工程化第 2 篇；或 middleware/场景题间歇）；②收尾 contrast 审计（163/164 各新增 1 图）。
 

@@ -232,6 +232,12 @@
       "label": "打包器 Webpack→Vite",
       "href": "/js/intermediate/engineering/01-bundlers/",
       "group": "工程化"
+    },
+    {
+      "id": "pkgmgr",
+      "label": "npm/pnpm 依赖管理",
+      "href": "/js/intermediate/engineering/02-package-managers/",
+      "group": "工程化"
     }
   ],
   "edges": [
@@ -545,6 +551,16 @@
       "source": "spafee",
       "target": "bundler",
       "label": "SPA 产物的构建来源"
+    },
+    {
+      "source": "bundler",
+      "target": "pkgmgr",
+      "label": "同一工程链的上下游"
+    },
+    {
+      "source": "envconfig",
+      "target": "pkgmgr",
+      "label": "Node 侧的依赖落地"
     }
   ]
 }

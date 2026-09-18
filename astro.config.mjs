@@ -804,6 +804,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/js/intermediate/engineering/' },
                         { label: '打包器：从 Webpack 到 Vite', link: '/js/intermediate/engineering/01-bundlers/' },
+                        { label: 'npm、pnpm 与依赖管理', link: '/js/intermediate/engineering/02-package-managers/' },
                       ],
                     },
                   ],
