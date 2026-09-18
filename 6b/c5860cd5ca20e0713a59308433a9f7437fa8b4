@@ -1,0 +1,19 @@
+src/content/docs/js/intermediate/engineering/04-lint-format.md
+  s_c794bae29d0139::t_e13ab1e0f9b944 1-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6bc5860cd5ca20e0713a59308433a9f7437fa8b4",
+  "prompts": {},
+  "sessions": {
+    "s_c794bae29d0139": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "4db90ea7-6a9d-4725-81f6-6dcd448d3a5c",
+        "model": "grok-4.6"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
