@@ -1,0 +1,19 @@
+docs/evolution.md
+  s_4dd73853d9ddf5::t_34f8f21bc01c52 329-331
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "bbcdd3967fe6fb041925316840b773e4ab84242a",
+  "prompts": {},
+  "sessions": {
+    "s_4dd73853d9ddf5": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "61d6440e-2b58-41a3-92db-e782689ddb07",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
