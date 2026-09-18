@@ -238,6 +238,12 @@
       "label": "npm/pnpm 依赖管理",
       "href": "/js/intermediate/engineering/02-package-managers/",
       "group": "工程化"
+    },
+    {
+      "id": "monorepo",
+      "label": "Monorepo 与 workspace",
+      "href": "/js/intermediate/engineering/03-monorepo/",
+      "group": "工程化"
     }
   ],
   "edges": [
@@ -561,6 +567,16 @@
       "source": "envconfig",
       "target": "pkgmgr",
       "label": "Node 侧的依赖落地"
+    },
+    {
+      "source": "pkgmgr",
+      "target": "monorepo",
+      "label": "workspace 结构的延伸"
+    },
+    {
+      "source": "modules",
+      "target": "monorepo",
+      "label": "多包模块的仓库组织"
     }
   ]
 }
