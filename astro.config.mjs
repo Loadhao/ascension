@@ -1348,6 +1348,20 @@ export default defineConfig({
                         { label: '节点角色、master 选举与脑裂', link: '/elasticsearch/intermediate/cluster/01-cluster-split-brain/' },
                       ],
                     },
+                    {
+                      label: '高级',
+                      collapsed: true,
+                      items: [
+                        {
+                          label: '架构协同',
+                          collapsed: false,
+                          items: [
+                            { label: '概览', link: '/elasticsearch/advanced/architecture/' },
+                            { label: 'ES 与 MySQL 的分工与数据同步', link: '/elasticsearch/advanced/architecture/01-mysql-es-divide/' },
+                          ],
+                        },
+                      ],
+                    },
                   ],
                 },
               ],
