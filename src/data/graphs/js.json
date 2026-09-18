@@ -196,6 +196,12 @@
       "label": "Service Worker",
       "href": "/js/intermediate/web/09-service-worker/",
       "group": "网络"
+    },
+    {
+      "id": "webvitals",
+      "label": "Web 性能指标",
+      "href": "/js/intermediate/web/10-web-vitals/",
+      "group": "网络"
     }
   ],
   "edges": [
@@ -429,6 +435,16 @@
       "source": "abortsig",
       "target": "serviceworker",
       "label": "请求链路的代理层"
+    },
+    {
+      "source": "renderpipe",
+      "target": "webvitals",
+      "label": "指标背后的渲染管线"
+    },
+    {
+      "source": "serviceworker",
+      "target": "webvitals",
+      "label": "缓存策略影响 LCP"
     }
   ]
 }

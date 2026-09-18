@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 155 轮（2026-09-18，内容补充模式）：Web 性能指标与采集（js/intermediate/web 第 10 篇）——勘察确认 Core Web Vitals/PerformanceObserver/INP/CLS 全站零覆盖（LCP 命中的 3 篇均为 Java CLSID 误命中）。内容：四指标各自替用户回答的问题与阈值速记（2.5s/200ms/0.1）、LCP 候选元素与 FCP 差异、INP 取代 FID 的理由、CLS 累积分数与 hadRecentInput、PerformanceObserver+buffered 补采、sendBeacon/keepalive 卸载不丢上报、LCP 差的四步定位路径（TTFB/资源/阻塞/排队，呼应渲染管线篇）。1 张 mermaid 指标时间轴图、1 张阈值表、2 段代码。构建 691 页、mermaid 520 块、一致性 8 项全绿。js/intermediate/web 10 篇。
+- 下一轮入口：候选池——①前端错误监控与上报（web 第 11 篇，window.onerror/unhandledrejection/资源错误/Sentry 视角全站零覆盖，与 basic 错误处理篇边界：那篇管语言机制、本篇管生产采集）；②收尾 contrast 审计（155 新增 1 图）。
+
 ### 第 154 轮（2026-09-18，内容补充模式）：Service Worker 与离线缓存（js/intermediate/web 第 9 篇）——勘察确认 SW 生命周期/缓存策略/Cache API 全站零专篇（仅 worker/storage 篇各一句定位提及），network http-cache 篇管协议层与本篇分层互补不重叠。内容：SW 代理线程定位与 HTTPS 强制理由、三阶段生命周期与「一个 SW 服务一个页面」的绕圈根源、skipWaiting 接管、fetch 拦截与三策略表（Cache First/Network First/Stale-While-Revalidate）、res.clone 必踩坑、SW 拦截先于 HTTP 缓存的分层关系、PWA=SW+Manifest+HTTPS 组合答法。1 张 mermaid 生命周期图、1 张策略表、1 段代码。构建 690 页、mermaid 519 块、一致性 8 项全绿。js/intermediate/web 9 篇。
 - 下一轮入口：候选池——①Web 性能指标与监控（web 第 10 篇，Web Vitals/PerformanceObserver/错误捕获全站零覆盖）；②错误监控上报（可与性能指标合篇或拆篇）；③收尾 contrast 审计（154 新增 1 图）。
 
