@@ -1,0 +1,14 @@
+src/content/docs/nginx/basic/config/03-rewrite-try-files.md
+  h_9324126a55eff3 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cb53ade02328c02fc6b1532963e66263c1b34b5a",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
