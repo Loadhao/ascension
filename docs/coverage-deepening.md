@@ -25,9 +25,11 @@
 
 
 
-- [ ] ai/advanced/agent/07-autonomous-agents — 第二题考「看板认领的原子性」
-- [ ] python/basic/oop/03-dataclass-slots — 第二题考「frozen 与 slots 的组合」（执行时核准）
-- [ ] python/basic/syntax/03-strings — 第二题考「不可变的底层与常用方法」（执行时核准）
+
+- [ ] ai/basic/foundation/03-transformer — 第一题考「Q/K/V 检索类比与并行性」（0 题补缺）
+- [ ] ai/basic/foundation/05-embedding — 第一题考「语义向量与相似度检索」（0 题补缺）
+- [ ] js/basic/core/07-collection-types — 第一题考「Map/Set 与对象键的差异」（0 题补缺）
+- [ ] distributed/intermediate/case-studies/07-red-packet — 第一题考「红包拆分算法与领取并发」（0 题补缺）
 
 ### b 类：旧题返修
 
@@ -149,7 +151,11 @@
 
 - 2026-09-10 · 第五十四轮：3 道核心笔记第二题（ai-msgbus-036 / py-gcpairs-051 / algo-diffedge-044，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第五十四轮
 
+- 2026-09-18 · 第五十五轮：3 道核心笔记第二题（ai-autoclaim-037 / py-dcadv-052 / py-strencode-053，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第五十五轮
+
 ## 经验与规则
+
+- 第五十五轮全库重扫发现：96 篇 core 笔记 0 题、134 篇仅 1 题——早前覆盖成果疑似在并行会话历史改写事故中丢失。队列补缺规则：0 题笔记优先补第一题（标「0 题补缺」），再轮到第二题。扫描脚本需同时处理 .md 与 .mdx，否则尾点导致误报 0 题。
 
 - core: true 共 234 篇：`grep -rl "^core: true" src/content/docs`；难度定级锚点——1~2 概念识别、3 原理理解、4 边界/易错点、5 生产权衡/深挖。
 - 新题红线：考点必须与该笔记现有题不同（入队时写明差异角度）；judge 固定 ["正确","错误"]；字段沿用所在文件格式；新题一律带 difficulty。

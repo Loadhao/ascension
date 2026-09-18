@@ -601,6 +601,23 @@
       ],
       "hint": "教学版 read_inbox 有 read+unlink 竞态，真实 CC 加 proper-lockfile；队友有简化工具集、限轮数，真实 CC 用 idle loop 等 inbox。ai-team-016 考协调不靠共享内存，本题考 MessageBus 与权限冒泡。",
       "difficulty": 4
+    },
+    {
+      "id": "ai-autoclaim-037",
+      "noteId": "ai/advanced/agent/07-autonomous-agents",
+      "type": "single",
+      "q": "两个队友同时 IDLE 轮询扫到同一个 pending 任务，教学版 claim_task 靠什么兜底？与 CC 的差异、依赖判断，按笔记正确的是？",
+      "options": [
+        "教学版靠 task.owner 二次检查避免「后写覆盖」最明显的问题，但读-改-写无锁仍可能竞态；CC 用 proper-lockfile 在锁内完成读-检查-改-写，busy check 与 claim 做成原子避免 TOCTOU；依赖上「有依赖」不等于不能做——只有 blockedBy 里有未完成任务才被阻塞",
+        "教学版有文件锁保护任务文件，认领完全原子",
+        "CC 的队友只被动等 idle_notification 通知，从不主动认领任务",
+        "只要任务有 blockedBy 依赖，无论前置是否完成都不能认领"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "教学版 IDLE 超时 60s = 12 次 × 5s；CC 的 waitForNextPromptOrShutdown 以 500ms 轮询三类来源，shutdown_request 优先处理不被饿死。ai-auto-017 考 inbox 优先于任务板的原因，本题考认领并发与依赖判断。",
+      "difficulty": 4
     }
   ]
 }

@@ -906,6 +906,42 @@
       ],
       "hint": "末项反了——__slots__ 锁死属性集合，加新属性直接 AttributeError；排查三板斧 getsizeof 看单体、tracemalloc 看增长、objgraph 看引用链。py-gc-006 考主力与兜底的分工，本题考 weakref 与 __slots__。",
       "difficulty": 4
+    },
+    {
+      "id": "py-dcadv-052",
+      "noteId": "python/basic/oop/03-dataclass-slots",
+      "type": "multiple",
+      "q": "关于 dataclass 的 frozen、可哈希与 __slots__ 的边界，正确的有？（多选）",
+      "options": [
+        "dataclass 里写 tags: list = [] 会被直接 ValueError 拒绝——不像手写类那样静默共享同一个列表，必须用 field(default_factory=list)",
+        "默认生成的 __eq__ 会把 __hash__ 置为 None（可变对象不可哈希）；frozen=True 后恢复可哈希，实例能当 dict key",
+        "__slots__ 与带 __dict__ 的类多继承混用会失效；声明之外的新属性一律 AttributeError",
+        "frozen=True 的实例字段赋值抛 FrozenInstanceError，所以 frozen dataclass 不能有带默认值的字段"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——frozen 与默认值无关，Money 示例就是 frozen=True + currency 默认值；frozen 三红利：线程安全、可进 set/dict、防顺手改共享配置。py-dc-021 考可变默认值写法与 slots 省内存动机，本题考 frozen/hash 联动与 slots 继承边界。",
+      "difficulty": 4
+    },
+    {
+      "id": "py-strencode-053",
+      "noteId": "python/basic/syntax/03-strings",
+      "type": "single",
+      "q": "关于 str 与 bytes 的边界和 f-string，按笔记正确的是？",
+      "options": [
+        "str 是 Unicode 码点序列、bytes 是原始字节序列；乱码九成来自 decode 用了与 encode 不同的编码，文件 IO 永远显式传 encoding=\"utf-8\"；f\"{name=}\" 输出 name=python，是调试利器",
+        "str 在 Python 3 里就是 utf-8 字节序列，encode 很少用到",
+        "decode 报 UnicodeDecodeError 时换 gbk 重试总能解决乱码",
+        "f-string 里 {value!r} 会去掉字符串的引号让输出更干净"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "中文 utf-8 编码是 b'\\xe4\\xb8\\xad\\xe6\\x96\\x87'；{pi:.2f}、{1234567:,}、{0.85:.1%} 是格式三板斧；循环拼接的性能账见 py-join-032，本题考 str/bytes 边界与 f-string。",
+      "difficulty": 3
     }
   ]
 }
