@@ -226,6 +226,12 @@
       "label": "浏览器内存泄漏",
       "href": "/js/intermediate/web/12-memory-leak/",
       "group": "网络"
+    },
+    {
+      "id": "bundler",
+      "label": "打包器 Webpack→Vite",
+      "href": "/js/intermediate/engineering/01-bundlers/",
+      "group": "工程化"
     }
   ],
   "edges": [
@@ -524,6 +530,21 @@
       "source": "propdesc",
       "target": "memleak",
       "label": "闭包与引用链的根基"
+    },
+    {
+      "source": "modules",
+      "target": "bundler",
+      "label": "CJS/ESM 之争的工程侧"
+    },
+    {
+      "source": "webvitals",
+      "target": "bundler",
+      "label": "代码分割服务 LCP"
+    },
+    {
+      "source": "spafee",
+      "target": "bundler",
+      "label": "SPA 产物的构建来源"
     }
   ]
 }

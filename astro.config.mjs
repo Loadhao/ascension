@@ -798,6 +798,14 @@ export default defineConfig({
                         { label: '内存泄漏场景与排查', link: '/js/intermediate/web/12-memory-leak/' },
                       ],
                     },
+                    {
+                      label: '工程化',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/js/intermediate/engineering/' },
+                        { label: '打包器：从 Webpack 到 Vite', link: '/js/intermediate/engineering/01-bundlers/' },
+                      ],
+                    },
                   ],
                 },
               ],
