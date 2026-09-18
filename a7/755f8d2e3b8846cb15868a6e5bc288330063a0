@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 754
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/js/basic/core/14-property-descriptors.md
+  h_9324126a55eff3 1-97
+src/data/graphs/js.json
+  h_9324126a55eff3 211-216,475-484
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a7755f8d2e3b8846cb15868a6e5bc288330063a0",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
