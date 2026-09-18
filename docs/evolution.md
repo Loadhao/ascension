@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 157 轮（2026-09-18，内容补充模式）：rewrite、try_files 与文件解析（nginx/basic/config 第 3 篇）——勘察确认 root/alias/try_files/rewrite flag 全站零专篇（location 优先级已有 static-server 篇专节退场、事务消息有 rocketmq 架构篇承载退场、linux 19 篇已厚退场），与前端路由篇的 SPA fallback 提及互链。内容：root 拼接 vs alias 替换与末尾斜杠坑、try_files 短路查找与两种兜底（内部重定向=SPA fallback 原理 / =404 终判）、rewrite 四 flag 表与 last/break 高频追问、改写循环 10 次上限、return 与 rewrite 分工。1 张 mermaid try_files 流程图、1 张 flag 表、2 段配置。构建 693 页、mermaid 522 块、一致性 8 项全绿。过程：nginx 图谱边端点再次凭记忆猜错（nginx-static→static），体检第 9 项拦截后修正——已两次确认图谱 id 必须先查 JSON。nginx 7 篇。
+- 下一轮入口：候选池——①js/basic/core 第 14 篇：属性描述符与冻结三兄弟（defineProperty 仅 proxy 对比语境提及）；②middleware/netty 续篇勘察；③收尾 contrast 审计（157 新增 1 图）。
+
 ### 第 156 轮（2026-09-18，内容补充模式）：前端错误监控与上报（js/intermediate/web 第 11 篇，web 线 11 篇收口）——勘察确认 window.onerror/unhandledrejection/Script error/sourcemap 还原全站零覆盖（与 basic 错误处理篇边界：那篇管语言机制、本篇管生产采集）。内容：四类错误来源与四个捕获入口路由图（资源错误不冒泡须捕获阶段监听、接口错误靠拦截器）、Script error. 跨域打码与 crossorigin+CORS 两件套、sourcemap 反向还原与「只进平台不上线」、上报三板斧（聚合去重/采样率/sendBeacon）与监控自我保护。1 张 mermaid 路由图、1 张入口表。构建 692 页、mermaid 521 块、一致性 8 项全绿。js/intermediate/web 11 篇。
 - 下一轮入口：候选池——①web 线 11 篇体量已厚，下轮轮转其他线（middleware/netty 续篇、场景题/ai 间歇）；②收尾 contrast 审计（155/156 各新增 1 图）。
 

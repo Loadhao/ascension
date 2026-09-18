@@ -335,6 +335,7 @@ export default defineConfig({
                         { label: '概览', link: '/nginx/basic/config/' },
                         { label: '工作模型与配置核心', link: '/nginx/basic/config/01-working-model/' },
                         { label: '静态服务与日志', link: '/nginx/basic/config/02-static-server/' },
+                        { label: 'rewrite、try_files 与文件解析', link: '/nginx/basic/config/03-rewrite-try-files/' },
                       ],
                     },
                   ],
