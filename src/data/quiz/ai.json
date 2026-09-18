@@ -618,6 +618,42 @@
       ],
       "hint": "教学版 IDLE 超时 60s = 12 次 × 5s；CC 的 waitForNextPromptOrShutdown 以 500ms 轮询三类来源，shutdown_request 优先处理不被饿死。ai-auto-017 考 inbox 优先于任务板的原因，本题考认领并发与依赖判断。",
       "difficulty": 4
+    },
+    {
+      "id": "ai-transformer-038",
+      "noteId": "ai/basic/foundation/03-transformer",
+      "type": "single",
+      "q": "自注意力为什么能取代 RNN 成为 LLM 的底座？Q/K/V 的检索类比与配套设计，按笔记正确的是？",
+      "options": [
+        "RNN 逐步递归难并行且长程信息稀释，自注意力让每个位置直接看全场（并行且任意两位置距离为 1）；Query 是查询词、Key 是索引线索、Value 是实际携带的信息，点积打分后 softmax 加权汇总；除以 √d 防止维度大时点积方差过大、softmax 饱和成 one-hot",
+        "自注意力保留了逐步递归，只是把 RNN 的隐藏层换成了注意力权重",
+        "除以 √d 是为了让点积结果变成概率分布，softmax 可以省掉",
+        "自注意力天然保留词序，位置编码只是可选的精度优化"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "自注意力把序列当集合处理、词序靠位置编码显式补回（主流 RoPE）；多头是并行做 h 组独立投影。追问高频：O(n²·d) 复杂度解释上下文窗口为何按 token 计费、KV Cache 缓存前文 K/V、LLM 为何用 Decoder-only。",
+      "difficulty": 4
+    },
+    {
+      "id": "ai-embed-039",
+      "noteId": "ai/basic/foundation/05-embedding",
+      "type": "multiple",
+      "q": "embedding 的训练方式与相似度度量选型，按笔记正确的有？（多选）",
+      "options": [
+        "主流用对比学习训练——正样本对拉近、负样本对推远，难负样本（字面像但语义不同）的质量决定模型好坏",
+        "相似度默认余弦（对长度不敏感）；向量 L2 归一化后，内积和欧氏距离与余弦的排序一致",
+        "看 MTEB 榜单要按任务分榜——检索任务看 Retrieval 榜而不是总分",
+        "RAG 中 query 和文档应拼成一段文本再算 embedding，相似度更准"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——双塔结构 query 和文档分别编码再比相似度，拼接改变语义分布；拼一起精算的是 cross-encoder。追问：embedding vs one-hot（稠密低维语义可计算 vs 正交无语义）、维度减半内存近半、recall@k 不达标再谈微调。",
+      "difficulty": 4
     }
   ]
 }

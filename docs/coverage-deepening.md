@@ -26,10 +26,12 @@
 
 
 
-- [ ] ai/basic/foundation/03-transformer — 第一题考「Q/K/V 检索类比与并行性」（0 题补缺）
-- [ ] ai/basic/foundation/05-embedding — 第一题考「语义向量与相似度检索」（0 题补缺）
-- [ ] js/basic/core/07-collection-types — 第一题考「Map/Set 与对象键的差异」（0 题补缺）
 - [ ] distributed/intermediate/case-studies/07-red-packet — 第一题考「红包拆分算法与领取并发」（0 题补缺）
+
+- [ ] ai/basic/foundation/08-tokenizer — 第一题考「BPE 子词切分与词表」（0 题补缺）
+- [ ] js/basic/core/08-error-handling — 第一题考「Error 类型与 try/catch 边界」（0 题补缺）
+- [ ] linux/basic/commands/02-text-pipeline — 第一题考「grep/sed/awk 管道组合」（0 题补缺）
+- [ ] mongodb/intermediate/usage/05-transactions — 第一题考「多文档事务与使用边界」（0 题补缺）
 
 ### b 类：旧题返修
 
@@ -152,6 +154,8 @@
 - 2026-09-10 · 第五十四轮：3 道核心笔记第二题（ai-msgbus-036 / py-gcpairs-051 / algo-diffedge-044，difficulty 4/4/4）· 本轮提交主题：feat: 题库深化第五十四轮
 
 - 2026-09-18 · 第五十五轮：3 道核心笔记第二题（ai-autoclaim-037 / py-dcadv-052 / py-strencode-053，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第五十五轮
+
+- 2026-09-18 · 第五十六轮：3 道第一题补缺（ai-transformer-038 / ai-embed-039 / js-collect-019，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第五十六轮
 
 ## 经验与规则
 

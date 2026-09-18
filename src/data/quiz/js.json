@@ -323,6 +323,23 @@
       ],
       "hint": "大消息可拆多帧（fin 标志收尾）；「用有状态长连接换全双工低延迟」——重连、心跳、连接数上限、网关配置都是成本。js-ws-007 考握手与传输模型，本题考帧协议细节与选型。",
       "difficulty": 4
+    },
+    {
+      "id": "js-collect-019",
+      "noteId": "js/basic/core/07-collection-types",
+      "type": "single",
+      "q": "Map/Set/WeakMap 的选型与 Symbol 的注册表语义，按笔记正确的是？",
+      "options": [
+        "键是动态的/非字符串/频繁增删/需要 size 用 Map；频繁 has 检查用 Set（O(1)）不用 Array（O(n)）；WeakMap 键必须是对象且是弱引用——键对象无其他引用时被 GC、条目自动消失，且设计上不可迭代",
+        "Map 的键只能是字符串和 Symbol，和 Object 一样",
+        "WeakMap 可以 for...of 遍历，只是遍历时键是弱引用",
+        "Symbol(\"id\") === Symbol(\"id\") 为 true，描述相同就是同一个 Symbol"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "Symbol.for(\"id\") 才是全局注册表版本（跨模块共享），Symbol 每次新建；Symbol 属性不会被 for...in 遍历、JSON.stringify 也忽略；Object 属性查找走原型链、Map 是纯哈希表——频繁动态增删差距明显。",
+      "difficulty": 3
     }
   ]
 }
