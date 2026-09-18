@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 160 轮（2026-09-18，内容补充模式）：浏览器内存泄漏场景与排查（js/intermediate/web 第 12 篇）——勘察确认内存泄漏 14 处均为顺带提及、浏览器侧场景与 DevTools 排查零专篇（gcmemory 篇是 Node GC 视角、errmonitor 是报错采集视角，边界互补不重叠）；netty ChannelFuture 亦零覆盖留作下轮。内容：泄漏判定标准（不该可达却可达）、五大场景对照表（意外全局/遗忘定时器/闭包持大对象/脱管 DOM/未清理监听器）、堆快照三照对比与 Retainers 找引用链、生产侧 performance.memory 堆趋势监控。1 张场景表、无 mermaid。构建 696 页、mermaid 523 块持平、一致性 8 项全绿。js/intermediate/web 12 篇。
+- 下一轮入口：候选池——①Netty 的 Future 与 Promise（netty/intermediate/core 第 4 篇，ChannelFuture 全站零覆盖）；②收尾 contrast 审计（160 无新图）。
+
 ### 第 159 轮（2026-09-18，内容补充模式）：深浅拷贝与手写深拷贝（js/basic/core 第 15 篇）——勘察确认深拷贝在 js 方向仅 fundamentals 篇 4 行速览、手写深拷贝/JSON 法缺陷/WeakMap 防循环全站零覆盖（java/python 篇为各自语言语境）；分布式 ID/缓存三件套/TCP/ai 方向等候选均有专篇承载依次退场。内容：引用共享根源与三档对比表、浅拷贝嵌套共享代码示例、JSON 法四大缺陷、structuredClone 边界（函数/DOM 不可拷、原型链丢失）、手写深拷贝四层拆解（递归出口/类型分派/WeakMap 防循环且先 set 再递归/弱键不妨碍 GC）、进阶口头补充点。1 张 mermaid 拷贝共享对比图。构建 695 页、mermaid 523 块、一致性 8 项全绿。js/basic/core 15 篇。
 - 下一轮入口：候选池——①收尾 contrast 审计（159 新增 1 图）；②middleware/netty 续篇与场景题/ai 间歇留待下轮；③例行：每轮开工先同步+定界+体检基线+PATH 前缀。
 

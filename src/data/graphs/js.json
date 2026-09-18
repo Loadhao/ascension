@@ -220,6 +220,12 @@
       "label": "深浅拷贝与手写",
       "href": "/js/basic/core/15-deep-clone/",
       "group": "语言核心"
+    },
+    {
+      "id": "memleak",
+      "label": "浏览器内存泄漏",
+      "href": "/js/intermediate/web/12-memory-leak/",
+      "group": "网络"
     }
   ],
   "edges": [
@@ -503,6 +509,21 @@
       "source": "webworker",
       "target": "deepclone",
       "label": "结构化克隆算法同源"
+    },
+    {
+      "source": "gcmemory",
+      "target": "memleak",
+      "label": "Node GC 视角到浏览器视角"
+    },
+    {
+      "source": "errmonitor",
+      "target": "memleak",
+      "label": "监控体系的生产侧补位"
+    },
+    {
+      "source": "propdesc",
+      "target": "memleak",
+      "label": "闭包与引用链的根基"
     }
   ]
 }
