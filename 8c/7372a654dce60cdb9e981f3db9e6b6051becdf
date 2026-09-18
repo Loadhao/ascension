@@ -1,0 +1,14 @@
+src/content/docs/elasticsearch/advanced/architecture/01-mysql-es-divide.md
+  h_9324126a55eff3 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8c7372a654dce60cdb9e981f3db9e6b6051becdf",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
