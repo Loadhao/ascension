@@ -244,6 +244,12 @@
       "label": "Monorepo 与 workspace",
       "href": "/js/intermediate/engineering/03-monorepo/",
       "group": "工程化"
+    },
+    {
+      "id": "lintgate",
+      "label": "代码规范工具链",
+      "href": "/js/intermediate/engineering/04-lint-format/",
+      "group": "工程化"
     }
   ],
   "edges": [
@@ -577,6 +583,16 @@
       "source": "modules",
       "target": "monorepo",
       "label": "多包模块的仓库组织"
+    },
+    {
+      "source": "monorepo",
+      "target": "lintgate",
+      "label": "同一工具链的兄弟环节"
+    },
+    {
+      "source": "errmonitor",
+      "target": "lintgate",
+      "label": "问题拦得越早修得越便宜"
     }
   ]
 }

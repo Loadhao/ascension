@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 167 轮（2026-09-18，内容补充模式）：代码规范工具链：Lint 与 Format（js/intermediate/engineering 第 4 篇）——勘察确认 ESLint/Prettier/Husky 零专篇（2/1/3 处顺带提及）。内容：Lint 管质量与 Format 管风格的正交分工表、eslint-config-prettier 和解方案、格式自动化省 review 争论与 diff 噪音、配置三层积木（规则/插件/可共享配置）、三道闸设计（编辑器实时→Husky+lint-staged 暂存区→CI 兜底，--no-verify 绕不过 CI）、--fix 语义边界、可执行的规范才是规范。1 张 mermaid 三道闸图、1 张分工表。预防性清缓存后一次通过（固化疗法升级为开工预防）。git add -N 后体检，构建 705 页、mermaid 530 块、一致性 8 项全绿。js/intermediate/engineering 4 篇。
+- 下一轮入口：候选池——①轮 168 收官候选（工程化第 5 篇 vs middleware/场景题/ai 间歇，开工勘察定）；②收尾 contrast 审计（163-167 每轮 1 图）。
+
 ### 第 166 轮（2026-09-18，内容补充模式）：Monorepo 与工作区管理（js/intermediate/engineering 第 3 篇）——勘察确认 monorepo 全站零覆盖（首轮 7 篇命中全为 workspace 字面量误命中）。内容：Polyrepo vs Monorepo 取舍表（原子提交/复用/权限/CI 范围）、pnpm workspace 结构与 workspace:* 协议、任务编排两层（--filter 跑哪 + Turborepo/Nx 增量缓存怎么跳）、CI 只构建变更包的答案（依赖图拓扑序+输入哈希缓存）、fixed vs independent 版本策略与 changesets。1 张 mermaid workspace 结构图、1 段 yaml/json。构建再次挂起（第三次同症状，清 node_modules/.astro 后 1m58s 通过——固化疗法三连有效）。git add -N 后体检，构建 704 页、mermaid 529 块、一致性 8 项全绿。js/intermediate/engineering 3 篇。
 - 下一轮入口：候选池——①工程化第 4 篇候选（代码规范工具链 ESLint/Prettier/Husky？待勘察）；②middleware/场景题/ai 间歇；③收尾 contrast 审计（163/164/165/166 各 1 图）。
 

@@ -806,6 +806,7 @@ export default defineConfig({
                         { label: '打包器：从 Webpack 到 Vite', link: '/js/intermediate/engineering/01-bundlers/' },
                         { label: 'npm、pnpm 与依赖管理', link: '/js/intermediate/engineering/02-package-managers/' },
                         { label: 'Monorepo 与工作区管理', link: '/js/intermediate/engineering/03-monorepo/' },
+                        { label: '代码规范工具链', link: '/js/intermediate/engineering/04-lint-format/' },
                       ],
                     },
                   ],
