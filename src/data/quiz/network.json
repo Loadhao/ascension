@@ -320,6 +320,23 @@
       ],
       "hint": "SHA-256 一样快、一样被彩虹表覆盖——「换个哈希算法」不是解药，需要「故意很慢」的 bcrypt/argon2；登录失败提示模糊化（分开提示等于帮攻击者确认账号存在）。本篇首题。",
       "difficulty": 4
+    },
+    {
+      "id": "net-httpcache-020",
+      "noteId": "network/basic/http/06-http-cache",
+      "type": "single",
+      "q": "强缓存与协商缓存的决策流程和响应头语义，按笔记正确的是？",
+      "options": [
+        "强缓存期内（max-age 未过）浏览器连服务器都不问；过期后带 If-None-Match/If-Modified-Since 协商，内容没变服务器回 304（无 body）用本地副本；no-cache 是「可存但每次用前必须协商」不是不缓存，no-store 才禁止存储；同时存在时 ETag 优先于 Last-Modified",
+        "协商缓存命中时服务器回 200 并重传完整内容",
+        "no-cache 表示禁止任何缓存，等价于 no-store",
+        "Last-Modified 精度高于 ETag，所以优先用 Last-Modified"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "生产标配：HTML 入口 no-cache 走协商、JS/CSS 文件名带内容 hash + 超长 max-age + immutable——内容变文件名就变，强缓存永不脏；多机部署下 mtime+size 生成的 ETag 各机不一致会抖动命中率；CDN 与浏览器是同一套缓存语义分层生效。",
+      "difficulty": 3
     }
   ]
 }

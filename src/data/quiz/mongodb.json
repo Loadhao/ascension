@@ -201,6 +201,25 @@
       ],
       "hint": "比总数据量更重要的是工作集（热数据+索引）；用 db.serverStatus() 的 wiredTiger.cache 持续观察；新索引/用户增长都会推大工作集——按一年后的工作集算，不是今天的。mongo-cap-005 考磁盘放大系数，本题考工作集与内存。",
       "difficulty": 4
+    },
+    {
+      "id": "mongo-ttl-010",
+      "noteId": "mongodb/intermediate/usage/03-ttl-index",
+      "type": "multiple",
+      "q": "MongoDB TTL 索引的过期语义与生产坑，正确的有？（多选）",
+      "options": [
+        "后台线程每 60 秒扫描一次 TTL 索引删过期文档——过期是分钟级非即时，业务逻辑不能依赖「TTL 到了就查不到」",
+        "字段必须是 BSON 日期类型——存成字符串或时间戳数字时 TTL 静默失效（不报错，最大的坑）",
+        "大批量同时到期会造成删除风暴（删除也是写，走 WiredTiger 写路径加索引维护）——写入时给过期时间加随机抖动错峰",
+        "修改 expireAfterSeconds 必须删掉索引重建，期间服务会中断"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——collMod 命令可在线修改 expireAfterSeconds，不用重建；要求秒级即时过期的场景（验证码 5 分钟失效）用 Redis EXPIRE，MongoDB 只做归档式清理；「自动消失」在 Redis/文档/文件三层各有机制，跨层迁移时过期语义要重新设计。",
+      "difficulty": 4
     }
   ]
 }

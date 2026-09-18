@@ -30,10 +30,12 @@
 
 - [ ] mongodb/intermediate/usage/05-transactions — 第一题考「多文档事务与使用边界」（0 题补缺）
 
-- [ ] js/basic/core/09-generators — 第一题考「生成器与 yield 惰性求值」（0 题补缺）
-- [ ] mongodb/intermediate/usage/03-ttl-index — 第一题考「TTL 索引过期语义」（0 题补缺）
-- [ ] network/basic/http/06-http-cache — 第一题考「强缓存与协商缓存」（0 题补缺）
 - [ ] ai/intermediate/agent/12-structured-output — 第一题考「结构化输出与 JSON 模式」（0 题补缺）
+
+- [ ] js/basic/core/10-proxy-reflect — 第一题考「Proxy 拦截与响应式底层」（0 题补缺）
+- [ ] ai/basic/foundation/04-lora — 第一题考「低秩适配与训练成本」（0 题补缺）
+- [ ] mongodb/intermediate/usage/08-index-advanced — 第一题考「索引下推与覆盖查询」（0 题补缺）
+- [ ] network/basic/http/07-websocket — 第一题考「WebSocket 握手与全双工」（0 题补缺）
 
 ### b 类：旧题返修
 
@@ -160,6 +162,8 @@
 - 2026-09-18 · 第五十六轮：3 道第一题补缺（ai-transformer-038 / ai-embed-039 / js-collect-019，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第五十六轮
 
 - 2026-09-18 · 第五十七轮：3 道第一题补缺（ai-tokenizer-040 / js-error-020 / linux-pipe-012，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第五十七轮
+
+- 2026-09-18 · 第五十八轮：3 道第一题补缺（js-gen-021 / mongo-ttl-010 / net-httpcache-020，difficulty 3/4/3）· 本轮提交主题：feat: 题库深化第五十八轮
 
 ## 经验与规则
 

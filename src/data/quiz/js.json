@@ -359,6 +359,23 @@
       ],
       "hint": "末项反了——instanceof 比 err.name 可靠，name 可能被子类覆写；三入口分工：error 捕同步、unhandledrejection 捕 Promise 拒绝（Node 15+ 未处理直接崩溃进程）、捕获阶段 error 捕资源加载失败。",
       "difficulty": 4
+    },
+    {
+      "id": "js-gen-021",
+      "noteId": "js/basic/core/09-generators",
+      "type": "single",
+      "q": "生成器函数的执行模型与 for...of / for...in 的协议区别，按笔记正确的是？",
+      "options": [
+        "function* 调用时不执行函数体，返回 Generator 对象；yield 是暂停点，下次 next() 从暂停处继续、状态自动保存在 Generator 里（不需要闭包）；无限序列靠惰性求值不会 OOM——只在 next() 时算下一步；for...of 遍历可迭代接口（值），for...in 遍历可枚举属性键（含原型链）",
+        "function* 调用时立即执行到第一个 yield 才返回",
+        "生成器的状态要靠闭包手动保存，否则暂停后变量丢失",
+        "生成器是异步的——next() 返回 Promise，要 await"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "生成器本身同步（next() 立即返回）；配 Promise 用是 Koa 1.x 中间件思路，后被 async/await 取代——async 函数本质是「自动驱动的生成器」；自定义对象实现 [Symbol.iterator]() 返回带 next() 的对象即可被 for...of。",
+      "difficulty": 3
     }
   ]
 }
