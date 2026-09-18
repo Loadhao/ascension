@@ -395,6 +395,23 @@
       ],
       "hint": "末项反了——Proxy 无法代理非对象（原始值直接返回），Object.freeze 后有些操作不可拦截；面试一句话：Reflect 是 Proxy handler 里执行默认行为的标准方式；应用不止响应式：校验/权限/mock/惰性加载。js-gen-021 考生成器，本题考 Proxy。",
       "difficulty": 4
+    },
+    {
+      "id": "js-promcombo-023",
+      "noteId": "js/basic/core/11-promise-combinators",
+      "type": "single",
+      "q": "四个 Promise 组合器的语义与 fail-fast 陷阱，按笔记正确的是？",
+      "options": [
+        "all 一个失败立即 reject 但不取消其他进行中的请求（结果被丢弃而已），结果数组按输入顺序排列；allSettled 等全部结束、永不 reject、返回 {status, value/reason} 数组；race 取第一个结束的（超时竞速经典）；any 取第一个成功的、全失败才抛 AggregateError",
+        "all 里一个失败会通过 AbortController 自动取消其他请求",
+        "allSettled 只要有一个失败就整体 reject",
+        "all 的结果数组按完成顺序排列，谁先完成谁在前"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "race 只是不等了，请求还在跑——真正取消要配 AbortController（请求取消篇的 signal 语义）；并发限制器 = race 监听执行中任务完成补位（IO 密集 10~20，CPU 密集=核数）；any 的 AggregateError 包含所有失败原因。js-gen-021 考生成器，本题考组合器。",
+      "difficulty": 3
     }
   ]
 }

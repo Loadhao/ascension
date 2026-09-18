@@ -34,10 +34,12 @@
 
 - [ ] network/basic/http/07-websocket — 第一题考「WebSocket 握手与全双工」（0 题补缺）
 
-- [ ] ai/basic/foundation/06-gpu — 第一题考「GPU 为什么适合矩阵运算」（0 题补缺）
-- [ ] js/basic/core/11-promise-combinators — 第一题考「Promise 组合器 all/allSettled 差异」（0 题补缺）
-- [ ] linux/basic/permission/03-ssh-access — 第一题考「SSH 密钥登录与安全加固」（0 题补缺）
 - [ ] mongodb/intermediate/usage/11-security — 第一题考「认证授权与传输加密」（0 题补缺）
+
+- [ ] js/basic/core/12-type-coercion — 第一题考「隐式转换规则与 == 陷阱」（0 题补缺）
+- [ ] linux/basic/filesystem/02-swap-memory — 第一题考「swap 与内存压力水位」（0 题补缺）
+- [ ] ai/intermediate/agent/10-agent-evaluation — 第一题考「Agent 评测与回归」（0 题补缺）
+- [ ] mongodb/intermediate/usage/04-read-preference — 第一题考「读偏好与从节点读」（0 题补缺）
 
 ### b 类：旧题返修
 
@@ -168,6 +170,8 @@
 - 2026-09-18 · 第五十八轮：3 道第一题补缺（js-gen-021 / mongo-ttl-010 / net-httpcache-020，difficulty 3/4/3）· 本轮提交主题：feat: 题库深化第五十八轮
 
 - 2026-09-18 · 第五十九轮：3 道第一题补缺（js-proxy-022 / ai-lora-041 / mongo-indexadv-011，difficulty 4/4/4；08-index-advanced 考点按笔记实况核准为部分/稀疏/通配符索引）· 本轮提交主题：feat: 题库深化第五十九轮
+
+- 2026-09-18 · 第六十轮：3 道第一题补缺（ai-gpu-042 / js-promcombo-023 / linux-ssh-013，difficulty 4/3/4）· 本轮提交主题：feat: 题库深化第六十轮
 
 ## 经验与规则
 

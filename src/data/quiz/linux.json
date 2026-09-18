@@ -250,6 +250,25 @@
       ],
       "hint": "生产纪律：sed -i 先 -i.bak 留备份或先不带 -i 预览；grep -F 按字面匹配搜含 . * 的字符串；统计前先 grep 缩小数据量；排查慢管道逐段断开跑、wc -l 看每段行数。",
       "difficulty": 3
+    },
+    {
+      "id": "linux-ssh-013",
+      "noteId": "linux/basic/permission/03-ssh-access",
+      "type": "multiple",
+      "q": "SSH 密钥认证原理与服务端加固，正确的有？（多选）",
+      "options": [
+        "认证过程传的是「签名」而非私钥——密码可被暴力枚举、签名挑战不可离线爆破，这是密钥更安全的根本原因；公钥放服务器 authorized_keys，私钥留本机永不外传",
+        "加固四件套：PasswordAuthentication no、PermitRootLogin no、AllowUsers 白名单、fail2ban 封爆破 IP——改端口只是降噪不是安全本身",
+        "known_hosts 首次连接记录服务器指纹，之后指纹突变提示中间人攻击——别图省事关掉严格检查",
+        "ForwardAgent yes 可以放心对所有跳板机开启，方便一跳直达"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——agent 转发只对可信跳板开：跳板上的 root 可向你的 agent 请求签名借身份登录后续机器；私钥不放跳板机（跳板被攻破=全网沦陷）；私钥丢失要从所有服务器 authorized_keys 删除对应公钥——集中管理（Ansible/堡垒机下发）。",
+      "difficulty": 4
     }
   ]
 }
