@@ -58,6 +58,12 @@
       "label": "ES 与 MySQL 分工同步",
       "href": "/elasticsearch/advanced/architecture/01-mysql-es-divide/",
       "group": "架构协同"
+    },
+    {
+      "id": "esilm",
+      "label": "索引生命周期与冷热",
+      "href": "/elasticsearch/advanced/architecture/02-ilms-lifecycle/",
+      "group": "架构协同"
     }
   ],
   "edges": [
@@ -142,6 +148,16 @@
       "source": "mapping",
       "target": "essync",
       "label": "投影的 mapping 设计"
+    },
+    {
+      "source": "essync",
+      "target": "esilm",
+      "label": "真源确定后的存法设计"
+    },
+    {
+      "source": "shard",
+      "target": "esilm",
+      "label": "分片规划的落地"
     }
   ]
 }

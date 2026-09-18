@@ -1358,6 +1358,7 @@ export default defineConfig({
                           items: [
                             { label: '概览', link: '/elasticsearch/advanced/architecture/' },
                             { label: 'ES 与 MySQL 的分工与数据同步', link: '/elasticsearch/advanced/architecture/01-mysql-es-divide/' },
+                            { label: '索引生命周期：rollover 与冷热分层', link: '/elasticsearch/advanced/architecture/02-ilms-lifecycle/' },
                           ],
                         },
                       ],

@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 163 轮（2026-09-18，内容补充模式）：索引生命周期：rollover 与冷热分层（elasticsearch/advanced/architecture 第 2 篇）——开工即修轮 162 遗留：基线体检第 7 项暴露 level=intermediate 与 advanced 目录不符（根因：体检脚本只扫 git 已跟踪文件，轮 162 提交前未入库逃过检查；修正为 advanced 8c7372a 并沉淀纪律「新文件先 git add -N 再跑体检」）；勘察确认 ILM/rollover 全站零覆盖、冷热分层提及均为 MySQL 语境。内容：单一大索引三重困境（delete_by_query 慢/shard 锁死/资源错配）、时间分片+读写别名接口层、rollover 三条件先到先滚与单 shard 20-50GB 经验锚点、ILM 四阶段 hot→warm→cold→delete 与节点打标分层、段伪删除与合并的删除慢根源（呼应倒排篇）。1 张 mermaid 四阶段流转图、2 张表。git add -N 后体检，构建 700 页、mermaid 526 块、一致性 8 项全绿。elasticsearch 10 篇。
+- 下一轮入口：候选池——①middleware/netty/场景题/ai 间歇；②ES advanced/architecture 已 2 篇可歇；③收尾 contrast 审计（163 新增 1 图）。
+
 ### 第 162 轮（2026-09-18，内容补充模式）：ES 与 MySQL 的分工与数据同步（elasticsearch/advanced/architecture 第 1 篇，新建 ES 第一个高级分类）——勘察确认 ES-MySQL 分工/canal/binlog 同步全站零专篇（canal 仅 cache-consistency 篇延伸阅读提及，TCP/分布式 ID/缓存三件套/ai 方向等候选均有专篇承载退场）。内容：职责分野表（真源与投影）、同步三方案对比（同步双写/异步双写/binlog 订阅为主流）、最终一致预期与两层兜底（强一致读回 MySQL+对账修复）、delete 事件必须订阅的翻车点、不用 LIKE 的回答框架。1 张 mermaid 三方案图、2 张表。新建 advanced/architecture 分类三件套（分类页+侧边栏高级组+图谱架构协同组）。过程：注册脚本元组笔误致图谱节点未写入（构建一致性先绿），复查发现补写后复验全绿。构建 699 页、mermaid 525 块、一致性 8 项全绿。elasticsearch 9 篇。
 - 下一轮入口：候选池——①收尾 contrast 审计（162 新增 1 图）；②middleware/netty 续篇、场景题/ai 间歇留待下轮；③ES advanced/architecture 后续候选：索引生命周期/冷热分层（待勘察）。
 
