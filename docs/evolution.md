@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 161 轮（2026-09-18，内容补充模式）：Netty 的 Future 与 Promise（netty/intermediate/core 第 4 篇）——勘察确认 ChannelFuture/addListener 全站零覆盖。内容：writeAndFlush 异步投递与凭证语义（「数据发出去了吗」陷阱题）、addListener 正道 vs sync 事故之源（EventLoop 内 sync 等自己的任务是死锁）、Promise 可写 Future 可读的接口分工、sync 与 await 的失败语义差异、写失败静默与 listener 感知、与 JUC Future 的对比及 EventLoop 绑定回调语义。1 张 mermaid 异步时间线图、1 段代码。构建 697 页、mermaid 524 块、一致性 8 项全绿。netty 7 篇。
+- 下一轮入口：候选池——①netty/basic 或 middleware 续篇勘察；②场景题/ai 间歇；③收尾 contrast 审计（161 新增 1 图）。
+
 ### 第 160 轮（2026-09-18，内容补充模式）：浏览器内存泄漏场景与排查（js/intermediate/web 第 12 篇）——勘察确认内存泄漏 14 处均为顺带提及、浏览器侧场景与 DevTools 排查零专篇（gcmemory 篇是 Node GC 视角、errmonitor 是报错采集视角，边界互补不重叠）；netty ChannelFuture 亦零覆盖留作下轮。内容：泄漏判定标准（不该可达却可达）、五大场景对照表（意外全局/遗忘定时器/闭包持大对象/脱管 DOM/未清理监听器）、堆快照三照对比与 Retainers 找引用链、生产侧 performance.memory 堆趋势监控。1 张场景表、无 mermaid。构建 696 页、mermaid 523 块持平、一致性 8 项全绿。js/intermediate/web 12 篇。
 - 下一轮入口：候选池——①Netty 的 Future 与 Promise（netty/intermediate/core 第 4 篇，ChannelFuture 全站零覆盖）；②收尾 contrast 审计（160 无新图）。
 
