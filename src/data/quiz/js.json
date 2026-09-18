@@ -376,6 +376,25 @@
       ],
       "hint": "生成器本身同步（next() 立即返回）；配 Promise 用是 Koa 1.x 中间件思路，后被 async/await 取代——async 函数本质是「自动驱动的生成器」；自定义对象实现 [Symbol.iterator]() 返回带 next() 的对象即可被 for...of。",
       "difficulty": 3
+    },
+    {
+      "id": "js-proxy-022",
+      "noteId": "js/basic/core/10-proxy-reflect",
+      "type": "multiple",
+      "q": "关于 Proxy/Reflect 与 Vue 3 响应式换代，正确的有？（多选）",
+      "options": [
+        "Proxy 拦截的是「对对象的操作」而非单个属性——新增属性自动被拦截；defineProperty 结构性无法监听新增属性、数组索引与删除，Vue 2 需要 $set",
+        "Proxy handler 里应该用 Reflect 执行默认行为——receiver 参数保证 getter/setter 里的 this 指向代理（继承场景必需），返回值也与 trap 约定一致（set 返回 boolean）",
+        "Proxy 性能优势来自惰性代理——访问时才收集依赖，而 defineProperty 初始化要递归遍历全部属性",
+        "Proxy 可以代理任何值，包括原始值和被 Object.freeze 冻结的对象"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——Proxy 无法代理非对象（原始值直接返回），Object.freeze 后有些操作不可拦截；面试一句话：Reflect 是 Proxy handler 里执行默认行为的标准方式；应用不止响应式：校验/权限/mock/惰性加载。js-gen-021 考生成器，本题考 Proxy。",
+      "difficulty": 4
     }
   ]
 }

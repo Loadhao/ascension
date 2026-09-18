@@ -671,6 +671,23 @@
       ],
       "hint": "词表大→embedding 表大（词表 × 维度），是权衡不是越大越好；中文约 1 字 ≈ 1 token、英文约 4 字符 ≈ 1 token；字符级精确任务可用空格分隔补偿（\"s t r a w b e r r y\"）；跨模型对比 token 数要用各自 tokenizer 实测。",
       "difficulty": 4
+    },
+    {
+      "id": "ai-lora-041",
+      "noteId": "ai/basic/foundation/04-lora",
+      "type": "single",
+      "q": "LoRA 为什么能低成本微调大模型？低秩假设与工程红利，按笔记正确的是？",
+      "options": [
+        "全参微调贵在更新全部权重（权重+梯度+优化器状态，7B FP16 要 100GB+ 显存）；LoRA 冻结 W、只训低秩增量 B×A（d=4096、r=8 时参数约降 250 倍）；推理时把 BA 合并回 W 是同一个线性层，零额外延迟；底座共享+MB 级适配器让一个底座养多个任务",
+        "LoRA 训练时原权重 W 也参与梯度更新，只是学习率更小",
+        "LoRA 擅长给模型注入新领域知识，可以替代 RAG",
+        "QLoRA 是把 LoRA 的 B/A 矩阵量化到 4bit 来省显存"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "末项反了——QLoRA 量化的底座：底座量化到 4bit 冻结加载，LoRA 部分保持高精度训练；秩 r 常用 8~64，任务与预训练分布差异越大 r 越大；LoRA 调行为范式、知识注入走 RAG，两者组合才是完整领域适配。ai-transformer-038 考自注意力，本题考微调。",
+      "difficulty": 4
     }
   ]
 }

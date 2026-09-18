@@ -220,6 +220,25 @@
       ],
       "hint": "末项反了——collMod 命令可在线修改 expireAfterSeconds，不用重建；要求秒级即时过期的场景（验证码 5 分钟失效）用 Redis EXPIRE，MongoDB 只做归档式清理；「自动消失」在 Redis/文档/文件三层各有机制，跨层迁移时过期语义要重新设计。",
       "difficulty": 4
+    },
+    {
+      "id": "mongo-indexadv-011",
+      "noteId": "mongodb/intermediate/usage/08-index-advanced",
+      "type": "multiple",
+      "q": "MongoDB 的部分索引、稀疏索引与通配符索引，正确的有？（多选）",
+      "options": [
+        "部分索引用 partialFilterExpression 只索引谓词命中的文档子集——省空间省写放大；查询条件必须与过滤表达式兼容（包含该条件或其子集），否则不走该索引——这是正确性约束，优化器不猜",
+        "稀疏索引只索引字段存在的文档，是部分索引的特例——新代码推荐 partialFilterExpression",
+        "唯一 + 稀疏/部分的经典组合允许多个「无该字段」的文档共存，但有字段的值必须唯一（如可选邮箱唯一）",
+        "通配符索引 attributes.$** 覆盖所有子字段且支持覆盖查询，所以根级 $** 也可以随便建"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了——通配符索引不支持覆盖查询，且要只索引真正被查询的子树（attributes.$** 而非根级 $**），根级写放大不可控；治理同 MySQL：$indexStats 看使用次数，零使用索引删除；text 索引是轻量全文，复杂检索上 ES。mongo-ttl-010 考过期语义，本题考特色索引。",
+      "difficulty": 4
     }
   ]
 }

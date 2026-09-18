@@ -32,10 +32,12 @@
 
 - [ ] ai/intermediate/agent/12-structured-output — 第一题考「结构化输出与 JSON 模式」（0 题补缺）
 
-- [ ] js/basic/core/10-proxy-reflect — 第一题考「Proxy 拦截与响应式底层」（0 题补缺）
-- [ ] ai/basic/foundation/04-lora — 第一题考「低秩适配与训练成本」（0 题补缺）
-- [ ] mongodb/intermediate/usage/08-index-advanced — 第一题考「索引下推与覆盖查询」（0 题补缺）
 - [ ] network/basic/http/07-websocket — 第一题考「WebSocket 握手与全双工」（0 题补缺）
+
+- [ ] ai/basic/foundation/06-gpu — 第一题考「GPU 为什么适合矩阵运算」（0 题补缺）
+- [ ] js/basic/core/11-promise-combinators — 第一题考「Promise 组合器 all/allSettled 差异」（0 题补缺）
+- [ ] linux/basic/permission/03-ssh-access — 第一题考「SSH 密钥登录与安全加固」（0 题补缺）
+- [ ] mongodb/intermediate/usage/11-security — 第一题考「认证授权与传输加密」（0 题补缺）
 
 ### b 类：旧题返修
 
@@ -164,6 +166,8 @@
 - 2026-09-18 · 第五十七轮：3 道第一题补缺（ai-tokenizer-040 / js-error-020 / linux-pipe-012，difficulty 4/4/3）· 本轮提交主题：feat: 题库深化第五十七轮
 
 - 2026-09-18 · 第五十八轮：3 道第一题补缺（js-gen-021 / mongo-ttl-010 / net-httpcache-020，difficulty 3/4/3）· 本轮提交主题：feat: 题库深化第五十八轮
+
+- 2026-09-18 · 第五十九轮：3 道第一题补缺（js-proxy-022 / ai-lora-041 / mongo-indexadv-011，difficulty 4/4/4；08-index-advanced 考点按笔记实况核准为部分/稀疏/通配符索引）· 本轮提交主题：feat: 题库深化第五十九轮
 
 ## 经验与规则
 
