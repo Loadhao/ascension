@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 791
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/js/intermediate/web/09-service-worker.md
+  h_9324126a55eff3 1-111
+src/data/graphs/js.json
+  h_9324126a55eff3 193-198,417-431
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "9e2b88414c39c90b0367945d0cc3675b0a1143f0",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
