@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 168 轮（2026-09-18，内容补充模式）：前端环境变量与多环境构建（js/intermediate/engineering 第 5 篇）——勘察确认 VITE_/import.meta.env/构建期注入全站零覆盖。内容：Vite .env 分层加载与 VITE_ 白名单（产物公开是白名单的理由）、构建期烙死 vs Node 运行时读取的本质差异（产物形态决定）、「改接口地址为何要重新发版」标准答案、同一产物跑多环境的运行时注入两解法（config.js 挂载/接口下发，K8s ConfigMap 配合）、前端无机密结论与 SDK key 服务端白名单兜底。1 张 mermaid 构建/运行时对比图。git add -N 后体检，构建 706 页、mermaid 531 块、一致性 8 项全绿。js/intermediate/engineering 5 篇成线。
+- 下一轮入口：候选池——①工程化线 5 篇可歇（后续候选：CI/CD 专篇待勘察）；②middleware/场景题/ai 间歇；③收尾 contrast 审计（163-168 各轮 1 图）。
+
 ### 第 167 轮（2026-09-18，内容补充模式）：代码规范工具链：Lint 与 Format（js/intermediate/engineering 第 4 篇）——勘察确认 ESLint/Prettier/Husky 零专篇（2/1/3 处顺带提及）。内容：Lint 管质量与 Format 管风格的正交分工表、eslint-config-prettier 和解方案、格式自动化省 review 争论与 diff 噪音、配置三层积木（规则/插件/可共享配置）、三道闸设计（编辑器实时→Husky+lint-staged 暂存区→CI 兜底，--no-verify 绕不过 CI）、--fix 语义边界、可执行的规范才是规范。1 张 mermaid 三道闸图、1 张分工表。预防性清缓存后一次通过（固化疗法升级为开工预防）。git add -N 后体检，构建 705 页、mermaid 530 块、一致性 8 项全绿。js/intermediate/engineering 4 篇。
 - 下一轮入口：候选池——①轮 168 收官候选（工程化第 5 篇 vs middleware/场景题/ai 间歇，开工勘察定）；②收尾 contrast 审计（163-167 每轮 1 图）。
 

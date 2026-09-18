@@ -807,6 +807,7 @@ export default defineConfig({
                         { label: 'npm、pnpm 与依赖管理', link: '/js/intermediate/engineering/02-package-managers/' },
                         { label: 'Monorepo 与工作区管理', link: '/js/intermediate/engineering/03-monorepo/' },
                         { label: '代码规范工具链', link: '/js/intermediate/engineering/04-lint-format/' },
+                        { label: '环境变量与多环境构建', link: '/js/intermediate/engineering/05-env-config/' },
                       ],
                     },
                   ],

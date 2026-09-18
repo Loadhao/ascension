@@ -250,6 +250,12 @@
       "label": "代码规范工具链",
       "href": "/js/intermediate/engineering/04-lint-format/",
       "group": "工程化"
+    },
+    {
+      "id": "envbuild",
+      "label": "环境变量与多环境",
+      "href": "/js/intermediate/engineering/05-env-config/",
+      "group": "工程化"
     }
   ],
   "edges": [
@@ -593,6 +599,16 @@
       "source": "errmonitor",
       "target": "lintgate",
       "label": "问题拦得越早修得越便宜"
+    },
+    {
+      "source": "bundler",
+      "target": "envbuild",
+      "label": "构建期注入的实现者"
+    },
+    {
+      "source": "envconfig",
+      "target": "envbuild",
+      "label": "Node 运行时读取的对照"
     }
   ]
 }
