@@ -751,6 +751,7 @@ export default defineConfig({
                         { label: 'Promise 组合器与并发控制', link: '/js/basic/core/11-promise-combinators/' },
                         { label: '类型转换与相等判断', link: '/js/basic/core/12-type-coercion/' },
                         { label: '解构赋值与展开运算符', link: '/js/basic/core/13-destructuring-spread/' },
+                        { label: '属性描述符与冻结三兄弟', link: '/js/basic/core/14-property-descriptors/' },
                       ],
                     },
                   ],

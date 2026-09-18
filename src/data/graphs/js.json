@@ -208,6 +208,12 @@
       "label": "错误监控与上报",
       "href": "/js/intermediate/web/11-error-monitoring/",
       "group": "网络"
+    },
+    {
+      "id": "propdesc",
+      "label": "属性描述符与冻结",
+      "href": "/js/basic/core/14-property-descriptors/",
+      "group": "语言核心"
     }
   ],
   "edges": [
@@ -466,6 +472,16 @@
       "source": "cors",
       "target": "errmonitor",
       "label": "Script error 的 CORS 根源"
+    },
+    {
+      "source": "langcore",
+      "target": "propdesc",
+      "label": "对象元数据层"
+    },
+    {
+      "source": "propdesc",
+      "target": "proxy",
+      "label": "defineProperty 到 Proxy 的演进"
     }
   ]
 }

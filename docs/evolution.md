@@ -326,6 +326,9 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 158 轮（2026-09-18，内容补充模式）：属性描述符与冻结三兄弟（js/basic/core 第 14 篇）——勘察确认属性描述符/存取器/freeze 家族在 js 方向零专篇（defineProperty 仅 proxy 对比语境、freeze 1 处顺带）。内容：数据属性四开关与存取器属性互斥（configurable 单行道）、存取器与 Vue2 响应式根基及其数组缺陷根源、枚举性对四种遍历的影响表（隐藏字段原生方案）、冻结三兄弟能力递进表（freeze 浅冻结/非严格静默失败/与 const 锁绑定正交）、Proxy 取代的现代视角。无 mermaid（表格+代码承载）。过程两则：①173 页构建卡死 15 分钟两连（astro 0% CPU 挂起），杀进程+清 node_modules/.astro 脏缓存后 2m45s 通过——卡点是缓存脏数据与并行会话进程争用，非内容问题，已沉淀处理办法；②轮 157 文中一处 .md 后缀内链被体检第 5 项拦截（并行会话已全站统一尾斜杠规范），修复后随本轮入库。构建 694 页、mermaid 522 块、一致性 8 项全绿。js/basic/core 14 篇。
+- 下一轮入口：候选池——①场景题/ai/middleware 间歇勘察；②收尾 contrast 审计（158 无新图，157 有 1 图已过首轮对比度）。
+
 ### 第 157 轮（2026-09-18，内容补充模式）：rewrite、try_files 与文件解析（nginx/basic/config 第 3 篇）——勘察确认 root/alias/try_files/rewrite flag 全站零专篇（location 优先级已有 static-server 篇专节退场、事务消息有 rocketmq 架构篇承载退场、linux 19 篇已厚退场），与前端路由篇的 SPA fallback 提及互链。内容：root 拼接 vs alias 替换与末尾斜杠坑、try_files 短路查找与两种兜底（内部重定向=SPA fallback 原理 / =404 终判）、rewrite 四 flag 表与 last/break 高频追问、改写循环 10 次上限、return 与 rewrite 分工。1 张 mermaid try_files 流程图、1 张 flag 表、2 段配置。构建 693 页、mermaid 522 块、一致性 8 项全绿。过程：nginx 图谱边端点再次凭记忆猜错（nginx-static→static），体检第 9 项拦截后修正——已两次确认图谱 id 必须先查 JSON。nginx 7 篇。
 - 下一轮入口：候选池——①js/basic/core 第 14 篇：属性描述符与冻结三兄弟（defineProperty 仅 proxy 对比语境提及）；②middleware/netty 续篇勘察；③收尾 contrast 审计（157 新增 1 图）。
 
