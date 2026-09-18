@@ -1,0 +1,20 @@
+astro.config.mjs
+  h_9324126a55eff3 721
+docs/evolution.md
+  h_9324126a55eff3 329-331
+src/content/docs/netty/intermediate/core/04-future-promise.md
+  h_9324126a55eff3 1-100
+src/data/graphs/netty.json
+  h_9324126a55eff3 43-48,97-106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "004ad4cebacb034c8ce33fa45ba3d47e47fa39af",
+  "prompts": {},
+  "humans": {
+    "h_9324126a55eff3": {
+      "author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
