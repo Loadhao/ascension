@@ -30,6 +30,7 @@
 | 站点配置   | `astro.config.mjs`             | 手动嵌套侧边栏、Footer/Sidebar/TableOfContents 覆盖、Mermaid 插件、base 路径    |
 | 部署流水线 | `.github/workflows/deploy.yml` | push main 自动构建发布 GitHub Pages            |
 | 书签入库工作区 | `bookmark-kb-design/`        | 浏览器书签分级入库的独立设计区（源数据/分级流水线/清单产物），不参与站点构建，详见其 `方案设计.md` |
+| 无人值守演进规范 | `docs/evolution-recipes.md` + `docs/evolution.md` | 定时任务每轮的唯一作业规范（车道轮转、尺寸上限、选题命令、停止条件）与轮次记录/待决策真源；题库队列在 `docs/coverage-deepening.md` |
 
 ## 内容写作约束
 
@@ -53,6 +54,8 @@
 
 - **强对比 / 分层速记类内容可补「彩色总结卡」收尾**：在 `src/data/viz/summaries.ts` 定义 `SummaryVizConfig` 并注册到 `summaryDemos`，笔记改 `.mdx` 后同样以 `<AlgorithmVizIsland demo="<key>" />` 引用（模板与选型见图表写作指南「彩色总结卡」）；纯静态渲染无脚本，`title` 写结论不写话题名，每栏 3~5 行「结论 + 理由」，面板可配 `icon` 表情图标、单元格可配 `tag` 小徽标，颜色只允许写语义 `tone` 名（blue/teal/green/amber/rose/violet/slate），实际配色由 `custom.css` 的 `--sum-*` 令牌按亮暗主题接管（文字对比度必须 ≥ 4.5:1）。三者分工为「mermaid 讲结构、FlowViz 讲过程、SummaryViz 讲总结」，不要用总结卡复述 mermaid 已画清的结构。
 
+- **需要「脱离屏幕听一遍」或「能带出站的画面」才做影像资产**：在 `src/data/viz/media.ts` 登记 `MediaAssetConfig`（`src`/`poster`/`alt`/`caption`/`source`/`narration`，颜色一律不写），笔记改 `.mdx` 后仍用 `<AlgorithmVizIsland demo="<key>" />` 引用（组件分发见 `AlgorithmVizIsland.astro`）。产法：`node scripts/media-capture.mjs`（需 `pnpm preview`）逐帧截图 → `node scripts/media-encode.mjs`（macOS 自带 `say` 离线配音，画面时长严格跟随音轨）→ 按脚本打印的真实尺寸时长**回填 `media.ts`**。硬约束：只能从既有动画或正文派生、**禁止无稿口播**（`narration` 段数须等于源动画帧数）、帧数 ≤12、成片 ≤60s、画面固定亮色底、`alt`/`caption` 要有信息量；闸门为 `node scripts/media-verify.mjs`（已并入 `pnpm verify:docs`）。细则与选型见图表写作指南「配音短片与图卡」——**能看动画就别做视频**，动画可暂停、可单步、跟主题变色，体积还更小。
+
 - 新增分类时三处同步：`<方向>/<等级>/<分类>/index.mdx` 分类页 + `astro.config.mjs` 侧边栏对应等级组内注册 + 知识点笔记放入该目录（分类项不设 `badge`；笔记页底部 ProgressMark 由 Footer 覆盖自动注入，无需手写）。
 
 - 新增方向时四处同步：建目录与 `index.mdx` 路线图 + `astro.config.mjs` 侧边栏注册 + `src/data/graphs/` 建图谱数据 + `src/lib/notes.ts` 的 `DIRECTION_ORDER` 追加方向 slug。
@@ -65,7 +68,7 @@
 
 - 包管理器为 pnpm；禁止提交 lockfile 之外的依赖变更说明。
 
-- 本地验证：`pnpm build` 必须通过；涉及组件改动时用 `pnpm preview` 实测交互。
+- 本地验证：`pnpm build` 必须通过；`pnpm verify:docs` 是全站静态闸门（一致性 8 项 + mermaid 语法 + 题库 8 项 + 影像 7 项），新增内容或数据后必须跑；涉及组件改动时用 `pnpm preview` 实测交互。
 
 - Mermaid 构建时渲染依赖 chromium，本地首次需 `pnpm exec playwright install chromium`。
 
