@@ -1,0 +1,23 @@
+docs/evolution-recipes.md
+  s_24010c99573e1a::t_8fff7148091a5c 1-32,34-35,37-38,43,47,49-50,58-59,61-108
+  s_24010c99573e1a::t_0875b267f4be7f 33,36,39-42,44-46,48,51-57,60
+scripts/evolution-candidates.mjs
+  s_24010c99573e1a::t_a3bb53378bb358 1-24,27-63
+  s_24010c99573e1a::t_46f8b4661c5baf 25-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "dbf946891614965e4b3fa1040d14dd160cf2831b",
+  "prompts": {},
+  "sessions": {
+    "s_24010c99573e1a": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7d2b4281-f8e9-451d-b176-0bbb0a968e3f",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
