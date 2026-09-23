@@ -9,7 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "verify:docs": "node scripts/consistency-verify.mjs && node scripts/mermaid-syntax-verify.mjs",
+    "verify:docs": "node scripts/consistency-verify.mjs && node scripts/mermaid-syntax-verify.mjs && node scripts/quiz-verify.mjs && node scripts/media-verify.mjs",
     "verify:contrast": "node scripts/mermaid-contrast-verify.mjs"
   },
   "dependencies": {
