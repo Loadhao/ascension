@@ -270,6 +270,61 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 「谁和谁怎么分工、分几块各管什么」的收尾用总结卡。别用总结卡复述 mermaid
 已画清的结构，也别拿它替代正文论述——它是速记，不是教材。
 
+## 配音短片与图卡（影像资产）
+
+同一份教学内容可以有第二种载体：**配音视频**让读者不看屏幕也能把一条链路听完
+（通勤、复习场景），**导出图卡**给要贴进文档、打印、发群里的画面。两者都是
+「派生物」，不产生新事实——只从已有的 FlowViz 动画与笔记正文导出，画完照旧
+受上面四条质量红线约束。
+
+下面这条短片就是站内 `mysql-2pc` 动画录出来的，逐帧口播与动画帧一一对应：
+
+<AlgorithmVizIsland demo="mysql-2pc-video" />
+
+同一支动画的最后那一帧，导出成可带走的静图：
+
+<AlgorithmVizIsland demo="mysql-2pc-card" />
+
+新增一条影像资产四步：
+
+1. 先在 `src/data/viz/media.ts` 登记资产：`src` 写站内绝对路径
+   （`/videos/<key>.mp4`、`/images/<key>.png`），`alt` 是屏读与图裂时的替代文本、
+   必须自带信息量，`caption` 写一句结论而不是「示意图」，`source` 指向派生来源的
+   FlowViz key。视频还要写 `narration`：**逐帧口播文稿，一帧一句**，事实取自
+   源动画那一帧的说明文字与笔记正文。
+2. 逐帧截图（需 `pnpm preview` 在跑）与合成：
+
+   ```bash
+   # 帧序列：自动隐藏播放器外设、把逐帧说明区钉成等高
+   node scripts/media-capture.mjs \
+     --page /guide/diagrams/ --figure 0 --demo <key>
+   # 口播用 macOS 自带 say（离线零额度），画面时长严格跟随音轨
+   node scripts/media-encode.mjs --demo <key>
+   ```
+
+3. 按脚本末尾打印的真实宽高与秒数**回填 `media.ts`**——尺寸写错会让暗色主题下
+   的卡片比例失真。
+4. 笔记改为 `.mdx`，与动画同一写法 `<AlgorithmVizIsland demo="<key>" />`，
+   正文一句话交代这支短片讲什么。
+
+硬约束（`node scripts/media-verify.mjs` 会拦，已并入 `pnpm verify:docs`）：
+
+- 一条资产只讲一件事：**帧数 ≤ 12、成片 ≤ 60 秒**，口播每句 ≤ 36 字（约 7 秒）；
+  讲不完是正文该拆篇，不是把片子拉长。
+- **禁止无稿口播**：`narration` 段数必须与源动画帧数相等，逐帧对齐，
+  不允许另起一套说法——读者对着动画听，两套事实就会互相打脸。
+- 画面固定**亮色底**（与构建期 mermaid 基准一致），暗色主题下读成一张卡片；
+  控制条、进度条、帧码这些播放器外设一律不入画。
+- 体积闸门：MP4 ≤ 4 MB、PNG ≤ 300 KB、封面 ≤ 150 KB、`public/` 总量 ≤ 60 MB。
+  站点托管在 GitHub Pages（源码仓建议 ≤ 1 GB），影像资产是进 git 的，
+  超预算就减帧、缩短口播，不要偷偷提上限。
+- 视频必须有同名封面（`<key>.poster.png`）与音轨，`preload="metadata"`
+  由组件统一给，别让首屏去拉几十 MB 的流。
+
+选型补一句：**能看动画就别做视频**——站内动画可暂停、可单步、跟主题变色，
+体验和体积都优于短片。短片只在「读者需要脱离屏幕听一遍」时才做，
+图卡只在「这张图要出现在站外的文档里」时才导。
+
 ## 时序图（sequenceDiagram）
 
 <Tabs>

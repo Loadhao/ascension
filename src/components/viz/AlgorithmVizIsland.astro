@@ -6,10 +6,12 @@ import StackViz from './StackViz';
 import GraphViz from './GraphViz';
 import FlowViz from './FlowViz';
 import SummaryViz from './SummaryViz';
+import MediaFigure from './MediaFigure.astro';
 import { vizDemos } from '../../data/viz';
 import { listDemos, stackDemos, treeDemos, graphDemos } from '../../data/viz/structures';
 import { flowDemos } from '../../data/viz/flows';
 import { summaryDemos } from '../../data/viz/summaries';
+import { mediaAssets } from '../../data/viz/media';
 
 const { demo } = Astro.props as { demo: string };
 // 按注册表分发到对应画法；旧柱状数组演示的 props 保持不变
@@ -20,6 +22,7 @@ const stack = stackDemos[demo];
 const graph = graphDemos[demo];
 const flow = flowDemos[demo];
 const summary = summaryDemos[demo];
+const media = mediaAssets[demo];
 ---
 
 {bars && <AlgorithmViz client:visible {...bars} />}
@@ -30,3 +33,5 @@ const summary = summaryDemos[demo];
 {flow && <FlowViz client:visible {...flow} />}
 {/* 总结卡是纯静态渲染，不需要水合 */}
 {summary && <SummaryViz {...summary} />}
+{/* 影像资产（配音视频 / 导出图卡）同样纯静态 */}
+{media && <MediaFigure {...media} />}

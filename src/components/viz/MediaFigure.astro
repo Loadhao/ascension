@@ -1,0 +1,43 @@
+---
+/**
+ * 影像教学资产：配音视频或导出图卡，纯静态渲染（同 SummaryViz 先例，不带客户端脚本）。
+ * 外观只挂 .media-fig 类名，配色由 custom.css 主题令牌接管。
+ */
+import type { MediaAssetConfig } from '../../data/viz/media';
+
+const asset = Astro.props as MediaAssetConfig;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const url = (path: string) => base + path;
+const isVideo = /\.mp4$/.test(asset.src);
+---
+
+<figure class="media-fig" aria-label={asset.title}>
+	{
+		isVideo ? (
+			<video
+				class="media-fig-player"
+				controls
+				playsinline
+				preload="metadata"
+				poster={asset.poster ? url(asset.poster) : undefined}
+				width={asset.width}
+				height={asset.height}
+			>
+				<source src={url(asset.src)} type="video/mp4" />
+				当前浏览器不支持内嵌播放，可
+				<a href={url(asset.src)}>直接打开视频文件</a>
+				。
+			</video>
+		) : (
+			<img
+				class="media-fig-still"
+				src={url(asset.src)}
+				alt={asset.alt}
+				width={asset.width}
+				height={asset.height}
+				loading="lazy"
+			/>
+		)
+	}
+	<figcaption class="media-fig-note">{asset.caption}</figcaption>
+</figure>

@@ -3291,3 +3291,43 @@ html.mmd-viewer-open {
     line-height: 1.5;
   }
 }
+
+/* ===== 影像教学资产（MediaFigure）：配音视频 / 导出图卡，纯静态无脚本 ===== */
+/* 成品像素由构建侧录得，底色固定为亮色基准；暗色主题下靠边框读成一张卡片，
+   因此这里只给容器与图注配色，不给画面本身着色 */
+.media-fig {
+  margin: 22px 0;
+  padding: 16px 18px 14px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 14px;
+  background: var(--sl-color-bg);
+}
+
+.media-fig-player,
+.media-fig-still {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 10px;
+}
+
+.media-fig-player:focus-visible,
+.media-fig-still:focus-visible {
+  outline: 2px solid var(--sl-color-gray-4);
+  outline-offset: 2px;
+}
+
+.media-fig-note {
+  margin-top: 10px;
+  /* 与 .algo-viz-note 同一档可读性令牌：gray-3 在亮色主题只有 4.54:1，压线 */
+  color: var(--sl-color-gray-2);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+@media (max-width: 44rem) {
+  .media-fig {
+    padding: 12px 10px 10px;
+  }
+}
