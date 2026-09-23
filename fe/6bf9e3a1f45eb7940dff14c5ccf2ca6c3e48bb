@@ -1,0 +1,28 @@
+AGENTS.md
+  s_24010c99573e1a::t_af8cded5030c06 57-58
+  s_24010c99573e1a::t_7cbe7742760b6c 33
+  s_24010c99573e1a::t_11ca02897b795a 71
+docs/coverage-deepening.md
+  s_24010c99573e1a::t_d95b57d67fd235 3-9
+docs/evolution.md
+  s_24010c99573e1a::t_d1328112be34af 438-445
+  s_24010c99573e1a::t_832975098e208c 466-467
+  s_24010c99573e1a::t_bc2b21e08139ea 7-9,14-15
+  s_24010c99573e1a::t_8759094312bc2b 458
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "fe6bf9e3a1f45eb7940dff14c5ccf2ca6c3e48bb",
+  "prompts": {},
+  "sessions": {
+    "s_24010c99573e1a": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7d2b4281-f8e9-451d-b176-0bbb0a968e3f",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
