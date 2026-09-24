@@ -1,0 +1,28 @@
+src/content/docs/network/basic/foundation/03-from-url-to-page.mdx
+  s_63622deb52e120::t_9c525ea6563103 48-49
+  s_63622deb52e120::t_a0f2efeb8b405e 50-52
+src/data/viz/media.ts
+  s_63622deb52e120::t_9027280cc23bf0 77-85
+  s_63622deb52e120::t_8e354777f188aa 70-71
+  s_63622deb52e120::t_dc5ac4415471a0 65-69,72-76,86-87
+docs/evolution.md
+  s_63622deb52e120::t_f8e3ae4e29c8e1 331-338
+  s_63622deb52e120::t_ba283b0d7a63ab 453-455
+  s_63622deb52e120::t_d8c896e24a41c8 49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a77dd75e43fb34567f4c59c16069924cc3a3d9b6",
+  "prompts": {},
+  "sessions": {
+    "s_63622deb52e120": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "584e51cd-aa55-471c-8175-4f8e6e71c07a",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
