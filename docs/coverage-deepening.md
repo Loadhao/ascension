@@ -32,12 +32,6 @@
 
 
 
-- [ ] distributed/intermediate/case-studies/07-red-packet — 第一题考「红包拆分算法与领取并发」（0 题补缺）
-
-- [ ] mongodb/intermediate/usage/05-transactions — 第一题考「多文档事务与使用边界」（0 题补缺）
-
-- [ ] ai/intermediate/agent/12-structured-output — 第一题考「结构化输出与 JSON 模式」（0 题补缺）
-
 - [ ] network/basic/http/07-websocket — 第一题考「WebSocket 握手与全双工」（0 题补缺）
 
 - [ ] mongodb/intermediate/usage/11-security — 第一题考「认证授权与传输加密」（0 题补缺）
@@ -46,6 +40,10 @@
 - [ ] linux/basic/filesystem/02-swap-memory — 第一题考「swap 与内存压力水位」（0 题补缺）
 - [ ] ai/intermediate/agent/10-agent-evaluation — 第一题考「Agent 评测与回归」（0 题补缺）
 - [ ] mongodb/intermediate/usage/04-read-preference — 第一题考「读偏好与从节点读」（0 题补缺）
+- [ ] react/basic/core/04-rerender-perf — 第一题考「memo 三件套分工与引用不稳定」（0 题补缺，第 171 轮留账：本篇自身入零题池）
+- [ ] distributed/intermediate/case-studies/08-lottery — 第一题考「权重区间概率配置与奖品预扣防超发」（0 题补缺）
+- [ ] distributed/intermediate/case-studies/20-reconciliation — 第一题考「对什么账、怎么对、差错怎么闭环」（0 题补缺）
+- [ ] ai/intermediate/llm/07-quantization — 第一题考「各量化位宽的显存账与 PTQ/QAT 分工」（0 题补缺）
 
 ### b 类：旧题返修
 
@@ -178,6 +176,8 @@
 - 2026-09-18 · 第五十九轮：3 道第一题补缺（js-proxy-022 / ai-lora-041 / mongo-indexadv-011，difficulty 4/4/4；08-index-advanced 考点按笔记实况核准为部分/稀疏/通配符索引）· 本轮提交主题：feat: 题库深化第五十九轮
 
 - 2026-09-18 · 第六十轮：3 道第一题补缺（ai-gpu-042 / js-promcombo-023 / linux-ssh-013，difficulty 4/3/4）· 本轮提交主题：feat: 题库深化第六十轮
+
+- 2026-09-24 · 第六十一轮（第 173 轮｜车道 C｜题库深化第 61 轮）：3 道第一题补缺（dist-redpacket-038 / mongo-txn-012 / ai-structout-043，difficulty 4/4/3）；队列销 3 条、追加 4 条（含第 171 轮留账的 react/04 篇）· 本轮提交主题：feat(quiz): 演进第 173 轮车道 C 补红包/事务/结构化输出三篇首题
 
 ## 经验与规则
 
