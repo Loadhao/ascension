@@ -1,0 +1,25 @@
+src/content/docs/network/basic/tcp/01-three-way-handshake.mdx
+  s_7ec82ec7572eda::t_61e73d481b4c9a 61-64
+src/data/viz/media.ts
+  s_7ec82ec7572eda::t_52680c0dfe2002 93-94
+  s_7ec82ec7572eda::t_26f0396cb62e81 88-92,95-109
+docs/evolution.md
+  s_7ec82ec7572eda::t_f8e4d2f53f5a67 333-340
+  s_7ec82ec7572eda::t_3a32d2308e64f1 485-487
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "42b5caf0014cff98a9d2a33126109a5ae6250c59",
+  "prompts": {},
+  "sessions": {
+    "s_7ec82ec7572eda": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "55113b20-965b-4274-97fd-71c768fb30d6",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
