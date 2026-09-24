@@ -871,6 +871,7 @@ export default defineConfig({
                         { label: '声明式 UI 与组件模型', link: '/react/basic/core/01-declarative-ui/' },
                         { label: 'Hooks 心智模型', link: '/react/basic/core/02-hooks-mental/' },
                         { label: '渲染流程与 diff', link: '/react/basic/core/03-render-flow/' },
+                        { label: '重渲染传播与 memo 三件套', link: '/react/basic/core/04-rerender-perf/' },
                       ],
                     },
                   ],

@@ -42,7 +42,7 @@
 
 | 候选项 | 类型 | 贡献 | 置信 | 成本/风险 | 得分 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1. 按大纲勘察继续补薄弱方向内容（候选池：ai/python 内部分类、linux/git/tools 工程向；rabbitmq/docker/etcd/mqtt/nginx/middleware 均已勘察为覆盖扎实） | 补功能 | 4 | 0.6 | 2.5 | 0.96 | 待办（宁缺毋滥） |
+| 1. 按大纲勘察继续补薄弱方向内容（候选池：**react 方向最薄**（第 171 轮实测仅 3 篇、无 intermediate 层，本轮 +1 篇至 4 篇，续篇候选见轮次记录）、ai/python 内部分类、linux/git/tools 工程向；rabbitmq/docker/etcd/mqtt/nginx/middleware 均已勘察为覆盖扎实） | 补功能 | 4 | 0.8 | 2.5 | 1.28 | 待办（宁缺毋滥） |
 | 2. core 星标全站策略：36 个分类核心占比过高（星标失去区分度）——是否降标属内容判断，涉及各会话既有意图 | 修问题 | 3 | 0.3 | 2 | 0.45 | **待用户决策**（见待决策区） |
 | 3. 移动端/打印样式实测（需 preview 实测，sidebar 组件常被并行会话占用） | 改善体验 | 2 | 0.4 | 3 | 0.27 | 待办 |
 | 4. 需求验证类动作（SEO/分享卡片/统计埋点） | 验证需求 | — | — | — | — | 暂不开发：需真实用户数据支持决策，阶段边界条件 |
@@ -330,6 +330,16 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 171 轮（2026-09-24，车道 A 新章节）：重渲染传播与 memo 三件套（react/basic/core 第 4 篇）
+
+- 选题证据：开工 `git pull --ff-only` 已是最新、`git status --porcelain` 干净（无他人未提交改动需绕开）；基线 `pnpm verify:docs` 全绿（一致性 10 项 + mermaid 531 块 + 题库 8 项 620 题 + 影像 7 项 3 资产），非「修基线」路径；`node scripts/evolution-candidates.mjs --top 40` 输出「下一轮 = 第 171 轮，171 mod 5 = 1 → 车道 A」，并给出笔记 535 篇 / 无图 89 / 双缺 33 / 有题 421 / 动画 44 / 影像 3。
+- A 车道清单口径（如实记录判断）：勘察器三条 A 清单列的是**已存在**的「无图 / 零题」笔记，而车道定义是「1 篇笔记 + 三件套」，两者不重合。按配方「先按选题方法核实是真缺口、避免重复写作」执行——那 33 篇不能重写，故本轮把清单当**薄弱面线索**用，改按「方向笔记数排序找薄弱面」另取真缺口；这 33 篇自身的补图与补题分别归后续 A 轮与 C 车道，**未销号**。
+- 真缺口证据：`git ls-files` 按方向×层级统计，react 仅 3 篇（全在 `basic/core`，无 intermediate/advanced），是前端主力方向里最薄的一面（对照 js 42 篇、typescript 7 篇）；grep 全站 `useMemo|useCallback|React.memo|虚拟列表|re-render` **仅 1 处命中**（01 篇一行术语表），即出场率最高的 React 性能题零专篇。本篇直接接在 03 篇「性能的心智账本」留下的那句话上（03 只说「减少不必要的重渲染（memo/缓存）」，本篇讲机制与优先级）。
+- 内容要点：`react/basic/core/04-rerender-perf.md`（`level: basic`，**不带 core 星标**——该分类已 3/3 全标，再标会加重候选项 2 的星标失真）。①默认行为：官方原话「组件重渲染时 React 递归重渲染所有子组件」（useCallback 文档）+ 与 03 篇账本衔接（render 便宜、commit 贵）；②`memo` 逐 prop `Object.is`、官方定性「性能优化，不是保证」；③三件套分工表（缓存渲染结果 / 缓存值 / 缓存函数引用）+ `useCallback(fn,deps) ≡ useMemo(()=>fn,deps)` + 依赖里放组件体内新建对象等于没缓存；④「加了 memo 还在重渲染」四类现场（引用不稳、children 是父级新建的元素对象、Context `value` 未 memo、状态放太高）；⑤优先级阶梯（结构 > 规模 > 单次开销，先用 Profiler 量）与 React Compiler 官方口径（编译器记忆化通常更精确，两个 hook 留作逃生门）。2 张 mermaid（传播对照 + 根因决策）、1 张分工表、2 段正反对照代码；侧边栏 +1 条、图谱 `r-perf` 节点 + 2 条边。
+- 事实核验（不凭印象写）：官方原话与语义逐条经 context7 对 `react.dev` 索引取回并落到具体页面（memo / useMemo / useCallback / Profiler / react-compiler/introduction）；「引用相同的已渲染元素会跳过整棵子树」这条现行索引取不到，改由 legacy React 文档「it bailed out by comparing the rendered React elements」佐证后才写入。**踩坑一则**：凭记忆写的 `react.dev/learn/rendering-performance` 实测 404，延伸阅读只保留逐个可达的官方链接。
+- 验证数字：`pnpm build` **707 页**（+1）/ 25.36s 通过；`pnpm verify:docs` 25 项全绿（一致性 10 项、侧边栏 link **704** 条 +1、mermaid **533** 块 +2、题库 8 项 620 题、影像 7 项 3 资产）；`node scripts/mermaid-contrast-verify.mjs` **384** 个含图页面 × 2 主题 **0 处低于 4.5:1**（上一轮 383，新增的正是本页）；代码块按 East Asian Width 逐行量过，全部 ≤80 视觉列。真机核验（1280×900 Playwright 实测）：两张图实际渲染 573×1065 与 676×308、分工表 4 列 3 行、`pre` 零横向溢出、页面无横向滚动、侧边栏新条目可达。preview 起了新实例（旧 pid 10539 挂的是上一轮陈旧 dist，`astro preview stop` 换新，本地只读服务）。
+- 下一轮入口：**第 172 轮 → 172 mod 5 = 2 → 车道 B 影像资产**（B 队列 42 支动画未出片，头部 tcp-close / es-write / redisson-watchdog / kafka-segment）。三条留账：①`react/basic/core/index.mdx` 与 `react/index.mdx` 导读仍写「三块地基」，本轮受 A 车道 ≤4 文件上限未改（1 行文案，留给后续同分类轮次顺手改）；②本篇自身进入「零题」池，C 队列可入一条「memo 三件套与引用稳定」考点；③react 方向仍无 intermediate 层，A 车道后续候选：状态管理与 Context、组件组合与拆分、useRef 与命令式逃生门。每轮开工照旧：同步 → 定界 → 体检基线 → 勘察命令。
+
 ### 第 170 轮（2026-09-24，车道 D 体检与工具）：配色硬约束补上静态闸门（一致性体检第 10 项）
 
 - 选题证据：开工 `git pull --ff-only` 已是最新、`git status --porcelain` 干净（无他人未提交改动需绕开）；基线 `pnpm verify:docs` 全绿（一致性 8 项 + mermaid 531 块 + 题库 8 项 620 题 + 影像 7 项 3 资产），非「修基线」路径；`node scripts/evolution-candidates.mjs --top 8` 输出「下一轮 = 第 170 轮，170 mod 5 = 0 → 车道 D」，并给出笔记 535 篇 / 无图 89 / 双缺 33 / 有题 421 / 动画 44 / 影像 3。D 车道按配方「给闸门加一条能判红的检查」执行。
@@ -481,6 +491,7 @@
 - 配色守护分两层、缺一不可（第 170 轮）：**源码层**禁写颜色（一致性第 10 项，静态、离线、每轮必跑，覆盖 mermaid 围栏 + `src/data/viz/*.ts`），**结果层**量对比度（`mermaid-contrast-verify`，能抓到主题令牌本身的失效，但依赖 preview 且只覆盖 mermaid 渲染出的文字）。写新图表时以源码层为准：要区分语义只用 `good/bad/hl/rb-black/rb-red` 五个类名。
 - 跑对比度审计前必须先确认 `dist` 新于工作树（第 170 轮实测在跑的 preview 挂着陈旧 dist，`/ascension/guide/` 直接 404 而页面数照跑，漏页不报错）：先 `pnpm build` 再 `astro preview stop && pnpm preview`；`astro preview` 全站单实例，替换他人会话起的实例属本地只读服务、可安全重起，但要在轮次记录里写明。
 - 无图表笔记用表格/代码块承载结论（有 mermaid 才需跑对比度审计）；时序图（sequenceDiagram）适用于协议/流程类内容。
+- 引用外部官方文档的口径与链接前，先确认真实出处（第 171 轮）：凭记忆写的 `react.dev/learn/rendering-performance` 实测 404；用 context7 对官方文档索引取回原话及其所在页面 URL 再落笔，现行索引取不到的机制断言可用 legacy 文档兜底佐证。
 
 ## 待用户决策
 
