@@ -62,4 +62,27 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 		caption: '复盘一张图：redo（物理日志）保崩溃安全，binlog（逻辑日志）保复制与归档。',
 		source: 'mysql-2pc',
 	},
+	'url-to-page-video': {
+		title: '输入 URL 到页面显示 · 配音短片',
+		src: '/videos/url-to-page-video.mp4',
+		poster: '/videos/url-to-page-video.poster.png',
+		width: 1280,
+		height: 786,
+		duration: 56.9,
+		alt: '动画短片：一次 https://example.com 访问依次经过 DNS 解析、TCP 三次握手、TLS 握手、' +
+			'HTTP 请求、服务端链路、响应回程与渲染，八步串成一条因果链，也是线上排障的地图。',
+		caption: '八步因果链既是背八股的总纲，也是排障的地图：倒着二分，curl 直打后端 IP 就知道断在哪一段。',
+		source: 'url-to-page',
+		narration: [
+			'输入 URL 到页面显示，是网络八股的总纲。',
+			'DNS 解析：浏览器缓存、hosts、本地 DNS 逐级问到权威。',
+			'首次解析可能跨多个来回，所以各级缓存很关键。',
+			'TCP 三次握手，同步双方的初始序号。',
+			'https 才有这一步：验证书、协商会话密钥。',
+			'发 HTTP 请求，带 Cookie，经 CDN 与负载均衡进服务端。',
+			'服务端这段最常出故障：网关、慢 SQL、线程池。',
+			'keep-alive 下连接不断，后续请求直接复用。',
+			'最后渲染成页面；排障时把这条链倒着二分。',
+		],
+	},
 };

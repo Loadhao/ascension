@@ -46,7 +46,7 @@
 | 2. core 星标全站策略：36 个分类核心占比过高（星标失去区分度）——是否降标属内容判断，涉及各会话既有意图 | 修问题 | 3 | 0.3 | 2 | 0.45 | **待用户决策**（见待决策区） |
 | 3. 移动端/打印样式实测（需 preview 实测，sidebar 组件常被并行会话占用） | 改善体验 | 2 | 0.4 | 3 | 0.27 | 待办 |
 | 4. 需求验证类动作（SEO/分享卡片/统计埋点） | 验证需求 | — | — | — | — | 暂不开发：需真实用户数据支持决策，阶段边界条件 |
-| 5. 体检工具脚本化收尾：consistency/mermaid-syntax/mermaid-contrast 三脚本接入 `pnpm verify:docs` 一键入口（package.json 并行改动风险，择机） | 改善体验 | 2 | 0.8 | 2 | 0.8 | 待办 |
+| 5. 体检工具脚本化收尾：`pnpm verify:docs` 已串起 consistency + mermaid-syntax + quiz + media 四脚本（第 169 轮实测 30 项）；剩 `mermaid-contrast-verify` 因依赖 preview 在跑仍单独执行——是否并入一键入口待裁决 | 改善体验 | 2 | 0.8 | 2 | 0.8 | 部分完成 |
 
 历史已完成项存档：图谱覆盖度补全（第 1 轮，100%）、Mermaid 对比度审计（第 2 轮，零违规）、frontmatter/内链/分类页导读/图谱结构体检（第 3/4/6/19 轮，均全绿并固化为 scripts/consistency-verify.mjs）、方向内容补全（第 5/7/8/9/10/11/12/14/15/17/20 轮，16 篇 + 5 分类）、工具固化（第 16 轮）、状态文件整理（第 18 轮）。
 
@@ -328,6 +328,14 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 169 轮（2026-09-24，车道 B 影像资产）：从输入 URL 到页面显示 · 配音短片
+
+- 选题证据：开工基线 `pnpm verify:docs` 30 项全绿（一致性 8 + mermaid 语法 531 块 + 题库 8 项 620 题 + 影像 7 项 2 资产），车道判定按配方走——`node scripts/evolution-candidates.mjs` 输出「下一轮 = 第 169 轮，169 mod 5 = 4 → 车道 B 影像资产」，B 队列 43 支动画未出片。从队列头部（tcp-close/es-write/…）按「过程型经典 + 脱离屏幕听一遍价值最大」取 `url-to-page`（9 帧·八步因果链，网络八股总纲）；勘察确认其宿主笔记 `network/basic/foundation/03-from-url-to-page.mdx` 已是 `.mdx`（免改后缀，文件数可控），且 network 方向此前零影像资产（既有 2 个都出自 mysql-2pc）。
+- 内容要点：`node scripts/media-capture.mjs --page /network/basic/foundation/03-from-url-to-page/ --figure 0` 逐帧截 9 帧（脚本自动把逐帧说明区等高钉到 64px，帧尺寸一致）→ `media-encode.mjs` 用离线 `say`（Tingting）逐帧配音、画面时长严格跟随音轨 → 回填 `media.ts` 真实尺寸 1280×786 / 56.9s。口播 9 句与源动画 9 帧一一对应、事实全部取自帧说明与正文（DNS 逐级查询 → 各级缓存 → 三次握手同步序号 → TLS 验证书协商密钥 → 请求带 Cookie 经 CDN/LB → 服务端故障段 → keep-alive 复用 → 渲染与倒着二分），无新增事实、无新写画面。笔记在动画下方挂 `<AlgorithmVizIsland demo="url-to-page-video" />`，正文一句话交代短片用途（通勤/复习脱离屏幕听一遍）。
+- 过程返修一则：首版口播 251 字合成 **69.7s 超 60s 上限**，按「讲不完是文稿该缩，不是把片子拉长」精简到 200 字（每句留主干结论、去掉重复限定语）重录为 56.9s。换算经验：`Tingting` 语速约 **3.9 字/秒 + 每帧 0.35s 呼吸**，故 9 帧成片的文稿总字数上限约 210 字——已沉淀进「经验与判断沉淀」。
+- 验证数字：`pnpm build` 706 页通过；`pnpm verify:docs` 全绿（一致性 8 项、mermaid 531 块、题库 620 题 8 项、影像 7 项/**3 个资产**、public 媒体合计 2.06MB 上限 60MB、成片 0.84MB 上限 4MB、封面 104KB 上限 150KB）；`node scripts/mermaid-contrast-verify.mjs` 383 图块双主题 **0 处低于 4.5:1**。真机核验（preview + Playwright）：`<video>` 的 src/poster 均 200、`preload="metadata"`、duration 56.92s 与登记值一致、点播放后 currentTime 走到 2.34s（readyState 4），暗色主题下读成亮底卡片、外设不入画。
+- 下一轮入口：**第 170 轮 → 170 mod 5 = 0 → 车道 D 体检与工具**（四道闸门本轮全绿，D 车道产出改为「修一处真实发现」或「给闸门加一条能判红的检查」，全绿无修则向候选表新增 2 条带证据候选）。B 队列余 42 支动画（tcp-close/es-write/redisson-watchdog/…）；C 队列 12 条未动。每轮开工照旧：同步 → 定界 → 体检基线 → 勘察命令。
+
 ### 第 168 轮（2026-09-18，内容补充模式）：前端环境变量与多环境构建（js/intermediate/engineering 第 5 篇）——勘察确认 VITE_/import.meta.env/构建期注入全站零覆盖。内容：Vite .env 分层加载与 VITE_ 白名单（产物公开是白名单的理由）、构建期烙死 vs Node 运行时读取的本质差异（产物形态决定）、「改接口地址为何要重新发版」标准答案、同一产物跑多环境的运行时注入两解法（config.js 挂载/接口下发，K8s ConfigMap 配合）、前端无机密结论与 SDK key 服务端白名单兜底。1 张 mermaid 构建/运行时对比图。git add -N 后体检，构建 706 页、mermaid 531 块、一致性 8 项全绿。js/intermediate/engineering 5 篇成线。
 - 下一轮入口：候选池——①工程化线 5 篇可歇（后续候选：CI/CD 专篇待勘察）；②middleware/场景题/ai 间歇；③收尾 contrast 审计（163-168 各轮 1 图）。
 
@@ -442,7 +450,9 @@
   帧数一一对应，禁止无稿口播；帧尺寸必须等高（`media-capture` 自动钉），逐帧切片再拼接
   （ffmpeg concat 对图片 `duration` 不可靠，实测 10 帧压成 3 段）；截图前显式
   `dataset.theme='light'`，只设 `colorScheme` 无效；成片尺寸时长要回填 `media.ts`，
-  闸门在 `scripts/media-verify.mjs`。细则见 `guide/diagrams`「配音短片与图卡」。
+  闸门在 `scripts/media-verify.mjs`。口播字数按 **3.9 字/秒 + 每帧 0.35s 呼吸** 预算
+  （`Tingting` 实测），9 帧成片文稿总长上限约 210 字——超 60s 时精简文稿，不拉长片子。
+  细则见 `guide/diagrams`「配音短片与图卡」。
 - astro.config.mjs 是高冲突文件（手动侧边栏），stale 频发但按纪律可安全使用；guide/diagrams、guide/resources 为体检豁免项（元文档）。
 
 ### 选题方法
