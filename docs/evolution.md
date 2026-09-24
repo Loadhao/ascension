@@ -330,6 +330,14 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 172 轮（2026-09-24，车道 B 影像资产）：TCP 四次挥手 · 配音短片
+
+- 选题证据：开工 `git pull --ff-only` 已是最新、`git status --porcelain` 干净（无他人未提交改动需绕开）；基线 `pnpm verify:docs` 30 项全绿（一致性 10 项 + mermaid 533 块 + 题库 8 项 620 题 + 影像 7 项 3 资产），非「修基线」路径；`node scripts/evolution-candidates.mjs --top 60` 输出「下一轮 = 第 172 轮，172 mod 5 = 2 → 车道 B 影像资产」，笔记 536 篇 / 动画 44 支 / 影像 3 个 / **B 队列 42 支未出片**，头部即 `tcp-close`。按配方「优先过程型经典（链路/握手/生命周期）」取头部 `tcp-close`（8 帧状态机迁移，TIME_WAIT 归属是网络八股高频追问）；勘察宿主笔记 `network/basic/tcp/01-three-way-handshake.mdx` 已是 `.mdx`（免改后缀，文件数可控），并用 `media-capture --list` 逐图核对确认该页 figure 0 是 tcp-handshake（6 帧）、figure 1 才是 tcp-close（8 帧），避免截错动画。
+- 内容要点：`src/data/viz/media.ts` 登记 `tcp-close-video`（`source: tcp-close`，8 段口播与 8 帧一一对应、逐句取自帧说明与正文，**无新增事实**：半关闭决定 ACK 与 FIN 拆两次、2MSL 的两个理由、TIME_WAIT 固定属于主动关闭方）→ `media-capture.mjs` 逐帧截 8 帧（脚本把逐帧说明区等高钉到 64px，帧尺寸一致）→ `media-encode.mjs` 离线 `say`（Tingting）配音、画面时长严格跟随音轨 → 回填真实尺寸 **1280×690 / 48.1s**。笔记在动画下方挂 `<AlgorithmVizIsland demo="tcp-close-video" />`，正文一句话交代这支短片干什么用（不看屏幕也能把四次挥手听完）。
+- 文稿预算实测（新经验）：口播 8 句共 237 字（`FIN_WAIT_1`/`CLOSE_WAIT` 等英文标识按字符计入，每句 ≤36 字闸门全过）。按既有「3.9 字/秒」公式估 60.5s 会**误判为超 60s 上限**，实际逐句 `say` 量得 4.18~7.43s、合计 45.3s + 8×0.35s 呼吸 = **48.1s**——`say` 读英文缩写按字母、比同字数中文快，故定稿前逐句实测时长，不照公式砍稿。已沉淀进「经验与判断沉淀」。
+- 验证数字：`pnpm build` **707 页** / 27.50s 通过（本轮不增页面，只加一条资产）；`pnpm verify:docs` 全绿（一致性 10 项、mermaid 533 块、题库 8 项 620 题、影像 7 项 / **4 个资产**、public 媒体合计 2.89MB 上限 60MB、成片 0.72MB 上限 4MB、封面 115KB 上限 150KB）；`node scripts/mermaid-contrast-verify.mjs` **384** 个含图页面 × 2 主题 **0 处低于 4.5:1**（本轮未改图表，属额外复核）。真机核验（preview + Playwright 双主题实测）：`<video>` 的 src/poster 均 200、`preload="metadata"`、`duration` 48.097s 与登记 48.1 一致、点播放后 `currentTime` 走到 2.47s（readyState 4、`error` 为 null）、caption 正常渲染、`document.scrollWidth` 1280 无横向溢出；暗色主题下 figure 底色随主题变黑、画面仍是固定亮底卡片、播放器外设不入画。preview 起了新实例（旧 pid 89160 挂的是本轮首次 build 前的 dist，`astro preview stop` 换新，本地只读服务）。
+- 下一轮入口：**第 173 轮 → 173 mod 5 = 3 → 车道 C 题库**（取 `coverage-deepening.md` 队列头部 3 条：`case-studies/07-red-packet`、`mongodb/usage/05-transactions`、`ai/agent/12-structured-output`，收尾销号并追加 2~4 条）。三条留账：①B 队列余 **41 支**，头部 es-write / redisson-watchdog / kafka-segment；②同页 figure 0 的 `tcp-handshake`（6 帧）尚未出片，宿主笔记本轮已改过、口播预算可复用，后续 B 轮可零勘察成本续做；③第 171 轮三条 react 留账（导读「三块地基」文案、memo 篇入零题池、无 intermediate 层）本轮未动。每轮开工照旧：同步 → 定界 → 体检基线 → 勘察命令。
+
 ### 第 171 轮（2026-09-24，车道 A 新章节）：重渲染传播与 memo 三件套（react/basic/core 第 4 篇）
 
 - 选题证据：开工 `git pull --ff-only` 已是最新、`git status --porcelain` 干净（无他人未提交改动需绕开）；基线 `pnpm verify:docs` 全绿（一致性 10 项 + mermaid 531 块 + 题库 8 项 620 题 + 影像 7 项 3 资产），非「修基线」路径；`node scripts/evolution-candidates.mjs --top 40` 输出「下一轮 = 第 171 轮，171 mod 5 = 1 → 车道 A」，并给出笔记 535 篇 / 无图 89 / 双缺 33 / 有题 421 / 动画 44 / 影像 3。
@@ -474,6 +482,9 @@
   `dataset.theme='light'`，只设 `colorScheme` 无效；成片尺寸时长要回填 `media.ts`，
   闸门在 `scripts/media-verify.mjs`。口播字数按 **3.9 字/秒 + 每帧 0.35s 呼吸** 预算
   （`Tingting` 实测），9 帧成片文稿总长上限约 210 字——超 60s 时精简文稿，不拉长片子。
+  但该公式**含英文标识时偏悲观**（第 172 轮 237 字 8 句实测 48.1s，公式估 60.5s 会误判超限）：
+  `say` 读 `FIN_WAIT_1` 这类缩写按字母、比同字数中文快，定稿前逐句 `say -o` + `ffprobe`
+  量真实时长再判，不照公式砍稿。
   细则见 `guide/diagrams`「配音短片与图卡」。
 - astro.config.mjs 是高冲突文件（手动侧边栏），stale 频发但按纪律可安全使用；guide/diagrams、guide/resources 为体检豁免项（元文档）。
 

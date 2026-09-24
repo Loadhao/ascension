@@ -85,4 +85,26 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'最后渲染成页面；排障时把这条链倒着二分。',
 		],
 	},
+	'tcp-close-video': {
+		title: 'TCP 四次挥手 · 配音短片',
+		src: '/videos/tcp-close-video.mp4',
+		poster: '/videos/tcp-close-video.poster.png',
+		width: 1280,
+		height: 690,
+		duration: 48.1,
+		alt: '动画短片：TCP 四次挥手逐帧走完，两侧状态徽标随 FIN 与 ACK 迁移，' +
+			'讲清半关闭为什么让 ACK 和 FIN 分成两次，以及 TIME_WAIT 为何落在主动关闭方。',
+		caption: '挥手的主线不是背四步，而是两个「为什么」：为什么四次（半关闭），为什么等 2MSL（兜底 ACK + 清洗旧报文）。',
+		source: 'tcp-close',
+		narration: [
+			'传输完毕，开始断开。四次挥手谁都能先发起，这里假设客户端先关。',
+			'客户端发出第一个 FIN，进 FIN_WAIT_1，我的数据发完了。',
+			'服务端回 ACK，进 CLOSE_WAIT；连接只关了一半。',
+			'服务端把剩下的数据接着发完，这就是半关闭的意义。',
+			'数据发完，服务端发 FIN 进 LAST_ACK，关掉剩下那个方向。',
+			'客户端回最后一个 ACK，却进 TIME_WAIT，定时 2MSL。',
+			'等 2MSL 有两个理由：ACK 丢了能重答，旧报文自然消亡。',
+			'2MSL 到期双方关闭；TIME_WAIT 只属于主动关闭的一方。',
+		],
+	},
 };

@@ -58,6 +58,10 @@ sequenceDiagram
 
 <AlgorithmVizIsland demo="tcp-close" />
 
+不看屏幕也能把四次挥手听完的一遍配音（通勤或复习用，逐句对应上面动画的 8 帧）：
+
+<AlgorithmVizIsland demo="tcp-close-video" />
+
 **为什么四次**：TCP 全双工，两个方向要各自关。被动方收到 FIN 时
 可能还有数据没发完，ACK 先回（"知道了"），数据发完再发自己的
 FIN——ACK 与 FIN 拆成两次，四次由此而来。（`TCP_NODELAY` 类优化里
