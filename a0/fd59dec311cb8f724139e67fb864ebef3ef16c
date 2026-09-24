@@ -1,0 +1,28 @@
+src/data/quiz/distributed.json
+  s_2a19bf38aef684::t_cef81be652bde1 529-543
+docs/coverage-deepening.md
+  s_2a19bf38aef684::t_5edc9abfa1c5fb 180-181
+  s_2a19bf38aef684::t_6c852fae03d98c 43-46
+src/data/quiz/ai.json
+  s_2a19bf38aef684::t_cd4eb294373ac1 710-726
+src/data/quiz/mongodb.json
+  s_2a19bf38aef684::t_26d90b0e99fbe2 242-260
+docs/evolution.md
+  s_2a19bf38aef684::t_8d032b56e18117 333-341
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a0fd59dec311cb8f724139e67fb864ebef3ef16c",
+  "prompts": {},
+  "sessions": {
+    "s_2a19bf38aef684": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "b965ebbd-5760-4813-932e-67ad05d7f746",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
