@@ -1,0 +1,32 @@
+docs/evolution.md
+  s_2e2be76cf88ce9::t_f50c80048881f6 494
+  s_2e2be76cf88ce9::t_d3c2fc91422827 333-342
+  s_2e2be76cf88ce9::t_23598ba129a9f8 45
+src/content/docs/react/basic/core/04-rerender-perf.md
+  s_2e2be76cf88ce9::t_527c498a4bddf8 131-134
+  s_2e2be76cf88ce9::t_65f74aee146cab 118-122
+  s_2e2be76cf88ce9::t_13a44f7f9156c1 149
+  s_2e2be76cf88ce9::t_ec164b6922fabc 105,109
+  s_2e2be76cf88ce9::t_45b9753e5c6c57 1-104,106-108,110-117,123-130,135-148,150
+astro.config.mjs
+  s_2e2be76cf88ce9::t_49374e6bbec12d 874
+src/data/graphs/react.json
+  s_2e2be76cf88ce9::t_ecdf8c0fd64c50 6,13,15-16
+  s_2e2be76cf88ce9::t_134e097fa53780 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "00451d7220836b3a24a9534b399615ef63056406",
+  "prompts": {},
+  "sessions": {
+    "s_2e2be76cf88ce9": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "0be37a31-8c58-40b3-a049-f9ce972c932f",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
