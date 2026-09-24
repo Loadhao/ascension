@@ -68,7 +68,7 @@
 
 - 包管理器为 pnpm；禁止提交 lockfile 之外的依赖变更说明。
 
-- 本地验证：`pnpm build` 必须通过；`pnpm verify:docs` 是全站静态闸门（一致性 8 项 + mermaid 语法 + 题库 8 项 + 影像 7 项），新增内容或数据后必须跑；涉及组件改动时用 `pnpm preview` 实测交互。
+- 本地验证：`pnpm build` 必须通过；`pnpm verify:docs` 是全站静态闸门（一致性 10 项 + mermaid 语法 + 题库 8 项 + 影像 7 项），新增内容或数据后必须跑；涉及组件改动时用 `pnpm preview` 实测交互。
 
 - Mermaid 构建时渲染依赖 chromium，本地首次需 `pnpm exec playwright install chromium`。
 

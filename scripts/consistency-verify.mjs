@@ -1,5 +1,6 @@
-// 全站一致性体检（8 项）：侧边栏死链 / 笔记未注册 / 图谱死链 / 图谱覆盖率 /
-// 笔记内绝对内链 / frontmatter 必填 / level 与目录一致 / 空壳分类页。
+// 全站一致性体检（10 项，编号 1–10，其中图谱结构记作 9）：侧边栏死链 / 笔记未注册 / 图谱死链 / 图谱覆盖率 /
+// 笔记内绝对内链 / frontmatter 必填 / level 与目录一致 / 空壳分类页 /
+// 图谱结构 / 图表与可视化数据硬编码颜色。
 // 任何一项失败输出清单并 exit 1；由 apex-project-evolution 例行运行，也可手动跑。
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -111,6 +112,55 @@ const report = {};
   report['8.空壳分类页'] = { ok: emptyPages.length === 0, detail: `${indexes.length} 个 index 页`, bad: emptyPages };
 }
 
+// 第 10 项：颜色一律由站点主题接管（AGENTS.md 硬约束）。
+// mermaid 块内的 fill/color/hex 会被烘焙成行内 !important 压过 custom.css 的变量，
+// 亮暗两主题必有一种浅底浅字；对比度审计量的是结果且要 preview 在跑，漏跑就静默入库，
+// 这条在源码层直接禁——语义区分只用 good/bad/hl/rb-black/rb-red 五个语义类。
+{
+  const COLOR_RULES = [
+    [/%%\{\s*init/i, '主题指令 %%{init}'],
+    [/\b(?:fill|stroke|color|background)\s*:/i, 'CSS 颜色声明'],
+    [/#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b/, '十六进制颜色'],
+    [/\b(?:rgba?|hsla?)\s*\(/i, 'rgb/hsl 颜色函数'],
+    [/\b(?:bgColor|fontColor|borderColor|strokeColor|color|fill|background)\s*:\s*['"`]/, '颜色字段写了字面量'],
+  ];
+  const hits = [];
+  const scan = (rel, raw, lineOffsetOf = (i) => i + 1) => {
+    raw.split('\n').forEach((ln, i) => {
+      const hit = COLOR_RULES.find(([re]) => re.test(ln));
+      if (hit) hits.push(`${rel}:${lineOffsetOf(i)} ${hit[1]}｜${ln.trim().slice(0, 60)}`);
+    });
+  };
+  let mermaidBlocks = 0;
+  const walkDocs = (dir) => {
+    for (const name of readdirSync(dir)) {
+      const p = join(dir, name);
+      if (statSync(p).isDirectory()) walkDocs(p);
+      else if (/\.(md|mdx)$/.test(name)) {
+        const raw = readFileSync(p, 'utf8');
+        const re = /^```mermaid\n([\s\S]*?)\n^```/gm;
+        let m;
+        while ((m = re.exec(raw)) !== null) {
+          mermaidBlocks++;
+          const start = raw.slice(0, m.index).split('\n').length;
+          scan(p.replace(ROOT + '/', ''), m[1], (i) => start + i + 1);
+        }
+      }
+    }
+  };
+  walkDocs(DOCS);
+  const VIZ = join(ROOT, 'src/data/viz');
+  const vizFiles = existsSync(VIZ) ? readdirSync(VIZ).filter((f) => f.endsWith('.ts')) : [];
+  for (const f of vizFiles) {
+    scan(`src/data/viz/${f}`, readFileSync(join(VIZ, f), 'utf8'));
+  }
+  report['10.图表与可视化数据硬编码颜色'] = {
+    ok: hits.length === 0,
+    detail: `mermaid ${mermaidBlocks} 块 + viz 数据 ${vizFiles.length} 份，配色归 custom.css 主题令牌`,
+    bad: [...new Set(hits)],
+  };
+}
+
 let failed = 0;
 for (const [name, r] of Object.entries(report)) {
   console.log(`${r.ok ? '✓' : '✗'} ${name}（${r.detail}）${r.ok ? '' : ': ' + r.bad.join('; ')}`);
@@ -124,4 +174,4 @@ if (failed) {
   console.log(`\n失败 ${failed} 项`);
   process.exit(1);
 }
-console.log('\n通过：8 项一致性体检全绿');
+console.log(`\n通过：${Object.keys(report).length} 项一致性体检全绿`);

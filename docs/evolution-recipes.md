@@ -59,7 +59,7 @@ node scripts/evolution-candidates.mjs [--top 8]
 新题一律带 `difficulty`。收尾按该文件规则销号并追加 2~4 条新条目。
 `noteId` 写错不会报错、只会静默 404，已由 `scripts/quiz-verify.mjs` 卡住。
 
-**D 体检与工具**——`pnpm verify:docs`（一致性 8 项 + mermaid 语法 + 题库 8 项 + 影像 7 项）
+**D 体检与工具**——`pnpm verify:docs`（一致性 10 项 + mermaid 语法 + 题库 8 项 + 影像 7 项）
 与 `node scripts/mermaid-contrast-verify.mjs`（需 `pnpm preview`）的输出就是候选池：
 修一处真实发现，或给闸门加一条能判红的检查。四道全绿且无可修时，产出改为
 「向 `evolution.md` 候选表新增 2 条带证据的可验证候选」——仍算有产出。

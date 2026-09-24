@@ -9,7 +9,7 @@
 - 每轮作业规范：`docs/evolution-recipes.md`（车道与游标、尺寸上限、降级阶梯、停止条件）。定时任务「知识库无人值守演进」（id `98552cee-4538-44d5-9ad0-78915438976e`，每天 03/09/15/21 点 17 分上海时间，Full Access 自动提交推送，**2026-10-23 17:42 到期需续**）每次触发只推进一轮，本文件的「轮次记录」是唯一全局编号真源；要暂停去 Automations 面板 disable 本任务。
 - 完成标志（全部可自动验证）：
   1. `pnpm build` 通过；
-  2. 一致性体检通过：侧边栏 link 零死链、已提交笔记全部注册进侧边栏（guide 元文档除外）、图谱 href 零死链、方向目录与图谱 JSON 一一对应；
+  2. 一致性体检通过：侧边栏 link 零死链、已提交笔记全部注册进侧边栏（guide 元文档除外）、图谱 href 零死链、方向目录与图谱 JSON 一一对应、图表与可视化数据零硬编码颜色；
   3. Mermaid 全站双主题对比度审计 0 处低于 4.5:1（运行 `node scripts/mermaid-contrast-verify.mjs`）；
   4. 题库与影像资产体检全绿（`pnpm verify:docs` 含 `quiz-verify` 8 项与 `media-verify` 7 项）：题目字段自洽、noteId 可达、媒体文件已登记且不超体积闸门；
   5. 出现必须由真实用户数据裁决的方向性决策时，本阶段视为到达边界，转入待用户决策。
@@ -46,7 +46,9 @@
 | 2. core 星标全站策略：36 个分类核心占比过高（星标失去区分度）——是否降标属内容判断，涉及各会话既有意图 | 修问题 | 3 | 0.3 | 2 | 0.45 | **待用户决策**（见待决策区） |
 | 3. 移动端/打印样式实测（需 preview 实测，sidebar 组件常被并行会话占用） | 改善体验 | 2 | 0.4 | 3 | 0.27 | 待办 |
 | 4. 需求验证类动作（SEO/分享卡片/统计埋点） | 验证需求 | — | — | — | — | 暂不开发：需真实用户数据支持决策，阶段边界条件 |
-| 5. 体检工具脚本化收尾：`pnpm verify:docs` 已串起 consistency + mermaid-syntax + quiz + media 四脚本（第 169 轮实测 30 项）；剩 `mermaid-contrast-verify` 因依赖 preview 在跑仍单独执行——是否并入一键入口待裁决 | 改善体验 | 2 | 0.8 | 2 | 0.8 | 部分完成 |
+| 5. 体检工具脚本化收尾：`pnpm verify:docs` 已串起 consistency + mermaid-syntax + quiz + media 四脚本（第 170 轮实测 25 项打勾：一致性 10 + 题库 8 + 影像 7，另 mermaid 531 块）；剩 `mermaid-contrast-verify` 因依赖 preview 在跑仍单独执行——是否并入一键入口待裁决 | 改善体验 | 2 | 0.8 | 2 | 0.8 | 部分完成 |
+| 6. 代码块「每行 ≤80 视觉列」仍是纸面约束：第 170 轮实测全站 4 行真溢出（1280 视口正文代码容器可用宽 674px，实测 688/691/732/743px，读者须横向滚动才能读完）——先修这 4 行（4 文件），再于后续 D 轮补体检第 11 项即可绿着落地 | 修问题 | 3 | 0.95 | 1.5 | 1.9 | 待办（证据已量化） |
+| 7. CI 只跑 `pnpm build`，不跑 `pnpm verify:docs`（`.github/workflows/deploy.yml` 第 170 轮核验无体检步骤）——25 项静态闸门全部依赖本地纪律，并行会话漏跑即静默入库；接进流水线属对外 CI 改动 | 修问题 | 4 | 1.0 | 2 | 2.0 | **待用户决策**（见待决策区） |
 
 历史已完成项存档：图谱覆盖度补全（第 1 轮，100%）、Mermaid 对比度审计（第 2 轮，零违规）、frontmatter/内链/分类页导读/图谱结构体检（第 3/4/6/19 轮，均全绿并固化为 scripts/consistency-verify.mjs）、方向内容补全（第 5/7/8/9/10/11/12/14/15/17/20 轮，16 篇 + 5 分类）、工具固化（第 16 轮）、状态文件整理（第 18 轮）。
 
@@ -328,6 +330,16 @@
 ### 第 135 轮（2026-09-08，第五十一次启动，内容补充模式）：Node 安全最佳实践（js/intermediate/node 第 8 篇）——grep 确认 Node 安全/供应链/原型污染/helmet 全站零覆盖；依赖供应链攻击、命令注入与原型污染、helmet 安全头、密钥与最小权限运行。五连验证全绿，提交 28a9cd4 已推送。js/intermediate/node 8 篇，Node 主线全闭环（GC/模块/EventEmitter/Stream/中间件/cluster/配置/安全）。
 - 下一轮入口：候选池——①场景题/ai 线间歇；②linux 线歇；③建议用户将 nvm 初始化写入 shell profile 根治 PATH 问题。每轮开工先同步+定界+体检基线+PATH 前缀。
 
+### 第 170 轮（2026-09-24，车道 D 体检与工具）：配色硬约束补上静态闸门（一致性体检第 10 项）
+
+- 选题证据：开工 `git pull --ff-only` 已是最新、`git status --porcelain` 干净（无他人未提交改动需绕开）；基线 `pnpm verify:docs` 全绿（一致性 8 项 + mermaid 531 块 + 题库 8 项 620 题 + 影像 7 项 3 资产），非「修基线」路径；`node scripts/evolution-candidates.mjs --top 8` 输出「下一轮 = 第 170 轮，170 mod 5 = 0 → 车道 D」，并给出笔记 535 篇 / 无图 89 / 双缺 33 / 有题 421 / 动画 44 / 影像 3。D 车道按配方「给闸门加一条能判红的检查」执行。
+- 真实发现（候选池两项，取证据更强的一项）：**AGENTS.md 的配色硬约束在 `verify:docs` 里零覆盖**——写作规范三处明写「严禁在 mermaid 块内出现任何硬编码颜色」「动画数据里不允许写颜色」「media 颜色一律不写」，但四道静态体检没有一条卡它；唯一守护是 `mermaid-contrast-verify.mjs`，而它 ①依赖 `dist` + preview 在跑（本轮实测在跑的 preview 挂着一份陈旧 dist：`/ascension/guide/` 404、`guide/diagrams` 200，与侧边栏 703 条 link 对不上，审计漏页无从发现）②量的是「文字/底色对比度」这个**结果**，硬编码但两主题恰好都 ≥4.5:1 的颜色（中灰底黑字一类）能悄悄过关 ③只查 `svg[id^=mermaid-]` 的节点与连线标签，FlowViz / SummaryViz / media 三类可视化数据完全不在覆盖面内。配色一旦写进图表源码，Mermaid 会烘焙成行内 `!important` 压过 `custom.css` 主题变量——这正是历史上暗色主题浅底浅字的成因，值得源码层直接禁死。
+- 内容要点：`scripts/consistency-verify.mjs` 新增第 10 项「图表与可视化数据硬编码颜色」，扫 `src/content/docs` 全部 `.md/.mdx` 的 ` ```mermaid ` 围栏（531 块，正则与 `mermaid-syntax-verify` 同源，块数一致可互相印证）+ `src/data/viz/*.ts`（5 份：flows/summaries/media/structures/index）。五条判红规则：`%%{init}` 主题指令、`fill|stroke|color|background` CSS 颜色声明、十六进制色值、`rgb()/hsl()` 函数、颜色字面量写进 color/fill/bgColor 等字段；每行只报首个命中，输出 `文件:行 + 原因 + 行内容前 60 字`，失败 exit 1。两点设计取舍：①第 10 项走文件系统遍历而非 `git ls-files`，规避轮 162「新文件未入库逃过体检」那类事故；②现存 30+ 处 `classDef hl stroke-width:1.5px`（几何写法、合法）必须不误伤，规则用 `stroke\s*:` 而非 `stroke` 匹配，全站跑下来 0 误报。同步把 AGENTS.md 与 `docs/evolution-recipes.md` 里「一致性 8 项」改为 10 项。
+- 注入自测（闸门必须能判红）：临时造 1 份含 5 类违规的 mdx + 1 份含色值的 viz 数据 → 第 10 项准确报出 4 处（init 指令 / classDef fill+stroke / style color:rgb() / 数据字段色值）并 exit 1，行号与围栏内偏移核对一致；同一文件 ` ```text ` 围栏里写的 `fill:#ff0000` **未**被抓，证明作用域收紧在 mermaid 围栏与 viz 数据上；删除样本后复绿。
+- 未选做的第二发现（已入候选表第 6 行）：「代码块每行 ≤80 视觉列」同样零闸门，实测全站 4 行真溢出（`distributed/…/18-approval-flow.md:32` 83 列渲染 691px、`js/intermediate/node/06-cluster-workers.md:17` 86 列 732px、`linux/basic/permission/02-immutable-capabilities.md:40` 82 列 688px、`mongodb/intermediate/usage/09-multikey-index.md:41` 86 列 743px；1280 视口下代码容器可用宽实测 674px，超出 14~69px 即需横向滚动）。该闸门与这 4 处修复必须同轮才不红着落地，合计 5 文件超 D 车道 ≤4 上限，故拆为「先修 4 处（4 文件）→ 后续 D 轮补第 11 项」两步。
+- 验证数字：`pnpm build` 706 页 / 50.85s 通过；`pnpm verify:docs` 25 项打勾全绿（一致性 10 + 题库 8 项 620 题 + 影像 7 项 3 资产）+ mermaid 531 块语法有效；`node scripts/mermaid-contrast-verify.mjs` 重建 dist 后重启 preview（旧实例是并行会话起的陈旧版，`astro preview stop` 换新，属本地只读服务、可随时重起）实测 383 个含图页面 × 2 主题 **0 处低于 4.5:1**。本轮未改任何图表与媒体，对比度审计为额外复核。
+- 下一轮入口：**第 171 轮 → 171 mod 5 = 1 → 车道 A 新章节**（「既无图又零题」33 篇优先，候选池首条 `ai/basic/agent/05-guardrails`、`ai/intermediate/agent/16-tool-design`、`ai/intermediate/llm/12-hallucination`、`distributed/…/09-sign-in` 等，开工仍需按「选题方法」核实是真缺口）。D 队列留两项待后续 D 轮：①80 视觉列闸门 + 4 处修复（见候选表第 6 行）；②CI 未接 `verify:docs`（见待决策区，涉及流水线改动不擅自做）。B 队列余 42 支动画；C 队列 12 条未动。每轮开工照旧：同步 → 定界 → 体检基线 → 勘察命令。
+
 ### 第 169 轮（2026-09-24，车道 B 影像资产）：从输入 URL 到页面显示 · 配音短片
 
 - 选题证据：开工基线 `pnpm verify:docs` 30 项全绿（一致性 8 + mermaid 语法 531 块 + 题库 8 项 620 题 + 影像 7 项 2 资产），车道判定按配方走——`node scripts/evolution-candidates.mjs` 输出「下一轮 = 第 169 轮，169 mod 5 = 4 → 车道 B 影像资产」，B 队列 43 支动画未出片。从队列头部（tcp-close/es-write/…）按「过程型经典 + 脱离屏幕听一遍价值最大」取 `url-to-page`（9 帧·八步因果链，网络八股总纲）；勘察确认其宿主笔记 `network/basic/foundation/03-from-url-to-page.mdx` 已是 `.mdx`（免改后缀，文件数可控），且 network 方向此前零影像资产（既有 2 个都出自 mysql-2pc）。
@@ -465,10 +477,14 @@
 ### 三件套与验证
 
 - 新建分类流程模板化：复制既有分类页改四处参数（组件名勿手写，CategoryIsland 教训）→ 写笔记 → 侧边栏分组 → 图谱节点/边 → 五连验证 → pathspec 提交。
-- 体检体系：`scripts/consistency-verify.mjs`（8 项固化）+ `scripts/mermaid-syntax-verify.mjs`（语法守护，针对构建静默吞错的补丁，经注入自测）+ `scripts/quiz-verify.mjs`（题库 8 项）+ `scripts/media-verify.mjs`（影像 7 项）四者并入 `pnpm verify:docs`；`scripts/mermaid-contrast-verify.mjs`（双主题对比度，需 preview）单独跑。
+- 体检体系：`scripts/consistency-verify.mjs`（10 项固化）+ `scripts/mermaid-syntax-verify.mjs`（语法守护，针对构建静默吞错的补丁，经注入自测）+ `scripts/quiz-verify.mjs`（题库 8 项）+ `scripts/media-verify.mjs`（影像 7 项）四者并入 `pnpm verify:docs`；`scripts/mermaid-contrast-verify.mjs`（双主题对比度，需 preview）单独跑。
+- 配色守护分两层、缺一不可（第 170 轮）：**源码层**禁写颜色（一致性第 10 项，静态、离线、每轮必跑，覆盖 mermaid 围栏 + `src/data/viz/*.ts`），**结果层**量对比度（`mermaid-contrast-verify`，能抓到主题令牌本身的失效，但依赖 preview 且只覆盖 mermaid 渲染出的文字）。写新图表时以源码层为准：要区分语义只用 `good/bad/hl/rb-black/rb-red` 五个类名。
+- 跑对比度审计前必须先确认 `dist` 新于工作树（第 170 轮实测在跑的 preview 挂着陈旧 dist，`/ascension/guide/` 直接 404 而页面数照跑，漏页不报错）：先 `pnpm build` 再 `astro preview stop && pnpm preview`；`astro preview` 全站单实例，替换他人会话起的实例属本地只读服务、可安全重起，但要在轮次记录里写明。
 - 无图表笔记用表格/代码块承载结论（有 mermaid 才需跑对比度审计）；时序图（sequenceDiagram）适用于协议/流程类内容。
 
 ## 待用户决策
+
+- 是否把 `pnpm verify:docs` 接进部署流水线：第 170 轮核验 `.github/workflows/deploy.yml` 只有 `pnpm install` + `playwright install chromium` + `pnpm build`，**没有任何体检步骤**——25 项静态闸门（含本轮新增的配色闸门）全部依赖本地纪律，并行会话漏跑即静默入库、且 GitHub Pages 会照常发布。推荐选项：在 `Build` 前加一步 `run: pnpm verify:docs`（仓库已有 chromium 缓存步骤，成本约 1 分钟）；备选：维持现状（不占 CI 额度，但闸门形同建议）。影响：改动对外可见的 CI/CD 流水线，按纪律不擅自动手。
 
 - 阶段目标确认：本文件「当前阶段目标」为无人值守自定（内容体系充实），推荐选项：维持；备选：用户指定内容路线图或阶段（如「把 XX 方向补完」）。影响：决定后续轮次选型方向。**21 轮后补充**：常规内容缺口已收敛，若继续本阶段，后续轮次自然放缓；更推荐用户给出下一阶段（如「提高已有功能使用率」需真实用户数据、「按你的学习计划补某方向」）。
 - core 星标全站策略：36 个分类核心占比过高（部分 4/4 全标，星标失去区分度），14 个零核心分类中 11 个（linux/tools/单篇）留白待定。推荐选项：维持现状（不同方向 core 语义可以不同）；备选：定一条规则（如每分类最多 2 篇核心）并由用户/会话统一执行——影响：分类页核心导航的可用性。
