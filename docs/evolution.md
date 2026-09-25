@@ -63,6 +63,86 @@
 
 ## 轮次记录
 
+### 第 186 轮（2026-09-25，车道 A 新章节｜游标一致，未越车道）：spring-ai 三篇深度篇 + 把上轮「标题级」事实回填成因果
+
+- 取号与定界：`git pull --ff-only` 已是最新；台账最大号实读 **185**（本会话上轮），本轮取
+  **186**，186 mod 5 = 1 → **车道 A 新章节**，与用户「继续补全，注意深度」的指令同向，
+  本轮**未越车道**。`git status --porcelain` 定界：并行会话此时在写
+  `mysql/advanced/performance-ha/04-backup-pitr.md`、`mysql/intermediate/transaction-lock/
+  04-lock-wait-triage.md`（未跟踪，即其 roadmap 的 MY-01/MY-02），此前他们的 java 侧内容
+  已自行提交入库；本会话全程只动 `spring-ai/` 自有路径与两处共享文件的自有 hunk。
+- 深度取向（用户点名"注意深度"，故本轮不铺篇数、改挖机制）：三篇新笔记每篇以一个
+  **反直觉的默认值或覆盖规则**为主轴，而不是功能清单——①`ChatModel` 路径下 options 是
+  **全量取代**（"the passed prompt needs to contain a full set of options that will
+  completely take precedence over options set in the model"），只有 `ChatClient` 是 delta；
+  ②AI 调用正文**默认一律不进观测数据**，且开关命名是 `log-prompt`/`log-completion`
+  （工具是 `include-content`）**不是** `include-prompt`，ChatClient 与 ChatModel 各一套
+  互不替代；③`EvaluationRequest(userText, dataList, responseContent)` **没有标准答案槽**，
+  所以这套 API 评的是"与上下文是否自洽"而非"是否等于正确答案"。
+- 取证推翻了自己两处直觉假设（记进经验）：(a) 我原本会按 `include-prompt` 那类拼法写属性名
+  ——2.0.1 文档实际是 `spring.ai.chat.client.observations.log-prompt` 等八个开关，
+  全部默认 `false`；(b) 我原本会去 `api/evaluation.html` 取评测文档——该地址
+  **返回 404**，真实页面是 `api/testing.html`（侧边栏叫 Model Evaluation、正文 H1 叫
+  Evaluation Testing）。两处都是"名字比概念更容易猜错"的典型，**只能查不能推**。
+- 其他关键事实（全部回原文）：`ChatModel extends Model<Prompt, ChatResponse>,
+  StreamingChatModel`（每个模型都是流式模型），2.0 在音频侧同构地让
+  `TranscriptionModel now extends StreamingTranscriptionModel` 并用
+  `Flux.error(UnsupportedOperationException)` 作默认实现保兼容；`ChatOptions` 可移植面
+  只有 8 个 getter + `mutate()`，厂商专有项（OpenAI `logitBias`/`seed`/`user`）在其外；
+  Options 严格不可变；观测四层为 `spring.ai.chat.client` / `spring.ai.advisor` /
+  `gen_ai.client.operation` / `spring.ai.tool`，向量库另有 `db.vector.client.operation`，
+  基名用点而 Prometheus 导出为 `_seconds_count/_sum/_max`；token 走
+  `gen_ai.client.token.usage` 按 `input`/`output`/`total` 分型；裁判只有
+  `RelevancyEvaluator` 与 `FactCheckingEvaluator` 两个，自定义模板必须保留
+  `query`/`response`/`context` 三个占位符，偏差控制三条为换模型、`temperature=0`、
+  独立 ChatClient（避免 narcissistic bias）；测试基建只有
+  `spring-ai-spring-boot-testcontainers` 一件成文 artifact，**文档里没有 mock/replay 框架**。
+- **回填上轮欠账**：第 185 轮取证时标注为"标题级、未逐条取原文"的几条默认值变更，本轮取到
+  原文并写回**已发笔记**（不是新开一篇），因果链因此成立——① OpenAI tool-calling `strict`
+  关掉的真实原因："JsonSchemaGenerator omits optional parameters from `required` instead of
+  using the nullable-type pattern OpenAI's strict mode requires, **so any tool with an
+  optional parameter was rejected by OpenAI with a 400 error under the old default**"
+  （→ 写进工具篇，解释 `@ToolParam(required=false)` 为何会表现为"模型死活不调工具"）；
+  ② `Advisor.DEFAULT_CHAT_MEMORY_PRECEDENCE_ORDER` **从 `MIN+1000` 改成 `MIN+200`**，
+  官方自己点明效果是 placing memory advisors "outside the ToolCallingAdvisor (+300)"
+  （→ 写进 Advisor 篇：1.x 的 +1000 数值更大⇒落在环内，2.0 主动移到环外，"工具往返中间
+  消息该不该进历史"从实现细节升格为框架默认）；③ MCP 服务端 2.0 起默认按 JSON Schema
+  校验入参，失败返回 `isError=true` 的 `CallToolResult`，可用 `validateToolInputs(false)`
+  关（→ 写进 MCP 篇）；④ `BeanOutputConverter` 改由 `JsonSchemaGenerator` 生成 Schema，
+  与工具调用共用同一套语义，并新增 `int32`/`int64`/`date-time` 的 format 提示
+  （→ 写进 ChatClient 篇，据此说明"一个 strict 坑会在两处同现"）；⑤ 递归 Advisor 官方定性
+  仍是 experimental（"new experimental feature in Spring AI 1.1.0-M4+"）且
+  "**non-streaming only**, require careful advisor ordering, can increase costs"
+  （→ 给 `validateSchema()` 补上代价警告，此前只写了"默认 3 次重试"显得像免费保险）。
+- 产出（14 文件）：新分类 `intermediate/model`（01 模型抽象与参数覆盖 191 行）、
+  `advanced/observability`（01 可观测性 164 行、02 Evaluator 与 LLM 裁判 187 行）+ 两个
+  分类页；四篇已发笔记回填机制段（工具 +24、ChatClient +24、Advisor +11、MCP +19）；
+  方向首页改三层七分类口径；图谱 +3 节点 5 边（含 `sa-model → sa-obs` 的
+  `gen_ai.client.operation`、`sa-obs → sa-eval` 的"看得见之后才谈判得准"）；
+  题库 8→12 题（新增三题难度 5/4/4，考点即上述三处反直觉默认）；速答手册 +4 行；
+  侧边栏 +17 行。**本方向现 11 篇 / 13 张图 / 2132 行正文 / 12 道考题。**
+- 验证数字：`pnpm build` **735 页**（+5：3 篇正文 + 2 个分类页）通过；
+  `pnpm verify:docs` **25 项全绿**（一致性 10 项含已提交笔记全部注册、图谱覆盖率 100%、
+  硬编码颜色 0 处；mermaid 语法全绿；题库 8 项 **653** 题；影像 7 项 6 资产）；
+  `node scripts/mermaid-contrast-verify.mjs` **403 页 × 2 主题 0 处低于 4.5:1**
+  （本轮新增 3 张图，页数 400→403 与本会话产出一致）。真机核验（本机 Playwright
+  1440×900，双主题各跑一遍）：9 个页面 **0 处代码块溢出、页宽恒 1440**，
+  新页 mermaid SVG 数 model=1 / observability=1 / evaluation=1（补图后复量仍为 1，
+  无 Parse error），四个新页站内链接 6/6/3/5 条逐个 HTTP 实取无非 2xx；作答页方向标签
+  「Spring AI 12 题」并真点起 1/12 轮次。宽度自查再次抓出真问题：新页首稿 **5 行**超
+  77 视觉列（81/78/85/88/82），重排后复扫为 0。
+- 纪律：共享文件 `astro.config.mjs`（+17）与 `interview-cheatsheet.md`（+4）先按行分类
+  确认**可疑非自有行数为 0** 再整文件 stage，`git diff --cached --name-only` 复核无他人
+  路径混入；**全程未使用 pathspec 形式提交**（第 183 轮教训已落到操作上）。
+- 下一轮入口：**第 187 轮 → 187 mod 5 = 2 → 车道 B 影像资产**。①本方向可继续挖深的已取证
+  主题：**PromptTemplate/StringTemplate 与 ChatMemory+RAG 的顺序耦合**、**Image/Audio
+  模型族**（`Moderation`、TTS 与转写的流式默认实现）、**Spring AI 的 ToolContext 与
+  Reactor Context 传递**；②`intermediate/tools`、`intermediate/model`、`advanced/mcp`
+  三个分类各只有 1 篇，第二题可按 `coverage-deepening.md` 规则入 d 类队列；
+  ③**D 队列自第 181 轮之后未再推进**（183、185 两次越车道做 A，186 游标本就落在 A），
+  候选表第 11 行「缩进围栏漏检 21 块」仍是低成本高收益首选，游标下次落到 D 时优先做掉；④B 车道若选本方向素材，注意
+  `src/data/viz/media.ts` 与 `flows.ts` 常被并行会话占用，开工前先定界。
+
 ### 第 185 轮（2026-09-25，用户定向续做 A 类产出｜游标本为 D，越车道执行并如实登记）：spring-ai 补四篇——工具调用、VectorStore 与 ETL、两档 RAG Advisor、MCP 接入
 
 - 触发与定界：用户对第 183 轮的「下一步」答复「继续」，即按上轮登记的续篇清单做厚
