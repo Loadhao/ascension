@@ -1,0 +1,29 @@
+src/data/quiz/redis.json
+  s_9d168779ccc0d8::t_00eb13e66bce0a 295-311
+docs/evolution.md
+  s_9d168779ccc0d8::t_e77ef6e6487411 55,61-64,66
+  s_9d168779ccc0d8::t_7957c8109fef03 65
+  s_9d168779ccc0d8::t_ea6236f459ccd4 67
+src/data/viz/media.ts
+  s_9d168779ccc0d8::t_856640b6fb7b81 136
+  s_9d168779ccc0d8::t_06ddc5a4e9fd98 135,141-149
+  s_9d168779ccc0d8::t_00eb13e66bce0a 130-134,137-140,150-151
+src/content/docs/redis/intermediate/usage/03-distributed-lock.mdx
+  s_9d168779ccc0d8::t_00eb13e66bce0a 73-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "4c46437bc92dc0103a38d2505b5aa6e49118128e",
+  "prompts": {},
+  "sessions": {
+    "s_9d168779ccc0d8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0d84a-68ed-7011-9352-0cb938c11fd4",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
