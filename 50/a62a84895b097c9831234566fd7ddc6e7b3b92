@@ -1,0 +1,33 @@
+src/content/docs/guide/interview-cheatsheet.md
+  s_7bff3c3f8b465c::t_9ba3204c9ecf48 204
+  s_7bff3c3f8b465c::t_337a3dd60278cf 218
+  s_7bff3c3f8b465c::t_7d5ceccc1e942a 264
+docs/coverage-deepening.md
+  s_7bff3c3f8b465c::t_445c7951f67799 181
+  s_7bff3c3f8b465c::t_4a01e8d6e3824a 42-45
+  s_7bff3c3f8b465c::t_7170dc3d14639a 182
+docs/evolution-recipes.md
+  s_7bff3c3f8b465c::t_f6b5ff19dfdea4 23-24,28-35
+src/data/quiz/js.json
+  s_7bff3c3f8b465c::t_aa764c062616e4 415-429
+src/data/quiz/mongodb.json
+  s_7bff3c3f8b465c::t_88dc306141ccbd 261-277
+src/data/quiz/network.json
+  s_7bff3c3f8b465c::t_36eea713943e6e 340-358
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "50a62a84895b097c9831234566fd7ddc6e7b3b92",
+  "prompts": {},
+  "sessions": {
+    "s_7bff3c3f8b465c": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "ff49c670-dbd2-4dba-8249-4ef85f4a95e4",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
