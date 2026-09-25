@@ -64,6 +64,9 @@
 - [ ] java/intermediate/build/01-dependency-conflict — 第二题考「`dependencyManagement` 与直接声明、import BOM 三者的优先级，以及 exclusion 与 `optional=true` 在传递性上的差别」（首题已考「两个 jar 提供同一个类时按 classpath 顺序谁赢 + nearest 仲裁」）
 - [ ] java/advanced/jvm/10-arthas-jfr — 第二题考「`trace`/`watch` 的字节码增强代价与 `-n` 命中上限、`reset` 与 `stop` 的区别，为何高 QPS 接口挂 trace 不设上限会自己变成故障」（首题已考「偶发慢现场取证：trace 条件过滤 vs tt 重放 vs JFR 环形缓冲回放」）
 - [ ] java/intermediate/spring/09-mybatis-in-practice — 第二题考「一级缓存的失效条件与 `localCacheScope=STATEMENT`、二级缓存 namespace 级清空在分布式多实例下为何会读到过期数据（生产建议不开）」（首题已考「`<association>` nested select 造成 N+1 与 lazy 触发点」）
+- [ ] java/intermediate/stream/02-collectors — 第二题考「downstream 嵌套的选型：`groupingBy` 套 `summarizingInt`/`mapping`/`partitioningBy` 各解决什么，以及 `teeing` 与 `collectingAndThen` 的分工」（首题已考「toMap 两种异常的成因 + CONCURRENT 语义」）
+- [ ] java/advanced/dubbo/03-generic-and-shutdown — 第二题考「泛化调用的类型代价：`$invoke` 参数类型数组必须是全限定名、POJO↔Map 的静默失配、为什么不能为省依赖在业务代码里用泛化、以及接口名外部可控时的白名单要求」（首题已考「无损下线的四步与 preStop 时序」）
+- [ ] java/basic/io/04-direct-memory — 第二题考「显式 `clean()` 的时序约束（之后任何人再碰即踩已释放内存）与 NMT 的可见性边界：NMT 合计远小于 RSS 说明什么、为什么 `-XX:+DisableExplicitGC` 会切断堆外兜底通路」（首题已考「System.gc 重试因果 / 默认额度与 Xmx 同量级 / mmap 不走 reserveMemory」）
 
 ## 已完成记录
 

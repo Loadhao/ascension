@@ -111,7 +111,10 @@
     { "id": "build", "label": "构建与依赖", "href": "/java/intermediate/build/", "group": "工程" },
     { "id": "depconf", "label": "依赖冲突与构建治理", "href": "/java/intermediate/build/01-dependency-conflict/", "group": "工程" },
     { "id": "arthas", "label": "Arthas 与 JFR 在线诊断", "href": "/java/advanced/jvm/10-arthas-jfr/", "group": "JVM" },
-    { "id": "mybatisuse", "label": "MyBatis 实战坑", "href": "/java/intermediate/spring/09-mybatis-in-practice/", "group": "框架" }
+    { "id": "mybatisuse", "label": "MyBatis 实战坑", "href": "/java/intermediate/spring/09-mybatis-in-practice/", "group": "框架" },
+    { "id": "collectors", "label": "Collector 与并行归约", "href": "/java/intermediate/stream/02-collectors/", "group": "并发" },
+    { "id": "dubbogen", "label": "泛化调用与无损上下线", "href": "/java/advanced/dubbo/03-generic-and-shutdown/", "group": "框架" },
+    { "id": "directmem", "label": "堆外内存与 DirectBuffer", "href": "/java/basic/io/04-direct-memory/", "group": "IO" }
   ],
   "edges": [
     { "source": "root", "target": "syntax" },
@@ -274,6 +277,15 @@
     { "source": "mybatis", "target": "mybatisuse", "label": "框架不管的四件事" },
     { "source": "mybatisuse", "target": "cor", "label": "分页插件即拦截器链" },
     { "source": "logging", "target": "mybatisuse", "label": "toString 触发懒加载" },
-    { "source": "mybatisuse", "target": "depconf", "label": "XML 没进产物就不是绑定问题" }
+    { "source": "mybatisuse", "target": "depconf", "label": "XML 没进产物就不是绑定问题" },
+    { "source": "streamapi", "target": "collectors", "label": "终点那一步的契约" },
+    { "source": "collectors", "target": "chm", "label": "CONCURRENT 要求线程安全容器" },
+    { "source": "dubbgov", "target": "dubbogen", "label": "调用治理之外：上下线" },
+    { "source": "dubbogen", "target": "scgateway", "label": "网关是泛化头号用户" },
+    { "source": "dubbogen", "target": "jit", "label": "预热窗口为何必要" },
+    { "source": "zerocopy", "target": "directmem", "label": "mmap 的另一面" },
+    { "source": "directmem", "target": "references", "label": "虚引用 + Cleaner 落地" },
+    { "source": "directmem", "target": "tuning", "label": "堆外要计入容器 limit" },
+    { "source": "directmem", "target": "arthas", "label": "BufferPool 与 vmtool 取证" }
   ]
 }

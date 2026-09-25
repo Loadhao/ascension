@@ -511,6 +511,7 @@ export default defineConfig({
                         { label: 'IO 模型：BIO、NIO、AIO', link: '/java/basic/io/01-io-model/' },
                         { label: '零拷贝', link: '/java/basic/io/02-zero-copy/' },
                         { label: 'TCP 粘包拆包与 Netty 解码', link: '/java/basic/io/03-tcp-sticky-packets/' },
+                        { label: '堆外内存与 DirectBuffer 泄漏', link: '/java/basic/io/04-direct-memory/' },
                       ],
                     },
                   ],
@@ -525,6 +526,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/java/intermediate/stream/' },
                         { label: 'Stream 原理与并行流', link: '/java/intermediate/stream/01-stream-principle/' },
+                        { label: 'Collector 与并行归约', link: '/java/intermediate/stream/02-collectors/' },
                       ],
                     },
                     {
@@ -689,6 +691,7 @@ export default defineConfig({
                         { label: '概览', link: '/java/advanced/dubbo/' },
                         { label: 'Dubbo 架构与 SPI', link: '/java/advanced/dubbo/01-architecture/' },
                         { label: '集群容错与流量治理', link: '/java/advanced/dubbo/02-governance/' },
+                        { label: '泛化调用与无损上下线', link: '/java/advanced/dubbo/03-generic-and-shutdown/' },
                       ],
                     },
                   ],

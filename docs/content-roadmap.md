@@ -38,9 +38,9 @@
 
 | # | 能力域 | 现有密度 | 判断 | 本文件条目 |
 | --- | --- | --- | --- | --- |
-| D1 | 语言与运行时底座（JVM/并发/GC/内存/IO） | **厚**：jvm 10 篇 + concurrent 12 篇 + collection 6 篇 | 原理侧已够用，缺的是**取证侧工具箱**（Arthas 此前只有一张命令表、JFR/jcmd 无专篇） | JR-02 ✅ · JR-06 |
+| D1 | 语言与运行时底座（JVM/并发/GC/内存/IO） | **厚**：jvm 10 篇 + concurrent 12 篇 + io 4 篇 | 原理侧已够用，缺的是**取证侧工具箱与堆外那条线**（均已补） | JR-02 ✅ · JR-06 ✅ |
 | D2 | 工程实践与代码资产（构建依赖、测试、重构、方法论） | **空白**：依赖仲裁、shade、enforcer、覆盖率、契约测试全零命中 | 高级工程师与「背熟八股」的主分界线，且是最干净的缺口 | JR-01 ✅ |
-| D3 | 框架与生态落地（Spring 全家 / MyBatis / Dubbo / Cloud） | **中**：spring 10 + boot 5 + mvc 3，此前持久层只有 1 篇、dubbo 2 篇 | 框架原理厚、**日常写的东西薄**（MyBatis 实战、Dubbo 落地面） | JR-03 ✅ · JR-04 · JR-05 |
+| D3 | 框架与生态落地（Spring 全家 / MyBatis / Dubbo / Cloud） | **中**：spring 10 + boot 5 + mvc 3，此前持久层只有 1 篇、dubbo 2 篇且不含落地面 | 框架原理厚、**日常写的东西薄**——MyBatis 实战、Dubbo 泛化与上下线均已补 | JR-03 ✅ · JR-04 ✅ · JR-05 ✅ |
 | D4 | 数据与中间件（MySQL / Redis / MQ / ES） | **中偏薄**：mysql 19 · redis 14 · kafka 11 · rocketmq 11 · rabbitmq 7 | 原理与机制齐，**生产运维面与现场排查**近零（备份恢复、锁等待、ACL、监控） | MY-01 · MY-02 · RD-01 · RD-02 · MQ-01 |
 | D5 | 分布式与系统设计 | **厚**：81 篇，含 31 个设计案例 | 案例与理论饱和；缺的是 SLO/日志支柱/发布风险判据这类**治理指标** | B2 池 |
 | D6 | 生产运维与稳定性（Linux/网络/容器/可观测） | **中**：linux 25 · network 18 · k8s 11 · docker 13 | 通用 Linux 排障厚，但**没有「Java 应用在容器里」这条线**（探针配 GC、CPU throttling） | OPS-01 · B2 池 |
@@ -55,9 +55,9 @@
 | **JR-01** | java · `java/intermediate/build/01-dependency-conflict.md`（新建 `build` 分类） | 广度 | 同一个类被两个 jar 提供时，JVM 实际加载哪个？为什么不是你以为的那个 | `shade`/`relocation`/`uber-jar`/`nearest`/`first-declared`/`requireUpperBoundDeps` 全库零命中；仅 `springcloud/01` 有 BOM 一节 | done 2026-09-25 · `java/intermediate/build/01-dependency-conflict.md` + 新建 build 分类 |
 | **JR-02** | java · `java/advanced/jvm/10-arthas-jfr.md` | 深度 | 不能重启、不能加日志、接口每天偶发慢 3 秒，怎么在 5 分钟内拿到证据 | `jvm/08-troubleshooting.md:86-99` 只有一张 7 行命令表；`retransform`/`vmtool`/`StartFlightRecording`/`jfr` 全库零命中 | done 2026-09-25 · `java/advanced/jvm/10-arthas-jfr.md` |
 | **JR-03** | java · `java/intermediate/spring/09-mybatis-in-practice.md` | 均衡 | 一句 `<association>` 和一次 `toString` 怎么把接口拖成 1+N 次查询 | `spring/05` 只讲 SqlSessionTemplate 代理；`PageHelper` 零命中；`rewriteBatchedStatements` 仅 `case-studies/17-excel.md:63` 提过一次 | done 2026-09-25 · `java/intermediate/spring/09-mybatis-in-practice.md` |
-| JR-04 | java · `java/intermediate/stream/02-collectors.md` | 均衡 | 并行流下 `Collectors.toMap` 为什么抛 IllegalStateException，三特性各管什么 | `Characteristics`/自定义归约/`toMap` 合并冲突零命中；`stream/01` 已覆盖并行原理与 commonPool 污染（故主题缺口在 Collector 侧，不是"篇数少"） | 待办 |
-| JR-05 | java · `java/advanced/dubbo/03-generic-and-shutdown.md` | 广度 | 网关要做泛化调用、发布时怎么不丢在途请求 | `GenericService`/Dubbo 优雅停机零命中（超时×重试放大已在 `02-governance`，不重复） | 待办 |
-| JR-06 | java · `java/basic/io/04-direct-memory.mdx` | 广度 | 堆内没满却 OOM，Netty 与驱动吃掉堆外怎么定位 | `jvm/02-memory` 有 `MaxDirectMemorySize` 症状行、`netty/02-refcount-leak` 讲引用计数，JDK 侧 Cleaner 归零 | 待办 |
+| JR-04 | java · `java/intermediate/stream/02-collectors.md` | 均衡 | 并行流下 `Collectors.toMap` 为什么抛 IllegalStateException，三特性各管什么 | `Characteristics`/自定义归约/`toMap` 合并冲突零命中；`stream/01` 已覆盖并行原理与 commonPool 污染（故主题缺口在 Collector 侧，不是"篇数少"） | done 2026-09-25 · `java/intermediate/stream/02-collectors.md` |
+| JR-05 | java · `java/advanced/dubbo/03-generic-and-shutdown.md` | 广度 | 网关要做泛化调用、发布时怎么不丢在途请求 | `GenericService`/Dubbo 优雅停机零命中（超时×重试放大已在 `02-governance`，不重复） | done 2026-09-25 · `java/advanced/dubbo/03-generic-and-shutdown.md` |
+| JR-06 | java · `java/basic/io/04-direct-memory.mdx` | 广度 | 堆内没满却 OOM，Netty 与驱动吃掉堆外怎么定位 | `jvm/02-memory` 有 `MaxDirectMemorySize` 症状行、`netty/02-refcount-leak` 讲引用计数，JDK 侧 Cleaner 归零 | done 2026-09-25 · `java/basic/io/04-direct-memory.md` |
 | MY-01 | mysql · `mysql/advanced/performance-ha/04-backup-pitr.md` | 广度 | DROP 错一张表，30 分钟后怎么恢复、能丢多少 | `PITR`/`xtrabackup` 在 mysql 方向零命中；**`mongodb/intermediate/usage/10-backup.md:40` 已把「MySQL binlog PITR（三大日志篇）」当既有内容引流，指向空处** | 待办 |
 | MY-02 | mysql · `mysql/intermediate/transaction-lock/04-lock-wait-triage.md` | 深度 | 谁堵了谁：锁等待链与长事务现场的取证顺序 | `innodb_lock_waits` 零命中，现只有 `innodb_trx` 一行 | 待办 |
 | RD-01 | redis · `redis/intermediate/usage/07-redisson.md` | 广度 | 读写锁、信号量、限流器、延迟队列各解决什么问题、代价是什么 | `usage/03-distributed-lock.mdx` 只有可重入锁 + 看门狗 | 待办 |
@@ -111,7 +111,7 @@ K8s×JVM 之后的容量与弹性联动、单元化落地细节。
    ② 挂到 `java` 下新分类（会把横向内容焊死在 Java 上）；③ 归 `guide`（现定位为
    作者向元文档，读者向方法论混进去会稀释）。**未裁决前 B2 也不展开这一条。**
 2. **core 星标是否给本批新篇**：evolution.md 候选项 2「36 个分类核心占比过高」仍挂待裁决，
-   故 JR-01/02/03 三篇**一律不加 `core: true`**，等该决策落地后统一补标。
+   故 B1 已落地的 **6 篇新笔记一律不加 `core: true`**（已逐篇核为 0 处），等该决策落地后统一补标。
 3. **是否把 B2 也逐条细化**：本文件推荐「不」（§0 规则 3）；若要一次性看全貌需同时接受
    清单过期风险，需你明确改 §0。
 
@@ -129,3 +129,8 @@ K8s×JVM 之后的容量与弹性联动、单元化落地细节。
   `coverage-deepening.md` d 类。**B1 余 9 条待办**，下一条为 JR-04。
 - 落地时按新写的「不迁移原则」执行：三篇都是**新增 + 互链**，未搬动任何既有笔记路径
   （学习状态以路径为 localStorage 键，改路径会清零读者进度）。
+- 2026-09-25 · 第二批：JR-04/JR-05/JR-06 落地，**Java 侧 6 条全部完成**——
+  `stream/02-collectors.md`、`dubbo/03-generic-and-shutdown.md`、`io/04-direct-memory.md`，
+  三件套与速答行、题库首题（难度 4）同轮配齐；第二题角度入 `coverage-deepening.md` d 类。
+  **B1 余 6 条**（MY-01/MY-02/RD-01/RD-02/MQ-01/OPS-01），头部为 **MY-01 备份恢复与 PITR**
+  ——它同时补掉 `mongodb/10-backup.md:40` 指向空处的那条引流。

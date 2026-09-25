@@ -2322,6 +2322,61 @@
       ],
       "hint": "lazy 改变的是「什么时候发查询」而不是「发不发」：默认 lazyLoadingEnabled=false，一旦开启，toString/equals/hashCode/clone 这四个触发方法会让打日志、Jackson 序列化都变成批量查询。判断 N+1 的朴素依据是数同模板 SQL 出现的次数——每条都很快、加起来才慢。",
       "difficulty": 4
+    },
+    {
+      "id": "java-collectors-136",
+      "noteId": "java/intermediate/stream/02-collectors",
+      "type": "multiple",
+      "q": "关于 `Collectors.toMap` 的两种异常与 Collector 特征值，哪些说法成立？",
+      "options": [
+        "重复 key 且没给 merge 函数会抛 IllegalStateException；并行时由 combiner 合并两个 map 报出来，所以本地单线程可能一直不复现",
+        "value 为 null 会抛 NullPointerException，因为 toMap 底层走 Map.merge 而 merge 要求 value 非空（toConcurrentMap 同样不行）",
+        "toList() 的契约不保证返回类型与可变性，需要不可变结果应改用 toUnmodifiableList()",
+        "声明 CONCURRENT 的 Collector 会让流为每个分段各建一个容器再 combiner 合并，所以累加容器不必线程安全"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "CONCURRENT 的含义正好相反：它声明 accumulator 线程安全，于是全流共用同一个容器、不再调 combiner——此时用 HashMap 就会丢计数。并行丢数据的另一常见原因是拿 reduce 的 identity 做有状态累积：identity 会被每个分段各用一次，必须不可变，可变容器要走 collect 的 supplier。",
+      "difficulty": 4
+    },
+    {
+      "id": "java-dubbogen-137",
+      "noteId": "java/advanced/dubbo/03-generic-and-shutdown",
+      "type": "single",
+      "q": "K8s 上滚动发布 Dubbo 提供者，切换瞬间仍有一波请求失败。最贴近根因的是？",
+      "options": [
+        "只在 SIGTERM 里做优雅停机不够：应在 preStop 先摘流量，并留出「消费者感知 + 在途请求跑完」的时间，这段等待必须计入 terminationGracePeriodSeconds",
+        "把提供者的服务端口延迟 30 秒打开即可避免",
+        "注册中心会自动等待在途请求完成，无需任何额外配置",
+        "给消费者配足重试次数就能消除失败"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "无损下线的四步是串行的：摘注册 → 等消费者收到推送并重建路由 → 等在途跑完 → 关端口；kill -9 跳过前三步，只能等 ZooKeeper 会话超时收敛，所以必有一波拒绝。运维上可用 QoS（默认 22222）的 gracefulShutdown/online 主动控制，delay=-1 + manual-register 管的是上线侧。重试只能兜住幂等读，写操作重试会放大副作用。",
+      "difficulty": 4
+    },
+    {
+      "id": "java-directmem-138",
+      "noteId": "java/basic/io/04-direct-memory",
+      "type": "multiple",
+      "q": "堆 Xmx 远未用满但容器 RSS 持续上涨，并偶发 `Direct buffer memory` OOM。哪些判断成立？",
+      "options": [
+        "直接内存额度不够时 Bits 会先反复 System.gc() 重试，所以堆外 OOM 前常伴随一次没有业务来源的 Full GC",
+        "MaxDirectMemorySize 不设时默认与最大堆同量级，容器里要和 MaxRAMPercentage 一起算账，否则两项各吃满必然超 limit",
+        "FileChannel.map 得到的 MappedByteBuffer 不走 reserveMemory，不受 MaxDirectMemorySize 约束，且解除映射同样要等 Cleaner",
+        "没看到 Direct buffer memory 异常就说明堆外没泄漏，应该去调 GC 参数"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "direct 与 mapped 是两个独立计数的池，NMT 也只覆盖 JVM 自己记账的部分——NMT 合计远小于 RSS 时要往 JNI 与 glibc malloc arena 碎片想，而不是调 GC。显式 clean() 能立刻释放，但之后任何人再碰这个 buffer 就是踩已释放内存，表现为随机数据错乱或 SIGSEGV，而不是一个好读的异常。",
+      "difficulty": 4
     }
   ]
 }

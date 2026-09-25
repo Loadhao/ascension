@@ -32,6 +32,7 @@ Docker、Nginx、Git 等全站方向。
 | [受检异常 vs 运行时](/java/basic/syntax/05-exception/) | 能恢复抛受检、是 bug 抛运行时、JVM 坏了抛 Error；finally 里 return 会劫持返回值 |
 | [BIO/NIO/AIO](/java/basic/io/01-io-model/) | 阻塞流 → 多路复用（selector 一个线程管千连接）→ 异步回调；Netty 是 NIO 的事实标准 |
 | [零拷贝](/java/basic/io/02-zero-copy/) | mmap/sendfile 砍掉内核态与用户态之间的拷贝，Kafka 吞吐的底层来源 |
+| [堆外内存什么时候才真正被释放](/java/basic/io/04-direct-memory/) | DirectByteBuffer 要等壳对象被 GC、Cleaner 跑 free；所以堆外 OOM 前必有一次无业务来源的 Full GC（reserveMemory 先 System.gc 重试） |
 | [TCP 粘包拆包](/java/basic/io/03-tcp-sticky-packets/) | TCP 是字节流没有消息边界，靠定长/分隔符/长度域解码切分（Netty 解码器） |
 | [位运算与补码](/java/basic/syntax/07-bit-operations/) | 补码让零唯一、符号位免特判、减法变加法；`>>` 补符号位，`>>>` 补 0 会把负数变成正大数 |
 | [serialVersionUID](/java/basic/syntax/08-serialization/) | JDK 序列化的版本关卡：不一致即 InvalidClassException；不声明会随类结构自动哈希漂移 |
@@ -87,6 +88,7 @@ Docker、Nginx、Git 等全站方向。
 | [Spring MVC 请求流程](/java/intermediate/spring-mvc/01-springmvc-flow/) | DispatcherServlet 统一收口 → HandlerMapping 找处理器 → Adapter 执行 → 渲染返回 |
 | [单点登录与 OAuth2](/java/intermediate/spring-boot/02-auth-sso/) | 授权码模式两次交换（code 换 token）防前端泄露 secret；OIDC 补认证语义 |
 | [注册中心 Nacos](/java/advanced/springcloud/02-registry/) | 临时实例 AP（Distro）、持久实例 CP（Raft）可切换；心跳剔除 + 客户端缓存兜底 |
+| [Dubbo 泛化调用与无损上下线](/java/advanced/dubbo/03-generic-and-shutdown/) | 泛化＝把类型换成「接口名字符串 + Map」走 `$invoke(方法, 参数类型名数组, 实参)`；下线要「摘注册 → 等消费者感知 → 等在途跑完 → 关端口」，K8s 里这段等待得放进 preStop |
 | [Sentinel 熔断限流](/java/advanced/springcloud/05-sentinel/) | 滑动窗口统计，熔断器三态循环（关闭→打开→半开），失败率/慢调用触发 |
 | [网关的职责](/java/advanced/springcloud/03-gateway/) | 统一入口做路由、鉴权、限流、灰度——业务无关的横切关注点上收 |
 | [什么时候拆微服务](/java/advanced/springcloud/01-microservices-overview/) | 用运维复杂度换并行研发与精准扩容；小团队硬拆等于给自己上刑 |
@@ -95,6 +97,7 @@ Docker、Nginx、Git 等全站方向。
 | [跨服务链路追踪](/java/advanced/springcloud/08-tracing/) | 单机 MDC 不够：traceId 经 W3C traceparent 贯穿；Boot 3.x 用 Micrometer Tracing 取代 Sleuth |
 | [单例模式](/java/intermediate/design-pattern/02-singleton/) | 进程内真唯一：饿汉/枚举/静态内部类/DCL；难点是并发、反射、序列化围攻下仍唯一 |
 | [Stream 延迟求值](/java/intermediate/stream/01-stream-principle/) | 不存数据、中间操作惰性串联，终止操作才触发；并行流走 ForkJoinPool 工作窃取 |
+| [toMap 为什么会抛异常](/java/intermediate/stream/02-collectors/) | 重复 key 没给 merge 函数 → IllegalStateException（并行下由 combiner 抛出，本地串行不复现）；value 为 null → NPE，因为底层 `Map.merge` 要求非空 |
 | [SqlSessionTemplate 单例凭什么线程安全](/java/intermediate/spring/05-mybatis-sqlsession/) | 壳是无状态 JDK 代理，真实 SqlSession 按调用临时获取、按事务生命周期管理（ThreadLocal 绑定 + 引用计数） |
 | [MyBatis 为什么会打出 N+1 条 SQL](/java/intermediate/spring/09-mybatis-in-practice/) | nested select 按行再发查询，换 nested results 一次 join；父层缺 `<id>` 则行边界按全部映射列拼 key，同一订单被判成多行 |
 | [Boot 内嵌 Web 服务器何时启动](/java/intermediate/spring/07-application-context/) | refresh 的 onRefresh 阶段，早于业务 Bean 预实例化——「Web 服务器就绪 ≠ 应用就绪」 |
