@@ -1,0 +1,60 @@
+src/content/docs/mysql/advanced/performance-ha/04-backup-pitr.md
+  s_d8c978081f408b::t_84469119890fdd 46
+  s_d8c978081f408b::t_68163216cd7c22 53-54
+  s_d8c978081f408b::t_38374760107357 81-83
+  s_d8c978081f408b::t_5a278934d97aa8 1-45,47-52,55-80,84-183
+src/data/quiz/mysql.json
+  s_d8c978081f408b::t_e04cb995e5e376 295-330
+src/content/docs/mysql/intermediate/transaction-lock/04-lock-wait-triage.md
+  s_d8c978081f408b::t_aa0ddca86a342c 76-79
+  s_d8c978081f408b::t_eeb73b787f47c9 1-75,80-210,212
+  s_d8c978081f408b::t_06d466cf64df1c 211,213-214
+docs/content-roadmap.md
+  s_d8c978081f408b::t_93d637bccaa937 137-150
+  s_d8c978081f408b::t_623cb07dd6af8e 44
+  s_d8c978081f408b::t_1eecbc8bd61d12 61-63
+src/content/docs/mongodb/intermediate/usage/10-backup.md
+  s_d8c978081f408b::t_7a264714c3eb36 40-41
+src/content/docs/redis/intermediate/usage/07-redisson.md
+  s_d8c978081f408b::t_b665638617cdf3 1-23,40-84,87-88,91-172,174-176,196-197,202-233
+  s_d8c978081f408b::t_9ebe5ced3e3bb1 89-90
+  s_d8c978081f408b::t_ee9eccd2c4f30c 179
+  s_d8c978081f408b::t_91c85dda2eacb8 24-39
+  s_d8c978081f408b::t_9e98531b401bd2 173,177-178,180-195,198-201
+  s_d8c978081f408b::t_3e8c98c62fe974 85-86
+src/content/docs/guide/interview-cheatsheet.md
+  s_d8c978081f408b::t_a0825a93f37d38 167-170
+  s_d8c978081f408b::t_22419e7e77e23b 204-205
+src/data/graphs/mysql.json
+  s_d8c978081f408b::t_f4fe7b867f37d6 16-18
+  s_d8c978081f408b::t_61eb29a15d8207 41-47
+src/data/graphs/redis.json
+  s_d8c978081f408b::t_1d8f11063ab7f6 30-33
+  s_d8c978081f408b::t_339a9df22463a5 13
+astro.config.mjs
+  s_d8c978081f408b::t_ff5657afdb0001 1241
+  s_d8c978081f408b::t_9971b768c377f4 1131
+  s_d8c978081f408b::t_c4897b0d1b8ed4 1105
+docs/coverage-deepening.md
+  s_d8c978081f408b::t_b15843478f2237 69-71
+src/content/docs/redis/intermediate/usage/index.mdx
+  s_d8c978081f408b::t_d2bc6de50a69ae 3,8-15
+src/data/quiz/redis.json
+  s_d8c978081f408b::t_1c370029eb35b7 312-329
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1e5abec0d2dcb8f3ff0bbf8f75eb705bada2946f",
+  "prompts": {},
+  "sessions": {
+    "s_d8c978081f408b": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7d34cf8a-946f-4536-ae6c-e2310b17da55",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
