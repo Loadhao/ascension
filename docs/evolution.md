@@ -63,6 +63,87 @@
 
 ## 轮次记录
 
+### 第 185 轮（2026-09-25，用户定向续做 A 类产出｜游标本为 D，越车道执行并如实登记）：spring-ai 补四篇——工具调用、VectorStore 与 ETL、两档 RAG Advisor、MCP 接入
+
+- 触发与定界：用户对第 183 轮的「下一步」答复「继续」，即按上轮登记的续篇清单做厚
+  `spring-ai` 方向。开工 `git pull --ff-only` 已是最新；`git status --porcelain` 定界到并行
+  会话在写 `astro.config.mjs`（java 侧边栏 3 个 hunk）、`interview-cheatsheet.md`（3 个
+  hunk）、`docs/evolution.md`、`coverage-deepening.md`、`evolution-recipes.md`、
+  `java/intermediate/spring/index.mdx`、`graphs/java.json`、`quiz/{ai,distributed,java}.json`
+  与未跟踪的 `java/intermediate/spring/09-mybatis-in-practice.md`、`docs/content-roadmap.md`
+  ——全程绕开，自有内容一律 hunk 级入索引。取号：台账最大号实读 **184**（并行会话的车道 C
+  三题补缺，`1bb39c4`+`40f9d9e`），本轮记 **185**、不重排他人记录。
+- 越车道理由（不粉饰）：185 mod 5 = 0 按车道表应走 **D 体检与工具**。实做 A 的原因是本轮
+  产出是用户显式定向的续篇（上轮「下一轮入口」②已把官方页取证清单交下来），且四篇已完成
+  并通过全部闸门；代价记一笔——**D 队列本轮未推进**（候选表第 11 行缩进围栏 21 块、
+  对比度审计 26 页选择器盲区、代码块宽度路线三项均原地不动）。
+- 与 `docs/content-roadmap.md` 的关系（如实说明，不擅自并入）：该文件由并行会话新建并已
+  提交为「内容优先级真源」，其 §2 当前批次 B1 共 12 条**全部是 java/mysql/redis/kafka/
+  kubernetes 的条目，不含 spring-ai**。本轮按用户直接指令执行，未从 B1 取点；建议把
+  spring-ai 续篇与 Spring 侧缺口作为新批次条目交给该文件的作者登记（本轮未碰该文件）。
+- 选题证据（现算）：`spring-ai` 方向第 183 轮只有 4 篇、覆盖 basic + intermediate 两层，
+  工具调用/RAG/MCP 三块官方页已在上轮取证在手但**零专篇**；本轮后本方向 8 篇 / 10 张
+  mermaid / 1512 行正文 / 8 道考题，三层（basic/intermediate/advanced）齐备、5 个分类。
+- 取证（每条回原文，另用 2.0.x 源码复核三处文档不可靠点）：
+  ① **工具循环归属**——"The per-ChatModel internal tool execution loop of Spring AI 1.x
+  has been removed … tool calls in that response are not executed automatically"；
+  ② **`toolCallbacks()`/`defaultToolCallbacks()` 在源码里标
+  `@Deprecated(since="2.0.0", forRemoval=true)`**，统一走异构 `tools(Object...)` /
+  `defaultTools(Object...)`，`toolContext(Map)` 亦经源码确认存在（文档未给签名）；
+  ③ **`Document` 只有 `getText()`**——官方《Vector Databases》示例写 `Document::getContent`，
+  但 2.0.x 源码该类 `getContent()` 出现 **0 次**，照文档抄编译不过，笔记里已写成显式警告；
+  ④ ETL 三段是 JDK 函数式接口（`Supplier`/`Function`/`Consumer`），`VectorStore extends
+  DocumentWriter, VectorStoreRetriever`，且 **"As of version 2.0, small texts … are no
+  longer split at punctuation marks"**（同一语料重灌会变块数与命中，属回归范围）；
+  ⑤ 两档 RAG Advisor **分属两个模块**：`spring-ai-vector-store-advisor` 与 `spring-ai-rag`，
+  `userTextAdvise()` 已弃用改 `promptTemplate()`，并纠正一处易记反的点——"Naive RAG" 在文档里
+  是挂在 `RetrievalAugmentationAdvisor` 的 Sequential Flows 下的**流程名**，不是类标签；
+  ⑥ MCP 侧：四个 starter 与传输矩阵、`spring.ai.mcp.client.toolcallback.enabled`（默认
+  `true`，产出 `SyncMcpToolCallbackProvider`）、**SSE 服务端 "deprecated since 2.0.0, use
+  STREAMABLE instead"**、"The SYNC server will register only synchronous MCP annotated
+  methods"、`destructiveHint` 默认 `true`、安全模块 WIP 且 "not officially endorsed"。
+- **两处官方源不可调和，均按既有红线不引数字/不采信**：(a) MCP Java SDK 版本——《MCP
+  Overview》"requires MCP Java SDK **1.0.0** … bumped from `0.18.x` to the `1.0.x`"，
+  《Upgrade Notes》一处 "upgraded … from `1.1.x` to **2.0.0**"、**同页另一处又重复
+  `0.18.x`→`1.0.x`**，三句无法同时为真，笔记里改为教 `mvn dependency:tree | grep -i mcp`；
+  (b) `Document` 取值方法名以源码为准并写明示例已过时。另主动不写 6 项「文档未出现」的名字
+  （`QaMetadataEnricher`、`FileWriter`、`TokenWindowChatMemory`、`ToolCallingChatMemoryAdvisor`、
+  `MethodToolCallbackProvider`、`RetrievalAugmentationAdvisor` 的 `queryExpander/joiner`
+  等装配方法），并在正文提示以 IDE 补全为准，不凭概念名硬编。
+- 产出（12 文件，全部自有路径）：`intermediate/tools/`（01 工具调用 182 行 + 分类页）、
+  `advanced/rag/`（01 VectorStore 与 ETL 200 行、02 两档 RAG Advisor 148 行 + 分类页）、
+  `advanced/mcp/`（01 MCP 接入 219 行 + 分类页）、方向首页覆盖段落改为三层口径、
+  `graphs/spring-ai.json` 增 4 节点 5 边（含「MCP 工具转 ToolCallback」「ToolCallingAdvisor
+  驱动循环」两条跨分类边）、`quiz/spring-ai.json` 4→8 题、侧边栏 hunk 级 +31 行、
+  速答手册 hunk 级 +5 行。4 张新 mermaid 零硬编码颜色（只用 `hl` 语义类）。四篇均不加
+  `core`，与 `content-roadmap.md` §5 待裁决第 2 条「本批新篇一律不加星标」同口径。
+- 基线修复一笔（他人内容，单独提交、只改一个路径 token）：`pnpm build` 绿但
+  `verify:docs` 第 5 项判红——并行会话已提交的 `java/intermediate/build/01-dependency-conflict.md`
+  指向不存在的 `/java/intermediate/syntax/13-lombok-apt/`，而目标笔记 `git ls-files` 实为
+  `java/basic/syntax/13-lombok-apt.md`（frontmatter `level: basic`、侧边栏亦登记在
+  `/java/basic/syntax/`）。三处证据一致、正确落点无歧义，按配方 §0.3「修基线优先」把
+  `intermediate` 改回 `basic`，作为独立提交 `a3fb4bd` 与本轮内容分开记账，未触碰该作者
+  其他任何在途内容。
+- 验证数字：`pnpm build` **730 页**通过；`pnpm verify:docs` **25 项全绿**（侧边栏 **727** 条
+  link、已提交笔记 **542** 篇全部注册、图谱覆盖率 **100%**、172 个 index 页无空壳、硬编码
+  颜色 **0** 处、mermaid **554** 块语法有效、题库 8 项 **649** 题（本方向 8 题、32 个题库文件
+  均对应真实方向）、影像 7 项 6 资产）；`node scripts/mermaid-contrast-verify.mjs`
+  **400 页 × 2 主题 0 处低于 4.5:1**（读数自检：内容树带图笔记与 dist 渲染页数相等）。
+  真机核验（本机 Playwright 1440×900）：7 个新页面 4 篇正文各渲染 **1 个** mermaid SVG、
+  表格 1/1/2/3 张、代码块 7/5/3/4 段、**0 处代码块溢出、页宽恒 1440**、MCP 篇 6 条站内绝对
+  链接逐个 HTTP 实取无 404；作答页方向标签显示「Spring AI 8 题」并真点起 1/8 轮次。
+  宽度自查再次起作用：MCP 篇首稿 4 行超 77 视觉列（80/82/89/91），重排后复扫为 0。
+- 下一轮入口：**第 186 轮 → 186 mod 5 = 1 → 车道 A 新章节**，与 `content-roadmap.md` §2
+  B1 批次对齐（该文件现为 A 车道取点真源，本方向不抢它的队列）。①`spring-ai` 仍可续的
+  已取证主题：**Observability**（Actuator/Micrometer 侧的 token 指标与追踪）、
+  **Prompt 模板与多模态**、**Model Evaluation**（`Evaluator` API 与幻觉检测，可与
+  `ai/intermediate/agent/10-agent-evaluation` 互链）；②本方向 8 篇中 `advanced/mcp` 与
+  `intermediate/tools` 各只有 1 篇，第二题可入 `coverage-deepening.md` d 类队列；
+  ③**D 队列欠两轮**（185 未做 D，181/183 亦为越车道），候选表第 11 行缩进围栏 21 块仍是
+  最弱成本最高收益的一项，建议下一轮游标落到 D 时优先；④共享文件提交纪律：本轮
+  `astro.config.mjs` 与 `interview-cheatsheet.md` 均按 hunk 切分入索引并复核，
+  **未使用 pathspec 形式**（第 183 轮的越界教训已生效）。
+
 ### 第 184 轮（2026-09-25，车道 C 题库｜越车道执行并如实登记）：抽奖权重区间与防超发 / 对账体系 / 量化位宽账——三篇核心笔记首题补缺
 
 - 取号与越车道（不粉饰）：开工 `git pull --ff-only` 已是最新，勘察命令算得「下一轮 = 第 **183** 轮，183 mod 5 = 3 → 车道 C」，本轮按 C 做完三道题与队列账；收尾复算台账时 183 号位已被并行会话（用户定向「spring AI 也是方向」→ spring-ai 新方向 4 篇，提交 `5728de2`+`08d973e` 并已推送）占用，故按配方 §6「最大号 +1、不重排他人记录」顺延登记为 **184**。代价两笔如实记账：① 184 mod 5 = 4 本应走 A 车道，**A 车道本会话仍未产出**（承接第 181 轮已欠的两轮 A，账未清）；② 183 那个 C 车道游标本轮已被我自己消费，下一轮游标（185 mod 5 = 0 → D）不再欠 C。
