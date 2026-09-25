@@ -337,6 +337,25 @@
       ],
       "hint": "生产标配：HTML 入口 no-cache 走协商、JS/CSS 文件名带内容 hash + 超长 max-age + immutable——内容变文件名就变，强缓存永不脏；多机部署下 mtime+size 生成的 ETag 各机不一致会抖动命中率；CDN 与浏览器是同一套缓存语义分层生效。",
       "difficulty": 3
+    },
+    {
+      "id": "net-wsup-021",
+      "noteId": "network/basic/http/07-websocket",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 WebSocket 的握手与生产落地，下列说法正确的有？（多选）",
+      "options": [
+        "握手是标准 HTTP 请求，101 表示同意换协议；之后这条 TCP 上跑 WebSocket 帧，不再带 HTTP 头",
+        "Sec-WebSocket-Key/Accept 只是握手校验，不承担加密——要加密必须走 wss://",
+        "SSE 与 WebSocket 都是长连接，双向实时场景两者等价，选哪个都行",
+        "TCP 半死连接不会主动通知应用，所以生产要配心跳探活、超时判死、指数退避重连"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "第三项错在方向：SSE 只能服务器→客户端单向推，聊天这类双向实时必须 WebSocket；反过来 LLM 流式输出只需单向，用 SSE 复用纯 HTTP 设施更轻。另记一条生产坑：nginx 要显式配 proxy_set_header Upgrade $http_upgrade 才透传升级请求，否则 101 根本到不了浏览器。"
     }
   ]
 }

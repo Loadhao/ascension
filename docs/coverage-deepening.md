@@ -32,11 +32,6 @@
 
 
 
-- [ ] network/basic/http/07-websocket — 第一题考「WebSocket 握手与全双工」（0 题补缺）
-
-- [ ] mongodb/intermediate/usage/11-security — 第一题考「认证授权与传输加密」（0 题补缺）
-
-- [ ] js/basic/core/12-type-coercion — 第一题考「隐式转换规则与 == 陷阱」（0 题补缺）
 - [ ] linux/basic/filesystem/02-swap-memory — 第一题考「swap 与内存压力水位」（0 题补缺）
 - [ ] ai/intermediate/agent/10-agent-evaluation — 第一题考「Agent 评测与回归」（0 题补缺）
 - [ ] mongodb/intermediate/usage/04-read-preference — 第一题考「读偏好与从节点读」（0 题补缺）
@@ -44,6 +39,10 @@
 - [ ] distributed/intermediate/case-studies/08-lottery — 第一题考「权重区间概率配置与奖品预扣防超发」（0 题补缺）
 - [ ] distributed/intermediate/case-studies/20-reconciliation — 第一题考「对什么账、怎么对、差错怎么闭环」（0 题补缺）
 - [ ] ai/intermediate/llm/07-quantization — 第一题考「各量化位宽的显存账与 PTQ/QAT 分工」（0 题补缺）
+- [ ] distributed/intermediate/case-studies/05-large-file-upload — 第一题考「分片 + 断点续传清单 + 秒传 hash 命中即引用，以及为什么生产要改对象存储直传」（0 题补缺）
+- [ ] distributed/intermediate/case-studies/10-coupon — 第一题考「券模板与用户券两件事的建模、领券库存预扣与核销重复防护」（0 题补缺）
+- [ ] ai/intermediate/llm/04-inference-params — 第一题考「temperature 锐化与 top_k/top_p 截断长尾的分工，别把两者当同一个旋钮」（0 题补缺）
+- [ ] ai/intermediate/llm/05-token-cost — 第一题考「账单构成与「上下文越长越贵也越慢」的 O(n²) 根源、提示缓存只对固定前缀打折」（0 题补缺）
 
 ### b 类：旧题返修
 
@@ -178,6 +177,8 @@
 - 2026-09-18 · 第六十轮：3 道第一题补缺（ai-gpu-042 / js-promcombo-023 / linux-ssh-013，difficulty 4/3/4）· 本轮提交主题：feat: 题库深化第六十轮
 
 - 2026-09-24 · 第六十一轮（第 173 轮｜车道 C｜题库深化第 61 轮）：3 道第一题补缺（dist-redpacket-038 / mongo-txn-012 / ai-structout-043，difficulty 4/4/3）；队列销 3 条、追加 4 条（含第 171 轮留账的 react/04 篇）· 本轮提交主题：feat(quiz): 演进第 173 轮车道 C 补红包/事务/结构化输出三篇首题
+
+- 2026-09-25 · 第六十二轮（第 175 轮｜车道 C｜题库深化第 62 轮）：3 道第一题补缺（net-wsup-021 / mongo-auth-013 / js-coerce-024，difficulty 4/3/4）；队列销 3 条、追加 4 条；同轮为首批 3 篇补「速答手册」索引行（网络协议 / JavaScript / 检索与文档存储各 1 行）· 本轮提交主题：feat(quiz): 演进第 175 轮车道 C 补 WebSocket/Mongo 安全/隐式转换三篇首题并同步速答索引
 
 ## 经验与规则
 

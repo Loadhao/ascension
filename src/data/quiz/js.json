@@ -412,6 +412,21 @@
       ],
       "hint": "race 只是不等了，请求还在跑——真正取消要配 AbortController（请求取消篇的 signal 语义）；并发限制器 = race 监听执行中任务完成补位（IO 密集 10~20，CPU 密集=核数）；any 的 AggregateError 包含所有失败原因。js-gen-021 考生成器，本题考组合器。",
       "difficulty": 3
+    },
+    {
+      "id": "js-coerce-024",
+      "noteId": "js/basic/core/12-type-coercion",
+      "type": "judge",
+      "difficulty": 4,
+      "q": "`\"0\" == false` 为 true，而 `\"0\" && false` 为 false——这两个结果互相矛盾，说明 == 与 && 走的是同一套 ToBoolean 规则。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "不矛盾，是两条独立的转换链：== 遇到布尔值先转数字（\"0\"→0、false→0，所以相等）；&& 对操作数走 ToBoolean（\"0\" 是非空字符串＝真值，于是返回末位的 false）。记牢假值只有 6 个——false、0、\"\"、null、undefined、NaN，带内容的 \"0\" 不在其中。"
     }
   ]
 }

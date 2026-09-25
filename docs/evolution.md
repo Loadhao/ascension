@@ -6,6 +6,7 @@
 
 - 阶段：内容体系充实 + 教学形态升级（「可用版本」已达成：构建通过且已部署 GitHub Pages；尚无真实用户数据，无法进入「验证有人需要」）
 - 目标描述：让站点成为结构自洽、核心技术方向内容成体系的知识库——每轮在补内容、修问题、改善体验中按证据选择一项最小改进，保持全站一致性体检全绿；自 2026-09-23 起并把教学形态从「看图文」扩到「可看可听」（配音视频 / 导出图卡），每轮按配方车道轮转推进。
+- 自 2026-09-25 起（用户指令）再加一条硬约束：每轮必含一项面向读者的内容增量（新章节 / 考题 / 速答手册新行 / 新图），不允许只加影像或只改工具脚本；车道表已把 B 的一格还给 A（配方 §1）。
 - 每轮作业规范：`docs/evolution-recipes.md`（车道与游标、尺寸上限、降级阶梯、停止条件）。定时任务「知识库无人值守演进」（id `98552cee-4538-44d5-9ad0-78915438976e`，每天 03/09/15/21 点 17 分上海时间，Full Access 自动提交推送，**2026-10-23 17:42 到期需续**）每次触发只推进一轮，本文件的「轮次记录」是唯一全局编号真源；要暂停去 Automations 面板 disable 本任务。
 - 完成标志（全部可自动验证）：
   1. `pnpm build` 通过；
@@ -54,6 +55,68 @@
 历史已完成项存档：图谱覆盖度补全（第 1 轮，100%）、Mermaid 对比度审计（第 2 轮，零违规）、frontmatter/内链/分类页导读/图谱结构体检（第 3/4/6/19 轮，均全绿并固化为 scripts/consistency-verify.mjs）、方向内容补全（第 5/7/8/9/10/11/12/14/15/17/20 轮，16 篇 + 5 分类）、工具固化（第 16 轮）、状态文件整理（第 18 轮）。
 
 ## 轮次记录
+
+### 第 177 轮（2026-09-25，车道 C 题库 + 速答增量｜用户指令改道并如实登记）：WebSocket / Mongo 安全 / 隐式转换三篇首题，同批补速答手册入口
+
+- 开工与定界：`git pull --ff-only` 已是最新、无未推送提交；开工瞬间 `git status --porcelain` 干净，
+  作业中途**两个并行会话先后进场**——①A 车道会话已提交并推送 `309832a`（mysql 联合索引新篇，自占
+  第 175 轮）与 `f5d55f1`（账本更正）；②D 车道会话留有未提交内容：4 篇笔记的代码块换行重排
+  （distributed/18-approval-flow、js/node/06-cluster-workers、linux/permission/02-immutable-capabilities、
+  mongodb/usage/09-multikey-index）、`src/data/quiz/linux.json` 新题、`.tmp-scan-code-overflow.mjs`
+  草稿，以及 `docs/evolution.md` 里自占**第 176 轮**的记录。本轮自有文件与其零重叠，全程只暂存自己
+  的 7 个文件，未 stage 他人任何内容；全局编号按「最大轮次 + 1」取 **177**（176 已被 D 会话占用，
+  不重排、不合并）。
+- 选题证据与改道理由（越车道执行，三条判据都在账上）：基线 `pnpm verify:docs` 25 项全绿（一致性 10
+  + mermaid 533 块 + 题库 8 项 623 题 + 影像 7 项 5 资产），非「修基线」路径；
+  `node scripts/evolution-candidates.mjs --top 60` 判「下一轮 = 第 175 轮 → 车道 D」，而 D 车道旧账
+  （候选表第 6 行「代码块 ≤80 视觉列」）当时**正被并行会话执行**，接手必撞同一批文件。触发指令里
+  用户明确写「定时任务，每次也要增加考题、快速问答、知识篇章等等，不能光生成视频啊」——用户指令
+  优先于配方轮转；按降级阶梯 A→B→C→D，A 当日已由并行会话连开两篇（第 171 轮 react、第 175 轮
+  mysql），B 队列头部 es-write 的第 174 轮实测口播预算不达标（每帧预算 22 字 vs 帧说明 114 字，
+  压缩即踩「机械缩写」红线），故取 C 并附带速答增量。
+- 内容要点（3 题与 3 条速答成对覆盖同批笔记）：
+  - `net-wsup-021`（multiple / difficulty 4 / `network/basic/http/07-websocket` 首题）：考握手借
+    HTTP 拿 101 后切独立帧、Sec-WebSocket-Key/Accept 只是校验**不是加密**、半死连接要心跳 +
+    超时判死 + 指数退避重连；干扰项用真实误区「SSE 与 WS 都是长连接所以双向场景等价」（笔记选型表
+    明确 SSE 只能服务器→客户端单向）。选题按 b 类「multiple 占比偏低优先补多选」：实测 network 方向
+    20 题里仅 2 道 multiple、全站 623 题 multiple 89（14.3%）。与 js 方向 `js-ws-007`/`js-wsframe-018`
+    （宿主是另一篇 `js/intermediate/web/01-websocket`）考点不重叠。
+  - `mongo-auth-013`（single / difficulty 3 / `mongodb/intermediate/usage/11-security` 首题）：考
+    「先建管理员账号再开 `--auth`、副本集内部认证另是一条独立的线」；三个干扰项逐一对应笔记点名的
+    三个坑（不是开箱已认证、bindIp 默认 127.0.0.1 而非 0.0.0.0、应用账号给目标库 readWrite 而非
+    root）——按「读完能避开事故」出题，不出记忆题。
+  - `js-coerce-024`（judge / difficulty 4 / `js/basic/core/12-type-coercion` 首题）：判断题只压一条
+    主张——「`"0" == false` 为 true 而 `"0" && false` 为 false 互相矛盾，说明走同一套 ToBoolean」，
+    正解「错误」（`==` 遇布尔走 ToNumber、`&&` 走 ToBoolean，两条独立转换链）。与池内既有
+    `js-implicit-014`（宿主 `01-js-fundamentals`，考转换发生点与 `[] + {}`）、`js-typeof-001` 角度不重叠。
+  - **速答手册补 3 行**（`guide/interview-cheatsheet.md`：网络协议 / JavaScript / 检索与文档存储各
+    1 行）：这三篇此前在手册里**没有任何入口**（JavaScript 节原有的 WebSocket 行指向 js 方向那篇），
+    读者冲刺复习点不到——题与索引行同批落地，凑成「速答扫一眼 → 点进笔记 → 做题自检」闭环。
+- 配方修订（把用户诉求变成长期约束，不是本轮一次性绕道）：`docs/evolution-recipes.md` §1 车道表把
+  B 从两格收回到一格（`n mod 5 = 4` 还给 A），每 5 轮由「2 影像 + 1 章节」变「**2 新章节 + 1 影像 +
+  1 题库 + 1 体检**」；并新增硬约束「每轮必含一项面向读者的内容增量（新章节 / 考题 / 速答行 / 新图），
+  不允许出现只加视频或只改工具脚本的纯技术轮」，B/D 车道在主产出之外附 1 题或 1 条速答即算满足。
+  改法走配方 §1 自述的预留旋钮（「影像阶段收敛后把其中一格还给 A，改这张表即可，不需要改技能」），
+  未新增结构、未动其他章节。
+- 验证数字：`pnpm build` **708 页 / 22.83s** 通过（708 含并行会话未提交的那篇 mysql 新页，本轮自有
+  改动不增页面）；`pnpm verify:docs` 25 项全绿——一致性 10 项、mermaid 535 块、题库 8 项 **626 题**
+  （+3，id 全局唯一 / noteId 可达 / difficulty 1~5 整数 / 选项与答案下标自洽全部通过）、影像 7 项
+  5 资产。本轮未动图表与媒体，`mermaid-contrast-verify` 按配方不适用；`media-verify` 已随
+  `verify:docs` 跑过。
+- 队列变化：C 队列销 3 条、追加 4 条（`05-large-file-upload`、`10-coupon`、`04-inference-params`、
+  `05-token-cost`，考点逐条取自各篇真实小节标题），a 类余 11 条；另实测全站「core 且 0 题」笔记仍余
+  **68 篇**，池子未枯竭。`docs/coverage-deepening.md` 记「题库深化第 62 轮」。
+- 过程发现（本轮自己踩到并已修，值得沉淀）：删 `coverage-deepening.md` 队列条目时把上一条的行尾
+  换行一起吃掉，导致两条 `- [ ]` 挤成一行——靠 `git diff` 复核才发现。**教训：markdown 列表项要连它
+  自己的换行一起删，且列表类改动必须看 diff 而不是只信编辑工具报成功。**
+- 下一轮入口：**第 178 轮 → 178 mod 5 = 3 → 车道 C 题库**（与新配方「每轮含内容增量」天然对齐）。
+  C 队列头部：`linux/basic/filesystem/02-swap-memory`、`ai/intermediate/agent/10-agent-evaluation`、
+  `mongodb/intermediate/usage/04-read-preference`；⚠️ 注意 `src/data/quiz/linux.json` 此刻有并行会话
+  未提交新题，开工先 `git status` 定界。D 车道旧账：候选表第 6 行已由第 176 轮（并行会话）处理，
+  接手前先核剩余行数，勿重复劳动；第 8 行（`media-encode` 回填尺寸打印 1280x730 vs 实测 1280×732）
+  仍无人动，是下一个 D 车道首选。B 队列余 40 支未出片（头部 es-write 需先精简文稿）。每轮开工照旧：
+  同步 → 定界 → 体检基线 → 勘察命令。
+
 
 ### 第 175 轮（2026-09-25，车道 A 新章节｜用户定向）：联合索引与最左前缀（mysql/basic/core 第 3 篇）——MySQL 索引主题从 1 篇扩到 2 篇
 

@@ -201,6 +201,7 @@ Docker、Nginx、Git 等全站方向。
 | [跨域与 CORS](/js/intermediate/web/02-cors/) | 浏览器同源策略的安全约束，CORS 靠响应头放行，复杂请求先 OPTIONS 预检 |
 | [OSI 与 TCP/IP](/network/basic/foundation/01-osi-tcpip/) | OSI 七层对照 TCP/IP 四层；排障 ping→端口→curl 逐层二分，L4/L7 用的是 OSI 编号 |
 | [HTTP 方法与状态码](/network/basic/http/01-http-basics/) | GET/PUT/DELETE 幂等、POST 不幂等是重试依据；401 未认证、403 没权限、502 上游挂、504 上游超时 |
+| [WebSocket 与 SSE 怎么选](/network/basic/http/07-websocket/) | 握手借 HTTP 升到 101，之后同一条 TCP 跑独立帧全双工；Key/Accept 只是校验不是加密，加密靠 wss；单向推送用 SSE 更轻 |
 
 ## JavaScript
 
@@ -214,6 +215,7 @@ Docker、Nginx、Git 等全站方向。
 | [WebSocket](/js/intermediate/web/01-websocket/) | HTTP 101 升级后同一条 TCP 全双工互发帧，绕开请求-响应 |
 | [DOM 事件委托](/js/intermediate/web/03-dom-events/) | 捕获→目标→冒泡；监听挂父元素靠 target 分辨，不冒泡的事件委托不了 |
 | [Node 内存](/js/intermediate/node/01-node-gc-memory/) | heapUsed 只是 V8 堆；RSS 涨而堆不涨先怀疑 Buffer 等堆外 |
+| [隐式转换与 == 陷阱](/js/basic/core/12-type-coercion/) | 假值只有 6 个；== 时布尔先转数字、对象先 ToPrimitive，所以 `[] == false` 为 true；工程永远用 ===，唯一例外是 `x == null` |
 
 ## 消息队列
 
@@ -259,6 +261,7 @@ Docker、Nginx、Git 等全站方向。
 | [MongoDB 分片集群](/mongodb/advanced/sharding/01-sharding-cluster/) | mongos 路由 + config 元数据 + shard 分片；复制集只解决可用性，写扩展靠分片 |
 | [Mongo 容量规划](/mongodb/advanced/operations/01-capacity-planning/) | 磁盘 ≠ 原始数据：副本×3 + 索引常占 20%~50%；内存按 2× 工作集，能放下别急着分片 |
 | [文档模型怎么选](/mongodb/basic/core/01-document-model/) | BSON 结构长在文档里；第一决策是内嵌还是引用，不是「没有 schema」 |
+| [MongoDB 上生产第一道必答题](/mongodb/intermediate/usage/11-security/) | 开箱默认无认证：先建管理员再开 --auth、bindIp 收敛、TLS 加密；应用账号只给目标库 readWrite，副本集内部认证是另一条线 |
 | [explain 看什么](/mongodb/advanced/operations/02-performance/) | keys/docs/returned 接近 1:1:1；COLLSCAN 就是没走到索引 |
 | [ES terms 聚合为什么会丢桶](/elasticsearch/intermediate/usage/02-aggregation/) | 各分片只交局部 top-N 再合并，size 太小高频词落选——聚合字段一律 keyword，size 要设够大 |
 | [ES match 与 term](/elasticsearch/intermediate/usage/01-query-dsl/) | 含某词用 match 查 text；精确等于用 term 且字段得是 keyword |
