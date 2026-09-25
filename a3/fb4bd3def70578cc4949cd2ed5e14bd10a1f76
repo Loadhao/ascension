@@ -1,0 +1,19 @@
+src/content/docs/java/intermediate/build/01-dependency-conflict.md
+  s_dbf93f31316499::t_f8a6c844eb1961 218
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a3fb4bd3def70578cc4949cd2ed5e14bd10a1f76",
+  "prompts": {},
+  "sessions": {
+    "s_dbf93f31316499": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "b812c46d-7f53-45af-87b8-09f7d292dd46",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
