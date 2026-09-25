@@ -1,0 +1,44 @@
+src/content/docs/spring-ai/basic/foundation/01-what-is-spring-ai.md
+  s_dbf93f31316499::t_e4907cf6bff7a5 1-178
+src/data/graphs/spring-ai.json
+  s_dbf93f31316499::t_5f974aac0e9983 1-18
+src/data/quiz/spring-ai.json
+  s_dbf93f31316499::t_951d55aae22188 1-72
+src/content/docs/spring-ai/intermediate/advisor/02-chat-memory.md
+  s_dbf93f31316499::t_590d43e2af890f 1-46,49-164
+  s_dbf93f31316499::t_52a001fb37ad48 47-48
+src/content/docs/spring-ai/intermediate/advisor/01-advisor-chain.md
+  s_dbf93f31316499::t_547d7e7cb42940 1-39,42-45,48-58,61-224
+  s_dbf93f31316499::t_fdeebd06ed8b6c 59-60
+  s_dbf93f31316499::t_4d570632c51658 40-41,46-47
+src/lib/notes.ts
+  s_dbf93f31316499::t_72d4d35b68c1d3 15
+src/content/docs/spring-ai/basic/foundation/02-chatclient-api.md
+  s_dbf93f31316499::t_a10df60e11536e 1-197
+src/content/docs/spring-ai/basic/foundation/index.mdx
+  s_dbf93f31316499::t_69b50668616d8e 1-16
+src/content/docs/spring-ai/intermediate/advisor/index.mdx
+  s_dbf93f31316499::t_c3230f1e8be898 1-19
+astro.config.mjs
+  s_dbf93f31316499::t_fc9050dbd041ed 2219-2255
+src/content/docs/guide/interview-cheatsheet.md
+  s_dbf93f31316499::t_819891d72db25d 453-457
+src/content/docs/spring-ai/index.mdx
+  s_dbf93f31316499::t_c8bfcb6ed7c354 1-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5728de2cc74659b5064d2e69bff96cba8a649980",
+  "prompts": {},
+  "sessions": {
+    "s_dbf93f31316499": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "b812c46d-7f53-45af-87b8-09f7d292dd46",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
