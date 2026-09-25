@@ -137,6 +137,74 @@
         0
       ],
       "hint": "官方注解说明里有一条 NOTE：「The SYNC server will register only synchronous MCP annotated methods. Asynchronous methods will be ignored.」——静默不注册，比报错更难查。要做非阻塞工具得把服务端配成 ASYNC（McpAsyncServer，自带 Reactor 支持）。见《MCP 接入》。"
+    },
+    {
+      "id": "sa-optsover-009",
+      "noteId": "spring-ai/intermediate/model/01-chatmodel-and-options",
+      "type": "single",
+      "difficulty": 5,
+      "q": "模型 Bean 上配了 temperature=0.2 与 maxTokens=200。现在直接调 ChatModel.call(new Prompt(text, options))，而 options 只设了 topK(5)。实际生效的是？",
+      "options": [
+        "只有 topK=5 生效，temperature 与 maxTokens 不再继承 Bean 的默认值",
+        "三项合并：topK 覆盖，其余沿用 Bean 配置",
+        "Prompt 校验失败，因为 options 不完整",
+        "沿用 Bean 全部配置，topK 被忽略"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "官方口径：走 ChatModel 时「the passed prompt needs to contain a full set of options that will completely take precedence over options set in the model (or use null options in the Prompt to use the model's defaults)」。增量（delta）覆盖只存在于 ChatClient 层；要基于默认改一项，用 options.mutate() 先复制全套再改。见《ChatModel 抽象与参数覆盖》。"
+    },
+    {
+      "id": "sa-stream-010",
+      "noteId": "spring-ai/intermediate/model/01-chatmodel-and-options",
+      "type": "judge",
+      "difficulty": 4,
+      "q": "流式输出要靠厂商额外实现 StreamingChatModel，ChatModel 本身不保证具备流式能力。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "接口定义是「public interface ChatModel extends Model<Prompt, ChatResponse>, StreamingChatModel」——每个 ChatModel 同时也是流式模型。2.0 在音频侧做了同构改动：TranscriptionModel now extends StreamingTranscriptionModel，并给默认实现返回 Flux.error(UnsupportedOperationException) 以免既有实现编译中断。见《ChatModel 抽象与参数覆盖》。"
+    },
+    {
+      "id": "sa-obslog-011",
+      "noteId": "spring-ai/advanced/observability/01-ai-observability",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 Spring AI 的观测，哪些说法成立？",
+      "options": [
+        "prompt 与 completion 正文默认不导出，要显式开 log-prompt / log-completion",
+        "ChatClient 层与 ChatModel 层各有一套 log-* 开关，开一层不影响另一层",
+        "token 用量走 gen_ai.client.token.usage，按 input / output / total 分型",
+        "conversation.id 适合作为 Prometheus 指标的低基数标签来聚合会话"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "官方理由：正文「typically big and possibly containing sensitive information. For those reasons, it is not exported by default」，且开关命名是 log-* 而非 include-prompt。干扰项错在基数：conversation.id 属高基数标签，进 trace 可以，进 metric 标签会让时间序列随会话数线性膨胀。见《AI 调用的可观测性》。"
+    },
+    {
+      "id": "sa-evalreq-012",
+      "noteId": "spring-ai/advanced/observability/02-llm-as-judge-evaluation",
+      "type": "single",
+      "difficulty": 5,
+      "q": "用 RelevancyEvaluator 给 RAG 链路写回归测试，构造 EvaluationRequest 需要哪三项？",
+      "options": [
+        "用户原始输入、检索到的上下文、模型回答",
+        "用户输入、标准答案、模型回答",
+        "提示模板、温度、模型名",
+        "用户输入、上下文、期望的 YES/NO 标签"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "签名是 EvaluationRequest(String userText, List<Content> dataList, String responseContent)，文档里没有 expected / ground-truth 槽——它评的是「回答与上下文是否自洽」，不是「是否等于正确答案」。上下文应取 advisor 实际检索到的文档（chatResponse.getMetadata().get(RetrievalAugmentationAdvisor.DOCUMENT_CONTEXT)），否则测的是拼接而不是检索质量。见《Evaluator 与 LLM 裁判》。"
     }
   ]
 }

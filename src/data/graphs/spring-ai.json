@@ -8,7 +8,10 @@
     { "id": "sa-tools", "label": "工具调用与执行归属", "href": "/spring-ai/intermediate/tools/01-tool-calling/", "group": "工具", "weight": 0.65 },
     { "id": "sa-vectordb", "label": "VectorStore 与 ETL", "href": "/spring-ai/advanced/rag/01-vector-store-etl/", "group": "RAG", "weight": 0.6 },
     { "id": "sa-ragadv", "label": "Naive 与 Modular RAG", "href": "/spring-ai/advanced/rag/02-rag-advisors/", "group": "RAG", "weight": 0.6 },
-    { "id": "sa-mcp", "label": "MCP 客户端与服务端", "href": "/spring-ai/advanced/mcp/01-mcp-client-server/", "group": "MCP", "weight": 0.6 }
+    { "id": "sa-mcp", "label": "MCP 客户端与服务端", "href": "/spring-ai/advanced/mcp/01-mcp-client-server/", "group": "MCP", "weight": 0.6 },
+    { "id": "sa-model", "label": "ChatModel 与参数覆盖", "href": "/spring-ai/intermediate/model/01-chatmodel-and-options/", "group": "模型层", "weight": 0.6 },
+    { "id": "sa-obs", "label": "四层观测与内容导出", "href": "/spring-ai/advanced/observability/01-ai-observability/", "group": "观测", "weight": 0.6 },
+    { "id": "sa-eval", "label": "Evaluator 与 LLM 裁判", "href": "/spring-ai/advanced/observability/02-llm-as-judge-evaluation/", "group": "观测", "weight": 0.6 }
   ],
   "edges": [
     { "source": "root", "target": "sa-what" },
@@ -24,6 +27,12 @@
     { "source": "sa-advisor", "target": "sa-tools", "label": "ToolCallingAdvisor 驱动循环" },
     { "source": "sa-advisor", "target": "sa-ragadv", "label": "RAG 也是一种 Advisor" },
     { "source": "sa-vectordb", "target": "sa-ragadv", "label": "检索端与拼接端" },
-    { "source": "sa-tools", "target": "sa-mcp", "label": "MCP 工具转 ToolCallback" }
+    { "source": "sa-tools", "target": "sa-mcp", "label": "MCP 工具转 ToolCallback" },
+    { "source": "root", "target": "sa-model" },
+    { "source": "root", "target": "sa-obs" },
+    { "source": "sa-chatclient", "target": "sa-model", "label": "门面之下的模型抽象" },
+    { "source": "sa-model", "target": "sa-obs", "label": "gen_ai.client.operation" },
+    { "source": "root", "target": "sa-eval" },
+    { "source": "sa-obs", "target": "sa-eval", "label": "看得见之后才谈判得准" }
   ]
 }

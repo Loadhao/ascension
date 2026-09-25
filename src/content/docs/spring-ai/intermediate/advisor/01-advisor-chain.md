@@ -164,6 +164,17 @@ that drives the loop"，并且 "always auto-registered by `ChatClient`"。
 - `MessageChatMemoryAdvisor` 默认 order = **`HIGHEST_PRECEDENCE + 200`**，
   官方直接点明后果——"lower than ToolCallingAdvisor, **which places it outside the loop**"。
 
+这个 200 不是随手挑的数，而是 2.0 的一次**主动改默认**。《Upgrade Notes》原文：
+"`Advisor.DEFAULT_CHAT_MEMORY_PRECEDENCE_ORDER` changed from
+`Ordered.HIGHEST_PRECEDENCE + 1000` to `Ordered.HIGHEST_PRECEDENCE + 200`, placing memory
+advisors at their default order *outside* the `ToolCallingAdvisor`
+(`HIGHEST_PRECEDENCE + 300`)."
+
+把两个数摆到同一条数轴上就能看出这次改动的方向：`MIN+200 < MIN+300 < MIN+1000`，
+而 order 越小越先执行、也越靠外层。**1.x 的 `+1000` 落在 `+300` 之内（环内），2.0 把常量
+挪到 `+200` 才移到环外。** 换句话说，"工具往返的中间消息该不该进历史"这个原本由实现细节
+决定的行为，在 2.0 被显式立成了框架默认——这也是前面那条"工具消息不落记忆"限制的出处。
+
 ```mermaid
 flowchart TB
     U["用户一句话"] --> MEM["记忆 Advisor<br/>MIN+200：读一次历史"]

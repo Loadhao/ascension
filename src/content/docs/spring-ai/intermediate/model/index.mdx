@@ -1,0 +1,16 @@
+---
+title: 模型抽象与参数
+description: ChatModel 与 ChatOptions 这一层——可移植旋钮的边界、per-request 参数的覆盖规则、Options 不可变与多模态输入
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+`ChatClient` 好用，但它把三件事藏了起来：**参数到底怎么覆盖**、**可移植性到哪为止**、
+**流式与非文本产出走哪条 API**。本分类把这些拆开讲：`ChatModel` 同时继承
+`StreamingChatModel` 意味着什么、`ChatOptions` 那八个可移植旋钮之外的东西为什么不能指望
+跨厂商一致、以及 2.0 把 Options 改成严格不可变之后"只改一项"该怎么写。
+
+分类页只有一篇，但它是本方向所有"行为和我预期不一样"问题的落点——
+门面层的内容在 [ChatClient 门面与结构化输出](/spring-ai/basic/foundation/02-chatclient-api/)。
+
+<CategoryNotesIsland categoryId="spring-ai/intermediate/model" />

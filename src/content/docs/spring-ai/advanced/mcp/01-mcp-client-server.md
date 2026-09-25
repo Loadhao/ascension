@@ -117,6 +117,25 @@ for non-blocking operations … with built-in Project Reactor support"）。其�
 - **`streamable-http.mcp-endpoint`（默认 `/mcp`）**、`keep-alive-interval`（默认禁用）、
   `disallow-delete`（默认 `false`）。
 
+### 入参校验默认开了：非法参数不再打到你的方法里
+
+2.0 起服务端先校验再执行，官方表述：**"MCP servers now validate incoming tool arguments
+against the tool's JSON schema before invoking the tool handler. Failed validation produces
+a `CallToolResult` with `isError=true` and a descriptive error message."** 要退回旧行为
+得在 builder 上显式关：
+
+```java
+McpServer.sync(transportProvider)
+    .validateToolInputs(false)
+    .tool(myTool, handler)
+    .build();
+```
+
+这条默认值得从协议层读一遍：**校验失败变成一条 `isError` 结果回给客户端**，而不是抛异常
+打断连接——在带工具循环的链路里，模型因此有机会看到错误并改参数重试（与
+[结构化输出的自纠错重试](/spring-ai/basic/foundation/02-chatclient-api/)是同一个思路，
+只是搬到了协议边界）。关掉它等于把这道保护退回给自己的方法去处理。
+
 ## 注解面：一个 `@McpTool` 与它的四个提示位
 
 依赖坐标 `spring-ai-mcp-annotations`，模块定位是 "provide annotation-based method handling

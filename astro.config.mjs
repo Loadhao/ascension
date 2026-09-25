@@ -2270,6 +2270,14 @@ export default defineConfig({
                         { label: '工具调用：@Tool 与执行归属', link: '/spring-ai/intermediate/tools/01-tool-calling/' },
                       ],
                     },
+                    {
+                      label: '模型抽象与参数',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/spring-ai/intermediate/model/' },
+                        { label: 'ChatModel 抽象与参数覆盖', link: '/spring-ai/intermediate/model/01-chatmodel-and-options/' },
+                      ],
+                    },
                   ],
                 },
                 {
@@ -2291,6 +2299,15 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/spring-ai/advanced/mcp/' },
                         { label: 'MCP 客户端与服务端接入', link: '/spring-ai/advanced/mcp/01-mcp-client-server/' },
+                      ],
+                    },
+                    {
+                      label: '观测与评测',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/spring-ai/advanced/observability/' },
+                        { label: 'AI 调用的可观测性', link: '/spring-ai/advanced/observability/01-ai-observability/' },
+                        { label: 'Evaluator 与 LLM 裁判', link: '/spring-ai/advanced/observability/02-llm-as-judge-evaluation/' },
                       ],
                     },
                   ],

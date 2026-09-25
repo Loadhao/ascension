@@ -1,0 +1,19 @@
+---
+title: 观测与评测
+description: AI 调用的四层 span、指标名与内容导出开关，以及用 Evaluator 把"回答得好不好"变成可复现判定
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+模型调用是**远程、慢、按 token 计费、输出不确定**的调用，两件事必须自己做：**看得见**与
+**判得准**。本分类第一篇讲 Spring AI 把观测切成的四层（ChatClient / Advisor / ChatModel /
+工具）、Prometheus 对指标名的改写规则、高基数标签的取舍，以及默认全关的 prompt 正文导出；
+第二篇讲评测侧的 `Evaluator` 抽象与 LLM-as-judge 一族——把"感觉这次答得不好"换成可复现的
+判定与反馈。
+
+通用原理（指标怎么选、LLM 当裁判的偏差从哪来）见
+[Agent 评测](/ai/intermediate/agent/10-agent-evaluation/)与
+[模型评测与对齐](/ai/advanced/eval/01-evaluation-align/)，本分类只讲 Spring AI 的 API 与
+默认值。
+
+<CategoryNotesIsland categoryId="spring-ai/advanced/observability" />

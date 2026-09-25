@@ -88,6 +88,30 @@ public interface ToolCallback {
 入参是**字符串**（模型给的 JSON），出参也是字符串。这个设计让"工具"这一层与
 模型协议彻底解耦：任何厂商的 tool call 报文，落到这里都是 `String → String`。
 
+## Schema 生成的两个真实坑
+
+工具的参数 Schema 由 `JsonSchemaGenerator` 从 Java 类型推导。这条链上有两处 2.0 变化，
+都能直接变成线上工单：
+
+**一、OpenAI 的 `strict` 模式默认被关掉了，原因写得很具体。** 官方原文：
+"`OpenAiChatModel` no longer defaults tool schemas to `strict(true)`. `JsonSchemaGenerator`
+omits optional parameters from `required` **instead of** using the nullable-type pattern
+OpenAI's strict mode requires, **so any tool with an optional parameter was rejected by
+OpenAI with a 400 error under the old default.**"
+
+读法：**一个 `@ToolParam(required = false)` 的可选参数，在旧默认下会让整次工具调用被 400
+拒掉**——"模型死活不调我的工具"这类问题，真身可能在这里。要重新开启就显式配
+`OpenAiChatOptions.builder().strict(true)`，开启后官方说明 optional 参数会被
+"automatically widened to nullable types and backfilled into `required`"，从而满足 strict
+契约。**两种解法对 Schema 的改写方式不同，换厂商时要重新验一次。**
+
+**二、工具重名是硬失败。** `MethodToolCallbackProvider` 在 2.0 改抛 `IllegalArgumentException`
+（原先是 `IllegalStateException`）的两种场景官方列明："When a tool object has no
+`@Tool`-annotated methods" 与 "When multiple tool objects produce callbacks with
+**duplicate names**"。这解释了前面那句"`name` 在一次请求的工具集内必须唯一"不是风格建议，
+而是启动即报错的约束——`defaultTools` 与单次 `.tools(...)` 是**追加**关系，两边撞名就会命中
+第二条。
+
 ## 注册位置：默认工具与单次工具
 
 ```java

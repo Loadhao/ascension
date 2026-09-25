@@ -142,6 +142,16 @@ is **instructed to honor it**, and the response is **deserialized into your type
 结构化输出能力去保证），`validateSchema()` 是**响应侧兜底**（拿到结果再校验、错就把错误
 塞回 prompt 重试）。
 
+:::warning[这个兜底环是"递归 Advisor"，官方标注为实验特性]
+驱动重试的 `StructuredOutputValidationAdvisor` 属于 recursive advisor，官方对它的定性是
+"Recursive Advisors are a new **experimental** feature in Spring AI 1.1.0-M4+."，并且直接
+列了三条代价："Currently, they are **non-streaming only**, require **careful advisor
+ordering**, and can **increase costs due to multiple LLM calls**."，收尾一句
+"Always set termination conditions and retry limits to prevent infinite loops."
+所以 `validateSchema()` 不是免费的保险：它把一次调用变成最多四次，且顺序没排好会连带影响
+其他 Advisor。要不要开，按接口的延迟与预算决策。
+:::
+
 ## 转换器层：`.entity()` 底下是什么
 
 想手工控制格式说明，用转换器族。接口定义："public interface
@@ -164,6 +174,20 @@ var converter = new BeanOutputConverter<>(
 
 概念层面的取舍（为什么"要求返回 JSON"经常失败、Schema 校验与自纠错的通用原理）
 见 [结构化输出](/ai/intermediate/agent/12-structured-output/)，本篇只讲 Spring AI 的落点。
+
+### 2.0 把 Schema 生成器统一了，一个后果很实用
+
+《Upgrade Notes》写明：**"BeanOutputConverter now delegates JSON Schema generation to
+`JsonSchemaGenerator`, aligning structured output conversion with the JSON Schema behavior
+used for tool calling."** 也就是**结构化输出与工具调用现在共用同一套 Schema 语义**——
+同一台生成器、同一批规则。附带两条官方点明的变化：生成的 schema 现在带 OpenAPI 风格的
+`format` 提示（"e.g., `int32` for `int`, `int64` for `long`, `date-time` for `LocalDateTime`"），
+以及 Kotlin 侧"主构造器里可选的属性不再进 `required` 数组"。
+
+实用价值在于**排障可以跨功能迁移**：一个 `@Tool` 的可选参数让 OpenAI 返 400，
+同一个类型的 `entity()` 也可能出意外（见[工具调用](/spring-ai/intermediate/tools/01-tool-calling/)
+的 strict 一节讲的那处默认变更）。反过来，"为什么模型返回的 JSON 少了这个字段"要先看
+Schema 里它到底是不是 `required`，而不是先怀疑模型。
 
 ## 模型参数：可移植 vs 厂商专属
 

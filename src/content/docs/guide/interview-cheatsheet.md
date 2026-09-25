@@ -473,6 +473,10 @@ Docker、Nginx、Git 等全站方向。
 | [向量库会自己算向量吗](/spring-ai/advanced/rag/01-vector-store-etl/) | 不会，"does not generate the embeddings itself"；造向量靠 EmbeddingModel 且维度要与库匹配，换模型等于全量重灌 |
 | [两套 RAG Advisor 的依赖差别](/spring-ai/advanced/rag/02-rag-advisors/) | QuestionAnswerAdvisor 在 `spring-ai-vector-store-advisor`、RetrievalAugmentationAdvisor 在 `spring-ai-rag`；naive 是流程名不是类名 |
 | [MCP 服务端传输怎么选](/spring-ai/advanced/mcp/01-mcp-client-server/) | 2.0 起 SSE 已标 deprecated，用 STREAMABLE；SYNC 服务端只注册同步注解方法，返回 Mono 的工具会被静默忽略 |
+| [ChatModel 与 ChatClient 传 options 有何区别](/spring-ai/intermediate/model/01-chatmodel-and-options/) | ChatModel 收「整套 options」且完全取代模型默认，只改一项要走 ChatClient 的 delta 或先 `mutate()` 复制；2.0 Options 严格不可变 |
+| [Prometheus 里查不到文档写的指标名](/spring-ai/advanced/observability/01-ai-observability/) | 基名用点、导出时下划线化并加后缀：`gen_ai.client.operation` → `gen_ai_client_operation_seconds_count/_sum/_max` |
+| [模型对话正文会进 trace 吗](/spring-ai/advanced/observability/01-ai-observability/) | 默认不进——`log-prompt`/`log-completion`/工具 `include-content` 全默认 false（大 + 可能含敏感信息）；ChatClient 与 ChatModel 两套开关互不替代 |
+| [Evaluator 能判答案对错吗](/spring-ai/advanced/observability/02-llm-as-judge-evaluation/) | 不能，`EvaluationRequest` 只有 用户输入/上下文/回答 三槽、无标准答案位；它评「与上下文是否自洽」，上下文要取 advisor 实际检索到的文档 |
 
 ## 分布式与集群
 

@@ -11,11 +11,11 @@ import graph from '../../../data/graphs/spring-ai.json';
 
 点击圆点标记学习状态：○ 未学 → ◐ 学习中 → ● 已掌握。
 
-当前覆盖三层：**基础 · 全景与调用门面**——Spring AI 的定位与依赖形态、2.0 断代清单、
-`ChatClient` 流式 API 与结构化输出；**中级 · 上下文与工具**——Advisor 责任链与 `order`
-语义、`ToolCallingAdvisor` 的位次、会话记忆的两层抽象与 2.0 的必填会话 ID、工具调用的三种
-声明方式与执行归属；**高级 · 检索与协议**——`VectorStore` 与 ETL 管线、Naive 与 Modular
-两档 RAG Advisor、MCP 客户端与服务端接入。
+当前覆盖三层、七个分类：**基础 · 全景与调用门面**——定位与依赖形态、2.0 断代清单、
+`ChatClient` 流式 API 与结构化输出；**中级 · 机制层**——Advisor 责任链与 `order` 语义、
+会话记忆两层抽象与必填会话 ID、工具调用的三种声明与执行归属、`ChatModel` 与参数覆盖规则；
+**高级 · 生产边界**——`VectorStore` 与 ETL 管线、Naive 与 Modular 两档 RAG Advisor、
+MCP 客户端与服务端接入、AI 调用的观测与评测。
 
 三种写法各管一段，别混：[AI 方向](/ai/basic/agent/01-agent-loop/)讲**原理**（Agent
 Loop、RAG、记忆、工具这些本来要手写什么），[LangChain 方向](/langchain/basic/core/01-langchain-overview/)
