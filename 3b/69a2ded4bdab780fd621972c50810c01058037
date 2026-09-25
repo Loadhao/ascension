@@ -1,0 +1,19 @@
+src/content/docs/guide/diagrams.mdx
+  s_f77ee767c41b11::t_ec9bb9e15a265e 31-89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3b69a2ded4bdab780fd621972c50810c01058037",
+  "prompts": {},
+  "sessions": {
+    "s_f77ee767c41b11": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0d819-8627-7052-abbe-3b8bc15abfd6",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
