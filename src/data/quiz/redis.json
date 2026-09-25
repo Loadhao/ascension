@@ -292,6 +292,23 @@
       ],
       "hint": "挑新主四步：排除断线 → replica-priority 优先级 → 复制 offset 最新 → runid 最小；Cluster 用 16384 槽 + MOVED/ASK 重定向 + Gossip 探活。redis-repl-008 考三层递进，本题考哨兵细节与脑裂缓解。",
       "difficulty": 4
+    },
+    {
+      "id": "redis-watchdog-018",
+      "noteId": "redis/intermediate/usage/03-distributed-lock",
+      "type": "single",
+      "difficulty": 4,
+      "q": "业务预计运行 20 秒，Redisson 调用 lock(10, SECONDS) 后仍未结束；看门狗对锁的行为是什么？",
+      "options": [
+        "看门狗会忽略显式租期并每 10 秒续到 30 秒",
+        "显式 leaseTime 不启动看门狗，锁在 10 秒后过期，业务仍运行时互斥可能失效",
+        "看门狗会在 unlock 时才启动，提前延长锁寿命",
+        "Redis 会根据业务线程是否存活自动延长 TTL"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "只有不指定 leaseTime 的 lock() 才交给看门狗管理 TTL；显式租期表示调用方承诺过期时间，业务超时后锁仍会释放。redis-watchdog-012 考是否启用与崩溃兜底，本题考显式租期造成的互斥边界。"
     }
   ]
 }

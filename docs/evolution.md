@@ -52,10 +52,18 @@
 | 7. CI 只跑 `pnpm build`，不跑 `pnpm verify:docs`（`.github/workflows/deploy.yml` 第 170 轮核验无体检步骤）——25 项静态闸门全部依赖本地纪律，并行会话漏跑即静默入库；接进流水线属对外 CI 改动 | 修问题 | 4 | 1.0 | 2 | 2.0 | **待用户决策**（见待决策区） |
 | 8. ~~`media-encode` 回填行打印 730 因 `probe` 未限定流选择器~~ **第 176 轮复跑未能复现**：同帧目录、同脚本、同一条 `probe('stream=width,height')` 重跑打印 1280x732 与实际一致，单次观察到的 730 归因不成立，**不改脚本**。留作观察项：影像成片尺寸若与登记不符，以 `ffprobe -select_streams v:0` 或浏览器 `videoWidth/videoHeight` 为准（配方指定的回填依据是脚本打印行） | 修问题 | 1 | 0.2 | 1 | 0.2 | 已降级（未复现，不再占 D 队列） |
 | 11. 缩进写法的 mermaid 围栏被两道静态闸门整块漏检：`consistency-verify` 第 10 项与 `mermaid-syntax-verify` 用行首锚定正则 `^```mermaid`，列表项内缩进书写的围栏不匹配。实测严格锚定 **538 块 / 411 篇**、容忍 `^[ \t]*` 缩进 **559 块 / 412 篇**，差 **21 块**分布在 **2 个文件**（`guide/diagrams.mdx` 20 块示例、`tools/basic/cli/03-jq.md` 1 块正文图示）。这些围栏**确实会渲染成读者看到的 SVG**（`dist/tools/basic/cli/03-jq/index.html` 含 `id="mermaid-`，而源文件按严格正则算「无围栏」——第 181 轮 dist 比对时暴露为唯一「有图无围栏」页），后果是该块既不过语法校验也不进硬编码颜色审计。改法：两处正则统一放宽为 `^[ \t]*`，预期块数 538 → 559，落地前先确认那 21 块无 `fill:`/`%%{init}` 且语法可 parse | 修问题 | 3 | 0.95 | 1.5 | 1.9 | 待办（D 队列，第 181 轮实测入队） |
+| 12. 站内已有动画的媒体派生队列：候选由 `node scripts/evolution-candidates.mjs --top 20` 每轮现算；第 182 轮完成 `redisson-watchdog`，余项按 B 车道逐轮制作并控制每片 ≤60 秒 / ≤4 MB | 改善体验 | 3 | 0.9 | 2 | 1.35 | 进行中（第 182 轮完成 1 项） |
 
 历史已完成项存档：图谱覆盖度补全（第 1 轮，100%）、Mermaid 对比度审计（第 2 轮，零违规）、frontmatter/内链/分类页导读/图谱结构体检（第 3/4/6/19 轮，均全绿并固化为 scripts/consistency-verify.mjs）、方向内容补全（第 5/7/8/9/10/11/12/14/15/17/20 轮，16 篇 + 5 分类）、工具固化（第 16 轮）、状态文件整理（第 18 轮）。
 
 ## 轮次记录
+
+### 第 182 轮（2026-09-25，车道 B 影像资产）：Redisson 看门狗配音短片 + 一道显式租期考题
+
+- 选题证据：开工 `git pull --ff-only` 已最新，`git status --porcelain` 仅有待用户决策区既有改动；基线 `pnpm verify:docs` 全绿（笔记 535 篇、题库 631 题、影像 5 个）。`node scripts/evolution-candidates.mjs --top 20` 输出「下一轮 = 第 182 轮 → 车道 B」，已有动画未出片队列 40 条，首选 `redisson-watchdog`（9 帧；过程型经典且可在 60 秒内讲清）；`node scripts/media-capture.mjs --page /redis/intermediate/usage/03-distributed-lock/ --figure 0 --demo redisson-watchdog --list` 实测 9 帧。初稿 66.3 秒超限，压缩逐帧文稿重录为 51.9 秒 / 0.76 MB 后通过尺寸约束。
+- 内容要点：导出源动画帧，登记 `/videos/redisson-watchdog-video.mp4` 与封面，笔记增加脱屏复习入口；附题 `redis-watchdog-018` 单独考「显式 leaseTime 令看门狗不启动，业务超出租期时互斥可能失效」，与已有题区分（已有题考看门狗启用条件与客户端崩溃兜底）。
+- 验证数字：`pnpm build` **709 页**通过；`pnpm verify:docs` 一致性 10 项、Mermaid 538 块、题库 8 项（632 题）、影像 7 项（6 个资产、媒体总量 4.41 MB）全部通过；contrast **386 页 × 2 主题**全部 ≥4.5:1。新增视频音轨存在、9 段文稿与 9 帧对齐、51.9 秒、0.76 MB。
+- 下一轮入口：**第 183 轮 → 183 mod 5 = 3 → 车道 C**；队列头部按 `node scripts/evolution-candidates.mjs` 为准，当前首题候选 `distributed/intermediate/case-studies/08-lottery`。B 队列本轮减少 1 条。开工仍按同步、定界、基线、候选现算顺序。
 
 ### 第 181 轮（2026-09-25，车道 D 体检与工具｜游标本为 A，越车道执行并如实登记）：给对比度审计闸门装「读数可信性」自校验——dist 残缺与静默漏页不再能冒充「0 处低对比」
 
