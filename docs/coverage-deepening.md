@@ -32,9 +32,6 @@
 
 
 
-- [ ] distributed/intermediate/case-studies/08-lottery — 第一题考「权重区间概率配置与奖品预扣防超发」（0 题补缺）
-- [ ] distributed/intermediate/case-studies/20-reconciliation — 第一题考「对什么账、怎么对、差错怎么闭环」（0 题补缺）
-- [ ] ai/intermediate/llm/07-quantization — 第一题考「各量化位宽的显存账与 PTQ/QAT 分工」（0 题补缺）
 - [ ] distributed/intermediate/case-studies/05-large-file-upload — 第一题考「分片 + 断点续传清单 + 秒传 hash 命中即引用，以及为什么生产要改对象存储直传」（0 题补缺）
 - [ ] distributed/intermediate/case-studies/10-coupon — 第一题考「券模板与用户券两件事的建模、领券库存预扣与核销重复防护」（0 题补缺）
 - [ ] ai/intermediate/llm/04-inference-params — 第一题考「temperature 锐化与 top_k/top_p 截断长尾的分工，别把两者当同一个旋钮」（0 题补缺）
@@ -43,6 +40,10 @@
 - [ ] js/intermediate/node/09-crypto — 第一题考「md5 为什么不能用、AES-GCM 加密要带随机 IV 与认证标签、HMAC 盲索引怎么等值查询」（0 题补缺，角度取自该篇 description）
 - [ ] typescript/basic/core/04-enum-asconst — 第一题考「enum 是少数不被擦除的构造、数字枚举双向映射而字符串单向、const enum 与 isolatedModules 的冲突、as const 三板斧」（0 题补缺，角度取自该篇 description）
 - [ ] distributed/intermediate/case-studies/13-push — 第一题考「四类通道矩阵与长连网关的消息路由、可靠性分级与推送风暴治理」（0 题补缺，角度取自该篇 description）
+- [ ] ai/intermediate/agent/11-rag-advanced — 第一题考「纯向量检索的盲区、BM25+向量混合召回与 RRF 融合、rerank 两阶段精排」（0 题补缺，角度取自该篇 description）
+- [ ] ai/intermediate/llm/06-vllm — 第一题考「PagedAttention 显存分页与 continuous batching 迭代级调度，以及吞吐与时延的权衡」（0 题补缺，角度取自该篇 description）
+- [ ] linux/intermediate/system/05-performance — 第一题考「load average 的真实含义、CPU 飙高四步定位法与 iostat 关键列的四象限排查」（0 题补缺，角度取自该篇 description）
+- [ ] distributed/intermediate/case-studies/31-bloom-filter — 第一题考「位数组与 k 个哈希函数、误判率的参数选择、不能删除的限制与 Counting/cuckoo 变体」（0 题补缺，角度取自该篇 description）
 
 ### b 类：旧题返修
 
@@ -183,6 +184,8 @@
 - 2026-09-25 · 第六十三轮（第 179 轮｜车道 C｜题库深化第 63 轮）：3 道第一题补缺（linux-swap-015 / ai-agenteval-044 / mongo-readpref-014，difficulty 全 4）；队列销 3 条、追加 4 条（16-tool-design / 09-crypto / 04-enum-asconst / 13-push，角度一律取自各篇 description 不做无据入队）· 说明：本轮开工算 178、收尾时 178 已被并行会话（车道 A）占用，按配方 §6 顺延为 179；第 176 轮（车道 D）另按新硬约束附 1 道 linux-cap-014 · 本轮提交主题：feat(quiz): 演进第 179 轮车道 C 补 swap 水位/应用评估/读偏好三篇首题
 
 - 2026-09-25 · 第六十四轮（第 181 轮｜车道 D 附 1 题｜题库深化第 64 轮）：1 道第一题补缺（`react-memo-007`，multiple，difficulty 4，宿主 `react/basic/core/04-rerender-perf`）；队列销 1 条（a 类头部 react 篇，考点角度即队列指定项）· 说明：本轮主产出在 D 车道（对比度审计闸门自校验），按配方 §1「每轮必含一项内容增量」附 1 道考题并允许超出车道文件上限 1 个文件；未做 C 车道的「追加 2~4 条」，a 类队列头部前移为 `distributed/intermediate/case-studies/08-lottery`，余 11 条 · 本轮提交主题：feat(quiz): 演进第 181 轮附 react 重渲染 memo 三件套首题
+
+- 2026-09-25 · 第六十五轮（第 184 轮｜车道 C｜题库深化第 65 轮）：3 道第一题补缺（`dist-lottery-039` / `dist-recon-040` / `ai-quant-045`，difficulty 全 4；前两题为 multiple，按 b 类「multiple 占比偏低优先补多选」——实测 distributed 38 题仅 6 道 multiple、ai 44 题仅 6 道）；队列销 3 条、追加 4 条（`ai/intermediate/agent/11-rag-advanced`、`ai/intermediate/llm/06-vllm`、`linux/intermediate/system/05-performance`、`distributed/intermediate/case-studies/31-bloom-filter`），四条角度一律取自各篇 description 原文，且先经脚本核实为「core: true 且该笔记全站 0 题」（实测此类池余 71 篇，池子未枯竭）· a 类现余 12 条 · 说明：本轮开工按勘察命令算得「183 mod 5 = 3 → 车道 C」并据此做完，收尾复算时 183 已被并行会话（用户定向 spring-ai 新方向）占用，按配方 §6 顺延登记为 184、不重排对方记录 · 本轮提交主题：feat(quiz): 演进第 184 轮车道 C 补抽奖/对账/量化三篇首题
 
 ## 经验与规则
 
