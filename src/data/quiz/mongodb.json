@@ -275,6 +275,25 @@
         1
       ],
       "hint": "默认 mongod 起来就能连，这是无数泄露事故的起点；bindIp 默认只绑 127.0.0.1，改成 0.0.0.0 而不做访问控制就是未认证实例扫描的猎物。不先建管理员就开 --auth 会把自己锁死（localhost exception 只作应急）。应用账号只给目标库 readWrite；客户端认证与副本集内部认证是两条独立的线。"
+    },
+    {
+      "id": "mongo-readpref-014",
+      "noteId": "mongodb/intermediate/usage/04-read-preference",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "readPreference、writeConcern、readConcern 三个旋钮的组合与取舍，正确的有？（多选）",
+      "options": [
+        "写后立读必须走 primary：从库复制有延迟，写主读从会读到旧数据——这与 MySQL 读写分离的主从延迟坑完全同构",
+        "副本集上用 readConcern local 可能读到被回滚的数据；升级成 majority 并与 writeConcern majority 配合，才拿到「读己之写不回滚」",
+        "按业务分级而不是全量强一致：订单创建用 w: majority + 读 primary，商品浏览用 w: 1 + secondaryPreferred，日志埋点用 w: 0 换最快速度",
+        "nearest 是一致性最强的档位，多机房部署时把所有读都切到 nearest，就能既就近又保证读到最新数据"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了：nearest 只挑网络延迟最低的节点，一致性反而最弱（可能读到落后很多的数据），适合容忍旧数据的就近读。三旋钮的分工要背清——readPreference 决定「读去哪」、writeConcern 决定「写多稳才算成功」、readConcern 决定「读多新的数据」，报表与全量扫描走 secondary 把重查询从主库剥离，而不是所有读都强一致。w: majority 的思想可对照 Kafka acks=all 与 MySQL 半同步；多文档事务则把这三者锁成 readConcern snapshot + writeConcern majority（另见 mongo-txn-012）。"
     }
   ]
 }

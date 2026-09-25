@@ -32,9 +32,6 @@
 
 
 
-- [ ] linux/basic/filesystem/02-swap-memory — 第一题考「swap 与内存压力水位」（0 题补缺）
-- [ ] ai/intermediate/agent/10-agent-evaluation — 第一题考「Agent 评测与回归」（0 题补缺）
-- [ ] mongodb/intermediate/usage/04-read-preference — 第一题考「读偏好与从节点读」（0 题补缺）
 - [ ] react/basic/core/04-rerender-perf — 第一题考「memo 三件套分工与引用不稳定」（0 题补缺，第 171 轮留账：本篇自身入零题池）
 - [ ] distributed/intermediate/case-studies/08-lottery — 第一题考「权重区间概率配置与奖品预扣防超发」（0 题补缺）
 - [ ] distributed/intermediate/case-studies/20-reconciliation — 第一题考「对什么账、怎么对、差错怎么闭环」（0 题补缺）
@@ -43,6 +40,10 @@
 - [ ] distributed/intermediate/case-studies/10-coupon — 第一题考「券模板与用户券两件事的建模、领券库存预扣与核销重复防护」（0 题补缺）
 - [ ] ai/intermediate/llm/04-inference-params — 第一题考「temperature 锐化与 top_k/top_p 截断长尾的分工，别把两者当同一个旋钮」（0 题补缺）
 - [ ] ai/intermediate/llm/05-token-cost — 第一题考「账单构成与「上下文越长越贵也越慢」的 O(n²) 根源、提示缓存只对固定前缀打折」（0 题补缺）
+- [ ] ai/intermediate/agent/16-tool-design — 第一题考「工具描述是写给模型的 API 文档、一个工具一件事、错误返回要可行动、数量上限与按需加载」（0 题补缺，角度取自该篇 description）
+- [ ] js/intermediate/node/09-crypto — 第一题考「md5 为什么不能用、AES-GCM 加密要带随机 IV 与认证标签、HMAC 盲索引怎么等值查询」（0 题补缺，角度取自该篇 description）
+- [ ] typescript/basic/core/04-enum-asconst — 第一题考「enum 是少数不被擦除的构造、数字枚举双向映射而字符串单向、const enum 与 isolatedModules 的冲突、as const 三板斧」（0 题补缺，角度取自该篇 description）
+- [ ] distributed/intermediate/case-studies/13-push — 第一题考「四类通道矩阵与长连网关的消息路由、可靠性分级与推送风暴治理」（0 题补缺，角度取自该篇 description）
 
 ### b 类：旧题返修
 
@@ -179,6 +180,8 @@
 - 2026-09-24 · 第六十一轮（第 173 轮｜车道 C｜题库深化第 61 轮）：3 道第一题补缺（dist-redpacket-038 / mongo-txn-012 / ai-structout-043，difficulty 4/4/3）；队列销 3 条、追加 4 条（含第 171 轮留账的 react/04 篇）· 本轮提交主题：feat(quiz): 演进第 173 轮车道 C 补红包/事务/结构化输出三篇首题
 
 - 2026-09-25 · 第六十二轮（第 175 轮｜车道 C｜题库深化第 62 轮）：3 道第一题补缺（net-wsup-021 / mongo-auth-013 / js-coerce-024，difficulty 4/3/4）；队列销 3 条、追加 4 条；同轮为首批 3 篇补「速答手册」索引行（网络协议 / JavaScript / 检索与文档存储各 1 行）· 本轮提交主题：feat(quiz): 演进第 175 轮车道 C 补 WebSocket/Mongo 安全/隐式转换三篇首题并同步速答索引
+
+- 2026-09-25 · 第六十三轮（第 179 轮｜车道 C｜题库深化第 63 轮）：3 道第一题补缺（linux-swap-015 / ai-agenteval-044 / mongo-readpref-014，difficulty 全 4）；队列销 3 条、追加 4 条（16-tool-design / 09-crypto / 04-enum-asconst / 13-push，角度一律取自各篇 description 不做无据入队）· 说明：本轮开工算 178、收尾时 178 已被并行会话（车道 A）占用，按配方 §6 顺延为 179；第 176 轮（车道 D）另按新硬约束附 1 道 linux-cap-014 · 本轮提交主题：feat(quiz): 演进第 179 轮车道 C 补 swap 水位/应用评估/读偏好三篇首题
 
 ## 经验与规则
 

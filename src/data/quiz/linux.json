@@ -288,6 +288,25 @@
       ],
       "hint": "末项反了：--privileged 等于把这层隔离整个放弃，正确姿势是按 --cap-add NET_BIND_SERVICE 白名单补单个能力（默认丢弃 + 白名单补齐才是容器安全基线，而不是「先给 root 再收紧」）。另两层的用法分工也要记住：+i 用于锁配置文件（防误改 resolv.conf/hosts），+a 用于审计日志只追加不可删改；要改 +i 的文件先 chattr -i 解锁、改完按需加回，生产变更别永久解锁。权限四层从浅到深：chmod 权限位 → ACL → chattr 文件属性 → capabilities 进程能力。",
       "difficulty": 4
+    },
+    {
+      "id": "linux-swap-015",
+      "noteId": "linux/basic/filesystem/02-swap-memory",
+      "type": "multiple",
+      "q": "关于 swap、swappiness 与内存压力判断，正确的有？（多选）",
+      "options": [
+        "回收成本两类页不一样：文件页内容在磁盘有底，干净页直接丢弃；匿名页（进程堆栈）没有对应文件，有 swap 才能换出，没 swap 就只能交给 OOM Killer",
+        "swappiness=0 并不是禁用 swap，只是让内核几乎不主动换出匿名页；真要禁用得 swapoff——这是这题最常踩的坑",
+        "判断「是不是真的在换页」看 vmstat 的 si/so 是否持续非零、free 的 swap used 是否持续上涨；此时 CPU 高很可能是换页风暴而不是计算量",
+        "数据库与低延迟服务应把 swappiness 调到 100，让内核积极换出匿名页好腾出内存"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了：数据库/低延迟服务要关 swap 或设成 1（不是 0，也不是 100）——一次 swap in 就能把毫秒级操作放大到秒级，JVM 大堆被换出是经典事故。反过来小内存机器反而要留少量 swap（如 1~2GB）当 OOM 前的最后缓冲，「配了但尽量不用」才是稳妥策略。再记一层：swappiness 是「偏向丢 pagecache 还是换出匿名页」的偏向旋钮，不是开关；swap used 持续涨之所以比 used 更像告警信号，是因为它意味着 pagecache 已经无可回收、内核开始动匿名页了。",
+      "difficulty": 4
     }
   ]
 }
