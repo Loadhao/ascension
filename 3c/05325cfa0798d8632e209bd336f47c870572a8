@@ -1,0 +1,34 @@
+src/data/quiz/mongodb.json
+  s_5e5a612a25b4ad::t_d3490895e983f5 278-295
+  s_5e5a612a25b4ad::t_c06c1428f293a6 296
+docs/evolution.md
+  s_5e5a612a25b4ad::t_dd09e536edc713 51
+  s_5e5a612a25b4ad::t_22883040509099 68,70-72
+  s_5e5a612a25b4ad::t_ee8610f282d8ae 667-669
+  s_5e5a612a25b4ad::t_48fe4c1f96801f 60,65-67,69,73-74
+  s_5e5a612a25b4ad::t_aa4f5ff50087da 59,61-64
+src/data/quiz/ai.json
+  s_5e5a612a25b4ad::t_c9146d7feed7f2 727-745
+src/data/quiz/linux.json
+  s_5e5a612a25b4ad::t_0c96a57375773e 291-309
+docs/coverage-deepening.md
+  s_5e5a612a25b4ad::t_9797748cda3157 43-46
+  s_5e5a612a25b4ad::t_fe93a81b5aed78 184
+  s_5e5a612a25b4ad::t_91acae390d76c6 185
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3c05325cfa0798d8632e209bd336f47c870572a8",
+  "prompts": {},
+  "sessions": {
+    "s_5e5a612a25b4ad": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "5e796f43-2658-4ef2-a9f9-c0ab55a19e84",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
