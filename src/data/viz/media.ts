@@ -149,4 +149,27 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'客户端崩溃后无人续期，锁最多三十秒自动过期。',
 		],
 	},
+	'kafka-segment-video': {
+		title: 'Kafka segment 的一生 · 配音短片',
+		src: '/videos/kafka-segment-video.mp4',
+		poster: '/videos/kafka-segment-video.poster.png',
+		width: 1280,
+		height: 808,
+		duration: 52.6,
+		alt: '动画短片：一个 Kafka 分区在磁盘上的 segment 文件串，逐帧走完生产者顺序追加、' +
+			'消费者按 offset 查稀疏索引、写满后封口滚出新段、retention 到期整文件删除四个阶段。',
+		caption:
+			'写得快、读得不慢、清得便宜：顺序追加 + 分段滚动 + 稀疏索引 + 整文件删除，四件事合起来才是高吞吐。',
+		source: 'kafka-segment',
+		narration: [
+			'一个分区在磁盘上就是一串 segment 文件，只追加、不改写。',
+			'生产者把消息批次发进 0 号分区，目录就是这一排段文件。',
+			'写入永远落在活跃段的文件尾：磁盘顺序写接近内存随机写。',
+			'消费按 offset 取数据，先查稀疏索引——只给少量消息建条目。',
+			'索引只答「大致在哪个位置」，找到起点后再顺序扫几条。',
+			'写满 log.segment.bytes 或到时间就封口，另起新段接着写。',
+			'retention 到期就删掉最旧那整个文件，不逐条删，代价 O(1)。',
+			'顺序追加、分段滚动、稀疏索引、文件级删除，换来高吞吐。',
+		],
+	},
 };
