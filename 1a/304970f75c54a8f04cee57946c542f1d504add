@@ -1,0 +1,68 @@
+src/data/graphs/java.json
+  s_d8c978081f408b::t_51d878375dc18b 110-114
+  s_d8c978081f408b::t_08a32db4d29240 264-277
+astro.config.mjs
+  s_d8c978081f408b::t_98db4b23418a68 563
+  s_d8c978081f408b::t_abbd684d5bc5d1 667
+  s_d8c978081f408b::t_f1cfeeb540ed2f 621-627
+  s_d8c978081f408b::t_934c6bd476c4ae 620
+src/content/docs/java/advanced/jvm/10-arthas-jfr.md
+  s_d8c978081f408b::t_dfef3a915f695d 171-174
+  s_d8c978081f408b::t_cc0971af324d1c 223
+  s_d8c978081f408b::t_931b2ef25ab2b0 1-25,27-28,30-139,145-154,156-170,175-222,224-225
+  s_d8c978081f408b::t_90e0cc093f894a 140-144
+  s_d8c978081f408b::t_86dae1c87e9c95 26,29
+  s_d8c978081f408b::t_4c4eca06bdab38 155
+src/content/docs/java/intermediate/build/01-dependency-conflict.md
+  s_d8c978081f408b::t_095e0e75888588 27
+  s_d8c978081f408b::t_ed3b4f6cf90622 1-26,28-148,151,154-242
+  s_d8c978081f408b::t_7c439bb027e502 149-150,152-153
+docs/content-roadmap.md
+  s_d8c978081f408b::t_26ca2e8c91ef26 58
+  s_d8c978081f408b::t_dbd66079c8afb8 41
+  s_d8c978081f408b::t_4947aac4e8c10a 99
+  s_d8c978081f408b::t_25a6c0924caab8 42-43
+  s_d8c978081f408b::t_966c0c42028db4 124-131
+  s_d8c978081f408b::t_d159fd59179bdf 27,29-32
+  s_d8c978081f408b::t_ab6c5fded3e649 1-26,28,33-40,44-54,59-98,100-123
+  s_d8c978081f408b::t_20eeae9d79a25f 55-57
+src/content/docs/guide/interview-cheatsheet.md
+  s_d8c978081f408b::t_e045d00de14dc3 72
+  s_d8c978081f408b::t_ff128d3215c59a 147-153
+  s_d8c978081f408b::t_4699c3d039f949 99
+  s_d8c978081f408b::t_3deacb91c9b2d7 154
+docs/evolution-recipes.md
+  s_d8c978081f408b::t_428ed3b5b6f845 15-17
+  s_d8c978081f408b::t_d20c7dacf7e541 41,47-49,51-65
+  s_d8c978081f408b::t_b66930e48f13ed 113-116
+  s_d8c978081f408b::t_3af766c64e0f38 67-69
+  s_d8c978081f408b::t_5b01b4e16ad74e 66
+src/data/quiz/java.json
+  s_d8c978081f408b::t_cc6ffa9503f815 2271-2324
+src/content/docs/java/intermediate/spring/index.mdx
+  s_d8c978081f408b::t_14323499994040 12-15
+src/content/docs/java/intermediate/build/index.mdx
+  s_d8c978081f408b::t_5d82e7849e44bb 1-13
+docs/coverage-deepening.md
+  s_d8c978081f408b::t_60701b69059157 59-66
+src/content/docs/java/intermediate/spring/09-mybatis-in-practice.md
+  s_d8c978081f408b::t_55a5fe4f5b2d7b 1-86,88-150,152-155,157-260
+  s_d8c978081f408b::t_ae3a3ae64439ba 151,156
+  s_d8c978081f408b::t_39bdc1a40286f2 87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1a304970f75c54a8f04cee57946c542f1d504add",
+  "prompts": {},
+  "sessions": {
+    "s_d8c978081f408b": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7d34cf8a-946f-4536-ae6c-e2310b17da55",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
