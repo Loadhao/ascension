@@ -1,0 +1,31 @@
+docs/evolution.md
+  s_5601a797667e65::t_1e38bd36c79ad2 58-67
+  s_5601a797667e65::t_1c2670cf046f93 45
+src/content/docs/mysql/basic/core/03-index-leftmost.md
+  s_5601a797667e65::t_38fd6efb8be25c 151
+  s_5601a797667e65::t_2e1e22d59386cf 1-149,152-200
+  s_5601a797667e65::t_ee24c6f598a8eb 150
+astro.config.mjs
+  s_5601a797667e65::t_49aff4e16d3281 1066
+src/data/graphs/mysql.json
+  s_5601a797667e65::t_74bd377d547355 6
+  s_5601a797667e65::t_ef40c4d0dfe224 27-28
+src/content/docs/mysql/basic/core/index.mdx
+  s_5601a797667e65::t_b2340bff9365d3 3,8-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "309832a333843c1872dca13094f9e7d3a4ddd993",
+  "prompts": {},
+  "sessions": {
+    "s_5601a797667e65": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "e973a340-4b52-418a-b7f0-f747a4376f69",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
