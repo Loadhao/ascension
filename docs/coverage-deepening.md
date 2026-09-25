@@ -56,7 +56,14 @@
 
 ### d 类：新知补充
 
-- （暂无；发现值得覆盖但无笔记的知识点时在此入队，先补笔记再收录）
+入队规则（2026-09-25 起）：`docs/content-roadmap.md` 的 A 车道新笔记落地时，在下方入队
+**该新篇的第二题角度**（首题已随笔记同轮写入 `src/data/quiz/<方向>.json`，不必重复入队）；
+条目格式沿用 a 类：`- [ ] <笔记路径> — 第二题考「<与首题不重叠的角度>」（首题已考 <X>）`。
+另：发现值得覆盖但站内无笔记的知识点，仍按原规则在此登记，先补笔记再收录。
+
+- [ ] java/intermediate/build/01-dependency-conflict — 第二题考「`dependencyManagement` 与直接声明、import BOM 三者的优先级，以及 exclusion 与 `optional=true` 在传递性上的差别」（首题已考「两个 jar 提供同一个类时按 classpath 顺序谁赢 + nearest 仲裁」）
+- [ ] java/advanced/jvm/10-arthas-jfr — 第二题考「`trace`/`watch` 的字节码增强代价与 `-n` 命中上限、`reset` 与 `stop` 的区别，为何高 QPS 接口挂 trace 不设上限会自己变成故障」（首题已考「偶发慢现场取证：trace 条件过滤 vs tt 重放 vs JFR 环形缓冲回放」）
+- [ ] java/intermediate/spring/09-mybatis-in-practice — 第二题考「一级缓存的失效条件与 `localCacheScope=STATEMENT`、二级缓存 namespace 级清空在分布式多实例下为何会读到过期数据（生产建议不开）」（首题已考「`<association>` nested select 造成 N+1 与 lazy 触发点」）
 
 ## 已完成记录
 

@@ -107,7 +107,11 @@
     { "id": "observer", "label": "观察者模式", "href": "/java/intermediate/design-pattern/11-observer/", "group": "设计" },
     { "id": "cor", "label": "责任链模式", "href": "/java/intermediate/design-pattern/12-chain-of-responsibility/", "group": "设计" },
     { "id": "lowfreq", "label": "访问者/中介者/解释器", "href": "/java/intermediate/design-pattern/14-visitor-mediator/", "group": "设计" },
-    { "id": "fwmap", "label": "框架模式地图", "href": "/java/intermediate/design-pattern/15-patterns-in-frameworks/", "group": "设计" }
+    { "id": "fwmap", "label": "框架模式地图", "href": "/java/intermediate/design-pattern/15-patterns-in-frameworks/", "group": "设计" },
+    { "id": "build", "label": "构建与依赖", "href": "/java/intermediate/build/", "group": "工程" },
+    { "id": "depconf", "label": "依赖冲突与构建治理", "href": "/java/intermediate/build/01-dependency-conflict/", "group": "工程" },
+    { "id": "arthas", "label": "Arthas 与 JFR 在线诊断", "href": "/java/advanced/jvm/10-arthas-jfr/", "group": "JVM" },
+    { "id": "mybatisuse", "label": "MyBatis 实战坑", "href": "/java/intermediate/spring/09-mybatis-in-practice/", "group": "框架" }
   ],
   "edges": [
     { "source": "root", "target": "syntax" },
@@ -257,6 +261,19 @@
     { "source": "behavioral", "target": "cor", "label": "逐模式深入：责任链" },
     { "source": "behavioral", "target": "lowfreq", "label": "逐模式深入：低频三杰" },
     { "source": "aop", "target": "proxy", "label": "@Transactional 的底座" },
-    { "source": "volatile", "target": "singleton", "label": "DCL 防半成品" }
+    { "source": "volatile", "target": "singleton", "label": "DCL 防半成品" },
+    { "source": "root", "target": "build" },
+    { "source": "build", "target": "depconf" },
+    { "source": "depconf", "target": "bootembed", "label": "Boot 不打平：嵌套 jar" },
+    { "source": "depconf", "target": "spi", "label": "shade 会吃掉 services" },
+    { "source": "depconf", "target": "lombok", "label": "处理器不入依赖树" },
+    { "source": "depconf", "target": "arthas", "label": "sc -d 坐实加载来源" },
+    { "source": "troubleshoot", "target": "arthas", "label": "现场不在时转回放" },
+    { "source": "bytecode", "target": "arthas", "label": "jad 与 retransform 的对象" },
+    { "source": "arthas", "target": "tuning", "label": "jcmd 需常备 NMT 参数" },
+    { "source": "mybatis", "target": "mybatisuse", "label": "框架不管的四件事" },
+    { "source": "mybatisuse", "target": "cor", "label": "分页插件即拦截器链" },
+    { "source": "logging", "target": "mybatisuse", "label": "toString 触发懒加载" },
+    { "source": "mybatisuse", "target": "depconf", "label": "XML 没进产物就不是绑定问题" }
   ]
 }

@@ -560,6 +560,7 @@ export default defineConfig({
                         { label: 'Spring 扩展点全景', link: '/java/intermediate/spring/06-extension-points/' },
                         { label: 'ApplicationContext：容器体系与内置组件', link: '/java/intermediate/spring/07-application-context/' },
                         { label: '常用注解地图：Java / Spring / Spring Boot', link: '/java/intermediate/spring/08-annotations-map/' },
+                        { label: 'MyBatis 实战：动态 SQL、N+1 与缓存边界', link: '/java/intermediate/spring/09-mybatis-in-practice/' },
                       ],
                     },
                     {
@@ -617,6 +618,14 @@ export default defineConfig({
                       ],
                     },
                     {
+                      label: '构建与依赖',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/java/intermediate/build/' },
+                        { label: '依赖冲突与构建治理', link: '/java/intermediate/build/01-dependency-conflict/' },
+                      ],
+                    },
+                    {
                       label: '日志体系',
                       collapsed: false,
                       items: [
@@ -655,6 +664,7 @@ export default defineConfig({
                         { label: 'JVM 参数与调优', link: '/java/advanced/jvm/07-tuning/' },
                         { label: '线上故障排查实战', link: '/java/advanced/jvm/08-troubleshooting/' },
                         { label: '类文件结构与字节码', link: '/java/advanced/jvm/09-bytecode/' },
+                        { label: 'Arthas、JFR 与 jcmd 在线诊断', link: '/java/advanced/jvm/10-arthas-jfr/' },
                       ],
                     },
                     {

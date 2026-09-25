@@ -69,6 +69,7 @@ Docker、Nginx、Git 等全站方向。
 | [四种引用](/java/advanced/jvm/04-references/) | 强不回收、软引用内存不足回收（缓存）、弱引用下次必收（ThreadLocal key）、虚引用管堆外 |
 | [JIT 与逃逸分析](/java/advanced/jvm/06-jit/) | 热点代码即时编译；对象不逃逸可栈上分配/标量替换，省掉堆分配 |
 | [线上 JVM 故障排查](/java/advanced/jvm/08-troubleshooting/) | CPU 高：top -H 定线程 → jstack 看栈；OOM：jmap dump → MAT 分析支配树 |
+| [不重启的在线诊断](/java/advanced/jvm/10-arthas-jfr/) | trace/watch 是字节码增强、开销随调用次数涨，必带 `-n`；`quit` 不撤销增强要 `stop`；不可复现的现场交给 JFR 环形缓冲回放 |
 | [对象内存布局](/java/advanced/jvm/05-object-layout/) | 对象头 + 实例数据 + 8 字节对齐；压缩指针堆 >32G 自动失效，包装类型开销 4~6 倍 |
 | [JVM 调优铁律](/java/advanced/jvm/07-tuning/) | 进程内存 ≠ Xmx：堆+元空间+栈×线程+直接内存；容器用 MaxRAMPercentage，一次只改一个变量 |
 | [字节码与 invoke](/java/advanced/jvm/09-bytecode/) | Class 文件严格排版，常量池是符号引用地址簿；重载编译期定、重写运行期找 |
@@ -95,6 +96,7 @@ Docker、Nginx、Git 等全站方向。
 | [单例模式](/java/intermediate/design-pattern/02-singleton/) | 进程内真唯一：饿汉/枚举/静态内部类/DCL；难点是并发、反射、序列化围攻下仍唯一 |
 | [Stream 延迟求值](/java/intermediate/stream/01-stream-principle/) | 不存数据、中间操作惰性串联，终止操作才触发；并行流走 ForkJoinPool 工作窃取 |
 | [SqlSessionTemplate 单例凭什么线程安全](/java/intermediate/spring/05-mybatis-sqlsession/) | 壳是无状态 JDK 代理，真实 SqlSession 按调用临时获取、按事务生命周期管理（ThreadLocal 绑定 + 引用计数） |
+| [MyBatis 为什么会打出 N+1 条 SQL](/java/intermediate/spring/09-mybatis-in-practice/) | nested select 按行再发查询，换 nested results 一次 join；父层缺 `<id>` 则行边界按全部映射列拼 key，同一订单被判成多行 |
 | [Boot 内嵌 Web 服务器何时启动](/java/intermediate/spring/07-application-context/) | refresh 的 onRefresh 阶段，早于业务 Bean 预实例化——「Web 服务器就绪 ≠ 应用就绪」 |
 | [@Configuration 的 @Bean 互调为什么不 new 第二份](/java/intermediate/spring/08-annotations-map/) | 配置类被 CGLIB 增强拦截方法互调、返回容器单例；proxyBeanMethods=false 即 lite 模式提速原理 |
 | [配置中心改了配置 Bean 里的值为什么没变](/java/intermediate/spring-boot/03-configuration/) | 热更新必须标 @RefreshScope，否则只是 Environment 更新，字段仍是旧值 |
@@ -141,6 +143,14 @@ Docker、Nginx、Git 等全站方向。
 | [从 8 升 11 最常见的两大报错](/java/intermediate/version/02-java9-11/) | JDK 内部 API 强封装（反射要 --add-opens）与 Java EE 模块移除（javax.* 要自己补依赖） |
 | [record 为什么不能继承其他类](/java/intermediate/version/03-java14-17/) | 隐含继承 java.lang.Record，字段全 final 的不可变数据载体——适合 DTO、值对象、Map 复合 key |
 | [虚拟线程要不要池化](/java/intermediate/version/04-java18-21/) | 不池化——便宜到每任务一个，限流用 Semaphore；synchronized 内阻塞会 pin 载体（22 起 JEP 491 修复） |
+
+## Java 工程与构建
+
+| 问题 | 一句话答案 |
+|---|---|
+| [两个 jar 有同一个类，谁赢](/java/intermediate/build/01-dependency-conflict/) | 运行期按 classpath 顺序第一个命中即加载、另一份静默失效；Maven 仲裁是 nearest（路径最近优先、同深度先声明优先），它不保证版本最新，所以会降级 |
+| [shade 打平依赖后会丢什么](/java/intermediate/build/01-dependency-conflict/) | zip 同路径条目只留一个：META-INF/services 与 spring.factories 被覆盖，SPI 实现与自动配置静默失效——要用 ServicesResourceTransformer / AppendingTransformer 显式合并 |
+| [为什么 Maven 与 Gradle 解出不同版本](/java/intermediate/build/01-dependency-conflict/) | 默认策略相反：Maven nearest（可能降级）、Gradle 取最高版本；且 Gradle Module Metadata 只被 Gradle 读，混用构建工具就会漂移 |
 
 ## MySQL
 

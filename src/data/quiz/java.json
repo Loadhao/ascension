@@ -2268,6 +2268,60 @@
       ],
       "hint": "一个 Java 程序天生多线程（main 只是其中之一）；上下文切换有真实成本——线程池复用是在摊销这笔成本。java-thb-030 多选考创建方式与状态归属，本题考状态归并与 wait 的设计。",
       "difficulty": 4
+    },
+    {
+      "id": "java-depconflict-133",
+      "noteId": "java/intermediate/build/01-dependency-conflict",
+      "type": "multiple",
+      "q": "两个 jar 都提供 com.x.Foo 且都进了 classpath。关于「最终加载哪一份」以及 Maven 解出的版本，哪些说法成立？",
+      "options": [
+        "运行期按 classpath 顺序从左到右找，第一个能提供该类的条目胜出，另一份静默失效",
+        "Maven 仲裁是「最短路径优先」，所以胜出的版本一定是依赖树里最新的那个",
+        "编译期选版本靠 POM 声明、运行期选版本靠 classpath 顺序，两者不一致就是本地能跑线上 NoSuchMethodError 的成因",
+        "把冲突的一方改成 provided，两份同名类就会由双亲委派自动合并"
+      ],
+      "answer": [
+        0,
+        2
+      ],
+      "hint": "nearest 只保证「路径最近」，不保证「版本最新」——正因如此才有 enforcer 的 requireUpperBoundDeps 专门判降级；provided 只影响是否打进产物，同名类仍按顺序先到先得。双亲委派解决的是「哪个类加载器去加载」，与同一加载器下多个 jar 撞名是两个正交维度。",
+      "difficulty": 4
+    },
+    {
+      "id": "java-arthasjfr-134",
+      "noteId": "java/advanced/jvm/10-arthas-jfr",
+      "type": "single",
+      "q": "接口每天凌晨慢 3 秒、只发作一次，等你连上服务器已经恢复正常。最合理的取证姿势是？",
+      "options": [
+        "给该方法挂一个不带 -n 的 trace，等明天凌晨自动抓到那一次",
+        "把 JFR 配成常开 + 环形缓冲（maxage 盖住发作周期），事后用 jfr summary 与 print 回放那一刻的 GC 与锁事件",
+        "先 jmap dump 一份堆——慢 3 秒必然是内存问题",
+        "重启进程并加上 GC 日志，第二天再看"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "现场已消失就只能「先记录、后回放」，JFR 的环形缓冲正是为此设计（JEP 328 的量级定位是可常开），且没加启动参数时可用 jcmd 运行期开一段等下次。trace/watch 属字节码增强，开销随该方法调用次数增长，不该长期挂在生产方法上；tt 能录现场供重放，但重放是真实调用，写方法禁用。",
+      "difficulty": 4
+    },
+    {
+      "id": "java-mybatisn1-135",
+      "noteId": "java/intermediate/spring/09-mybatis-in-practice",
+      "type": "multiple",
+      "q": "订单列表接口打出 1 条主查询 + 200 条明细查询。关于这个 N+1 与懒加载，哪些说法成立？",
+      "options": [
+        "<collection select=\"...\"> 的 nested select 会按行再发一条查询，改成一次 join 的 nested results 可压成 1 条",
+        "把 lazyLoadingEnabled 设为 true，明细就不会再有多余查询了",
+        "加一行 log.info(\"{}\", order) 之后查询翻倍，可能是 toString 触发了懒加载——它就在 lazyLoadTriggerMethods 的默认值里",
+        "nested results 归并父子结构时父层不写 <id>，行边界会退化成用所有映射列拼 key，同一订单可能被判成多行"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "lazy 改变的是「什么时候发查询」而不是「发不发」：默认 lazyLoadingEnabled=false，一旦开启，toString/equals/hashCode/clone 这四个触发方法会让打日志、Jackson 序列化都变成批量查询。判断 N+1 的朴素依据是数同模板 SQL 出现的次数——每条都很快、加起来才慢。",
+      "difficulty": 4
     }
   ]
 }
