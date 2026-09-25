@@ -1,0 +1,18 @@
+---
+title: RAG 与向量存储
+description: VectorStore 抽象与元数据过滤 DSL、ETL 三段式管线，以及 Naive 与 Modular 两档 RAG Advisor
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+「让模型回答你私有资料里的问题」在 Spring AI 里被拆成**入库**与**检索**两件事，本分类各一篇：
+第一篇讲 `VectorStore` 的读写接口、`SearchRequest` 的三个旋钮、ANTLR4 元数据过滤 DSL，以及
+`DocumentReader → DocumentTransformer → DocumentWriter` 三段式管线（`VectorStore` 本身就是
+Writer）；第二篇讲挂到 `ChatClient` 上的两档 Advisor——`QuestionAnswerAdvisor` 的一键
+Naive RAG 与 `RetrievalAugmentationAdvisor` 的四阶段 Modular RAG，以及两者**依赖坐标不同**
+这件事。
+
+RAG 的通用原理与评测口径见 [AI 方向](/ai/intermediate/agent/06-rag/)与
+[RAG 进阶](/ai/intermediate/agent/11-rag-advanced/)，本分类只讲 Spring AI 的抽象边界与坑。
+
+<CategoryNotesIsland categoryId="spring-ai/advanced/rag" />

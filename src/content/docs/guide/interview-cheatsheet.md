@@ -465,6 +465,11 @@ Docker、Nginx、Git 等全站方向。
 | [Advisor 的 order 怎么算先后](/spring-ai/intermediate/advisor/01-advisor-chain/) | 值小者先执行、值大者优先级低；但链是栈——order 最小的最先处理请求，也最后处理响应 |
 | [Spring AI 记忆为什么在工具环外](/spring-ai/intermediate/advisor/02-chat-memory/) | 记忆 Advisor = MIN+200 小于 ToolCallingAdvisor = MIN+300，一整轮工具往返只读一次、写一次历史 |
 | [2.0 忘传 CONVERSATION_ID 会怎样](/spring-ai/intermediate/advisor/02-chat-memory/) | 当场 IllegalArgumentException——默认值 `"default"` 已移除；1.x 是全员共用一份历史，属数据串线事故 |
+| [2.0 裸调 ChatModel 带工具会怎样](/spring-ai/intermediate/tools/01-tool-calling/) | 工具定义发出去了但 tool call 不执行——1.x 的 per-ChatModel 内部循环已移除，循环归 ToolCallingAdvisor，只有走 ChatClient 才跑 |
+| [身份参数为什么不能交给模型填](/spring-ai/intermediate/tools/01-tool-calling/) | 模型只填 JSON Schema 里的参数；tenantId/userId 走 `ToolContext`，官方注明 "not sent to the model"，否则等于把越权写进 prompt |
+| [向量库会自己算向量吗](/spring-ai/advanced/rag/01-vector-store-etl/) | 不会，"does not generate the embeddings itself"；造向量靠 EmbeddingModel 且维度要与库匹配，换模型等于全量重灌 |
+| [两套 RAG Advisor 的依赖差别](/spring-ai/advanced/rag/02-rag-advisors/) | QuestionAnswerAdvisor 在 `spring-ai-vector-store-advisor`、RetrievalAugmentationAdvisor 在 `spring-ai-rag`；naive 是流程名不是类名 |
+| [MCP 服务端传输怎么选](/spring-ai/advanced/mcp/01-mcp-client-server/) | 2.0 起 SSE 已标 deprecated，用 STREAMABLE；SYNC 服务端只注册同步注解方法，返回 Mono 的工具会被静默忽略 |
 
 ## 分布式与集群
 

@@ -4,15 +4,26 @@
     { "id": "sa-what", "label": "定位与 2.0 断代", "href": "/spring-ai/basic/foundation/01-what-is-spring-ai/", "group": "基础", "weight": 0.55 },
     { "id": "sa-chatclient", "label": "ChatClient 与结构化输出", "href": "/spring-ai/basic/foundation/02-chatclient-api/", "group": "基础", "weight": 0.6 },
     { "id": "sa-advisor", "label": "Advisor 责任链", "href": "/spring-ai/intermediate/advisor/01-advisor-chain/", "group": "上下文", "weight": 0.7 },
-    { "id": "sa-memory", "label": "会话记忆两层抽象", "href": "/spring-ai/intermediate/advisor/02-chat-memory/", "group": "上下文", "weight": 0.6 }
+    { "id": "sa-memory", "label": "会话记忆两层抽象", "href": "/spring-ai/intermediate/advisor/02-chat-memory/", "group": "上下文", "weight": 0.6 },
+    { "id": "sa-tools", "label": "工具调用与执行归属", "href": "/spring-ai/intermediate/tools/01-tool-calling/", "group": "工具", "weight": 0.65 },
+    { "id": "sa-vectordb", "label": "VectorStore 与 ETL", "href": "/spring-ai/advanced/rag/01-vector-store-etl/", "group": "RAG", "weight": 0.6 },
+    { "id": "sa-ragadv", "label": "Naive 与 Modular RAG", "href": "/spring-ai/advanced/rag/02-rag-advisors/", "group": "RAG", "weight": 0.6 },
+    { "id": "sa-mcp", "label": "MCP 客户端与服务端", "href": "/spring-ai/advanced/mcp/01-mcp-client-server/", "group": "MCP", "weight": 0.6 }
   ],
   "edges": [
     { "source": "root", "target": "sa-what" },
     { "source": "root", "target": "sa-chatclient" },
     { "source": "root", "target": "sa-advisor" },
     { "source": "root", "target": "sa-memory" },
+    { "source": "root", "target": "sa-tools" },
+    { "source": "root", "target": "sa-vectordb" },
+    { "source": "root", "target": "sa-ragadv" },
     { "source": "sa-what", "target": "sa-chatclient", "label": "门面分层" },
     { "source": "sa-chatclient", "target": "sa-advisor", "label": "defaultAdvisors 挂载" },
-    { "source": "sa-advisor", "target": "sa-memory", "label": "order 决定读写时机" }
+    { "source": "sa-advisor", "target": "sa-memory", "label": "order 决定读写时机" },
+    { "source": "sa-advisor", "target": "sa-tools", "label": "ToolCallingAdvisor 驱动循环" },
+    { "source": "sa-advisor", "target": "sa-ragadv", "label": "RAG 也是一种 Advisor" },
+    { "source": "sa-vectordb", "target": "sa-ragadv", "label": "检索端与拼接端" },
+    { "source": "sa-tools", "target": "sa-mcp", "label": "MCP 工具转 ToolCallback" }
   ]
 }

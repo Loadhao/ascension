@@ -2259,6 +2259,37 @@ export default defineConfig({
                         { label: '会话记忆：两层抽象与必填会话 ID', link: '/spring-ai/intermediate/advisor/02-chat-memory/' },
                       ],
                     },
+                    {
+                      label: '工具调用',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/spring-ai/intermediate/tools/' },
+                        { label: '工具调用：@Tool 与执行归属', link: '/spring-ai/intermediate/tools/01-tool-calling/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '高级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: 'RAG 与向量存储',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/spring-ai/advanced/rag/' },
+                        { label: 'VectorStore 与 ETL 管线', link: '/spring-ai/advanced/rag/01-vector-store-etl/' },
+                        { label: '两种 RAG Advisor：Naive 与 Modular', link: '/spring-ai/advanced/rag/02-rag-advisors/' },
+                      ],
+                    },
+                    {
+                      label: 'MCP 接入',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/spring-ai/advanced/mcp/' },
+                        { label: 'MCP 客户端与服务端接入', link: '/spring-ai/advanced/mcp/01-mcp-client-server/' },
+                      ],
+                    },
                   ],
                 },
               ],

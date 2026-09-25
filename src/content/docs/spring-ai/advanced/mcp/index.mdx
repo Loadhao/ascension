@@ -1,0 +1,17 @@
+---
+title: MCP 接入
+description: Model Context Protocol 的客户端与服务端接法——starter 选型、注解面、传输与 2.0 包名断代
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+MCP 把「模型能调哪些工具、能读哪些资源」标准化，于是工具提供方与 LLM 应用解耦。
+Spring AI 在这件事上是**双向**的：既能作为客户端去吃别人的 MCP server，也能把自己的服务
+开成 MCP server 给别的 agent 调用。本分类讲四个 starter 的分工、`spring.ai.mcp.*` 属性面、
+注解（`@McpTool` / `@McpResource` / `@McpPrompt`）与 MCP 工具如何变成 Spring AI 的
+`ToolCallback`，以及 2.0 里包名与传输类的迁移边界。
+
+协议与概念本身见 [MCP 篇](/ai/intermediate/agent/08-mcp/)，工具侧的接法见
+[工具调用](/spring-ai/intermediate/tools/01-tool-calling/)。
+
+<CategoryNotesIsland categoryId="spring-ai/advanced/mcp" />

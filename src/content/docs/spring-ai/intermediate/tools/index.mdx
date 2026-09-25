@@ -1,0 +1,18 @@
+---
+title: 工具调用
+description: 注解式工具与 ToolCallback 的三种声明方式、参数 Schema 推导、2.0 工具循环归属变更与 ToolContext 旁路
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+模型只会输出「我想调用哪个工具、带什么参数」，**执行永远在你的 JVM 里**。本分类讲 Spring AI
+怎么把这套协议落成注解与接口：`@Tool` / `FunctionToolCallback` / `MethodToolCallback` 三条
+声明路径如何收敛到同一个 `ToolCallback`，工具在构建期与请求期分别怎么注册，以及 2.0 最要紧
+的一处结构变化——**工具循环从 `ChatModel` 搬进了自动注册的 `ToolCallingAdvisor`**，
+裸调 `ChatModel` 不再自动执行工具。
+
+协议本身的通用原理（为什么描述决定选用率、身份参数为什么不能交给模型填）见
+[工具使用](/ai/basic/agent/02-tool-use/) 与[工具设计](/ai/intermediate/agent/16-tool-design/)，
+本分类只讲 Spring AI 的接法。
+
+<CategoryNotesIsland categoryId="spring-ai/intermediate/tools" />

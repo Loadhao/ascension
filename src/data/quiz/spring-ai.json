@@ -67,6 +67,76 @@
         1
       ],
       "hint": "2.0 移除了常量 ChatMemory.DEFAULT_CONVERSATION_ID（值 \"default\"），官方写明「There is no default conversation ID」，缺参在运行期抛 IllegalArgumentException。1.x 的默认会话行为在多用户场景等于历史串线，2.0 把它换成了立刻失败。见《会话记忆》。"
+    },
+    {
+      "id": "sa-toolloop-005",
+      "noteId": "spring-ai/intermediate/tools/01-tool-calling",
+      "type": "single",
+      "difficulty": 4,
+      "q": "2.0 里绕过 ChatClient、直接调 ChatModel 并带上工具，会发生什么？",
+      "options": [
+        "工具定义发给模型，但响应里的 tool call 不会被自动执行",
+        "仍由框架内部循环执行工具，与 1.x 行为一致",
+        "启动时抛异常，提示必须使用 ChatClient",
+        "工具被执行，但结果不会回填给模型"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "官方口径：「The per-ChatModel internal tool execution loop of Spring AI 1.x has been removed … tool calls in that response are not executed automatically」。循环改由 ChatClient 自动注册的 ToolCallingAdvisor 驱动，所以裸调 ChatModel 会「看起来能跑但工具没执行」。见《工具调用》。"
+    },
+    {
+      "id": "sa-vectordb-006",
+      "noteId": "spring-ai/advanced/rag/01-vector-store-etl",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 VectorStore、EmbeddingModel 与 Document，哪些说法成立？",
+      "options": [
+        "向量库不负责生成 embedding，它只做存储与相似检索",
+        "SearchRequest 的 similarityThreshold 取值 0~1，越接近 1 表示越相似",
+        "SimpleVectorStore 只适合测试与演示，不应上生产",
+        "一个 Document 可以同时携带正文和媒体内容"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "官方明确向量库「does not generate the embeddings itself」，造向量要用 EmbeddingModel，且模型维度要与库匹配。干扰项错在「both」：Document「holds either text content or media content, but not both」，用 isText() 判断；另外取值方法是 getText()，官方示例里的 getContent() 在 2.0.x 源码中不存在。见《VectorStore 与 ETL》。"
+    },
+    {
+      "id": "sa-ragmodule-007",
+      "noteId": "spring-ai/advanced/rag/02-rag-advisors",
+      "type": "single",
+      "difficulty": 3,
+      "q": "要用 QuestionAnswerAdvisor 与 RetrievalAugmentationAdvisor，依赖坐标分别是？",
+      "options": [
+        "前者 spring-ai-vector-store-advisor，后者 spring-ai-rag",
+        "两者都在 spring-ai-rag",
+        "前者 spring-ai-rag，后者 spring-ai-vector-store-advisor",
+        "两者都在 spring-ai-advisors-vector-store"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "官方分别写明「To use the QuestionAnswerAdvisor or VectorStoreChatMemoryAdvisor, you need to add the spring-ai-vector-store-advisor dependency」与「To use the RetrievalAugmentationAdvisor, you need to add the spring-ai-rag dependency」。干扰项里的 spring-ai-advisors-vector-store 是 1.x 旧名，2.0 已改名。另记：naive RAG 是流程名而非某个类。见《两种 RAG Advisor》。"
+    },
+    {
+      "id": "sa-mcpsync-008",
+      "noteId": "spring-ai/advanced/mcp/01-mcp-client-server",
+      "type": "single",
+      "difficulty": 4,
+      "q": "MCP 服务端配 type: SYNC，某个带 @McpTool 的方法返回 Mono<String>，结果会是？",
+      "options": [
+        "该异步方法被忽略，SYNC 服务端只注册同步注解方法",
+        "框架自动桥接为阻塞调用后注册",
+        "启动即失败，提示类型不匹配",
+        "正常注册，只是首次调用较慢"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "官方注解说明里有一条 NOTE：「The SYNC server will register only synchronous MCP annotated methods. Asynchronous methods will be ignored.」——静默不注册，比报错更难查。要做非阻塞工具得把服务端配成 ASYNC（McpAsyncServer，自带 Reactor 支持）。见《MCP 接入》。"
     }
   ]
 }
