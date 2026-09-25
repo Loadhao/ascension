@@ -37,8 +37,8 @@ chattr +a /var/log/app.log    # 只追加（append-only）：只能写不能删�
 - `CAP_SYS_TIME`：改系统时间……
 
 ```bash
-setcap cap_net_bind_service=+ep /usr/sbin/nginx   # 非-root 运行的 nginx 也能绑 80
-getcap /usr/sbin/nginx                            # 查看已授权能力
+setcap cap_net_bind_service=+ep /usr/sbin/nginx  # 非 root 也能绑 80
+getcap /usr/sbin/nginx  # 查看已授权能力
 ```
 
 - nginx 以非 root 用户运行却绑 80 端口（生产标配），靠的就是这个

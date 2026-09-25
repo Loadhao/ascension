@@ -29,7 +29,8 @@ core: true
 
 ```text
 approval: id, biz_type, biz_id, status(进行中/通过/驳回/撤销)
-approval_node: id, approval_id, node_order, approver, status(待处理/通过/驳回/跳过)
+approval_node: id, approval_id, node_order, approver,
+               status(待处理/通过/驳回/跳过)
 ```
 
 - 推进 = 当前节点通过 → 下一节点置待处理；驳回 = 状态置驳回 + 记录

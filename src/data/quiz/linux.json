@@ -269,6 +269,25 @@
       ],
       "hint": "末项反了——agent 转发只对可信跳板开：跳板上的 root 可向你的 agent 请求签名借身份登录后续机器；私钥不放跳板机（跳板被攻破=全网沦陷）；私钥丢失要从所有服务器 authorized_keys 删除对应公钥——集中管理（Ansible/堡垒机下发）。",
       "difficulty": 4
+    },
+    {
+      "id": "linux-cap-014",
+      "noteId": "linux/basic/permission/02-immutable-capabilities",
+      "type": "multiple",
+      "q": "文件属性（chattr）与进程能力（capabilities）这两层「比权限位更高」的机制，正确的有？（多选）",
+      "options": [
+        "chattr +i 改的是 inode 上的文件系统属性，属性检查在 chmod 的权限位检查之外——所以 chmod 777 也照样删不掉，rm 报 Operation not permitted 时该先 lsattr 查属性，再怀疑权限",
+        "CAP_NET_BIND_SERVICE 让以非 root 用户运行的 nginx 也能绑 80 端口，本质是把 root 的全能拆成零件后按需发放，是「最小授权在进程层的落地」",
+        "Docker 默认丢弃全部 capabilities 再白名单归还一小部分，所以容器内的 root 改系统时间会缺 CAP_SYS_TIME、挂载会缺 CAP_SYS_ADMIN——容器内 root 不等于真 root 是特性不是 bug",
+        "容器里 root 干不了某件事时，标准做法是加 --privileged 把全部能力还回来，与逐个 --cap-add 补齐相比既省事又同样安全"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项反了：--privileged 等于把这层隔离整个放弃，正确姿势是按 --cap-add NET_BIND_SERVICE 白名单补单个能力（默认丢弃 + 白名单补齐才是容器安全基线，而不是「先给 root 再收紧」）。另两层的用法分工也要记住：+i 用于锁配置文件（防误改 resolv.conf/hosts），+a 用于审计日志只追加不可删改；要改 +i 的文件先 chattr -i 解锁、改完按需加回，生产变更别永久解锁。权限四层从浅到深：chmod 权限位 → ACL → chattr 文件属性 → capabilities 进程能力。",
+      "difficulty": 4
     }
   ]
 }

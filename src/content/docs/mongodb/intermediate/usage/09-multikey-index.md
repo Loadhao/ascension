@@ -38,7 +38,9 @@ db.posts.find({ tags: "mongodb" })   // 走索引，毫秒级
 
 ```javascript
 // scores: [{ subject: "math", score: 90 }, ...]
-db.students.find({ scores: { $elemMatch: { subject: "math", score: { $gte: 90 } } } })
+db.students.find({
+  scores: { $elemMatch: { subject: "math", score: { $gte: 90 } } }
+})
 ```
 
 - $elemMatch 保证**同一元素**同时满足多个条件（没有它，

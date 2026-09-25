@@ -14,7 +14,8 @@ worker_threads（多线程）是两个正解，适用场景不同。
 ```javascript
 const cluster = require("cluster");
 if (cluster.isPrimary) {
-  for (let i = 0; i < os.cpus().length; i++) cluster.fork();  // 每核 fork 一个 worker
+  // 每核 fork 一个 worker
+  for (let i = 0; i < os.cpus().length; i++) cluster.fork();
 } else {
   require("./server");   // 每个 worker 跑同一个服务
 }
