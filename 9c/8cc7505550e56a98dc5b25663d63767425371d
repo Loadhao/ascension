@@ -1,0 +1,36 @@
+src/data/quiz/react.json
+  s_5f8b15b59022de::t_b3efa3181a69b1 104-123
+docs/coverage-deepening.md
+  s_5f8b15b59022de::t_09aa335026949b 185-186
+scripts/mermaid-contrast-verify.mjs
+  s_5f8b15b59022de::t_2fb2bb74e10293 115
+  s_5f8b15b59022de::t_c5ad461fcb3cba 153
+  s_5f8b15b59022de::t_88a89b24584b9c 14,21,29,31-41,43-52,55-59,62-71,73
+  s_5f8b15b59022de::t_b501833405c5a5 163-168,170
+  s_5f8b15b59022de::t_be1ee6e5ff8702 26-28,30
+  s_5f8b15b59022de::t_5cfa5823f6e261 72
+  s_5f8b15b59022de::t_641cb6369b448c 54,60-61
+  s_5f8b15b59022de::t_84bbecde6704a3 132-135,143,147,150-152,154-161
+  s_5f8b15b59022de::t_ac08726f0f004e 53
+  s_5f8b15b59022de::t_241e767058c9d0 4-7
+  s_5f8b15b59022de::t_26586b004ac14b 42
+  s_5f8b15b59022de::t_8ff9ec77b9cda1 74
+docs/evolution.md
+  s_5f8b15b59022de::t_9cd001ca0c4f44 54,60-70
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "9c8cc7505550e56a98dc5b25663d63767425371d",
+  "prompts": {},
+  "sessions": {
+    "s_5f8b15b59022de": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "55c9ec52-43d6-4e52-96f8-46170ff5c7b1",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
