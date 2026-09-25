@@ -1,0 +1,53 @@
+astro.config.mjs
+  s_dbf93f31316499::t_48e4a6a0b8c562 2285-2292
+  s_dbf93f31316499::t_333ade0216fdd2 2262-2284
+src/content/docs/spring-ai/index.mdx
+  s_dbf93f31316499::t_0877272fd88bfa 14-18
+src/content/docs/spring-ai/advanced/rag/index.mdx
+  s_dbf93f31316499::t_573bb9075ae55c 1-18
+src/content/docs/spring-ai/intermediate/tools/01-tool-calling.md
+  s_dbf93f31316499::t_92bf0b68b66a67 1-136,138-169,173-182
+  s_dbf93f31316499::t_ed28dbc43cc1ba 170-172
+  s_dbf93f31316499::t_eeaa64b67a2a61 137
+src/data/graphs/spring-ai.json
+  s_dbf93f31316499::t_52ef77cbb9456f 7-9,18-20,23-25
+  s_dbf93f31316499::t_00fa6e4efbe968 26-27
+  s_dbf93f31316499::t_1359590012932b 10-11
+src/content/docs/spring-ai/advanced/mcp/01-mcp-client-server.md
+  s_dbf93f31316499::t_0e2f9120d7dd56 164-169
+  s_dbf93f31316499::t_baa0b821185c4e 136-137
+  s_dbf93f31316499::t_b14aa16aee6d2a 1-135,138-163,170-178,181-219
+  s_dbf93f31316499::t_01b5c8542aac33 179-180
+src/content/docs/spring-ai/advanced/rag/01-vector-store-etl.md
+  s_dbf93f31316499::t_9178a3ca69c4c6 117-118
+  s_dbf93f31316499::t_a286c579f7a33b 169-172
+  s_dbf93f31316499::t_0c46a7c5fa0e29 1-116,119-168,173-200
+src/content/docs/spring-ai/advanced/mcp/index.mdx
+  s_dbf93f31316499::t_bda265391bae47 1-17
+src/data/quiz/spring-ai.json
+  s_dbf93f31316499::t_e77764ed9fd858 70-139
+src/content/docs/spring-ai/advanced/rag/02-rag-advisors.md
+  s_dbf93f31316499::t_3f9e03252c0e4a 1-42,45-148
+  s_dbf93f31316499::t_4ac7f7bcc61a3a 43-44
+src/content/docs/guide/interview-cheatsheet.md
+  s_dbf93f31316499::t_ca452f209fe693 468-472
+src/content/docs/spring-ai/intermediate/tools/index.mdx
+  s_dbf93f31316499::t_f7d2c6977265d4 3
+  s_dbf93f31316499::t_6b024572874306 1-2,4-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1880230c81ed064ceeb7b0605f0e5f20069b9249",
+  "prompts": {},
+  "sessions": {
+    "s_dbf93f31316499": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "b812c46d-7f53-45af-87b8-09f7d292dd46",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
