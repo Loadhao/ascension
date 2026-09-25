@@ -101,6 +101,26 @@
       ],
       "hint": "组件函数每次渲染都会重跑——纯函数纪律是性能与正确性的前提；状态提升或上下文解决跨层级共享。react-declarative-005 考 UI=f(state) 与纯函数纪律，本题考 JSX 本质与数据流向。",
       "difficulty": 4
+    },
+    {
+      "id": "react-memo-007",
+      "noteId": "react/basic/core/04-rerender-perf",
+      "type": "multiple",
+      "q": "关于 memo / useMemo / useCallback 三件套的分工与失效现场，正确的有？（多选）",
+      "options": [
+        "memo 逐个 prop 用 Object.is 做浅比较，全部相等才跳过本次渲染；父组件里 filter 出来的新数组、函数体里新建的箭头函数每次都是新引用，会让 memo 永远不生效，还白付一次比较成本",
+        "把 <Panel><Heavy/></Panel> 用 memo(Panel) 包住，Heavy 就不会跟着 Panel 重渲染",
+        "useCallback(fn, deps) 与 useMemo(() => fn, deps) 等价，它只稳住函数引用、本身不省任何计算；依赖数组同样按 Object.is 逐项比较，把组件体内新建的对象写进依赖等于没缓存",
+        "Context 的 consumer 更新走 context 通道，memo 拦不住；<Ctx value={{a,b}}> 每次渲染都是新对象，等于每次推倒全部 consumer，所以 Provider 的 value 自己要用 useMemo 包",
+        "memo 是渲染的语义保证，加上之后 React 就不会再重渲染该子组件，因此默认给全部组件套上只会更好"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "另两条的错处：children 每次是新建的元素对象，memo(Panel) 短路不了它——有效用法是反过来从外层把稳定元素传进去，React 对引用相同（===）的已渲染元素会跳过整棵子树；官方定性 memo 是「性能优化，不是保证」（措辞 usually），满屏 memo 会让依赖数组变成新的漏更新源头。优先级要先用 Profiler 量：状态下沉与拆分 > 虚拟列表减规模 > useMemo 缓存计算值 > memo + 稳定引用；开启 React Compiler 后 memo 基本不必。react-renderstage-004 考渲染三段流程与账本，本题考 memo 失效的引用机制。",
+      "difficulty": 4
     }
   ]
 }

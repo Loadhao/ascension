@@ -32,7 +32,6 @@
 
 
 
-- [ ] react/basic/core/04-rerender-perf — 第一题考「memo 三件套分工与引用不稳定」（0 题补缺，第 171 轮留账：本篇自身入零题池）
 - [ ] distributed/intermediate/case-studies/08-lottery — 第一题考「权重区间概率配置与奖品预扣防超发」（0 题补缺）
 - [ ] distributed/intermediate/case-studies/20-reconciliation — 第一题考「对什么账、怎么对、差错怎么闭环」（0 题补缺）
 - [ ] ai/intermediate/llm/07-quantization — 第一题考「各量化位宽的显存账与 PTQ/QAT 分工」（0 题补缺）
@@ -182,6 +181,8 @@
 - 2026-09-25 · 第六十二轮（第 175 轮｜车道 C｜题库深化第 62 轮）：3 道第一题补缺（net-wsup-021 / mongo-auth-013 / js-coerce-024，difficulty 4/3/4）；队列销 3 条、追加 4 条；同轮为首批 3 篇补「速答手册」索引行（网络协议 / JavaScript / 检索与文档存储各 1 行）· 本轮提交主题：feat(quiz): 演进第 175 轮车道 C 补 WebSocket/Mongo 安全/隐式转换三篇首题并同步速答索引
 
 - 2026-09-25 · 第六十三轮（第 179 轮｜车道 C｜题库深化第 63 轮）：3 道第一题补缺（linux-swap-015 / ai-agenteval-044 / mongo-readpref-014，difficulty 全 4）；队列销 3 条、追加 4 条（16-tool-design / 09-crypto / 04-enum-asconst / 13-push，角度一律取自各篇 description 不做无据入队）· 说明：本轮开工算 178、收尾时 178 已被并行会话（车道 A）占用，按配方 §6 顺延为 179；第 176 轮（车道 D）另按新硬约束附 1 道 linux-cap-014 · 本轮提交主题：feat(quiz): 演进第 179 轮车道 C 补 swap 水位/应用评估/读偏好三篇首题
+
+- 2026-09-25 · 第六十四轮（第 181 轮｜车道 D 附 1 题｜题库深化第 64 轮）：1 道第一题补缺（`react-memo-007`，multiple，difficulty 4，宿主 `react/basic/core/04-rerender-perf`）；队列销 1 条（a 类头部 react 篇，考点角度即队列指定项）· 说明：本轮主产出在 D 车道（对比度审计闸门自校验），按配方 §1「每轮必含一项内容增量」附 1 道考题并允许超出车道文件上限 1 个文件；未做 C 车道的「追加 2~4 条」，a 类队列头部前移为 `distributed/intermediate/case-studies/08-lottery`，余 11 条 · 本轮提交主题：feat(quiz): 演进第 181 轮附 react 重渲染 memo 三件套首题
 
 ## 经验与规则
 
