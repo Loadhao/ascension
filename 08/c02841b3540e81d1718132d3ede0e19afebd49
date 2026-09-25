@@ -1,0 +1,55 @@
+src/data/graphs/java.json
+  s_d8c978081f408b::t_a4b991a4ed3ef9 280-289
+  s_d8c978081f408b::t_a361e8d4e585ed 114-117
+src/content/docs/guide/interview-cheatsheet.md
+  s_d8c978081f408b::t_71230f66fc0fab 100
+  s_d8c978081f408b::t_b3f62ab981776b 91
+  s_d8c978081f408b::t_42badeb5df9851 35
+src/content/docs/java/intermediate/stream/02-collectors.md
+  s_d8c978081f408b::t_768161ee324312 148-151
+  s_d8c978081f408b::t_1d056b55f50b82 1-147,152-233
+src/content/docs/java/advanced/dubbo/03-generic-and-shutdown.md
+  s_d8c978081f408b::t_a132bd5d966034 115
+  s_d8c978081f408b::t_b6e4190ba0d827 1-105,107-114,116-130,133-175
+  s_d8c978081f408b::t_02973dbece63f8 131-132
+  s_d8c978081f408b::t_814b5bace5bf48 106
+src/content/docs/java/intermediate/stream/index.mdx
+  s_d8c978081f408b::t_19401f4f78bf39 3,8,10-12
+src/content/docs/java/basic/io/04-direct-memory.md
+  s_d8c978081f408b::t_2873c00cd83e3b 117
+  s_d8c978081f408b::t_d2ad03b783c46b 96-98
+  s_d8c978081f408b::t_6b50354b419b7e 1-86,88-95,99-116,118-160,165-190
+  s_d8c978081f408b::t_89667149300de5 161-164
+  s_d8c978081f408b::t_467b18439a7a75 191-194
+  s_d8c978081f408b::t_23750983f09259 87
+docs/content-roadmap.md
+  s_d8c978081f408b::t_711caa9dee99cc 114
+  s_d8c978081f408b::t_a23010da7e42e8 41
+  s_d8c978081f408b::t_0cdf5b38f9ba2d 43
+  s_d8c978081f408b::t_bf259067a767f1 132-136
+  s_d8c978081f408b::t_879d006be0232c 58-60
+src/data/quiz/java.json
+  s_d8c978081f408b::t_e112a14d731609 2325-2379
+astro.config.mjs
+  s_d8c978081f408b::t_539045eb1f6c74 514
+  s_d8c978081f408b::t_2f2c53a41e25fd 529
+  s_d8c978081f408b::t_6b07c5ef64b913 694
+docs/coverage-deepening.md
+  s_d8c978081f408b::t_1f332b1a87205d 67-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "08c02841b3540e81d1718132d3ede0e19afebd49",
+  "prompts": {},
+  "sessions": {
+    "s_d8c978081f408b": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7d34cf8a-946f-4536-ae6c-e2310b17da55",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
