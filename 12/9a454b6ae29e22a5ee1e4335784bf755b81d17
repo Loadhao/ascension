@@ -1,0 +1,56 @@
+src/content/docs/spring-ai/basic/foundation/02-chatclient-api.md
+  s_dbf93f31316499::t_43f1dc86cf911f 145-154
+  s_dbf93f31316499::t_175392de1047e3 178-191
+src/content/docs/spring-ai/intermediate/advisor/01-advisor-chain.md
+  s_dbf93f31316499::t_f83b144f57e4e8 167-177
+src/content/docs/spring-ai/intermediate/tools/01-tool-calling.md
+  s_dbf93f31316499::t_20a19a4a660182 91-114
+src/content/docs/spring-ai/advanced/observability/02-llm-as-judge-evaluation.md
+  s_dbf93f31316499::t_e2e3f6b371452d 1-49,71-187
+  s_dbf93f31316499::t_04b004f61e1c74 50-70
+src/content/docs/spring-ai/intermediate/model/index.mdx
+  s_dbf93f31316499::t_ef3e60cdbf1a84 1-16
+src/content/docs/spring-ai/advanced/observability/index.mdx
+  s_dbf93f31316499::t_7d914b6d0d398d 1-19
+src/content/docs/guide/interview-cheatsheet.md
+  s_dbf93f31316499::t_898f3cc859f70c 476-479
+src/data/graphs/spring-ai.json
+  s_dbf93f31316499::t_f33bffec5bcac3 34-36
+  s_dbf93f31316499::t_cadf36d1a31e51 11-12
+  s_dbf93f31316499::t_4a861e00c023a7 13-14
+  s_dbf93f31316499::t_0ef5f7a91127fc 30-33
+src/content/docs/spring-ai/advanced/observability/01-ai-observability.md
+  s_dbf93f31316499::t_c0eed6da677ef5 63-70
+  s_dbf93f31316499::t_1979c78bc3fba6 1-62,71-122,134-164
+  s_dbf93f31316499::t_db693af373ad20 123-133
+src/content/docs/spring-ai/advanced/mcp/01-mcp-client-server.md
+  s_dbf93f31316499::t_30753f30e7e09a 120-138
+src/content/docs/spring-ai/index.mdx
+  s_dbf93f31316499::t_c9c906bfea02a6 14-18
+src/data/quiz/spring-ai.json
+  s_dbf93f31316499::t_1d4f0dcb07c67c 140-190
+  s_dbf93f31316499::t_07474eea8b3e37 191-207
+astro.config.mjs
+  s_dbf93f31316499::t_fcfa14a6967409 2273-2280
+  s_dbf93f31316499::t_aeb4ec9bd50938 2310
+  s_dbf93f31316499::t_61dc7063c8fa09 2304-2309,2311-2312
+src/content/docs/spring-ai/intermediate/model/01-chatmodel-and-options.md
+  s_dbf93f31316499::t_117ab2833e5b6a 1-99,106-191
+  s_dbf93f31316499::t_14d6e806f6df58 100-105
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "129a454b6ae29e22a5ee1e4335784bf755b81d17",
+  "prompts": {},
+  "sessions": {
+    "s_dbf93f31316499": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "b812c46d-7f53-45af-87b8-09f7d292dd46",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
