@@ -1,0 +1,26 @@
+src/data/viz/media.ts
+  s_5e5a612a25b4ad::t_326982bee6dc19 88-92,94-107
+  s_5e5a612a25b4ad::t_b54e6ee21c7797 93
+docs/evolution.md
+  s_5e5a612a25b4ad::t_576b015917baa6 58-68
+  s_5e5a612a25b4ad::t_98fabfd18e1e5d 509-512
+  s_5e5a612a25b4ad::t_d4eb80a111837f 52
+src/content/docs/network/basic/tcp/01-three-way-handshake.mdx
+  s_5e5a612a25b4ad::t_4684ba76fb1bb5 30-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cbff011ca6ace505fcadc7b36b5eb7eaaf8931db",
+  "prompts": {},
+  "sessions": {
+    "s_5e5a612a25b4ad": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "5e796f43-2658-4ef2-a9f9-c0ab55a19e84",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
