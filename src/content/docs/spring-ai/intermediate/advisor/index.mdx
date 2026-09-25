@@ -1,0 +1,19 @@
+---
+title: Advisor 链与上下文增强
+description: 模型调用的统一拦截点——责任链语义与顺序、工具循环位次、会话记忆的两层抽象
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+`ChatClient` 只负责把一次调用发出去，**真正让回答"有据可依"的是 Advisor 这一层**：
+补历史、检索私有文档、跑工具循环、上护栏，全都挂在同一条链上。本分类第一篇讲
+`CallAdvisor` / `StreamAdvisor` 的签名与 `order` 的栈式语义，并落到 2.0 最要紧的一处结构
+变化——工具循环变成了自动注册的 `ToolCallingAdvisor`，位次直接决定历史怎么写；
+第二篇拆会话记忆的 `ChatMemory` / `ChatMemoryRepository` 两层，以及 2.0 取消默认会话 ID
+之后必须显式传参这件事。
+
+责任链模式本身见[设计模式篇](/java/intermediate/design-pattern/12-chain-of-responsibility/)，
+RAG 与记忆的通用原理见 [AI 方向](/ai/intermediate/agent/06-rag/)，本分类只讲 Spring AI 的
+接法与边界。
+
+<CategoryNotesIsland categoryId="spring-ai/intermediate/advisor" />

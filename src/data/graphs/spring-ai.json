@@ -1,0 +1,18 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Spring AI", "group": "核心" },
+    { "id": "sa-what", "label": "定位与 2.0 断代", "href": "/spring-ai/basic/foundation/01-what-is-spring-ai/", "group": "基础", "weight": 0.55 },
+    { "id": "sa-chatclient", "label": "ChatClient 与结构化输出", "href": "/spring-ai/basic/foundation/02-chatclient-api/", "group": "基础", "weight": 0.6 },
+    { "id": "sa-advisor", "label": "Advisor 责任链", "href": "/spring-ai/intermediate/advisor/01-advisor-chain/", "group": "上下文", "weight": 0.7 },
+    { "id": "sa-memory", "label": "会话记忆两层抽象", "href": "/spring-ai/intermediate/advisor/02-chat-memory/", "group": "上下文", "weight": 0.6 }
+  ],
+  "edges": [
+    { "source": "root", "target": "sa-what" },
+    { "source": "root", "target": "sa-chatclient" },
+    { "source": "root", "target": "sa-advisor" },
+    { "source": "root", "target": "sa-memory" },
+    { "source": "sa-what", "target": "sa-chatclient", "label": "门面分层" },
+    { "source": "sa-chatclient", "target": "sa-advisor", "label": "defaultAdvisors 挂载" },
+    { "source": "sa-advisor", "target": "sa-memory", "label": "order 决定读写时机" }
+  ]
+}

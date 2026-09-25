@@ -1,0 +1,72 @@
+{
+  "questions": [
+    {
+      "id": "sa-version-001",
+      "noteId": "spring-ai/basic/foundation/01-what-is-spring-ai",
+      "type": "single",
+      "difficulty": 3,
+      "q": "存量 Spring Boot 3.5 的单体服务要接入大模型，关于 Spring AI 版本该作何判断？",
+      "options": [
+        "Spring AI 2.0.x 只支持 Boot 4.0.x/4.1.x，要用 2.0 就得连 Boot 一起升级",
+        "Spring AI 2.0 向下兼容 Boot 3.x，只是少数 starter 用不了",
+        "只要 JDK 17 以上，Spring AI 任意版本都能配 Boot 3.x",
+        "Spring AI 与 Boot 版本无关，靠 spring-ai-bom 锁定即可"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "官方《Getting Started》口径是「Spring AI 2.0.x supports Spring Boot 4.0.x and 4.1.x」。卡点不是 Java 版本（Boot 4 侧仍要求 Java 17+），而是 Boot 大版本列车；1.1.x/1.0.x 才是 Boot 3.x 时代的选择。见《Spring AI 是什么》。"
+    },
+    {
+      "id": "sa-terminal-002",
+      "noteId": "spring-ai/basic/foundation/02-chatclient-api",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 ChatClient 的终结方法，哪些说法成立？",
+      "options": [
+        "`entity()` 只在 `call()` 路径可用，流式路径拿不到类型化结果",
+        "`chatClientResponse()` 比 `chatResponse()` 多带 Advisor 执行上下文",
+        "想知道本次回答用了多少 token，应取 `chatResponse()` 的 metadata",
+        "`stream().content()` 返回 `Mono<String>`，要 `.block()` 才能取全文"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "官方写明「`.entity(…)` is `.call()`-only」；`ChatClientResponse` 包着 `ChatResponse` 再加执行上下文（RAG 检索到的文档从这里取）；token 用量属 `ChatResponse` metadata。干扰项错在返回类型——流式是 `Flux<String>`，不是 `Mono<String>`。见《ChatClient 门面与结构化输出》。"
+    },
+    {
+      "id": "sa-advisororder-003",
+      "noteId": "spring-ai/intermediate/advisor/01-advisor-chain",
+      "type": "single",
+      "difficulty": 4,
+      "q": "2.0 中 MessageChatMemoryAdvisor 默认 order 为 HIGHEST_PRECEDENCE+200，小于 ToolCallingAdvisor 的 +300，直接后果是？",
+      "options": [
+        "记忆落在工具循环之外，一整轮工具往返只读一次历史、写一次记忆",
+        "记忆会在每次工具往返后重复写入，历史迅速膨胀",
+        "工具调用结果进不了记忆，只能改用 PromptChatMemoryAdvisor",
+        "两者位次冲突，DefaultChatClient 会拒绝注册记忆 Advisor"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "官方对这一位次的说明是「lower than ToolCallingAdvisor, which places it outside the loop」。要把记忆放进环内靠调顺序（order 大于 ToolCallingAdvisor.DEFAULT_ORDER），而 PromptChatMemoryAdvisor 在 2.0 已被移除。见《Advisor 责任链》。"
+    },
+    {
+      "id": "sa-convid-004",
+      "noteId": "spring-ai/intermediate/advisor/02-chat-memory",
+      "type": "judge",
+      "difficulty": 3,
+      "q": "Spring AI 2.0 里，挂上记忆 Advisor 但不传 ChatMemory.CONVERSATION_ID，请求会落到名为 default 的会话上。",
+      "options": [
+        "正确",
+        "错误"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "2.0 移除了常量 ChatMemory.DEFAULT_CONVERSATION_ID（值 \"default\"），官方写明「There is no default conversation ID」，缺参在运行期抛 IllegalArgumentException。1.x 的默认会话行为在多用户场景等于历史串线，2.0 把它换成了立刻失败。见《会话记忆》。"
+    }
+  ]
+}

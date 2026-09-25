@@ -2216,6 +2216,43 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: 'Spring AI',
+              collapsed: true,
+              items: [
+                { label: '学习路线', link: '/spring-ai/' },
+                {
+                  label: '基础',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '全景与调用门面',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/spring-ai/basic/foundation/' },
+                        { label: 'Spring AI 是什么：定位与 2.0 断代', link: '/spring-ai/basic/foundation/01-what-is-spring-ai/' },
+                        { label: 'ChatClient 门面与结构化输出', link: '/spring-ai/basic/foundation/02-chatclient-api/' },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: 'Advisor 链与上下文增强',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/spring-ai/intermediate/advisor/' },
+                        { label: 'Advisor 责任链：语义与工具循环', link: '/spring-ai/intermediate/advisor/01-advisor-chain/' },
+                        { label: '会话记忆：两层抽象与必填会话 ID', link: '/spring-ai/intermediate/advisor/02-chat-memory/' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {

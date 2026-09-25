@@ -450,6 +450,11 @@ Docker、Nginx、Git 等全站方向。
 | [并行 Agent 为什么要 worktree](/ai/advanced/agent/08-worktree-isolation/) | 对话隔离不够，还要隔离文件系统；绑定不改任务状态，有未提交改动默认拒绝删除 |
 | [综合 Harness 改了循环吗](/ai/advanced/agent/09-comprehensive-agent/) | 没改——机制很多循环一个：LLM 前注入、工具前权限、工具后回写 |
 | [OpenClaw 三层](/ai/advanced/agent/11-openclaw/) | Channels + 唯一 Gateway 收口 + Workspace 隔离；LLM 不直连任何聊天平台 |
+| [Spring AI 2.0 配什么 Boot](/spring-ai/basic/foundation/01-what-is-spring-ai/) | 2.0.x 只支持 Boot 4.0.x/4.1.x（Java 基线仍 17）；Boot 3.x 存量项目接不进 2.0，得连列车一起升 |
+| [ChatClient 与 ChatModel 谁管什么](/spring-ai/basic/foundation/02-chatclient-api/) | ChatModel 是可移植模型抽象，ChatClient 是门面（流式 API + Advisor 链 + `entity()`）；2.0 起工具循环只在 ChatClient 上自动跑 |
+| [Advisor 的 order 怎么算先后](/spring-ai/intermediate/advisor/01-advisor-chain/) | 值小者先执行、值大者优先级低；但链是栈——order 最小的最先处理请求，也最后处理响应 |
+| [Spring AI 记忆为什么在工具环外](/spring-ai/intermediate/advisor/02-chat-memory/) | 记忆 Advisor = MIN+200 小于 ToolCallingAdvisor = MIN+300，一整轮工具往返只读一次、写一次历史 |
+| [2.0 忘传 CONVERSATION_ID 会怎样](/spring-ai/intermediate/advisor/02-chat-memory/) | 当场 IllegalArgumentException——默认值 `"default"` 已移除；1.x 是全员共用一份历史，属数据串线事故 |
 
 ## 分布式与集群
 
