@@ -1,0 +1,38 @@
+docs/evolution.md
+  s_d8c978081f408b::t_2dcb29cc24c4bc 51
+  s_d8c978081f408b::t_0c7392bb07afbb 10-14
+  s_dbf93f31316499::t_ba17b329691d04 66-77
+  s_2529216c9e5b00::t_54f825b47a7675 717
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "08d973ebdac3657809180c09634088a8c8557d6b",
+  "prompts": {},
+  "sessions": {
+    "s_2529216c9e5b00": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0d83d-3ff4-7bd2-9659-11217faae590",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_d8c978081f408b": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7d34cf8a-946f-4536-ae6c-e2310b17da55",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_dbf93f31316499": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "b812c46d-7f53-45af-87b8-09f7d292dd46",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
