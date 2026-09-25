@@ -1,0 +1,40 @@
+docs/evolution.md
+  s_5e5a612a25b4ad::t_0f7127c30dadef 135
+  s_5e5a612a25b4ad::t_3ff6b1f5355d73 122,139
+  s_5e5a612a25b4ad::t_a037a0fa92b8d8 51
+  s_5e5a612a25b4ad::t_deb0d9c08effd2 640-641
+  s_5e5a612a25b4ad::t_f4b646731455b6 121,123,125-130,134,137-138
+  s_5e5a612a25b4ad::t_3aa4ef9b5f9ab2 53
+  s_5e5a612a25b4ad::t_1b5f259f41d8fe 136
+  s_5e5a612a25b4ad::t_34af474454581b 600-603,607-619
+  s_5e5a612a25b4ad::t_6c1172bedff0b6 124
+  s_5e5a612a25b4ad::t_d8fb5cf6fba925 131-133
+  s_5e5a612a25b4ad::t_a11cfedc8a2693 642
+src/content/docs/linux/basic/permission/02-immutable-capabilities.md
+  s_5e5a612a25b4ad::t_6981231bdeeb4a 40-41
+src/content/docs/js/intermediate/node/06-cluster-workers.md
+  s_5e5a612a25b4ad::t_46ec89393ab303 17-18
+src/content/docs/mongodb/intermediate/usage/09-multikey-index.md
+  s_5e5a612a25b4ad::t_3d5154996a46f4 41-43
+src/content/docs/distributed/intermediate/case-studies/18-approval-flow.md
+  s_5e5a612a25b4ad::t_f31fc187179a43 32
+  s_5e5a612a25b4ad::t_d10911971ec4cc 33
+src/data/quiz/linux.json
+  s_5e5a612a25b4ad::t_9333c65a36ea64 272-290
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ed0eec66a18bd16d3e05ef02370eb9d0365a6d7b",
+  "prompts": {},
+  "sessions": {
+    "s_5e5a612a25b4ad": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "5e796f43-2658-4ef2-a9f9-c0ab55a19e84",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
