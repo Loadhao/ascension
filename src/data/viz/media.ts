@@ -85,6 +85,26 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'最后渲染成页面；排障时把这条链倒着二分。',
 		],
 	},
+	'tcp-handshake-video': {
+		title: 'TCP 三次握手 · 配音短片',
+		src: '/videos/tcp-handshake-video.mp4',
+		poster: '/videos/tcp-handshake-video.poster.png',
+		width: 1280,
+		height: 732,
+		duration: 41.6,
+		alt: '动画短片：TCP 三次握手逐帧走完，SYN、SYN+ACK、ACK 三个报文与两端状态徽标同步迁移，' +
+			'讲清每一次同步了什么序号，以及只握两次会为历史连接留下什么。',
+		caption: '握手不是背三步，而是两个「为什么」：每次同步了谁的序号，以及第三次为什么是给历史连接留的否决机会。',
+		source: 'tcp-handshake',
+		narration: [
+			'服务端先监听，客户端主动建连；为什么恰好三次，最后一帧揭晓。',
+			'第一次：客户端发 SYN，带上初始序号 x，自己进入 SYN_SENT。',
+			'第二次：服务端回 SYN+ACK，序号从 y 起，同时确认 x+1。',
+			'第三次：客户端回 ACK 确认 y+1，也是给历史连接留的否决机会。',
+			'两次不行：旧 SYN 会让服务端白分配资源；三次是互认收发能力的最低次数。',
+			'双方序号坐标系对齐完毕，连接建立，开始传数据。',
+		],
+	},
 	'tcp-close-video': {
 		title: 'TCP 四次挥手 · 配音短片',
 		src: '/videos/tcp-close-video.mp4',

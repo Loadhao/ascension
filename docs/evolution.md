@@ -49,10 +49,22 @@
 | 5. 体检工具脚本化收尾：`pnpm verify:docs` 已串起 consistency + mermaid-syntax + quiz + media 四脚本（第 170 轮实测 25 项打勾：一致性 10 + 题库 8 + 影像 7，另 mermaid 531 块）；剩 `mermaid-contrast-verify` 因依赖 preview 在跑仍单独执行——是否并入一键入口待裁决 | 改善体验 | 2 | 0.8 | 2 | 0.8 | 部分完成 |
 | 6. 代码块「每行 ≤80 视觉列」仍是纸面约束：第 170 轮实测全站 4 行真溢出（1280 视口正文代码容器可用宽 674px，实测 688/691/732/743px，读者须横向滚动才能读完）——先修这 4 行（4 文件），再于后续 D 轮补体检第 11 项即可绿着落地 | 修问题 | 3 | 0.95 | 1.5 | 1.9 | 待办（证据已量化） |
 | 7. CI 只跑 `pnpm build`，不跑 `pnpm verify:docs`（`.github/workflows/deploy.yml` 第 170 轮核验无体检步骤）——25 项静态闸门全部依赖本地纪律，并行会话漏跑即静默入库；接进流水线属对外 CI 改动 | 修问题 | 4 | 1.0 | 2 | 2.0 | **待用户决策**（见待决策区） |
+| 8. `scripts/media-encode.mjs` 末尾「回填 media.ts」行打印的宽高不可照抄：第 174 轮实测打印 1280x730，而 `ffprobe -select_streams v:0` 与浏览器 `videoWidth/videoHeight` 两处独立实测均为 1280×732（脚本 `probe(videoPath,'stream=width,height')` 未限定流选择器）——尺寸写错会让暗色主题下卡片比例失真，且该打印是配方指定的唯一回填依据 | 修问题 | 3 | 1.0 | 1 | 3.0 | 待办（D 车道，1 文件） |
 
 历史已完成项存档：图谱覆盖度补全（第 1 轮，100%）、Mermaid 对比度审计（第 2 轮，零违规）、frontmatter/内链/分类页导读/图谱结构体检（第 3/4/6/19 轮，均全绿并固化为 scripts/consistency-verify.mjs）、方向内容补全（第 5/7/8/9/10/11/12/14/15/17/20 轮，16 篇 + 5 分类）、工具固化（第 16 轮）、状态文件整理（第 18 轮）。
 
 ## 轮次记录
+
+### 第 174 轮（2026-09-25，车道 B 影像资产）：TCP 三次握手 · 配音短片（与上轮挥手短片同页成对）
+
+- 选题证据：开工 `git pull --ff-only` 已是最新、`git status --porcelain` 干净（无他人未提交改动需绕开）；基线 `pnpm verify:docs` 25 项全绿（一致性 10 项 + mermaid 533 块 + 题库 8 项 623 题 + 影像 7 项 4 资产），非「修基线」路径；`node scripts/evolution-candidates.mjs --top 60` 输出「下一轮 = 第 174 轮，174 mod 5 = 4 → 车道 B 影像资产」，笔记 536 篇 / 动画 44 支 / 影像 4 个 / **B 队列 41 支未出片**（头部 es-write）。
+- 未取队列头部 es-write（如实记录取舍）：逐帧量过候选的帧数与帧说明字数——`es-write` **10 帧**、帧说明 60~114 字，按成片 ≤60s 与每帧 0.35s 呼吸反推，每帧口播预算只剩约 22 字（闸门允许 36 字），把 114 字压到 22 字会踩「机械缩写凑数」红线，属需要单独排期重写文稿的一支；`tcp-handshake`（6 帧）是配方点名的「握手」类过程型经典，且第 172 轮留账已勘察过宿主（同一篇 `.mdx`、口播预算公式已实测），零勘察成本。两支短片同页成对后，TCP 连接管理这条主线从建连到断开都能脱离屏幕听一遍。
+- 内容要点：`src/data/viz/media.ts` 登记 `tcp-handshake-video`（`source: tcp-handshake`，6 段口播与 6 帧一一对应、逐句取自帧说明与正文，**无新增事实**：第一次 SYN 带 ISN=x 进 SYN_SENT、第二次 SYN+ACK 双向确认 y 与 x+1、第三次 ACK 是给历史连接留的否决机会、三次是互认收发能力的最低次数）→ `media-capture --figure 0` 逐帧截 6 帧（脚本把逐帧说明区等高钉到 87px）→ `media-encode` 离线 `say`（Tingting）配音、画面时长严格跟随音轨 → 回填真实尺寸 **1280×732 / 41.6s / 0.57MB**。笔记在握手动画下方挂 `<AlgorithmVizIsland demo="tcp-handshake-video" />`，一句话交代用途（通勤/复习脱离屏幕听一遍）。
+- 口播预算第三组实测数据（继续修正 3.9 字/秒公式）：6 句 182 字（闸门按去空格计 30/33/30/31/35/23 字，全部 ≤36），逐句 `say -o` + `ffprobe` 实测 5.37~7.61s、合计 39.5s + 6×0.35s 呼吸 = **41.6s**，语速 **4.6 字/秒**（169 轮纯中文实测 3.72、172 轮含状态名 5.23）——英文标识占比越高语速越快，砍稿前必须逐句实测，同一条判据再次成立。
+- 过程发现（已入候选表第 8 行，归 D 车道）：`media-encode` 末尾「回填 media.ts」行打印 **1280x730**，而 `ffprobe -select_streams v:0` 与浏览器 `videoWidth/videoHeight` 两处独立实测均为 **1280×732**——脚本的 `probe(videoPath, 'stream=width,height')` 未限定流选择器，打印口径不可照抄。本轮以实测 732 回填。
+- 验证数字：`pnpm build` **707 页** / 22.91s 通过（不增页面，只加一条资产）；`pnpm verify:docs` 25 项全绿（一致性 10 项、mermaid 533 块、题库 8 项 623 题、影像 7 项 / **5 个资产**、public 媒体合计 3.55MB 上限 60MB、成片 0.57MB 上限 4MB）；`node scripts/mermaid-contrast-verify.mjs` **384** 个含图页面 × 2 主题 **0 处低于 4.5:1**（本轮未改图表，属额外复核）；真机核验（preview + Playwright）：页内 `<video>` 2 个（握手/挥手成对）、src 与 poster 均 200、`preload="metadata"`、`duration` 41.57s 与登记 41.6 一致、点播放后 `currentTime` 走到 2.38s（readyState 4、`error` 为 null）、DOM 盒比 1.745 对真值 1.749、`document.scrollWidth` 1280 无横向溢出、暗色主题下 figure 底随主题变黑而画面仍是固定亮底卡片。preview 为本轮新起实例（开工时无在跑实例，未替换他人）。
+- 下一轮入口：**第 175 轮 → 175 mod 5 = 0 → 车道 D 体检与工具**，队列三项：①候选表第 6 行「代码块 ≤80 视觉列」的 4 处真溢出（4 文件）；②本轮新增第 8 行「`media-encode` 回填尺寸打印不准」（1 文件，可与①同轮但会超 ≤4 上限，按证据强弱取一）；③CI 未接 `verify:docs`（在待决策区，不擅自动手）。B 队列余 **40 支**未出片，头部 es-write（需先精简文稿）/ redisson-watchdog（9 帧）/ kafka-segment（8 帧）；C 队列头部 `network/basic/http/07-websocket`。两条旧本轮未动：react 导读「三块地基」1 行文案、候选表第 1/2/3 行。每轮开工照旧：同步 → 定界 → 体检基线 → 勘察命令。
+
 
 ### 第 1 轮（2026-09-08）
 
@@ -494,6 +506,10 @@
   但该公式**含英文标识时偏悲观**（第 172 轮 237 字 8 句实测 48.1s，公式估 60.5s 会误判超限）：
   `say` 读 `FIN_WAIT_1` 这类缩写按字母、比同字数中文快，定稿前逐句 `say -o` + `ffprobe`
   量真实时长再判，不照公式砍稿。
+  **成片尺寸不照抄 `media-encode` 的打印行**（第 174 轮实测打印 730、真值 732），以
+  `ffprobe -select_streams v:0` 或浏览器 `videoWidth/videoHeight` 为准。
+  每支短片帧说明的**字数 × 帧数**要先对着 60s 预算过一遍：帧数 ≥10 且帧说明普遍上百字
+  （如 es-write）时口播预算会掉到 22 字/帧以下，这类动画要先在正文侧精简文稿再做片。
   细则见 `guide/diagrams`「配音短片与图卡」。
 - astro.config.mjs 是高冲突文件（手动侧边栏），stale 频发但按纪律可安全使用；guide/diagrams、guide/resources 为体检豁免项（元文档）。
 
