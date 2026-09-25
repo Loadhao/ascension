@@ -7,6 +7,11 @@
 - 阶段：内容体系充实 + 教学形态升级（「可用版本」已达成：构建通过且已部署 GitHub Pages；尚无真实用户数据，无法进入「验证有人需要」）
 - 目标描述：让站点成为结构自洽、核心技术方向内容成体系的知识库——每轮在补内容、修问题、改善体验中按证据选择一项最小改进，保持全站一致性体检全绿；自 2026-09-23 起并把教学形态从「看图文」扩到「可看可听」（配音视频 / 导出图卡），每轮按配方车道轮转推进。
 - 自 2026-09-25 起（用户指令）再加一条硬约束：每轮必含一项面向读者的内容增量（新章节 / 考题 / 速答手册新行 / 新图），不允许只加影像或只改工具脚本；车道表已把 B 的一格还给 A（配方 §1）。
+- **内容优先级真源＝`docs/content-roadmap.md`**（用户 2026-09-25 定向：Java 为主方向要补更多 +
+  高级工程师必备知识；三条轴广度/均衡/深度全选）。本文件此前所述「若用户另有人工规划（如
+  内容路线图），人工修改本文件即视为最新事实」现在有了落点：**A 车道（新章节）选题以 roadmap
+  §2 当前批次为第一优先**，本文件「候选项」表与 `evolution-candidates.mjs` 退为兜底池；
+  下方候选项 1 的薄弱方向判断以 roadmap §1/§4 为准，不在本处重复维护清单。
 - 每轮作业规范：`docs/evolution-recipes.md`（车道与游标、尺寸上限、降级阶梯、停止条件）。定时任务「知识库无人值守演进」（id `98552cee-4538-44d5-9ad0-78915438976e`，每天 03/09/15/21 点 17 分上海时间，Full Access 自动提交推送，**2026-10-23 17:42 到期需续**）每次触发只推进一轮，本文件的「轮次记录」是唯一全局编号真源；要暂停去 Automations 面板 disable 本任务。
 - 完成标志（全部可自动验证）：
   1. `pnpm build` 通过；
@@ -43,7 +48,7 @@
 
 | 候选项 | 类型 | 贡献 | 置信 | 成本/风险 | 得分 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1. 按大纲勘察继续补薄弱方向内容（候选池：**react 方向最薄**（第 171 轮实测仅 3 篇、无 intermediate 层，本轮 +1 篇至 4 篇，续篇候选见轮次记录）、**mysql 方向 13 篇但索引主题第 175 轮前仅 1 篇总览——用户 2026-09-25 显式定向该主题「篇章太少、考题太简单」，第 175 轮已补「怎么用」1 篇，仍缺「设计实战」篇**、ai/python 内部分类、linux/git/tools 工程向；rabbitmq/docker/etcd/mqtt/nginx/middleware 均已勘察为覆盖扎实） | 补功能 | 4 | 0.9 | 2.5 | 1.44 | 待办（宁缺毋滥） |
+| 1. **（2026-09-25 更新：本行的薄弱方向判断改由 `docs/content-roadmap.md` §1 能力地图与 §2 当前批次接管，下列文字保留作历史沿革与证据）**按大纲勘察继续补薄弱方向内容（候选池：**react 方向最薄**（第 171 轮实测仅 3 篇、无 intermediate 层，本轮 +1 篇至 4 篇，续篇候选见轮次记录）、**mysql 方向 13 篇但索引主题第 175 轮前仅 1 篇总览——用户 2026-09-25 显式定向该主题「篇章太少、考题太简单」，第 175 轮已补「怎么用」1 篇，仍缺「设计实战」篇**、ai/python 内部分类、linux/git/tools 工程向；rabbitmq/docker/etcd/mqtt/nginx/middleware 均已勘察为覆盖扎实） | 补功能 | 4 | 0.9 | 2.5 | 1.44 | 待办（宁缺毋滥） |
 | 2. core 星标全站策略：36 个分类核心占比过高（星标失去区分度）——是否降标属内容判断，涉及各会话既有意图 | 修问题 | 3 | 0.3 | 2 | 0.45 | **待用户决策**（见待决策区） |
 | 3. 移动端/打印样式实测（需 preview 实测，sidebar 组件常被并行会话占用） | 改善体验 | 2 | 0.4 | 3 | 0.27 | 待办 |
 | 4. 需求验证类动作（SEO/分享卡片/统计埋点） | 验证需求 | — | — | — | — | 暂不开发：需真实用户数据支持决策，阶段边界条件 |
@@ -57,6 +62,18 @@
 历史已完成项存档：图谱覆盖度补全（第 1 轮，100%）、Mermaid 对比度审计（第 2 轮，零违规）、frontmatter/内链/分类页导读/图谱结构体检（第 3/4/6/19 轮，均全绿并固化为 scripts/consistency-verify.mjs）、方向内容补全（第 5/7/8/9/10/11/12/14/15/17/20 轮，16 篇 + 5 分类）、工具固化（第 16 轮）、状态文件整理（第 18 轮）。
 
 ## 轮次记录
+
+### 第 183 轮（2026-09-25，用户定向｜新方向落地 `spring-ai`｜游标本为 C，越车道执行并如实登记）：把 Spring AI 立成第 33 个方向，4 篇笔记全部按官方 2.0.1 口径取证
+
+- 触发与定界：用户指令「spring 还是少啊，还有最近比较火的，spring AI 等都是方向啊」，随后确认「落地」。开工 `git pull --ff-only` 已是最新；`git status --porcelain` 定界到并行会话正在写 `docs/evolution.md`、`docs/coverage-deepening.md`、`docs/evolution-recipes.md`、新文件 `docs/content-roadmap.md`、`java/intermediate/spring/09-mybatis-in-practice.md` + `spring/index.mdx`、`java/intermediate/build/`、`quiz/ai.json`、`quiz/distributed.json`——全程绕开、未 stage 任何他人内容。作业期间对方把**第 182 轮（车道 B，Redisson 短片）**提交为 `4c46437`，故本轮按「最大号 +1」记 **183**。
+- 选题证据（现算，不采信印象）：`ls src/content/docs/java/*/spring*` → Spring 家族 **25 篇**全部挂在 `java` 方向下的 4 个分类（`spring` 9 / `spring-boot` 5 / `spring-mvc` 3 / `springcloud` 8），方向级笔记数 java 112、distributed 80、ai 60；`Grep "Spring AI|spring-ai|SpringAI"` 全站 **0 命中**，空白属实。
+- 结构决策（已向用户交代代价并获确认）：**只新建方向，不迁移 Spring 四分类**。迁移代价量化过——`src/data/quiz/java.json` 有 **30** 处 spring `noteId`、`src/data/graphs/java.json` 有 **18** 处 spring `href`、侧边栏 4 组重写，且 `src/lib/notes.ts:27` 注明 localStorage 以内容 entry id 为键，读者进度圆点与续读位置会当场清零。`spring-ai` 立为独立方向的先例是 `langchain`（仅 8 篇）。
+- 取证（全部逐条回原文后才落笔）：官方 reference 版本选择器 **Stable 2.0.1**（另列 1.1.8 / 1.0.9 / 2.1.0-M1）；《Getting Started》**"Spring AI 2.0.x supports Spring Boot 4.0.x and 4.1.x."**、BOM `org.springframework.ai:spring-ai-bom`、starter 命名 `spring-ai-starter-model-{provider}`；《Upgrade Notes》"upgrading from Spring AI 1.1.x to 2.0.0"（`FunctionCallback` 全删、`functions()`→`tools()`、`ChatModel` 内置工具循环移除、`PromptChatMemoryAdvisor` 移除、`ChatMemory.DEFAULT_CONVERSATION_ID`（值 `"default"`）移除、Options 严格不可变、属性扁平化去 `.options`、`spring-ai-azure-openai` 等模块移除、MCP 包与 group 迁移、OpenRewrite 配方 `migrate-to-2-0-0-M3.yaml`）；《ChatClient》Builder 原型作用域、`call()` 五个终结方法与 `stream()` 三个、`ChatClient.create()` 绕过自动配置会丢观测；《Structured Output》`.entity()` 为入口且 call-only、`validateSchema()` 默认 3 次自纠错重试 + `StructuredOutputValidationAdvisor`；《Advisors》接口签名与 order 三句语义、`ToolCallingAdvisor` = MIN+300、`MessageChatMemoryAdvisor` = MIN+200 "places it outside the loop"；《Chat Memory》`ChatMemory`/`ChatMemoryRepository` 分层、滑窗默认 20 条且保留 SystemMessage、`CONVERSATION_ID` 必填无默认、7 种仓储、工具消息仅 InMemory/Redis/Neo4j 支持全消息集。Boot 侧另取 spring.io：Boot 4.0.0 发布 2025-11-20、"requires at least Java 17 ... up to and including Java 26"、需 Spring Framework 7.0.9+、Servlet 6.1。
+- **一处官方口径自相矛盾，正文不引数字**：《Upgrade Notes》称 MCP Java SDK "from `1.1.x` to `2.0.0`"，《MCP Overview》称 "requires MCP Java SDK **1.0.0** (RC1 or later)，从 `0.18.x` 升到 `1.0.x`"——两页直接冲突。按第 178 轮「官方源自己打架就不引用」的既有处置，正文不写版本号，改教读者 `mvn dependency:tree | grep -i mcp` 自查。
+- 产出（12 文件，全部自有路径）：`src/content/docs/spring-ai/` 方向首页 + `basic/foundation`（01 全景与 2.0 断代 178 行、02 ChatClient 与结构化输出 197 行）+ `intermediate/advisor`（01 责任链 224 行、02 会话记忆 164 行）+ 两个分类页；`src/data/graphs/spring-ai.json`（root + 4 节点、7 条带关系标签的边）；`src/data/quiz/spring-ai.json` **4 题**（难度 3/4/4/3，含 1 多选 1 判断）；速答手册「AI 与大模型」组 +5 行；`astro.config.mjs` 在 AI 组 LangChain 之后注册 +37 行；`notes.ts` 的 `DIRECTION_ORDER` 于 `langchain` 后插入 `spring-ai`。6 张 mermaid 零硬编码颜色（只用 `hl` 语义类）。四篇均未标 `core`，避免加重候选项 2 的星标失真。
+- 验证数字：`pnpm build` 首轮 716 页通过、宽度修复后 719 页（含并行会话未提交页面）；`pnpm verify:docs` **25 项全绿**——侧边栏 **717** 条 link、已提交笔记 **539** 篇全部注册、图谱覆盖率 **100%**、171 个 index 页无空壳、硬编码颜色 **0** 处、mermaid **547** 块语法有效、题库 8 项 **636** 题（+4，32 个题库文件均对应真实方向）、影像 7 项 6 资产；`node scripts/mermaid-contrast-verify.mjs` **392 页 × 2 主题 0 处低于 4.5:1**，自检行「内容树带图笔记 416 篇 / dist 渲染出图 416 页」两数相等（第 181 轮的读数自校验在跑）；图块计数增量 **+6** 与本会话实画 6 张逐一对上（防第 178 轮「少画一张图」）。真机核验（本机 Playwright 1440×900，不用 600px MCP 视口）：7 个新页面 0 横向溢出、mermaid SVG 逐页 1/1/3/1 渲染、9 条站内绝对链接逐个 GET 无 404、方向首页 RoadmapIsland 圆点与 cytoscape 图谱画布均渲染、侧边栏 7 条 spring-ai 条目齐全；作答页**端到端真点**——「全不选 → 勾 Spring AI（标签显示 4 题）→ 开始新一轮 → 多选勾 A/B/C → 确认作答」得「✓ 回答正确」并给「查看完整笔记」入口，4 个题目 id 均在 `dist/guide/quiz/index.html` 内联命中。宽度自查抓到一个真问题：首跑量出 `01-advisor-chain` 首个代码块 `sw 740 > cw 718` 溢出，按 ≤77 视觉列重排接口签名两行后复量 0 溢出（另把 78 列的 `SimpleLoggerAdvisor` 声明行拆行）。
+- 共享文件的冲突处置（方法值得留档）：提交前 `git diff --stat` 发现 `astro.config.mjs` 由自有 **+37** 变成 **+46**——并行会话刚补了 java 侧边栏 3 个 hunk。改用「按 hunk 切分 + `git apply --cached`」只把自有 hunk 入暂存，并用 `git diff --cached` 复核新增 link 全部指向 `/spring-ai/`；**不使用 `git commit -- <pathspec>`**（该形式按工作树内容提交，会把他人 hunk 一并带走）。他人未提交的 java/spring 侧边栏与笔记原样留在工作树。
+- 下一轮入口：**第 184 轮 → 184 mod 5 = 4 → 车道 A 新章节**。①**Spring 侧真实缺口已勘察成清单，建议并入 `docs/content-roadmap.md` §2 当前批次**（该文件由并行会话新建，本轮未碰）：Spring Security 过滤器链与认证流程（全站仅 3 处顺带提及、零专篇）、`@Async`/`@Cacheable`/`@Retryable` 声明式能力（只在 `08-annotations-map` 报了名）、WebFlux/响应式（`springcloud/03-gateway` 用了却没讲）、Spring Boot + 虚拟线程（JDK 侧 `version/04-java18-21` 有 23 处、Spring 侧 0）；②**spring-ai 方向续篇**的官方页已取证在手，可直接写：Tool Calling（`@Tool`/`ToolCallback`/`returnDirect`/`ToolContext`）、RAG 与 VectorStore（`QuestionAnswerAdvisor` vs `RetrievalAugmentationAdvisor`、2.0 模块改名 `spring-ai-vector-store-advisor`）、MCP（client/server starter 与传输矩阵，注意 SDK 版本口径矛盾）；③D 队列旧账不变（候选表第 11 行缩进围栏 21 块、对比度审计 26 页选择器盲区、代码块宽度路线待用户裁决）。
 
 ### 第 182 轮（2026-09-25，车道 B 影像资产）：Redisson 看门狗配音短片 + 一道显式租期考题
 
@@ -697,3 +714,4 @@
 - guide/diagrams、guide/resources 是否需要注册进侧边栏：推荐选项：维持现状（元文档）；影响：极小。
 - 是否补 AI 生成的概念插画（位图）：2026-09-23 用户已选定「补齐无图笔记 + 动画导出 PNG 卡片」这条零幻觉路线，AI 插画**未采纳也未否决**。推荐选项：维持现状（矢量图已覆盖 83% 笔记，插画装饰性强、技术标签易错）；备选：允许对**不含任何文字标签**的抽象隐喻插画开一道口子，由人工逐张过审——影响：需要新增一条媒体来源与审核流程，且与「图中每个节点都要有出处」的质量红线存在张力。
 - 配音音质是否可接受：现用 macOS 自带 `Tingting`（离线、零额度、零凭据），实测样片 `mysql-2pc-video` 57.2s / 0.90MB，语速偏机械。推荐选项：先用着（教学信息完整）；备选：换云端 TTS 需你提供凭据并同意按量计费，且成片体积会增大——影响：`scripts/media-encode.mjs` 的 `say` 调用要换成可插拔后端。
+- 第 180 轮验证阻塞（2026-09-25）：工作区有从 17:56 起零 CPU 挂起的共享 `astro build` 进程，首轮构建调用未保留退出码；contrast 审计虽通过 386 页×2 主题，但报告 dist 有 1 页与内容树不一致，不能视为新鲜构建结果。为避免并发重建覆盖共享 `dist`，已撤回本轮速答行与候选记录，未提交未推送；待共享构建进程结束后重跑 `pnpm build`、确认 dist 新鲜，再按第 180 轮 D 车道完成。
