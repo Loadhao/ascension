@@ -215,7 +215,7 @@ mvn versions:display-dependency-updates
 Lombok、MapStruct 这类靠 `annotationProcessorPaths` 生效，
 **没进依赖树、只进编译期**。`dependency:tree` 查不到它，漏配的表现是
 "编译期突然找不到 setter"。写法与原理见
-[Lombok 与注解处理器](/java/intermediate/syntax/13-lombok-apt/)。
+[Lombok 与注解处理器](/java/basic/syntax/13-lombok-apt/)。
 
 ## 小结：一条收敛路线
 
