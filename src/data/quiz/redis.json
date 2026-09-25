@@ -309,6 +309,24 @@
         1
       ],
       "hint": "只有不指定 leaseTime 的 lock() 才交给看门狗管理 TTL；显式租期表示调用方承诺过期时间，业务超时后锁仍会释放。redis-watchdog-012 考是否启用与崩溃兜底，本题考显式租期造成的互斥边界。"
+    },
+    {
+      "id": "redis-redisson-019",
+      "noteId": "redis/intermediate/usage/07-redisson",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "用 Redisson 做跨实例并发控制，哪些说法成立？",
+      "options": [
+        "RSemaphore 的许可不会自动过期，持有者进程崩溃会让许可永久泄漏；需要租约就用 RPermitExpirableSemaphore，并按 acquire 返回的 id 释放",
+        "配限速用 trySetRate（仅在未配置时生效），setRate 会覆盖已有配置并重置已消耗的令牌",
+        "RFencedLock 给出单调递增 token，只要客户端自己比较 token 就能挡住过期后复活的旧持有者",
+        "读写锁能降低读路径开销，因为读锁在客户端本地判定、不访问 Redis"
+      ],
+      "answer": [
+        0,
+        1
+      ],
+      "hint": "fencing 的价值全在「资源侧记住见过的最大 token 并拒绝更小的」——只在客户端比等于没做；被保护的资源若无法校验 token（比如一个不认识 token 的第三方接口），这套就退化成普通锁。Redisson 的同步器都是 Redis 侧 Lua 原子脚本的封装，读写锁每次 acquire/release 都是一次网络往返，热点读路径上常比无锁更慢。锁本身仍受主从异步切换丢锁影响，见分布式锁那篇。"
     }
   ]
 }

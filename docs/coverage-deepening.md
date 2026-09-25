@@ -66,6 +66,9 @@
 - [ ] java/intermediate/stream/02-collectors — 第二题考「downstream 嵌套的选型：`groupingBy` 套 `summarizingInt`/`mapping`/`partitioningBy` 各解决什么，以及 `teeing` 与 `collectingAndThen` 的分工」（首题已考「toMap 两种异常的成因 + CONCURRENT 语义」）
 - [ ] java/advanced/dubbo/03-generic-and-shutdown — 第二题考「泛化调用的类型代价：`$invoke` 参数类型数组必须是全限定名、POJO↔Map 的静默失配、为什么不能为省依赖在业务代码里用泛化、以及接口名外部可控时的白名单要求」（首题已考「无损下线的四步与 preStop 时序」）
 - [ ] java/basic/io/04-direct-memory — 第二题考「显式 `clean()` 的时序约束（之后任何人再碰即踩已释放内存）与 NMT 的可见性边界：NMT 合计远小于 RSS 说明什么、为什么 `-XX:+DisableExplicitGC` 会切断堆外兜底通路」（首题已考「System.gc 重试因果 / 默认额度与 Xmx 同量级 / mmap 不走 reserveMemory」）
+- [ ] mysql/advanced/performance-ha/04-backup-pitr — 第二题考「物理备份的 `--prepare` 为什么不可跳（拷贝期间数据页撕裂、redo 按 LSN 前滚后才一致）+ 逻辑备份恢复时间为何随数据量线性膨胀 + 备份窗口内禁 DDL 的原因」（首题已考「反向 SQL 只撤 DML、PITR 通用路径、延迟从库」）
+- [ ] mysql/intermediate/transaction-lock/04-lock-wait-triage — 第二题考「`trx_query` 为 NULL 的空闲长事务为什么最难发现（不进慢日志、不吃 CPU 却持有行锁与 MDL）+ 8.0 与 5.7 锁视图的表名迁移 + `innodb_print_all_deadlocks` 为什么该生产常开」（首题已考「MDL 写者优先与 kill 前先估回滚代价」）
+- [ ] redis/intermediate/usage/07-redisson — 第二题考「`RSemaphore` 与 `RPermitExpirableSemaphore` 的归属差异（后者按 permitId 释放、租约必须长于任务时长）+ `RateType.OVERALL` 与 `PER_CLIENT` 该在什么场景各选哪个（首题已考「许可泄漏、trySetRate 与 setRate 之别、fencing 必须资源侧校验、读锁也要网络往返」）」
 
 ## 已完成记录
 

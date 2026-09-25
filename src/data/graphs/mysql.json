@@ -13,7 +13,9 @@
     { "id": "rwsplit", "label": "读写分离", "href": "/mysql/intermediate/connection-pool/02-read-write-split/", "group": "事务与锁" },
     { "id": "optimization", "label": "SQL 优化", "href": "/mysql/advanced/performance-ha/01-optimization/", "group": "性能与高可用" },
     { "id": "replication", "label": "复制与分片", "href": "/mysql/advanced/performance-ha/02-replication-sharding/", "group": "性能与高可用" },
-    { "id": "onlineddl", "label": "大表 Online DDL", "href": "/mysql/advanced/performance-ha/03-online-ddl/", "group": "性能与高可用" }
+    { "id": "onlineddl", "label": "大表 Online DDL", "href": "/mysql/advanced/performance-ha/03-online-ddl/", "group": "性能与高可用" },
+    { "id": "locktriage", "label": "锁等待现场排查", "href": "/mysql/intermediate/transaction-lock/04-lock-wait-triage/", "group": "事务与锁" },
+    { "id": "backuppitr", "label": "备份恢复与 PITR", "href": "/mysql/advanced/performance-ha/04-backup-pitr/", "group": "性能与高可用" }
   ],
   "edges": [
     { "source": "root", "target": "sqlexec" },
@@ -36,6 +38,12 @@
     { "source": "locks", "target": "onlineddl", "label": "MDL 锁卡 DDL" },
     { "source": "locks", "target": "connpool", "label": "锁竞争与池大小" },
     { "source": "replication", "target": "rwsplit", "label": "复制的第一应用" },
-    { "source": "connpool", "target": "rwsplit", "label": "连接层路由" }
+    { "source": "connpool", "target": "rwsplit", "label": "连接层路由" },
+    { "source": "locks", "target": "locktriage", "label": "语义之外：现场取证" },
+    { "source": "locktriage", "target": "onlineddl", "label": "MDL 写者优先卡住全表" },
+    { "source": "locktriage", "target": "mvcc", "label": "长事务的另一重代价" },
+    { "source": "logs", "target": "backuppitr", "label": "binlog 决定能回到哪一刻" },
+    { "source": "replication", "target": "backuppitr", "label": "延迟从库当后悔药" },
+    { "source": "backuppitr", "target": "onlineddl", "label": "备份窗口内禁 DDL" }
   ]
 }

@@ -1102,6 +1102,7 @@ export default defineConfig({
                         { label: '事务与 MVCC', link: '/mysql/intermediate/transaction-lock/01-transaction-mvcc/' },
                         { label: '锁机制', link: '/mysql/intermediate/transaction-lock/02-locks/' },
                         { label: '三大日志与两阶段提交', link: '/mysql/intermediate/transaction-lock/03-redo-undo-binlog/' },
+                        { label: '锁等待与死锁现场排查', link: '/mysql/intermediate/transaction-lock/04-lock-wait-triage/' },
                       ],
                     },
                     {
@@ -1127,6 +1128,7 @@ export default defineConfig({
                         { label: 'SQL 优化与执行计划', link: '/mysql/advanced/performance-ha/01-optimization/' },
                         { label: '主从复制与分库分表', link: '/mysql/advanced/performance-ha/02-replication-sharding/' },
                         { label: '大表变更与 Online DDL', link: '/mysql/advanced/performance-ha/03-online-ddl/' },
+                        { label: '备份恢复与 PITR', link: '/mysql/advanced/performance-ha/04-backup-pitr/' },
                       ],
                     },
                   ],
@@ -1236,6 +1238,7 @@ export default defineConfig({
                         { label: '缓存架构模式', link: '/redis/intermediate/usage/04-cache-patterns/' },
                         { label: '管道、事务与 Lua', link: '/redis/intermediate/usage/05-pipeline-transaction-lua/' },
                         { label: '大 key 与热 key 治理', link: '/redis/intermediate/usage/06-bigkey-hotkey/' },
+                        { label: 'Redisson 并发工具族', link: '/redis/intermediate/usage/07-redisson/' },
                       ],
                     },
                   ],

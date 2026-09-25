@@ -164,6 +164,10 @@ Docker、Nginx、Git 等全站方向。
 | [事务隔离级别](/mysql/intermediate/transaction-lock/01-transaction-mvcc/) | RU/RC/RR/串行，InnoDB 默认 RR 靠 MVCC + next-key 锁防幻读 |
 | [MVCC 的实现](/mysql/intermediate/transaction-lock/01-transaction-mvcc/) | undo log 版本链 + ReadView 可见性判断——不加锁的一致性读 |
 | [InnoDB 的锁](/mysql/intermediate/transaction-lock/02-locks/) | 行锁（record/gap/next-key）加在索引上；无索引命中会退化为大范围锁 |
+| [谁堵了谁：锁等待怎么查](/mysql/intermediate/transaction-lock/04-lock-wait-triage/) | 8.0 用 `performance_schema.data_lock_waits`（5.7 的 INNODB_LOCKS 已移除），日常直接 `sys.innodb_lock_waits` 拿现成 KILL；kill 前先看 `trx_rows_modified`——回滚可能比等它跑完更久 |
+| [一个 DDL 能让全表停服](/mysql/intermediate/transaction-lock/04-lock-wait-triage/) | MDL 写者优先：未提交长事务持 MDL → ALTER 排队 → 之后所有查询都排在 ALTER 后面；MDL 等待受 server 层 `lock_wait_timeout`（默认一年）管，不是行锁那 50 秒 |
+| [大表 DDL 怎么变更](/mysql/advanced/performance-ha/03-online-ddl/) | Online DDL / gh-ost 双写切表——锁表变更在业务高峰是事故 |
+| [误删之后能回到哪一刻](/mysql/advanced/performance-ha/04-backup-pitr/) | 取决于「全量 + 该位点之后连续的 binlog」；反向 SQL 只能撤 DML（ROW+FULL+有主键），DROP TABLE 得走 PITR 或延迟从库 |
 | [三大日志的作用](/mysql/intermediate/transaction-lock/03-redo-undo-binlog/) | redo 崩溃恢复（WAL）、undo 回滚与 MVCC、binlog 复制与恢复；两阶段提交保一致 |
 | [主从复制与延迟](/mysql/advanced/performance-ha/02-replication-sharding/) | binlog 异步复制；延迟对策：并行复制、半同步、读写分离路由敏感查询 |
 | [慢 SQL 怎么优化](/mysql/advanced/performance-ha/01-optimization/) | explain 看 type/key/rows/Extra：建索引、改写 SQL、避免函数与隐式转换失效索引 |
@@ -197,6 +201,8 @@ Docker、Nginx、Git 等全站方向。
 | [Redis 锁的演进](/redis/intermediate/usage/03-distributed-lock/) | setnx+expire 的坑 → SET NX PX + Lua 原子释放 → Redisson 看门狗续期 → RedLock 争议 |
 | [主从、哨兵与集群](/redis/advanced/ha/01-replication-sentinel-cluster/) | 主从复制冗余，哨兵自动故障转移，Cluster 16384 槽分片——三层递进 |
 | [大 key 与热 key 治理](/redis/intermediate/usage/06-bigkey-hotkey/) | 大 key 拆分压缩，热 key 本地缓存 + 随机打散——都先监控发现再治理 |
+| [锁之外的 Redisson 工具族](/redis/intermediate/usage/07-redisson/) | 读写锁/信号量/限流器都是 Redis 侧 Lua 原子脚本；`RSemaphore` 许可不过期会随崩溃泄漏，改用带租约的 `RPermitExpirableSemaphore`；限速用 `trySetRate`（`setRate` 会覆盖并重置令牌） |
+| [锁过期后复活的写入怎么挡](/redis/intermediate/usage/07-redisson/) | fencing token：`RFencedLock` 给单调递增 token，**由资源侧**拒绝比已见最大值更小的写入；只在客户端比等于没做。红锁已被官方弃用（`RLock`/`RFencedLock` 取代） |
 | [缓存架构模式](/redis/intermediate/usage/04-cache-patterns/) | Cache Aside 主流；Read/Write Through 收敛到缓存层，Write Behind 换吞吐冒风险 |
 | [管道、事务与 Lua](/redis/intermediate/usage/05-pipeline-transaction-lua/) | Pipeline 只省 RTT 不保证原子；MULTI/EXEC 不被插队但不回滚；真正多命令+逻辑原子靠 Lua |
 

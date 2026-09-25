@@ -292,6 +292,42 @@
       ],
       "hint": "延迟关联的核心是先拿 id（覆盖索引）再回表；count(普通列) 要判 NULL 逐行取值所以最慢；join 优化口诀「小表驱动大表，被驱动表关联列必须有索引」。mysql-opt-008 考 explain 列，本题考深分页与 count。",
       "difficulty": 4
+    },
+    {
+      "id": "mysql-backuppitr-018",
+      "noteId": "mysql/advanced/performance-ha/04-backup-pitr",
+      "type": "multiple",
+      "q": "凌晨 2:17 有人 DROP 错一张表，9:00 才发现。昨晚 23:00 有一次 mysqldump 全量，binlog 开启且本地保留 3 天。哪些说法成立？",
+      "options": [
+        "反向 SQL 只覆盖 DML 事件；DROP TABLE 是 DDL、没有行镜像可反，只能走 PITR 或延迟从库",
+        "在新实例上用全量重建，再重放 binlog 到 2:17 之前那一刻，然后把这张表导回生产，是通用路径",
+        "binlog 留了 3 天，所以 RPO 必然为 0，不必校验位点是否连续",
+        "如果有一个固定延迟一小时的从库，先去它上面捞这张表，通常比走 PITR 快得多"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "「留了 3 天」不等于「能回到任意一刻」：位点或 GTID 断档时 PITR 只能走到缺口处。反向 SQL 的前提是 binlog_format=ROW、binlog_row_image=FULL 且表有主键，它救「几条语句」，救不了「整库重建」。也别在生产实例上就地重放——选错位点就没有第二次机会。",
+      "difficulty": 4
+    },
+    {
+      "id": "mysql-locktriage-019",
+      "noteId": "mysql/intermediate/transaction-lock/04-lock-wait-triage",
+      "type": "single",
+      "q": "orders 表上一个未提交事务已跑 10 分钟，随后一个 ALTER 上线，接着该表所有查询都在等待。此刻最该做的是？",
+      "options": [
+        "kill 掉那条 ALTER，让后面的查询继续跑",
+        "先留证据（innodb_trx 快照、锁等待全景、SHOW ENGINE INNODB STATUS），再 kill 那个原始长事务；若它已改了大量行，先把回滚代价算清楚",
+        "把 innodb_lock_wait_timeout 调大到 600 秒，等它自己恢复",
+        "重启实例，MDL 队列自然就清了"
+      ],
+      "answer": [
+        1
+      ],
+      "hint": "MDL 是写者优先：DDL 一进队，它后面的所有查询都要排队，所以杀 DDL 只是让队列继续撞上同一个持有者，要杀的是持锁的原始事务。MDL 等待由 server 层 lock_wait_timeout 管（默认远大于行锁的 50 秒），调超时只是把报错推后。kill 未提交事务要回滚，trx_rows_modified 决定回滚耗时——有时等它跑完反而更快。证据永远先于动作。",
+      "difficulty": 4
     }
   ]
 }

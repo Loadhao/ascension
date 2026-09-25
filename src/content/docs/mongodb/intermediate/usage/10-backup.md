@@ -37,8 +37,8 @@ flowchart LR
 
 - oplog 是环形（Change Streams 篇）——**oplog 窗口必须覆盖备份间隔**，
   否则增量断档（"窗口要覆盖最长恢复需求"的容量规划）；
-- MySQL binlog PITR（三大日志篇）与 Mongo oplog PITR 同构——全量+
-  增量重放是关系与非关系库通用的恢复模式。
+- [MySQL binlog PITR](/mysql/advanced/performance-ha/04-backup-pitr/) 与 Mongo
+  oplog PITR 同构——全量 + 增量重放是关系与非关系库通用的恢复模式；
 
 ## 备份验证：没有验证过的备份等于没有
 
