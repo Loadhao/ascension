@@ -1064,6 +1064,7 @@ export default defineConfig({
                         { label: '一条 SQL 的执行流程', link: '/mysql/basic/core/01-sql-execution/' },
                         { label: '索引与 B+ 树', link: '/mysql/basic/core/02-index-btree/' },
                         { label: '联合索引与最左前缀', link: '/mysql/basic/core/03-index-leftmost/' },
+                        { label: '索引设计实战', link: '/mysql/basic/core/04-index-design/' },
                       ],
                     },
                     {
