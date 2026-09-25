@@ -1,0 +1,29 @@
+astro.config.mjs
+  s_025a95872412af::t_a3d76b4d385161 1067
+src/content/docs/mysql/basic/core/index.mdx
+  s_025a95872412af::t_a63b9d71e9db25 3,8-11
+src/data/graphs/mysql.json
+  s_025a95872412af::t_164826f4591673 30-32
+  s_025a95872412af::t_eca36eebcf48cf 7
+src/content/docs/mysql/basic/core/04-index-design.md
+  s_025a95872412af::t_dd29904439c086 150-151
+  s_025a95872412af::t_1ab3d888ff051d 213-236
+  s_025a95872412af::t_6fecc3500bdc4a 155-160,163-164
+  s_025a95872412af::t_c4b9f60b8e324f 1-149,152-154,161-162,165-212,237-301
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "713157e67f448d4b76459b4077fe81ee5ff3ca9a",
+  "prompts": {},
+  "sessions": {
+    "s_025a95872412af": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "717e0dfe-7d24-41bf-9b07-0939771d63a9",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
