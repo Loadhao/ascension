@@ -19,6 +19,9 @@ const { mediaAssets } = await import(join(ROOT, 'src/data/viz/media.ts'));
 const { flowDemos } = await import(join(ROOT, 'src/data/viz/flows.ts'));
 
 const mb = (bytes) => (bytes / 1048576).toFixed(2);
+// 单文件判红按字节打印：两侧都换算成 MB 且保留两位小数时，超限的量级从打印上读不出来
+// （第 187 轮封面 154,031 > 153,600 B 被判红成「0.15MB > 0.15MB」）
+const overMsg = (rel, bytes, cap) => `${rel} ${bytes} B（上限 ${cap} B，超出 ${bytes - cap} B）`;
 const sizeOf = (rel) => statSync(join(ROOT, rel)).size;
 const probe = (file, entries) =>
 	execFileSync(brew('ffprobe'), ['-v', 'error', '-show_entries', entries, '-of', 'default=noprint_wrappers=1:nokey=1', file], { encoding: 'utf8' }).trim();
@@ -58,9 +61,9 @@ const skipNotes = [];
 			const bytes = statSync(file).size;
 			total += bytes;
 			const rel = `public/${dir}/${f}`;
-			if (rel.endsWith('.mp4') && bytes > CAP.mp4) over.push(`${rel} ${mb(bytes)}MB > ${mb(CAP.mp4)}MB`);
-			else if (rel.endsWith('.poster.png') && bytes > CAP.poster) over.push(`${rel} ${mb(bytes)}MB > ${mb(CAP.poster)}MB`);
-			else if (rel.endsWith('.png') && bytes > CAP.png) over.push(`${rel} ${mb(bytes)}MB > ${mb(CAP.png)}MB`);
+			if (rel.endsWith('.mp4') && bytes > CAP.mp4) over.push(overMsg(rel, bytes, CAP.mp4));
+			else if (rel.endsWith('.poster.png') && bytes > CAP.poster) over.push(overMsg(rel, bytes, CAP.poster));
+			else if (rel.endsWith('.png') && bytes > CAP.png) over.push(overMsg(rel, bytes, CAP.png));
 		}
 	}
 	if (total > CAP.total) over.push(`public/ 合计 ${mb(total)}MB > ${mb(CAP.total)}MB`);

@@ -133,7 +133,9 @@ run(FFMPEG, [
 	videoPath,
 ]);
 
-run(FFMPEG, ['-hide_banner', '-loglevel', 'error', '-y', '-i', clipFor(0), '-vf', 'scale=1280:-2:flags=lanczos', posterPath]);
+// 封面有 150 KiB 闸门（media-verify），帧 0 画面偏复杂时默认滤波会超；-pred mixed + 最高压缩
+// 是无损手段（解成 raw rgb24 与不带参数的产物逐字节相同），不调调色板（那属有损）
+run(FFMPEG, ['-hide_banner', '-loglevel', 'error', '-y', '-i', clipFor(0), '-vf', 'scale=1280:-2:flags=lanczos', '-pred', 'mixed', '-compression_level', '12', posterPath]);
 
 const w = probe(videoPath, 'stream=width,height');
 const dur = probe(videoPath, 'format=duration');

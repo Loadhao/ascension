@@ -148,7 +148,7 @@ while (true) {
 形状是"**投递进延迟层，到期由 Redisson 自动搬进目标队列**"，消费端
 完全不知道有延迟这回事。它比"把过期时间设成任务时间、靠 key 过期
 通知"可靠得多——**键过期通知不可靠**（惰性删除下过期事件可能不发，
-重启还会丢），这条在[延迟消息](/middleware/intermediate/mq/05-delay-message/)里
+重启还会丢），这条在[延迟消息](/middleware/basic/mq/05-delay-message/)里
 论证过。
 
 三条边界：延迟任务的载体仍在 Redis 里，**没落盘就等于会丢**（要
