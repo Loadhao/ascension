@@ -1,0 +1,29 @@
+src/data/quiz/react.json
+  s_6ee5ba3f60e3c9::t_d9630ad603f1c0 124-142
+  s_6ee5ba3f60e3c9::t_f22bf11314e8c0 143
+scripts/evolution-candidates.mjs
+  s_6ee5ba3f60e3c9::t_219901045dd9f5 66,68
+  s_6ee5ba3f60e3c9::t_21d4c583866c29 67
+  s_6ee5ba3f60e3c9::t_f72b0723efcf3c 3
+  s_6ee5ba3f60e3c9::t_3c6af3f95dfdc6 47-57
+docs/evolution.md
+  s_6ee5ba3f60e3c9::t_8faad92fc0fa41 63
+  s_6ee5ba3f60e3c9::t_36d58bd6d27ef6 69-70,72-82
+  s_6ee5ba3f60e3c9::t_10369d8a010496 71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f6c8379f3e157f771da908660a80247cbd8d69cc",
+  "prompts": {},
+  "sessions": {
+    "s_6ee5ba3f60e3c9": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "fc501b01-094f-4f02-a33e-c1242239f2b2",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
