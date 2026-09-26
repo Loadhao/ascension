@@ -1,0 +1,39 @@
+src/data/graphs/react.json
+  s_82e6ecf6d33b2c::t_3aac031e715d2e 7-8,15,18-20
+src/content/docs/react/intermediate/state/01-context-vs-store.md
+  s_82e6ecf6d33b2c::t_188af7b29c7842 83,92
+  s_82e6ecf6d33b2c::t_8a1ce3aace4770 343
+  s_82e6ecf6d33b2c::t_d800d29c4193fb 332
+  s_82e6ecf6d33b2c::t_c95f23f448ffbe 206-208
+  s_82e6ecf6d33b2c::t_143ab99459c21f 307-308
+  s_82e6ecf6d33b2c::t_a6174d9b34b729 36
+  s_82e6ecf6d33b2c::t_e65f5e438d136e 87
+  s_82e6ecf6d33b2c::t_c5c29748f99cca 1-35,37-82,84-86,88-91,93-205,209-255,257-260,264-306,309-331,333-342,344
+  s_82e6ecf6d33b2c::t_96e1ce3eaaee06 261-263
+  s_82e6ecf6d33b2c::t_17c6e39982f351 256
+docs/evolution.md
+  s_82e6ecf6d33b2c::t_978f6196a5b5e3 63-64
+  s_82e6ecf6d33b2c::t_e19260bc7fd37b 79
+  s_82e6ecf6d33b2c::t_14a3a724b35058 74
+  s_82e6ecf6d33b2c::t_3947844884e535 69-73,75-78,80
+src/content/docs/react/intermediate/state/index.mdx
+  s_82e6ecf6d33b2c::t_679f811c6c33ee 1-13
+astro.config.mjs
+  s_82e6ecf6d33b2c::t_8efdbf25860225 892-905
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "01dd52f62dd94514ae36af48c7ee02fcfcd078f6",
+  "prompts": {},
+  "sessions": {
+    "s_82e6ecf6d33b2c": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "4f56def3-c440-4c73-8c91-4bf4dddaa7a1",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
