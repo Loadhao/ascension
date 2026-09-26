@@ -121,6 +121,26 @@
       ],
       "hint": "另两条的错处：children 每次是新建的元素对象，memo(Panel) 短路不了它——有效用法是反过来从外层把稳定元素传进去，React 对引用相同（===）的已渲染元素会跳过整棵子树；官方定性 memo 是「性能优化，不是保证」（措辞 usually），满屏 memo 会让依赖数组变成新的漏更新源头。优先级要先用 Profiler 量：状态下沉与拆分 > 虚拟列表减规模 > useMemo 缓存计算值 > memo + 稳定引用；开启 React Compiler 后 memo 基本不必。react-renderstage-004 考渲染三段流程与账本，本题考 memo 失效的引用机制。",
       "difficulty": 4
+    },
+    {
+      "id": "react-layer-008",
+      "noteId": "react/intermediate/state/01-context-vs-store",
+      "type": "multiple",
+      "q": "「这份状态该放哪一层」——按就地 state → 状态提升 → Context → 外部 store 四级台阶与各自的机制，下列判断哪些成立？（多选）",
+      "options": [
+        "接口返回的列表数据能由「请求地址 + 参数」唯一确定，它属于服务端状态：缓存、去重、后台刷新、失效判断该交给缓存层，而不是塞进全局 store 自己手写 refetch 与失效时机",
+        "Context 定义里的主语是「父组件」，值仍由某个上层组件用 useState / useReducer 持有，Provider 只是把它交出来——它解决的是送达路径，不是所有权",
+        "把 dispatch 单独放一个 Context 值得做：它的引用永久稳定，只提交动作、不读结果的组件订阅 DispatchCtx 就不会随 state 更新而重渲染",
+        "自己写订阅外部 store 的 hook 时，getSnapshot 每次返回字段相同的新对象就可以，React 会按值比较快照、只有内容真变了才重渲染",
+        "不同 createContext 之间会互相覆盖，所以要把尽量多的共享值合进同一个 Context 的 value 里，靠少建 Provider 来控制重渲染范围"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "两个错项的错处都在「按值比较」和「互相覆盖」这两个假设上：官方对 getSnapshot 的硬约束是「store 未变化时重复调用必须返回同一个值」，返回新建对象等于每一帧都在告诉 React「变了」，表现为 The result of getSnapshot should be cached 告警加反复重渲染——这正是 selector 结果要记忆化、比较要用浅比较的根本原因；而官方明写 different React contexts don't override each other，每次 createContext() 得到的都完全独立，「拆成多个 Context」因此才是解法而不是代价。顺带把 Context 的两条天花板记牢：value 每次渲染都是新对象，且 useContext 没有 selector（value 里塞多大对象，每个 consumer 就拿多大对象），memo 也拦不住走 context 通道的更新。撕裂的处置是：Transition 期间 store 被改，React 会在把变更应用到 DOM 前第二次调 getSnapshot，读数不一致就把整次更新以 blocking 重跑。react-memo-007 考 memo 与引用稳定性，本题考状态的归属分层。",
+      "difficulty": 4
     }
   ]
 }
