@@ -1,0 +1,32 @@
+src/data/viz/media.ts
+  s_da7c7a316847eb::t_37170544e0bcd3 180-181
+  s_da7c7a316847eb::t_bc36770c7f9360 185
+  s_da7c7a316847eb::t_c447f26a8a3ac8 175-179,182-184,186-199
+docs/coverage-deepening.md
+  s_da7c7a316847eb::t_3d98f0d35e95bc 210-211
+src/content/docs/elasticsearch/basic/core/02-shard-replica.mdx
+  s_da7c7a316847eb::t_4de730e906fc52 77-80
+docs/evolution.md
+  s_da7c7a316847eb::t_9f3d08f001cd3c 67-80
+  s_da7c7a316847eb::t_9258d2289d805c 967
+  s_da7c7a316847eb::t_c9d55523d74761 60
+  s_da7c7a316847eb::t_32590393565795 81
+src/data/quiz/ai.json
+  s_da7c7a316847eb::t_92b3c652df559d 823-842
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2162f652e23fbf16c428716b3e5c38733606b99d",
+  "prompts": {},
+  "sessions": {
+    "s_da7c7a316847eb": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "6ee336de-c3b0-42f8-9c64-1b77e93e776a",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
