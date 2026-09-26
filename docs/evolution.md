@@ -898,6 +898,7 @@
 - astro.config.mjs 是高冲突文件（手动侧边栏），stale 频发但按纪律可安全使用；guide/diagrams、guide/resources 为体检豁免项（元文档）。
 - **开工第 3 步跑 `pnpm verify:docs` 是唯一的复算点，别人的「本轮已跑绿」不能替代它**（第 189 轮实测：`1e5abec` 自述 25 项全绿、入库态却是 exit=1）。修基线时先归因再动手：`git log -S"<死链原文>" -- <文件>` 能一句话锁定引入提交，避免把他人已修的东西当成自己的发现。
 - 站内绝对内链最容易写错的是**等级段**（`basic`/`intermediate`/`advanced`）——目录层级、笔记标题都不能证明它，只有 `src/data/graphs/<方向>.json` 的 `href` 与 `astro.config.mjs` 侧边栏的 `link` 两处是登记过的真值；改法照这两处，别按语义猜。
+- **共享文件里只入自有 hunk 的正确姿势是重建 index，不是按 pathspec 提交**（第 189 轮实操）：`git commit -- <路径>` 对**该路径按工作树内容入库**，对方未提交的 hunk 会被一起带走（配方 §4.2 那句「`git commit -m ... -- <自有路径>`」在混合作业文件上是反效果）。可靠做法：`git show HEAD:<文件>` 取基线 → 只对基线施加自己的那几处改动（每处 `assert` 命中次数）→ `git hash-object -w` → `git update-index --cacheinfo <mode>,<blob>,<路径>` → 用 `git diff --cached --numstat` 与 `git cat-file blob :<路径> | grep -c <对方标记>` 双向核对（自有行数对、对方内容 0 命中），再以普通 `git commit`（只吃 index）落库；工作树保持原样，对方的改动一个字都不动。第 189 轮 `coverage-deepening.md` 即如此处理：暂存 1 加 1 删，对方「第六十八轮（第 190 轮｜车道 C）」与 3 道 ai 新题全部留在工作树。**建议下次修订配方 §4.2 时把「混合作业文件走 index 重建」写成显式分支**——属规范改动，本轮未自行修改 `docs/evolution-recipes.md`。
 
 ### 选题方法
 
