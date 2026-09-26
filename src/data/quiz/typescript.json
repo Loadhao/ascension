@@ -1,0 +1,23 @@
+{
+  "questions": [
+    {
+      "id": "ts-enum-001",
+      "noteId": "typescript/basic/core/04-enum-asconst",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 enum、const enum 与 as const 的运行时痕迹和选型，按笔记说法正确的有哪些？（多选）",
+      "options": [
+        "enum 是 TS 里少数不被擦除的构造：数字枚举编译成真实 JS 对象且带双向映射，Status[0] 能反查到 'Active'；代价是 bundle 里多了实际代码，IIFE 形态还对 tree-shaking 不友好",
+        "字符串枚举只有单向映射：LogLevel.Error 得到 'error'，但不支持按值反查名字——值不唯一，反查无意义",
+        "as const 把对象断言成最窄的字面量类型并全部 readonly，再靠 typeof 取对象类型、keyof 取键联合、索引访问取值联合推导出 'active' | 'disabled'；运行时它只是个普通对象，可 tree-shaking、可序列化",
+        "打包器时代应优先用 const enum：它跨文件内联成字面量所以既省产物又不受构建链影响；而字符串字面量联合只在 IDE 里提示，约束不了实际赋值"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "末项两处与正文相反：const enum 恰恰依赖跨文件类型信息，而 Vite/esbuild/Babel 是单文件转译（isolatedModules 模式）没有跨文件视野、无法内联，官方文档也提示了限制，正文结论是「新项目别把宝押在 const enum 上」；字面量联合是编译期的真约束，赋值越界直接报错，不是只有 IDE 提示。选型共识回到第一篇的第一性——TS 的美德是「类型不进运行时」：运行时需要真实对象（映射表、配置）用 as const 对象 + typeof 推导，纯类型层约束用字符串字面量联合，enum 只留给明确需要数字↔名字双向映射的场景（如协议状态机调试日志）。另两条易错点：readonly 拦的是编译期赋值，数字枚举的双向映射正是它区别于字符串枚举的唯一理由。"
+    }
+  ]
+}

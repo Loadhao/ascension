@@ -32,9 +32,6 @@
 
 
 
-- [ ] js/intermediate/node/09-crypto — 第一题考「md5 为什么不能用、AES-GCM 加密要带随机 IV 与认证标签、HMAC 盲索引怎么等值查询」（0 题补缺，角度取自该篇 description）
-- [ ] typescript/basic/core/04-enum-asconst — 第一题考「enum 是少数不被擦除的构造、数字枚举双向映射而字符串单向、const enum 与 isolatedModules 的冲突、as const 三板斧」（0 题补缺，角度取自该篇 description）
-- [ ] distributed/intermediate/case-studies/13-push — 第一题考「四类通道矩阵与长连网关的消息路由、可靠性分级与推送风暴治理」（0 题补缺，角度取自该篇 description）
 - [ ] ai/intermediate/agent/11-rag-advanced — 第一题考「纯向量检索的盲区、BM25+向量混合召回与 RRF 融合、rerank 两阶段精排」（0 题补缺，角度取自该篇 description）
 - [ ] ai/intermediate/llm/06-vllm — 第一题考「PagedAttention 显存分页与 continuous batching 迭代级调度，以及吞吐与时延的权衡」（0 题补缺，角度取自该篇 description）
 - [ ] linux/intermediate/system/05-performance — 第一题考「load average 的真实含义、CPU 飙高四步定位法与 iostat 关键列的四象限排查」（0 题补缺，角度取自该篇 description）
@@ -42,6 +39,10 @@
 - [ ] ai/intermediate/llm/04-inference-params — 第二题考「重复惩罚调过头会误伤专有名词、max_tokens 与 stop 序列是防跑飞必配、seed 与 temperature=0 的「近似确定」差别在哪」（首题已考「temperature 动分布形状 vs top_k/top_p 裁候选集的分工，以及两个旋钮不该同时猛调」）
 - [ ] ai/intermediate/llm/05-token-cost — 第二题考「降本四招各自落点（滑动窗口+摘要裁历史、系统提示表格化或外置按需取、max_tokens 限输出、分级路由的量级收益）与为什么粗估口径不能替代实测预算」（首题已考「输入量大 vs 输出单价高谁才是账单大头、O(n²) 根源、提示缓存的固定前缀条件」）
 - [ ] ai/intermediate/agent/16-tool-design — 第二题考「工具选择准确率怎么用评测集量化（标注任务→应选工具、改描述前后跑对比）、写类工具为何必须幂等、MCP 生态参差为什么要审描述与错误行为后包一层再暴露」（首题已考「一个工具一件事的拆分判据、「何时不用」比「何时用」更防错、错误分类触发不同模型行为」）
+- [ ] distributed/intermediate/case-studies/17-payment — 第一题考「支付状态机与掉单治理、回调幂等纪律、渠道对账单与差错处理」（0 题补缺，角度取自该篇 description）
+- [ ] js/intermediate/node/04-stream — 第一题考「为什么不能把 10GB 文件读进内存、四种流类型、pipe 与背压、pipeline API 的错误传播」（0 题补缺，角度取自该篇 description）
+- [ ] linux/intermediate/system/07-cron-timer — 第一题考「crontab 五字段与经典坑、systemd timer 的补跑能力、分布式环境下防重复执行的三个思路」（0 题补缺，角度取自该篇 description）
+- [ ] mongodb/intermediate/usage/09-multikey-index — 第一题考「数组字段自动多键化、一个查询一次一个多键的限制、多键+复合索引的边界与 $elemMatch 配合」（0 题补缺，角度取自该篇 description）
 
 ### b 类：旧题返修
 
@@ -204,6 +205,7 @@
 - 2026-09-26 · 第六十七轮（第 189 轮｜车道 D 附 1 题｜题库深化第 67 轮）：1 道第一题补缺（`dist-coupon-042`，multiple，difficulty 4，宿主 `distributed/intermediate/case-studies/10-coupon`，考点即队列指定的「券模板与用户券两件事的建模、领券库存预扣与核销重复防护」；干扰项两处都取正文「高频追问速答」明确反对的说法——把超发归罪 Redis 预扣、把锁券当多余状态）· 队列销 1 条，a 类头部前移为 `ai/intermediate/llm/04-inference-params`，现余 10 条 · 说明：本轮主产出在 D 车道（修 RD-01 新篇的延迟消息死链 + `media-encode` 封面无损压缩），按配方 §1「每轮必含一项内容增量」附 1 道考题，沿用第 181/187 轮先例只销号不追加 · 本轮提交主题：fix(redis,quiz): 演进第 189 轮车道 D 修延迟消息死链并补领券中心首题
 - 2026-09-26 · 第六十八轮（第 190 轮｜车道 C｜题库深化第 68 轮）：3 道第一题补缺（`ai-infparams-046` / `ai-tokencost-047` / `ai-tooldesign-048`，均 multiple、difficulty 4，宿主即 a 类头部三条 `ai/intermediate/llm/04-inference-params`、`ai/intermediate/llm/05-token-cost`、`ai/intermediate/agent/16-tool-design`；三篇均 `core: true`，开工实测该三篇全站 0 题、`quiz/ai.json` 45 题里无一条指向它们）· 队列销 3 条、追加 3 条（同三篇的第二题角度，一律取自各篇「高频追问速答」与小结正文，与首题考点不重叠）· a 类现余 10 条（7 条第一题补缺 + 本轮新入的 3 条第二题）· 三条均为 multiple，延续 b 类「multiple 占比偏低优先补多选」——补题前实测 `quiz/ai.json` 45 题仅 6 道 multiple，补后 9 道 · 说明：本轮开工按勘察命令算得「188 mod 5 = 3 → 车道 C」并据此做完，收尾复算时 188 已由第 187 轮「下一轮入口」指定给并行会话的 roadmap B1 第三批（`1e5abec`，车道 A）、189 已由并行会话在共享台账声明（车道 D），按配方 §6「不重排、不在两个会话里各算各号」顺延登记为 190 · 本轮提交主题：feat(quiz): 演进第 190 轮车道 C 补推理参数/Token 成本/工具设计三篇首题
 
+- 2026-09-26 · 第六十九轮（第 191 轮｜车道 C｜题库深化第 69 轮）：3 道第一题补缺（`js-crypto-025` / `ts-enum-001` / `dist-push-043`，均 multiple、difficulty 4，宿主即 a 类头部三条 `js/intermediate/node/09-crypto`、`typescript/basic/core/04-enum-asconst`、`distributed/intermediate/case-studies/13-push`；三篇均 `core: true` 且开工实测全站 0 题）· 其中 `quiz/typescript.json` 是**本轮新建**：此前 34 个方向目录里只有 `panorama`（单张全景页、无知识点笔记）与 `typescript` 无题库文件，即 typescript 是**唯一有正经笔记（7 篇）却 0 题可刷**的方向，`/guide/quiz` 的方向列表里根本不会出现它 · 队列销 3 条、追加 4 条（`distributed/intermediate/case-studies/17-payment`、`js/intermediate/node/04-stream`、`linux/intermediate/system/07-cron-timer`、`mongodb/intermediate/usage/09-multikey-index`），四条角度一律取自各篇 description 原文，且先经脚本核实为「core: true 且该笔记全站 0 题」——此类池实测仍余 63 篇，未枯竭 · a 类现余 11 条（8 条第一题补缺 + 3 条第二题）· 三条均为 multiple，延续 b 类「multiple 占比偏低优先补多选」：补题前实测 `quiz/js.json` 25 题仅 5 道 multiple、`quiz/distributed.json` 42 题仅 10 道 · 说明：本轮游标本为 A（191 mod 5 = 1），因 `astro.config.mjs` 全程被并行会话以未提交态持有（roadmap MQ-01 在途，注册新篇必改该文件）按配方 §0.2/§3 退位，路径 A→B→C；B 车道头部 `es-write` 实测 10 帧、帧说明合计 1318 视觉列、单帧最长 228 列，对照已出片的 `kafka-segment`（8 帧、逐帧口播裁到 ≤36 列、成片 52.6s）要压进 ≤60s 闸门须先重写动画正文，不属 B 车道 ≤5 文件口径 · 本轮提交主题：feat(quiz): 演进第 191 轮车道 C 补 crypto/枚举/推送三篇首题并新建 typescript 题库
 ## 经验与规则
 
 - 第五十五轮全库重扫发现：96 篇 core 笔记 0 题、134 篇仅 1 题——早前覆盖成果疑似在并行会话历史改写事故中丢失。队列补缺规则：0 题笔记优先补第一题（标「0 题补缺」），再轮到第二题。扫描脚本需同时处理 .md 与 .mdx，否则尾点导致误报 0 题。
