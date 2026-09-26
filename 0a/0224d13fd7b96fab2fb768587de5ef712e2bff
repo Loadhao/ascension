@@ -1,0 +1,31 @@
+docs/evolution.md
+  s_99fa858bd83272::t_61abea13224373 67-71,73-81,83
+  s_99fa858bd83272::t_a5b79934fe6c19 60
+  s_99fa858bd83272::t_2c758b2ed6246d 82
+  s_99fa858bd83272::t_59aa45ab6b51a2 72
+src/data/quiz/typescript.json
+  s_99fa858bd83272::t_57857dbc31baf3 1-23
+docs/coverage-deepening.md
+  s_99fa858bd83272::t_c6e641e710f8ea 42-45
+  s_99fa858bd83272::t_de37f5d65417d1 208
+src/data/quiz/distributed.json
+  s_99fa858bd83272::t_28aecae2a728f9 604-618
+src/data/quiz/js.json
+  s_99fa858bd83272::t_3dd36b922cc87b 430-448
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "0a0224d13fd7b96fab2fb768587de5ef712e2bff",
+  "prompts": {},
+  "sessions": {
+    "s_99fa858bd83272": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "5331f541-9b62-4ce1-8c2f-961391dee21c",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
