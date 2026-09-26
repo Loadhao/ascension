@@ -1,0 +1,43 @@
+src/content/docs/redis/intermediate/usage/07-redisson.md
+  s_a8894097d2be6a::t_4927b293aae9ab 151
+docs/evolution.md
+  s_a8894097d2be6a::t_8a0cfdfd90dc34 57
+  s_a8894097d2be6a::t_bb2531801918ca 67-75,77-85
+  s_a8894097d2be6a::t_1c96befb9be6ce 76
+  s_a8894097d2be6a::t_053565254982c1 61
+  s_a8894097d2be6a::t_b98f5a587afb8e 899-900
+  s_a8894097d2be6a::t_31d72f2887c702 920
+src/data/quiz/distributed.json
+  s_a8894097d2be6a::t_1fb89757ddc860 589-603
+scripts/media-encode.mjs
+  s_a8894097d2be6a::t_52440e20732b3d 136-138
+scripts/media-verify.mjs
+  s_a8894097d2be6a::t_8444678d37fb79 22-24
+  s_a8894097d2be6a::t_c115a02933195b 64-66
+docs/coverage-deepening.md
+  s_7fe863f87ad1f0::t_1c080bf8487087 202
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cd38ccb9eac8a83e5965b78555d912ea1948b271",
+  "prompts": {},
+  "sessions": {
+    "s_7fe863f87ad1f0": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "f4ca4127-0ecc-4a22-8bc0-c1488b8fdc75",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_a8894097d2be6a": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "100b0d68-b7fa-4e38-9582-8fc464e4154c",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
