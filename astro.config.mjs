@@ -889,6 +889,20 @@ export default defineConfig({
                     },
                   ],
                 },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '状态与数据流',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/react/intermediate/state/' },
+                        { label: '状态管理与 Context', link: '/react/intermediate/state/01-context-vs-store/' },
+                      ],
+                    },
+                  ],
+                },
               ],
             },
             {

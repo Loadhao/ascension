@@ -1,0 +1,13 @@
+---
+title: 状态与数据流
+description: 状态该放在哪一层、Context 的送达能力与它的性能账、外部 store 和缓存层各补哪一块
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+前端工程里「状态放哪儿」是架构决定，不是写法偏好：放低了远处拿不到，放高了
+一次输入牵动整棵树重渲染。React 给的是**四级台阶**——就地 state、状态提升、
+Context、外部 store，再加一条容易被忽略的分界：**服务端状态根本不该进这套
+台阶**。这一分类把「谁持有、怎么送达、谁跟着重渲染」三件事一次算清。
+
+<CategoryNotesIsland categoryId="react/intermediate/state" />
