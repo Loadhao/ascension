@@ -71,6 +71,7 @@
 - [ ] redis/intermediate/usage/07-redisson — 第二题考「`RSemaphore` 与 `RPermitExpirableSemaphore` 的归属差异（后者按 permitId 释放、租约必须长于任务时长）+ `RateType.OVERALL` 与 `PER_CLIENT` 该在什么场景各选哪个（首题已考「许可泄漏、trySetRate 与 setRate 之别、fencing 必须资源侧校验、读锁也要网络往返」）」
 - [ ] redis/intermediate/usage/08-observability — 第二题考「SCAN 姿势：为什么单次返回空不能判定键不存在、`COUNT` 与 `MATCH` 各自的语义（工作量提示 vs 取回后过滤）、以及 `KEYS` 为什么被官方归入只用于调试」（首题已考「慢日志只量执行段 → 空记录时的三个转向：LATENCY 事件、intrinsic 基线、输出缓冲堆积」）
 - [ ] kafka/intermediate/core/06-transactions-eos — 第二题考「`transactional.id` 的身份语义：为什么它必须与任务分区一一对应且不能随机生成（共用互相 fence、换 ID 等于放弃僵尸保护），以及 `commitTransaction()` 超时后为什么不能重试提交」（首题已考「悬挂事务卡 LSO + 默认 read_uncommitted 仍可见中止数据」）
+- [ ] kubernetes/intermediate/ops/05-java-on-k8s — 第二题考「优雅停机预算的相加关系：preStop 执行完才发 SIGTERM 且这段时间计入宽限期，所以 grace ≥ preStop sleep + 注册中心下线 + 应用收尾；为什么在 hook 与 Spring phase timeout 里各等 30 秒会直接爆」（首题已考「CPU limit 是周期配额不是核数 → P99 台阶 + JVM 不按 shares 算核数」）
 
 ## 已完成记录
 
@@ -206,6 +207,7 @@
 - 2026-09-26 · 第六十八轮（第 190 轮｜车道 C｜题库深化第 68 轮）：3 道第一题补缺（`ai-infparams-046` / `ai-tokencost-047` / `ai-tooldesign-048`，均 multiple、difficulty 4，宿主即 a 类头部三条 `ai/intermediate/llm/04-inference-params`、`ai/intermediate/llm/05-token-cost`、`ai/intermediate/agent/16-tool-design`；三篇均 `core: true`，开工实测该三篇全站 0 题、`quiz/ai.json` 45 题里无一条指向它们）· 队列销 3 条、追加 3 条（同三篇的第二题角度，一律取自各篇「高频追问速答」与小结正文，与首题考点不重叠）· a 类现余 10 条（7 条第一题补缺 + 本轮新入的 3 条第二题）· 三条均为 multiple，延续 b 类「multiple 占比偏低优先补多选」——补题前实测 `quiz/ai.json` 45 题仅 6 道 multiple，补后 9 道 · 说明：本轮开工按勘察命令算得「188 mod 5 = 3 → 车道 C」并据此做完，收尾复算时 188 已由第 187 轮「下一轮入口」指定给并行会话的 roadmap B1 第三批（`1e5abec`，车道 A）、189 已由并行会话在共享台账声明（车道 D），按配方 §6「不重排、不在两个会话里各算各号」顺延登记为 190 · 本轮提交主题：feat(quiz): 演进第 190 轮车道 C 补推理参数/Token 成本/工具设计三篇首题
 
 - 2026-09-26 · 第六十九轮（第 191 轮｜车道 C｜题库深化第 69 轮）：3 道第一题补缺（`js-crypto-025` / `ts-enum-001` / `dist-push-043`，均 multiple、difficulty 4，宿主即 a 类头部三条 `js/intermediate/node/09-crypto`、`typescript/basic/core/04-enum-asconst`、`distributed/intermediate/case-studies/13-push`；三篇均 `core: true` 且开工实测全站 0 题）· 其中 `quiz/typescript.json` 是**本轮新建**：此前 34 个方向目录里只有 `panorama`（单张全景页、无知识点笔记）与 `typescript` 无题库文件，即 typescript 是**唯一有正经笔记（7 篇）却 0 题可刷**的方向，`/guide/quiz` 的方向列表里根本不会出现它 · 队列销 3 条、追加 4 条（`distributed/intermediate/case-studies/17-payment`、`js/intermediate/node/04-stream`、`linux/intermediate/system/07-cron-timer`、`mongodb/intermediate/usage/09-multikey-index`），四条角度一律取自各篇 description 原文，且先经脚本核实为「core: true 且该笔记全站 0 题」——此类池实测仍余 63 篇，未枯竭 · a 类现余 11 条（8 条第一题补缺 + 3 条第二题）· 三条均为 multiple，延续 b 类「multiple 占比偏低优先补多选」：补题前实测 `quiz/js.json` 25 题仅 5 道 multiple、`quiz/distributed.json` 42 题仅 10 道 · 说明：本轮游标本为 A（191 mod 5 = 1），因 `astro.config.mjs` 全程被并行会话以未提交态持有（roadmap MQ-01 在途，注册新篇必改该文件）按配方 §0.2/§3 退位，路径 A→B→C；B 车道头部 `es-write` 实测 10 帧、帧说明合计 1318 视觉列、单帧最长 228 列，对照已出片的 `kafka-segment`（8 帧、逐帧口播裁到 ≤36 列、成片 52.6s）要压进 ≤60s 闸门须先重写动画正文，不属 B 车道 ≤5 文件口径 · 本轮提交主题：feat(quiz): 演进第 191 轮车道 C 补 crypto/枚举/推送三篇首题并新建 typescript 题库
+
 ## 经验与规则
 
 - 第五十五轮全库重扫发现：96 篇 core 笔记 0 题、134 篇仅 1 题——早前覆盖成果疑似在并行会话历史改写事故中丢失。队列补缺规则：0 题笔记优先补第一题（标「0 题补缺」），再轮到第二题。扫描脚本需同时处理 .md 与 .mdx，否则尾点导致误报 0 题。

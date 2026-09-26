@@ -70,7 +70,12 @@ try {
 
 **官方对崩溃语义有一句容易漏的补充**：事务被中止时，消费者存的 position
 会回到旧值，但**消费者不会自动回退，必须自己重新拉取已提交的 offset**。
-所以位点回滚不是"免费重放"，消费端逻辑要能接受重来一遍。
+所以位点回滚不是"免费重放"，消费端逻辑要能接受重来一遍。官方示例
+`TransactionalClientDemo` 里就配了这个动作——abort 之后调一个
+`resetToLastCommittedPositions()`，对每个已分配分区用
+`consumer.committed()` 拿到已提交位点再 `seek()` 回去，取不到就
+`seekToBeginning`。自己实现时别省这一步：不回去，就会从"内存里那个已经
+被回滚掉的前进位置"继续读，等于跳过了一批数据。
 
 ## transactional.id 是身份，不是前缀
 

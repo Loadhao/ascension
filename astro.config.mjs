@@ -2415,6 +2415,7 @@ export default defineConfig({
                         { label: 'Service 与 Ingress', link: '/kubernetes/intermediate/ops/02-service-ingress/' },
                         { label: '声明式 API 与 List-Watch', link: '/kubernetes/intermediate/ops/03-declarative-listwatch/' },
                         { label: '弹性伸缩与 HPA', link: '/kubernetes/intermediate/ops/04-autoscaling-hpa/' },
+                        { label: 'Java 应用在 K8s 上的三处联动', link: '/kubernetes/intermediate/ops/05-java-on-k8s/' },
                       ],
                     },
                   ],

@@ -43,7 +43,7 @@
 | D3 | 框架与生态落地（Spring 全家 / MyBatis / Dubbo / Cloud） | **中**：spring 10 + boot 5 + mvc 3，此前持久层只有 1 篇、dubbo 2 篇且不含落地面 | 框架原理厚、**日常写的东西薄**——MyBatis 实战、Dubbo 泛化与上下线均已补 | JR-03 ✅ · JR-04 ✅ · JR-05 ✅ |
 | D4 | 数据与中间件（MySQL / Redis / MQ / ES） | **中偏薄**：mysql 21 · redis 16 · kafka 12 · rocketmq 11 · rabbitmq 7 | 原理与机制齐，此前**生产运维面与现场排查**近零——备份恢复/PITR、锁等待取证、Redisson 工具族、Redis 可观测面、Kafka 事务边界已补 | MY-01 ✅ · MY-02 ✅ · RD-01 ✅ · RD-02 ✅ · MQ-01 ✅ |
 | D5 | 分布式与系统设计 | **厚**：81 篇，含 31 个设计案例 | 案例与理论饱和；缺的是 SLO/日志支柱/发布风险判据这类**治理指标** | B2 池 |
-| D6 | 生产运维与稳定性（Linux/网络/容器/可观测） | **中**：linux 25 · network 18 · k8s 11 · docker 13 | 通用 Linux 排障厚，但**没有「Java 应用在容器里」这条线**（探针配 GC、CPU throttling） | OPS-01 · B2 池 |
+| D6 | 生产运维与稳定性（Linux/网络/容器/可观测） | **中**：linux 25 · network 18 · k8s 12 · docker 13 | 通用 Linux 排障厚；**「Java 应用在容器里」这条线已补**（CPU 配额 × GC 停顿 × 探针窗口 × 停机预算），后续增量集中在 B2 池 | OPS-01 ✅ · B2 池 |
 | D7 | 工程方法论与协作（方案写作、CR、复盘、晋升） | **空白**：`聚合根`/`限界上下文`/`5Why`/`Code Review 规范` 全库零命中 | 内容确定缺，但**归属未定**（不是「技术/工具」，开新方向是结构性决策） | §5 待裁决 |
 
 ## 2. 当前批次 B1（12 条 · 定时任务唯一取点处）
@@ -63,7 +63,7 @@
 | RD-01 | redis · `redis/intermediate/usage/07-redisson.md` | 广度 | 读写锁、信号量、限流器、延迟队列各解决什么问题、代价是什么 | `usage/03-distributed-lock.mdx` 只有可重入锁 + 看门狗 | done 2026-09-25 · `redis/intermediate/usage/07-redisson.md` |
 | RD-02 | redis · `redis/intermediate/usage/08-observability.md` | 广度 | 一条命令怎么看出 Redis 快出事了 | `requirepass`/`ACL`/`slowlog`/INFO 指标在 redis 方向零命中 | done 2026-09-26 · `redis/intermediate/usage/08-observability.md` |
 | MQ-01 | kafka · `kafka/intermediate/core/06-transactions-eos.md` | 深度 | Kafka 的 Exactly-Once 到哪儿就失效了 | `transactional.id` 零命中；`core/03-reliability-idempotent.md` 讲幂等专篇但事务只一行 | done 2026-09-26 · `kafka/intermediate/core/06-transactions-eos.md` |
-| OPS-01 | kubernetes · `kubernetes/intermediate/ops/05-java-on-k8s.md` | 广度 | GC 停顿把探针打死过谁：探针选型、优雅停机与 CPU throttling 在 Java 上如何互相牵连 | `cfs_quota`/throttling 零命中；`k8s/ops/01-probes-lifecycle`、`jvm/07-tuning`、`docker/03-lifecycle` 各写一块未串联 | 待办 |
+| OPS-01 | kubernetes · `kubernetes/intermediate/ops/05-java-on-k8s.md` | 广度 | GC 停顿把探针打死过谁：探针选型、优雅停机与 CPU throttling 在 Java 上如何互相牵连 | `cfs_quota`/throttling 零命中；`k8s/ops/01-probes-lifecycle`、`jvm/07-tuning`、`docker/03-lifecycle` 各写一块未串联 | done 2026-09-26 · `kubernetes/intermediate/ops/05-java-on-k8s.md` |
 
 **每条落地时的固定动作**（沿用 `AGENTS.md` 与配方既有约定，不另立规则）：
 正文 + 侧边栏注册 + `src/data/graphs/<方向>.json` 节点与边 + 分类页 `index.mdx` 导读
@@ -189,3 +189,28 @@ K8s×JVM 之后的容量与弹性联动、单元化落地细节。
   同轮配齐：侧边栏 1 条、图谱 1 节点 5 边、首题 `kafka-txn-016`（难度 5）、
   速答 4 行、分类页由"三个问题"改为"四个问题"，第二题（fencing 身份）入 d 类。
   **B1 余 1 条**：OPS-01。
+- 2026-09-26 · 第六批：OPS-01 落地 `kubernetes/intermediate/ops/05-java-on-k8s.md`，
+  **B1 十二条全部清空**。本篇不重复站内已有的探针篇/JVM 调优篇/容器生死篇，
+  只算三者交叉处的账：`limits.cpu` 是**每 100ms 重发一次的时长配额**
+  （内核 `cfs_period_us`/`cfs_quota_us` 语义、`-1` 为不限、`cpu.stat` 的
+  `nr_periods`/`nr_throttled`/`throttled_time`）→ GC 并行阶段最容易吃光额度
+  → 停顿被拉长 → 探针窗口（`periodSeconds × failureThreshold`）被击穿 →
+  liveness 重启带来 JIT 冷启动又抬高 CPU 需求，**一张自激环图**收住全篇；
+  另一半是 `requests` 的双重语义（K8s 侧是 shares 与 HPA 分母，而 JVM
+  已按 JDK-8283356 停止用 shares 推核数，故只设 request 不设 limit 时
+  JVM 按节点核数配线程池）。停机部分给出官方原文两条与 60/55/10 反例。
+  **顺带据官方原文更正 `kubernetes/intermediate/ops/01-probes-lifecycle.md`
+  的一处事实错误**：该篇原写「发 SIGTERM → preStop 执行」，官方为
+  *"the hook must complete its execution before the TERM signal can be sent"*
+  且宽限期覆盖「hook 执行 + 容器正常停止」两段——顺序与预算口径已改正，
+  并加指向新篇的互链。
+  同轮配齐：侧边栏 1 条、图谱 1 节点 4 边、首题 `k8s-cputhrottle-011`
+  （难度 5）、**速答手册新增 `## Kubernetes` 小节 6 行**（此前全站速答对
+  k8s 零覆盖），第二题（停机预算相加）入 d 类。
+  未采纳的未核实数字：探针三参数默认值、cAdvisor 指标名、JVM 按核数算
+  GC 线程的具体公式——均改为"查当前版本"或只给机制不给数字。
+
+> **B1 已清空 → 触发 §0 规则 3 的复评。** 复评结论：B2 不自动展开，
+> §5 的三项待裁决（D7 工程方法论与 DDD 归属、这 12 篇是否补 `core` 星标、
+> B2 是否逐条细化）**均需用户拍板后才动**；在此之前，A 车道按配方
+> 退回脚本候选池（`scripts/evolution-candidates.mjs`），不再从本文件取点。

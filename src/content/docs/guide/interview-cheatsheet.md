@@ -333,6 +333,17 @@ Docker、Nginx、Git 等全站方向。
 | [镜像怎么瘦身](/docker/advanced/orchestration/03-image-optimization/) | 先 dive 定位大层：换 alpine、多阶段构建、.dockerignore；生产 USER 非 root、密钥不进层 |
 | [镜像与容器命令](/docker/basic/fundamentals/02-commands/) | pull 拉只读层、run 叠可写层成容器；-p 是宿主:容器，--rm 一次性任务退出即删 |
 
+## Kubernetes
+
+| 问题 | 一句话答案 |
+|---|---|
+| [preStop 和 SIGTERM 谁先](/kubernetes/intermediate/ops/01-probes-lifecycle/) | preStop 先——官方要求 hook 执行完才发 TERM，且宽限期覆盖"hook + 容器正常停止"两段之和，hook 睡太久就没时间收尾 |
+| [liveness 和 readiness 配反了会怎样](/kubernetes/intermediate/ops/01-probes-lifecycle/) | liveness 失败=重启、readiness 失败=摘流；把依赖健康塞给 liveness，依赖一抖就全体连环重启成雪崩；慢启动必配 startupProbe |
+| [CPU limit 限的是什么](/kubernetes/intermediate/ops/05-java-on-k8s/) | 不是绑核，是 CFS 配额：默认每 100ms 一个周期，额度用尽就要等到下个周期边界——所以会出现"均值不高但 P99 有 100ms 台阶" |
+| [怎么确认被 CPU 限流](/kubernetes/intermediate/ops/05-java-on-k8s/) | 看 `cpu.stat` 的 `nr_throttled / nr_periods` 是否持续非零、且与延迟尖刺同相位；别看平均利用率 |
+| [JVM 会看 CPU request 吗](/kubernetes/intermediate/ops/05-java-on-k8s/) | 不会——历史上曾用 cpu.shares 推核数（语义倒置）已移除；只设 requests 不设 limits 时 JVM 按**节点核数**配线程池，要显式 `-XX:ActiveProcessorCount` |
+| [GC 停顿把探针打死了怎么分诊](/kubernetes/intermediate/ops/05-java-on-k8s/) | GC 日志时间戳与 `Liveness probe failed` 事件对齐=停顿问题；对不上而 `nr_throttled` 在涨=配额问题。另注意探针端点别和业务抢同一线程池（用独立 management 端口） |
+
 ## Nginx
 
 | 问题 | 一句话答案 |

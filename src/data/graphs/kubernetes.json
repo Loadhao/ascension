@@ -52,6 +52,12 @@
       "label": "弹性伸缩与 HPA",
       "href": "/kubernetes/intermediate/ops/04-autoscaling-hpa/",
       "group": "运维实战"
+    },
+    {
+      "id": "k8s-java",
+      "label": "Java 在 K8s 的三处联动",
+      "href": "/kubernetes/intermediate/ops/05-java-on-k8s/",
+      "group": "运维实战"
     }
   ],
   "edges": [
@@ -113,6 +119,26 @@
       "source": "k8s-listwatch",
       "target": "k8s-hpa",
       "label": "HPA 也是调谐控制器"
+    },
+    {
+      "source": "k8s-probe",
+      "target": "k8s-java",
+      "label": "GC 停顿撞上探针窗口"
+    },
+    {
+      "source": "k8s-pod",
+      "target": "k8s-java",
+      "label": "limits 才是 JVM 看到的上限"
+    },
+    {
+      "source": "k8s-hpa",
+      "target": "k8s-java",
+      "label": "HPA 分母用 requests，JVM 用它没用"
+    },
+    {
+      "source": "k8s-java",
+      "target": "k8s-deploy",
+      "label": "停机预算决定发布是否掉流量"
     }
   ]
 }

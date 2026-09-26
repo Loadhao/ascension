@@ -56,10 +56,14 @@ lifecycle:
 terminationGracePeriodSeconds: 30
 ```
 
-Pod 终止流程：endpoint 摘除（异步）→ 发 SIGTERM → preStop 执行 →
-宽限期到强杀 SIGKILL。**摘除与 SIGTERM 并发进行**，注册中心/负载
+Pod 终止流程：endpoint 摘除（异步）→ **preStop 执行完毕才发 SIGTERM** →
+宽限期耗尽则 SIGKILL。两条容易被搞反的细节：官方明确
+"the hook must complete its execution before the TERM signal can be sent"，
+且**宽限期覆盖"preStop 执行 + 容器正常停止"两段之和**——hook 里 sleep 太久，
+应用收尾的时间就被吃掉了。另一条：**摘除与终止是并发进行的**，注册中心/负载
 均衡有滞后——preStop 里 sleep 几秒让在途请求跑完，是优雅退出的
-标准操作。
+标准操作。三处预算怎么相加见
+[Java 应用在 K8s 上的三处联动](/kubernetes/intermediate/ops/05-java-on-k8s/)。
 
 ## 要点备忘
 
