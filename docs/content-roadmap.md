@@ -41,7 +41,7 @@
 | D1 | 语言与运行时底座（JVM/并发/GC/内存/IO） | **厚**：jvm 10 篇 + concurrent 12 篇 + io 4 篇 | 原理侧已够用，缺的是**取证侧工具箱与堆外那条线**（均已补） | JR-02 ✅ · JR-06 ✅ |
 | D2 | 工程实践与代码资产（构建依赖、测试、重构、方法论） | **空白**：依赖仲裁、shade、enforcer、覆盖率、契约测试全零命中 | 高级工程师与「背熟八股」的主分界线，且是最干净的缺口 | JR-01 ✅ |
 | D3 | 框架与生态落地（Spring 全家 / MyBatis / Dubbo / Cloud） | **中**：spring 10 + boot 5 + mvc 3，此前持久层只有 1 篇、dubbo 2 篇且不含落地面 | 框架原理厚、**日常写的东西薄**——MyBatis 实战、Dubbo 泛化与上下线均已补 | JR-03 ✅ · JR-04 ✅ · JR-05 ✅ |
-| D4 | 数据与中间件（MySQL / Redis / MQ / ES） | **中偏薄**：mysql 21 · redis 15 · kafka 11 · rocketmq 11 · rabbitmq 7 | 原理与机制齐，此前**生产运维面与现场排查**近零——备份恢复/PITR、锁等待取证、Redisson 工具族已补；仍缺 Redis 可观测面与 Kafka 事务 | MY-01 ✅ · MY-02 ✅ · RD-01 ✅ · RD-02 · MQ-01 |
+| D4 | 数据与中间件（MySQL / Redis / MQ / ES） | **中偏薄**：mysql 21 · redis 16 · kafka 11 · rocketmq 11 · rabbitmq 7 | 原理与机制齐，此前**生产运维面与现场排查**近零——备份恢复/PITR、锁等待取证、Redisson 工具族、Redis 可观测面已补；仍缺 Kafka 事务 | MY-01 ✅ · MY-02 ✅ · RD-01 ✅ · RD-02 ✅ · MQ-01 |
 | D5 | 分布式与系统设计 | **厚**：81 篇，含 31 个设计案例 | 案例与理论饱和；缺的是 SLO/日志支柱/发布风险判据这类**治理指标** | B2 池 |
 | D6 | 生产运维与稳定性（Linux/网络/容器/可观测） | **中**：linux 25 · network 18 · k8s 11 · docker 13 | 通用 Linux 排障厚，但**没有「Java 应用在容器里」这条线**（探针配 GC、CPU throttling） | OPS-01 · B2 池 |
 | D7 | 工程方法论与协作（方案写作、CR、复盘、晋升） | **空白**：`聚合根`/`限界上下文`/`5Why`/`Code Review 规范` 全库零命中 | 内容确定缺，但**归属未定**（不是「技术/工具」，开新方向是结构性决策） | §5 待裁决 |
@@ -61,7 +61,7 @@
 | MY-01 | mysql · `mysql/advanced/performance-ha/04-backup-pitr.md` | 广度 | DROP 错一张表，30 分钟后怎么恢复、能丢多少 | `PITR`/`xtrabackup` 在 mysql 方向零命中；**`mongodb/intermediate/usage/10-backup.md:40` 已把「MySQL binlog PITR（三大日志篇）」当既有内容引流，指向空处** | done 2026-09-25 · `mysql/advanced/performance-ha/04-backup-pitr.md` |
 | MY-02 | mysql · `mysql/intermediate/transaction-lock/04-lock-wait-triage.md` | 深度 | 谁堵了谁：锁等待链与长事务现场的取证顺序 | `innodb_lock_waits` 零命中，现只有 `innodb_trx` 一行 | done 2026-09-25 · `mysql/intermediate/transaction-lock/04-lock-wait-triage.md` |
 | RD-01 | redis · `redis/intermediate/usage/07-redisson.md` | 广度 | 读写锁、信号量、限流器、延迟队列各解决什么问题、代价是什么 | `usage/03-distributed-lock.mdx` 只有可重入锁 + 看门狗 | done 2026-09-25 · `redis/intermediate/usage/07-redisson.md` |
-| RD-02 | redis · `redis/intermediate/usage/08-observability.md` | 广度 | 一条命令怎么看出 Redis 快出事了 | `requirepass`/`ACL`/`slowlog`/INFO 指标在 redis 方向零命中 | 待办 |
+| RD-02 | redis · `redis/intermediate/usage/08-observability.md` | 广度 | 一条命令怎么看出 Redis 快出事了 | `requirepass`/`ACL`/`slowlog`/INFO 指标在 redis 方向零命中 | done 2026-09-26 · `redis/intermediate/usage/08-observability.md` |
 | MQ-01 | kafka · `kafka/intermediate/core/06-transactions-eos.md` | 深度 | Kafka 的 Exactly-Once 到哪儿就失效了 | `transactional.id` 零命中；`core/03-reliability-idempotent.md` 讲幂等专篇但事务只一行 | 待办 |
 | OPS-01 | kubernetes · `kubernetes/intermediate/ops/05-java-on-k8s.md` | 广度 | GC 停顿把探针打死过谁：探针选型、优雅停机与 CPU throttling 在 Java 上如何互相牵连 | `cfs_quota`/throttling 零命中；`k8s/ops/01-probes-lifecycle`、`jvm/07-tuning`、`docker/03-lifecycle` 各写一块未串联 | 待办 |
 
@@ -148,3 +148,21 @@ K8s×JVM 之后的容量与弹性联动、单元化落地细节。
   三件套同轮配齐（侧边栏 3 条、图谱 mysql 2 节点 6 边 + redis 1 节点 3 边、
   首题 3 道难度 4、速答手册 5 行），第二题角度入 d 类。
   **B1 余 3 条**：RD-02、MQ-01、OPS-01。
+- 2026-09-26 · 第四批：RD-02 落地 `redis/intermediate/usage/08-observability.md`。
+  取证入口按「谁能回答哪个问题」切分：`INFO` 六种读法（命中率公式与
+  `EXISTS` 判空也算 miss、`evicted_keys` vs `expired_keys` 分诊、碎片率虚高
+  的三条官方成因、`latest_fork_usec` 与 THP、`mem_not_counted_for_evict`
+  对 `maxmemory` 配置的影响、`commandstats` 按 `usec_per_call` 排序）、
+  `SLOWLOG` 只量执行段这一条定义（配 `slowlog-max-argc` 截断与增量 ID）、
+  `LATENCY` 事件表与「160 点 + 同秒取 max，所以要平时就开」、
+  `--intrinsic-latency` 必须先在服务端定基线、`MONITOR` 掉一半吞吐的官方
+  基准、`CLIENT LIST` 字段与「字段会加也会删」的解析警告、`SCAN` 的
+  COUNT/MATCH 语义（附游标机制图）、ACL 侧的被拒可见性与四个坑
+  （key pattern 拦不住 `FLUSHALL`、`SETUSER` 增量、类目不含模块命令、
+  `CONFIG REWRITE` 不写 ACL 文件）。**所有事实逐条对官方文档核验后落笔**
+  （latency / latency-monitor / slowlog / monitor / scan / client-list /
+  memory-optimization / eviction / acl / acl-log 十篇），未采纳未经验证的
+  默认值（如 `slowlog-log-slower-than` 的具体数字改为「单位微秒」表述）。
+  同轮配齐：侧边栏 1 条、图谱 1 节点 5 边、首题 `redis-observe-020`
+  （难度 5）、速答 4 行、分类页导读重写，第二题（SCAN 姿势）入 d 类。
+  **B1 余 2 条**：MQ-01、OPS-01。

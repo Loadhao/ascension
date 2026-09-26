@@ -203,6 +203,10 @@ Docker、Nginx、Git 等全站方向。
 | [大 key 与热 key 治理](/redis/intermediate/usage/06-bigkey-hotkey/) | 大 key 拆分压缩，热 key 本地缓存 + 随机打散——都先监控发现再治理 |
 | [锁之外的 Redisson 工具族](/redis/intermediate/usage/07-redisson/) | 读写锁/信号量/限流器都是 Redis 侧 Lua 原子脚本；`RSemaphore` 许可不过期会随崩溃泄漏，改用带租约的 `RPermitExpirableSemaphore`；限速用 `trySetRate`（`setRate` 会覆盖并重置令牌） |
 | [锁过期后复活的写入怎么挡](/redis/intermediate/usage/07-redisson/) | fencing token：`RFencedLock` 给单调递增 token，**由资源侧**拒绝比已见最大值更小的写入；只在客户端比等于没做。红锁已被官方弃用（`RLock`/`RFencedLock` 取代） |
+| [一条命令能看出 Redis 快出事吗](/redis/intermediate/usage/08-observability/) | 不能——`INFO` 多是累计计数器，要两次快照相减；命中率 `hits/(hits+misses)`，`EXISTS` 判空也算 miss；`evicted_keys` 高是策略踢错键，`expired_keys` 高是 TTL 太短 |
+| [客户报慢但慢日志是空的](/redis/intermediate/usage/08-observability/) | `SLOWLOG` 只量命令真正执行那一段，不含排队/网络/回写。转 `LATENCY`（阈值毫秒、默认关、只有 160 个点，要平时就开）与 `CLIENT LIST` 的 `oll/omem`；先用 `--intrinsic-latency`（服务端跑）定环境基线 |
+| [为什么不能用 MONITOR 做监控](/redis/intermediate/usage/08-observability/) | 官方基准：一个 MONITOR 客户端让 GET 从 ~104k 掉到 ~45k rps；且不记录管理命令。常态用 SLOWLOG + LATENCY + commandstats + `CLIENT LIST` 的 `tot-net-*` |
+| [碎片率 1.8 要不要报警](/redis/intermediate/usage/08-observability/) | 先别——碎片率 = RSS/实际使用，而 Redis 删键不还内存给 OS（5GB 删 2GB 后 RSS 仍 ~5GB），峰值远大于当前时必然虚高；它是趋势指标不是静态阈值指标 |
 | [缓存架构模式](/redis/intermediate/usage/04-cache-patterns/) | Cache Aside 主流；Read/Write Through 收敛到缓存层，Write Behind 换吞吐冒风险 |
 | [管道、事务与 Lua](/redis/intermediate/usage/05-pipeline-transaction-lua/) | Pipeline 只省 RTT 不保证原子；MULTI/EXEC 不被插队但不回滚；真正多命令+逻辑原子靠 Lua |
 

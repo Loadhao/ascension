@@ -1239,6 +1239,7 @@ export default defineConfig({
                         { label: '管道、事务与 Lua', link: '/redis/intermediate/usage/05-pipeline-transaction-lua/' },
                         { label: '大 key 与热 key 治理', link: '/redis/intermediate/usage/06-bigkey-hotkey/' },
                         { label: 'Redisson 并发工具族', link: '/redis/intermediate/usage/07-redisson/' },
+                        { label: '可观测面与现场取证', link: '/redis/intermediate/usage/08-observability/' },
                       ],
                     },
                   ],

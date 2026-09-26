@@ -1,6 +1,6 @@
 ---
 title: 使用进阶
-description: 过期删除与内存淘汰、缓存穿透/击穿/雪崩、分布式锁与 Redisson 工具族、管道事务 Lua、大小 key 治理——缓存实战
+description: 过期删除与内存淘汰、缓存穿透/击穿/雪崩、分布式锁与 Redisson 工具族、管道事务 Lua、大小 key 治理、可观测面取证——缓存实战
 ---
 
 import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
@@ -8,10 +8,12 @@ import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIs
 这一分类按"把它当缓存用之后会遇到的事"组织：内存里的过期键怎么清理
 （过期删除与淘汰策略）、缓存三大经典故障（穿透/击穿/雪崩）的成因与
 对策、读写模式与多级缓存怎么取舍、管道/事务/Lua 提供的原子性边界、
-大小 key 的治理，以及锁与并发原语——其中
+大小 key 的治理、锁与并发原语，以及出事之前的可观测面。其中
 [分布式锁](/redis/intermediate/usage/03-distributed-lock/)讲一把锁的演进，
 [Redisson 并发工具族](/redis/intermediate/usage/07-redisson/)讲锁之外的
-读写锁、信号量、限流器与 fencing token。点击右侧圆点可标记学习状态
-（未学 → 学习中 → 已掌握）。
+读写锁、信号量、限流器与 fencing token，
+[可观测面与现场取证](/redis/intermediate/usage/08-observability/)讲
+INFO/慢日志/延迟监控各能回答什么、又各自看不见哪一段。点击右侧圆点可
+标记学习状态（未学 → 学习中 → 已掌握）。
 
 <CategoryNotesIsland categoryId="redis/intermediate/usage" />

@@ -327,6 +327,25 @@
         1
       ],
       "hint": "fencing 的价值全在「资源侧记住见过的最大 token 并拒绝更小的」——只在客户端比等于没做；被保护的资源若无法校验 token（比如一个不认识 token 的第三方接口），这套就退化成普通锁。Redisson 的同步器都是 Redis 侧 Lua 原子脚本的封装，读写锁每次 acquire/release 都是一次网络往返，热点读路径上常比无锁更慢。锁本身仍受主从异步切换丢锁影响，见分布式锁那篇。"
+    },
+    {
+      "id": "redis-observe-020",
+      "noteId": "redis/intermediate/usage/08-observability",
+      "type": "multiple",
+      "difficulty": 5,
+      "q": "客户端普遍反馈 Redis 慢，但 SLOWLOG GET 查不到记录。下列判断成立的有？",
+      "options": [
+        "慢日志的执行时间不含与客户端通信、发送响应等 I/O 阶段，所以「为空」并不代表 Redis 没问题",
+        "应该看 LATENCY：fork、aof-write-pending-fsync、expire-cycle 这些主线程停顿只有延迟监控会采样",
+        "把 latency-monitor-threshold 调成 0 可以提高采样灵敏度，从而补查出历史上的尖刺",
+        "CLIENT LIST 里 obl/oll/omem 偏高，说明响应正堆积在输出缓冲里，属于慢日志覆盖不到的那一段"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "第 2 项反了：阈值单位是毫秒，0 表示关闭监控；且时间序列只有 160 个点、同一秒的尖刺按最大值合并，事后才打开拿不到历史，要平时就开着。另外先用服务端跑的 --intrinsic-latency 定环境基线——虚拟化环境官方测到 9.7ms 甚至 40ms，这种慢调 Redis 没用。"
     }
   ]
 }
