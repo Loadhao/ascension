@@ -32,7 +32,6 @@
 
 
 
-- [ ] ai/intermediate/agent/11-rag-advanced — 第一题考「纯向量检索的盲区、BM25+向量混合召回与 RRF 融合、rerank 两阶段精排」（0 题补缺，角度取自该篇 description）
 - [ ] ai/intermediate/llm/06-vllm — 第一题考「PagedAttention 显存分页与 continuous batching 迭代级调度，以及吞吐与时延的权衡」（0 题补缺，角度取自该篇 description）
 - [ ] linux/intermediate/system/05-performance — 第一题考「load average 的真实含义、CPU 飙高四步定位法与 iostat 关键列的四象限排查」（0 题补缺，角度取自该篇 description）
 - [ ] distributed/intermediate/case-studies/31-bloom-filter — 第一题考「位数组与 k 个哈希函数、误判率的参数选择、不能删除的限制与 Counting/cuckoo 变体」（0 题补缺，角度取自该篇 description）
@@ -207,6 +206,8 @@
 - 2026-09-26 · 第六十八轮（第 190 轮｜车道 C｜题库深化第 68 轮）：3 道第一题补缺（`ai-infparams-046` / `ai-tokencost-047` / `ai-tooldesign-048`，均 multiple、difficulty 4，宿主即 a 类头部三条 `ai/intermediate/llm/04-inference-params`、`ai/intermediate/llm/05-token-cost`、`ai/intermediate/agent/16-tool-design`；三篇均 `core: true`，开工实测该三篇全站 0 题、`quiz/ai.json` 45 题里无一条指向它们）· 队列销 3 条、追加 3 条（同三篇的第二题角度，一律取自各篇「高频追问速答」与小结正文，与首题考点不重叠）· a 类现余 10 条（7 条第一题补缺 + 本轮新入的 3 条第二题）· 三条均为 multiple，延续 b 类「multiple 占比偏低优先补多选」——补题前实测 `quiz/ai.json` 45 题仅 6 道 multiple，补后 9 道 · 说明：本轮开工按勘察命令算得「188 mod 5 = 3 → 车道 C」并据此做完，收尾复算时 188 已由第 187 轮「下一轮入口」指定给并行会话的 roadmap B1 第三批（`1e5abec`，车道 A）、189 已由并行会话在共享台账声明（车道 D），按配方 §6「不重排、不在两个会话里各算各号」顺延登记为 190 · 本轮提交主题：feat(quiz): 演进第 190 轮车道 C 补推理参数/Token 成本/工具设计三篇首题
 
 - 2026-09-26 · 第六十九轮（第 191 轮｜车道 C｜题库深化第 69 轮）：3 道第一题补缺（`js-crypto-025` / `ts-enum-001` / `dist-push-043`，均 multiple、difficulty 4，宿主即 a 类头部三条 `js/intermediate/node/09-crypto`、`typescript/basic/core/04-enum-asconst`、`distributed/intermediate/case-studies/13-push`；三篇均 `core: true` 且开工实测全站 0 题）· 其中 `quiz/typescript.json` 是**本轮新建**：此前 34 个方向目录里只有 `panorama`（单张全景页、无知识点笔记）与 `typescript` 无题库文件，即 typescript 是**唯一有正经笔记（7 篇）却 0 题可刷**的方向，`/guide/quiz` 的方向列表里根本不会出现它 · 队列销 3 条、追加 4 条（`distributed/intermediate/case-studies/17-payment`、`js/intermediate/node/04-stream`、`linux/intermediate/system/07-cron-timer`、`mongodb/intermediate/usage/09-multikey-index`），四条角度一律取自各篇 description 原文，且先经脚本核实为「core: true 且该笔记全站 0 题」——此类池实测仍余 63 篇，未枯竭 · a 类现余 11 条（8 条第一题补缺 + 3 条第二题）· 三条均为 multiple，延续 b 类「multiple 占比偏低优先补多选」：补题前实测 `quiz/js.json` 25 题仅 5 道 multiple、`quiz/distributed.json` 42 题仅 10 道 · 说明：本轮游标本为 A（191 mod 5 = 1），因 `astro.config.mjs` 全程被并行会话以未提交态持有（roadmap MQ-01 在途，注册新篇必改该文件）按配方 §0.2/§3 退位，路径 A→B→C；B 车道头部 `es-write` 实测 10 帧、帧说明合计 1318 视觉列、单帧最长 228 列，对照已出片的 `kafka-segment`（8 帧、逐帧口播裁到 ≤36 列、成片 52.6s）要压进 ≤60s 闸门须先重写动画正文，不属 B 车道 ≤5 文件口径 · 本轮提交主题：feat(quiz): 演进第 191 轮车道 C 补 crypto/枚举/推送三篇首题并新建 typescript 题库
+
+- 2026-09-26 · 第七十轮（第 192 轮｜车道 B 附 1 题｜题库深化第 70 轮）：1 道第一题补缺（`ai-ragadv-049`，multiple，difficulty 4，宿主 `ai/intermediate/agent/11-rag-advanced`，考点即队列指定的「纯向量检索的盲区、BM25+向量混合召回与 RRF 融合、rerank 两阶段精排」；两个错项都取正文明确反对的说法——把 RRF 说成「两路分数归一化后加权、权重靠人工反复调」，以及把检索问题归到生成端提示词与「chunk 越大上下文越完整」）· 队列销 1 条，a 类头部前移为 `ai/intermediate/llm/06-vllm`，现余 10 条 · 说明：本轮主产出在 B 车道（`es-write` 10 帧 → `es-write-video` 51.9s 配音短片），按配方 §1「每轮必含一项内容增量」附 1 道考题，沿用第 181/187/189 轮先例只销号不追加 · multiple 延续 b 类「multiple 占比偏低优先补多选」：补题前实测 `quiz/ai.json` 48 题 9 道 multiple，补后 49 题 10 道 · **一条队列历史的更正**：第 187/191 轮两处记载称 `es-write` 「须先精简动画正文才能压进 ≤60s 闸门」，本轮实测推翻——10 帧逐帧口播按中文为主写（单句 ≤30 字、合计 238 字）成片 51.9s，距闸门余 8.1s，`flows.ts` 正文一字未改；口播预算的瓶颈是**逐帧文稿写作**而非源动画帧说明长度 · 本轮提交主题：feat(viz): 演进第 192 轮车道 B 出 ES 写入到可搜索配音短片并附 RAG 混合检索首题
 
 ## 经验与规则
 

@@ -172,4 +172,29 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'顺序追加、分段滚动、稀疏索引、文件级删除，换来高吞吐。',
 		],
 	},
+	'es-write-video': {
+		title: '一次写入到可搜索 · 配音短片',
+		src: '/videos/es-write-video.mp4',
+		poster: '/videos/es-write-video.poster.png',
+		width: 1280,
+		height: 860,
+		duration: 51.9,
+		alt: '动画短片：一篇文档在 ES 主分片上依次经过协调节点路由、写内存 buffer 与 translog、' +
+			'复制给副本、refresh 成不可变 segment 变得可搜、后台 flush 落盘变得可持久，逐帧讲清近实时从哪来。',
+		caption:
+			'「写入成功」不等于「搜得到」：buffer 与 translog 只保证不丢，可搜索要等 refresh，可持久要等 flush。',
+		source: 'es-write',
+		narration: [
+			'一次写入怎么变成可搜索？四个动作逐个登场。',
+			'写请求发给任意节点，它充当这次的协调节点。',
+			'按 _id 哈希算出目标分片，转发给 P0 所在节点。',
+			'写进内存 buffer 和 translog，此时还搜不到。',
+			'主分片并行复制给副本，各写各的缓冲和日志。',
+			'副本回 ACK，同步组全部到位这次写才算成功。',
+			'确认逐层返回，客户端拿到成功，但文档仍搜不到。',
+			'到 refresh 就生成新段，文档从此可搜，这叫近实时。',
+			'后台 flush 落盘并把日志清空，此时才算持久。',
+			'refresh 管可搜，flush 管持久，merge 管回收。',
+		],
+	},
 };
