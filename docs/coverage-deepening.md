@@ -32,9 +32,6 @@
 
 
 
-- [ ] ai/intermediate/llm/04-inference-params — 第一题考「temperature 锐化与 top_k/top_p 截断长尾的分工，别把两者当同一个旋钮」（0 题补缺）
-- [ ] ai/intermediate/llm/05-token-cost — 第一题考「账单构成与「上下文越长越贵也越慢」的 O(n²) 根源、提示缓存只对固定前缀打折」（0 题补缺）
-- [ ] ai/intermediate/agent/16-tool-design — 第一题考「工具描述是写给模型的 API 文档、一个工具一件事、错误返回要可行动、数量上限与按需加载」（0 题补缺，角度取自该篇 description）
 - [ ] js/intermediate/node/09-crypto — 第一题考「md5 为什么不能用、AES-GCM 加密要带随机 IV 与认证标签、HMAC 盲索引怎么等值查询」（0 题补缺，角度取自该篇 description）
 - [ ] typescript/basic/core/04-enum-asconst — 第一题考「enum 是少数不被擦除的构造、数字枚举双向映射而字符串单向、const enum 与 isolatedModules 的冲突、as const 三板斧」（0 题补缺，角度取自该篇 description）
 - [ ] distributed/intermediate/case-studies/13-push — 第一题考「四类通道矩阵与长连网关的消息路由、可靠性分级与推送风暴治理」（0 题补缺，角度取自该篇 description）
@@ -42,6 +39,9 @@
 - [ ] ai/intermediate/llm/06-vllm — 第一题考「PagedAttention 显存分页与 continuous batching 迭代级调度，以及吞吐与时延的权衡」（0 题补缺，角度取自该篇 description）
 - [ ] linux/intermediate/system/05-performance — 第一题考「load average 的真实含义、CPU 飙高四步定位法与 iostat 关键列的四象限排查」（0 题补缺，角度取自该篇 description）
 - [ ] distributed/intermediate/case-studies/31-bloom-filter — 第一题考「位数组与 k 个哈希函数、误判率的参数选择、不能删除的限制与 Counting/cuckoo 变体」（0 题补缺，角度取自该篇 description）
+- [ ] ai/intermediate/llm/04-inference-params — 第二题考「重复惩罚调过头会误伤专有名词、max_tokens 与 stop 序列是防跑飞必配、seed 与 temperature=0 的「近似确定」差别在哪」（首题已考「temperature 动分布形状 vs top_k/top_p 裁候选集的分工，以及两个旋钮不该同时猛调」）
+- [ ] ai/intermediate/llm/05-token-cost — 第二题考「降本四招各自落点（滑动窗口+摘要裁历史、系统提示表格化或外置按需取、max_tokens 限输出、分级路由的量级收益）与为什么粗估口径不能替代实测预算」（首题已考「输入量大 vs 输出单价高谁才是账单大头、O(n²) 根源、提示缓存的固定前缀条件」）
+- [ ] ai/intermediate/agent/16-tool-design — 第二题考「工具选择准确率怎么用评测集量化（标注任务→应选工具、改描述前后跑对比）、写类工具为何必须幂等、MCP 生态参差为什么要审描述与错误行为后包一层再暴露」（首题已考「一个工具一件事的拆分判据、「何时不用」比「何时用」更防错、错误分类触发不同模型行为」）
 
 ### b 类：旧题返修
 
@@ -201,6 +201,7 @@
 
 - 2026-09-25 · 第六十六轮（第 187 轮｜车道 B 附 1 题｜题库深化第 66 轮）：1 道第一题补缺（`dist-upload-041`，multiple，difficulty 4，宿主 `distributed/intermediate/case-studies/05-large-file-upload`，考点即队列指定的「分片 + 断点续传清单 + 秒传 hash 命中即引用，以及为什么生产要改对象存储直传」）· 队列销 1 条，a 类头部前移为 `distributed/intermediate/case-studies/10-coupon`，现余 11 条 · 说明：本轮主产出在 B 车道（`kafka-segment` 8 帧配音短片），按配方 §1「每轮必含一项内容增量」附 1 道考题，沿用第 181 轮先例只销号不追加 · 本轮提交主题：feat(viz): 演进第 187 轮车道 B 出 Kafka segment 配音短片并附大文件上传首题
 - 2026-09-26 · 第六十七轮（第 189 轮｜车道 D 附 1 题｜题库深化第 67 轮）：1 道第一题补缺（`dist-coupon-042`，multiple，difficulty 4，宿主 `distributed/intermediate/case-studies/10-coupon`，考点即队列指定的「券模板与用户券两件事的建模、领券库存预扣与核销重复防护」；干扰项两处都取正文「高频追问速答」明确反对的说法——把超发归罪 Redis 预扣、把锁券当多余状态）· 队列销 1 条，a 类头部前移为 `ai/intermediate/llm/04-inference-params`，现余 10 条 · 说明：本轮主产出在 D 车道（修 RD-01 新篇的延迟消息死链 + `media-encode` 封面无损压缩），按配方 §1「每轮必含一项内容增量」附 1 道考题，沿用第 181/187 轮先例只销号不追加 · 本轮提交主题：fix(redis,quiz): 演进第 189 轮车道 D 修延迟消息死链并补领券中心首题
+- 2026-09-26 · 第六十八轮（第 190 轮｜车道 C｜题库深化第 68 轮）：3 道第一题补缺（`ai-infparams-046` / `ai-tokencost-047` / `ai-tooldesign-048`，均 multiple、difficulty 4，宿主即 a 类头部三条 `ai/intermediate/llm/04-inference-params`、`ai/intermediate/llm/05-token-cost`、`ai/intermediate/agent/16-tool-design`；三篇均 `core: true`，开工实测该三篇全站 0 题、`quiz/ai.json` 45 题里无一条指向它们）· 队列销 3 条、追加 3 条（同三篇的第二题角度，一律取自各篇「高频追问速答」与小结正文，与首题考点不重叠）· a 类现余 10 条（7 条第一题补缺 + 本轮新入的 3 条第二题）· 三条均为 multiple，延续 b 类「multiple 占比偏低优先补多选」——补题前实测 `quiz/ai.json` 45 题仅 6 道 multiple，补后 9 道 · 说明：本轮开工按勘察命令算得「188 mod 5 = 3 → 车道 C」并据此做完，收尾复算时 188 已由第 187 轮「下一轮入口」指定给并行会话的 roadmap B1 第三批（`1e5abec`，车道 A）、189 已由并行会话在共享台账声明（车道 D），按配方 §6「不重排、不在两个会话里各算各号」顺延登记为 190 · 本轮提交主题：feat(quiz): 演进第 190 轮车道 C 补推理参数/Token 成本/工具设计三篇首题
 
 ## 经验与规则
 
