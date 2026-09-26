@@ -1779,6 +1779,7 @@ export default defineConfig({
                         { label: '不丢消息与幂等消费', link: '/kafka/intermediate/core/03-reliability-idempotent/' },
                         { label: 'Kafka 高吞吐之谜：从顺序写到零拷贝', link: '/kafka/intermediate/core/04-high-throughput/' },
                         { label: '消费组 Rebalance 全解', link: '/kafka/intermediate/core/05-rebalance/' },
+                        { label: '事务与 Exactly-Once 的边界', link: '/kafka/intermediate/core/06-transactions-eos/' },
                       ],
                     },
                   ],

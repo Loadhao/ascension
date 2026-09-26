@@ -41,7 +41,7 @@
 | D1 | 语言与运行时底座（JVM/并发/GC/内存/IO） | **厚**：jvm 10 篇 + concurrent 12 篇 + io 4 篇 | 原理侧已够用，缺的是**取证侧工具箱与堆外那条线**（均已补） | JR-02 ✅ · JR-06 ✅ |
 | D2 | 工程实践与代码资产（构建依赖、测试、重构、方法论） | **空白**：依赖仲裁、shade、enforcer、覆盖率、契约测试全零命中 | 高级工程师与「背熟八股」的主分界线，且是最干净的缺口 | JR-01 ✅ |
 | D3 | 框架与生态落地（Spring 全家 / MyBatis / Dubbo / Cloud） | **中**：spring 10 + boot 5 + mvc 3，此前持久层只有 1 篇、dubbo 2 篇且不含落地面 | 框架原理厚、**日常写的东西薄**——MyBatis 实战、Dubbo 泛化与上下线均已补 | JR-03 ✅ · JR-04 ✅ · JR-05 ✅ |
-| D4 | 数据与中间件（MySQL / Redis / MQ / ES） | **中偏薄**：mysql 21 · redis 16 · kafka 11 · rocketmq 11 · rabbitmq 7 | 原理与机制齐，此前**生产运维面与现场排查**近零——备份恢复/PITR、锁等待取证、Redisson 工具族、Redis 可观测面已补；仍缺 Kafka 事务 | MY-01 ✅ · MY-02 ✅ · RD-01 ✅ · RD-02 ✅ · MQ-01 |
+| D4 | 数据与中间件（MySQL / Redis / MQ / ES） | **中偏薄**：mysql 21 · redis 16 · kafka 12 · rocketmq 11 · rabbitmq 7 | 原理与机制齐，此前**生产运维面与现场排查**近零——备份恢复/PITR、锁等待取证、Redisson 工具族、Redis 可观测面、Kafka 事务边界已补 | MY-01 ✅ · MY-02 ✅ · RD-01 ✅ · RD-02 ✅ · MQ-01 ✅ |
 | D5 | 分布式与系统设计 | **厚**：81 篇，含 31 个设计案例 | 案例与理论饱和；缺的是 SLO/日志支柱/发布风险判据这类**治理指标** | B2 池 |
 | D6 | 生产运维与稳定性（Linux/网络/容器/可观测） | **中**：linux 25 · network 18 · k8s 11 · docker 13 | 通用 Linux 排障厚，但**没有「Java 应用在容器里」这条线**（探针配 GC、CPU throttling） | OPS-01 · B2 池 |
 | D7 | 工程方法论与协作（方案写作、CR、复盘、晋升） | **空白**：`聚合根`/`限界上下文`/`5Why`/`Code Review 规范` 全库零命中 | 内容确定缺，但**归属未定**（不是「技术/工具」，开新方向是结构性决策） | §5 待裁决 |
@@ -62,7 +62,7 @@
 | MY-02 | mysql · `mysql/intermediate/transaction-lock/04-lock-wait-triage.md` | 深度 | 谁堵了谁：锁等待链与长事务现场的取证顺序 | `innodb_lock_waits` 零命中，现只有 `innodb_trx` 一行 | done 2026-09-25 · `mysql/intermediate/transaction-lock/04-lock-wait-triage.md` |
 | RD-01 | redis · `redis/intermediate/usage/07-redisson.md` | 广度 | 读写锁、信号量、限流器、延迟队列各解决什么问题、代价是什么 | `usage/03-distributed-lock.mdx` 只有可重入锁 + 看门狗 | done 2026-09-25 · `redis/intermediate/usage/07-redisson.md` |
 | RD-02 | redis · `redis/intermediate/usage/08-observability.md` | 广度 | 一条命令怎么看出 Redis 快出事了 | `requirepass`/`ACL`/`slowlog`/INFO 指标在 redis 方向零命中 | done 2026-09-26 · `redis/intermediate/usage/08-observability.md` |
-| MQ-01 | kafka · `kafka/intermediate/core/06-transactions-eos.md` | 深度 | Kafka 的 Exactly-Once 到哪儿就失效了 | `transactional.id` 零命中；`core/03-reliability-idempotent.md` 讲幂等专篇但事务只一行 | 待办 |
+| MQ-01 | kafka · `kafka/intermediate/core/06-transactions-eos.md` | 深度 | Kafka 的 Exactly-Once 到哪儿就失效了 | `transactional.id` 零命中；`core/03-reliability-idempotent.md` 讲幂等专篇但事务只一行 | done 2026-09-26 · `kafka/intermediate/core/06-transactions-eos.md` |
 | OPS-01 | kubernetes · `kubernetes/intermediate/ops/05-java-on-k8s.md` | 广度 | GC 停顿把探针打死过谁：探针选型、优雅停机与 CPU throttling 在 Java 上如何互相牵连 | `cfs_quota`/throttling 零命中；`k8s/ops/01-probes-lifecycle`、`jvm/07-tuning`、`docker/03-lifecycle` 各写一块未串联 | 待办 |
 
 **每条落地时的固定动作**（沿用 `AGENTS.md` 与配方既有约定，不另立规则）：
@@ -166,3 +166,26 @@ K8s×JVM 之后的容量与弹性联动、单元化落地细节。
   同轮配齐：侧边栏 1 条、图谱 1 节点 5 边、首题 `redis-observe-020`
   （难度 5）、速答 4 行、分类页导读重写，第二题（SCAN 姿势）入 d 类。
   **B1 余 2 条**：MQ-01、OPS-01。
+- 2026-09-26 · 第五批：MQ-01 落地 `kafka/intermediate/core/06-transactions-eos.md`。
+  题眼是「**Kafka 的 EOS 只在"读 Kafka → 处理 → 写 Kafka"闭环内成立**」，
+  支点为 design 文档那句"消费者的 position 本身是作为一条消息写进内部
+  topic 的，所以能和输出数据放进同一个事务"。展开四条链：
+  `transactional.id` 的**身份语义**（coordinator 抬 epoch 做 fencing，
+  故 ID 必须与任务分区一一对应、不能随机生成；Admin API
+  `fenceProducers` 才是处理 `INVALID_PRODUCER_EPOCH` 的正解，不是删
+  `__transaction_state`）、KIP-890 起 `TimeoutException` 与
+  `TransactionAbortableException` **都必须 abort 不得重试提交**、
+  `read_committed` 作为事务的另一半（marker 由客户端过滤、lag/末端偏移
+  按 LSO 而非 HW 算，故中止的消息仍占带宽、悬置事务会卡住整分区可见性）、
+  `transaction.timeout.ms` 的双向权衡（推迟 fencing vs 延长下游阻塞）、
+  以及 RF<3 官方判定"effectively voids EOS"。失效边界逐条给出处：
+  源不在 Kafka、落点不在 Kafka（含 `prepareTransaction` 三段式只是挂载点）、
+  副本因子、消费端漏配（MirrorMaker 两侧成对配置作对照）。
+  **本篇事实全部取自 apache/kafka 仓库内文件与官方 Javadoc/升级说明**
+  （design.md、KafkaProducer.java、SubscriptionState.java、
+  config-streams.md、core-concepts.md、upgrade.md、geo-replication.md、
+  FenceProducersHandler.java），未采信任何未经核实的数字——
+  `commit.interval.ms` 只写"开 EOS 后为 100ms"而不写未验证的对照默认值。
+  同轮配齐：侧边栏 1 条、图谱 1 节点 5 边、首题 `kafka-txn-016`（难度 5）、
+  速答 4 行、分类页由"三个问题"改为"四个问题"，第二题（fencing 身份）入 d 类。
+  **B1 余 1 条**：OPS-01。

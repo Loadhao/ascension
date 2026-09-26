@@ -1,13 +1,14 @@
 ---
 title: 核心机制
-description: 架构与存储模型、副本与 ISR、不丢消息与幂等消费
+description: 架构与存储模型、副本与 ISR、不丢消息与幂等消费、高吞吐机制、Rebalance 与事务边界
 ---
 
 import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
 
-Kafka 篇回答三个问题：**数据和消费怎么组织**（Topic/分区/消费组的
+Kafka 篇回答四个问题：**数据和消费怎么组织**（Topic/分区/消费组的
 三层模型 + 顺序写存储）、**机器挂了怎么办**（副本与 ISR 机制）、
-**消息怎么才能不丢不重**（三段可靠性 + 幂等消费）。点击右侧圆点可
-标记学习状态（未学 → 学习中 → 已掌握）。
+**消息怎么才能不丢不重**（三段可靠性 + 幂等消费）、**不重能到什么程度**
+（事务与 Exactly-Once 的射程边界，以及它在哪儿必然失效）。点击右侧
+圆点可标记学习状态（未学 → 学习中 → 已掌握）。
 
 <CategoryNotesIsland categoryId="kafka/intermediate/core" />

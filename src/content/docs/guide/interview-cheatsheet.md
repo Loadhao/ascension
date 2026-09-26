@@ -254,6 +254,10 @@ Docker、Nginx、Git 等全站方向。
 | [零拷贝何时失效](/kafka/intermediate/core/04-high-throughput/) | SSL/TLS 必须在用户态改写字节，sendfile 链路断开；Kafka 持久性靠副本不靠单机逐条 fsync |
 | [offset 提交语义](/kafka/basic/core/02-offset/) | 提交的是「下一条要读的 offset」；先提交后处理会丢，先处理后提交可能重复 |
 | [Rebalance](/kafka/intermediate/core/05-rebalance/) | 成员/订阅/分区变化触发，代价是全组停消费；处理慢被踢调 max.poll.interval.ms |
+| [Kafka 的 Exactly-Once 是真的吗](/kafka/intermediate/core/06-transactions-eos/) | 只覆盖"读 Kafka→处理→写 Kafka"闭环，支点是消费位点作为一条消息写进同一事务；落库、调接口都要外部配合，否则退化 at-least-once |
+| [事务和幂等什么关系](/kafka/intermediate/core/06-transactions-eos/) | 设了 `transactional.id` 幂等自动开；幂等只保单会话（PID 重启即换），跨会话去重靠 transactional.id 驱逐僵尸生产者（id 要稳定且独占） |
+| [下游消费者卡住、生产端偏移一直在涨](/kafka/intermediate/core/06-transactions-eos/) | `read_committed` 只能读到 LSO 之前；有事务开了没结束（实例被强杀），要等 `transaction.timeout.ms` 超时被中止。调大超时只会堵更久 |
+| [EOS 需要哪些集群条件](/kafka/intermediate/core/06-transactions-eos/) | 官方明说 RF<3 会让 EOS 实际失效：RF=3 + `min.insync.replicas=2`，适用于 `__transaction_state`/`__consumer_offsets`/内部与业务 topic；开 EOS 后 `commit.interval.ms` 默认变 100ms |
 | [RocketMQ 事务消息](/rocketmq/advanced/core/01-rocketmq-features/) | 半消息先落库 + 本地事务 + 回查补偿——分布式事务的 MQ 解 |
 | [消息积压怎么处理](/rocketmq/advanced/core/03-backlog/) | 先定位瓶颈（生产/存储/消费）再扩容消费组，空跑跳过 + 新 topic 换道是紧急手段 |
 | [死信队列与延迟消息](/rabbitmq/intermediate/usage/01-deadletter-delay/) | 重试耗尽进死信人工兜底；延迟用死信 TTL 或延时插件（订单超时关单标准解） |

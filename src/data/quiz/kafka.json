@@ -254,6 +254,25 @@
       ],
       "hint": "攒批的隐藏收益是「一批里消息越相似压缩率越高」；linger.ms=0 不是不攒批——批满了照样发，linger 只是没满再多等一会。kafka-tp-008 考独立 fsync 的后果，本题考页缓存理由与零拷贝失效。",
       "difficulty": 4
+    },
+    {
+      "id": "kafka-txn-016",
+      "noteId": "kafka/intermediate/core/06-transactions-eos",
+      "type": "multiple",
+      "difficulty": 5,
+      "q": "生产者用事务写输出 topic，下游消费者用默认配置消费；某实例被 kill -9 时有一个事务开着既没提交也没中止。下列说法正确的有？",
+      "options": [
+        "默认隔离级别是 read_uncommitted，下游照样能读到那个最终会被中止的事务里的消息",
+        "read_committed 消费者只能看到 lastStableOffset 之前的数据，这个悬挂事务会把它堵住，直到 broker 按 transaction.timeout.ms 中止该事务",
+        "只要生产端用了事务，被中止的数据就不会被消费到——隔离级别由 broker 侧统一决定，消费端无需配置",
+        "Kafka Streams 开 exactly_once_v2 会把消费端 isolation.level 自动配成 read_committed，自己手写消费程序则要显式配置"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "第 2 项把责任放错了地方：isolation.level 是消费者配置，不会记在 broker 或 __consumer_offsets 里替你把关，漏配就静默退化成 at-least-once。另注意 read_committed 返回「已提交事务的消息 + 不属于任何事务的消息」，混合写入的 topic 不会误伤非事务数据。"
     }
   ]
 }
