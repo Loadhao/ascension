@@ -32,9 +32,6 @@
 
 
 
-- [ ] ai/intermediate/llm/06-vllm — 第一题考「PagedAttention 显存分页与 continuous batching 迭代级调度，以及吞吐与时延的权衡」（0 题补缺，角度取自该篇 description）
-- [ ] linux/intermediate/system/05-performance — 第一题考「load average 的真实含义、CPU 飙高四步定位法与 iostat 关键列的四象限排查」（0 题补缺，角度取自该篇 description）
-- [ ] distributed/intermediate/case-studies/31-bloom-filter — 第一题考「位数组与 k 个哈希函数、误判率的参数选择、不能删除的限制与 Counting/cuckoo 变体」（0 题补缺，角度取自该篇 description）
 - [ ] ai/intermediate/llm/04-inference-params — 第二题考「重复惩罚调过头会误伤专有名词、max_tokens 与 stop 序列是防跑飞必配、seed 与 temperature=0 的「近似确定」差别在哪」（首题已考「temperature 动分布形状 vs top_k/top_p 裁候选集的分工，以及两个旋钮不该同时猛调」）
 - [ ] ai/intermediate/llm/05-token-cost — 第二题考「降本四招各自落点（滑动窗口+摘要裁历史、系统提示表格化或外置按需取、max_tokens 限输出、分级路由的量级收益）与为什么粗估口径不能替代实测预算」（首题已考「输入量大 vs 输出单价高谁才是账单大头、O(n²) 根源、提示缓存的固定前缀条件」）
 - [ ] ai/intermediate/agent/16-tool-design — 第二题考「工具选择准确率怎么用评测集量化（标注任务→应选工具、改描述前后跑对比）、写类工具为何必须幂等、MCP 生态参差为什么要审描述与错误行为后包一层再暴露」（首题已考「一个工具一件事的拆分判据、「何时不用」比「何时用」更防错、错误分类触发不同模型行为」）
@@ -42,6 +39,9 @@
 - [ ] js/intermediate/node/04-stream — 第一题考「为什么不能把 10GB 文件读进内存、四种流类型、pipe 与背压、pipeline API 的错误传播」（0 题补缺，角度取自该篇 description）
 - [ ] linux/intermediate/system/07-cron-timer — 第一题考「crontab 五字段与经典坑、systemd timer 的补跑能力、分布式环境下防重复执行的三个思路」（0 题补缺，角度取自该篇 description）
 - [ ] mongodb/intermediate/usage/09-multikey-index — 第一题考「数组字段自动多键化、一个查询一次一个多键的限制、多键+复合索引的边界与 $elemMatch 配合」（0 题补缺，角度取自该篇 description）
+- [ ] ai/intermediate/llm/06-vllm — 第二题考「PagedAttention 顺带的 Copy-on-Write 为什么能让并行采样共享前缀 KV、前缀缓存与 Token 成本篇提示缓存的服务端关系，以及 TensorRT-LLM/SGLang（RadixAttention 前缀树）/llama.cpp 三家选型为何核心思想趋同、HF 直接推理为何「能跑不等于能服务」」（首题已考「显存分页把浪费从 60%~80% 压到 4% 以下是吞吐根源 + 迭代级调度让完成者退出、新请求补位 + TTFT/TPOT 约束内把 batch 推到最大」）
+- [ ] linux/intermediate/system/05-performance — 第二题考「free 里为什么看 available 而不是 free、buff 与 cache 的分工与都可回收、OOM Killer 按 oom_score 挑进程要用 dmesg 取证，以及日志删了空间不释放的 `lsof | grep deleted`」（首题已考「load 量的是 R+D 进程数所以负载高 CPU 低要查 D 状态与 IO、vmstat b/wa 列的转向、iostat %util 与 await 到 pidstat -d 定位进程的下钻路径」）
+- [ ] distributed/intermediate/case-studies/31-bloom-filter — 第二题考「RedisBloom 的 BF.ADD/BF.EXISTS 与 CF 命令变体、Counting（空间 ×4~8）/Cuckoo Filter/定期重建三种删除方案按数据量怎么选，以及公式里 n 是实际元素数——超量写入会让误判率偏离设计值」（首题已考「k 个位置全 1 只是可能存在、任一为 0 绝对不存在 + 最优 k=(m/n)·ln2 不是越大越好 + m/n 从 10 提到 16 误判率约 0.8%→0.04%」）
 
 ### b 类：旧题返修
 
@@ -208,6 +208,8 @@
 - 2026-09-26 · 第六十九轮（第 191 轮｜车道 C｜题库深化第 69 轮）：3 道第一题补缺（`js-crypto-025` / `ts-enum-001` / `dist-push-043`，均 multiple、difficulty 4，宿主即 a 类头部三条 `js/intermediate/node/09-crypto`、`typescript/basic/core/04-enum-asconst`、`distributed/intermediate/case-studies/13-push`；三篇均 `core: true` 且开工实测全站 0 题）· 其中 `quiz/typescript.json` 是**本轮新建**：此前 34 个方向目录里只有 `panorama`（单张全景页、无知识点笔记）与 `typescript` 无题库文件，即 typescript 是**唯一有正经笔记（7 篇）却 0 题可刷**的方向，`/guide/quiz` 的方向列表里根本不会出现它 · 队列销 3 条、追加 4 条（`distributed/intermediate/case-studies/17-payment`、`js/intermediate/node/04-stream`、`linux/intermediate/system/07-cron-timer`、`mongodb/intermediate/usage/09-multikey-index`），四条角度一律取自各篇 description 原文，且先经脚本核实为「core: true 且该笔记全站 0 题」——此类池实测仍余 63 篇，未枯竭 · a 类现余 11 条（8 条第一题补缺 + 3 条第二题）· 三条均为 multiple，延续 b 类「multiple 占比偏低优先补多选」：补题前实测 `quiz/js.json` 25 题仅 5 道 multiple、`quiz/distributed.json` 42 题仅 10 道 · 说明：本轮游标本为 A（191 mod 5 = 1），因 `astro.config.mjs` 全程被并行会话以未提交态持有（roadmap MQ-01 在途，注册新篇必改该文件）按配方 §0.2/§3 退位，路径 A→B→C；B 车道头部 `es-write` 实测 10 帧、帧说明合计 1318 视觉列、单帧最长 228 列，对照已出片的 `kafka-segment`（8 帧、逐帧口播裁到 ≤36 列、成片 52.6s）要压进 ≤60s 闸门须先重写动画正文，不属 B 车道 ≤5 文件口径 · 本轮提交主题：feat(quiz): 演进第 191 轮车道 C 补 crypto/枚举/推送三篇首题并新建 typescript 题库
 
 - 2026-09-26 · 第七十轮（第 192 轮｜车道 B 附 1 题｜题库深化第 70 轮）：1 道第一题补缺（`ai-ragadv-049`，multiple，difficulty 4，宿主 `ai/intermediate/agent/11-rag-advanced`，考点即队列指定的「纯向量检索的盲区、BM25+向量混合召回与 RRF 融合、rerank 两阶段精排」；两个错项都取正文明确反对的说法——把 RRF 说成「两路分数归一化后加权、权重靠人工反复调」，以及把检索问题归到生成端提示词与「chunk 越大上下文越完整」）· 队列销 1 条，a 类头部前移为 `ai/intermediate/llm/06-vllm`，现余 10 条 · 说明：本轮主产出在 B 车道（`es-write` 10 帧 → `es-write-video` 51.9s 配音短片），按配方 §1「每轮必含一项内容增量」附 1 道考题，沿用第 181/187/189 轮先例只销号不追加 · multiple 延续 b 类「multiple 占比偏低优先补多选」：补题前实测 `quiz/ai.json` 48 题 9 道 multiple，补后 49 题 10 道 · **一条队列历史的更正**：第 187/191 轮两处记载称 `es-write` 「须先精简动画正文才能压进 ≤60s 闸门」，本轮实测推翻——10 帧逐帧口播按中文为主写（单句 ≤30 字、合计 238 字）成片 51.9s，距闸门余 8.1s，`flows.ts` 正文一字未改；口播预算的瓶颈是**逐帧文稿写作**而非源动画帧说明长度 · 本轮提交主题：feat(viz): 演进第 192 轮车道 B 出 ES 写入到可搜索配音短片并附 RAG 混合检索首题
+
+- 2026-09-26 · 第七十一轮（第 193 轮｜车道 C｜题库深化第 71 轮）：3 道第一题补缺（`ai-vllm-050` difficulty 4 / `linux-perf-016` difficulty 3 / `dist-bloom-044` difficulty 4，均为 multiple，宿主即 a 类头部三条 `ai/intermediate/llm/06-vllm`、`linux/intermediate/system/05-performance`、`distributed/intermediate/case-studies/31-bloom-filter`；三篇均 `core: true`，开工实测该三篇全站 0 题、各自方向题库里无一条指向它们）· 考点一律照队列指定角度，干扰项全部取该篇正文明确反对或明写过的反论——`ai-vllm-050` 把 continuous batching 说回「按批为单位」、把瓶颈说成算力不足（正文：瓶颈是显存带宽，且各家框架核心思想趋同）；`linux-perf-016` 用「负载高 CPU 低就重启应用」这道经典错答当干扰项；`dist-bloom-044` 写「k 越大越好、且能让『不存在』更可靠」与「几十万条也该用布隆、『存在』结论精确」（正文：最优 k=(m/n)·ln2；数据量小于百万用 Set）· 队列销 3 条、追加 3 条（同三篇的第二题角度，取自各篇正文其余章节与「高频追问速答」，与首题考点不重叠）· a 类现余 10 条（7 条第一题补缺 + 3 条第二题）· 三条均为 multiple，延续 b 类「multiple 占比偏低优先补多选」：补题前实测 `quiz/ai.json` 49 题 10 道、`quiz/linux.json` 18 题 4 道（全站最低配比方向之一）、`quiz/distributed.json` 43 题 11 道，补后为 50/11、19/5、44/12 · 本轮提交主题：feat(quiz): 演进第 193 轮车道 C 补 vLLM 吞吐/Linux 四象限/布隆过滤器三篇首题
 
 ## 经验与规则
 

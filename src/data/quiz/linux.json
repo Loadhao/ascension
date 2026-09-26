@@ -307,6 +307,25 @@
       ],
       "hint": "末项反了：数据库/低延迟服务要关 swap 或设成 1（不是 0，也不是 100）——一次 swap in 就能把毫秒级操作放大到秒级，JVM 大堆被换出是经典事故。反过来小内存机器反而要留少量 swap（如 1~2GB）当 OOM 前的最后缓冲，「配了但尽量不用」才是稳妥策略。再记一层：swappiness 是「偏向丢 pagecache 还是换出匿名页」的偏向旋钮，不是开关；swap used 持续涨之所以比 used 更像告警信号，是因为它意味着 pagecache 已经无可回收、内核开始动匿名页了。",
       "difficulty": 4
+    },
+    {
+      "id": "linux-perf-016",
+      "noteId": "linux/intermediate/system/05-performance",
+      "type": "multiple",
+      "q": "值班收到「负载很高但 CPU 使用率不高」的告警，按笔记的四象限排查框架，下列说法哪些正确？（多选）",
+      "options": [
+        "load average 三个数字量的是可运行状态（R）加不可中断睡眠（D，通常是 IO 等待）的进程数，它不等于 CPU 使用率；load 高而 CPU 低，大概率是 D 状态进程在排队，比如 NFS 挂载卡死或磁盘 IO 打满",
+        "先用 vmstat 1 看 b 列（阻塞进程数）与 wa 列（CPU 等 IO 的占比），据此转到 IO 排查；经验判据是 load 持续超过 CPU 核数就需要关注，4 核机器 load 8 已经很挤",
+        "既然 CPU 空闲，说明系统层没问题、根因在应用本身，直接重启应用或回滚版本就能恢复",
+        "磁盘 IO 高走 iostat -x 1 看 %util 与 await（%util 接近 100% 即设备饱和，await 是请求平均等待毫秒数），再用 pidstat -d 1 定位 IO 大户进程、lsof -p 看它在写什么"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "hint": "第 3 项正是「负载高 CPU 不高」这道经典题的标准错答：load 高说明有进程在排队或等 IO，症状在系统层而不在应用代码，重启只是把队列临时清空，NFS 挂载、磁盘打满或不可中断挂起的根因还在原地。笔记的框架是先分象限、再逐层下钻，「负载高但 CPU 低」这一行的第一步就是 vmstat，下钻到 IO 或挂起后转 IO 排查。另三条同样易错：内存看 free 的 available（不开新交换就能给新进程用的量）而不是 free 列，buff/cache 是可回收的磁盘缓存，「内存全占满但机器很健康」就是 Linux 有内存闲着就拿来做缓存的策略；服务莫名消失，第一步是 dmesg 里找「Killed process」看 OOM Killer 按 oom_score 挑了谁；load 与 CPU 同时高才走 CPU 四步（top 找进程 → top -Hp PID 找线程 → printf '%x' 把线程 ID 转十六进制后按 nid 对 jstack → 非 Java 进程用 perf top -p PID 看热点函数），若 jstack 里大量 GC 线程，说明 CPU 症状只是内存问题的影子，要转内存排查。",
+      "difficulty": 3
     }
   ]
 }
