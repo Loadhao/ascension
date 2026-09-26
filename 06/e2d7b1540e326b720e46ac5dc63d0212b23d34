@@ -1,0 +1,38 @@
+src/content/docs/guide/interview-cheatsheet.md
+  s_d8c978081f408b::t_d15778d69cd4cf 206-209
+src/content/docs/redis/intermediate/usage/index.mdx
+  s_d8c978081f408b::t_05ced510a17487 3,11,14-17
+astro.config.mjs
+  s_d8c978081f408b::t_8bec04dd10c56a 1242
+src/data/graphs/redis.json
+  s_d8c978081f408b::t_74582118f11e12 14
+  s_d8c978081f408b::t_d6dfc3125b8283 34-39
+src/data/quiz/redis.json
+  s_d8c978081f408b::t_7466da4a45d88d 330-348
+docs/content-roadmap.md
+  s_d8c978081f408b::t_66e090ca242e68 151-168
+  s_d8c978081f408b::t_e9dff4be3fcdea 44
+  s_d8c978081f408b::t_41fbbaa58b0cc6 64
+src/content/docs/redis/intermediate/usage/08-observability.md
+  s_d8c978081f408b::t_19943725f8df2c 251
+  s_d8c978081f408b::t_9f6dc366d450de 329,331-335,337-341,344-350
+  s_d8c978081f408b::t_e61c6ae63f78d6 1-250,252-328,330,336,342-343,351-388
+docs/coverage-deepening.md
+  s_d8c978081f408b::t_f5fc7a40263c23 71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "06e2d7b1540e326b720e46ac5dc63d0212b23d34",
+  "prompts": {},
+  "sessions": {
+    "s_d8c978081f408b": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7d34cf8a-946f-4536-ae6c-e2310b17da55",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
