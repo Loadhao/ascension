@@ -1,0 +1,52 @@
+src/content/docs/kubernetes/intermediate/ops/01-probes-lifecycle.md
+  s_d8c978081f408b::t_033afe967502c7 59-63,65-66
+src/content/docs/kafka/intermediate/core/06-transactions-eos.md
+  s_d8c978081f408b::t_bfd87f139d9853 73-78
+src/data/quiz/kubernetes.json
+  s_d8c978081f408b::t_3167fde2d7b5a9 174-192
+docs/coverage-deepening.md
+  s_d8c978081f408b::t_782e42be5f3ead 74
+  s_99fa858bd83272::t_362294dd9f627a 210
+src/data/graphs/kubernetes.json
+  s_d8c978081f408b::t_f597b7ed4e2b4b 55-60
+  s_d8c978081f408b::t_a105389de858d8 122-141
+astro.config.mjs
+  s_d8c978081f408b::t_e6580cea1d61c4 2418
+src/content/docs/guide/interview-cheatsheet.md
+  s_d8c978081f408b::t_8b8e9c05fce817 336-346
+src/content/docs/kubernetes/intermediate/ops/05-java-on-k8s.md
+  s_d8c978081f408b::t_399ea0e3317e80 51-53
+  s_d8c978081f408b::t_489dd0de4e4ba0 95-99
+  s_d8c978081f408b::t_8ac79ca95260af 7,9,11-12,14-16,20,26,28-30,32,34-39,41-42,44,47,50,56-57,61-63,65-67,69,71-72,74-75,78-79,83,85-89,91,93,103-104,106,110,119-131,135-142,145,150-157,160,169-171,174,176-184,190,192-196,201-205,207-208,210-214,218-219,222-229,233,235,237
+  s_d8c978081f408b::t_a157fa78436e10 1-6,8,10,13,17-19,21-25,27,31,33,40,43,45-46,48-49,54-55,58-60,64,68,70,73,76-77,80-82,84,90,92,94,100-102,105,107-109,111-118,132-134,143-144,146-149,158-159,161-168,172-173,175,185-189,191,197-200,206,209,215-217,220-221,230-232,234,236
+docs/content-roadmap.md
+  s_d8c978081f408b::t_bae61b429093e2 192-216
+  s_d8c978081f408b::t_1fbd75d63b9daf 66
+  s_d8c978081f408b::t_d212b1010354a9 46
+src/content/docs/kubernetes/intermediate/ops/index.mdx
+  s_d8c978081f408b::t_1effac4d72b4a9 3,8-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f97ed7a1b93bd44ba26fd21e8f87b7b9a94094f6",
+  "prompts": {},
+  "sessions": {
+    "s_99fa858bd83272": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "5331f541-9b62-4ce1-8c2f-961391dee21c",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_d8c978081f408b": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7d34cf8a-946f-4536-ae6c-e2310b17da55",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
