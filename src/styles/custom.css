@@ -53,8 +53,8 @@
 main:has(.kg-fullbleed) {
   padding-bottom: 8px !important;
 }
-/* 图谱页 toc:false 时 html 仍带 data-has-toc，全局「正文靠右」公式会误把标题/图谱
-   推到主栏右侧，中间留出大块空白；右侧栏已隐藏，正文应贴左占满主栏 */
+/* 图谱页右侧栏已被 display:none 收起（含 toc:false 但 html 仍带 data-has-toc
+   误标的情况），正文容器显式贴左占满主栏，不参与居中留白 */
 @media (min-width: 50rem) {
   .lg\:sl-flex:has(.kg-fullbleed) .content-panel .sl-container {
     margin-inline: 0 !important;
@@ -396,19 +396,12 @@ main:has(.kg-fullbleed) {
 }
 
 /* ===== 右侧篇章目录收窄 + 正文在剩余空间居中（≥72rem 覆盖 Starlight 布局公式） ===== */
-/* 正文列全宽度居中：Starlight core 只在 ≥72rem 给 .sl-container 加 auto 边距，
-   50–72rem 区间正文贴左，这里统一接管（层叠优先级高于 core 的 @layer 规则） */
+/* 正文列在主栏剩余空间水平居中、两侧留白对半分：Starlight core 只在 ≥72rem
+   给 .sl-container 加 auto 边距，50–72rem 区间正文贴左，这里统一接管
+   （层叠优先级高于 core 的 @layer 规则）。展开态与收起态一致居中——
+   余白单侧堆放（正文贴右侧目录排）在宽屏桌面上呈现为一侧成片空白，弃用 */
 .content-panel .sl-container {
   margin-inline: auto;
-}
-/* 展开态（有左侧目录 + 有右侧目录）正文靠右排：余白全部让给左侧，
-   内容右缘只保留基础内边距；收起态不适用（保持对称留白）。
-   余白不足时 max(0) 兜底回退为贴左填充 */
-@media (min-width: 50rem) {
-  :root:not([data-sidebar-tree='collapsed'])[data-has-sidebar][data-has-toc] .content-panel .sl-container {
-    margin-left: max(0rem, calc(100% - var(--sl-content-width)));
-    margin-right: auto;
-  }
 }
 @media (min-width: 72rem) {
   .right-sidebar-container {
