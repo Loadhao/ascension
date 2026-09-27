@@ -447,5 +447,26 @@
       ],
       "hint": "末项把哈希当成了加密：HMAC 不可逆，索引列里那串值既不能当明文用也拿不回原文。盲索引的姿势是写入时算 HMAC(明文) 存进索引列、查询时对用户输入算同一个 HMAC 再做等值匹配；密钥必须只留在服务端，一旦泄露整列就等于可以被离线字典批量穷举——确定性既是它能查的原因，也是它怕穷举的原因。前三项都在正文里：md5/SHA1 出局、IV 随机不重复且认证标签要随密文一起保存、可逆与否决定用加密还是哈希。另有一条容易顺手踩的：密钥、IV、token 只能用 crypto.randomBytes 生成，Math.random 是伪随机可预测。"
     }
+,
+    {
+      "id": "js-stream-026",
+      "noteId": "js/intermediate/node/04-stream",
+      "type": "multiple",
+      "difficulty": 3,
+      "q": "关于 Node 流的收益、四种流类型与 pipe/pipeline 的分工，按笔记说法哪些正确？（多选）",
+      "options": [
+        "流是处理文件的通用姿势，几 MB 的小文件也应改用 createReadStream 而不是 readFile，否则内存占用会随文件大小线性增长",
+        "流把内存占用从 O(文件大小) 降为 O(1)：readFile 是把整个文件读进内存，流是固定 chunk（默认 64KB）的滑动窗口逐块流过",
+        "背压由 pipe 自动调节：消费端写不过来时 write 返回 false 就暂停读取，缓冲区清空收到 drain 事件后再恢复——这正是「用 pipe 别手写 data 事件」的第一理由",
+        "pipe() 不会把错误传播下去：源或目标出错时管道不自动销毁，可能留下半关闭的流；stream.pipeline() 任一环出错即全部销毁并让 Promise reject",
+        "TCP socket 与 WebSocket 属于 Transform 流（它们把字节流转换成协议消息），zlib.createGzip() 与加密流属于 Duplex 流"
+      ],
+      "answer": [
+        1,
+        2,
+        3
+      ],
+      "hint": "第 1 与第 5 项有误。第 1 项踩在笔记「什么时候不需要流」这条速答上：几 MB 的小文件直接 readFile 更简单，流的复杂度必须换回收益才值得引入，「数据量大 + 可分块」才是流的舞台（10GB 日志统计、文件压缩上传、HTTP 代理转发）。第 5 项把两类流对调了：可读可写、两个方向各自独立的是 Duplex（TCP socket、WebSocket），而在读与写之间做中间变换的才是 Transform（gzip、加密、行解析），pipeline 里串多个 Transform 就组成一条处理链。另三条分别是流的省内存机制（固定 chunk 滑动窗口）、背压的自动调节（false 暂停 / drain 恢复，手写要 data 与 drain 配对、容易写错，是经典面试手写题），以及 pipe 与 pipeline 的分界——生产代码用 pipeline 或 stream-compose 替代 pipe，图的就是错误统一传播与全部流自动清理。"
+    }
   ]
 }
