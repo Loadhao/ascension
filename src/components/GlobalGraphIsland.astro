@@ -47,6 +47,8 @@ for (const { direction, count } of directionStats) {
     group: direction.title,
     // sqrt 压缩数量差异，避免头部方向过分放大
     weight: Math.sqrt(count / maxDirCount),
+    tier: 'summary',
+    detail: ['方向', `${count} 个知识点`],
   });
   groupCounts[direction.title] = count;
   for (const level of direction.levels) {
@@ -58,6 +60,11 @@ for (const { direction, count } of directionStats) {
         group: direction.title,
         // 分类整体压在方向之下，保持两级视觉层次
         weight: 0.15 + 0.5 * Math.sqrt(category.notes.length / maxCatCount),
+        tier: 'detail',
+        detail: [
+          `${direction.title} › ${level.label}`,
+          `${category.notes.length} 个知识点`,
+        ],
       });
       edges.push({ source: direction.id, target: category.id, label: level.label });
     }
@@ -74,4 +81,7 @@ const graph: GraphData = { nodes, edges };
   groupCounts={groupCounts}
   legendLayout="bar"
   fullBleed={fullBleed}
+  searchable
+  tapAction="focus"
+  layout="radial"
 />

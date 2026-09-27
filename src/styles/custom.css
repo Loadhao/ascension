@@ -73,7 +73,7 @@ main:has(.kg-fullbleed) {
 }
 /* Starlight 正文会给「非首个兄弟元素」注入 margin-block-start，
    导致工具栏按钮错位、统计 chips 行距虚高，这里统一归零 */
-.knowledge-graph :is(.kg-btn, .kg-chip) {
+.knowledge-graph :is(.kg-btn, .kg-chip, .kg-input, .kg-hits) {
   margin: 0;
 }
 .kg-btn {
@@ -155,14 +155,109 @@ main:has(.kg-fullbleed) {
   position: static;
   max-width: none;
   max-height: none;
-  overflow: visible;
-  padding: 10px 16px 12px;
+  /* 单行横向滚动：35 个方向不再占掉三行画布高度 */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  padding: 8px 12px 10px;
   border-top: 1px solid color-mix(in srgb, var(--sl-color-gray-5) 55%, transparent);
   backdrop-filter: none;
 }
 .kg-legend--footer .kg-chip {
+  flex: 0 0 auto;
   background: none;
   backdrop-filter: none;
+}
+/* 「全部」= 清除分组筛选，让筛选态始终有明确出口 */
+.kg-chip--all {
+  font-weight: 600;
+}
+.kg-chip--all[aria-pressed='true'] {
+  border-color: var(--sl-color-gray-2);
+  color: var(--sl-color-white);
+}
+/* 搜索定位框：大图靠肉眼扫不动，输入即高亮、回车定位 */
+.kg-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.kg-input {
+  width: 164px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--sl-color-bg) 78%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--sl-color-white);
+  font: inherit;
+  font-size: 12px;
+  transition:
+    width 150ms ease,
+    border-color 150ms ease;
+}
+.kg-input::placeholder {
+  color: var(--sl-color-gray-3);
+}
+.kg-input:focus {
+  outline: none;
+  width: 216px;
+  border-color: var(--sl-color-gray-2);
+}
+.kg-hits {
+  font-size: 11px;
+  color: var(--sl-color-gray-2);
+  white-space: nowrap;
+}
+/* 详情卡：悬停预览、单击后钉住（钉住态可点「打开」），固定左上角不跟随鼠标，
+   避免卡片盖住节点或移出画布被裁 */
+.kg-card {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 6;
+  max-width: 268px;
+  padding: 8px 11px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--sl-color-bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+.kg-card--pinned {
+  pointer-events: auto;
+}
+.kg-card-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+.kg-card-line {
+  margin-top: 3px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--sl-color-gray-2);
+}
+.kg-card-open {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: var(--sl-color-text-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+@media (max-width: 48rem) {
+  /* 窄屏工具栏占满上排，详情卡下移一行避让 */
+  .kg-input,
+  .kg-input:focus {
+    width: 112px;
+  }
+  .kg-card {
+    top: 50px;
+    max-width: calc(100% - 24px);
+  }
 }
 
 /* ===== 黑白主题令牌（site-redesign spec 第 4 节） =====
