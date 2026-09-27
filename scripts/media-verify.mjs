@@ -4,7 +4,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const brew = (t) => (existsSync(`/opt/homebrew/bin/${t}`) ? `/opt/homebrew/bin/${t}` : t);
@@ -15,8 +15,10 @@ const MAX_FRAMES = 12;
 const MAX_SECONDS = 60;
 const MAX_LINE_CHARS = 36;
 
-const { mediaAssets } = await import(join(ROOT, 'src/data/viz/media.ts'));
-const { flowDemos } = await import(join(ROOT, 'src/data/viz/flows.ts'));
+// Windows 上 join() 出的是反斜杠绝对路径，ESM import() 只认 file:// URL（第 196 轮实测
+// ERR_UNSUPPORTED_ESM_URL_SCHEME 'd:'），必须经 pathToFileURL 转换；POSIX 下行为不变。
+const { mediaAssets } = await import(pathToFileURL(join(ROOT, 'src/data/viz/media.ts')).href);
+const { flowDemos } = await import(pathToFileURL(join(ROOT, 'src/data/viz/flows.ts')).href);
 
 const mb = (bytes) => (bytes / 1048576).toFixed(2);
 // 单文件判红按字节打印：两侧都换算成 MB 且保留两位小数时，超限的量级从打印上读不出来

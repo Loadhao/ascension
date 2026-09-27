@@ -4,7 +4,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DOCS = join(ROOT, 'src/content/docs');
@@ -32,8 +32,10 @@ const quizNoteIds = new Set();
 for (const f of readdirSync(join(ROOT, 'src/data/quiz'))) {
 	for (const q of JSON.parse(readFileSync(join(ROOT, 'src/data/quiz', f), 'utf8')).questions) quizNoteIds.add(q.noteId);
 }
-const { flowDemos } = await import(join(ROOT, 'src/data/viz/flows.ts'));
-const { mediaAssets } = await import(join(ROOT, 'src/data/viz/media.ts'));
+// Windows 上 join() 出的是反斜杠绝对路径，ESM import() 只认 file:// URL（第 196 轮实测
+// ERR_UNSUPPORTED_ESM_URL_SCHEME 'd:'），必须经 pathToFileURL 转换；POSIX 下行为不变。
+const { flowDemos } = await import(pathToFileURL(join(ROOT, 'src/data/viz/flows.ts')).href);
+const { mediaAssets } = await import(pathToFileURL(join(ROOT, 'src/data/viz/media.ts')).href);
 
 const noFigure = notes.filter((n) => !withFigure.has(n));
 const noQuiz = notes.filter((n) => !quizNoteIds.has(n));

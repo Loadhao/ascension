@@ -23,7 +23,9 @@ function walk(dir, out = []) {
 
 const blocks = [];
 for (const file of walk(DOCS)) {
-  const raw = readFileSync(file, 'utf8');
+  // 归一行尾：CRLF 检出（Windows autocrlf）下按 \n 锚定的围栏正则会整类失配、
+  // 静默 0 块通过——第 196 轮实测。读入即归一，两种检出都判真。
+  const raw = readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
   const re = /^```mermaid\n([\s\S]*?)\n^```/gm;
   let m;
   while ((m = re.exec(raw)) !== null) {

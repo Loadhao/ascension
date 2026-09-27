@@ -77,7 +77,10 @@ const report = {};
   const fmIssues = [];
   const levelIssues = [];
   for (const f of notes) {
-    const raw = readFileSync(ROOT + '/' + f, 'utf8');
+    // 归一行尾：Windows 上 git core.autocrlf=true 会把工作区检出为 CRLF（索引仍是 LF），
+    // 下面按 \n 锚定的正则（frontmatter / mermaid 围栏）会整类失配——第 196 轮实测
+    // frontmatter 假红 559 篇、mermaid 块假绿 0 块。读入即归一，两种检出都判真。
+    const raw = readFileSync(ROOT + '/' + f, 'utf8').replace(/\r\n/g, '\n');
     const noCode = raw.replace(/^```[\s\S]*?^```/gm, '');
     let m;
     const re = /\[[^\]]*\]\((\/[^)]+)\)/g;
@@ -137,7 +140,7 @@ const report = {};
       const p = join(dir, name);
       if (statSync(p).isDirectory()) walkDocs(p);
       else if (/\.(md|mdx)$/.test(name)) {
-        const raw = readFileSync(p, 'utf8');
+        const raw = readFileSync(p, 'utf8').replace(/\r\n/g, '\n');
         const re = /^```mermaid\n([\s\S]*?)\n^```/gm;
         let m;
         while ((m = re.exec(raw)) !== null) {
