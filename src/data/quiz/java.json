@@ -2458,6 +2458,48 @@
       4
     ],
     "hint": "第 1/2/5 项正确、第 3/4 项错。park 对中断不敏感——不抛异常、只设标志，返回后检查并 selfInterrupt() 把排队期间的中断补上，这正是 acquire 被称作「不可中断模式」的原因，要可中断得走 lockInterruptibly。公平与非公平用的是同一条 CLH 变体 FIFO 队列，差别只差一次 hasQueuedPredecessors() 检查：非公平上来直接 CAS 抢、不看队列，公平在 state 为 0 时先看队列里有没有人在等；非公平吞吐高的道理是唤醒线程的空窗期不浪费，公平不饿死但多一次队列检查加上下文切换，所以默认非公平。另三条同样要背准：SIGNAL 的含义是「前驱释放时要唤醒我」，不先置好就会丢失唤醒；release 只做一件事，就是 unpark 头结点的后继线程；CountDownLatch 的 await 即 tryAcquireShared 要求 state == 0，而 Semaphore 的 tryAcquireShared 是扣令牌、remaining 为负就返回负数入队。共享模式还多一条级联传播——唤醒后若还有余量，后继也会被叫醒。"
+  },
+  {
+    "id": "java-threadlocal-144",
+    "noteId": "java/intermediate/concurrent/06-threadlocal",
+    "type": "multiple",
+    "difficulty": 3,
+    "q": "按笔记对 ThreadLocal 的定位与内部结构的说法，下列哪些正确？（多选）",
+    "options": [
+      "关键反转在于 Map 挂在 Thread 身上：每个 Thread 有 threadLocals 字段，ThreadLocal 实例只是 Entry 的 key，读写路径是 tl.get() 取当前线程的 Map、再用 tl 的 hash 定位 Entry",
+      "它与 synchronized 管的是两件相反的事：后者让多个线程排队抢同一个变量，前者直接给每个线程发一份变量，读写都不需要同步",
+      "给 SimpleDateFormat 每个线程发一份实例，图的是它非线程安全、共享实例会解析错乱，而不是给格式化做缓存提速",
+      "用户上下文透传图的是整条调用链随取随用：登录信息塞进 ThreadLocal 后，链路上任何一处都能取值，不必把参数一路传下去",
+      "Entry 的 key 与 value 都是强引用，只是 Map 挂在线程上；每次调用 get() 都会完整清理该线程的所有过期 Entry"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hint": "第 1/2/3/4 项正确、第 5 项错。第 5 项把两处结构说反了：Entry 继承 WeakReference，key 是弱引用、value 是强引用——正因如此才需要「弱引用是止血带」那套解释；清理也不是每次 get() 全量扫，expungeStaleEntry 只在 set/get/rehash 顺路扫到才清，没人碰它就永远等不到，所以 finally 里的 remove() 才是线程池下唯一可靠方案。第 1 项是该篇点名的「关键反转」：直觉会以为 ThreadLocal 自己握着各线程的值，实际反过来——静态的 ThreadLocal 实例全局一份、只当 key，值分散在各线程自己的 ThreadLocalMap 里。第 2 项是该篇开篇的定位句：synchronized 解决抢一个变量，ThreadLocal 空间换并发。第 3 项容易被读成性能优化：共享一个 SimpleDateFormat 的问题是解析错乱（结果错），发一份实例是为正确性。"
+  },
+  {
+    "id": "java-chm-145",
+    "noteId": "java/basic/collection/03-concurrenthashmap",
+    "type": "multiple",
+    "difficulty": 4,
+    "q": "按笔记里 putVal 的三条路径与两处细节，下列说法哪些正确？（多选）",
+    "options": [
+      "空桶 CAS 失败不立刻换 synchronized 上锁，而是回到自旋循环重新定位桶再试——外层 for 循环的注释就是「自旋：失败重试」",
+      "synchronized 块里那句 tabAt(tab, i) == f 是 double check，防的是锁错对象：等锁期间桶头节点已被并发替换，手里这把 f 的锁就锁错了地方",
+      "树化是双条件：链长与 table 长度都要够（图里写作链长 >= 8 且 table >= 64），只满足链长这一条并不树化",
+      "spread 扰动是对 hashCode 做高低位异或、随后再与 HASH_BITS 相与；它在 putVal 里排在 null 检查之后——key 或 value 为 null 时第一行就抛 NPE，根本走不到扰动",
+      "空桶 CAS 一旦失败就说明竞争激烈，应立即 synchronized 锁住桶头保证插入成功；树化只看链表长度、与 table 大小无关"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hint": "第 1/2/3/4 项正确、第 5 项错。第 5 项两半都是正文明确反对的说法：CAS 失败靠自旋重试而不是加锁（空桶路径完全无锁，冲突才 synchronized 锁桶头，锁粒度才从「段」缩到「桶头节点」）；树化是双条件，链长 >= 8 与 table >= 64 同时成立才转红黑树。第 2 项的「锁错对象」是该篇给 double check 的原话理由——拿到锁不等于锁对了东西，等锁那段时间里桶头可能已被别人换掉。第 3 项按笔记的流程图读：链长与 table 两个阈值缺一不可，这也是它和 HashMap 常被混记的地方。第 4 项是代码顺序：putVal 第一行先判 key 与 value 是否为 null 并直接抛 NPE，之后才算 spread 扰动；扰动本身写作高低位异或、再与 HASH_BITS 相与。第 1 项的自旋结构在扩容处也复用——碰到 ForwardingNode 同样回到循环里换用新表继续。"
   }
   ]
 }
