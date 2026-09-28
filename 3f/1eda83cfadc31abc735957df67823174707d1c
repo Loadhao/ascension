@@ -1,0 +1,47 @@
+docs/evolution.md
+  s_3baebe4285adee::t_94b167660a2a50 99-112
+  s_3baebe4285adee::t_73f2ae73deeca1 176
+src/content/docs/vue/basic/core/index.mdx
+  s_3baebe4285adee::t_dd8bd8e0916936 3,10-12
+src/content/docs/vue/basic/core/04-form-inputs.md
+  s_3baebe4285adee::t_6e61668c0f17dc 266-268
+  s_3baebe4285adee::t_c41aef93cadf5b 155-156
+  s_3baebe4285adee::t_a0a58d2ea62993 392-395
+  s_3baebe4285adee::t_b9515ce3e58c26 339-340,342-347
+  s_3baebe4285adee::t_aa02a421ed0050 71,73,75,78-81,84-85
+  s_3baebe4285adee::t_6c6ebd3cbf9df1 171-172,174
+  s_3baebe4285adee::t_9d7685fe05af21 316-317
+  s_3baebe4285adee::t_9bc4ce2225ff77 50-52
+  s_3baebe4285adee::t_ef625680e1330c 422
+  s_3baebe4285adee::t_a3f7875860eabf 383-385
+  s_3baebe4285adee::t_e7dcc039cccf96 231-234
+  s_3baebe4285adee::t_689b3796b613d8 1-17,19,21-49,53-70,72,74,76-77,82-83,86-154,157-170,173,175-191,193-230,235-265,269-297,299-300,303-315,318-328,330-338,348-361,364-365,372-382,386-391,396-415,418-421,423-479
+  s_3baebe4285adee::t_5aced7a42794c7 18,20
+  s_3baebe4285adee::t_65b2b1b00926ab 416-417
+  s_3baebe4285adee::t_9f29e76f6760df 362-363,366-371
+  s_3baebe4285adee::t_6f14c73fa2b836 298,301-302
+  s_3baebe4285adee::t_f840b324011cb5 192
+  s_3baebe4285adee::t_398320b9dce576 341
+  s_3baebe4285adee::t_10e03323591bce 329
+astro.config.mjs
+  s_3baebe4285adee::t_f2d8ada321cc48 926
+src/data/graphs/vue.json
+  s_3baebe4285adee::t_2e610dcc4463be 7
+  s_3baebe4285adee::t_0616731b534f78 33-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3f1eda83cfadc31abc735957df67823174707d1c",
+  "prompts": {},
+  "sessions": {
+    "s_3baebe4285adee": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "0e86e5c0-fefb-4073-aca5-b9edea6b57fc",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
