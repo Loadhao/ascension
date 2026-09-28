@@ -201,7 +201,6 @@ report['2.考点卡 JSON 可解析'] = {
 		'rocketmq',
 		'seata',
 		'security',
-		'spring-ai',
 		'tools',
 		'typescript',
 		'vue',

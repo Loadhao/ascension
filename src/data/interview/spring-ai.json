@@ -1,0 +1,24 @@
+{
+  "cards": [
+    {
+      "id": "sa-toolcall-ic-001",
+      "noteId": "spring-ai/intermediate/tools/01-tool-calling",
+      "group": "AI 与大模型",
+      "difficulty": 4,
+      "q": "Spring AI 里模型是怎么调用你的方法的？接一个工具要写哪些东西？",
+      "intent": "筛的是有没有把「谁说要调」和「谁真去调」分清楚。\n只答「加个 @Tool 注解就行」是背 API，答不出 Schema 与追加语义这两处会出事的。\n区分度落在两个坑上：可选参数被 400 拒掉、工具重名启动即失败。",
+      "answer": "模型只输出要调什么，执行发生在我的 JVM 里。\n声明有三条路：@Tool 注解打在方法上、FunctionToolCallback 动态注册、MethodToolCallback 反射指定。\n三条终点都是 ToolCallback：模型给的 JSON 字符串进、字符串出，与厂商协议解耦。\n两个坑：可选参数在 strict 旧默认下让整次调用被 400 拒，工具撞名在 2.0 直接抛异常。\n单次 .tools(...) 是往 defaultTools 追加而不是替换，userId 与 tenantId 走 ToolContext 不进 prompt。",
+      "followup": "大概追问 returnDirect：结果本身就是终答时跳过回填，省一次模型往返、也防模型转述改数字。\n再问 MCP 的工具会不会自动带上：官方把 MCP 的 provider 排除在自动收集之外，要显式接线。\n还会问工具越多越聪明吗：每个都占 prompt 的定义空间，2.0.1 起只有随请求附带的才可能被执行。"
+    },
+    {
+      "id": "sa-mcp-ic-002",
+      "noteId": "spring-ai/advanced/mcp/01-mcp-client-server",
+      "group": "AI 与大模型",
+      "difficulty": 4,
+      "q": "你们接 MCP 吗？它和模型自带的工具调用有什么区别，Spring AI 怎么接？",
+      "intent": "先听有没有把两条协议边界说清：模型到你的应用、你的应用再往工具提供方。\n把 MCP 说成工具调用的另一种写法，等于没读过它解的是工具只服务一个应用。\n区分度在接线：外部工具要进 Spring AI 的工具面，中间隔着一道默认开着的开关。",
+      "answer": "两者不在一层：function calling 管模型与应用之间。\nMCP 管应用与工具提供方之间，两层可以叠着用。\nSpring AI 双向支持：客户端吃别人的工具，服务端把自己的服务开成 MCP server。\n客户端这条链靠 spring.ai.mcp.client.toolcallback.enabled，默认开着，产出一个 ToolCallbackProvider Bean。\n排障按三层定位：连不上看 transport，连上但会话异常看 session，工具调不到看注册。",
+      "followup": "追问注解面：@McpTool 自动生成参数 Schema，四个提示位里 destructiveHint 默认 true。\n接一句口径：不声明 readOnlyHint，只读查询工具也会被宿主当成破坏性操作去弹确认。\n再问传输选型：SSE 服务端 2.0 起标了弃用，新项目用 Streamable-HTTP，客户端生产建议上 webflux 那版 starter。"
+    }
+  ]
+}
