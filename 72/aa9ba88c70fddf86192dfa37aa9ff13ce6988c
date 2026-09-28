@@ -1,0 +1,35 @@
+docs/coverage-deepening.md
+  s_738d9a8bfb5198::t_ebf7313284f8c9 220
+  s_738d9a8bfb5198::t_e9352cea97cca5 221
+  s_c1ad7b3e63b6e3::t_9472a476f51dd5 35,42,48-49
+src/data/quiz/java.json
+  s_c1ad7b3e63b6e3::t_67150f7bac4bf3 2441-2461
+src/data/quiz/linux.json
+  s_c1ad7b3e63b6e3::t_cb7de87a23bbda 351-391
+docs/evolution.md
+  s_738d9a8bfb5198::t_2da4d975afde61 93-109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "72aa9ba88c70fddf86192dfa37aa9ff13ce6988c",
+  "prompts": {},
+  "sessions": {
+    "s_738d9a8bfb5198": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "190b62fb-2b5d-458a-b550-8d3a4cccd44e",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_c1ad7b3e63b6e3": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "fb6cb2a1-f778-4622-8286-18201373195f",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
