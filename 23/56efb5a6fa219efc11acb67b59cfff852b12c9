@@ -1,0 +1,52 @@
+src/data/graphs/js.json
+  s_d01f76724b95b1::t_951ad9cfdb0149 98,618-632
+  s_d01f76724b95b1::t_4fd44ca5f54550 99-103
+src/content/docs/js/intermediate/node/11-package-resolution.md
+  s_d01f76724b95b1::t_0219f220b83cba 23,25-26,34-37,39
+  s_d01f76724b95b1::t_66fa305cc63e12 3
+  s_d01f76724b95b1::t_55422ba6b37c16 14-15
+  s_d01f76724b95b1::t_db64adc94b2b50 16
+  s_d01f76724b95b1::t_499211539379bb 63
+  s_d01f76724b95b1::t_7a7d49083cf856 295-297
+  s_d01f76724b95b1::t_a2af330cfb780e 1-2,4-13,17-22,24,27-33,38,40-62,64-122,124-137,141-153,156-169,171-177,184-214,216,218-228,232,234-262,272-274,278-294,298-302,312-320,322-338,343-345,347-355,357-381,384-416
+  s_d01f76724b95b1::t_463ca432744911 321
+  s_d01f76724b95b1::t_c23233ad81c333 275-277
+  s_d01f76724b95b1::t_5e7aaa5fbf64ca 356
+  s_d01f76724b95b1::t_c597800306a9c8 178-183
+  s_d01f76724b95b1::t_c5e8f386e0e560 417
+  s_d01f76724b95b1::t_acbcea85b8edcf 229-231
+  s_d01f76724b95b1::t_2240b321a04e03 154-155
+  s_d01f76724b95b1::t_7f5ecf46adf41c 419
+  s_d01f76724b95b1::t_e8e042ce74e39a 138-140
+  s_d01f76724b95b1::t_38e666dc8b0357 123,418
+  s_d01f76724b95b1::t_134fb419c49223 303-311
+  s_d01f76724b95b1::t_64d1495c9bf664 263-271
+  s_d01f76724b95b1::t_dfcbf3f5739a98 339-342
+  s_d01f76724b95b1::t_bebcfe21e7bb88 170
+  s_d01f76724b95b1::t_e5f46e6441f987 233
+  s_d01f76724b95b1::t_1637affa4bb8d1 346
+  s_d01f76724b95b1::t_e78c180090c819 215,217
+  s_d01f76724b95b1::t_66f36d29ae59b0 382-383
+astro.config.mjs
+  s_d01f76724b95b1::t_992169ebd051d2 794
+src/content/docs/js/intermediate/node/index.mdx
+  s_d01f76724b95b1::t_7d42f2f3c62694 3,9-11
+docs/evolution.md
+  s_d01f76724b95b1::t_f2480cae6e0c51 51,56,113-128,210
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2356efb5a6fa219efc11acb67b59cfff852b12c9",
+  "prompts": {},
+  "sessions": {
+    "s_d01f76724b95b1": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "a2cf83dc-0c0e-420b-9eeb-4eb6e6a4ff8d",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
