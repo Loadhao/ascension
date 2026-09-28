@@ -1,0 +1,24 @@
+src/data/viz/media.ts
+  s_b27d4d82203755::t_674c016e88a870 433-437,439-456
+  s_b27d4d82203755::t_bd35239cf0db00 438
+src/content/docs/rabbitmq/basic/core/02-reliable-delivery.mdx
+  s_b27d4d82203755::t_aab41fc78a4a79 103-106
+src/data/quiz/rabbitmq.json
+  s_b27d4d82203755::t_af1802943059dd 170-185
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "d6cc184de2171ac0923a6f43cf9949078fa20783",
+  "prompts": {},
+  "sessions": {
+    "s_b27d4d82203755": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "bcb1169c-d790-4b9e-860e-a34a24adc220",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
