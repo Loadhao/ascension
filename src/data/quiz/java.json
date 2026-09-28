@@ -2397,6 +2397,46 @@
       ],
       "hint": "别把五个阶段读成一次跑完的流水线：该篇阶段表写明解析「可发生在初始化之后（运行期绑定）」，这份弹性正是多态与动态绑定的落点，所以第 2 项把话说死了。初始化只认主动引用，而定义类数组、读 final 常量、经子类引用父类静态字段这三类被动引用都不触发。父子顺序也别记反——初始化子类会先初始化父类，父类的 static 块一定先跑完。第 5 项是这张表的原文：赋值动作落在初始化而不是准备期，准备期只有零值；<clinit> 由 JVM 加锁保证同一个类只执行一次。",
       "difficulty": 4
+    },
+    {
+      "id": "java-threadlocal-140",
+      "noteId": "java/intermediate/concurrent/06-threadlocal",
+      "type": "multiple",
+      "q": "关于 ThreadLocal 的弱引用设计、跨线程传递与 ThreadLocalMap 的哈希组织，下列说法正确的是？（多选）",
+      "options": [
+        "Entry 的 key 用弱引用正是内存泄漏的根源，把它换成强引用就能根治",
+        "弱引用把泄漏范围从「key + value 一起挂着」缩小到「只剩 value 挂着」，key 变 null 之后 Entry 才有被清理机制识别为 stale 并顺路清除的机会",
+        "InheritableThreadLocal 只在 `new Thread()` 时复制父线程的 Map，线程池复用既有线程不再构造 Thread，所以复制根本不发生；跨池传值要靠提交任务时捕获快照、执行前重放的 TransmittableThreadLocal",
+        "ThreadLocalMap 用拉链法解决冲突：每个槽位挂一条 Entry 链表，hash 相同就沿链表逐个比对",
+        "相邻 ThreadLocal 实例的 hash 间隔固定为 `0x61c88647`（黄金分割数 × 2^32），让连续创建的实例在 2^n 长度的数组里均匀散开，冲突概率极低"
+      ],
+      "answer": [
+        1,
+        2,
+        4
+      ],
+      "hint": "第 0 项把因果读反了：key 若是强引用，静态 ThreadLocal 变量置 null 之后 Entry 仍强链到它，连同它带过的所有 value 一起陪葬到线程结束——所以弱引用是止血带而不是病因。第 3 项与正文相反：ThreadLocalMap 是开放寻址而非拉链，一个线程通常也就几个 ThreadLocal，开放寻址足够快。第 2 项是线程池里最隐蔽的一类事故：复制时机绑死在 Thread 构造上，池化线程一旦复用就拿不到新提交线程的上下文，TTL 把「继承」换成「捕获快照—执行前重放」正是为了绕开这一点。",
+      "difficulty": 4
+    },
+    {
+      "id": "java-chm-141",
+      "noteId": "java/basic/collection/03-concurrenthashmap",
+      "type": "multiple",
+      "q": "关于 ConcurrentHashMap 1.8 的无锁读、null 约束与 size 统计，下列说法正确的是？（多选）",
+      "options": [
+        "get 同样要 synchronized 锁桶头，只是读操作持锁时间短，整体开销可以接受",
+        "get 的可见性由两处保证：Node 的 `val` 与 `next` 声明为 volatile，而数组元素本身没有 volatile 语义，靠 `tabAt` 走 `Unsafe.getObjectVolatile` 读到最新引用",
+        "value 允许为 null，只是并发下 `get` 返回 null 时要再用 `containsKey` 确认一次",
+        "size() 只能给弱一致：多线程都 CAS 同一个 baseCount 失败率会很高，于是仿 LongAdder 分摊热点、各自 CAS 自己的 CounterCell 格子，求和那一瞬间并发写可能又把数改了",
+        "ForwardingNode 对两条路径分流不同：put 碰到 `hash = MOVED` 就调 helpTransfer 认领一段桶区间一起搬，get 碰到则通过 find 转发到新表查询，扩容期间读写都不被阻塞"
+      ],
+      "answer": [
+        1,
+        3,
+        4
+      ],
+      "hint": "第 0 项与第 2 项都是把正文说反了：get 全程不加锁，靠的就是 val/next 的 volatile 加上 tabAt 的 volatile 读；null 键值被 putVal 第一行直接抛 NPE 禁掉，理由是并发下 `get(k) == null` 分不清「键不存在」还是「存进去的就是 null」，与其留二义性不如禁止。第 4 项那句「扩容期间读写都不被阻塞」正是该篇称作 1.8 相比 1.7 最优雅改进之一的地方。也别把并发度混记成 1.7——分段锁默认 16 段且初始化后不可扩段，1.8 的并发度随 table 扩容增长。",
+      "difficulty": 4
     }
   ]
 }
