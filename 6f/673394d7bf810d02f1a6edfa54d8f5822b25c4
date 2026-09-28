@@ -1,0 +1,70 @@
+scripts/interview-verify.mjs
+  s_8d478b2b81ffe2::t_b28ef1fbcb7951 22
+  s_8d478b2b81ffe2::t_3b4756d925233a 1-21,23-236
+astro.config.mjs
+  s_8d478b2b81ffe2::t_ae7e579f5aed96 242
+src/lib/interview-store.ts
+  s_8d478b2b81ffe2::t_1750f6a596305b 1-78
+AGENTS.md
+  s_8d478b2b81ffe2::t_8bd846cfe05479 77
+  s_8d478b2b81ffe2::t_6c669e31b43cdc 28-29
+  s_8d478b2b81ffe2::t_19ea8e7472c0db 63-64
+src/components/interview/InterviewIsland.astro
+  s_8d478b2b81ffe2::t_e272ff84770572 1-24
+docs/coverage-deepening.md
+  s_8d478b2b81ffe2::t_6ca427237bc286 82-97
+src/content/docs/guide/interview.mdx
+  s_8d478b2b81ffe2::t_99eb624e6b3b89 1-15
+src/components/interview/Interview.tsx
+  s_8d478b2b81ffe2::t_5eb812ee735c89 113-117
+  s_8d478b2b81ffe2::t_51028b20f7c385 288-302
+  s_8d478b2b81ffe2::t_aeb5f3f96aec2b 273-274,276-280,284,286
+  s_8d478b2b81ffe2::t_f26ddf10e461b4 179
+  s_8d478b2b81ffe2::t_9dceb15d3aaadc 1-112,118-178,180-272,275,281-283,285,287,303-324
+docs/superpowers/specs/2026-09-28-interview-cards-design.md
+  s_8d478b2b81ffe2::t_65431d42f66ba3 3
+  s_8d478b2b81ffe2::t_c020578f527ef1 15-16
+package.json
+  s_8d478b2b81ffe2::t_3dc3bd095b9816 12
+scripts/evolution-candidates.mjs
+  s_8d478b2b81ffe2::t_be2ad7c64fa3f1 144-147
+  s_8d478b2b81ffe2::t_38c458ffe79664 128
+  s_8d478b2b81ffe2::t_6eb155bf610c5c 148
+  s_8d478b2b81ffe2::t_d6f20c70fb7fcf 95-106
+  s_8d478b2b81ffe2::t_0954133d028f2d 115,118-120
+  s_8d478b2b81ffe2::t_95baa628ac04c5 88-94
+  s_8d478b2b81ffe2::t_544f63e9a7bdbf 135
+docs/evolution-recipes.md
+  s_8d478b2b81ffe2::t_447d9aa25a883b 103
+  s_8d478b2b81ffe2::t_136ce792335a8c 131-134
+  s_8d478b2b81ffe2::t_aa9c469174fbca 52-53,58
+  s_8d478b2b81ffe2::t_a5d880f2a1e3d2 90-102
+  s_8d478b2b81ffe2::t_5d0a3fc45a8b18 23,28-29,38-41
+  s_8d478b2b81ffe2::t_58c8ef6bb280af 45
+docs/evolution.md
+  s_8d478b2b81ffe2::t_9a53dae81bdf01 8-9,20,55,68-69,107-123,185,675
+src/data/interview/ai.json
+  s_8d478b2b81ffe2::t_f133ba4f95b04b 1-24
+src/data/interview/java.json
+  s_8d478b2b81ffe2::t_3c4e6cc7113aae 1-24
+src/data/interview/mysql.json
+  s_8d478b2b81ffe2::t_6bdcadb13073b0 1-24
+src/styles/custom.css
+  s_8d478b2b81ffe2::t_22c50194e25829 3422-3517
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6f673394d7bf810d02f1a6edfa54d8f5822b25c4",
+  "prompts": {},
+  "sessions": {
+    "s_8d478b2b81ffe2": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "65ca6b46-60f5-4668-a933-143f2cd1e327",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
