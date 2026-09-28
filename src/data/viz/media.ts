@@ -430,4 +430,28 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'两条铁律：每个宏任务之后清空全部微任务，微任务永远优先于宏任务。',
 		],
 	},
+	'rabbitmq-reliable-video': {
+		title: '可靠投递 · 配音短片',
+		src: '/videos/rabbitmq-reliable-video.mp4',
+		poster: '/videos/rabbitmq-reliable-video.poster.png',
+		width: 1280,
+		height: 810,
+		duration: 53.4,
+		alt:
+			'动画短片：一条持久化消息依次经过生产者发布、Broker 内存入队、落盘、回 confirm、投递消费者与手动 ACK，' +
+			'八帧走完，末帧收在「生产者到 broker」与「消费者到 broker」两段独立责任链。',
+		caption:
+			'confirm 只证明 broker 收到了，消费成败归手动 ACK——两段责任链各守一段才叫不丢，重发造成的重复交给幂等。',
+		source: 'rabbitmq-reliable',
+		narration: [
+			'「不丢」是三段责任链：生产者确认、broker 持久化、消费者手动 ACK。',
+			'生产者发持久化消息，delivery_mode 为 2，经交换机路由进队列。',
+			'消息先进内存排队，落盘前都不可靠，确认此刻被门控着。',
+			'durable 队列收下这条消息，写盘完成才有资格回确认。',
+			'生产者收到确认才删本地待确认记录，收不到就超时重发。',
+			'随后 broker 投递给消费者，确认只代表收到，与消费成败无关。',
+			'消费者处理完回手动 ACK，broker 才删这条，没 ACK 就重新入队。',
+			'两段责任链各自守住才不丢，重发造成的重复交给业务幂等。',
+		],
+	},
 };
