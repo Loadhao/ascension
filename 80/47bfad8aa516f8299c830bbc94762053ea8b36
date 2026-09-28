@@ -1,0 +1,26 @@
+src/content/docs/java/advanced/jvm/03-garbage-collection.mdx
+  s_ce5d503f848900::t_0b8d1988fd645d 93-96
+src/data/viz/media.ts
+  s_ce5d503f848900::t_9b931b73cbe4ad 366-367
+  s_ce5d503f848900::t_7313215b5f28ad 361-365,368-385
+src/data/quiz/java.json
+  s_ce5d503f848900::t_cc45cd64228b64 2543-2563
+docs/evolution.md
+  s_ce5d503f848900::t_20b99fc68b7f93 60,125-140,207
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8047bfad8aa516f8299c830bbc94762053ea8b36",
+  "prompts": {},
+  "sessions": {
+    "s_ce5d503f848900": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "8818c161-d719-428d-b140-668d94d9d1eb",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
