@@ -161,6 +161,66 @@
         4
       ],
       "hint": "第 1/3/5 项正确、第 2/4 项错。第 2 项两处都不成立：官方明确说过用一个包含部分重叠对象的新数组替换旧数组仍是很高效的操作，不会丢弃现有 DOM 重刷整表；而 v-if 与 v-for 写在同一元素上在 Vue 3 不是慢而是跑不通——v-if 优先级更高，求值时 v-for 的别名还不存在，官方注释直接写会抛错。过滤要换成返回过滤结果的 computed，整表隐藏则把 v-if 移到 ul 这类容器上。第 4 项错在把位置当身份：认人的判据是节点类型与 key 两个字段一起比，而 v-for 里第 i 项的下标恒等于 i，所以绑下标和不写 key 给出同一套配对结果，只是仍要付认人那笔账；笔记把这条明标为按官方两句推出来的推导，不是官方条文，别说成官方结论。回看第 1 项的代价：顺序变了在 DOM 层被翻译成每个位置的内容都变了，带着输入值的那个节点一直坐在原位，于是刚打的字跑到邻居那一条。第 3 项补一句开关在哪：新下标一路单调不减时 moved 为假，连最长稳定子序列都不算、一次 move 也不发，真正保持不动的那一批正是最长稳定子序列。"
+    },
+    {
+      "id": "vue-formmodel-147",
+      "noteId": "vue/basic/core/04-form-inputs",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 v-model 在不同元素上读写的属性与事件、以及初始值的来源，按笔记说法哪些正确？（多选）",
+      "options": [
+        "绑的是 checked 属性、侦听 change 事件；value 只决定勾上时往绑定的数组里塞哪一份，多个框绑同一个数组时数组里放的是各框的 value",
+        "静态 HTML 里预置的 value、checked、selected 会被 v-model 忽略，输入框显示为空；初值必须声明在 JS 侧的状态里",
+        "下拉框上 v-model 表达式的初值若不匹配任何选项，元素渲染成「未选择」状态，iOS 上因此选不到第一项；官方给的对策是补一个 disabled 的空值占位选项",
+        "想让勾选与未勾选落到 yes、no 两个自定义字符串，用 true-value 与 false-value；这两个 attribute 同时会改写元素的 value，所以走原生 form 提交时未勾选的那一项也会带上 no",
+        "中文输入法在拼字阶段 v-model 不触发更新，官方给的对策是在这个 v-model 之外再补一个 change 事件监听，把拼字中间态同步进来"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "第 1/2/3 项正确、第 4/5 项错。一个 v-model 在原生元素上是三对规则：文本类输入框与 textarea 读写 value 并侦听 input，checkbox 与 radio 读写 checked 并侦听 change，select 绑定 value 并侦听 change；「每按一下都同步」那条通路属于文本类，所以实时联想挂得上去。第 4 项后半与正文相反：这两个 attribute 不改变元素的 value attribute，而浏览器提交表单时根本不会带上未勾选的复选框，所以原生 form 那条路上 no 永远不出现，要保证两个值里必有一个被提交就得换成单选按钮；它们还是模板层的约定，只与 v-model 配套。第 5 项把对策记反了：官方的做法是绕开 v-model，自己接 input 监听器并绑 value，而不是在 v-model 上再叠一层 change——顺带一提 .lazy 也不是解法，它把同步整体推到了 change。补三条同页纪律：textarea 里不支援插值表达式，只能绑 v-model；type 为 number 的输入框会自动启用 number 修饰符，不必显式再挂一次；defineModel 给的 default 只补子组件这一侧的读数，不会把值推回父组件，父子会不同步。"
+    },
+    {
+      "id": "vue-formvalid-148",
+      "noteId": "vue/basic/core/04-form-inputs",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "v-model 只负责把值同步进状态，「这个值合不合格」完全归浏览器的约束校验。按笔记，关于这一层的说法哪些正确？（多选）",
+      "options": [
+        "满足不了约束就匹配 :invalid，而 :user-invalid 还要求用户与该控件交互过；带 required 的必填项只要为空就即刻无效，所以用 :invalid 上色会一打开页面就满屏红",
+        "只写 pattern 不写 required 时，用户什么都不填也算一次合法提交——空值本身不触发 pattern 判定",
+        "用 v-model 把一段超长文本程序化回填进输入框，maxlength 不会报警：长度约束只对用户亲手输入的内容生效",
+        "setCustomValidity 传一段非空消息之后，元素就一直保持无效，直到页面重新加载或者控件失焦才自动恢复",
+        "表单上加 novalidate 等于关掉必填判定，带 required 的字段可以直接提交出去，自绘错误消息正是靠它腾出提交通道"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "第 1/2/3 项正确、第 4/5 项错。第 4 项缺的是「主动置空」那一步：customError 非空就拦住提交，判据解除之后必须再调一次并传空串，否则表单永远提交不出去；MDN 那段标准写法是先读内置判据、再叠自定义约束，最后那行空串是收尾而不是可选项。第 5 项把范围说大了：novalidate 关掉的只是浏览器自己的错误气泡，约束校验 API 与 :valid、:invalid 这类伪类照样工作——它换的是「谁来展示」，不是「谁来判定」。补三条同页读数：validity 上每条判据各有字段，必填落 valueMissing、类型落 typeMismatch、正则落 patternMismatch、长度越界落 tooShort 与 tooLong、数值越界落 rangeUnderflow 与 rangeOverflow；checkValidity 遇到不合格的元素还会发出 invalid 事件，reportValidity 则把不合格字段逐一报出来，适合配 preventDefault 用在提交处理器里；先确认 willValidate 为真再去读 validationMessage，不参与判据的控件返回的是空串。type 为 email 的输入框自带模式判定，无需再挂 pattern。客户端这一整层可以被人整条绕过——改 DOM 或直接发请求，服务端那份判据才是边界。"
+    },
+    {
+      "id": "vue-router-149",
+      "noteId": "vue/intermediate/routing/01-routing-and-guards",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 Vue Router 的导航守卫与「同组件换参数」，按笔记说法哪些正确？（多选）",
+      "options": [
+        "从 /users/johnny 跳到 /users/jolyne 复用同一个组件实例，生命周期钩子不再调用，详情页里还留着上一个用户的数据；改用 watch 只盯会变的那一项，或 onBeforeRouteUpdate——后者比 watch 多一个能力，可以返回 false 把这一跳取消",
+        "全局 beforeEach 按创建顺序依次执行，导航要等所有守卫 resolve 完才继续；afterEach 不接受 next 也改变不了导航本身，用它埋点可以、用它拦权限拦不住",
+        "守卫拿结论的方式是返回值：返回 undefined 或 true 放行、返回 false 取消并把地址重置回 from 对应的地址、抛出的错误交给 router.onError()、返回一个路由地址则中断当前导航并用相同的 from 起一次新导航",
+        "在 beforeEach 里不通过就 next 一个登录地址、然后无条件再调用一次 next，是最常见的写法——next 仍被官方支持，守卫挂起多半是别处忘了放行",
+        "路由组件的 component 写成 defineAsyncComponent 包一层更稳妥，因为路由表建立时就会执行一次取组件的函数，不必等到第一次进入页面"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "第 1/2/3 项正确、第 4/5 项错。第 4 项正是官方点名的错误用例：next 虽然仍被支持，但同一个守卫里必须严格只调用一次，两次调用会让钩子永不 resolve、这一跳永远挂着——官方原话是它「是一个常见的错误来源」，经 RFC 讨论后被移除。第 5 项两处都不对：官方明确不要在路由里使用异步组件，路由组件本身就该写成动态导入；而 Vue Router 只在第一次进入该路由时才去执行那个函数、之后用缓存的数据，不是建表时就取。补三条同页读数：一次导航的完整解析共 12 步，失活组件的 beforeRouteLeave 在最前，执行 beforeRouteEnter 传给 next 的回调在最后，解析异步路由组件排在被激活组件的 beforeRouteEnter 之前；setup 语法里没有 beforeRouteEnter 的对应函数，要用全局守卫；监听整个 route 对象是官方要求避免的写法。meta 有两种读法：to.matched 是父记录在前、子记录在后的整串记录，to.meta 则把整条匹配链上的字段合并，子记录可以覆盖父记录，所以登录判定只写一次就够；被拦下的那一跳要把 to.fullPath 塞进 query 带着，登录成功再回跳。"
     }
   ]
 }
