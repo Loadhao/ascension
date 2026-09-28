@@ -1,0 +1,24 @@
+src/content/docs/rocketmq/advanced/core/01-rocketmq-features.mdx
+  s_c475bf4f596489::t_457b25124989bf 69-72
+src/data/viz/media.ts
+  s_c475bf4f596489::t_5de67417d08b21 343-344
+  s_c475bf4f596489::t_76664414c5ff5f 338-342,345-360
+src/data/quiz/rocketmq.json
+  s_c475bf4f596489::t_b14c7c3e5868fa 221-240
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "567b35c3a4f47110db3eeb7ab2cad84f38cf973d",
+  "prompts": {},
+  "sessions": {
+    "s_c475bf4f596489": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "5769de85-f776-4a6d-81a0-18951e68755b",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
