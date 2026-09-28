@@ -1,0 +1,31 @@
+src/styles/custom.css
+  s_29d60b8a632172::t_04103c59ed5212 3453-3455,3457,3464-3468,3475-3494,3496-3503,3505-3583
+  s_41b3129b194852::t_5156eb13d073d8 29,39-58
+scripts/consistency-verify.mjs
+  s_41b3129b194852::t_b484304c047c9e 177
+  s_41b3129b194852::t_e681e70d3cd63b 178
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6dcece1a2f335b3a6cc2c81653a93d489bd4bcc4",
+  "prompts": {},
+  "sessions": {
+    "s_29d60b8a632172": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "e90a765b-893b-476e-a30b-52595cdec6ce",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_41b3129b194852": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "8a536a9c-787c-421f-b31e-351ba893392d",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
