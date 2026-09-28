@@ -40,6 +40,50 @@ const { mediaAssets } = await import(pathToFileURL(join(ROOT, 'src/data/viz/medi
 const noFigure = notes.filter((n) => !withFigure.has(n));
 const noQuiz = notes.filter((n) => !quizNoteIds.has(n));
 const bothGaps = noFigure.filter((n) => new Set(noQuiz).has(n));
+// A 车道两级兜底池里混着 `docs/content-roadmap.md` §4「已饱和清单」的点——配方 §2 明写
+// 饱和主题一律不写、改为互链，而第 204 轮实测双缺 19 条的前 8 条全是它，每个 A 轮都得
+// 人工比对一次。这里现读 §4 表格做标注：只改呈现、不改选题规则，落点清单不落进脚本。
+const LEVELS = new Set(['basic', 'intermediate', 'advanced']);
+// 「代表篇」列有三种写法：目录（`distributed/intermediate/case-studies/`、`zookeeper/*`）、
+// 带扩展名的文件（`java/advanced/jvm/07-tuning.md`）、省掉等级段的简写（`redis/usage/03`，
+// 真实落点是 `redis/intermediate/usage/03-distributed-lock.mdx`）。故比对时同时用全路径与
+// 「去掉等级段的短路径」两种形态——只比全路径的话简写会静默不命中，标注就成了假绿。
+const saturatedTopics = [];
+for (const line of (readFileSync(join(ROOT, 'docs/content-roadmap.md'), 'utf8')
+	.replace(/\r\n/g, '\n')
+	.split('\n## ')
+	.find((s) => s.startsWith('4.')) ?? '')
+	.split('\n')) {
+	if (!line.startsWith('|')) continue;
+	const cells = line.split('|').map((c) => c.trim());
+	if (cells.length < 4 || cells[2] === '代表篇' || /^-{3,}$/.test(cells[2])) continue;
+	const tokens = [...cells[2].matchAll(/`([^`]+)`/g)].map((m) => {
+		const raw = m[1];
+		const dir = raw.endsWith('/') || /\/\*$/.test(raw);
+		const file = /\.mdx?$/.test(raw);
+		return { dir, file, stem: raw.replace(/\/\*$/, '').replace(/\/$/, '').replace(/\.mdx?$/, '') };
+	});
+	if (tokens.length) saturatedTopics.push({ label: cells[1], tokens });
+}
+const saturatedHits = saturatedTopics.reduce((s, t) => s + t.tokens.length, 0);
+function covers(path, t) {
+	if (t.dir) return path === t.stem || path.startsWith(t.stem + '/');
+	if (t.file) return path === t.stem;
+	return path === t.stem || path.startsWith(t.stem + '/') || path.startsWith(t.stem + '-');
+}
+const saturatedHit = (note) => {
+	const segs = note.split('/');
+	const forms = segs.length === 4 && LEVELS.has(segs[1]) ? [note, `${segs[0]}/${segs[2]}/${segs[3]}`] : [note];
+	return saturatedTopics.find((t) => t.tokens.some((k) => forms.some((f) => covers(f, k))))?.label ?? '';
+};
+// 标注后仍按原顺序整池打印，饱和条目留在原位可见（过滤掉会让「这池有多少条」读不出来）
+const annotate = (list) => {
+	const hits = list.map((n) => saturatedHit(n));
+	return {
+		saturated: hits.filter(Boolean).length,
+		lines: list.map((n, i) => (hits[i] ? `${n}  ← §4 已饱和：${hits[i]}` : n)),
+	};
+};
 const videoQueue = Object.keys(flowDemos).filter((k) => !Object.values(mediaAssets).some((a) => a.source === k));
 const quizQueue = readFileSync(join(ROOT, 'docs/coverage-deepening.md'), 'utf8')
 	.split('\n')
@@ -66,10 +110,17 @@ const show = (label, list) => {
 
 console.log(`笔记 ${notes.length} 篇｜题库 ${quizNoteIds.size} 篇有题｜动画 ${Object.keys(flowDemos).length} 支｜影像 ${Object.keys(mediaAssets).length} 个`);
 console.log(
+	`§4 已饱和标注：解析出 ${saturatedTopics.length} 个主题 / ${saturatedHits} 个落点${
+		saturatedTopics.length === 0 ? '  ⚠ 一条都没解析到，A 池标注已空转（roadmap §4 表格被改动？）' : ''
+	}`,
+);
+console.log(
 	`\n>>> ${argRound === -1 ? '下一轮' : '游标核对（--round 覆盖，未读台账）'} = 第 ${next} 轮，${next} mod 5 = ${next % 5} → 车道 ${lane}`,
 );
-show('A 车道｜既无图又零题（价值最高，补一篇两种缺口都收）', bothGaps);
-show('A 车道｜纯文字无图笔记', noFigure);
+const gapPool = annotate(bothGaps);
+const textPool = annotate(noFigure);
+show(`A 车道｜既无图又零题（价值最高，补一篇两种缺口都收）｜其中 §4 已饱和 ${gapPool.saturated} 条不可直取`, gapPool.lines);
+show(`A 车道｜纯文字无图笔记｜其中 §4 已饱和 ${textPool.saturated} 条不可直取`, textPool.lines);
 show('A 车道｜有图但零题笔记', noQuiz.filter((n) => withFigure.has(n)));
 show('B 车道｜已有动画未出配音视频', videoQueue);
 show('C 车道｜coverage-deepening 队列头部', quizQueue.map((l) => l.replace('- [ ] ', '')));
