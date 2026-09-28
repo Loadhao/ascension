@@ -289,4 +289,27 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'半同步折中：至少一台从库收到才返回，降点吞吐换不丢数据。',
 		],
 	},
+	'zk-zab-video': {
+		title: 'ZAB 写流程 · 配音短片',
+		src: '/videos/zk-zab-video.mp4',
+		poster: '/videos/zk-zab-video.poster.png',
+		width: 1280,
+		height: 786,
+		duration: 46.0,
+		alt: '动画短片：一次 ZooKeeper 写入依次经过 Leader 分配 zxid、按序广播 Proposal、' +
+			'Follower 落盘回 ACK、过半提交后广播 COMMIT，末两帧演 Leader 宕机后 zxid 最大者当选并先同步数据。',
+		caption:
+			'那句 ACK 的意思是「我已持久化」而不是「已对客户端可见」——恢复时已过半的写不丢，未过半的丢弃。',
+		source: 'zk-zab',
+		narration: [
+			'ZAB 写流程：排序、广播 Proposal、过半 ACK、提交。',
+			'写请求只由 Leader 处理，每个写分配全局递增的 zxid。',
+			'Proposal 按 zxid 顺序广播，Follower 各自落盘。',
+			'Follower 落盘才回 ACK：我已持久化，不是已对客户端可见。',
+			'过半 ACK 到齐（三台取两台），Leader 提交后广播 COMMIT。',
+			'Follower 应用变更，Leader 回客户端，顺序一致靠 zxid。',
+			'Leader 宕机选主：zxid 最大者当选，已过半不丢，未过半丢弃。',
+			'新 Leader 先同步数据再服务：广播与恢复循环，与 Raft 同源。',
+		],
+	},
 };
