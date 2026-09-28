@@ -1,0 +1,24 @@
+{
+  "cards": [
+    {
+      "id": "kafka-txn-ic-001",
+      "noteId": "kafka/intermediate/core/06-transactions-eos",
+      "group": "消息队列",
+      "difficulty": 5,
+      "q": "Kafka 事务里的 transactional.id 为什么不能随机生成？它到底在防什么？",
+      "intent": "这一问筛的是有没有读过 fencing 的语义，而不是只会背事务四步。\n短板在把它当成一次性字符串：重启换一个新 ID，等于放弃跨会话保护。\n区分度落在多个实例共用同一个 ID 的后果上——是彼此 fence，不是各自相安。",
+      "answer": "它是身份不是随机串，靠它才能把僵尸生产者 fence 掉。\n新实例 initTransactions 时，coordinator 给这个 ID 抬高 producer epoch，并把上一个会话没结束的事务中止掉。\n旧实例再写就撞 ProducerFencedException；幂等生产者的 PID 随进程消失，做不到这一条。\n两条纪律：ID 必须与任务分区一一对应，多个实例共用会彼此 fence。\n也不能随机生成，Kafka Streams 用 application.id 加任务编号派生，天然一一对应。",
+      "followup": "大概率追问提交超时怎么处置：超时不等于失败，它可能已经提交，重试提交或重发都是错姿势。\n还会问不带 ID 的事务行不行：纯生产者照样拿到原子写，只是失去跨会话保护。\n再往下是版本变化：4.0 起多了 TransactionAbortableException，官方要求把它和 TimeoutException 都当作该 abort 的信号。"
+    },
+    {
+      "id": "kafka-rebalance-ic-002",
+      "noteId": "kafka/intermediate/core/05-rebalance",
+      "group": "消息队列",
+      "difficulty": 4,
+      "q": "为什么一次 Rebalance 会让整个消费组停掉消费？线上怎么治？",
+      "intent": "这一问先筛有没有讲清代价的来源，而不是只答有人进组就重平衡。\n短板是不知道默认 Eager 协议要求全员先交出手头分区。\n区分度在两种治法各对付什么：发布抖动与大组停摆不是同一件事。",
+      "answer": "全组停摆来自默认 Eager 协议，不是偶发抖动。\nJoinGroup 一开始所有成员都要放弃手头全部分区再进组，哪怕这次只是加了一个消费者。\n于是大组一次重平衡要停数秒到数十秒、期间消息积压；Generation 每次加一，旧代提交的 offset 会被拒。\n治发布抖动用静态成员 group.instance.id：重启后身份不变，Coordinator 只当它是暂离，滚动发布不再触发重平衡。\n治大组停摆用 CooperativeStickyAssignor 增量协作：只挪必要的分区，被挪的短暂停一下，其余全程不停。",
+      "followup": "大概率追问怎么发现线上在频繁重平衡——看消费组 generation 是否持续增长、消费 TPS 周期性归零，日志里找 heartbeat failed。\n还会问它为什么带来重复消费：分区转手时已消费未提交的 offset 丢了，接手方从提交点重放。\n再问 Coordinator 本身是谁：组名哈希到 __consumer_offsets 的某个分区，该分区的 Leader 所在 Broker 担任。"
+    }
+  ]
+}
