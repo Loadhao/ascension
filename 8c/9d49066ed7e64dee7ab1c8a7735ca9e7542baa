@@ -1,0 +1,25 @@
+src/data/interview/spring-ai.json
+  s_c36df525e2d4b5::t_b0084e1aa12c4b 1-8,12-18,22-24
+  s_c36df525e2d4b5::t_a2a2aa16249a6a 21
+  s_c36df525e2d4b5::t_565a7f65cb863d 9-11,19-20
+docs/coverage-deepening.md
+  s_c36df525e2d4b5::t_fbf10622c0d084 99-104
+docs/evolution.md
+  s_c36df525e2d4b5::t_675ea605af0909 68,124-139,210,787
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8c9d49066ed7e64dee7ab1c8a7735ca9e7542baa",
+  "prompts": {},
+  "sessions": {
+    "s_c36df525e2d4b5": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "8e1a173a-dd21-4a42-8c01-270b75beeea9",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
