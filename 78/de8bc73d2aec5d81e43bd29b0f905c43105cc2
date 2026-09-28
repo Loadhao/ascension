@@ -1,0 +1,24 @@
+docs/superpowers/specs/2026-09-28-interview-cards-design.md
+  s_8d478b2b81ffe2::t_f7b76fd2fa4e56 70,72,76-77,79-85
+  s_8d478b2b81ffe2::t_818ced5e316666 97-101
+  s_8d478b2b81ffe2::t_eccfecd3468fb3 128,130-131
+  s_8d478b2b81ffe2::t_1a24b511d0ab85 16
+  s_8d478b2b81ffe2::t_fa09c58aa1237e 1-15,17-31,33-69,71,73-75,78,86-96,102-127,129,132-143
+  s_8d478b2b81ffe2::t_4df8b815f741a6 32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "78de8bc73d2aec5d81e43bd29b0f905c43105cc2",
+  "prompts": {},
+  "sessions": {
+    "s_8d478b2b81ffe2": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "65ca6b46-60f5-4668-a933-143f2cd1e327",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
