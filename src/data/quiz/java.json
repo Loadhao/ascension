@@ -2501,5 +2501,44 @@
     ],
     "hint": "第 1/2/3/4 项正确、第 5 项错。第 5 项两半都是正文明确反对的说法：CAS 失败靠自旋重试而不是加锁（空桶路径完全无锁，冲突才 synchronized 锁桶头，锁粒度才从「段」缩到「桶头节点」）；树化是双条件，链长 >= 8 与 table >= 64 同时成立才转红黑树。第 2 项的「锁错对象」是该篇给 double check 的原话理由——拿到锁不等于锁对了东西，等锁那段时间里桶头可能已被别人换掉。第 3 项按笔记的流程图读：链长与 table 两个阈值缺一不可，这也是它和 HashMap 常被混记的地方。第 4 项是代码顺序：putVal 第一行先判 key 与 value 是否为 null 并直接抛 NPE，之后才算 spread 扰动；扰动本身写作高低位异或、再与 HASH_BITS 相与。第 1 项的自旋结构在扩容处也复用——碰到 ForwardingNode 同样回到循环里换用新表继续。"
   }
+  ,
+  {
+    "id": "java-aqs-148",
+    "noteId": "java/intermediate/concurrent/05-aqs",
+    "type": "multiple",
+    "difficulty": 4,
+    "q": "按笔记里 AQS 的模板方法约定与 CLH 队列的节点细节，下列说法正确的是？（多选）",
+    "options": [
+      "子类只回答「状态怎么变」：tryAcquire、tryRelease、tryAcquireShared、tryReleaseShared、isHeldExclusively 按需覆写，AQS 给的默认实现全部抛 UnsupportedOperationException，排队、挂起、唤醒、重试的骨架由 acquire 与 release 代劳",
+      "自研互斥锁的 tryRelease 里 setState(0) 不必用 CAS，因为只有持锁线程才会走到释放；tryAcquire 却必须 compareAndSetState(0, 1)，那是所有竞争者共同抢的同一个改写",
+      "队列头是不存线程的虚拟哨兵，真正的等待者从第二个节点开始；每个节点只盯前驱的 waitStatus，靠前驱释放时唤醒自己，而不是监听整条队列做全队列广播",
+      "head 节点存着当前持锁的线程，释放时把 head.thread 取出来 unpark，所以队头就是这把锁的 owner",
+      "五个模板方法必须全部覆写，哪怕只做独占锁也要把共享那两个补上空实现，否则编译不过"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "hint": "第 1/2/3 项正确、第 4/5 项错。第 4 项把哨兵当成了业务节点：头节点不挂线程，release 唤醒的是 head 的后继里那个线程，被叫醒的人还得自己再去 CAS；锁归谁由子类的 state 与独占线程字段说了算。第 5 项错在「必须」——默认实现抛 UnsupportedOperationException 是运行期才发生的事，只做独占的类不碰共享那两个方法照样能排队，笔记里 25 行不到的 MyMutex 只写了 tryAcquire、tryRelease 与 isHeldExclusively。第 3 项那句「只盯前驱」是 CLH 自旋锁思想搬到阻塞锁上的变体：全队列广播会把一次释放摊给所有等待者，这里改成每个节点只关心前驱会不会叫醒自己。顺带把 waitStatus 的四个取值归好类：1 是 CANCELLED（节点已放弃等待）、-1 是 SIGNAL（前驱释放时要把我唤醒）、-2 是 CONDITION（挂在条件队列里）、0 是默认值。"
+  }
+  ,
+  {
+    "id": "java-threadlocal-149",
+    "noteId": "java/intermediate/concurrent/06-threadlocal",
+    "type": "single",
+    "difficulty": 4,
+    "q": "「只要用了 ThreadLocal 就一定会内存泄漏」——按笔记的说法这句话该怎么判？下列理解正确的是？",
+    "options": [
+      "泄漏成立要两个条件同时满足：ThreadLocal 实例被回收让 key 变成 null，并且那条线程长期存活；一次性线程用完就连同它那份 Map 一起回收，谈不上长期残留",
+      "key 变成 null 之后整个 Entry 就成了垃圾，value 会在下一次 GC 里连着一块被清掉",
+      "只要业务代码不再持有那个 ThreadLocal 实例，泄漏就成立，跟线程还能活多久没有关系",
+      "线程池之所以放大残留，是因为池把每个线程的 ThreadLocalMap 合并成了一张全局共享的表"
+    ],
+    "answer": [
+      0
+    ],
+    "hint": "第 1 项正确、第 2/3/4 项错。正文那句「泄漏成立需要两个条件同时满足」是最容易被压成一句话的地方：实例被回收只把 key 变成 null，value 还挂在 Entry 上；线程要是很快退出，这份残留跟着线程一起消失，所以核心线程永生才是放大器，非池化的一次性线程构成长期残留说不通。第 2 项把弱引用当成了清理器：GC 只放手 key，value 是普通字段、被强引用握着，要等某一次 set、get 或 rehash 顺路才被扫走，没人再碰它就永远等不到。第 3 项只说中一半，缺的正是线程寿命那一半。第 4 项把结构说反了：Map 一直挂在各个 Thread 的 threadLocals 字段上，池化没有把它并成一张表。这也是笔记把 remove 写进 finally 的理由——不能指望顺路清理来兜底。"
+  }
   ]
 }
