@@ -1,0 +1,24 @@
+src/data/viz/media.ts
+  s_bd5a6c1a7686ce::t_6acd09110d2f93 315-319,321-337
+  s_bd5a6c1a7686ce::t_fc65c152b5c318 320
+src/content/docs/seata/intermediate/modes/01-at-tcc-saga.mdx
+  s_bd5a6c1a7686ce::t_b8b2068c47100b 65-68
+src/data/quiz/seata.json
+  s_bd5a6c1a7686ce::t_927245569f5ad9 118-133
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a4258cb190263ad7bbcf944f10f22a3aefea1309",
+  "prompts": {},
+  "sessions": {
+    "s_bd5a6c1a7686ce": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "8ac1274c-3693-4726-99f4-2c2e30bd1c66",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
