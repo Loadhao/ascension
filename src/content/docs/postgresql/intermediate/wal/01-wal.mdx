@@ -39,6 +39,10 @@ flowchart LR
 
 <AlgorithmVizIsland demo="pg-wal" />
 
+需要脱离屏幕听一遍时，上面这支动画有逐帧对应的配音短片（九帧、约 51 秒）：
+
+<AlgorithmVizIsland demo="pg-wal-video" />
+
 这和 MySQL redo 同构、和 binlog 不同：binlog 是逻辑变更（给复制
 和闪回用），InnoDB 崩溃恢复靠 redo；PG **一条 WAL 同时服务崩溃
 恢复和物理复制**。逻辑复制是后来叠加的解码槽，不是 WAL 的本职。

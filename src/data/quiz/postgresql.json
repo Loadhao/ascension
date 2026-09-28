@@ -161,6 +161,22 @@
       "answer": [0],
       "hint": "老主数据已分叉/落后，必须从新主全量重建——pg_basebackup -R 顺便生成 standby.signal，属主不对起不来是高频坑；PG 12 起 recovery.conf 被移除（数据目录存在它则起不来）。pg-sync-003 考 synchronous_commit 五档，本题考故障后的重入流程。",
       "difficulty": 4
+    },
+    {
+      "id": "pg-ckpt-012",
+      "noteId": "postgresql/intermediate/wal/01-wal",
+      "type": "multiple",
+      "q": "关于 checkpoint（检查点），按笔记的说法正确的有哪几项？",
+      "options": [
+        "它一次做三件事：刷一批脏页、记下重放从这里开始、让更旧的 WAL 得以回收或交给归档",
+        "调得太勤会把脏页集中刷出 IO 尖峰，调得太稀则崩溃之后要补的日志拉得很长、恢复时间变差",
+        "checkpoint_timeout 与 max_wal_size 谁先到谁触发；监控里频繁出现 req 说明 WAL 产量把超时门槛打穿了",
+        "检查点把脏页刷完，客户端的提交从此就不必再等日志落盘",
+        "崩溃后数据文件停在旧状态，已提交的内容只能靠基础备份整个重来"
+      ],
+      "answer": [0, 1, 2],
+      "hint": "提交能不能返回，只看日志有没有落盘，跟检查点刷没刷脏页无关；崩溃后靠重放把页追回来，不必整套重来。经常触发请求式检查点是写放大信号，该放宽体积上限或去查那批突发写入。",
+      "difficulty": 4
     }
   ]
 }
