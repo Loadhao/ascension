@@ -62,6 +62,10 @@ AT 不是 2PC：资源锁（行锁）在本地提交时就放了，只留一把 
 
 <AlgorithmVizIsland demo="seata-at" />
 
+不想盯屏幕时，把「锁到底什么时候放、二阶段到底做什么」听一遍——8 句逐帧对应上面那支动画（53.1 秒）：
+
+<AlgorithmVizIsland demo="seata-at-video" />
+
 ## TCC：把隔离做成业务预留
 
 TCC 没有 undo_log，Try 必须把「这笔事务可能成功」编码进数据模型：

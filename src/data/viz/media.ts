@@ -312,4 +312,27 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'新 Leader 先同步数据再服务：广播与恢复循环，与 Raft 同源。',
 		],
 	},
+	'seata-at-video': {
+		title: 'Seata AT 一二阶段 · 配音短片',
+		src: '/videos/seata-at-video.mp4',
+		poster: '/videos/seata-at-video.poster.png',
+		width: 1280,
+		height: 798,
+		duration: 53.1,
+		alt: '动画短片：一次 Seata AT 全局事务依次演 TM 申请 XID、RM 代理拦截 SQL 生成 undo log、' +
+			'一阶段本地提交当场释放行锁、分支二同样处理、全局提交后异步删 undo log，末两帧演按改前镜像反向补偿与 AT 不是 2PC 的复盘。',
+		caption:
+			'行锁在本地提交那刻就放了，只留一把 TC 侧全局锁——这一条把 AT 和两阶段提交分开。',
+		source: 'seata-at',
+		narration: [
+			'三角色分工：TM 发起、TC 协调、RM 管分支。',
+			'注解开启全局事务，向 TC 申请唯一的 XID 往下传播。',
+			'RM 拦截 SQL，解析改前改后镜像，生成 undo log。',
+			'一阶段当场提交本地事务，行锁立刻释放，不等二阶段。',
+			'分支二同样：留镜像、拿全局锁、本地提交并注册。',
+			'全局提交只做异步清理：删掉 undo log，几乎零成本。',
+			'任一分支失败就全局回滚，按镜像反向补偿，脏写人工兜。',
+			'所以 AT 不是两阶段提交：本地锁提交时就放了，只留 TC 侧全局锁。',
+		],
+	},
 };
