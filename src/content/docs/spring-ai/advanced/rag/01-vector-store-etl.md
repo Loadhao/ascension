@@ -100,7 +100,7 @@ Filter.Expression exp = b.and(
     .build();
 ```
 
-:::warning[IS NULL 系列不是所有库都实现了]
+:::caution[IS NULL 系列不是所有库都实现了]
 官方明确留了一句 **"IS NULL and IS NOT NULL have not been implemented in all vector
 stores yet."** 跨库可移植性在这里有个真实的洞——用到这两个操作符时，换库要单独回归。
 :::

@@ -205,6 +205,26 @@
         0
       ],
       "hint": "签名是 EvaluationRequest(String userText, List<Content> dataList, String responseContent)，文档里没有 expected / ground-truth 槽——它评的是「回答与上下文是否自洽」，不是「是否等于正确答案」。上下文应取 advisor 实际检索到的文档（chatResponse.getMetadata().get(RetrievalAugmentationAdvisor.DOCUMENT_CONTEXT)），否则测的是拼接而不是检索质量。见《Evaluator 与 LLM 裁判》。"
+    },
+    {
+      "id": "sa-schema-013",
+      "noteId": "spring-ai/basic/foundation/02-chatclient-api",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 ChatClient 的结构化输出，哪些说法成立？",
+      "options": [
+        "entity 一条链做完三件事：从 Java 类型生成 JSON Schema、把格式要求写进 prompt、再把响应反序列化回该类型",
+        "validateSchema 开的是响应侧兜底：校验不过就把具体错误追加进 prompt 重发，默认上限三次",
+        "useProviderStructuredOutput 方向相反，靠厂商原生的结构化输出能力在请求侧做约束",
+        "只要调用 entity 就自带 Schema 校验与自纠错重试，不必再显式开启任何东西",
+        "返回 List 这类泛型集合时直接传元素类型的 class 就够，Schema 推导不依赖额外的类型信息"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "官方把这三步写成「a JSON schema is generated from your type, the model is instructed to honor it, and the response is deserialized into your type」。干扰项一：默认只「要求 + 解析」，真正的校验重试要显式 validateSchema()，它由 StructuredOutputValidationAdvisor 驱动、官方标注是实验特性且非流式。干扰项二：泛型集合必须走 ParameterizedTypeReference，否则类型擦除后推不出 Schema。另记一条 2.0 断代：BeanOutputConverter 把 Schema 生成委托给 JsonSchemaGenerator，与工具调用共用同一套语义，所以排障可以跨功能迁移。见《ChatClient 门面与结构化输出》。"
     }
   ]
 }

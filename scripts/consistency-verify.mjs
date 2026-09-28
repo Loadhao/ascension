@@ -180,14 +180,11 @@ const report = {};
 // （0.42.0 读到的就是 note/tip/caution/danger 四个，无别名映射），升 Starlight 时先复核该表。
 {
   const ASIDE_TYPES = new Set(['note', 'tip', 'caution', 'danger']);
-  // 全站现算出的已知存量，已登记进 docs/evolution.md 候选表第 17 行待修。
+  // 全站现算出的已知存量，已登记进 docs/evolution.md 候选表第 17/18 行待修。
   // 修掉或改写到不再命中时，下面「清单过期」那条会判红要求同步删项——
   // 既不放宽容差，也不允许清单静默过期（与 quiz-verify 第 9 项同款口径）。
-  const KNOWN = {
-    'src/content/docs/spring-ai/advanced/rag/01-vector-store-etl.md:103|容器名': ':::warning 不在四类内',
-    'src/content/docs/spring-ai/advanced/rag/02-rag-advisors.md:106|容器名': ':::warning 不在四类内',
-    'src/content/docs/spring-ai/basic/foundation/02-chatclient-api.md:145|容器名': ':::warning 不在四类内',
-  };
+  // 第 216 轮登记 38 处 → 第 221 轮销 2 处 → 第 233 轮销最后 3 处，现存量归零。
+  const KNOWN = {};
   const violations = [];
   const scanned = { files: 0, opens: 0 };
   const walkAsides = (dir) => {

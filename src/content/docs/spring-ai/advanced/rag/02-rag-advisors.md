@@ -103,7 +103,7 @@ var advisor = RetrievalAugmentationAdvisor.builder()
     .build();
 ```
 
-:::warning[别凭直觉写没出现过的装配方法]
+:::caution[别凭直觉写没出现过的装配方法]
 `queryExpander(...)`、`documentJoiner(...)`、`documentPostProcessors(...)` 这类**单数/复数
 混猜**的名字，在文档示例里没有出现过——模块化组件是存在的，但**注入点名称要以你依赖版本的
 `RetrievalAugmentationAdvisor.Builder` 为准**。写之前用 IDE 补全确认，别照概念名硬编。
