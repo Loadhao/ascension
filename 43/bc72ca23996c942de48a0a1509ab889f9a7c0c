@@ -1,0 +1,33 @@
+src/data/graphs/vue.json
+  s_29d60b8a632172::t_1577c7d2747166 43-48
+  s_29d60b8a632172::t_8162681d27d06a 10
+src/content/docs/vue/basic/core/05-slots-and-events.md
+  s_29d60b8a632172::t_0a9eba4d05008d 168-169,172-173
+  s_29d60b8a632172::t_40b21b167737cf 170-171
+  s_29d60b8a632172::t_f356690f48ecaa 277
+  s_29d60b8a632172::t_ed952dc4617a38 1-27,34,36-38,40,45-167,174-276,278-290,292-484
+  s_29d60b8a632172::t_48a9e3f408b35b 28-33,35,39,41-44
+  s_29d60b8a632172::t_a11f0e1bee3e41 291
+astro.config.mjs
+  s_29d60b8a632172::t_2a04b5e31687ff 928
+src/content/docs/vue/basic/core/index.mdx
+  s_29d60b8a632172::t_3c29ff94febc40 3,10,12-14
+docs/evolution.md
+  s_29d60b8a632172::t_a1c83c13fa8e03 110-124,192
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "43bc72ca23996c942de48a0a1509ab889f9a7c0c",
+  "prompts": {},
+  "sessions": {
+    "s_29d60b8a632172": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "e90a765b-893b-476e-a30b-52595cdec6ce",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
