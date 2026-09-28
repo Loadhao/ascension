@@ -1,0 +1,20 @@
+src/content/docs/vue/intermediate/rendering/01-update-cost.md
+  s_eab28199b23d40::t_3ba4d188e67257 48-51
+  s_eab28199b23d40::t_3055e542e82f15 143-146
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cb21615152aaf768b5d270f959b0924e3521f999",
+  "prompts": {},
+  "sessions": {
+    "s_eab28199b23d40": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "9206c975-f3b0-4d77-82be-571ac0580153",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
