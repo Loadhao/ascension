@@ -3450,26 +3450,137 @@ html.mmd-viewer-open {
   gap: 10px;
 }
 
+/* 考点卡三段：一块一色、一色一职——① 读题（violet）② 说出口（teal，最强调）
+   ③ 接追问（amber）。颜色只引用 --sum-* 语义令牌（亮暗主题各自定义、bg 与
+   ink/title 是既配好的对照对），组件与数据里不写颜色。 */
 .ic-seg {
-  padding: 14px 16px 12px;
+  padding: 12px 14px 14px;
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 10px;
   background: var(--sl-color-bg-nav);
 }
 
 .ic-seg-title {
-  margin: 0 0 8px;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 0 0 10px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--sl-color-gray-2);
 }
 
-.ic-seg-text {
+.ic-seg-no {
+  font-size: 14px;
+}
+
+.ic-seg-label {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+
+.ic-seg-hint {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* 话块：一行一块、带圆形序号徽标，靠「组块 + 序号」帮助记忆；
+   首块是结论句，加重以标出「开口第一句该说什么」 */
+.ic-beats {
+  display: grid;
+  gap: 9px;
   margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ic-beat;
+}
+
+.ic-beat {
+  position: relative;
+  padding-left: 27px;
   font-size: 15px;
-  line-height: 1.9;
-  color: var(--sl-color-white);
+  line-height: 1.75;
+  counter-increment: ic-beat;
+}
+
+.ic-beat::before {
+  content: counter(ic-beat);
+  position: absolute;
+  top: 3px;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 19px;
+  height: 19px;
+  border: 1px solid;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ic-beat:first-child {
+  font-weight: 650;
+}
+
+.ic-seg[data-tone='violet'] {
+  border-color: var(--sum-violet-border);
+  background: var(--sum-violet-bg);
+}
+
+.ic-seg[data-tone='violet'] :is(.ic-seg-hint, .ic-beat) {
+  color: var(--sum-violet-ink);
+}
+
+.ic-seg[data-tone='violet'] :is(.ic-seg-no, .ic-seg-label) {
+  color: var(--sum-violet-title);
+}
+
+.ic-seg[data-tone='violet'] .ic-beat::before {
+  border-color: var(--sum-violet-chip-border);
+  background: var(--sum-violet-chip-bg);
+  color: var(--sum-violet-title);
+}
+
+.ic-seg[data-tone='teal'] {
+  border-color: var(--sum-teal-border);
+  background: var(--sum-teal-bg);
+}
+
+.ic-seg[data-tone='teal'] :is(.ic-seg-hint, .ic-beat) {
+  color: var(--sum-teal-ink);
+}
+
+.ic-seg[data-tone='teal'] :is(.ic-seg-no, .ic-seg-label) {
+  color: var(--sum-teal-title);
+}
+
+.ic-seg[data-tone='teal'] .ic-beat::before {
+  border-color: var(--sum-teal-chip-border);
+  background: var(--sum-teal-chip-bg);
+  color: var(--sum-teal-title);
+}
+
+.ic-seg[data-tone='amber'] {
+  border-color: var(--sum-amber-border);
+  background: var(--sum-amber-bg);
+}
+
+.ic-seg[data-tone='amber'] :is(.ic-seg-hint, .ic-beat) {
+  color: var(--sum-amber-ink);
+}
+
+.ic-seg[data-tone='amber'] :is(.ic-seg-no, .ic-seg-label) {
+  color: var(--sum-amber-title);
+}
+
+.ic-seg[data-tone='amber'] .ic-beat::before {
+  border-color: var(--sum-amber-chip-border);
+  background: var(--sum-amber-chip-bg);
+  color: var(--sum-amber-title);
 }
 
 .ic-seg-note {

@@ -43,6 +43,49 @@ interface Props {
 
 const DIFFICULTY_WORDS = ['', '识别', '理解', '原理', '边界', '权衡'];
 
+/**
+ * 三段各自的色调与短标签：① 读题 ② 说出口（最强调）③ 接追问。
+ * 颜色只写语义名，实际取值由 custom.css 的 --sum-* 令牌按亮暗主题接管。
+ */
+const SEGMENTS = {
+  intent: { tone: 'violet', no: '①', label: '筛什么', hint: '这一问在区分哪一层' },
+  answer: { tone: 'teal', no: '②', label: '怎么说', hint: '一块一句，照着说出口' },
+  followup: { tone: 'amber', no: '③', label: '怎么接', hint: '追问来了先接哪句' },
+} as const;
+
+/** 一段文本按话块（`\n`）渲染成带序号的有序列表；单块也照序号走，形状只有一种 */
+function Segment({
+  field,
+  text,
+}: {
+  field: keyof typeof SEGMENTS;
+  text: string;
+}) {
+  const { tone, no, label, hint } = SEGMENTS[field];
+  const beats = text
+    .split('\n')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return (
+    <section className="ic-seg" data-tone={tone}>
+      <h2 className="ic-seg-title">
+        <span className="ic-seg-no" aria-hidden="true">
+          {no}
+        </span>
+        <span className="ic-seg-label">{label}</span>
+        <span className="ic-seg-hint">{hint}</span>
+      </h2>
+      <ol className="ic-beats">
+        {beats.map((b, i) => (
+          <li className="ic-beat" key={i}>
+            {b}
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
 function clampDifficulty(value: unknown): number {
   const n = typeof value === 'number' && Number.isFinite(value) ? Math.round(value) : 3;
   return Math.min(5, Math.max(1, n));
@@ -185,32 +228,22 @@ export default function Interview({ directions, banks }: Props) {
 
         <div className="ic-actions">
           <button type="button" className="quiz-btn" onClick={() => setOpenIntent((v) => !v)}>
-            {openIntent ? '收起这一问在筛什么' : '先看：这一问在筛什么'}
+            {openIntent ? '收起 ① 筛什么' : '先看 ① 筛什么'}
           </button>
           <button type="button" className="quiz-btn quiz-btn-primary" onClick={markSeen}>
-            {openAnswer ? '收起参考答话' : '我答完了，看参考答话'}
+            {openAnswer ? '收起答话' : '我答完了，看 ② 怎么说'}
           </button>
         </div>
 
-        {openIntent && (
-          <section className="ic-seg">
-            <h2 className="ic-seg-title">面试官为什么这么问</h2>
-            <p className="ic-seg-text">{active.intent}</p>
-          </section>
-        )}
+        {openIntent && <Segment field="intent" text={active.intent} />}
 
         {openAnswer && (
           <>
-            <section className="ic-seg">
-              <h2 className="ic-seg-title">参考答话（可背）</h2>
-              <p className="ic-seg-text">{active.answer}</p>
-            </section>
-            <section className="ic-seg">
-              <h2 className="ic-seg-title">会被追问到哪、怎么接</h2>
-              <p className="ic-seg-text">{active.followup}</p>
-            </section>
+            <Segment field="answer" text={active.answer} />
+            <Segment field="followup" text={active.followup} />
             <p className="ic-seg-note">
-              {seen ? '已计入「已过」，' : ''}答话里的事实都取自底部链接的完整笔记；讲不顺就回去读那一节再来说一遍。
+              {seen ? '已计入「已过」，' : ''}
+              先把 ② 的每块各说一句连起来讲一遍；讲不顺就回去读底部链接那一节。
             </p>
           </>
         )}

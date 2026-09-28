@@ -1,5 +1,6 @@
-// 面试考点卡体检（9 项）：方向对应 / JSON 结构 / id 唯一 / noteId 可达 / group 对齐速答手册 /
-// 字段齐全与三段字数下限 / 禁裸露 markdown 记号 / 同篇考点重合 / 缺卡方向空转守卫。
+// 面试考点卡体检（10 项）：方向对应 / JSON 结构 / id 唯一 / noteId 可达 / group 对齐速答手册 /
+// 字段齐全与三段字数下限 / 禁裸露 markdown 记号 / 同篇考点重合 / 缺卡方向空转守卫 /
+// 三段话块形状（每段按 \n 拆成「一块一句」，答案首块是结论句）。
 // 考点卡的 noteId 只被 InterviewIsland 构建期聚合、渲染时当「查看完整笔记」链接用一次，
 // 写错不会构建失败也不会报错，只会静默 404；三段字数不设闸就会退化成关键词堆砌——
 // 所以「每个回答都满意」这件事必须由机器卡住，不靠写题人的自觉。
@@ -220,6 +221,38 @@ report['2.考点卡 JSON 可解析'] = {
 	report['9.考点卡方向覆盖空转守卫'] = {
 		ok: bad.length === 0,
 		detail: `带题库方向 ${withBank.length} 个｜已有卡 ${withBank.filter((d) => hasCards.has(d)).length} 个｜存量待补 ${KNOWN_MISSING.size} 个`,
+		bad,
+	};
+}
+
+{
+	// 话块形状：三段一律按 `\n` 拆成「一块一句」。整段长文既记不住也说不出口——
+	// 「不潦草」不等于「成段」，所以块数与每块汉字数都判红。答案首块另设更严的上限，
+	// 它承担「开口第一句该说什么」，是整张卡最该被记住的一句。
+	const SHAPE = { intent: [2, 3], answer: [3, 5], followup: [2, 3] };
+	const MAX_BEAT = 40;
+	const MAX_LEAD = 24;
+	const MIN_BEAT = 8;
+	const bad = [];
+	for (const { c } of cards) {
+		for (const [field, [lo, hi]] of Object.entries(SHAPE)) {
+			const beats = String(c[field] ?? '')
+				.split('\n')
+				.map((s) => s.trim())
+				.filter(Boolean);
+			if (beats.length < lo || beats.length > hi)
+				bad.push(`${c.id}.${field} 话块 ${beats.length} 块，须在 ${lo}~${hi} 之间（整段不换行即判红）`);
+			beats.forEach((b, i) => {
+				const n = cjkLen(b);
+				const cap = field === 'answer' && i === 0 ? MAX_LEAD : MAX_BEAT;
+				if (n > cap) bad.push(`${c.id}.${field} 第 ${i + 1} 块 ${n} 汉字，超单块上限 ${cap}`);
+				else if (n < MIN_BEAT) bad.push(`${c.id}.${field} 第 ${i + 1} 块 ${n} 汉字，不足 ${MIN_BEAT} 不成一句`);
+			});
+		}
+	}
+	report['10.三段话块形状'] = {
+		ok: bad.length === 0,
+		detail: `按换行拆块 intent 2~3 / answer 3~5 / followup 2~3，每块 ≤${MAX_BEAT} 汉字（答案首块 ≤${MAX_LEAD}）、≥${MIN_BEAT}`,
 		bad,
 	};
 }
