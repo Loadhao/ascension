@@ -1,0 +1,24 @@
+{
+  "cards": [
+    {
+      "id": "java-aqs-ic-001",
+      "noteId": "java/intermediate/concurrent/05-aqs",
+      "group": "Java 并发",
+      "difficulty": 4,
+      "q": "说说 AQS 的原理，ReentrantLock 的等待与唤醒是怎么落地的？",
+      "intent": "这一问筛的是能不能把「锁」拆成两件具体的东西讲——一块 state 和一条排队队列，而不是背出「AQS 是原子同步器、内部有队列」这种没有信息量的句子。答里若只说「用 CAS 抢锁」就停住，说明只看过一次源码截图：没有回答没抢到的线程去哪、什么时候睡、谁来叫醒。区分度恰好在「丢失唤醒」那句上——挂起前必须先把前驱置成 SIGNAL，否则刚 park 前驱就释放，唤醒信号丢失、线程永远睡着。能讲出这一条，设计者要解决的并发问题就跟着出来了。",
+      "answer": "把它拆成一句话：AQS 等于一块由子类解释含义的整数 state，加一条 CLH 变体的双向等待队列，再加一套写死的排队挂起骨架。骨架负责所有脏活：tryAcquire 失败就 CAS 追加到队尾、自旋看前驱是不是 head、不是就把前驱置成 SIGNAL 再 park；被唤醒不等于拿到锁，还要回到自旋重新 CAS。子类只回答「状态怎么变」这一件事，独占模式覆写 tryAcquire 与 tryRelease，共享模式覆写 tryAcquireShared 与 tryReleaseShared，五个模板方法默认全部抛 UnsupportedOperationException。所以 ReentrantLock 里 state 是重入层数、Semaphore 里是剩余令牌数、CountDownLatch 里是剩余计数、读写锁把一块 state 拆成高 16 位读计数与低 16 位写计数——四个工具共用同一套排队骨架，差别只在 state 的读法。",
+      "followup": "接着大概率问「为什么挂起前要先把前驱置 SIGNAL」「公平与非公平差在哪」「自研一把互斥锁最少要写哪几个方法」。答前先分清哪半是骨架代劳、哪半是子类负责：非公平与公平用的是同一条 FIFO 队列，只差一次 hasQueuedPredecessors 检查；自研互斥锁不到 25 行，因为排队、挂起、唤醒、重试全在骨架里。"
+    },
+    {
+      "id": "java-tl-ic-002",
+      "noteId": "java/intermediate/concurrent/06-threadlocal",
+      "group": "Java 并发",
+      "difficulty": 4,
+      "q": "ThreadLocal 为什么会内存泄漏？在线程池里表现有什么不一样？",
+      "intent": "想听的是泄漏链路能否说全，以及线程池为什么把这个问题放大。只答「key 是弱引用所以会泄漏」是常见背题痕迹：方向恰好反了，弱引用是把泄漏范围从「key 加 value 一起挂着」缩小到「只剩 value 挂着」的止血带。更关键的是漏掉成立条件——要 ThreadLocal 实例被回收且线程长期存活两个条件同时满足，少了线程池这一半，问题就描述不准。",
+      "answer": "先纠正一个方向：Map 挂在 Thread 身上而不是 ThreadLocal 里，每个线程有一份 threadLocals，ThreadLocal 实例全局一份只当 Entry 的 key，读写是从当前线程的 Map 用 tl 的 hash 定位 Entry。泄漏链路是静态实例被置空后 GC 把 key 回收成 null，而 Entry 的 value 仍是强引用、还被这条线程的 Map 拽着；JDK 的 expungeStaleEntry 只在 set、get、rehash 路过时顺路清 stale 项，没人再碰那个 Entry 就永远等不到。线程池把残留放大：核心线程永不退出，于是一批没人再取的 value 一直占着堆。所以结论是 finally 里 remove() 是唯一可靠方案；跨线程池传值也别指望 InheritableThreadLocal，它的复制绑死在 Thread 构造上，池化线程复用不再构造 Thread，要换成提交任务时捕获快照、执行前重放的 TransmittableThreadLocal。",
+      "followup": "追问常见两支：一是「那把 key 改成强引用是不是就没问题」——更糟，静态变量置空后 Entry 仍强链到 ThreadLocal，连它带过的所有 value 一起陪葬到线程结束；二是「为什么用开放寻址而不是拉链」，一个线程通常也就几个 ThreadLocal，相邻实例 hash 间隔固定 0x61c88647 让连续创建的实例在 2 的 n 次方长度数组里均匀散开。"
+    }
+  ]
+}

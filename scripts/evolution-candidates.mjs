@@ -85,9 +85,25 @@ const annotate = (list) => {
 	};
 };
 const videoQueue = Object.keys(flowDemos).filter((k) => !Object.values(mediaAssets).some((a) => a.source === k));
-const quizQueue = readFileSync(join(ROOT, 'docs/coverage-deepening.md'), 'utf8')
-	.split('\n')
-	.filter((l) => l.startsWith('- [ ] '));
+const deepQueue = readFileSync(join(ROOT, 'docs/coverage-deepening.md'), 'utf8').split('\n');
+const eStart = deepQueue.findIndex((l) => l.startsWith('### e 类'));
+const doneStart = deepQueue.findIndex((l, i) => i > 0 && l.startsWith('## 已完成记录'));
+const boxes = (from, to) => deepQueue.slice(from, to).filter((l) => l.startsWith('- [ ] '));
+// e 类是 E 车道（面试考点卡）的取点源，不计入 C 车道题库队列
+const quizQueue = boxes(0, eStart === -1 ? deepQueue.length : eStart);
+const eCardQueue = eStart === -1 ? [] : boxes(eStart, doneStart > eStart ? doneStart : deepQueue.length);
+// E 车道候选池现算：带题库但零考点卡的方向（口径与 scripts/interview-verify.mjs 第 9 项一致）
+const bankDirs = readdirSync(join(ROOT, 'src/data/quiz'))
+	.filter((f) => f.endsWith('.json'))
+	.map((f) => f.replace(/\.json$/, ''));
+const icDir = join(ROOT, 'src/data/interview');
+const icDirs = existsSync(icDir)
+	? readdirSync(icDir).filter((f) => f.endsWith('.json')).map((f) => f.replace(/\.json$/, ''))
+	: [];
+const cardCount = existsSync(icDir)
+	? icDirs.reduce((sum, d) => sum + (JSON.parse(readFileSync(join(icDir, `${d}.json`), 'utf8')).cards?.length ?? 0), 0)
+	: 0;
+const icQueue = bankDirs.filter((d) => !icDirs.includes(d));
 // 全局轮次真源：evolution.md 里最大轮次号
 const rounds = [...readFileSync(join(ROOT, 'docs/evolution.md'), 'utf8').matchAll(/^### 第 (\d+) 轮/gm)].map((m) => Number(m[1]));
 const argRound = process.argv.indexOf('--round');
@@ -96,11 +112,12 @@ if (argRound !== -1 && !Number.isInteger(Number(process.argv[argRound + 1]))) {
 	process.exit(2);
 }
 const next = argRound === -1 ? Math.max(...rounds) + 1 : Number(process.argv[argRound + 1]);
-// 车道游标：与 docs/evolution-recipes.md §1 的 n mod 5 表逐格对齐。按余数显式建表，
+// 车道游标：与 docs/evolution-recipes.md §1 的 n mod 6 表逐格对齐。按余数显式建表，
 // 不用位置数组——建档版 `['', 'A', 'B', 'C', 'B', 'D'][n % 5]` 把余数 4 打成 B、
 // 余数 0 打成空白（第 194、195 轮实测），且配方改表时数组下标会静默错位。
-const LANES = { 0: 'D 体检与工具', 1: 'A 新章节', 2: 'B 影像资产', 3: 'C 题库', 4: 'A 新章节' };
-const lane = LANES[next % 5];
+// 第 214 轮（用户指令新增 E 车道）起模数由 5 改 6：0→E、1→A、2→B、3→C、4→A、5→D。
+const LANES = { 0: 'E 面试考点卡', 1: 'A 新章节', 2: 'B 影像资产', 3: 'C 题库', 4: 'A 新章节', 5: 'D 体检与工具' };
+const lane = LANES[next % 6];
 
 const show = (label, list) => {
 	console.log(`\n${label}：${list.length} 条`);
@@ -108,14 +125,14 @@ const show = (label, list) => {
 	if (list.length > TOP) console.log(`  …另 ${list.length - TOP} 条`);
 };
 
-console.log(`笔记 ${notes.length} 篇｜题库 ${quizNoteIds.size} 篇有题｜动画 ${Object.keys(flowDemos).length} 支｜影像 ${Object.keys(mediaAssets).length} 个`);
+console.log(`笔记 ${notes.length} 篇｜题库 ${quizNoteIds.size} 篇有题｜动画 ${Object.keys(flowDemos).length} 支｜影像 ${Object.keys(mediaAssets).length} 个｜考点卡 ${cardCount} 张 / ${icDirs.length} 个方向`);
 console.log(
 	`§4 已饱和标注：解析出 ${saturatedTopics.length} 个主题 / ${saturatedHits} 个落点${
 		saturatedTopics.length === 0 ? '  ⚠ 一条都没解析到，A 池标注已空转（roadmap §4 表格被改动？）' : ''
 	}`,
 );
 console.log(
-	`\n>>> ${argRound === -1 ? '下一轮' : '游标核对（--round 覆盖，未读台账）'} = 第 ${next} 轮，${next} mod 5 = ${next % 5} → 车道 ${lane}`,
+	`\n>>> ${argRound === -1 ? '下一轮' : '游标核对（--round 覆盖，未读台账）'} = 第 ${next} 轮，${next} mod 6 = ${next % 6} → 车道 ${lane}`,
 );
 const gapPool = annotate(bothGaps);
 const textPool = annotate(noFigure);
@@ -124,4 +141,9 @@ show(`A 车道｜纯文字无图笔记｜其中 §4 已饱和 ${textPool.saturat
 show('A 车道｜有图但零题笔记', noQuiz.filter((n) => withFigure.has(n)));
 show('B 车道｜已有动画未出配音视频', videoQueue);
 show('C 车道｜coverage-deepening 队列头部', quizQueue.map((l) => l.replace('- [ ] ', '')));
+show(
+	`E 车道｜带题库却零考点卡的方向${icDirs.length === 0 ? '  ⚠ src/data/interview 为空，E 池已空转' : ''}`,
+	icQueue,
+);
+show('E 车道｜e 类队列已定宿主拟出项', eCardQueue.map((l) => l.replace('- [ ] ', '')));
 console.log('\nD 车道：跑 pnpm verify:docs 与 node scripts/mermaid-contrast-verify.mjs，输出即候选池（全绿则新增 2 条带证据候选入队）');

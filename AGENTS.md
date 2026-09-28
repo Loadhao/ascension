@@ -25,6 +25,8 @@
 | 图谱数据   | `src/data/graphs/<方向>.json`    | 与方向目录一一对应                                 |
 | 自测题库   | `src/data/quiz/<方向>.json`     | `/guide/quiz` 自测作答页的题目数据（文件名即方向 slug，可选提供），每题用 `noteId` 关联笔记；题目必填 `difficulty` 整数 1–5（五档星：概念识别 → 深挖原理/边界/生产权衡），缺字段时作答页兜底为 3 |
 | 自测作答存储 | `src/lib/quiz-store.ts`       | localStorage：刷题进度（不重复出题）、错题本、收藏本、进行中轮次恢复         |
+| 面试考点卡数据 | `src/data/interview/<方向>.json` | `/guide/interview` 考点卡页的数据（文件名即方向 slug，可选提供），每张卡 `noteId` 关联一篇笔记，`group` 取值须与速答手册的主题标题一致；七字段 `id/noteId/group/difficulty/q/intent/answer/followup` |
+| 考点卡状态存储 | `src/lib/interview-store.ts`  | localStorage：已过（展开过参考答话）、待复习、收藏、主题与难度筛选；与自测题库分家，互不影响 |
 | 阅读历史存储 | `src/lib/history.ts`           | localStorage：每篇笔记的最近阅读时间/次数/可见时长/滚动位置，笔记页续读定位与仪表盘「最近阅读」共用 |
 | 全局样式   | `src/styles/custom.css`        | 黑白主题令牌、学习组件样式、Mermaid 与打印样式             |
 | 站点配置   | `astro.config.mjs`             | 手动嵌套侧边栏、Footer/Sidebar/TableOfContents 覆盖、Mermaid 插件、base 路径    |
@@ -58,6 +60,8 @@
 
 - **需要「脱离屏幕听一遍」或「能带出站的画面」才做影像资产**：在 `src/data/viz/media.ts` 登记 `MediaAssetConfig`（`src`/`poster`/`alt`/`caption`/`source`/`narration`，颜色一律不写），笔记改 `.mdx` 后仍用 `<AlgorithmVizIsland demo="<key>" />` 引用（组件分发见 `AlgorithmVizIsland.astro`）。产法：`node scripts/media-capture.mjs`（需 `pnpm preview`）逐帧截图 → `node scripts/media-encode.mjs`（macOS 自带 `say` 离线配音，画面时长严格跟随音轨）→ 按脚本打印的真实尺寸时长**回填 `media.ts`**。硬约束：只能从既有动画或正文派生、**禁止无稿口播**（`narration` 段数须等于源动画帧数）、帧数 ≤12、成片 ≤60s、画面固定亮色底、`alt`/`caption` 要有信息量；闸门为 `node scripts/media-verify.mjs`（已并入 `pnpm verify:docs`）。细则与选型见图表写作指南「配音短片与图卡」——**能看动画就别做视频**，动画可暂停、可单步、跟主题变色，体积还更小。
 
+- **面试考点卡（`/guide/interview`）只服务「说得出口」**：每张卡七字段 `id`/`noteId`/`group`/`difficulty`/`q`/`intent`/`answer`/`followup`，`group` 取值必须与速答手册的 `## ` 主题标题一致；三段各有任务——`intent` 写「这一问在筛什么、短板在哪、区分度落在哪一句」（不许复述题干），`answer` 写成**能直接说出口的成段答话**（结论先行 + 至少一个具体机制/参数/可查的数字，不许堆关键词），`followup` 写「大概率被追问什么 + 一句应对口径」。**事实一律取自 `noteId` 指向的笔记正文，笔记没写的不进卡**：宁可少出，不外推、不编数字；字段按纯文本渲染，**不得出现反引号或 `**`**；同一篇笔记的第二张卡须先读既有卡的题干与三段做三清单复算，考点不许重合。它与速答手册（一句话索引）和自测题库（判对错）分工不同，不复述手册结论。闸门为 `node scripts/interview-verify.mjs`（已并入 `pnpm verify:docs`），其中第 9 项「缺卡方向空转守卫」以 `src/data/interview` 现算，补卡后必须同步删 `KNOWN_MISSING` 对应项。
+
 - 新增分类时三处同步：`<方向>/<等级>/<分类>/index.mdx` 分类页 + `astro.config.mjs` 侧边栏对应等级组内注册 + 知识点笔记放入该目录（分类项不设 `badge`；笔记页底部 ProgressMark 由 Footer 覆盖自动注入，无需手写）。
 
 - 新增方向时四处同步：建目录与 `index.mdx` 路线图 + `astro.config.mjs` 侧边栏注册 + `src/data/graphs/` 建图谱数据 + `src/lib/notes.ts` 的 `DIRECTION_ORDER` 追加方向 slug。
@@ -70,7 +74,7 @@
 
 - 包管理器为 pnpm；禁止提交 lockfile 之外的依赖变更说明。
 
-- 本地验证：`pnpm build` 必须通过；`pnpm verify:docs` 是全站静态闸门（一致性 10 项 + mermaid 语法 + 题库 9 项 + 影像 7 项），新增内容或数据后必须跑；涉及组件改动时用 `pnpm preview` 实测交互。
+- 本地验证：`pnpm build` 必须通过；`pnpm verify:docs` 是全站静态闸门（一致性 10 项 + mermaid 语法 + 考点卡 9 项 + 题库 9 项 + 影像 7 项，共 35 项），新增内容或数据后必须跑；涉及组件改动时用 `pnpm preview` 实测交互。
 
 - Mermaid 构建时渲染依赖 chromium，本地首次需 `pnpm exec playwright install chromium`。
 

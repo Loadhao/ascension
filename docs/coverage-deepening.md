@@ -79,6 +79,22 @@
 - [ ] kafka/intermediate/core/06-transactions-eos — 第二题考「`transactional.id` 的身份语义：为什么它必须与任务分区一一对应且不能随机生成（共用互相 fence、换 ID 等于放弃僵尸保护），以及 `commitTransaction()` 超时后为什么不能重试提交」（首题已考「悬挂事务卡 LSO + 默认 read_uncommitted 仍可见中止数据」）
 - [ ] kubernetes/intermediate/ops/05-java-on-k8s — 第二题考「优雅停机预算的相加关系：preStop 执行完才发 SIGTERM 且这段时间计入宽限期，所以 grace ≥ preStop sleep + 注册中心下线 + 应用收尾；为什么在 hook 与 Spring phase timeout 里各等 30 秒会直接爆」（首题已考「CPU limit 是周期配额不是核数 → P99 台阶 + JVM 不按 shares 算核数」）
 
+### e 类：面试考点卡队列（第 215 轮落地形态，E 车道取点源）
+
+> 口径见 `docs/evolution-recipes.md` §1 车道表与 §2「E 面试考点卡」、
+> `docs/superpowers/specs/2026-09-28-interview-cards-design.md`：每轮 2 张，事实一律取自宿主笔记正文；
+> 三段各管一件事（`intent` 这一问在筛什么 / `answer` 能直接说出口的答话 / `followup` 会被追问到哪），
+> 缺一或写成关键词堆砌即视为潦草；`group` 用速答手册的主题名。**优先级（用户 2026-09-28 定向）：
+> Java 后端与 AI 相关方向优先，前端（vue / react / typescript / js）排最后。**
+> 剩余缺卡方向以 `node scripts/evolution-candidates.mjs` 的「E 车道｜带题库却零考点卡的方向」**现算为准**，
+> 本处只登记**已定宿主与角度**的条目（清单会过期，取点前先跑命令；补卡后还要从
+> `scripts/interview-verify.mjs` 的 `KNOWN_MISSING` 删掉该方向，否则下轮判红）。
+
+- [x] 首批 6 张 · **done 2026-09-28（第 215 轮用户指令轮，覆盖 java / mysql / ai 三个方向）**：`java-aqs-ic-001`（把 AQS 拆成 state + 队列 + 骨架，区分度落在「挂起前先置 SIGNAL」那句）、`java-tl-ic-002`（Map 挂在 Thread 身上的反转 + 泄漏要两个条件同时成立 + 线程池放大）、`mysql-idx-ic-001`（联合索引 (a,b,c) 里 c 用不用得上：元组字典序、区间推进、ICP、explain 四个字段自证）、`mysql-mvcc-ic-001`（RC 与 RR 只差 ReadView 拍照时机，快照读与当前读分侧讲幻读）、`ai-vllm-ic-001`（瓶颈是显存带宽、两类碎片各指什么、PagedAttention 不减矩阵运算量）、`ai-hallu-ic-001`（先亮「只能管理不能消灭」的立场再按四层布防，并说清 RAG 不是解药）
+- [ ] redis/intermediate/usage/07-redisson — 拟出第一张：考「用 Redis 做分布式锁要注意什么」这一问在筛的层次——只会背 setnx + 过期时间，还是能说出 fencing token 必须资源侧校验、读锁也要网络往返、看门狗与进程存活耦合；**角度须先通读正文并按三清单与该篇既有两题复算**
+- [ ] kafka/intermediate/core/06-transactions-eos — 拟出第一张：考「`transactional.id` 为什么是身份而不是随机串」（共用互相 fence、换 ID 等于放弃僵尸保护、提交超时不能重试提交）在筛的是有没有读过 fence 的语义
+- [ ] kubernetes/intermediate/ops/05-java-on-k8s — 拟出第一张：考「K8s 上 Java 优雅停机」一问在筛的是有没有算过预算相加（preStop 计入宽限期），而不是只会答「加个 sleep」
+
 ## 已完成记录
 
 - 2026-09-28 · 第七十六轮（第 213 轮｜车道 C｜题库深化第 76 轮）：3 道核心笔记补题（`dist-bloom-046` d4 / `java-threadlocal-144` d3 / `java-chm-145` d4，均 multiple、answer 一律 [0,1,2,3]＝4 正确 + 1 干扰）· 宿主 `distributed/intermediate/case-studies/31-bloom-filter`、`java/intermediate/concurrent/06-threadlocal`、`java/basic/collection/03-concurrenthashmap`，三篇 `core: true`· 取点与改道：a 类头部逐条按「既有正确项 + 干扰项 + hint」三清单复算——头部第 1 条 vllm 仍未解除（复核确认正文 15~19 行与速答确实写清了内部/外部两类碎片且首题未考，但第三条正确项只能落回首题 `ai-vllm-050` 的正确项本身，第 9 项必判红，就地改写保留队列位）；第 2 条 bloom **改道后出成**（原指定的 RedisBloom 命令与三种删除方案大半在首题 hint 内，改取方向性、n 的容量规划含义、Counting 与 Cuckoo 取舍不等价、百万级以下走 Set 四条）；第 3、4 条 payment 与 stream **二次复算仍撑不起 3 正确 + 2 干扰**（正文逐句比对后剩余落点要么已被 hint 覆盖、要么只剩短句），就地改写保留原位；第 6、7 条 threadlocal 与 chm 按原指定第三题角度直取、未改道· 队列动作：a 类销 3（bloom/threadlocal/chm 标 done 并记实做角度与撞车复核）、改写 3（vllm/payment/stream 附本轮实测证据与解除路线）、追加 5（a 类 4：`06-threadlocal` 补满 3 题后的余角「两个条件同时满足」＋按 d 规则入队 `28-refund`、`04-form-inputs`、`routing/01` 三个**现算零题/单题宿主**，其中后两条系第 209/210 轮入口预告过却从未落进队列、本轮补登记以免再丢；b 类 1：hint↔hint 机械复述的白送分实测与修法）· 收尾现算：**队列未勾条目 26 → 28 条**（a 9／b 6／c 1／d 12），a 类勾掉待查的 done 条目 3 条· 三条均 multiple，延续 b 类「multiple 占比偏低优先补多选」：补题前实读 `quiz/java.json` 143 题 25 道 multiple、`quiz/distributed.json` 45 题 13 道，补后 145/27 与 46/14，全站 691→**694** 题· 追加候选现算池同场复跑（文档口径 `core: true` 笔记 371 篇 ∩ 全站题数恰为 1 ∩ 不在队列 = **158** 条，较第 208 轮的 164 减少，成因是本轮三宿主补题后脱离「恰 1 题」以及新入队三条把三篇从池里划走）· 一条写题纪律就地固化：三道题的 hint 一律按「第 X/Y/Z 项正确、第 A/B 项错」开句并与 answer 下标机器对账；追加改走**文本级插入**并按各文件既有缩进与 answer 排版风格落笔（distributed.json 单行 `[0, 1, 2, 3]`、java.json 多行），首版误用整文件 `JSON.stringify` 重排产生 **207/53** 的淹没式 diff，已回退重写为 16/0 与 42/0 的纯追加· 说明：本轮游标 `213 mod 5 = 3` 与实做车道一致、未越车道；第 212 轮入口对本轮车道与队列头部（vllm 待裁决 + bloom/payment/stream 三条撞车）的预判与实跑一致，差异仅在 bloom 一条按新角度出成、payment/stream 二次确认为不可写· 本轮提交主题：feat(quiz): 演进第 213 轮车道 C 补布隆过滤器选型、ThreadLocal 挂载反转与 CHM put 细节三道题并按三清单复算为 payment/stream 二次改判

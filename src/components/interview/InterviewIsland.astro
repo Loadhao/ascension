@@ -1,0 +1,24 @@
+---
+import Interview, { type InterviewCard } from './Interview';
+import { getSiteData, toNavSiteData } from '../../lib/notes';
+
+// 聚合 src/data/interview/<方向>.json 为主题卡池（文件名即方向 slug），
+// 方向标题交给 Interview 组件按 notes.ts 聚合结果对齐
+const modules = import.meta.glob('../../data/interview/*.json', { eager: true }) as Record<
+  string,
+  { default?: { cards?: InterviewCard[] }; cards?: InterviewCard[] }
+>;
+
+const banks = Object.entries(modules).map(([path, mod]) => {
+  const raw = mod.default ?? mod;
+  return {
+    directionId: path.split('/')!.pop()!.replace(/\.json$/, ''),
+    cards: raw.cards ?? [],
+  };
+});
+
+const site = await getSiteData();
+const nav = toNavSiteData(site);
+---
+
+<Interview client:load directions={nav.directions} banks={banks} />
