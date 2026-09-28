@@ -945,6 +945,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/vue/intermediate/state/' },
                         { label: '状态放在哪一层', link: '/vue/intermediate/state/01-where-to-put-state/' },
+                        { label: '该存、该算，还是跟着做', link: '/vue/intermediate/state/02-store-compute-or-react/' },
                       ],
                     },
                     {
