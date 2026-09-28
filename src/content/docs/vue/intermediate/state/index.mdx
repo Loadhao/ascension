@@ -1,0 +1,14 @@
+---
+title: 状态与数据共享
+description: 一份状态该放哪一层：props 提升、provide/inject、模块级 reactive() 与 Pinia 各自的适用边界与代价
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+响应式系统回答「改了数据谁会收到通知」，组件模型回答「父与子之间数据怎么走」。这一
+分类回答的是第三个问题：**一份要被多个组件读写的状态，究竟归谁所有、放在哪一层**。
+放低了远处拿不到，只能一路往上抬；抬过头了谁都能改，出事时找不到改动点。四个台阶
+各自的失效边界——包括 SSR 下模块单例的跨请求污染、解构 store 丢响应性——都算在
+这一类里。
+
+<CategoryNotesIsland categoryId="vue/intermediate/state" />

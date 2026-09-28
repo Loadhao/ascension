@@ -939,6 +939,14 @@ export default defineConfig({
                         { label: '一次更新到底重做了什么', link: '/vue/intermediate/rendering/01-update-cost/' },
                       ],
                     },
+                    {
+                      label: '状态与数据共享',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/vue/intermediate/state/' },
+                        { label: '状态放在哪一层', link: '/vue/intermediate/state/01-where-to-put-state/' },
+                      ],
+                    },
                   ],
                 },
               ],
