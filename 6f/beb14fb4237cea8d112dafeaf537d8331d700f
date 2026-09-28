@@ -1,0 +1,24 @@
+src/data/viz/media.ts
+  s_25a618617bb190::t_36df6bd741ac1f 457-461,463-480
+  s_25a618617bb190::t_9869869ae6ae90 462
+src/content/docs/mongodb/intermediate/replication/01-replication-set.mdx
+  s_25a618617bb190::t_e78707e9060baf 114-117
+src/data/quiz/mongodb.json
+  s_25a618617bb190::t_f4aa8eb4bdadb6 356-377
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6fbeb14fb4237cea8d112dafeaf537d8331d700f",
+  "prompts": {},
+  "sessions": {
+    "s_25a618617bb190": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "2901d0cb-c422-4212-9078-0a788f0e277f",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
