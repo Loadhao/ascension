@@ -198,7 +198,6 @@ report['2.考点卡 JSON 可解析'] = {
 		'python',
 		'rabbitmq',
 		'react',
-		'redis',
 		'rocketmq',
 		'seata',
 		'security',
