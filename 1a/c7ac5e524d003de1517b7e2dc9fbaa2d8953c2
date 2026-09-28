@@ -1,0 +1,26 @@
+src/data/quiz/rabbitmq.json
+  s_74c64f31644e56::t_1b6fe851273434 186-201
+src/data/viz/media.ts
+  s_74c64f31644e56::t_646f25e082e180 506-510,512-528
+  s_74c64f31644e56::t_4d12f432cf449c 511
+src/content/docs/rabbitmq/intermediate/usage/01-deadletter-delay.mdx
+  s_74c64f31644e56::t_aa11946cc5a0c0 44-47
+docs/evolution.md
+  s_74c64f31644e56::t_6b2ce98b1c1c30 60,138-155,233
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1ac7ac5e524d003de1517b7e2dc9fbaa2d8953c2",
+  "prompts": {},
+  "sessions": {
+    "s_74c64f31644e56": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "a5703ae3-6046-46cf-a1a8-4bdd82718d9d",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
