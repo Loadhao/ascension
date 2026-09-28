@@ -1,0 +1,30 @@
+astro.config.mjs
+  s_6279abe8029272::t_30174e730930fc 941
+src/content/docs/vue/index.mdx
+  s_6279abe8029272::t_ea54238783fde4 15-16
+  s_6279abe8029272::t_846d2b76ac5f1c 3
+  s_6279abe8029272::t_efe949275c8a00 17-18
+src/data/graphs/vue.json
+  s_6279abe8029272::t_ac4ba73ff5da06 38-42
+  s_6279abe8029272::t_e8b925c5b5aa08 9
+src/content/docs/vue/intermediate/rendering/02-list-render-and-key.md
+  s_6279abe8029272::t_a58711111a4c8e 1-403
+docs/evolution.md
+  s_6279abe8029272::t_8f89e1b254c5bc 103-117
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cf8f47afc04d2397a5fc5e0feb7dd48d2fb6fb3d",
+  "prompts": {},
+  "sessions": {
+    "s_6279abe8029272": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "f58e31c9-1d2b-46dd-a955-270e236ce338",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
