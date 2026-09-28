@@ -1,0 +1,19 @@
+docs/evolution.md
+  s_1056462b4a73b7::t_c61ac578e4dadc 97-98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cef169bb152b66fdea22cc43de9cd781e5435852",
+  "prompts": {},
+  "sessions": {
+    "s_1056462b4a73b7": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "db8e2687-aa6b-4889-a485-0ea880aa94dd",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
