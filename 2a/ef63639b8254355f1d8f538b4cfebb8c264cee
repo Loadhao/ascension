@@ -1,0 +1,41 @@
+docs/evolution.md
+  s_8d478b2b81ffe2::t_4b20d870e642ef 103-111,113-115
+  s_8d478b2b81ffe2::t_c60e04d17cc733 112
+  s_8d478b2b81ffe2::t_93136854cad70b 102
+  s_8d478b2b81ffe2::t_04c0af3f22d4d1 177
+docs/coverage-deepening.md
+  s_8d478b2b81ffe2::t_4ddda831174419 46
+  s_8d478b2b81ffe2::t_aeadb203e29bdc 36
+  s_8d478b2b81ffe2::t_9c3504ca682d49 84
+  s_8d478b2b81ffe2::t_98dc9ab9bc3988 85
+  s_8d478b2b81ffe2::t_ac53e8f0d2da29 40
+  s_8d478b2b81ffe2::t_d903e05e245b0a 43-45
+  s_8d478b2b81ffe2::t_4efa155c9dcc99 38
+  s_8d478b2b81ffe2::t_ce37ccdb71f71a 41
+  s_8d478b2b81ffe2::t_3761b78a2d6745 56
+  s_8d478b2b81ffe2::t_60bb20f7ceb6c6 37
+  s_8d478b2b81ffe2::t_78ab932cd51620 35
+  s_8d478b2b81ffe2::t_8785a4d2be9eb1 57
+src/data/quiz/distributed.json
+  s_8d478b2b81ffe2::t_fe88eba6faffae 667
+  s_8d478b2b81ffe2::t_156afbddcc1be7 664-666
+  s_8d478b2b81ffe2::t_c9287c71af38dc 652-663
+src/data/quiz/java.json
+  s_8d478b2b81ffe2::t_6db54758468e57 2461-2502
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2aef63639b8254355f1d8f538b4cfebb8c264cee",
+  "prompts": {},
+  "sessions": {
+    "s_8d478b2b81ffe2": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "65ca6b46-60f5-4668-a933-143f2cd1e327",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
