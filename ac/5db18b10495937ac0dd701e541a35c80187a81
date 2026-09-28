@@ -1,0 +1,27 @@
+src/data/quiz/kafka.json
+  s_43ec7a71b07387::t_32bd2f2a6f81e5 276-295
+src/data/viz/media.ts
+  s_43ec7a71b07387::t_091406df171810 222-226,229-244
+  s_43ec7a71b07387::t_bd20197bc5d19a 227-228
+docs/evolution.md
+  s_43ec7a71b07387::t_1bed911aa6c26a 60
+  s_43ec7a71b07387::t_544f4ef81958a3 91-104
+src/content/docs/kafka/basic/core/03-producer-path.mdx
+  s_43ec7a71b07387::t_f6da88ffdc8c31 40-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ac5db18b10495937ac0dd701e541a35c80187a81",
+  "prompts": {},
+  "sessions": {
+    "s_43ec7a71b07387": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "f8572e98-54d5-475d-82eb-a64d087e4bdc",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
