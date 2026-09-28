@@ -197,4 +197,26 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'refresh 管可搜，flush 管持久，merge 管回收。',
 		],
 	},
+	'java-classload-video': {
+		title: '类加载五阶段 · 配音短片',
+		src: '/videos/java-classload-video.mp4',
+		poster: '/videos/java-classload-video.poster.png',
+		width: 1280,
+		height: 786,
+		duration: 48.5,
+		alt: '动画短片：一个类从 .class 字节码到可用，依次经过加载、验证、准备、解析、初始化五个阶段，' +
+			'逐帧讲清准备期静态变量只拿到零值、真正赋值要等初始化执行 <clinit>，以及主动引用才触发初始化。',
+		caption:
+			'五阶段里两处反直觉都在后半程：准备期 `a` 还是 0，写进 1 的是加锁执行、只跑一次的 <clinit>。',
+		source: 'java-classload',
+		narration: [
+			'类从字节码到可用要走五步：加载、验证、准备、解析、初始化。',
+			'加载：读入字节流，在方法区建类结构，堆里生成 Class 对象。',
+			'验证：格式、语义、字节码、符号引用四道安检，坏字节码挡在门外。',
+			'准备：静态变量只分配内存设零值，源码写 1 此刻仍是 0。',
+			'解析：把符号引用换成直接引用，这一步可推迟到运行期。',
+			'初始化：静态变量才真正赋值，JVM 给这段执行加锁，只跑一次。',
+			'初始化由主动引用触发：new、反射、初始化子类连带父类。',
+		],
+	},
 };
