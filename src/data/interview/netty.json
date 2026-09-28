@@ -1,0 +1,24 @@
+{
+  "cards": [
+    {
+      "id": "netty-future-ic-001",
+      "noteId": "netty/intermediate/core/04-future-promise",
+      "group": "Java 并发",
+      "difficulty": 4,
+      "q": "writeAndFlush 返回了，数据发出去了吗？Netty 的 Future 和 JUC 那个差在哪？",
+      "intent": "这一问先筛有没有把返回和完成分成两件事。\n答成已经写进 socket 的人，后面两句都不用再问。\n区分度在 EventLoop 里同步等待自己队列那一句。",
+      "answer": "没发出去，只拿到一张结果凭证。\n调用只是把写操作投进 EventLoop 的任务队列，此刻大概率连 socket 都没碰。\n正道是 addListener；在 EventLoop 里 sync 等自己要执行的任务，等于站在收银台前等自己排到，这条线程上的连接一起停。\nPromise 是 Future 的子接口：读结果只查状态挂回调，写结果由干活的一方 setSuccess。\n和 JUC 的差在能力：那边只有阻塞 get，这边天生支持 listener，阻塞等待与异步模型天然相克。",
+      "followup": "大概率追问 sync 与 await 怎么选。\n接法：两个都阻塞，差别在失败时 await 静默返回 false，sync 把异常重抛；且都在 EventLoop 外才谈得上选择。\n再问为何不用 CompletableFuture：ChannelFuture 绑 Channel 与 EventLoop 上下文，回调默认就在这条线程，省掉跨线程同步。"
+    },
+    {
+      "id": "netty-ws-ic-002",
+      "noteId": "netty/intermediate/core/03-websocket",
+      "group": "网络协议",
+      "difficulty": 4,
+      "q": "Netty 上做 WebSocket 服务，handler 链为什么是四件套？握手之后 pipeline 有什么变化？",
+      "intent": "先筛有没有把握手是 HTTP、通信不是这条分界说清。\n只报四个类名的人答不出聚合器为什么不能省。\n区分度落在握手完成后把 HTTP 那几个 handler 摘掉那一步。",
+      "answer": "两段式：借 HTTP 完成握手，之后跑帧协议。\n链上四件各有一职：HTTP 编解码、聚合完整请求、协议处理器做升级与帧编解码、最后才是业务 handler。\n聚合器不能省：升级处理器要求拿到完整的请求才能回 101，而请求可能分多段到达。\n101 之后协议处理器把 pipeline 里的 HTTP handler 移除，业务侧从此只见帧、不再见请求。\n长消息会被拆成首帧加若干 Continuation 帧，在协议处理器之后挂帧聚合器重组，业务永远只见整条。",
+      "followup": "大概率追问心跳放协议层还是应用层。\n接法：Ping/Pong 自动回只证协议栈活着，进程假死时 Pong 照样回，业务健康靠应用层心跳。\n还会问握手前业务 handler 收不收得到请求——被升级处理器拦住，要事件就监听 HandshakeComplete。"
+    }
+  ]
+}

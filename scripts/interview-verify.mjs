@@ -191,7 +191,6 @@ report['2.考点卡 JSON 可解析'] = {
 		'middleware',
 		'mongodb',
 		'mqtt',
-		'netty',
 		'network',
 		'nginx',
 		'postgresql',
