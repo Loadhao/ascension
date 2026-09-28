@@ -1,0 +1,32 @@
+src/content/docs/react/index.mdx
+  s_41cfaa26d49cbf::t_48f2319c16a977 3
+  s_41cfaa26d49cbf::t_11324d55633d87 14-17
+docs/evolution.md
+  s_41cfaa26d49cbf::t_1b5e1204ac7581 75
+  s_41cfaa26d49cbf::t_b70e8a160a29a1 77-86
+  s_41cfaa26d49cbf::t_810f3163bae8db 76
+astro.config.mjs
+  s_41cfaa26d49cbf::t_1f1e672cd39c01 902
+src/data/graphs/react.json
+  s_41cfaa26d49cbf::t_6fea484f936757 8-9,17,21,23-24
+src/content/docs/react/intermediate/state/02-effect-contract.md
+  s_41cfaa26d49cbf::t_e76e29fe3f0e3c 1-88,94-161,190-246
+  s_41cfaa26d49cbf::t_5363ad0839f550 89-93
+  s_41cfaa26d49cbf::t_7464c2b44c7c41 162-189
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "7a8c54cf3bdb9e7071a33e732c1de3c41895b2b2",
+  "prompts": {},
+  "sessions": {
+    "s_41cfaa26d49cbf": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "cb8051bf-5a76-42bd-ac5b-d301e377083e",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
