@@ -938,6 +938,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/vue/intermediate/rendering/' },
                         { label: '一次更新到底重做了什么', link: '/vue/intermediate/rendering/01-update-cost/' },
+                        { label: '列表凭什么认出同一行', link: '/vue/intermediate/rendering/02-list-render-and-key/' },
                       ],
                     },
                     {
