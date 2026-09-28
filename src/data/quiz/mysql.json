@@ -328,6 +328,26 @@
       ],
       "hint": "MDL 是写者优先：DDL 一进队，它后面的所有查询都要排队，所以杀 DDL 只是让队列继续撞上同一个持有者，要杀的是持锁的原始事务。MDL 等待由 server 层 lock_wait_timeout 管（默认远大于行锁的 50 秒），调超时只是把报错推后。kill 未提交事务要回滚，trx_rows_modified 决定回滚耗时——有时等它跑完反而更快。证据永远先于动作。",
       "difficulty": 4
+    },
+    {
+      "id": "mysql-replchain-020",
+      "noteId": "mysql/advanced/performance-ha/02-replication-sharding",
+      "type": "multiple",
+      "q": "一条主库更新要走到从库才可见。按笔记里三个线程与两份日志的分工，下列正确的有？（多选）",
+      "options": [
+        "从库 IO 线程收到事件先落成本地 relay log，再由 SQL 线程重放进从库数据",
+        "主库 dump 线程持续推送 binlog 事件，断线重连按 GTID 或位点续传",
+        "relay log 的意义是把接收与重放解耦，网络抖动不至于回压到主库提交",
+        "从库不必留本地日志，SQL 线程直接读主库的 binlog 重放即可",
+        "把复制切成半同步，主从延迟会随着接收环节一起消失"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "第 1/2/3 项正确、第 4/5 项错。两份日志分家正是这条链路的设计：binlog 留在主库，relay log 落在从库，接收与重放解耦之后网络抖动才不回压主库。半同步改的是主库何时返回——从「提交即回」变成「有从库确认收到」，重放那一段的堆积它管不着。延迟的结构性根因与三层对策分别是 mysql-repl-009、mysql-replfix-015 的考点，本题只管链路分工。",
+      "difficulty": 3
     }
   ]
 }

@@ -266,4 +266,27 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'quorum 定下线，majority 定 leader，两个数别混。',
 		],
 	},
+	'mysql-replication-video': {
+		title: '主从复制链路 · 配音短片',
+		src: '/videos/mysql-replication-video.mp4',
+		poster: '/videos/mysql-replication-video.poster.png',
+		width: 1280,
+		height: 810,
+		duration: 52.9,
+		alt: '动画短片：一条主库更新依次走完 binlog 落盘、dump 线程推送、从库 IO 线程写 relay log、' +
+			'SQL 线程重放四步落到从库，末两帧对比默认异步与半同步在主库何时返回上的差别。',
+		caption:
+			'三个线程各管一段：relay log 把接收与重放解耦，异步与半同步差的只是主库等不等那句「收到」。',
+		source: 'mysql-replication',
+		narration: [
+			'主从复制靠三个线程和两份日志，看一条更新怎么走到从库。',
+			'主库执行写入，提交时按顺序写进 binlog，复制只认这一份日志。',
+			'binlog 落盘，主库 dump 线程待命，把它推给每一台从库。',
+			'断线重连按 GTID 或位点续传，不重复也不丢。',
+			'从库 IO 线程先把它写成本地 relay log，接收和重放就此解耦。',
+			'SQL 线程重放 relay log，应用到从库数据，追平后读流量才安全。',
+			'默认是异步，主库提交就返回不等从库，延迟由此而来。',
+			'半同步折中：至少一台从库收到才返回，降点吞吐换不丢数据。',
+		],
+	},
 };
