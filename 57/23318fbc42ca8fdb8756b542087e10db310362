@@ -1,0 +1,29 @@
+astro.config.mjs
+  s_eab28199b23d40::t_5f58612fe62195 930-943
+src/data/graphs/vue.json
+  s_eab28199b23d40::t_e7958c705559c6 14-17
+  s_eab28199b23d40::t_a686d3d20dc73e 6-7
+src/content/docs/vue/intermediate/rendering/01-update-cost.md
+  s_eab28199b23d40::t_acd2aa8289acdf 1-25,28-207,209-301
+  s_eab28199b23d40::t_58e5718cb4472f 208
+  s_eab28199b23d40::t_58276450f183a2 26-27
+src/content/docs/vue/intermediate/rendering/index.mdx
+  s_eab28199b23d40::t_8dd893ed9e6408 1,4-7,12-13
+  s_eab28199b23d40::t_526e917d30c0a8 2-3,8-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5723318fbc42ca8fdb8756b542087e10db310362",
+  "prompts": {},
+  "sessions": {
+    "s_eab28199b23d40": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "9206c975-f3b0-4d77-82be-571ac0580153",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
