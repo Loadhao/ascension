@@ -225,6 +225,26 @@
         2
       ],
       "hint": "官方把这三步写成「a JSON schema is generated from your type, the model is instructed to honor it, and the response is deserialized into your type」。干扰项一：默认只「要求 + 解析」，真正的校验重试要显式 validateSchema()，它由 StructuredOutputValidationAdvisor 驱动、官方标注是实验特性且非流式。干扰项二：泛型集合必须走 ParameterizedTypeReference，否则类型擦除后推不出 Schema。另记一条 2.0 断代：BeanOutputConverter 把 Schema 生成委托给 JsonSchemaGenerator，与工具调用共用同一套语义，所以排障可以跨功能迁移。见《ChatClient 门面与结构化输出》。"
+    },
+    {
+      "id": "sa-builder-014",
+      "noteId": "spring-ai/basic/foundation/02-chatclient-api",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 ChatClient 的装配与配置落点，哪些说法成立？",
+      "options": [
+        "自动配置给出的是 ChatClient.Builder，而且它是原型作用域——每个注入点新建一个实例，这正是「一个用例一个客户端」能成立的前提",
+        "改用 ChatClient.create 手工建门面会绕开自动配置的 Builder，代价是观测埋点和自定义 Builder 的定制一起静默失效",
+        "defaultSystem、defaultOptions、defaultTools、defaultAdvisors 设在构建级只定默认，请求级另有一套在链上追加",
+        "用了 OpenAiChatOptions 这类厂商专属参数，换厂商时只改 starter 依赖就能保持行为一致",
+        "2.0 里可以先取一份 options 用 setter 就地改温度，改完对后续所有请求都生效"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "第 1/2/3 项正确、第 4/5 项错。本篇引的官方原文说 Builder 是 prototype-scoped、a new instance is created for each injection point，原型作用域才让一个用例配一个客户端成立；官方点名的反模式是手工 create 会 bypass the auto-configured ChatClient.Builder，于是 observability 和 ChatClientBuilderCustomizer beans are ignored——ignored 就是静默失效，不报错、只丢埋点。第 4 项错在厂商专属 options 换厂商即失效，可移植性正是在这一点上打折，能跨厂商带走的是 ChatOptions 里定义的可移植项。第 5 项撞的是 2.0 那条断代：Options 类 now strictly immutable，不能再 setter 改，默认值也从 *Properties 下沉进构造器。顺带记配置键扁平化：spring.ai.openai.embedding.options.model 变成 spring.ai.openai.embedding.model，旧键 deprecated 兼容但新写代码用新键。见《ChatClient 门面与结构化输出》。"
     }
   ]
 }

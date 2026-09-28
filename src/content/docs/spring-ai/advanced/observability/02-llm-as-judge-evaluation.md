@@ -40,7 +40,7 @@ public EvaluationRequest(String userText,
 三槽的官方语义：`userText` 是用户原始输入；`dataList` 是 "Contextual data, such as from
 Retrieval Augmented Generation, appended to the raw input"；`responseContent` 是模型回答。
 
-:::note[没有"标准答案"这一槽]
+:::note[没有「标准答案」这一槽]
 `EvaluationRequest` 里**没有** expected / ground-truth 参数——这套 API 评的是
 **"回答与给定上下文是否自洽"**，不是"回答是否等于正确答案"。所以它是
 **RAG 场景的忠实度检查**，不是精确匹配测试。要判"事实对不对"得自己带参照资料进

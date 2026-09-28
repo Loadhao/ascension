@@ -142,7 +142,7 @@ is **instructed to honor it**, and the response is **deserialized into your type
 结构化输出能力去保证），`validateSchema()` 是**响应侧兜底**（拿到结果再校验、错就把错误
 塞回 prompt 重试）。
 
-:::caution[这个兜底环是"递归 Advisor"，官方标注为实验特性]
+:::caution[这个兜底环是「递归 Advisor」，官方标注为实验特性]
 驱动重试的 `StructuredOutputValidationAdvisor` 属于 recursive advisor，官方对它的定性是
 "Recursive Advisors are a new **experimental** feature in Spring AI 1.1.0-M4+."，并且直接
 列了三条代价："Currently, they are **non-streaming only**, require **careful advisor

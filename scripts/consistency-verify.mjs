@@ -178,6 +178,11 @@ const report = {};
 //    后续按用户指令「工具页顶部不留元说明框」把这些引流框整块删掉，该形态存量归零）。
 // 四类依据 node_modules/@astrojs/starlight/dist/integrations/aside-utils.js 的 asideVariants
 // （0.42.0 读到的就是 note/tip/caution/danger 四个，无别名映射），升 Starlight 时先复核该表。
+// ④（第 239 轮并入）标题里的直双引号：remark 的 typographer 按前后字符判引号方向，`"` 前邻
+// 是汉字或字母数字（既非空白也非标点）时判成闭引号，标题落进 dist 就是「这一页没写”整体关掉
+// 观测”的开关」——本该朝内的开引号方向朝外。站内约定用「」（现算 1646 处／222 篇，中文弯引号
+// 仅 6 处／3 篇），故一律改写成「」。正文侧同形状存量大（第 239 轮按渲染文本现算 1541 处／
+// 415 篇），其处置路线待用户裁决、不在本闸门范围内，这里只守住「容器标题」这一档新增。
 {
   const ASIDE_TYPES = new Set(['note', 'tip', 'caution', 'danger']);
   // 全站现算出的已知存量，已登记进 docs/evolution.md 候选表第 17/18 行待修。
@@ -212,6 +217,14 @@ const report = {};
             stack.push(i + 1);
             if (!ASIDE_TYPES.has(om[1])) violations.push(`${rel}:${i + 1}|容器名`);
             if (om[2] !== '' && om[2][0] !== '[') violations.push(`${rel}:${i + 1}|标题空格形`);
+            // ④ 标题里写直双引号：typographer 会把「汉字后紧跟的 "」判成闭引号，
+            //    标题落进 dist 就是 这一页没写”整体关掉观测”的开关 —— 开引号方向朝外。
+            //    标题是加粗小标题、读者最先看到，故这一形状一并判红（站内约定改用「」）。
+            if (om[2][0] === '[') {
+              const close = om[2].indexOf(']');
+              const title = close > 0 ? om[2].slice(1, close) : om[2].slice(1);
+              if (title.includes('"')) violations.push(`${rel}:${i + 1}|标题直双引号`);
+            }
             return;
           }
           if (/^[ \t]*:::[ \t]*$/.test(ln)) {
@@ -229,7 +242,7 @@ const report = {};
   const stale = Object.keys(KNOWN).filter((k) => !hit.has(k));
   report['11.容器指令写法与闭合'] = {
     ok: fresh.length === 0 && stale.length === 0,
-    detail: `${scanned.files} 篇扫出 ${scanned.opens} 个开围栏、${violations.length} 处不成立（其中已登记待修 ${Object.keys(KNOWN).length} 处）；容器名限 note/tip/caution/danger、标题须写成 name[标题]、开围栏须闭合`,
+    detail: `${scanned.files} 篇扫出 ${scanned.opens} 个开围栏、${violations.length} 处不成立（其中已登记待修 ${Object.keys(KNOWN).length} 处）；容器名限 note/tip/caution/danger、标题须写成 name[标题]、开围栏须闭合、标题里不写直双引号（汉字后紧跟会被判成闭引号，一律改用「」）`,
     bad: [...fresh.map((v) => `新增违规 ${v}`), ...stale.map((k) => `存量清单过期、修好后须删项 ${k}`)],
   };
 }
