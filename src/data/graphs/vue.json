@@ -4,6 +4,7 @@
     { "id": "v-react", "label": "响应式系统", "href": "/vue/basic/core/01-reactivity/", "group": "基础" },
     { "id": "v-comp", "label": "组件模型与数据流", "href": "/vue/basic/core/02-component-model/", "group": "基础" },
     { "id": "v-compo", "label": "Composition API", "href": "/vue/basic/core/03-composition-api/", "group": "基础" },
+    { "id": "v-form", "label": "输入框的值何时算数", "href": "/vue/basic/core/04-form-inputs/", "group": "基础" },
     { "id": "v-update", "label": "一次更新重做了什么", "href": "/vue/intermediate/rendering/01-update-cost/", "group": "渲染" },
     { "id": "v-state", "label": "状态放在哪一层", "href": "/vue/intermediate/state/01-where-to-put-state/", "group": "状态" },
     { "id": "v-derv", "label": "该存、该算还是跟着做", "href": "/vue/intermediate/state/02-store-compute-or-react/", "group": "状态" },
@@ -29,6 +30,10 @@
     { "source": "root", "target": "v-derv" },
     { "source": "v-react", "target": "v-derv" },
     { "source": "v-state", "target": "v-derv" },
-    { "source": "v-derv", "target": "v-update" }
+    { "source": "v-derv", "target": "v-update" },
+    { "source": "root", "target": "v-form" },
+    { "source": "v-comp", "target": "v-form" },
+    { "source": "v-react", "target": "v-form" },
+    { "source": "v-form", "target": "v-derv" }
   ]
 }
