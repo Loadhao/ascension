@@ -1,0 +1,41 @@
+scripts/consistency-verify.mjs
+  s_7dc255ecd17e0f::t_f69c3091cdb42b 144-147
+scripts/mermaid-syntax-verify.mjs
+  s_7dc255ecd17e0f::t_23d917b1d9df5f 29-30
+docs/evolution.md
+  s_7dc255ecd17e0f::t_189222a2d32151 64
+  s_7dc255ecd17e0f::t_05d86a5d24f003 87
+  s_7dc255ecd17e0f::t_90c8e12bb8c19a 88
+  s_7dc255ecd17e0f::t_96d3429b5d3673 89
+  s_7dc255ecd17e0f::t_595b7a242e1b5b 91
+  s_7dc255ecd17e0f::t_bacd09bcf1b44d 80
+  s_7dc255ecd17e0f::t_2c73e06e1f3a3d 621-622
+  s_7dc255ecd17e0f::t_7ec2181a4152d5 79,81-86,90
+  s_7dc255ecd17e0f::t_e94036c0aedbf6 59
+  s_7dc255ecd17e0f::t_88466a05efc4e1 76-78
+  s_7dc255ecd17e0f::t_1c8c3e7de403c4 148
+scripts/mermaid-contrast-verify.mjs
+  s_7dc255ecd17e0f::t_01c6e5b7db6952 61-66
+  s_7dc255ecd17e0f::t_0f518e861cbee4 27-29,36
+scripts/media-encode.mjs
+  s_7dc255ecd17e0f::t_e065e1d73fd833 46-48
+  s_7dc255ecd17e0f::t_abbc393aa36745 9
+src/data/quiz/ai.json
+  s_7dc255ecd17e0f::t_2d074269d8aa9f 943-962
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "95712417a40418d6dea902ba25555ee4dfe7eee0",
+  "prompts": {},
+  "sessions": {
+    "s_7dc255ecd17e0f": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "57247be5-fb57-4ee8-8175-c9c6ad2c1638",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
