@@ -1,0 +1,24 @@
+docs/coverage-deepening.md
+  s_7de303837f902e::t_e3e4138342b252 103,105-106
+  s_7de303837f902e::t_2b3811afe58b39 104
+src/data/interview/netty.json
+  s_7de303837f902e::t_c9bf4a08111d40 1-24
+docs/evolution.md
+  s_7de303837f902e::t_66c5ca2e212199 68,131-145,209
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ad800d6cbbfeb4c4dbd6a3520709eb82d73ced6e",
+  "prompts": {},
+  "sessions": {
+    "s_7de303837f902e": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "d05338d5-201e-458b-b060-7916f92b95df",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
