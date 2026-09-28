@@ -1,0 +1,27 @@
+src/data/viz/media.ts
+  s_1c5d4008eea7f2::t_e2032d5019a8b9 245-249,252-268
+  s_1c5d4008eea7f2::t_b0171f3c4f42b5 250-251
+src/content/docs/redis/advanced/ha/01-replication-sentinel-cluster.mdx
+  s_1c5d4008eea7f2::t_79bcab132955e1 67-70
+docs/evolution.md
+  s_1c5d4008eea7f2::t_cb33eb09641eee 101-114
+  s_1c5d4008eea7f2::t_3ba291a05dce03 60
+src/data/quiz/redis.json
+  s_1c5d4008eea7f2::t_c40c0d8bb7f486 349-368
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a07625e960967464851e706cd83755cf3baa3baa",
+  "prompts": {},
+  "sessions": {
+    "s_1c5d4008eea7f2": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "3c8f458e-0805-4719-9a93-142390085116",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
