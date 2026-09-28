@@ -1,0 +1,26 @@
+src/content/docs/zookeeper/basic/core/01-zookeeper-core.mdx
+  s_090106617e839b::t_2d2fe54bc956ee 62-65
+src/data/quiz/zookeeper.json
+  s_090106617e839b::t_9f62dc90257f16 112-127
+src/data/viz/media.ts
+  s_090106617e839b::t_b5352d07f6f66f 297-298
+  s_090106617e839b::t_b70eb3e0b9906d 292-296,299-314
+docs/evolution.md
+  s_090106617e839b::t_f69cc4a58ad84f 60,118-133
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "d163a3591c8a7d1c3c137e039eda96f538c745ed",
+  "prompts": {},
+  "sessions": {
+    "s_090106617e839b": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "db22bbb6-7b0b-4eb6-a1b4-9d4c3e68ed4b",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
