@@ -96,6 +96,12 @@
       "group": "运行时"
     },
     {
+      "id": "pkgresolve",
+      "label": "包解析与双格式",
+      "href": "/js/intermediate/node/11-package-resolution/",
+      "group": "运行时"
+    },
+    {
       "id": "emitter",
       "label": "EventEmitter",
       "href": "/js/intermediate/node/03-event-emitter/",
@@ -609,6 +615,21 @@
       "source": "envconfig",
       "target": "envbuild",
       "label": "Node 运行时读取的对照"
+    },
+    {
+      "source": "modules",
+      "target": "pkgresolve",
+      "label": "语法之外，包名到文件那一段"
+    },
+    {
+      "source": "pkgresolve",
+      "target": "pkgmgr",
+      "label": "运行期解析依赖的安装期结构"
+    },
+    {
+      "source": "pkgresolve",
+      "target": "monorepo",
+      "label": "最近的 package.json 判格式"
     }
   ]
 }

@@ -791,6 +791,7 @@ export default defineConfig({
                         { label: 'Node 安全最佳实践', link: '/js/intermediate/node/08-security/' },
                         { label: 'crypto 模块：Node 的加密工具箱', link: '/js/intermediate/node/09-crypto/' },
                         { label: 'Node 事件循环与浏览器差异', link: '/js/intermediate/node/10-event-loop/' },
+                        { label: '包解析：exports 条件与双包陷阱', link: '/js/intermediate/node/11-package-resolution/' },
                       ],
                     },
                     {

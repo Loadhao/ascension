@@ -1,12 +1,13 @@
 ---
 title: Node.js 运行时
-description: V8 之外的另一半：事件循环线程模型、垃圾回收与内存管理、进程与诊断
+description: V8 之外的另一半：事件循环线程模型、垃圾回收与内存管理、模块解析与包边界、进程与诊断
 ---
 
 import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
 
 Node.js = V8 + libuv：语言之上是运行时。事件循环的六个阶段、进程池与
-libuv 线程、V8 堆内存与 GC、线上内存问题的排查姿势，都在这一分类。
-点击右侧圆点可标记学习状态（未学 → 学习中 → 已掌握）。
+libuv 线程、V8 堆内存与 GC、线上内存问题的排查姿势，外加「一个包名怎么变成
+磁盘上那个文件」这条模块边界账（`exports` 白名单、条件键序、双包陷阱），
+都在这一分类。点击右侧圆点可标记学习状态（未学 → 学习中 → 已掌握）。
 
 <CategoryNotesIsland categoryId="js/intermediate/node" />
