@@ -242,4 +242,28 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'复盘这条路径：丢了、重了、乱了，都能定位到环节。',
 		],
 	},
+	'redis-sentinel-video': {
+		title: '哨兵故障转移 · 配音短片',
+		src: '/videos/redis-sentinel-video.mp4',
+		poster: '/videos/redis-sentinel-video.poster.png',
+		width: 1280,
+		height: 846,
+		duration: 48.9,
+		alt: '动画短片：主库失联后，三个哨兵每秒探活把它记成主观下线、互相问成客观下线，' +
+			'过半选出 leader，leader 按优先级与复制位点把从库晋升为新主，其余从库改挂新主，卡住的旧主恢复后被降级重同步。',
+		caption:
+			'故障转移三道关：探活记主观下线、quorum 定客观下线、majority 定 leader——两个门槛各自管什么，别混。',
+		source: 'redis-sentinel',
+		narration: [
+			'主从只保证有备份，主库挂了要人工切——哨兵来自动化。',
+			'哨兵每秒 ping 主库、从库和彼此；超时无回应记主观下线。',
+			'主观下线一人说了不算，它去问其他哨兵是否同意。',
+			'同意数达到 quorum，客观下线才成立。',
+			'哨兵再拉票选 leader，过半当选，由它执行切换。',
+			'挑新主先排掉断线和延迟大的，再按三条规则排序。',
+			'胜出的从库晋升新主，其余改挂新主，客户端重连。',
+			'旧主只是卡了又恢复，会被降级重同步，写入丢失。',
+			'quorum 定下线，majority 定 leader，两个数别混。',
+		],
+	},
 };
