@@ -273,6 +273,26 @@
         3
       ],
       "hint": "第 2 项把责任放错了地方：isolation.level 是消费者配置，不会记在 broker 或 __consumer_offsets 里替你把关，漏配就静默退化成 at-least-once。另注意 read_committed 返回「已提交事务的消息 + 不属于任何事务的消息」，混合写入的 topic 不会误伤非事务数据。"
+    },
+    {
+      "id": "kafka-producer-017",
+      "noteId": "kafka/basic/core/03-producer-path",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于 Kafka 生产者「主线程攒批、Sender 线程发送」这条路径与其语义，下列说法正确的有？",
+      "options": [
+        "send() 返回只代表消息进了累加器，要确认结果得对 Future 调 get() 或注册回调",
+        "分区三规则按序判断：指定了 partition 就用之，其次有 key 按 hash(key) % 分区数，同 key 恒落同一分区",
+        "粘性分区会逐条随机选分区，把一批消息摊薄到多个 batch 里让分布更均匀",
+        "幂等生产者的序列号由 transactional.id 决定，producer 重启后仍能跨会话去重",
+        "acks=all 配合 min.insync.replicas≥2 与幂等生产者，才构成「不丢消息」的生产标准三件套"
+      ],
+      "answer": [
+        0,
+        1,
+        4
+      ],
+      "hint": "第 1/2/5 项正确、第 3/4 项错。生产代码里「发完就忘」是丢消息的高发姿势——send() 是异步的，返回只走到累加器那一格。第 3 项把因果说反了：逐条随机选分区正是粘性分区要避免的做法，一批消息被摊薄到多个 batch 会让批量收益归零，所以它一段时间内钉住一个分区、攒满再换。第 4 项混了两件事：幂等生产者的序列号随 producer 会话（PID）走，会话重启即换号，跨会话去重要靠 Kafka 事务（transactional.id）或业务侧幂等。"
     }
   ]
 }

@@ -219,4 +219,27 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'初始化由主动引用触发：new、反射、初始化子类连带父类。',
 		],
 	},
+	'kafka-producer-video': {
+		title: '生产者 send() 的旅程 · 配音短片',
+		src: '/videos/kafka-producer-video.mp4',
+		poster: '/videos/kafka-producer-video.poster.png',
+		width: 1280,
+		height: 808,
+		duration: 45.3,
+		alt: '动画短片：一条消息在 Kafka 生产者客户端里依次经过主线程的序列化与分区选择、' +
+			'累加器按分区攒批、Sender 线程批量取出、发往分区 Leader 追加日志、ISR 副本按 acks 裁决，确认沿路返回后回调才触发。',
+		caption:
+			'send() 返回只走到累加器那一步：落盘要等 Leader 追加、acks 裁决；丢、重、乱都能沿这条双线程路径定位。',
+		source: 'kafka-producer',
+		narration: [
+			'send() 返回不等于发送成功，主线程只做了三件事。',
+			'序列化、按三规则选分区，再返回 Future，全程不碰网络。',
+			'进累加器：每个分区一个队列，攒满或到点才发。',
+			'Sender 线程把凑好的整批取走，主线程与网络解耦。',
+			'整批发往分区 Leader，Leader 顺序追加到本地日志。',
+			'acks 三档定谁回了才算数，也就定下丢数据的窗口。',
+			'确认沿路返回触发回调；失败重试，开幂等才不重不乱。',
+			'复盘这条路径：丢了、重了、乱了，都能定位到环节。',
+		],
+	},
 };
