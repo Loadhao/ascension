@@ -7,6 +7,7 @@
     { "id": "v-form", "label": "输入框的值何时算数", "href": "/vue/basic/core/04-form-inputs/", "group": "基础" },
     { "id": "v-update", "label": "一次更新重做了什么", "href": "/vue/intermediate/rendering/01-update-cost/", "group": "渲染" },
     { "id": "v-list", "label": "列表凭什么认出同一行", "href": "/vue/intermediate/rendering/02-list-render-and-key/", "group": "渲染" },
+    { "id": "v-slot", "label": "跨组件边界的三条通道", "href": "/vue/basic/core/05-slots-and-events/", "group": "基础" },
     { "id": "v-state", "label": "状态放在哪一层", "href": "/vue/intermediate/state/01-where-to-put-state/", "group": "状态" },
     { "id": "v-derv", "label": "该存、该算还是跟着做", "href": "/vue/intermediate/state/02-store-compute-or-react/", "group": "状态" },
     { "id": "v-route", "label": "URL 怎么变成组件", "href": "/vue/intermediate/routing/01-routing-and-guards/", "group": "路由" }
@@ -39,6 +40,11 @@
     { "source": "root", "target": "v-list" },
     { "source": "v-update", "target": "v-list" },
     { "source": "v-comp", "target": "v-list" },
-    { "source": "v-form", "target": "v-list" }
+    { "source": "v-form", "target": "v-list" },
+    { "source": "root", "target": "v-slot" },
+    { "source": "v-comp", "target": "v-slot" },
+    { "source": "v-compo", "target": "v-slot" },
+    { "source": "v-list", "target": "v-slot" },
+    { "source": "v-slot", "target": "v-state" }
   ]
 }

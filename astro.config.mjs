@@ -925,6 +925,7 @@ export default defineConfig({
                         { label: '组件模型与单向数据流', link: '/vue/basic/core/02-component-model/' },
                         { label: 'Composition API 与逻辑复用', link: '/vue/basic/core/03-composition-api/' },
                         { label: '输入框的值什么时候算数', link: '/vue/basic/core/04-form-inputs/' },
+                        { label: '跨组件边界的三条通道', link: '/vue/basic/core/05-slots-and-events/' },
                       ],
                     },
                   ],
