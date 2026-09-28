@@ -1,0 +1,25 @@
+src/content/docs/spring-ai/advanced/observability/02-llm-as-judge-evaluation.md
+  s_e25f6f1ee7038f::t_92d21e53d78213 43
+src/data/quiz/js.json
+  s_e25f6f1ee7038f::t_3d44f1e7528ff6 470-489
+src/content/docs/spring-ai/advanced/mcp/01-mcp-client-server.md
+  s_e25f6f1ee7038f::t_92a45ce5c56274 101
+docs/evolution.md
+  s_e25f6f1ee7038f::t_462a6e371fc104 69,115-129,193
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3763d59e01cc627528031fb3abc566410f59c08b",
+  "prompts": {},
+  "sessions": {
+    "s_e25f6f1ee7038f": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "dba56d75-bac7-4000-85e1-9dba9e39983b",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
