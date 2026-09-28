@@ -1,0 +1,13 @@
+---
+title: 路由与导航控制
+description: URL 到组件的完整链路：历史模式与服务器兜底、路径匹配与嵌套记录、导航守卫与动态权限路由、路由级懒加载与缓存
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+响应式系统回答「改了数据谁会收到通知」，状态那一篇回答「共用的数据归谁所有」。这一
+分类回答的是另一条链路：**地址栏里那串字符是怎么变成屏幕上的组件的**。它有四道关卡
+——这次导航要不要问服务器、哪条路由接走了它、该不该放行、组件怎么拿到参数——四道
+关卡各自会失效，混在一起记就答不出「本地正常、上线刷新 404」这类现场题。
+
+<CategoryNotesIsland categoryId="vue/intermediate/routing" />

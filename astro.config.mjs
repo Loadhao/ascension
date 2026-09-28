@@ -947,6 +947,14 @@ export default defineConfig({
                         { label: '状态放在哪一层', link: '/vue/intermediate/state/01-where-to-put-state/' },
                       ],
                     },
+                    {
+                      label: '路由与导航控制',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/vue/intermediate/routing/' },
+                        { label: 'URL 怎么变成组件', link: '/vue/intermediate/routing/01-routing-and-guards/' },
+                      ],
+                    },
                   ],
                 },
               ],
