@@ -1,0 +1,28 @@
+scripts/evolution-candidates.mjs
+  s_153176aeb99828::t_1123c6a669880a 113-116,120-123
+  s_153176aeb99828::t_f1b915192fedb4 77
+  s_153176aeb99828::t_9f2f370b9672a7 43-76,78-86
+  s_153176aeb99828::t_c7ea44f1f39f2e 112
+src/data/quiz/vue.json
+  s_153176aeb99828::t_5d3874aec65b12 123
+  s_153176aeb99828::t_43be531162c6b6 104-122
+docs/evolution.md
+  s_153176aeb99828::t_6eb68f082c338a 66
+  s_153176aeb99828::t_f80f881e84e4a4 87-102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f4f2007e7965e95b2827b241783a1b5184946c9b",
+  "prompts": {},
+  "sessions": {
+    "s_153176aeb99828": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "4420782e-9a4b-4547-998f-5ca19ef4a31e",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
