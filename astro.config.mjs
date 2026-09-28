@@ -899,6 +899,7 @@ export default defineConfig({
                       items: [
                         { label: '概览', link: '/react/intermediate/state/' },
                         { label: '状态管理与 Context', link: '/react/intermediate/state/01-context-vs-store/' },
+                        { label: 'Effect 的契约', link: '/react/intermediate/state/02-effect-contract/' },
                       ],
                     },
                   ],

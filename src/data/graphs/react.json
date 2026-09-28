@@ -5,7 +5,8 @@
     { "id": "r-hooks", "label": "Hooks 心智模型", "href": "/react/basic/core/02-hooks-mental/", "group": "基础" },
     { "id": "r-render", "label": "渲染流程与 diff", "href": "/react/basic/core/03-render-flow/", "group": "基础" },
     { "id": "r-perf", "label": "重渲染传播与 memo", "href": "/react/basic/core/04-rerender-perf/", "group": "基础" },
-    { "id": "r-state", "label": "状态管理与 Context", "href": "/react/intermediate/state/01-context-vs-store/", "group": "状态" }
+    { "id": "r-state", "label": "状态管理与 Context", "href": "/react/intermediate/state/01-context-vs-store/", "group": "状态" },
+    { "id": "r-effect", "label": "Effect 的契约", "href": "/react/intermediate/state/02-effect-contract/", "group": "副作用" }
   ],
   "edges": [
     { "source": "root", "target": "r-decl" },
@@ -13,10 +14,13 @@
     { "source": "root", "target": "r-render" },
     { "source": "root", "target": "r-perf" },
     { "source": "root", "target": "r-state" },
+    { "source": "root", "target": "r-effect" },
     { "source": "r-decl", "target": "r-hooks" },
     { "source": "r-hooks", "target": "r-render" },
     { "source": "r-hooks", "target": "r-state" },
+    { "source": "r-hooks", "target": "r-effect" },
     { "source": "r-render", "target": "r-perf" },
-    { "source": "r-perf", "target": "r-state" }
+    { "source": "r-perf", "target": "r-state" },
+    { "source": "r-state", "target": "r-effect" }
   ]
 }
