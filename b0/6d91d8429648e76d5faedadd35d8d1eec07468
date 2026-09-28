@@ -1,0 +1,41 @@
+src/content/docs/vue/intermediate/state/02-store-compute-or-react.md
+  s_02580ea72b3c06::t_9ad0e218d7de6f 182-186
+  s_02580ea72b3c06::t_df348bf21239b3 121
+  s_02580ea72b3c06::t_88203f0969c330 160-161
+  s_02580ea72b3c06::t_a71f794ee69495 221
+  s_02580ea72b3c06::t_5aabfd04bf919b 94-95
+  s_02580ea72b3c06::t_0e85f3beb96476 227-231
+  s_02580ea72b3c06::t_15de3674515abd 333
+  s_02580ea72b3c06::t_0993bc29bde048 171
+  s_02580ea72b3c06::t_7ab12c1b67bf72 264-265
+  s_02580ea72b3c06::t_b4214e8f9b6b88 61-66,70-71
+  s_02580ea72b3c06::t_97e5b5552ce924 368-371
+  s_02580ea72b3c06::t_0719fabd1aff04 426-428
+  s_02580ea72b3c06::t_b948277eea4118 124-126
+  s_02580ea72b3c06::t_00104acd0f308d 1-60,67-69,72-93,96-120,122-123,127-159,162-170,172-181,187-220,222-226,232-263,266-332,334-367,372-425
+astro.config.mjs
+  s_02580ea72b3c06::t_0ac15a88735b4f 948
+src/data/graphs/vue.json
+  s_02580ea72b3c06::t_49d0d203633d2f 9
+  s_02580ea72b3c06::t_578660c7341305 28-32
+src/content/docs/vue/index.mdx
+  s_02580ea72b3c06::t_67be098cf076f5 14-18
+docs/evolution.md
+  s_02580ea72b3c06::t_c1da2a2c80874a 95-108
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b06d91d8429648e76d5faedadd35d8d1eec07468",
+  "prompts": {},
+  "sessions": {
+    "s_02580ea72b3c06": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "ff0f7b2e-f633-4940-aa73-694689c45eec",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
