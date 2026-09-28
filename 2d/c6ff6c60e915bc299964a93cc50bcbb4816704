@@ -1,0 +1,26 @@
+docs/coverage-deepening.md
+  s_ba39507c89e134::t_6f20d6e612edf7 113-114
+  s_ba39507c89e134::t_c72d9908c2beed 111
+src/data/interview/kafka.json
+  s_ba39507c89e134::t_fdf41987bf2972 20
+  s_ba39507c89e134::t_d04d2d99c07ecf 11
+  s_ba39507c89e134::t_a4cb101de27bd7 1-10,12-19,21-24
+docs/evolution.md
+  s_ba39507c89e134::t_328cefa4c114f8 68,137-153,232
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2dc6ff6c60e915bc299964a93cc50bcbb4816704",
+  "prompts": {},
+  "sessions": {
+    "s_ba39507c89e134": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "80422f3f-0c7f-4619-aa93-2aed42433c14",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
