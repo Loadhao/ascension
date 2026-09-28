@@ -26,7 +26,7 @@
 .lg\:sl-flex:has(.kg-fullbleed) aside.right-sidebar-container {
   display: none;
 }
-/* 图谱全宽页：压缩页题与正文区的上下留白，图谱高度最大化
+/* 图谱全宽页：压缩正文区上下留白，图谱高度最大化
    （页面里有两个 .content-panel：外层包页题、内层包正文，
    从 wrapper 级命中全部；Starlight scoped 样式优先级更高，需 !important） */
 .lg\:sl-flex:has(.kg-fullbleed) .content-panel {
@@ -36,16 +36,30 @@
 .lg\:sl-flex:has(.kg-fullbleed) astro-island {
   margin-top: 0 !important;
 }
-.lg\:sl-flex:has(.kg-fullbleed) h1 {
-  margin-top: 4px !important;
-  margin-bottom: 8px !important;
+/* 图谱全宽页不显示页题：这类页面正文就是一张图，标题占掉 58px 视觉高度
+   却没有任何信息量（侧栏与浏览器标签已写明「知识全景」）。
+   只把面板收成零高、h1 转 sr-only，不 display:none——读屏的标题导航、
+   页内检索和 #_top 锚点仍要它。 */
+.lg\:sl-flex:has(.kg-fullbleed) .content-panel:has(> .sl-container > h1) {
+  padding: 0 !important;
+}
+.lg\:sl-flex:has(.kg-fullbleed) .content-panel:has(> .sl-container > h1) h1 {
+  margin: 0 !important;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* 页题面板归零后，正文面板顶部那条分隔线会紧贴图谱自己的上边框，
+   两道线挤在一起显脏，去掉前者 */
+.lg\:sl-flex:has(.kg-fullbleed) .content-panel:has(.kg-fullbleed) {
+  border-top: 0 !important;
 }
 /* 图谱全宽页隐藏页脚（编辑链接/元信息），还高度给图谱 */
 .lg\:sl-flex:has(.kg-fullbleed) .content-panel footer {
   display: none;
-}
-.content-panel:has(.kg-fullbleed) .sl-container h1 {
-  margin-bottom: 8px;
 }
 .sl-content:has(.kg-fullbleed) {
   padding-block: 8px 0 !important;

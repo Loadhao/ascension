@@ -174,26 +174,16 @@ const report = {};
 // ② 容器名不在 Starlight 支持的四类里（实测站内有 :::warning、:::important）→ 走
 //    transformUnhandledDirective 回退，框、图标与 aria-label 全丢，内容降级成无样式裸 div；
 // ③ 开围栏缺对应的 ::: → 容器一直吞到文末，其后整节被包进提示框（第 215 轮 dist 实测
-//    33 个方向首页的 :::tip[面试冲刺] 把「知识图谱」小标题与图谱组件一并吞了进去）。
+//    33 个方向首页的 :::tip[面试冲刺] 把「知识图谱」小标题与图谱组件一并吞了进去；
+//    后续按用户指令「工具页顶部不留元说明框」把这些引流框整块删掉，该形态存量归零）。
 // 四类依据 node_modules/@astrojs/starlight/dist/integrations/aside-utils.js 的 asideVariants
 // （0.42.0 读到的就是 note/tip/caution/danger 四个，无别名映射），升 Starlight 时先复核该表。
 {
   const ASIDE_TYPES = new Set(['note', 'tip', 'caution', 'danger']);
-  // 33 个方向首页模板的 :::tip[面试冲刺] 从未闭合（值＝开围栏行号）。
-  const UNCLOSED_TIP = {
-    ai: 16, algorithm: 16, distributed: 27, docker: 16, elasticsearch: 20, etcd: 22,
-    git: 16, java: 16, js: 16, kafka: 20, kubernetes: 22, langchain: 22, linux: 16,
-    middleware: 22, mongodb: 20, mqtt: 20, mysql: 20, netty: 22, network: 18, nginx: 20,
-    postgresql: 22, python: 16, rabbitmq: 20, react: 22, redis: 20, rocketmq: 20,
-    seata: 22, security: 22, 'spring-ai': 27, tools: 19, typescript: 20, vue: 23, zookeeper: 22,
-  };
   // 全站现算出的已知存量，已登记进 docs/evolution.md 候选表第 17 行待修。
   // 修掉或改写到不再命中时，下面「清单过期」那条会判红要求同步删项——
   // 既不放宽容差，也不允许清单静默过期（与 quiz-verify 第 9 项同款口径）。
   const KNOWN = {
-    ...Object.fromEntries(
-      Object.entries(UNCLOSED_TIP).map(([d, l]) => [`src/content/docs/${d}/index.mdx:${l}|未闭合`, '方向首页 :::tip 缺闭围栏，整节知识图谱被吞进提示框'])
-    ),
     'src/content/docs/spring-ai/advanced/mcp/01-mcp-client-server.md:101|容器名': ':::warning 不在四类内',
     'src/content/docs/spring-ai/advanced/observability/02-llm-as-judge-evaluation.md:43|容器名': ':::important 不在四类内',
     'src/content/docs/spring-ai/advanced/rag/01-vector-store-etl.md:103|容器名': ':::warning 不在四类内',
