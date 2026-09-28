@@ -98,7 +98,7 @@ with all MCP clients are provided as a `ToolCallbackProvider` instance." 拿到�
 
 协议由 `spring.ai.mcp.server.protocol` 选：`SSE` / `STREAMABLE` / `STATELESS`。
 
-:::warning[2.0 起 SSE 服务端已弃用]
+:::caution[2.0 起 SSE 服务端已弃用]
 文档表格里 SSE 两行直接标着 **"deprecated since 2.0.0, use STREAMABLE instead"**，
 Streamable-HTTP 的说明也是 **"It replaces the SSE transport"**。新服务别再写 SSE，
 照旧教程配 `protocol=SSE` 等于一上线就背一个弃用项。

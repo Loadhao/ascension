@@ -184,8 +184,6 @@ const report = {};
   // 修掉或改写到不再命中时，下面「清单过期」那条会判红要求同步删项——
   // 既不放宽容差，也不允许清单静默过期（与 quiz-verify 第 9 项同款口径）。
   const KNOWN = {
-    'src/content/docs/spring-ai/advanced/mcp/01-mcp-client-server.md:101|容器名': ':::warning 不在四类内',
-    'src/content/docs/spring-ai/advanced/observability/02-llm-as-judge-evaluation.md:43|容器名': ':::important 不在四类内',
     'src/content/docs/spring-ai/advanced/rag/01-vector-store-etl.md:103|容器名': ':::warning 不在四类内',
     'src/content/docs/spring-ai/advanced/rag/02-rag-advisors.md:106|容器名': ':::warning 不在四类内',
     'src/content/docs/spring-ai/basic/foundation/02-chatclient-api.md:145|容器名': ':::warning 不在四类内',
