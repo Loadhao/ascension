@@ -1,0 +1,26 @@
+src/data/viz/media.ts
+  s_05870031f2af9b::t_d9f86dfeb44c26 481-485,487-505
+  s_05870031f2af9b::t_1469beae39662b 486
+src/content/docs/postgresql/intermediate/wal/01-wal.mdx
+  s_05870031f2af9b::t_be82bcb1701f85 42-45
+src/data/quiz/postgresql.json
+  s_05870031f2af9b::t_e4780d6932d8f7 164-179
+docs/evolution.md
+  s_05870031f2af9b::t_f585a9385c01b2 60,135-152,221
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "9ae3037f4f537a1450f84725138e76253964014b",
+  "prompts": {},
+  "sessions": {
+    "s_05870031f2af9b": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "ef0eacbe-99a1-48b2-9e07-1aef54a28fdc",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
