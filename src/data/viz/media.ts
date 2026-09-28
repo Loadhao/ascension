@@ -335,4 +335,27 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'所以 AT 不是两阶段提交：本地锁提交时就放了，只留 TC 侧全局锁。',
 		],
 	},
+	'rocketmq-tx-video': {
+		title: 'RocketMQ 事务消息 · 配音短片',
+		src: '/videos/rocketmq-tx-video.mp4',
+		poster: '/videos/rocketmq-tx-video.poster.png',
+		width: 1280,
+		height: 690,
+		duration: 57.6,
+		alt: '动画短片：下单扣库存一条事务消息依次演半消息进 Broker 但对消费者不可见、确认到手才执行本地事务、' +
+			'成功回 commit 让半消息转正投递给库存服务、失败 rollback 直接删除，末两帧演 Broker 定时回查本地订单表与整条链复盘。',
+		caption:
+			'悬念由半消息锁住、定论由本地事务给、兜底由回查做——它换掉的是自建那张本地消息表。',
+		source: 'rocketmq-tx',
+		narration: [
+			'本地消息表要建表还要扫表，RocketMQ 把这套做法内建成了协议。',
+			'第一步发半消息进 Broker：消息已经存下，但对消费者完全不可见。',
+			'确认到手才执行本地事务：订单落库，投不投递的悬念先由半消息锁住。',
+			'本地事务成功就回 commit：半消息转正，消费者这才看得见它。',
+			'链路在库存服务消费后闭合；本地事务失败就 rollback，半消息删除。',
+			'要是生产者宕机、commit 丢了，Broker 收不到确认就定时回查它。',
+			'生产者拿本地订单表作答：查得到就转正，查不到就删除半消息。',
+			'半消息锁悬念、本地事务给定论、回查兜底；强一致留给 Seata。',
+		],
+	},
 };
