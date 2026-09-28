@@ -1,0 +1,29 @@
+src/content/docs/spring-ai/advanced/observability/01-ai-observability.md
+  s_f9aea6b94fcaa6::t_75feedbe02b865 139
+src/content/docs/spring-ai/basic/foundation/02-chatclient-api.md
+  s_f9aea6b94fcaa6::t_15e54e0a9566ce 145
+src/content/docs/spring-ai/advanced/observability/02-llm-as-judge-evaluation.md
+  s_f9aea6b94fcaa6::t_7b80090c3705f4 43
+scripts/consistency-verify.mjs
+  s_f9aea6b94fcaa6::t_9f7b82e113cae7 245
+  s_f9aea6b94fcaa6::t_643dcb455c50ff 181-185
+  s_f9aea6b94fcaa6::t_920a040a6128e6 220-227
+src/data/quiz/spring-ai.json
+  s_f9aea6b94fcaa6::t_83352a2af544b9 228-247
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "017fedb373e70a74dda666968312256a96bc292a",
+  "prompts": {},
+  "sessions": {
+    "s_f9aea6b94fcaa6": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "864f616a-f133-4f1b-99c7-ec84cd103c79",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
