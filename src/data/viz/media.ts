@@ -407,4 +407,27 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'之后数据全走对称加密：非对称只在握手搬一次种子。',
 		],
 	},
+	'js-event-loop-video': {
+		title: '事件循环 · 配音短片',
+		src: '/videos/js-event-loop-video.mp4',
+		poster: '/videos/js-event-loop-video.poster.png',
+		width: 1280,
+		height: 750,
+		duration: 55.8,
+		alt: '动画短片：一段同步代码里同时登记 setTimeout 与 Promise 的 then，逐帧演调用栈清空后先清空整个' +
+			'微任务队列、再取一个宏任务执行、宏任务跑完又清一遍微任务才轮到渲染，末帧收在两条排班铁律。',
+		caption:
+			'微任务插队插在渲染和下一个宏任务之前——这就是「3 2 1」里那个 1 排到最后的全部原因。',
+		source: 'js-event-loop',
+		narration: [
+			'排班表：同步跑完，清空全部微任务，渲染，再取一个宏任务。',
+			'同步里遇到 setTimeout，回调不是零毫秒后执行，是排进宏任务队列。',
+			'遇到 Promise 的 then，回调进微任务队列，和宏任务不同班次。',
+			'同步执行完、调用栈清空，此刻微一个宏一个，谁先跑？',
+			'先清空整个微任务队列：then 立刻执行，它插队在渲染和下一个宏任务之前。',
+			'微队列空了，循环才取一个宏任务，setTimeout 回调到这一步才跑。',
+			'宏任务跑完再清一遍微任务，才轮到渲染，每个宏任务都是清空点。',
+			'两条铁律：每个宏任务之后清空全部微任务，微任务永远优先于宏任务。',
+		],
+	},
 };
