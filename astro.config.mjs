@@ -927,6 +927,20 @@ export default defineConfig({
                     },
                   ],
                 },
+                {
+                  label: '中级',
+                  collapsed: true,
+                  items: [
+                    {
+                      label: '渲染机制与更新粒度',
+                      collapsed: false,
+                      items: [
+                        { label: '概览', link: '/vue/intermediate/rendering/' },
+                        { label: '一次更新到底重做了什么', link: '/vue/intermediate/rendering/01-update-cost/' },
+                      ],
+                    },
+                  ],
+                },
               ],
             },
             {

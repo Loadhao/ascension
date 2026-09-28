@@ -1,0 +1,13 @@
+---
+title: 渲染机制与更新粒度
+description: 一次更新到底牵动多少代码：组件级依赖追踪、编译期三条 hint 与手动跳过更新的两条路
+---
+
+import CategoryNotesIsland from '../../../../../components/learn/CategoryNotesIsland.astro';
+
+响应式系统回答的是「改了数据谁会收到通知」，这一分类回答通知之后发生的事：一次
+更新要跑哪些组件的渲染函数、虚拟 DOM 要比对多少节点、编译期又能替运行时省掉多
+少。三件事合起来才是 Vue 3 的性能账——它同时解释了为什么 Vue 通常不需要像
+React 那样手工给组件套 memo。
+
+<CategoryNotesIsland categoryId="vue/intermediate/rendering" />
