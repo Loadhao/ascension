@@ -24,15 +24,16 @@ function walk(dir, out = []) {
 }
 
 // 期望集：内容树里带 mermaid 围栏的 .md/.mdx，每个恰好渲染成一个页面。
-// 这里刻意放宽行首缩进（列表项内嵌的围栏同样会被渲染），而 consistency-verify
-// 与 mermaid-syntax-verify 用的是行首锚定正则——已实测漏掉 2 块，见 evolution.md 候选表。
+// 与 consistency-verify 第 10 项、mermaid-syntax-verify 同口径（第 200 轮对齐）：
+// 容忍列表项内缩进的围栏，并归一行尾——CRLF 检出下不归一则这里读到 0 块，
+// 下面的 1:1 自校验会空转而把「读数不可信」伪装成「0 处低对比」。
 const expectedPages = () => {
   const re = /^[ \t]*```mermaid\n([\s\S]*?)\n^[ \t]*```/gm;
   const out = new Set();
   for (const p of walk(DOCS)) {
     if (!/\.(md|mdx)$/.test(p)) continue;
     re.lastIndex = 0;
-    if (!re.test(readFileSync(p, 'utf8'))) continue;
+    if (!re.test(readFileSync(p, 'utf8').replace(/\r\n/g, '\n'))) continue;
     const rel = p.slice(DOCS.length + 1).replace(/\.(md|mdx)$/, '').replace(/\\/g, '/');
     out.add(rel.endsWith('/index') ? rel.slice(0, -'/index'.length) : rel);
   }
@@ -57,6 +58,12 @@ const scanned = walk(DIST)
 const distSvg = scanned.filter((e) => e.svg);
 const pages = distSvg.filter((e) => e.auditable);
 const expected = expectedPages();
+// 期望集为空即自校验空转：missing/stale 都会算成 0 或全量 ⚠，而审计照常打印
+// 「0 处低于 4.5:1」。内容树有图而 dist 也渲出图，两者并存时期望集不可能为 0。
+if (!expected.size && distSvg.length) {
+  console.log(`✗ 内容树读到 0 篇带图笔记，dist 却渲染出 ${distSvg.length} 页 mermaid SVG——期望集读取口径失效（行尾未归一或 DOCS 路径变动），此刻的对比度读数不可信，判红。`);
+  process.exit(1);
+}
 const distSvgRels = new Set(distSvg.map((e) => e.rel));
 const missing = [...expected].filter((rel) => !distSvgRels.has(rel));
 const stale = distSvg.filter((e) => !expected.has(e.rel));

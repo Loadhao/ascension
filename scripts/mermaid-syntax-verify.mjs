@@ -26,7 +26,8 @@ for (const file of walk(DOCS)) {
   // 归一行尾：CRLF 检出（Windows autocrlf）下按 \n 锚定的围栏正则会整类失配、
   // 静默 0 块通过——第 196 轮实测。读入即归一，两种检出都判真。
   const raw = readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
-  const re = /^```mermaid\n([\s\S]*?)\n^```/gm;
+  // 缩进围栏同样会被构建渲染成 SVG，行首锚定正则会整块漏检（第 200 轮实测差 21 块）。
+  const re = /^[ \t]*```mermaid\n([\s\S]*?)\n^[ \t]*```/gm;
   let m;
   while ((m = re.exec(raw)) !== null) {
     const line = raw.slice(0, m.index).split('\n').length;

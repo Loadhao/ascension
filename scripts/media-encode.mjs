@@ -6,6 +6,7 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const brew = (tool) => (existsSync(`/opt/homebrew/bin/${tool}`) ? `/opt/homebrew/bin/${tool}` : tool);
 const FFMPEG = brew('ffmpeg');
@@ -42,7 +43,9 @@ const run = (cmd, args, opts = {}) => {
 const probe = (file, args) =>
 	run(FFPROBE, ['-v', 'error', '-show_entries', args, '-of', 'default=noprint_wrappers=1:nokey=1', file]).trim();
 
-const { mediaAssets } = await import(resolve('src', 'data', 'viz', 'media.ts'));
+// Windows 上 resolve() 出的是反斜杠绝对路径，ESM import() 只认 file:// URL（第 197 轮实测
+// ERR_UNSUPPORTED_ESM_URL_SCHEME 'd:'），必须经 pathToFileURL；POSIX 下行为不变。
+const { mediaAssets } = await import(pathToFileURL(resolve('src', 'data', 'viz', 'media.ts')).href);
 const asset = mediaAssets[key];
 if (!asset) {
 	console.error(`media.ts 里没有「${key}」，请先登记资产（含 narration 文稿）`);

@@ -141,7 +141,10 @@ const report = {};
       if (statSync(p).isDirectory()) walkDocs(p);
       else if (/\.(md|mdx)$/.test(name)) {
         const raw = readFileSync(p, 'utf8').replace(/\r\n/g, '\n');
-        const re = /^```mermaid\n([\s\S]*?)\n^```/gm;
+        // 容忍列表项内缩进的围栏：这类块同样会被渲染成读者看到的 SVG，行首锚定会整块
+        // 漏检（第 200 轮实测 567 vs 588 块，差 21 块分布在 2 个文件），漏检的块既不进
+        // 本项配色审计也不进 mermaid-syntax-verify。
+        const re = /^[ \t]*```mermaid\n([\s\S]*?)\n^[ \t]*```/gm;
         let m;
         while ((m = re.exec(raw)) !== null) {
           mermaidBlocks++;
