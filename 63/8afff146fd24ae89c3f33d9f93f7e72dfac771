@@ -1,0 +1,29 @@
+src/content/docs/vue/intermediate/routing/01-routing-and-guards.md
+  s_8ba78e046f72f2::t_8e2d493f048c9e 1-58,60-357
+  s_8ba78e046f72f2::t_bd7ac1747b9db1 59
+src/content/docs/vue/intermediate/routing/index.mdx
+  s_8ba78e046f72f2::t_e7b2ea8de93060 1-13
+src/data/graphs/vue.json
+  s_8ba78e046f72f2::t_5cfa28657e00f0 23-27
+  s_8ba78e046f72f2::t_cb4fc126ecb373 8-9
+astro.config.mjs
+  s_8ba78e046f72f2::t_41b2582439f2ed 950-957
+docs/evolution.md
+  s_8ba78e046f72f2::t_bacdafea085d44 89-102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "638afff146fd24ae89c3f33d9f93f7e72dfac771",
+  "prompts": {},
+  "sessions": {
+    "s_8ba78e046f72f2": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7899f8ca-8dda-4eff-acd5-fa59f5a240f4",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
