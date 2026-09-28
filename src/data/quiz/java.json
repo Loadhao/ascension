@@ -2438,5 +2438,26 @@
       "hint": "第 0 项与第 2 项都是把正文说反了：get 全程不加锁，靠的就是 val/next 的 volatile 加上 tabAt 的 volatile 读；null 键值被 putVal 第一行直接抛 NPE 禁掉，理由是并发下 `get(k) == null` 分不清「键不存在」还是「存进去的就是 null」，与其留二义性不如禁止。第 4 项那句「扩容期间读写都不被阻塞」正是该篇称作 1.8 相比 1.7 最优雅改进之一的地方。也别把并发度混记成 1.7——分段锁默认 16 段且初始化后不可扩段，1.8 的并发度随 table 扩容增长。",
       "difficulty": 4
     }
+,
+    {
+    "id": "java-aqs-142",
+    "noteId": "java/intermediate/concurrent/05-aqs",
+    "type": "multiple",
+    "difficulty": 4,
+    "q": "按笔记里 acquire 独占获取的完整流程，关于挂起与唤醒的几句话说哪些正确？（多选）",
+    "options": [
+      "入队用 CAS，但挂起前必须先把前驱的 waitStatus 置成 SIGNAL——否则自己刚 park、前驱就把锁释放了，唤醒信号丢失，线程会永远睡着",
+      "被唤醒不等于拿到锁：unpark 后线程从 park 点返回继续自旋、重新 tryAcquire，还得看 CAS 能不能成；释放方只负责唤醒 head 的后继，被唤醒者自己再去抢",
+      "park 对中断是敏感的，排队期间被 interrupt 会立即抛 InterruptedException 并把节点移出队列，所以 acquire 本身就是可中断模式",
+      "公平与非公平的差别在队列结构：公平模式按等待时长排序，非公平模式按到达顺序排队",
+      "同一块 state 的含义由子类定义：Semaphore 里它是剩余令牌数，CountDownLatch 里是剩余计数（减到 0 才放行），ReentrantReadWriteLock 里高 16 位是读计数、低 16 位是写计数"
+    ],
+    "answer": [
+      0,
+      1,
+      4
+    ],
+    "hint": "第 1/2/5 项正确、第 3/4 项错。park 对中断不敏感——不抛异常、只设标志，返回后检查并 selfInterrupt() 把排队期间的中断补上，这正是 acquire 被称作「不可中断模式」的原因，要可中断得走 lockInterruptibly。公平与非公平用的是同一条 CLH 变体 FIFO 队列，差别只差一次 hasQueuedPredecessors() 检查：非公平上来直接 CAS 抢、不看队列，公平在 state 为 0 时先看队列里有没有人在等；非公平吞吐高的道理是唤醒线程的空窗期不浪费，公平不饿死但多一次队列检查加上下文切换，所以默认非公平。另三条同样要背准：SIGNAL 的含义是「前驱释放时要唤醒我」，不先置好就会丢失唤醒；release 只做一件事，就是 unpark 头结点的后继线程；CountDownLatch 的 await 即 tryAcquireShared 要求 state == 0，而 Semaphore 的 tryAcquireShared 是扣令牌、remaining 为负就返回负数入队。共享模式还多一条级联传播——唤醒后若还有余量，后继也会被叫醒。"
+  }
   ]
 }
