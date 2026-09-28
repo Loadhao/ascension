@@ -1,0 +1,25 @@
+src/data/viz/media.ts
+  s_9cc288fc949e9a::t_4b424ded104e9c 410-414,417-419,421-432
+  s_9cc288fc949e9a::t_dfe3e19b04720e 420
+  s_9cc288fc949e9a::t_dd21ce755a259b 415-416
+src/content/docs/js/basic/core/05-event-loop.mdx
+  s_9cc288fc949e9a::t_544894d2c6d4de 38-41
+src/data/quiz/js.json
+  s_9cc288fc949e9a::t_e089f90b846222 490-509
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c24cc86488dcad2ee84c3a057a6c6840ce1790ff",
+  "prompts": {},
+  "sessions": {
+    "s_9cc288fc949e9a": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "6a36a72f-6969-4de9-8d77-dadd2fc32097",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
