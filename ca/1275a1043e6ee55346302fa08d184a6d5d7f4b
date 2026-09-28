@@ -1,0 +1,29 @@
+src/content/docs/spring-ai/advanced/rag/01-vector-store-etl.md
+  s_4cac39ac560229::t_a16a6178b913cb 103
+scripts/consistency-verify.mjs
+  s_4cac39ac560229::t_5e9bf2d9155060 183,186-187
+src/content/docs/spring-ai/basic/foundation/02-chatclient-api.md
+  s_4cac39ac560229::t_7a7ee633b0283d 145
+src/content/docs/spring-ai/advanced/rag/02-rag-advisors.md
+  s_4cac39ac560229::t_c8ac79ca4b6126 106
+docs/evolution.md
+  s_4cac39ac560229::t_64125ce8b9d621 69,72,130-143,209
+src/data/quiz/spring-ai.json
+  s_4cac39ac560229::t_72b3b74af709aa 208-227
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ca1275a1043e6ee55346302fa08d184a6d5d7f4b",
+  "prompts": {},
+  "sessions": {
+    "s_4cac39ac560229": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "f76280d3-b668-4a00-aff2-987799843460",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
