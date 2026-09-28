@@ -41,6 +41,10 @@ flowchart LR
 
 <AlgorithmVizIsland demo="rabbitmq-dlq" />
 
+需要脱离屏幕听一遍时，上面这支动画有逐帧对应的配音短片（七帧、约 49 秒）：
+
+<AlgorithmVizIsland demo="rabbitmq-dlq-video" />
+
 配置要点：业务消息丢到"只设了 `x-message-ttl` 且 `x-dead-letter-exchange=真实交换机`"
 的队列，过期时自动转投到真正的业务队列——**用"等待"换"延迟"**。
 新版官方已提供 **Delay Exchange 插件**（`rabbitmq_delayed_message_exchange`），
