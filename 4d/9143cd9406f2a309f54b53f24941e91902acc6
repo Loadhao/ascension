@@ -1,0 +1,30 @@
+scripts/consistency-verify.mjs
+  s_8d8f45330acf6a::t_d8c0ede0679df4 248
+  s_8d8f45330acf6a::t_0a9932d6bab4e5 1,3
+  s_8d8f45330acf6a::t_024290dea234fc 170-247,249
+  s_8d8f45330acf6a::t_68bc635b23655b 250-251
+src/data/quiz/vue.json
+  s_8d8f45330acf6a::t_e375dd88a56749 144-163
+AGENTS.md
+  s_8d8f45330acf6a::t_9903a4656fcfde 77
+docs/evolution.md
+  s_8d8f45330acf6a::t_f9c89945c6d69c 20,69,109-126,190,675
+docs/evolution-recipes.md
+  s_8d8f45330acf6a::t_18f6c626fbc415 103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "4d9143cd9406f2a309f54b53f24941e91902acc6",
+  "prompts": {},
+  "sessions": {
+    "s_8d8f45330acf6a": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "73f04223-aeb0-4966-a2c6-265ab8665497",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
