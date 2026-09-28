@@ -1,0 +1,38 @@
+src/data/quiz/mysql.json
+  s_6edcfb689071e0::t_9f0c9cad473597 331-350
+docs/evolution.md
+  s_29d60b8a632172::t_033fb056b03ac4 119
+  s_29d60b8a632172::t_adfdb930666b2a 120
+  s_29d60b8a632172::t_7d6935eab3be73 116-118
+  s_29d60b8a632172::t_07931c555703c6 121-123
+  s_29d60b8a632172::t_b5e236f8ed1e28 60,111-115,124-129,196
+src/data/viz/media.ts
+  s_6edcfb689071e0::t_16a26157bf9744 274-275
+  s_6edcfb689071e0::t_1a28fb8aa9aa5d 269-273,276-291
+src/content/docs/mysql/advanced/performance-ha/02-replication-sharding.mdx
+  s_6edcfb689071e0::t_8f585e3933d744 36-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6857827c7b8f3f2b1033e037adb24c6fb686a7d8",
+  "prompts": {},
+  "sessions": {
+    "s_29d60b8a632172": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "e90a765b-893b-476e-a30b-52595cdec6ce",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_6edcfb689071e0": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "c7e423d8-3033-477b-99ff-c709e5e012a7",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
