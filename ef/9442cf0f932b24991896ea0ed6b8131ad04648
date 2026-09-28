@@ -1,0 +1,38 @@
+AGENTS.md
+  s_44fbd20ffd6df9::t_52790861537c23 73
+docs/coverage-deepening.md
+  s_44fbd20ffd6df9::t_4211b2ee55861f 49
+scripts/quiz-verify.mjs
+  s_44fbd20ffd6df9::t_2af6d3194f78b4 174
+  s_44fbd20ffd6df9::t_1a8041842edc2d 141-143
+  s_44fbd20ffd6df9::t_ac59454d24faa9 1-2
+  s_44fbd20ffd6df9::t_1cea6ba138bc6b 120-140,144-173,175-210
+docs/evolution.md
+  s_44fbd20ffd6df9::t_721ec372e1ed90 100-105,107-113
+  s_44fbd20ffd6df9::t_4869d55c351de2 99
+  s_44fbd20ffd6df9::t_5f7aa53379c95c 106
+  s_44fbd20ffd6df9::t_043df8f89e63e5 97-98
+  s_44fbd20ffd6df9::t_9034d9f3cb89c4 644
+  s_44fbd20ffd6df9::t_5dcbd52d8a07f7 20
+  s_44fbd20ffd6df9::t_7a717eddb582e7 173
+docs/evolution-recipes.md
+  s_44fbd20ffd6df9::t_cd272bdabaf962 85
+src/data/quiz/vue.json
+  s_44fbd20ffd6df9::t_213d3d060b2a9b 124-143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ef9442cf0f932b24991896ea0ed6b8131ad04648",
+  "prompts": {},
+  "sessions": {
+    "s_44fbd20ffd6df9": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "dfb6c7d0-6748-40e6-a789-b62ac9d9ad91",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
