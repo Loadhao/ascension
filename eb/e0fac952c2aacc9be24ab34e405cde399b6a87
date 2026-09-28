@@ -1,0 +1,22 @@
+src/components/quiz/QuizNav.tsx
+  s_2d2b72330cb3dd::t_2794ffed3d68f7 22-24,26-29
+  s_2d2b72330cb3dd::t_3c3f8d80fb059e 2-8
+src/data/quiz/mongodb.json
+  s_2d2b72330cb3dd::t_a9ec372f284153 335-354
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ebe0fac952c2aacc9be24ab34e405cde399b6a87",
+  "prompts": {},
+  "sessions": {
+    "s_2d2b72330cb3dd": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "be707f64-99c6-45cf-9ff7-0c282f48136b",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
