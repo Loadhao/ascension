@@ -45,7 +45,10 @@ flowchart LR
 
 主语是 component，不是 application。所以「Vue 精准更新」这句话的准确版本是
 **以组件为最小单位**：同一个父组件里没读这个 ref 的部分不会单独更新，它要么整个
-组件重跑、要么不跑。理解到这一层，就能预判两类实际会发生的事：
+组件重跑、要么不跑。[响应式系统](/vue/basic/core/01-reactivity/)要点备忘里那句
+「不需要整树 diff 重跑」，读的也是这一层——它说的是**没读数据的组件不重跑**，
+不是「没有 diff」；diff 照样发生，只是被下一节的编译期 hint 收窄。理解到这一层，
+就能预判两类实际会发生的事：
 
 ```mermaid
 flowchart TB
@@ -136,6 +139,10 @@ condensed into a single "static vnode" that contains the plain HTML string for
 all these nodes*，这些静态 vnode 的挂载方式是**直接设置 `innerHTML`**。一大段
 静态结构从「逐个创建 vnode 再逐个挂载」塌缩成「一次 innerHTML」，② 和 ③ 两段
 成本同时被削掉。
+
+[组件模型与单向数据流](/vue/basic/core/02-component-model/)里那句「静态内容只
+创建一次」说的就是这一条，本篇把它落到「缓存的是 vnode 对象、跳过比对的判据是
+同一个引用」这个精度。
 
 ## 三条 hint 之二：更新类型标记（Patch Flags）
 
