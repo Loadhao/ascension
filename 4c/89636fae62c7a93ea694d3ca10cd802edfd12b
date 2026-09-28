@@ -1,0 +1,52 @@
+docs/evolution.md
+  s_29d60b8a632172::t_2a2e9c2e2d869c 20
+docs/evolution-recipes.md
+  s_29d60b8a632172::t_7a6457c4bf0d0e 108
+  s_29d60b8a632172::t_286671d651dd9e 96-100
+  s_29d60b8a632172::t_27d641f7ae3029 101-102
+AGENTS.md
+  s_29d60b8a632172::t_48883756ad8864 63
+  s_29d60b8a632172::t_62aba5eefdad17 77
+  s_29d60b8a632172::t_76d2364527e45d 28
+src/styles/custom.css
+  s_29d60b8a632172::t_04103c59ed5212 3453-3455,3457,3464-3468,3475-3494,3496-3503,3505-3583
+src/content/docs/guide/interview.mdx
+  s_29d60b8a632172::t_d211afd5bfc1c1 3
+scripts/interview-verify.mjs
+  s_29d60b8a632172::t_93d343b5a1e155 1-3
+  s_29d60b8a632172::t_7c8f8a9d350dd7 228-255
+  s_29d60b8a632172::t_ed7d1eb5f0cece 256-258
+  s_29d60b8a632172::t_864a658d56edfa 259
+src/components/interview/Interview.tsx
+  s_41b3129b194852::t_3b2fae01e7f3fd 46-88,231,234,238,242-243,245-246
+src/data/interview/ai.json
+  s_29d60b8a632172::t_b31366dae70d8a 9-11,19-21
+src/data/interview/java.json
+  s_29d60b8a632172::t_1bafc6c8af7b56 9-11,19-21
+src/data/interview/mysql.json
+  s_29d60b8a632172::t_d373ff6e12b7f2 9-11,19-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "4c89636fae62c7a93ea694d3ca10cd802edfd12b",
+  "prompts": {},
+  "sessions": {
+    "s_29d60b8a632172": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "e90a765b-893b-476e-a30b-52595cdec6ce",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_41b3129b194852": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "8a536a9c-787c-421f-b31e-351ba893392d",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
