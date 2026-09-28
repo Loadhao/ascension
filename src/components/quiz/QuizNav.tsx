@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { loadQuizState, subscribeQuizChange, gotoQuizIndex, type QuizPersist } from '../../lib/quiz-store';
+import {
+  emptyQuizState,
+  loadQuizState,
+  subscribeQuizChange,
+  gotoQuizIndex,
+  type QuizPersist,
+} from '../../lib/quiz-store';
 import type { RoundKind } from '../../lib/quiz-store';
 
 // ===== 右侧栏刷题导航器（/guide/quiz 的 TableOfContents 覆盖） =====
@@ -13,9 +19,14 @@ const ROUND_LABELS: Record<RoundKind, string> = {
 };
 
 export default function QuizNav({ total }: { total: number }) {
-  const [quiz, setQuiz] = useState<QuizPersist>(() => loadQuizState());
+  // 首帧必须与构建期 SSR 出的 HTML 同构：SSR 侧读不到 localStorage，
+  // 这里若在水合前就取存档，读数会让水合校验判为 React #418、整个岛屿报废重挂。
+  const [quiz, setQuiz] = useState<QuizPersist>(emptyQuizState);
 
-  useEffect(() => subscribeQuizChange(() => setQuiz(loadQuizState())), []);
+  useEffect(() => {
+    setQuiz(loadQuizState());
+    return subscribeQuizChange(() => setQuiz(loadQuizState()));
+  }, []);
 
   const round = quiz.round;
   const doneCount = Object.keys(quiz.done).length;
