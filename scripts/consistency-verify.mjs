@@ -1,6 +1,6 @@
-// 全站一致性体检（10 项，编号 1–10，其中图谱结构记作 9）：侧边栏死链 / 笔记未注册 / 图谱死链 / 图谱覆盖率 /
+// 全站一致性体检（11 项，编号 1–11，其中图谱结构记作 9）：侧边栏死链 / 笔记未注册 / 图谱死链 / 图谱覆盖率 /
 // 笔记内绝对内链 / frontmatter 必填 / level 与目录一致 / 空壳分类页 /
-// 图谱结构 / 图表与可视化数据硬编码颜色。
+// 图谱结构 / 图表与可视化数据硬编码颜色 / 容器指令写法与闭合。
 // 任何一项失败输出清单并 exit 1；由 apex-project-evolution 例行运行，也可手动跑。
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -164,6 +164,88 @@ const report = {};
     ok: hits.length === 0,
     detail: `mermaid ${mermaidBlocks} 块 + viz 数据 ${vizFiles.length} 份，配色归 custom.css 主题令牌`,
     bad: [...new Set(hits)],
+  };
+}
+
+// 第 11 项：容器指令（提示框）的写法与闭合。第 214 轮实测「:::note 空格形标题」在
+// 当时 26 项全绿下静默漏过、真机读 .starlight-aside 命中 0 才现形，故把这一类失效整体收进闸门。
+// 三种形状各自有不同的失效后果，都在源码层可判：
+// ① 标题写成空格形（:::note 标题）→ 指令不被识别，读者看到字面量 :::note；
+// ② 容器名不在 Starlight 支持的四类里（实测站内有 :::warning、:::important）→ 走
+//    transformUnhandledDirective 回退，框、图标与 aria-label 全丢，内容降级成无样式裸 div；
+// ③ 开围栏缺对应的 ::: → 容器一直吞到文末，其后整节被包进提示框（第 215 轮 dist 实测
+//    33 个方向首页的 :::tip[面试冲刺] 把「知识图谱」小标题与图谱组件一并吞了进去）。
+// 四类依据 node_modules/@astrojs/starlight/dist/integrations/aside-utils.js 的 asideVariants
+// （0.42.0 读到的就是 note/tip/caution/danger 四个，无别名映射），升 Starlight 时先复核该表。
+{
+  const ASIDE_TYPES = new Set(['note', 'tip', 'caution', 'danger']);
+  // 33 个方向首页模板的 :::tip[面试冲刺] 从未闭合（值＝开围栏行号）。
+  const UNCLOSED_TIP = {
+    ai: 16, algorithm: 16, distributed: 27, docker: 16, elasticsearch: 20, etcd: 22,
+    git: 16, java: 16, js: 16, kafka: 20, kubernetes: 22, langchain: 22, linux: 16,
+    middleware: 22, mongodb: 20, mqtt: 20, mysql: 20, netty: 22, network: 18, nginx: 20,
+    postgresql: 22, python: 16, rabbitmq: 20, react: 22, redis: 20, rocketmq: 20,
+    seata: 22, security: 22, 'spring-ai': 27, tools: 19, typescript: 20, vue: 23, zookeeper: 22,
+  };
+  // 全站现算出的已知存量，已登记进 docs/evolution.md 候选表第 17 行待修。
+  // 修掉或改写到不再命中时，下面「清单过期」那条会判红要求同步删项——
+  // 既不放宽容差，也不允许清单静默过期（与 quiz-verify 第 9 项同款口径）。
+  const KNOWN = {
+    ...Object.fromEntries(
+      Object.entries(UNCLOSED_TIP).map(([d, l]) => [`src/content/docs/${d}/index.mdx:${l}|未闭合`, '方向首页 :::tip 缺闭围栏，整节知识图谱被吞进提示框'])
+    ),
+    'src/content/docs/spring-ai/advanced/mcp/01-mcp-client-server.md:101|容器名': ':::warning 不在四类内',
+    'src/content/docs/spring-ai/advanced/observability/02-llm-as-judge-evaluation.md:43|容器名': ':::important 不在四类内',
+    'src/content/docs/spring-ai/advanced/rag/01-vector-store-etl.md:103|容器名': ':::warning 不在四类内',
+    'src/content/docs/spring-ai/advanced/rag/02-rag-advisors.md:106|容器名': ':::warning 不在四类内',
+    'src/content/docs/spring-ai/basic/foundation/02-chatclient-api.md:145|容器名': ':::warning 不在四类内',
+  };
+  const violations = [];
+  const scanned = { files: 0, opens: 0 };
+  const walkAsides = (dir) => {
+    for (const name of readdirSync(dir)) {
+      const p = join(dir, name);
+      if (statSync(p).isDirectory()) walkAsides(p);
+      else if (!/\.(md|mdx)$/.test(name)) continue;
+      else {
+        scanned.files++;
+        const rel = p.replace(ROOT + '/', '');
+        const lines = readFileSync(p, 'utf8').replace(/\r\n/g, '\n').split('\n');
+        let fence = null;
+        const stack = [];
+        lines.forEach((ln, i) => {
+          // 代码围栏内的 ::: 是示例或 mermaid 的节点打标（A-->B:::good），不是容器指令。
+          const cm = ln.match(/^[ \t]*(```|~~~)/);
+          if (cm) {
+            fence = fence ? null : cm[1];
+            return;
+          }
+          if (fence) return;
+          const om = ln.match(/^[ \t]*:::([a-zA-Z][a-zA-Z0-9_-]*)(.*)$/);
+          if (om) {
+            scanned.opens++;
+            stack.push(i + 1);
+            if (!ASIDE_TYPES.has(om[1])) violations.push(`${rel}:${i + 1}|容器名`);
+            if (om[2] !== '' && om[2][0] !== '[') violations.push(`${rel}:${i + 1}|标题空格形`);
+            return;
+          }
+          if (/^[ \t]*:::[ \t]*$/.test(ln)) {
+            if (stack.length) stack.pop();
+            else violations.push(`${rel}:${i + 1}|多余闭围栏`);
+          }
+        });
+        for (const l of stack) violations.push(`${rel}:${l}|未闭合`);
+      }
+    }
+  };
+  walkAsides(DOCS);
+  const hit = new Set(violations);
+  const fresh = violations.filter((v) => !KNOWN[v]);
+  const stale = Object.keys(KNOWN).filter((k) => !hit.has(k));
+  report['11.容器指令写法与闭合'] = {
+    ok: fresh.length === 0 && stale.length === 0,
+    detail: `${scanned.files} 篇扫出 ${scanned.opens} 个开围栏、${violations.length} 处不成立（其中已登记待修 ${Object.keys(KNOWN).length} 处）；容器名限 note/tip/caution/danger、标题须写成 name[标题]、开围栏须闭合`,
+    bad: [...fresh.map((v) => `新增违规 ${v}`), ...stale.map((k) => `存量清单过期、修好后须删项 ${k}`)],
   };
 }
 

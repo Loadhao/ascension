@@ -100,7 +100,7 @@ node scripts/evolution-candidates.mjs [--top 8]
 每补一个方向就要把该方向从 `interview-verify.mjs` 的 `KNOWN_MISSING` 删项（清单过期会判红）。
 `noteId` 写错同样只静默 404，已由该闸门卡住。
 
-**D 体检与工具**——`pnpm verify:docs`（一致性 10 项 + mermaid 语法 + 考点卡 9 项 + 题库 9 项 + 影像 7 项，共 35 项）
+**D 体检与工具**——`pnpm verify:docs`（一致性 11 项 + mermaid 语法 + 考点卡 9 项 + 题库 9 项 + 影像 7 项，共 36 项）
 与 `node scripts/mermaid-contrast-verify.mjs`（需 `pnpm preview`）的输出就是候选池：
 修一处真实发现，或给闸门加一条能判红的检查。四道全绿且无可修时，产出改为
 「向 `evolution.md` 候选表新增 2 条带证据的可验证候选」——仍算有产出。
