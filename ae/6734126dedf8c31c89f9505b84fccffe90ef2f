@@ -1,0 +1,32 @@
+src/data/viz/media.ts
+  s_0cebf192777f30::t_1be2425cdbad85 200-204,207-221
+  s_0cebf192777f30::t_e6acefcaa5bd74 205-206
+src/content/docs/java/advanced/jvm/01-class-loading.mdx
+  s_0cebf192777f30::t_ac1d21b974b128 52-55
+src/data/quiz/java.json
+  s_0cebf192777f30::t_206c5c078e5802 2380-2399
+docs/evolution.md
+  s_0cebf192777f30::t_984dd6b7108e9a 632
+  s_0cebf192777f30::t_0054a229b59e0e 60
+  s_0cebf192777f30::t_3b6b26a3de4da6 79-86,88-90
+  s_0cebf192777f30::t_d1878bde2b7059 87
+  s_0cebf192777f30::t_da1297292c9284 91
+  s_0cebf192777f30::t_c3f61c70ee522a 92
+  s_0cebf192777f30::t_26c5a79af4d205 150
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ae6734126dedf8c31c89f9505b84fccffe90ef2f",
+  "prompts": {},
+  "sessions": {
+    "s_0cebf192777f30": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "49786a65-8312-4aac-8fa4-af95f61836f3",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
