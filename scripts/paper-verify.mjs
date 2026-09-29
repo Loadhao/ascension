@@ -241,7 +241,6 @@ for (const f of files) {
 	// 覆盖率空转守卫：带题库的方向都该有本篇卷。M1 只铺 java，其余按存量登记为 KNOWN_MISSING
 	// 放行；每轮补卷后必须同步删项——清单里的方向本轮已有卷却不删 → 判红（同考点卡那套写法）。
 	const KNOWN_MISSING = new Set([
-		'ai',
 		'algorithm',
 		'distributed',
 		'docker',
