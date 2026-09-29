@@ -1,0 +1,19 @@
+docs/superpowers/plans/2026-09-29-note-page-quiz.md
+  s_ecb907cc6c89b6::t_fb2a6254c6aba4 1-187
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c9e54fb7111c787bc6cc9577c5d1ed823db9b460",
+  "prompts": {},
+  "sessions": {
+    "s_ecb907cc6c89b6": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "88aa9de0-403b-4c7d-9ba6-968cdf88a144",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
