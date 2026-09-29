@@ -1,0 +1,29 @@
+src/data/interview/kafka.json
+  s_08f4188222a474::t_e7d54866c7504d 42-61
+docs/coverage-deepening.md
+  s_038938e7c89f19::t_10fd5864f04008 129-131
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cf8156ee793674ee2ebc169764ed9b981054424b",
+  "prompts": {},
+  "sessions": {
+    "s_038938e7c89f19": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "13e9e492-6923-4237-8ae2-f357f3ea2398",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_08f4188222a474": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "c22c282b-c47e-4681-b91e-a02dd603995b",
+        "model": "composer-2.5"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
