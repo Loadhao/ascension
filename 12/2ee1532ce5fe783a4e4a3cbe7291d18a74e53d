@@ -1,0 +1,21 @@
+scripts/media-capture.mjs
+  s_aa6541e4e7cf4f::t_c79da76ac69aa8 81-84,86-87
+src/data/quiz/mysql.json
+  s_aa6541e4e7cf4f::t_b9bc4601ae9db4 351-370
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "122ee1532ce5fe783a4e4a3cbe7291d18a74e53d",
+  "prompts": {},
+  "sessions": {
+    "s_aa6541e4e7cf4f": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "0bd9937c-0acb-4b9c-9c12-9a337ad37700",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
