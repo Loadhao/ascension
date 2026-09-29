@@ -626,4 +626,26 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'复盘：方案由 Leader 算，代价是全组停摆，治理靠增量协作。',
 		],
 	},
+	'netty-pipeline-video': {
+		title: 'Netty 流水线双向流动 · 配音短片',
+		src: '/videos/netty-pipeline-video.mp4',
+		poster: '/videos/netty-pipeline-video.poster.png',
+		width: 1280,
+		height: 786,
+		duration: 46.7,
+		alt:
+			'动画短片：一条 Channel 的 Handler 链上事件分两股——入站从链头流向链尾，字节先由解码器切成业务消息、' +
+			'再显式传给业务 Handler；出站反过来从当前站点逆流经编码器写回字节，末帧复盘注册顺序与事件方向共同决定执行时机。',
+		caption:
+			'顺序事故的高发点在写操作的起点：从当前站点发起只路过它之前的出站 Handler，从链尾发起则整条链都要走一遍。',
+		source: 'netty-pipeline',
+		narration: [
+			'一条链两股方向：入站从链头流向链尾，出站反过来从链尾流回链头。',
+			'字节先经解码器：把网卡字节流切成业务消息，粘包拆包就在这一步解决。',
+			'解码器得显式把事件往下传，业务那一站才收得到；不传就是截断链路。',
+			'业务回写时出站事件从当前位置逆流，第一个命中的是编码器，把对象写回字节。',
+			'起点也别搞混：从本站写和从链尾写，途经的出站 Handler 数量不同。',
+			'复盘：入站头到尾、出站尾到头，注册顺序加事件方向决定执行时机。',
+		],
+	},
 };
