@@ -669,6 +669,155 @@
           "why": "IO 密集不是越多越好。公式只给初值，还得压测看活跃线程、队列积压和 RT，再用「队列涨就加线程」这类动态策略兜底，别把参数写死。"
         }
       ]
+    },
+    {
+      "noteId": "java/intermediate/concurrent/06-threadlocal",
+      "title": "ThreadLocal 原理与内存泄漏 · 本篇测一下",
+      "questions": [
+        {
+          "id": "tl-p01",
+          "kind": "recall",
+          "type": "single",
+          "section": "定位：线程内部的私有变量",
+          "q": "ThreadLocal 用什么换掉线程之间的同步？",
+          "options": [
+            "每个线程一份变量，读写不必再抢同一份",
+            "所有线程共用一个实例，用加锁把访问排队",
+            "给字段加上 volatile，让每次读写都刷回主存",
+            "把变量放进阻塞队列，只留一个消费者来取"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "空间换并发，读写都不用同步",
+          "why": "开篇的定位就是按线程复制变量，读写不再同步。共享的 SimpleDateFormat 会解析错乱，所以典型用法是每线程一个实例，再用来绑数据库连接或透传用户上下文。"
+        },
+        {
+          "id": "tl-p02",
+          "kind": "recall",
+          "type": "judge",
+          "section": "数据结构：Thread 持有 Map，ThreadLocal 是 key",
+          "q": "各线程的值存在 ThreadLocal 对象自己的表里，按线程号去取——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "Map 挂在 Thread 身上，而不是 ThreadLocal 里",
+          "why": "方向是反的。每个 Thread 自己带 threadLocals 字段；ThreadLocal 实例是静态的、全局一份，只当 Entry 的 key。get 先拿当前线程的 Map，再用这个 ThreadLocal 的 hash 定位 Entry，取出 value。"
+        },
+        {
+          "id": "tl-p03",
+          "kind": "recall",
+          "type": "single",
+          "section": "哈希设计：魔数 0x61c88647",
+          "q": "相邻 ThreadLocal 的 hash 按固定增量往上加，冲突为什么仍然很低？",
+          "options": [
+            "增量把连续创建的实例摊开，而一个线程里通常没几个",
+            "相同 hash 会挂成链表，沿链比对就不会漏掉",
+            "数组长度就等于这个魔数，下标没有相撞的机会",
+            "撞上的 Entry 会由弱引用在下次 GC 清掉"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "这个增量让连续创建的 ThreadLocal 在 2^n 长度的数组里均匀散开（斐波那契散列），冲突概率极低——一个线程通常也就几个 ThreadLocal",
+          "why": "增量取黄金分割数乘 2 的 32 次方，在 2 的幂长度上相当于斐波那契散列，连续实例被摊开。一个线程通常只有几个 ThreadLocal，再配合开放寻址就够快。"
+        },
+        {
+          "id": "tl-p04",
+          "kind": "recall",
+          "type": "multiple",
+          "section": "内存泄漏的真实链路",
+          "q": "value 会一直占着堆，笔记要求哪两件事同时成立？",
+          "options": [
+            "ThreadLocal 实例被收走之后，Entry 的 key 不再指向它",
+            "这条线程还会长期活着，池里的核心线程就是这样",
+            "业务里只要调用过 set，线程结束也清不掉这份 value",
+            "key 变成 null 的那次 GC，会把 value 一起收走"
+          ],
+          "answer": [
+            0,
+            1
+          ],
+          "quote": "泄漏成立需要两个条件同时满足：ThreadLocal 实例被回收（key = null），且线程长期存活（典型：线程池）。核心线程永不退出，没人再碰那个 Entry，value 就一直占着堆。",
+          "why": "只满足一半不够。key 变成 null 只说明实例被收走，value 仍被 Entry 强引用握着；线程死掉时 value 才会释放。核心线程不退出，又没人再去碰那条 Entry，value 就一直占着堆。"
+        },
+        {
+          "id": "tl-p05",
+          "kind": "diverge",
+          "type": "single",
+          "section": "为什么 key 用弱引用：防更大面积的泄漏",
+          "q": "Entry 的 key 若改成强引用，静态变量置成 null 之后留下的是什么？",
+          "options": [
+            "ThreadLocal 对象连同它带过的 value，被 Entry 攥到线程结束",
+            "Thread 上的 threadLocals 字段会被换成一张空表",
+            "只改下次哈希的落点，对象还能活多久并不变",
+            "get 不再走开放寻址，因为强引用只能沿链表找"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "假设 key 是强引用：静态 ThreadLocal 变量置 null 后，Entry 仍强链到 ThreadLocal 对象，连同它带过的所有 value 一起陪葬到线程结束。",
+          "why": "弱引用是止血：实例只剩 Entry 里那根弱链时，下次 GC 可以收掉 key，泄漏从 key 加 value 收成只剩 value。key 换成强引用，变量置 null 也砍不断这根链，这条退路就没了。"
+        },
+        {
+          "id": "tl-p06",
+          "kind": "diverge",
+          "type": "single",
+          "section": "正确姿势",
+          "q": "父线程放进 InheritableThreadLocal 的值，提交到线程池后经常读不到。笔记给的原因是？",
+          "options": [
+            "复制绑在线程构造上，复用已有线程时不会再复制一次",
+            "工人线程每次跑任务前都会把继承来的 Map 清空",
+            "子任务的 get 会回头读父线程，父线程返回后值就没了",
+            "它只复制字符串，用户对象在提交时被丢掉"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "线程池复用线程，不会重新复制（复制只发生在 Thread 构造时）",
+          "why": "复制时机钉在 Thread 构造，不是钉在任务提交。池里的线程会被反复使用，提交新任务不会再走一遍复制。要跨池带走上下文，用 TransmittableThreadLocal：提交时捕获快照，执行前重放。"
+        },
+        {
+          "id": "tl-p07",
+          "kind": "interview",
+          "type": "single",
+          "section": "正确姿势",
+          "q": "面试官问线程池里 ThreadLocal 怎么用才不出事，你先说哪一句？",
+          "options": [
+            "用完放在 finally 里 remove，这是池化线程下唯一靠得住的清法",
+            "交给弱引用即可，下次 GC 会把 key 和 value 一起收走",
+            "改成 InheritableThreadLocal，每个任务执行前都会再复制一份",
+            "创建工人线程时 remove 一次，之后每个任务不必再清"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "用完立刻清，线程池下唯一可靠方案",
+          "why": "顺路清理只在 set、get 或 rehash 碰到 key 已经为 null 的 Entry 时发生，没人再调用就永远扫不到。池里核心线程不退出，所以不能等线程结束，finally 里的 remove 才是笔记给出的唯一可靠写法。"
+        },
+        {
+          "id": "tl-p08",
+          "kind": "relate",
+          "type": "judge",
+          "section": "数据结构：Thread 持有 Map，ThreadLocal 是 key",
+          "neighborId": "java/advanced/jvm/04-references",
+          "q": "对照四种引用：Entry 用弱引用当 key，是为了让 value 和 key 同一次 GC 被收走——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "key 是弱引用，value 是强引用",
+          "why": "弱引用只挂在 key 上，value 是普通强引用。ThreadLocal 实例只剩这根弱链时，下次 GC 收的是 key，value 不会跟着走。本篇把这件事叫做止血带：泄漏面缩小，不是把 value 清掉。",
+          "neighborTitle": "四种引用：强、软、弱、虚"
+        }
+      ]
     }
   ]
 }
