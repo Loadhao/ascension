@@ -51,6 +51,10 @@ bgsave 的 fork + COW 与 AOF 重写按帧走一遍：
 
 <AlgorithmVizIsland demo="redis-persist" />
 
+同一套 fork 魔法也可以带着听一遍：
+
+<AlgorithmVizIsland demo="redis-persist-video" />
+
 ## AOF：命令追加 + 刷盘三档
 
 写命令先进入 AOF 缓冲区，再按策略刷盘：

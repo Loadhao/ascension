@@ -694,6 +694,29 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'复盘：建连一次付成本，解析优化每条都走；慢查询沿链看计划与扫描行数。',
 		],
 	},
+	'redis-persist-video': {
+		title: 'Redis 持久化 · 配音短片',
+		src: '/videos/redis-persist-video.mp4',
+		poster: '/videos/redis-persist-video.poster.png',
+		width: 1280,
+		height: 786,
+		duration: 57.3,
+		alt:
+			'动画短片：RDB 快照与 AOF 日志两条持久化路线，逐帧走完 bgsave 的 fork 与子进程写盘、' +
+			'主进程改页触发的写时复制、AOF 追加与三档刷盘、bgrewriteaof 生成最小等价命令集、混合持久化复盘六个阶段。',
+		caption:
+			'持久化共用同一套 fork 魔法：RDB 拍快照靠 fork 加写时复制，AOF 记命令追加，重写按内存状态反向生成最小命令集，混合持久化两头兼得。',
+		source: 'redis-persist',
+		narration: [
+			'Redis 持久化两条路：RDB 拍全量快照，AOF 记写命令日志。',
+			'bgsave 让主进程 fork 子进程，父子共享内存页，主进程继续服务。',
+			'子进程遍历内存写临时 RDB 文件，写完原子替换，主进程不受阻塞。',
+			'主进程这时改数据？系统复制被改的页，内存可能接近翻倍，容量留余量。',
+			'AOF 每条写命令进缓冲再追加，刷盘三档，默认 everysec 最多丢一秒。',
+			'文件太长恢复慢就做重写：fork 子进程按内存状态生成最小等价命令集。',
+			'复盘：混合持久化 RDB 打底恢复快，增量 AOF 丢得少，默认就该开。',
+		],
+	},
 	'docker-cow-video': {
 		title: '镜像分层与写时复制 · 配音短片',
 		src: '/videos/docker-cow-video.mp4',
