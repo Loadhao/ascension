@@ -1,0 +1,25 @@
+src/content/docs/js/basic/core/14-property-descriptors.md
+  s_8cb0eb37b3a048::t_6018fdab3eb9db 82-108
+src/data/quiz/js.json
+  s_8cb0eb37b3a048::t_7ffa5a0589d6db 530-544
+docs/coverage-deepening.md
+  s_8cb0eb37b3a048::t_94a7b28fd9fbee 105
+docs/evolution.md
+  s_8cb0eb37b3a048::t_4d65c2e443327d 157,159-169,246,249,360,367
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1987284128f31429d012cb98d3608b0d09afa743",
+  "prompts": {},
+  "sessions": {
+    "s_8cb0eb37b3a048": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "8682908e-cfeb-46c2-adee-1421b68653c8",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
