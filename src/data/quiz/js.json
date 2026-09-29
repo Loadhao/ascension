@@ -559,5 +559,40 @@
       "answer": [0],
       "hint": "CJS 循环引用不报错，拿到的是执行到一半的 exports（部分导出）——b 里 require(\"./a\") 时 a 已经执行到 require(\"./b\") 那一行，x 已写入、y 还没写，读到 undefined。第 2/4 项都建立在「缓存要等执行完才写入」上，而缓存恰恰在模块开始执行前就占位，所以 b 才能拿到那个半成品而不是重新执行一遍；第 3 项的「空对象」同样错在时点——占位对象里已有 x。解法是把 require 挪进函数内部做延迟加载，或重构消除循环；ESM 靠活绑定把函数导出的循环大多救活，但顶层执行的值导出仍可能 TDZ 报错。"
     }
+,
+    {
+      "id": "js-emitter-032",
+      "noteId": "js/intermediate/node/03-event-emitter",
+      "type": "multiple",
+      "difficulty": 3,
+      "q": "关于 Node 的 EventEmitter，下列说法正确的有？（多选）",
+      "options": [
+        "once 靠包装函数实现自动移除：先 off 掉包装引用再执行原回调，移除的必须是包装后的引用",
+        "emit(\"error\") 且该事件无监听器时，Node 只是像普通事件一样忽略，进程继续跑",
+        "emit 是同步的：立即依次执行所有监听器，emit 之后的代码在监听器之后才执行",
+        "超过 10 个同事件监听器时 Node 会直接抛异常终止进程，必须先把监听器降下来"
+      ],
+      "answer": [
+        0,
+        2
+      ],
+      "hint": "第 1 项就是 once 的实现技巧——包装层先调 off 移除自己（存的是包装引用，所以能 off 掉）再执行原回调，直接存原函数就移除不掉。第 2 项说反了：error 事件无监听器是唯一例外，直接抛异常崩掉进程——Node 的错误不允许被静默吞掉，其他事件没监听器才是忽略。第 3 项对应「emit 是同步还是异步」的高频答法，异步要自己 setTimeout/process.nextTick。第 4 项把动作夸大：超过默认阈值 10 个只是打 MaxListenersExceededWarning 警告，不抛异常；真正的泄漏解法是一次性逻辑用 once、动态注册配对 off、用命名函数方便移除。"
+    }
+,
+    {
+      "id": "js-cluster-033",
+      "noteId": "js/intermediate/node/06-cluster-workers",
+      "type": "single",
+      "difficulty": 3,
+      "q": "一个 Node Web 服务要利用多核，另一个接口里有图像压缩这类 CPU 密集计算拖慢了事件循环——各该选什么？",
+      "options": [
+        "前者用 cluster 每核 fork 一个进程（master 分发连接、崩溃可补位），后者用 worker_threads 把计算卸载出事件循环",
+        "两个都用 cluster：fork 出的 worker 与主进程共享内存，传 SharedArrayBuffer 零拷贝，CPU 计算放 worker 里跑",
+        "两个都用 worker_threads：多开几个线程分担 HTTP 请求，图像压缩也在线程里做，不必多进程",
+        "把图像压缩改成异步回调就不阻塞了——只要用了异步 API，CPU 密集计算也不会卡住事件循环"
+      ],
+      "answer": [0],
+      "hint": "选型分界是「IO 扩核 vs CPU 卸载」：Web 服务要的是多核接请求加崩溃隔离，cluster 的进程级隔离（一个 worker 崩不影响其他、master 可 fork 补位）正对这一格；CPU 密集要的是别阻塞事件循环，worker_threads 在同进程内开真线程卸载计算，两者还可组合。第 2 项把内存共享安到了 cluster 头上——进程间内存独立，通信靠 IPC 序列化（较重），SharedArrayBuffer 与转移所有权是 worker_threads 的轻量通信。第 3 项反过来把接请求的活交给线程：多线程不是 IO 扩核的正解，且丢掉了进程隔离。第 4 项是经典误区——事件循环只有一个，异步 API 管不住同步跑完的 CPU 密集代码，长任务照样把所有请求堵在队列里。"
+    }
   ]
 }

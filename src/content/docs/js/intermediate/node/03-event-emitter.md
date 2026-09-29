@@ -56,6 +56,32 @@ http server 这类**长生命周期对象**的监听器只增不减——每次�
 - 解法：一次性逻辑用 once、动态注册必须配对 off、命名函数方便
   移除（匿名函数无法 off）。
 
+```mermaid
+flowchart TB
+    CORE["Node 一切异步 API 的底座：EventEmitter 发布订阅<br/>核心结构：Map（事件名 → 回调数组）"]
+    CORE --> API["四件套都是对同一张事件表做增删遍历"]
+    API --> ON["on：注册进数组、返回 this 可链式"]
+    API --> OFF["off：按引用过滤数组<br/>匿名函数存不下引用、off 不掉"]
+    API --> ONCE["once：包装一层先移除再执行<br/>移除的必须是包装后的引用"]:::hl
+    API --> EMIT["emit：同步依次执行所有监听器<br/>emit 之后的代码在监听器之后"]
+    EMIT --> ERR["emit error 且无监听器<br/>→ 直接抛异常崩掉进程"]:::bad
+    ERR -.-> WHY["其他事件没监听器只是忽略<br/>错误不允许被静默吞掉<br/>对照回调的 error-first 约定"]:::good
+    CORE --> LEAK["长生命周期对象（http server）<br/>每次请求注册新监听器、从不移除<br/>→ 内存泄漏 + 重复执行"]:::bad
+    LEAK --> WARN["超 10 个同事件监听器<br/>打 MaxListenersExceededWarning"]:::hl
+    LEAK -.-> FIX["一次性逻辑用 once<br/>动态注册配对 off、命名函数"]:::good
+    CORE --> CHOICE["单次结果 → Promise<br/>多次/持续事件流 → EventEmitter"]
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
+    classDef hl stroke-width:1.5px
+```
+
+图上把全篇收成四条主线：四件套共用一张「事件名 → 回调数组」的
+事件表，once 的关键在「先移除再执行、移除的是包装引用」；emit 是
+同步的，而 error 事件因无监听器会崩进程这一条约定，把 Node「错误
+不许静默」的哲学落到事件体系；另一条主线是长生命周期对象的监听器
+泄漏——注册必须配对移除；选型上「单次结果用 Promise、持续事件流
+用 EventEmitter」是分界线。
+
 ## 高频追问速答
 
 - **emit 是同步还是异步？** 同步——emit 时立即依次执行所有监听器

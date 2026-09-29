@@ -51,6 +51,30 @@ new Worker("./heavy-task.js", { workerData: { n: 1e9 } });
 经验：**Web 服务用 cluster/PM2 扩核**；**单个请求内的 CPU 密集计算
 用 worker_threads 卸载**——两者可组合。
 
+```mermaid
+flowchart TB
+    CORE["先纠正：单线程 = JS 执行（事件循环）单线程<br/>进程、线程都可以多个"]
+    CORE --> IO["IO 密集为何反而高效：<br/>异步非阻塞 IO 由 libuv 线程池处理<br/>单线程无锁无切换"]:::good
+    CORE --> WEAK["CPU 密集是结构性弱点：<br/>长任务阻塞事件循环、所有请求排队"]:::bad
+    CORE --> CLUSTER["cluster：每核 fork 一个进程<br/>master 监听端口、round-robin 分发<br/>多个 worker 共享同一端口"]
+    CLUSTER --> ISO["进程级崩溃隔离：<br/>一个 worker 崩不影响其他<br/>master 可 fork 补位"]:::good
+    CLUSTER --> COSTC["代价：每个 worker 是完整进程<br/>内存独立、通信靠 IPC 序列化（较重）"]:::hl
+    CORE --> WT["worker_threads：同进程真线程<br/>启动成本轻"]
+    WT --> SHARE["内存可共享 SharedArrayBuffer<br/>ArrayBuffer 转移所有权、零拷贝"]:::hl
+    WT --> SCENE["CPU 密集任务卸载：<br/>计算不阻塞事件循环"]:::good
+    ISO & SCENE --> CHOICE["选型分界：IO 扩核 vs CPU 卸载<br/>Web 服务用 cluster/PM2<br/>单个请求内的 CPU 密集用 worker<br/>两者可组合"]
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
+    classDef hl stroke-width:1.5px
+```
+
+图上先立准「单线程」的准确含义——JS 执行单线程而进程/线程可多个，
+由此推出两头的判断：IO 密集反而高效（异步非阻塞 + 无锁无切换）、
+CPU 密集是结构性弱点（阻塞事件循环全员排队）；两条多核路线各有
+一张底牌——cluster 赢在进程级崩溃隔离、代价是完整进程加 IPC
+序列化，worker_threads 赢在轻量与可共享内存；选型收在「IO 扩核
+用 cluster、CPU 卸载用 worker」这一句。
+
 ## 高频追问速答
 
 - **Node 单线程为什么还能高并发？** 单线程指 JS 执行（事件循环），
