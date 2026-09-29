@@ -2600,6 +2600,26 @@
         2
       ],
       "hint": "第 1/2/3 项正确、第 4/5 项错。第 4 项混了类别：按调用次数收成本的是 Instrumentation 加 ASM 改类那一档（trace/watch/stack/tt/monitor/retransform），attach 上去什么都不做并不会给调用链加拦截，dashboard、thread、sc、jad 那一批读的是现成运行时信息、基本可忽略。第 5 项错在归类：profiler 走 async-profiler 的安全点采样，单独成第三类，代价形态是产物大而不是每次调用多一层，也就不吃 -n 那套限次参数。再补两条本篇的收尾口径：排查记录里要写清这次改过哪些类；热替换那条路只能改方法体、重启即失效，正式修复仍要走发布。"
+    },
+    {
+      "id": "java-webgate-153",
+      "noteId": "java/intermediate/spring-mvc/01-springmvc-flow",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "要把登录态校验放到某一层上。按笔记里「过滤器 / 拦截器 / AOP」三层关卡的分工，哪些判断成立？（多选）",
+      "options": [
+        "Filter 跑在 DispatcherServlet 之外的全程，静态资源也要过它，但它拿不到「要执行哪个方法」这条信息",
+        "AOP 能切任意 Spring Bean 方法，覆盖面比拦截器广，所以把登录态校验放 AOP 比放拦截器更贴近 HTTP 语义",
+        "拦截器只拦进到 MVC 的 Handler，没走 DispatcherServlet 的请求它看不见，这正是它范围比 Filter 窄的地方",
+        "三层的异常出口也不同：Filter 走容器 error page，拦截器有 afterCompletion 和全局异常可接，AOP 是声明式 try 语义",
+        "执行顺序是 preHandle 先跑，然后才进 Filter.doFilter 前，Controller 结束再走 afterCompletion 与 postHandle"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "hint": "第 1/3/4 项正确、第 2/5 项错。第 2 项把判断说反了：笔记的口径是拦截器比 AOP 贴近 HTTP 语义，AOP 的战场是事务、缓存、审计这类 Bean 方法级横切，覆盖广不等于位置合适。第 5 项错在顺序倒装：Filter 的前后两段包在最外层，往里依次是 preHandle、Controller、postHandle、afterCompletion。再补一条选型理由：鉴权常要读目标方法上的权限注解，这份信息只有进到 MVC 的拦截器拿得到，而 AOP 已经离开 HTTP 语境。"
     }
   ]
 }

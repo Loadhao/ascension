@@ -576,4 +576,30 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'复盘：Raft 管多数派认可，MVCC 管可溯，Watch 管即时可见。',
 		],
 	},
+	'springmvc-flow-video': {
+		title: 'Spring MVC 九步流水线 · 配音短片',
+		src: '/videos/springmvc-flow-video.mp4',
+		poster: '/videos/springmvc-flow-video.poster.png',
+		width: 1280,
+		height: 810,
+		duration: 54.4,
+		alt:
+			'动画短片：一条请求依次经过容器层的过滤器链、DispatcherServlet 的 doDispatch 总调度、' +
+			'HandlerMapping 按网址与方法匹配出处理器与拦截器链、拦截器 preHandle 前置放行、' +
+			'HandlerAdapter 统一适配调用并做参数与报文解析、返回值写成 JSON 或渲染视图，' +
+			'八帧走完，末帧收在拦截器收尾与全局异常处理器兜底。',
+		caption:
+			'过滤器归容器，映射表管「找到谁」，适配器管「统一调」——九步里考点最密的三站各有归属。',
+		source: 'springmvc-flow',
+		narration: [
+			'Spring MVC 的核心就是一个 Servlet，一条请求走完九步。',
+			'第一站是过滤器链，它归 Servlet 容器规范，编码鉴权常挂在这。',
+			'接着前端控制器接管，doDispatch 一启动，总调度就开始了。',
+			'HandlerMapping 按网址、方法、条件，匹配出处理器与拦截器链。',
+			'拦截器 preHandle 先跑，它返回否，后面所有步骤直接短路。',
+			'适配器用统一姿势调用各种处理器，参数与报文解析完才执行方法。',
+			'返回值分两条路：标了注解直接写 JSON，普通返回才渲染视图。',
+			'最后拦截器收尾、响应回客户端；途中抛错由全局异常处理器接住。',
+		],
+	},
 };
