@@ -1,0 +1,26 @@
+docs/coverage-deepening.md
+  s_db302989403760::t_be025c2b267eaf 66
+  s_db302989403760::t_c3a8400f5fa1a8 100-101
+  s_db302989403760::t_56801dc49bb4fa 131
+  s_db302989403760::t_a79f53631ad14a 35
+  s_db302989403760::t_ad49aa4fd0221e 98-99
+  s_db302989403760::t_11aa393b69e2c9 130
+src/data/papers/ai.json
+  s_db302989403760::t_54f999009e8224 1-137
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "60c34750d900514380865b63646d3770c2c9dbbc",
+  "prompts": {},
+  "sessions": {
+    "s_db302989403760": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "0da0eca2-bcd2-4898-9dc5-e6ac3b49ac89",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
