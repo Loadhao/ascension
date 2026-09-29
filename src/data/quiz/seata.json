@@ -131,6 +131,22 @@
       ],
       "answer": [0, 1, 2],
       "hint": "三个角色各管一段：TM 发起全局事务，TC 记账协调，RM 管分支。一阶段留 undo log 并提交本地事务，行锁当场放；二阶段成功只删镜像、失败才按改前镜像反向补偿，绕开全局锁造成的脏写需人工介入。"
+    },
+    {
+      "id": "seata-tccledger-148",
+      "noteId": "seata/intermediate/modes/01-at-tcc-saga",
+      "type": "multiple",
+      "difficulty": 3,
+      "q": "TCC 三段业务各自落在库存账本的哪一步？下列说法正确的有？（多选）",
+      "options": [
+        "Try 阶段 available 减 n、frozen 加 n，数据仍可见，两笔全局事务在字段的条件更新上消化冲突",
+        "Confirm 阶段把 frozen 减 n 转成实扣，这一步必须做成幂等，因为协调器会重试驱动到成功",
+        "Cancel 阶段把 frozen 减 n、available 加回 n，把预留原样释放还回去",
+        "TCC 的二阶段补偿靠 undo_log 的改前镜像自动回滚，业务代码不必自己写 Cancel",
+        "Saga 和 TCC 一样先做资源预留，差别只在二阶段失败时按什么顺序补偿"
+      ],
+      "answer": [0, 1, 2],
+      "hint": "后两项都张冠李戴：TCC 没有 undo_log，Try、Confirm、Cancel 三段全要业务自己实现；Saga 才是不做预留的路线，正向步骤直接提交，失败从后往前一步步补偿。"
     }
   ]
 }

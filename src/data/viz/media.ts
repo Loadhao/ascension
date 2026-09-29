@@ -741,4 +741,51 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'数据库这类数据挂 volume 写到可写层之外，容器删了数据还在。',
 		],
 	},
+	'redis-slot-video': {
+		title: 'Cluster 槽路由 · 配音短片',
+		src: '/videos/redis-slot-video.mp4',
+		poster: '/videos/redis-slot-video.poster.png',
+		width: 1280,
+		height: 810,
+		duration: 53.4,
+		alt:
+			'动画短片：Redis Cluster 把键空间切成 16384 个槽并按 CRC16 落位，客户端 GET user:42 打到节点 A 后' +
+			'收到 MOVED 重定向改连节点 C，扩缩容迁移期间命中 ASK 临时绕行，末帧 Gossip 探活并复盘两种重定向的区别。',
+		caption:
+			'MOVED 是永久改址、客户端缓存槽位表，ASK 只是迁移期的临时绕行、不改缓存；槽显式分配让扩缩容按槽搬数据，不用全库 rehash。',
+		source: 'redis-slot',
+		narration: [
+			'Cluster 把键空间切成 16384 个槽，每个主节点负责一段。',
+			'客户端随手 GET user:42，这条请求打到了节点 A。',
+			'A 算出槽号不在我这段，返回 MOVED——永久归属变了，客户端记下槽位表。',
+			'改连节点 C 重发，槽在本地，直接执行，不再绕路。',
+			'扩缩容迁槽时，这段槽处在新旧节点各持一部分的中间态。',
+			'查到迁移中的 key 返回 ASK：只这一条临时去问，不改客户端缓存。',
+			'节点间靠 Gossip 探活，主挂了内置从库自动顶上。',
+			'复盘：MOVED 是永久改址，ASK 是临时绕行，分清这两条就看懂了路由。',
+		],
+	},
+	'seata-tcc-video': {
+		title: 'Seata TCC · 配音短片',
+		src: '/videos/seata-tcc-video.mp4',
+		poster: '/videos/seata-tcc-video.poster.png',
+		width: 1280,
+		height: 810,
+		duration: 48.6,
+		alt:
+			'动画短片：一笔库存扣减的 TCC 一生——TM 向 TC 开全局事务、Try 把 available 减 2 并冻结进 frozen、' +
+			'二阶段 Confirm 把冻结转实扣，末帧复盘回滚路径与「必须幂等、防悬挂与空回滚」的纪律代价。',
+		caption:
+			'TCC 把隔离做进数据模型：Try 预留让两笔事务争的是字段条件更新而不是全局锁，代价全在纪律——Confirm/Cancel 必须幂等。',
+		source: 'seata-tcc',
+		narration: [
+			'TCC 三段全在业务里：Try 预留、Confirm 实扣、Cancel 释放。',
+			'先开全局事务，XID 随调用链传播到每个参与者。',
+			'Try 预留：可售减 2、冻结加 2，两笔事务争的是条件更新，不是全局锁。',
+			'业务成功，全局提交；失败走 Cancel，立刻了断，不持锁到事务结束。',
+			'二阶段 Confirm：冻结转实扣，必须幂等，协调器会重试到成功。',
+			'账本落定，冻结清零；回滚时把冻结原样还回可售。',
+			'复盘：隔离靠预留模型，代价在纪律，防悬挂与空回滚，幂等兜底。',
+		],
+	},
 };

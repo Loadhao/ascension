@@ -106,6 +106,10 @@ MOVED 与 ASK 两种重定向、迁移中的槽位状态，按帧放一遍：
 
 <AlgorithmVizIsland demo="redis-slot" />
 
+这段链路也有配音短片：MOVED 为什么记、ASK 为什么不记，听一遍就能分清。
+
+<AlgorithmVizIsland demo="redis-slot-video" />
+
 **为什么是 16384**：心跳包里要携带"我负责哪些槽"的位图，16384 bit =
 2KB 刚好；槽越多图越大浪费带宽；且官方定位集群 ≤1000 节点，16384 个槽
 足够分。**为什么不用一致性哈希**：槽是**显式分配**的——扩缩容时按槽
