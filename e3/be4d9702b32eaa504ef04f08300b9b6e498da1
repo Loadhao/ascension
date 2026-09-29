@@ -1,0 +1,33 @@
+AGENTS.md
+  s_577541b9b1ca5c::t_5b58a2c2e22724 77
+package.json
+  s_577541b9b1ca5c::t_3d1c92fce676ae 12
+docs/evolution-recipes.md
+  s_577541b9b1ca5c::t_a4f34a1997d569 36-39
+scripts/round-content-verify.mjs
+  s_085b621d502104::t_bfef56fc18700a 1-89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "e3be4d9702b32eaa504ef04f08300b9b6e498da1",
+  "prompts": {},
+  "sessions": {
+    "s_085b621d502104": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "43e7a1bc-29ab-4b79-9997-573afa01ea45",
+        "model": "grok-4.7"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_577541b9b1ca5c": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "386fcb39-5378-47e0-bf26-365f9973afc2",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
