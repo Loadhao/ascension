@@ -1,6 +1,6 @@
-// 全站一致性体检（11 项，编号 1–11，其中图谱结构记作 9）：侧边栏死链 / 笔记未注册 / 图谱死链 / 图谱覆盖率 /
+// 全站一致性体检（12 项，编号 1–12，其中图谱结构记作 9）：侧边栏死链 / 笔记未注册 / 图谱死链 / 图谱覆盖率 /
 // 笔记内绝对内链 / frontmatter 必填 / level 与目录一致 / 空壳分类页 /
-// 图谱结构 / 图表与可视化数据硬编码颜色 / 容器指令写法与闭合。
+// 图谱结构 / 图表与可视化数据硬编码颜色 / 容器指令写法与闭合 / 代码块行宽。
 // 任何一项失败输出清单并 exit 1；由 apex-project-evolution 例行运行，也可手动跑。
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -244,6 +244,77 @@ const report = {};
     ok: fresh.length === 0 && stale.length === 0,
     detail: `${scanned.files} 篇扫出 ${scanned.opens} 个开围栏、${violations.length} 处不成立（其中已登记待修 ${Object.keys(KNOWN).length} 处）；容器名限 note/tip/caution/danger、标题须写成 name[标题]、开围栏须闭合、标题里不写直双引号（汉字后紧跟会被判成闭引号，一律改用「」）`,
     bad: [...fresh.map((v) => `新增违规 ${v}`), ...stale.map((k) => `存量清单过期、修好后须删项 ${k}`)],
+  };
+}
+
+// 第 12 项：代码块每行 ≤80 视觉列。AGENTS.md「内容写作约束」自第 176 轮起就把这条写成硬约束
+// （ASCII 计 1、CJK/全角计 2），但一直没有机器守：第 176/179 轮手工量、第 220 轮 A 车道新篇还
+// 是「13 个代码块按 ≤80 视觉列逐行量过（最大 79 列）」——每写一篇核一次，属可机检却靠人肉的纪律。
+// 口径三条：
+// ① 视觉列按 AGENTS.md 原话：ASCII 计 1，CJK／全角／假名／谚文／emoji 计 2；全角标点（「」，。）在
+//    FF01–FF60 与 3000–303E 两段内一并计 2。制表符计 1（全站实测 0 行代码含 Tab，无需展开口径）。
+// ② mermaid 围栏整体豁免并打印豁免行数：它渲染成 SVG，源行不以任何文字出现在读者面前。
+//    第 245 轮现算：全站 >80 列的代码行 276 行／192 篇**全部**落在 mermaid 围栏内，非 mermaid 0 行。
+// ③ 围栏含列表项内缩进写法（`^[ \t]*`），与第 10 项、mermaid-syntax-verify 同口径（第 200 轮对齐），
+//    并不归一行尾——CRLF 检出下否则这里会整片漏扫。
+// 另按第 176 轮真机量的「实际只放得下 77.9 列」打印一档**观察数**（≥78 列），不判红：
+// 判红线仍取纸面常数 80，是否把线收到 78 属候选表第 6 行那条待用户裁决的路线（收线即一次
+// 134 行／85 篇的返修面，无人值守不自行扩大）。
+{
+  const LIMIT = 80;
+  const OBSERVE = 78;
+  const isWide = (ch) =>
+    /[\u1100\u2329\u232A\u2E80-\u303E\u3041-\u4DAF\u4E00-\uA4CF\uA960-\uA97F\uAC00-\uD7A3\uF900-\uFAFF\uFE10-\uFE19\uFE30-\uFE6F\uFF00-\uFF60\uFFE0-\uFFE6]/.test(ch) ||
+    /^[\uD83C\uD83D\uD83E]/.test(ch);
+  const cols = (s) => {
+    let n = 0;
+    for (const ch of s) n += isWide(ch) ? 2 : 1;
+    return n;
+  };
+  const over = [];
+  let files = 0;
+  let codeLines = 0;
+  let mermaidLines = 0;
+  let wide = 0;
+  const walkWidth = (dir) => {
+    for (const name of readdirSync(dir)) {
+      const p = join(dir, name);
+      if (statSync(p).isDirectory()) walkWidth(p);
+      else if (!/\.(md|mdx)$/.test(name)) continue;
+      else {
+        files++;
+        const rel = p.replace(ROOT + '/', '');
+        const lines = readFileSync(p, 'utf8').replace(/\r\n/g, '\n').split('\n');
+        let fence = null;
+        for (let i = 0; i < lines.length; i++) {
+          const ln = lines[i];
+          if (!fence) {
+            const om = ln.match(/^[ \t]*(`{3,}|~{3,})(.*)$/);
+            if (om) fence = { mark: om[1][0], len: om[1].length, mer: /^mermaid\b/i.test(om[2].trim()) };
+            continue;
+          }
+          const cm = ln.match(/^[ \t]*(`{3,}|~{3,})[ \t]*$/);
+          if (cm && cm[1][0] === fence.mark && cm[1].length >= fence.len) {
+            fence = null;
+            continue;
+          }
+          if (fence.mer) {
+            mermaidLines++;
+            continue;
+          }
+          codeLines++;
+          const n = cols(ln);
+          if (n >= OBSERVE) wide++;
+          if (n > LIMIT) over.push(`${rel}:${i + 1}（${n} 列）`);
+        }
+      }
+    }
+  };
+  walkWidth(DOCS);
+  report['12.代码块行宽'] = {
+    ok: over.length === 0,
+    detail: `${files} 篇扫出非 mermaid 代码行 ${codeLines} 行、超 ${LIMIT} 视觉列 ${over.length} 处（mermaid 围栏豁免 ${mermaidLines} 行）；观察档 ≥${OBSERVE} 列 ${wide} 行不判红（第 176 轮真机量得实际放得下 77.9 列，收线路线待裁决）；ASCII 计 1、CJK/全角计 2`,
+    bad: over,
   };
 }
 
