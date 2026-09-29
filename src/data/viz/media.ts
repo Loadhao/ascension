@@ -602,4 +602,28 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'最后拦截器收尾、响应回客户端；途中抛错由全局异常处理器接住。',
 		],
 	},
+	'kafka-rebalance-video': {
+		title: '消费组重平衡两阶段 · 配音短片',
+		src: '/videos/kafka-rebalance-video.mp4',
+		poster: '/videos/kafka-rebalance-video.poster.png',
+		width: 1280,
+		height: 836,
+		duration: 42.2,
+		alt:
+			'动画短片：消费组重平衡先由全员向 GroupCoordinator 发 JoinGroup 报到并放弃手头全部分区，' +
+			'Coordinator 选出一个 Leader 成员计算分配方案，再由 SyncGroup 把分区清单下发给各成员，' +
+			'末两帧收在 Generation 代数加一与全组停摆这条代价上。',
+		caption:
+			'停摆的源头在第一步：Eager 协议要求全员先放弃手头分区再进组，所以静态成员和增量协作才是治理抓手。',
+		source: 'kafka-rebalance',
+		narration: [
+			'消费组正常分工；成员增减、订阅或分区变化都会触发。',
+			'第一阶段 JoinGroup：全员报到，同时放弃手头全部分区。',
+			'Coordinator 选一个成员当 Leader，把全组订阅下发给它。',
+			'Leader 按分配策略算出新方案，Coordinator 只管收集下发。',
+			'第二阶段 SyncGroup：Leader 交方案，成员各拿自己的分区。',
+			'Generation 加一，旧代提交的 offset 被拒绝，挡住僵尸消费者。',
+			'复盘：方案由 Leader 算，代价是全组停摆，治理靠增量协作。',
+		],
+	},
 };
