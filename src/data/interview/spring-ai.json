@@ -19,6 +19,26 @@
       "intent": "先听有没有把两条协议边界说清：模型到你的应用、你的应用再往工具提供方。\n把 MCP 说成工具调用的另一种写法，等于没读过它解的是工具只服务一个应用。\n区分度在接线：外部工具要进 Spring AI 的工具面，中间隔着一道默认开着的开关。",
       "answer": "两者不在一层：function calling 管模型与应用之间。\nMCP 管应用与工具提供方之间，两层可以叠着用。\nSpring AI 双向支持：客户端吃别人的工具，服务端把自己的服务开成 MCP server。\n客户端这条链靠 spring.ai.mcp.client.toolcallback.enabled，默认开着，产出一个 ToolCallbackProvider Bean。\n排障按三层定位：连不上看 transport，连上但会话异常看 session，工具调不到看注册。",
       "followup": "追问注解面：@McpTool 自动生成参数 Schema，四个提示位里 destructiveHint 默认 true。\n接一句口径：不声明 readOnlyHint，只读查询工具也会被宿主当成破坏性操作去弹确认。\n再问传输选型：SSE 服务端 2.0 起标了弃用，新项目用 Streamable-HTTP，客户端生产建议上 webflux 那版 starter。"
+    },
+    {
+      "id": "sa-advisor-ic-003",
+      "noteId": "spring-ai/intermediate/advisor/01-advisor-chain",
+      "group": "AI 与大模型",
+      "difficulty": 4,
+      "q": "Spring AI 的 Advisor 是什么？一次模型调用能挂几个、按什么顺序跑？",
+      "intent": "这一问筛的是有没有把它当成正经的扩展点，而不是只会写 defaultAdvisors 那一行。\n短板是答不出放行由谁做：不调 nextCall 这一站就把链条截断，护栏靠的正是它。\n区分度落在栈式语义上——先处理请求的那个，最后才拿到响应。",
+      "answer": "它就是 AI 调用版的 Filter，拦的不是 HTTP 请求是一次模型调用。\n接口三个方法就说完：getName、adviseCall、adviseStream，请求与响应都在这条链上可改。\n下一站由你显式调 nextCall 才放行，所以能改完再走、走完再改，也能直接拒掉不进模型。\norder 三条语义：值小的先执行，值大算低优先级，整条链是个栈。\n跟 AOP 不是一层：AOP 靠代理在 Bean 方法边界织入，这里拿到的是请求响应对象加链，同类内部调用也不失效。",
+      "followup": "大概率追问内置都有什么：记忆两个、RAG 两个、推理增强 ReReadingAdvisor、护栏 SafeGuardAdvisor、工具循环 ToolCallingAdvisor。\n还会问注册时机：官方推荐构建期用 defaultAdvisors，请求期靠 AdvisorSpec 追加，会话 ID 这类运行参数走 param。\n再往下是旧教程为什么编译不过：CallAroundAdvisor 改成了 CallAdvisor，FunctionCallback 到 2.0 被移除。"
+    },
+    {
+      "id": "sa-memory-ic-004",
+      "noteId": "spring-ai/intermediate/advisor/02-chat-memory",
+      "group": "AI 与大模型",
+      "difficulty": 5,
+      "q": "多轮对话的记忆在 Spring AI 里怎么实现？聊着聊着忘了前面，问题出在哪？",
+      "intent": "这一问筛的是有没有把「留哪些消息」和「存在哪」拆成两层，而不是只答把历史拼回 prompt。\n短板是背得出默认窗口，说不出它数的是消息条数而不是 token。\n区分度落在工具往返那几轮消息留不留得住——两道闸门各卡什么。",
+      "answer": "两层分工：ChatMemory 管这一轮留哪些消息，Repository 管怎么存取。\n默认实现是 MessageWindowChatMemory，滑动窗口 20 条，超了淘汰最老的，SystemMessage 永远保留。\n它数的是消息条数不是 token，长对话照样撑爆上下文，按 token 裁剪得自己在窗口外另做。\n忘了前面的诉求，通常是窗口把最早的消息挤了出去，放大窗口或改摘要式长期记忆才是解药。\n工具消息能不能留档有两道闸：位置闸，记忆 Advisor 落在循环内才逐轮写；能力闸，2.0 只有 InMemory、Redis、Neo4j 存得下全消息集。",
+      "followup": "大概率追问和 VectorStoreChatMemoryAdvisor 的差别：一个以消息集合注入，一个写进 system 文本，取向不同。\n还会问换存储要不要动业务代码：只换 Repository 实现与 starter，ChatMemory 的用法不变。\n再往下是它算不算缓存：存的是要重放给模型的消息序列，不是 KV 缓存。"
     }
   ]
 }
