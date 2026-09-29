@@ -348,6 +348,26 @@
       ],
       "hint": "第 1/2/3 项正确、第 4/5 项错。两份日志分家正是这条链路的设计：binlog 留在主库，relay log 落在从库，接收与重放解耦之后网络抖动才不回压主库。半同步改的是主库何时返回——从「提交即回」变成「有从库确认收到」，重放那一段的堆积它管不着。延迟的结构性根因与三层对策分别是 mysql-repl-009、mysql-replfix-015 的考点，本题只管链路分工。",
       "difficulty": 3
+    },
+    {
+      "id": "mysql-locktriage-154",
+      "noteId": "mysql/intermediate/transaction-lock/04-lock-wait-triage",
+      "type": "multiple",
+      "q": "排查 orders 表的锁等待时，INNODB_TRX 里有一行 trx_query 为 NULL 而 run_s 已 900 秒。关于这类现场与配套取证手段，下列正确的有？（多选）",
+      "options": [
+        "这种空闲事务最难发现：语句都执行完了却没人提交，它不进慢查询日志、不占 CPU，持有的行锁与 MDL 照样把后面的请求挡住",
+        "8.0 上看锁与等待关系要查 performance_schema.data_locks 与 data_lock_waits，5.7 那两张 INNODB_LOCKS、INNODB_LOCK_WAITS 已被移除",
+        "SHOW ENGINE INNODB STATUS 只保留最近一次死锁，所以 innodb_print_all_deadlocks 得在生产提前打开，否则现场早被后一次覆盖",
+        "把 innodb_deadlock_detect 关掉死锁就不复存在了，剩下的只是普通的超时等待",
+        "锁等待的根因几乎总在锁本身（行锁粒度、间隙锁规则），所以排查优先从索引与锁模式入手"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "第 4 项把「少一次检测」说成「没有环」：关掉检测换来的是单次等待变长、由超时收尾，环照样形成，正文把它列为业务改造之外的第二顺位手段。第 5 项把归属说反了——该提交没提交、把 RPC 圈进事务才是根因，锁只是现场。第 2 项里被移除的只是 information_schema 那两张表，sys schema 的现成视图不在此列；小版本之间列有增减，以 SELECT * 先看一眼为准，别背。",
+      "difficulty": 4
     }
   ]
 }

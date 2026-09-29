@@ -78,8 +78,13 @@ try {
 	const stepEl = figure.locator('.algo-viz-step');
 	const noteEl = figure.locator('.algo-viz-note');
 	await figure.focus();
-	// 键盘单步会顺带暂停自动播放；倒回到第一帧，保证序列确定
+	// 倒回第一帧，保证序列确定。
+	// 必须无条件先按一次左键：seek() 顺带停掉自动播放，而首帧时左键本就是空操作。
+	// 若按「读到的帧码」决定按不按，读到 0 时一次都不按、自动播放仍在跑，SETTLE_MS 内被顶到第 1 帧
+	// （第 250 轮实测抛「未能回到第一帧，当前 1」；第 251 轮对照 8 趟里旧写法 6 趟判红、新写法 8 趟全过）
 	const rewind = async () => {
+		await page.keyboard.press('ArrowLeft');
+		await page.waitForTimeout(SETTLE_MS);
 		let cur = (await readStep(stepEl)).at;
 		for (; cur > 0; cur--) await page.keyboard.press('ArrowLeft');
 		await page.waitForTimeout(SETTLE_MS);
