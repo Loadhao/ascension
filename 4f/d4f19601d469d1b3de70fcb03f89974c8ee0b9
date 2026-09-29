@@ -1,0 +1,23 @@
+src/content/docs/js/intermediate/node/02-modules.md
+  s_775f43606efdad::t_8986b670873bcb 63-87
+src/data/quiz/js.json
+  s_775f43606efdad::t_1c059af40eb2fd 546-561
+docs/coverage-deepening.md
+  s_775f43606efdad::t_5a32d5e6a81271 107-108
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "4fd4f19601d469d1b3de70fcb03f89974c8ee0b9",
+  "prompts": {},
+  "sessions": {
+    "s_775f43606efdad": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "212a9fcc-35c0-4aa2-94f4-ec9810280dd1",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
