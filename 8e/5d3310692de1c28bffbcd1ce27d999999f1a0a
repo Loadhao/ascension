@@ -1,0 +1,29 @@
+docs/coverage-deepening.md
+  s_5c93ed0f426f85::t_9a8edc15361d66 101
+  s_5c93ed0f426f85::t_d97c9cc4cb7110 109-110
+src/content/docs/js/intermediate/node/03-event-emitter.md
+  s_5c93ed0f426f85::t_68ca056e3639ad 59-84
+src/data/quiz/js.json
+  s_5c93ed0f426f85::t_4279505fe65f37 581-596
+  s_5c93ed0f426f85::t_f6cb9aa870785c 562-580
+src/content/docs/js/intermediate/node/06-cluster-workers.md
+  s_5c93ed0f426f85::t_0f2748932cf7cc 54-77
+docs/evolution.md
+  s_5c93ed0f426f85::t_cd137193bfb83a 199-209
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8e5d3310692de1c28bffbcd1ce27d999999f1a0a",
+  "prompts": {},
+  "sessions": {
+    "s_5c93ed0f426f85": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "d3c09613-c46f-46d7-a04b-1bc0b053700a",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
