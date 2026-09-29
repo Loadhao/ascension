@@ -526,4 +526,29 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'复盘一句：用等待换延迟，同一口死信交换机还兜住失败与告警。',
 		],
 	},
+	'mqtt-qos2-video': {
+		title: 'QoS2 四段握手 · 配音短片',
+		src: '/videos/mqtt-qos2-video.mp4',
+		poster: '/videos/mqtt-qos2-video.poster.png',
+		width: 1280,
+		height: 690,
+		duration: 51.3,
+		alt:
+			'动画短片：一条 QoS2 消息依次经过带消息编号的 PUBLISH、接收方登记编号后回 PUBREC、' +
+			'发送方从此只重发确认不重发数据、收到 PUBREL 才投给应用层、回 PUBCOMP 清算，八帧走完，' +
+			'末帧收在两条报文至少一次与四条报文恰好一次的分工。',
+		caption:
+			'恰好一次不是靠少重发，而是靠接收方先把编号记下来——重复报文只补确认，不再投第二次。',
+		source: 'mqtt-qos2',
+		narration: [
+			'QoS2 求的是恰好一次，不重也不丢，代价是四段报文。',
+			'第一步发 PUBLISH 带上消息编号，没收到确认前它随时可能重发。',
+			'接收方先登记这个编号，再回 PUBREC，登记就是去重的根。',
+			'发送方收到 PUBREC 就明白对方已收到且已登记，从此只补确认。',
+			'没等到 PUBCOMP 就重发 PUBREL，重发的是确认不是数据。',
+			'收到 PUBREL 才把消息交给应用层，只交这一次，再回最后一段。',
+			'窗口内再来重复报文，查到编号已登记就不再投递，只补一次确认。',
+			'两条报文至少一次，四条报文恰好一次，默认前者加业务幂等。',
+		],
+	},
 };

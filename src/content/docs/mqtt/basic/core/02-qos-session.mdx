@@ -77,6 +77,10 @@ PUBCOMP）。很多人背流程但不理解它靠什么消重，关键在于**�
 
 <AlgorithmVizIsland demo="mqtt-qos2" />
 
+需要脱离屏幕听一遍时，上面这支动画有逐帧对应的配音短片（八帧、约 51 秒）：
+
+<AlgorithmVizIsland demo="mqtt-qos2-video" />
+
 **消重的真相**：接收方**一旦 PUBREC 过某个 message id，就记住了**；后续
 重复的 PUBLISH/PUBREL 都不再重复投递给应用层，只回 ACK。所以"恰好一次"
 = 接收方按 message id 去重 + 发送方只重发确认而非重发数据。
