@@ -1,0 +1,26 @@
+src/content/docs/kafka/intermediate/core/05-rebalance.mdx
+  s_434fa3ac96ef53::t_346343b4363359 56-59
+src/data/quiz/kafka.json
+  s_434fa3ac96ef53::t_38290131b7cfc6 296-312
+src/data/viz/media.ts
+  s_434fa3ac96ef53::t_772561c5e47ae8 605-609,612-628
+  s_434fa3ac96ef53::t_4114c66f9c0d99 610-611
+docs/evolution.md
+  s_434fa3ac96ef53::t_84fa511a97cf86 60,147-163,237
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cc7dda3d4bcd4df15522ec3d95701bf24e1c8eae",
+  "prompts": {},
+  "sessions": {
+    "s_434fa3ac96ef53": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "15014e17-6215-432c-8de1-ae088ef8c661",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
