@@ -60,6 +60,31 @@ export const add = (a, b) => a + b;
 - __dirname/__filename 在 ESM 不存在——用
   `import.meta.dirname` 替代（高频迁移坑）。
 
+```mermaid
+flowchart TB
+    CORE["两套模块系统的分界：<br/>CJS 是运行时函数调用，ESM 是编译时声明"]
+    CORE --> CJS["CommonJS<br/>require 是运行时读文件、包一层执行<br/>结果缓存进 require.cache，只执行一次"]
+    CJS --> EXPT["exports 陷阱<br/>exports 只是 module.exports 的引用别名<br/>exports = {...} 重绑变量无效<br/>必须写 module.exports = {...}"]:::bad
+    CJS --> LOOP["循环引用 = 部分导出<br/>缓存按执行进度曝光：<br/>b 拿到执行到一半的 exports<br/>已写入的 x 读得到、没执行到的 y 是 undefined"]:::bad
+    LOOP -.-> FIX["解法：require 挪进函数内延迟加载<br/>或重构消除循环"]:::good
+    CORE --> ESM["ESM：模块图在编译时确定<br/>import 是声明不是函数、会提升<br/>这就是 tree-shaking 的基础"]
+    ESM --> LIVE["循环引用靠活绑定工作<br/>导出的是活的绑定，变量变了引用处也变<br/>函数导出的循环大多能工作"]:::good
+    LIVE --> TDZ["仍有 TDZ 风险<br/>顶层执行的值导出依赖加载顺序"]:::bad
+    ESM --> TAWAIT["顶层 await 只有 ESM 支持<br/>CJS 不行"]:::good
+    CORE --> MIG["互操作三条坑"]
+    MIG --> TYPE["package.json 的 type 决定 .js 按哪套解析<br/>.cjs / .mjs 强制指定"]
+    MIG --> REQESM["CJS 里 require ESM：Node 22+ 才同步支持<br/>此前必须动态 import()"]
+    MIG --> DIR["__dirname / __filename 缺失<br/>用 import.meta.dirname 替代"]:::bad
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
+```
+
+图上把全篇收成三条主线：CJS 一侧记住两件运行时的事——exports
+别名陷阱与「拿到执行到一半 exports」的循环引用；ESM 一侧的核心是
+编译时模块图，活绑定让循环引用大多能工作、但值导出仍有 TDZ 风险，
+顶层 await 也只在这边可用；互操作三条坑（type 字段、require ESM、
+__dirname 缺失）是迁移期最常踩的地面。
+
 ## 高频追问速答
 
 - **tree-shaking 为什么需要 ESM？** CJS 的 require 是运行时函数

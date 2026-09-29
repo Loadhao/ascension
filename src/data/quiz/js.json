@@ -543,5 +543,21 @@
       "answer": [0],
       "hint": "两种形态互斥不可兼得——存取器属性只有 get/set、enumerable、configurable，没有 value/writable，第 2 项说反。configurable 是四开关里唯一的单行道，落下 false 连改回 true 都不行，第 3 项不存在这个反悔口。第 4 项把机制说错：Vue2 是把属性改写成存取器，在 getter 里收集依赖、setter 里派发更新，不是靠 writable 失败拦截。"
     }
+,
+    {
+      "id": "js-modules-031",
+      "noteId": "js/intermediate/node/02-modules",
+      "type": "single",
+      "difficulty": 4,
+      "q": "CommonJS 出现循环引用：a.js 先 exports.x = 1 再 require(\"./b\")，b.js 又 require(\"./a\")，此时 b 拿到的 a 是什么？",
+      "options": [
+        "执行到一半的 exports：已写入的 x 读得到，还没执行到的 y 是 undefined——不报错但埋雷",
+        "抛出循环依赖错误，因为模块缓存只有在模块执行完毕后才写入，a 还没完成就不在缓存里",
+        "一个空对象：循环引用直接短路，第二次 require 拿到的是尚未开始执行的原始 module.exports",
+        "完整的 a：Node 会先把 a 整个执行完再回头执行 b，缓存保证了每个模块必然完整执行一次"
+      ],
+      "answer": [0],
+      "hint": "CJS 循环引用不报错，拿到的是执行到一半的 exports（部分导出）——b 里 require(\"./a\") 时 a 已经执行到 require(\"./b\") 那一行，x 已写入、y 还没写，读到 undefined。第 2/4 项都建立在「缓存要等执行完才写入」上，而缓存恰恰在模块开始执行前就占位，所以 b 才能拿到那个半成品而不是重新执行一遍；第 3 项的「空对象」同样错在时点——占位对象里已有 x。解法是把 require 挪进函数内部做延迟加载，或重构消除循环；ESM 靠活绑定把函数导出的循环大多救活，但顶层执行的值导出仍可能 TDZ 报错。"
+    }
   ]
 }
