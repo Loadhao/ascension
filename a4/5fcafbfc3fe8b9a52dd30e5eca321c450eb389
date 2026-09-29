@@ -1,0 +1,19 @@
+src/data/papers/js.json
+  s_d7017a16876535::t_2cc9df35230b48 1-134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a45fcafbfc3fe8b9a52dd30e5eca321c450eb389",
+  "prompts": {},
+  "sessions": {
+    "s_d7017a16876535": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "bf74b20b-3a62-467c-a232-286b16342646",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
