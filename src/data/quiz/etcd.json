@@ -124,6 +124,26 @@
       ],
       "answer": [0, 1, 2],
       "hint": "Learner 只复制不投票、不能当 Leader；线性读和写打到纯 Learner 会失败或被转发。"
-    }
+    },
+    {
+    "id": "etcd-mvccwatch-009",
+    "noteId": "etcd/basic/core/01-etcd-core",
+    "type": "multiple",
+    "difficulty": 4,
+    "q": "关于 etcd 的 MVCC、Watch 与数据模型，下列说法正确的有？（多选）",
+    "options": [
+      "每次写分配一个全局递增的 revision，旧版本不被直接覆盖，因此可以按指定版本回溯读到的值",
+      "客户端订阅的是 key 前缀，key 一变服务端就把 PUT 或 DELETE 事件流式推过去，K8s 控制器的声明式收敛建立在这条推送上",
+      "它与 ZooKeeper 定位相似但分野清楚：共识用 Raft 而非 ZAB，数据模型是 KV 加多版本而非树形 znode，实现语言是 Go 而非 Java",
+      "要取一批前缀键，客户端只能先把全量 key 拉到本地逐条过滤，服务端没有按前缀批量读的能力",
+      "Lease 到期后对应的 key 仍然保留，必须由客户端再发一次显式删除才能真正回收"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "hint": "三个机制各管一件事：Raft 管多数派认可才提交，MVCC 管变化有版本可溯，Watch 管变化即时可见。前缀批量读由服务端的 get --prefix 完成，不用把全量 key 拉回客户端；Lease 到期是服务端自动删键。旧版本还得靠压缩回收，不压缩会撑大存储和内存。"
+  }
   ]
 }

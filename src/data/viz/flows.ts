@@ -1529,7 +1529,7 @@ function etcdWrite(): FlowVizConfig {
 	});
 	frames.push({
 		done: ['client', 'leader', 'follower', 'mvcc'],
-		note: '读请求默认走节点本地状态（快）；要线性一致可强制走 Raft。Lease 租约给 key 带 TTL，过期自动删除——临时节点的同款语义。',
+		note: '默认读是 linearizable，要走一遍共识确认读到最新；改用 serializable 才读本机状态（快，但可能略旧）。Lease 租约给 key 带 TTL，过期自动删除——临时节点的同款语义。',
 	});
 	frames.push({
 		done: ['client', 'leader', 'follower', 'mvcc', 'watcher'],
