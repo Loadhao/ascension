@@ -22,9 +22,9 @@
 
 | `n mod 6` | 车道 | 本轮产出 | 单轮上限 |
 | --- | --- | --- | --- |
-| 1、4 | **A 新章节** | 1 篇笔记 + 三件套（侧边栏 / 图谱节点 / 分类页） | ≤4 文件 |
+| 1、4 | **A 新章节** | 1 篇笔记 + 三件套（侧边栏 / 图谱节点 / 分类页）+ 该新篇的本篇卷 1 套 | ≤4 文件（卷允许 +1） |
 | 2 | **B 影像资产** | 1 条配音视频 **或** 1 张导出图卡，挂到 ≤2 篇笔记 | ≤5 文件、媒体 ≤6 MB |
-| 3 | **C 题库** | 3 道题（append 到 `src/data/quiz/<方向>.json`） | ≤4 文件 |
+| 3 | **C 题库** | 1 套本篇卷（5–10 题，append 到 `src/data/papers/<方向>.json`）**或** 3 道题（`src/data/quiz/<方向>.json`），**优先卷** | ≤4 文件 |
 | 5 | **D 体检与工具** | 1 项真实发现的修复，或 1 个脚本/闸门增强 | ≤4 文件 |
 | 0 | **E 面试考点卡** | 2 张考点卡（append 到 `src/data/interview/<方向>.json`） | ≤4 文件 |
 
@@ -82,7 +82,16 @@ node scripts/evolution-candidates.mjs [--top 8]
 基准**，截图前要显式写 `document.documentElement.dataset.theme='light'`，
 只设 Playwright 的 `colorScheme` 没用。
 
-**C 题库**——取队列头部 3 条，遵守 `coverage-deepening.md` 的「新题红线」：
+**C 题库**——默认产出改为**本篇卷**（用户 2026-09-29 批准，设计见
+`docs/superpowers/plans/2026-09-29-note-page-quiz.md`）：从 `coverage-deepening.md` 队列头部取
+**一篇笔记**，读正文后出 5–10 题 append 到 `src/data/papers/<方向>.json`，七字段
+`id/kind/type/section/neighborId/q/options/answer/quote/why`，`kind` 取 `recall`（小节直考，
+≥3 题且**分属不同小节**）/`diverge`（正文内发散追问）/`relate`（图谱相关性，≤2 题且引文仍取本篇）/
+`interview`（面试口径，≥1 题）。硬约束：**`section` 必须逐字等于该篇某个 `##`/`###` 标题、
+`quote` 必须是该篇正文的连续原文**（去空白与 `**` 后逐字命中）、题面不得与全局题库重合
+（「测一下」不是题库的子集）——九条判红全部由 `scripts/paper-verify.mjs` 卡住，补卷后要把该方向
+从其 `KNOWN_MISSING` 删项。取不到合格宿主笔记时降级为原路线（3 道全局题）。
+原全局题库红线仍适用：取队列头部 3 条，遵守 `coverage-deepening.md` 的「新题红线」：
 考点必须与该笔记已有题不同、字段沿用所在文件格式、`judge` 固定 `["正确","错误"]`、
 新题一律带 `difficulty`。收尾按该文件规则销号并追加 2~4 条新条目。
 `noteId` 写错不会报错、只会静默 404，已由 `scripts/quiz-verify.mjs` 卡住。
@@ -105,7 +114,7 @@ node scripts/evolution-candidates.mjs [--top 8]
 每补一个方向就要把该方向从 `interview-verify.mjs` 的 `KNOWN_MISSING` 删项（清单过期会判红）。
 `noteId` 写错同样只静默 404，已由该闸门卡住。
 
-**D 体检与工具**——`pnpm verify:docs`（一致性 12 项 + mermaid 语法 + 考点卡 10 项 + 题库 9 项 + 影像 7 项，共 38 项）
+**D 体检与工具**——`pnpm verify:docs`（一致性 12 项 + mermaid 语法 + 考点卡 10 项 + 题库 9 项 + 影像 7 项 + 本篇卷 9 项，共 47 项）
 与 `node scripts/mermaid-contrast-verify.mjs`（需 `pnpm preview`）的输出就是候选池：
 修一处真实发现，或给闸门加一条能判红的检查。四道全绿且无可修时，产出改为
 「向 `evolution.md` 候选表新增 2 条带证据的可验证候选」——仍算有产出。

@@ -5,11 +5,11 @@
  */
 import DefaultFooter from '@astrojs/starlight/components/Footer.astro';
 import ProgressMark from '../learn/ProgressMark';
+import NotePaperIsland from '../quiz/NotePaperIsland.astro';
 import { HISTORY_KEY, RESTORE_MIN_RATIO } from '../../lib/history';
 
-const entry = Astro.locals.starlightRoute?.entry as
-  | { id: string; data: { level?: string } }
-  | undefined;
+const route = Astro.locals.starlightRoute;
+const entry = route?.entry as { id: string; data: { level?: string } } | undefined;
 const noteId = entry?.data?.level !== undefined ? entry.id : null;
 ---
 
@@ -39,4 +39,5 @@ const noteId = entry?.data?.level !== undefined ? entry.id : null;
   </script>
 )}
 {noteId && <ProgressMark client:idle noteId={noteId} />}
+{noteId && <NotePaperIsland noteId={noteId} headings={route?.headings ?? []} />}
 <DefaultFooter />

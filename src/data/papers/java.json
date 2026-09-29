@@ -1,0 +1,395 @@
+{
+  "papers": [
+    {
+      "noteId": "java/intermediate/concurrent/04-synchronized",
+      "title": "synchronized 与锁升级 · 本篇测一下",
+      "questions": [
+        {
+          "id": "sync-p01",
+          "kind": "recall",
+          "type": "single",
+          "section": "三种用法与锁对象",
+          "q": "static synchronized 方法锁的是哪个对象？",
+          "options": [
+            "调用它的当前实例 this",
+            "该类的 Class 对象，所有实例共享同一把",
+            "方法的第一个参数",
+            "不锁对象，只保证字段可见性"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "类锁（Class 对象）管所有实例的静态方法",
+          "why": "静态方法属于类而不属于实例，所以锁的是 Class 对象；同类两个实例的静态同步方法仍互斥，普通实例方法则各锁各的。"
+        },
+        {
+          "id": "sync-p02",
+          "kind": "recall",
+          "type": "judge",
+          "section": "底层：monitor 与对象头",
+          "q": "重量级锁之所以「重」，是因为它要落到操作系统互斥量、发生用户态到内核态的切换——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "要操作系统互斥量（mutex），用户态切内核态，挂起/唤醒开销大",
+          "why": "JDK 6 之前加锁只能找 ObjectMonitor，而它依赖内核 mutex，挂起与唤醒都要切换态，这个开销才是「重量级」这个名字的来源。"
+        },
+        {
+          "id": "sync-p03",
+          "kind": "recall",
+          "type": "single",
+          "section": "偏向锁（Biased Locking，JDK 15 废弃、JDK 18 移除）",
+          "q": "偏向锁在 JDK 15 被废弃并默认关闭（实现随后在 JDK 18 移除），最主要的原因是什么？",
+          "options": [
+            "偏向锁不支持重入，语义有缺陷",
+            "Mark Word 里放不下线程 ID 的位数",
+            "撤销偏向要走全局安全点，现代多线程场景得不偿失",
+            "轻量级锁的性能全面超过了它"
+          ],
+          "answer": [
+            2
+          ],
+          "quote": "撤销偏向要 safepoint STW，得不偿失",
+          "why": "JEP 374 的口径：偏向只对「同一线程反复拿锁」划算，而当今应用普遍多线程，第二个线程出现就要在安全点撤销偏向——为省一次 CAS 换来 STW 不划算。"
+        },
+        {
+          "id": "sync-p04",
+          "kind": "recall",
+          "type": "single",
+          "section": "轻量级锁",
+          "q": "轻量级锁加锁时，对象头 Mark Word 被复制到哪里？",
+          "options": [
+            "堆上另开一份对象头副本",
+            "当前线程栈帧里的 Lock Record（Displaced Mark Word）",
+            "ObjectMonitor 的 EntryList 里",
+            "方法区的运行时常量池"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "加锁：栈帧里建 Lock Record，把 Mark Word 复制进去",
+          "why": "轻量级锁靠「栈上副本 + CAS 把 Mark Word 改成指向 Lock Record 的指针」实现，解锁时再把副本换回去，全程不进内核。"
+        },
+        {
+          "id": "sync-p05",
+          "kind": "recall",
+          "type": "multiple",
+          "section": "锁粗化与锁消除",
+          "q": "关于 JIT 的锁消除与锁粗化，下列哪两项说法正确？",
+          "options": [
+            "逃逸分析证明锁对象不逃出线程时，这把锁可以直接删掉",
+            "连续相邻的加锁解锁会被合并成一个同步块",
+            "锁消除要求锁对象必须是静态字段",
+            "锁粗化会改变互斥语义，因此默认被关闭"
+          ],
+          "answer": [
+            0,
+            1
+          ],
+          "quote": "JIT 的逃逸分析证明对象不逃出线程 → 锁没意义 → 消除；反复相邻的加锁解锁 → 粗化成一次",
+          "why": "两者都是 JIT 的自动优化：没有竞争者就删锁，相邻的反复加解锁就合成一次。业务代码不必为「性能」手动合并锁——先写对。"
+        },
+        {
+          "id": "sync-p06",
+          "kind": "interview",
+          "type": "single",
+          "section": "synchronized vs ReentrantLock",
+          "q": "面试官问「什么时候该把 synchronized 换成 ReentrantLock」，你的第一句答什么？",
+          "options": [
+            "ReentrantLock 性能更好，高并发就该换",
+            "需要超时、可中断、公平性或多个条件队列时才换",
+            "统一都用 ReentrantLock，方便以后加功能",
+            "synchronized 不可重入，需要重入时必须换"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "需要超时、可中断、公平性、多条件队列才上 ReentrantLock",
+          "why": "先给结论：简单场景默认 synchronized（不会漏释放，JIT 还在持续优化），只有需要那四种能力才上 ReentrantLock；性能不是理由，JDK 6 后两者基本持平。"
+        },
+        {
+          "id": "sync-p07",
+          "kind": "relate",
+          "type": "judge",
+          "section": "底层：monitor 与对象头",
+          "neighborId": "java/advanced/jvm/05-object-layout",
+          "q": "Mark Word 要记下锁状态和指向 monitor 的指针，所以加锁会让对象实例的字段区变大——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "重量级锁：指向 ObjectMonitor 的指针(62)",
+          "why": "各锁状态复用的是对象头里同一段 64 位 Mark Word（无锁放 hashCode 与分代年龄，重量级放一个 62 位指针），变的是位的含义不是对象大小；monitor 结构体本身在别处分配。",
+          "neighborTitle": "对象内存布局与指针压缩"
+        }
+      ]
+    },
+    {
+      "noteId": "java/intermediate/concurrent/03-volatile",
+      "title": "volatile 与 Java 内存模型 · 本篇测一下",
+      "questions": [
+        {
+          "id": "vol-p01",
+          "kind": "recall",
+          "type": "single",
+          "section": "为什么需要 JMM",
+          "q": "JMM 这套规矩本质上在为哪件事兜底？",
+          "options": [
+            "寄存器与多级缓存让各核心看到的主存内容不再一致",
+            "编译器与 CPU 重排会破坏单线程代码自身的语义",
+            "解锁与后续加锁之间的先后顺序不确定",
+            "GC 并发移动对象导致线程读到失效的引用"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "硬件层引入寄存器 + 多级缓存救场，代价是：每个核心看到的主存内容不再一致",
+          "why": "JMM 管的是可见性与有序性——线程各自在工作内存读写、何时刷回主存不确定；原子性它不管，要靠锁与 CAS。"
+        },
+        {
+          "id": "vol-p02",
+          "kind": "recall",
+          "type": "judge",
+          "section": "volatile 不保证原子性",
+          "q": "给计数字段加 volatile 后，多线程的 count++ 就不会丢更新了——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "volatile 只保证每次读写的可见性",
+          "why": "count++ 是「读值 → +1 → 写回」的复合操作，volatile 只保证每一步读写可见，挡不住两步之间的交错；计数要用 AtomicInteger（CAS）或加锁。"
+        },
+        {
+          "id": "vol-p03",
+          "kind": "recall",
+          "type": "single",
+          "section": "经典应用：DCL 双重检查锁单例",
+          "q": "DCL 单例里 instance 不加 volatile，最典型的故障是什么？",
+          "options": [
+            "两个线程各建一个实例，返回不同对象",
+            "别的线程可能拿到已分配内存但还没初始化完的半个对象",
+            "编译期就报类型错误",
+            "只是慢一点，结果仍然正确"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "直接返回——拿到半个初始化的对象",
+          "why": "new 分三步（分配内存 → 初始化字段 → 引用指向内存），②③ 可能被重排；没有 volatile 禁止重排，第二个线程在第一次检查处就会看到非 null 而返回半成品。"
+        },
+        {
+          "id": "vol-p04",
+          "kind": "diverge",
+          "type": "single",
+          "section": "happens-before 原则",
+          "q": "线程 A 先写普通字段、再写 volatile 标志；线程 B 读到标志后去读那个字段。B 能看到最新值的依据是什么？",
+          "options": [
+            "靠程序顺序规则，同一线程里代码顺序天然保证跨线程可见",
+            "volatile 写之前的所有普通写，都会被 volatile 读一并带到后面",
+            "靠操作系统把两个线程绑到同一个 CPU 核心",
+            "靠 final 字段的冻结语义保证初始化完成"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "volatile 写之前的所有普通写，对 volatile 读之后的读都可见",
+          "why": "这叫双向辐射：写标志位时，之前所有普通写都被这条 happens-before 边带过去；程序顺序只约束同一个线程，跨线程不成立。"
+        },
+        {
+          "id": "vol-p05",
+          "kind": "diverge",
+          "type": "single",
+          "section": "内存屏障与缓存伪共享（深入）",
+          "q": "伪共享为什么能把两个互不相干的字段一起拖慢？",
+          "options": [
+            "它们挤在同一条缓存行里，写其中一个会让整行失效，另一个再读就得重取",
+            "JIT 把两个字段合并成了同一个变量",
+            "volatile 字段本身就比常规字段读写慢一个量级",
+            "GC 会把热字段搬到同一片内存"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "两个无关变量若被放到同一缓存行，一个被写会使整行失效、另一个的下次读也要重取",
+          "why": "缓存一致性以缓存行（64 字节）为最小单位，不是以变量为单位；解法是 padding 或 @Contended 把它们隔开，普通业务极少遇到。"
+        },
+        {
+          "id": "vol-p06",
+          "kind": "interview",
+          "type": "single",
+          "section": "volatile 的适用场景",
+          "q": "面试官问「volatile 适合用在哪」，你答的判断标准是？",
+          "options": [
+            "写进去的新值不依赖旧值，也不牵扯与其他变量的组合状态",
+            "凡是跨线程读写的字段都应该加上它",
+            "需要把几个变量作为一个整体被看到时最合适",
+            "只能用在 final 字段上"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "且变量不与其他共享变量构成需要原子组合的状态",
+          "why": "一句话说清：一写多读的状态标志、一次性发布引用可以用；只要「读改写」或多变量不变式（lower <= upper）就不适用，得换原子类或加锁。"
+        },
+        {
+          "id": "vol-p07",
+          "kind": "relate",
+          "type": "judge",
+          "section": "经典应用：DCL 双重检查锁单例",
+          "neighborId": "java/intermediate/concurrent/04-synchronized",
+          "q": "既然 volatile 已经禁止重排并保证可见，DCL 里 synchronized 那次加锁就可以省了——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "② 第二次检查：防止重复创建",
+          "why": "volatile 管的是可见性与有序性，不保证互斥；两个线程可以同时通过第一次检查，仍要靠锁把创建串行化，第二次检查才是防重复创建的那道闸。",
+          "neighborTitle": "synchronized 与锁升级"
+        }
+      ]
+    },
+    {
+      "noteId": "java/intermediate/concurrent/05-aqs",
+      "title": "AQS 抽象队列同步器 · 本篇测一下",
+      "questions": [
+        {
+          "id": "aqs-p01",
+          "kind": "recall",
+          "type": "single",
+          "section": "AQS 的三块基石",
+          "q": "继承 AQS 写一个同步器，子类通常要回答什么？",
+          "options": [
+            "覆写 acquire / release 的排队骨架",
+            "覆写 tryAcquire / tryRelease 等模板方法，说明状态怎么变",
+            "配置线程池的核心线程数",
+            "自己维护 Node 的 prev 与 next 指针"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "acquire/release 排队逻辑是写死的骨架，tryXxx 是子类填的肉",
+          "why": "排队、挂起、唤醒由骨架代劳，子类只定义 state 的语义；默认实现直接抛 UnsupportedOperationException，忘了覆写会当场炸。"
+        },
+        {
+          "id": "aqs-p02",
+          "kind": "recall",
+          "type": "single",
+          "section": "CLH 队列：虚拟双向链表",
+          "q": "AQS 同步队列的头节点存的是什么？",
+          "options": [
+            "当前持有锁的线程",
+            "等待时间最长的线程",
+            "虚拟哨兵节点，不存线程",
+            "已被取消的节点"
+          ],
+          "answer": [
+            2
+          ],
+          "quote": "队列头是虚拟哨兵节点（不存线程），真正的排队者从第二个节点开始",
+          "why": "head 是哨兵，代表「正在拥有同步状态」的一侧，真正排队的线程从第二个节点起，每个节点只盯前驱的 waitStatus。"
+        },
+        {
+          "id": "aqs-p03",
+          "kind": "recall",
+          "type": "judge",
+          "section": "acquire 独占获取全流程",
+          "q": "线程被 unpark 唤醒后就直接拿到锁了——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "被唤醒 ≠ 拿到锁，还得看 CAS",
+          "why": "唤醒只是让它回到自旋点重新 tryAcquire；锁可能在这空窗被新来的线程抢走（非公平模式），所以被叫醒不等于获得同步状态。"
+        },
+        {
+          "id": "aqs-p04",
+          "kind": "diverge",
+          "type": "single",
+          "section": "acquire 独占获取全流程",
+          "q": "线程 park 之前为什么必须先把前驱的 waitStatus 置成 SIGNAL？",
+          "options": [
+            "不先把标志写在前头，前驱释放时没人负责叫醒它，线程会永久沉睡",
+            "为了把自己标记成虚拟哨兵节点",
+            "因为队列只有在 SIGNAL 时才允许追加节点",
+            "为了让 park 响应线程中断"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "挂起前必先把前驱置 SIGNAL——否则自己刚 park、前驱就释放了，唤醒信号丢失，线程永远睡着",
+          "why": "这就是丢失唤醒问题：置标志与挂起之间没有原子性，必须先把「该叫醒我」写在前头。park 对中断不敏感，返回后再补 selfInterrupt。"
+        },
+        {
+          "id": "aqs-p05",
+          "kind": "diverge",
+          "type": "single",
+          "section": "公平 vs 非公平",
+          "q": "公平与非公平模式在代码上的实际差别是什么？",
+          "options": [
+            "公平模式多一次队列前驱检查，有人排队就乖乖排队",
+            "非公平模式不使用 CAS 获取状态",
+            "公平模式会饿死线程，所以被默认禁用",
+            "两者只差在 park 的等待时长上限"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "非公平吞吐高（唤醒线程的空窗期不浪费），公平不饿死但多一次队列检查",
+          "why": "非公平让刚到的线程直接 CAS 抢，唤醒空窗不浪费；公平靠 hasQueuedPredecessors 保证先来者先服务，本篇给的代价口径是多一次队列检查与上下文切换——默认非公平是吞吐与公平的折中。"
+        },
+        {
+          "id": "aqs-p06",
+          "kind": "interview",
+          "type": "single",
+          "section": "共享模式：Semaphore 视角",
+          "q": "面试官问「AQS 为什么能同时撑起 ReentrantLock 和 Semaphore」，你怎么开口？",
+          "options": [
+            "因为 Semaphore 继承自 ReentrantLock",
+            "因为共享模式不入队，只有独占模式才排队",
+            "因为 state 的含义由子类定义，排队骨架共用：一个表示锁计数，一个表示剩余令牌",
+            "因为它们都只使用独占模式"
+          ],
+          "answer": [
+            2
+          ],
+          "quote": "一套骨架，两种模式，四个明星工具类",
+          "why": "结论先行：变的只是 state 语义与 tryXxx 实现。独占模式问「拿没拿到锁」，共享模式问「还剩几个许可」，不够就入队，够了就扣减并级联唤醒后继。"
+        },
+        {
+          "id": "aqs-p07",
+          "kind": "relate",
+          "type": "judge",
+          "section": "公平 vs 非公平",
+          "neighborId": "java/intermediate/concurrent/04-synchronized",
+          "q": "AQS 与 synchronized 都是非公平的，所以在「能不能要公平」这件事上两者没区别——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "默认非公平是吞吐与公平的务实折中",
+          "why": "「默认非公平」是 AQS 的选择而不是唯一选项：它另有公平模式；synchronized 没有公平开关，只能接受插队。能配置与不能配置是实质差别。",
+          "neighborTitle": "synchronized 与锁升级"
+        }
+      ]
+    }
+  ]
+}

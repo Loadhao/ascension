@@ -1,0 +1,31 @@
+---
+// 笔记页「测一下」包装层：按 noteId 从 src/data/papers/<方向>.json 里取本卷，
+// 没有卷就不渲染（也就不下发任何客户端 JS）。锚点 slug 由 Starlight 路由数据的
+// headings 现取，不自造 slug 规则。
+import NotePaper, { type NotePaper as NotePaperData } from './NotePaper';
+
+const { noteId, headings = [] } = Astro.props as {
+  noteId: string;
+  headings?: { text: string; slug: string }[];
+};
+
+const modules = import.meta.glob('../../data/papers/*.json', { eager: true }) as Record<
+  string,
+  { default?: { papers?: NotePaperData[] }; papers?: NotePaperData[] }
+>;
+
+const all: NotePaperData[] = Object.values(modules).flatMap((mod) => (mod.default ?? mod).papers ?? []);
+const paper = all.find((p) => p.noteId.replace(/^\/+|\/+$/g, '') === noteId.replace(/^\/+|\/+$/g, ''));
+
+/** 与 paper-verify.mjs 同口径，另剥掉行内 code 标记：Starlight 的 headings[].text 不含反引号 */
+const key = (s: string) => s.replace(/[*`]/g, '').replace(/[\s　]/g, '');
+const slugs: Record<string, string> = {};
+for (const h of headings) {
+  // 同名小节（全站现存 1 篇）保留第一个锚点，别让后者把跳转悄悄改道
+  if (!(h.text in slugs)) slugs[h.text] = h.slug;
+  const k = key(h.text);
+  if (!(k in slugs)) slugs[k] = h.slug;
+}
+---
+
+{paper && <NotePaper client:idle paper={paper} slugs={slugs} />}

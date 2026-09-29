@@ -69,6 +69,7 @@
 正文 + 侧边栏注册 + `src/data/graphs/<方向>.json` 节点与边 + 分类页 `index.mdx` 导读
 （新分类另建分类页）+ 至少一张主题图（颜色全走令牌，改完跑对比度审计）
 + 首题入 `src/data/quiz/<方向>.json`（带 `difficulty`）+ 速答手册一行
++ 本篇卷一套入 `src/data/papers/<方向>.json`（5–10 题，逐题绑真实小节 + 正文逐字引文，过 `paper-verify`）
 + 回本表把状态改 `done <日期>`，并向 `docs/coverage-deepening.md` d 类入队第二题。
 
 ## 3. 后续池 B2 / B3（只列方向，不逐条细化）

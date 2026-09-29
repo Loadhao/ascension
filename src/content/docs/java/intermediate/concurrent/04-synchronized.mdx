@@ -17,7 +17,7 @@ public class SyncDemo {
     public synchronized void m2() { }          // 等价于 synchronized(this)
     public static synchronized void m3() { }   // 锁 Class 对象：所有实例共享
     public static void m4() {
-        synchronized (Synchronized.class) { } // 等价于 static synchronized
+        synchronized (SyncDemo.class) { }    // 等价于 static synchronized
     }
 }
 ```
@@ -60,7 +60,7 @@ JDK 6 之前加锁只能找 ObjectMonitor——要**操作系统互斥量（mute
 ## JDK 6 的重大优化：锁升级
 
 HotSpot 发现大多数锁**不仅没有竞争，甚至总是同一线程反复拿**，全上
-monitor 太浪费，于是造出升级链条（JDK 15 起偏向锁已废弃，但原理仍值得懂）：
+monitor 太浪费，于是造出升级链条（偏向锁 JDK 15 被废弃并默认关闭、实现于 JDK 18 移除，但原理仍值得懂）：
 
 ```mermaid
 flowchart LR
@@ -74,13 +74,13 @@ flowchart LR
     classDef hl stroke-width:1.5px
 ```
 
-### 偏向锁（Biased Locking，JDK 15 移除）
+### 偏向锁（Biased Locking，JDK 15 废弃、JDK 18 移除）
 
 - 只有**第一个**拿到锁的线程：CAS 把线程 ID 写进 Mark Word，之后该线程
   再进入**连 CAS 都不用**——判断 Mark Word 里是自己就进。
 - 第二个线程出现才撤销偏向（等到全局安全点，检查原线程是否还在同步块中）。
 - 场景：单线程反复访问（如早期 StringBuffers）。
-- 移除原因：现代应用普遍多线程，撤销偏向要 safepoint STW，得不偿失。
+- 废弃与移除原因：JEP 374 说明现代应用普遍多线程，撤销偏向要 safepoint STW，得不偿失。
 
 ### 轻量级锁
 

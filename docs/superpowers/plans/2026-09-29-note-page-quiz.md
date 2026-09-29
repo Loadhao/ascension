@@ -4,7 +4,7 @@
 
 | 项 | 值 |
 |---|---|
-| 状态 | 待裁决（§9 三条决策落地后才能开工 M1 之后的扩量） |
+| 状态 | M1 已落地（2026-09-29，用户批准 R1 + 车道接入 + 试点先行）；M2 起待推进，§9-2 覆盖范围仍未拍板 |
 | 日期 | 2026-09-29 |
 | 版本 | **v2**，取代 v1（`git show c9e54fb:docs/superpowers/plans/2026-09-29-note-page-quiz.md`）。v1 的核心前提「复用 `noteId` 全局题库抽题装配」**已被需求澄清与实测数据双重否证**，见 §3 R3。 |
 | 需求依据 | 用户三轮次澄清原话见 §0 |
@@ -13,7 +13,7 @@
 
 **Architecture:** 数据侧新增与全局题库**分家**的「本篇卷」资产 `src/data/papers/<方向>.json`，一篇笔记一份卷，构建期由 `scripts/paper-verify.mjs` 逐题校验「小节真实存在 + 引文逐字命中」。展示侧在 `src/components/starlight/Footer.astro`（已有 `ProgressMark` 注入范式）挂 `<NotePaperIsland>`，收起态一行按钮、点击展开逐题作答；`section → slug` 由 `Astro.locals.starlightRoute.headings` 现取，不自己实现 slugger。**出题本身不发生在浏览器里**——站点是纯静态部署，见 §2。
 
-**Tech Stack:** Astro 7 + Starlight 0.42、React 岛屿、Node 校验脚本（复用 `verify:docs` 现有闸门链，当前 38 项）。无新依赖、无服务端、不改 `astro.config.mjs` 部署形态。
+**Tech Stack:** Astro 7 + Starlight 0.42、React 岛屿、Node 校验脚本（复用 `verify:docs` 现有闸门链，M1 落地后 **47 项**）。无新依赖、无服务端、不改 `astro.config.mjs` 部署形态。
 
 ---
 
@@ -144,7 +144,7 @@ v1 走的这条路。两条独立证据否证：
 
 ## 5. 闸门：`scripts/paper-verify.mjs`（挂进 `pnpm verify:docs`）
 
-反幻觉靠断言，不靠自觉。逐卷逐题判红项：
+反幻觉靠断言，不靠自觉。**落地口径（M1 实跑）**：下列 6 条拆成脚本里的 **9 项**——1→第 4 项、2→第 5 项、3 与 4→第 6 项、5→第 2/3/8/9 项，另把「noteId 与方向可达」独立成第 1 项、「relate 邻居真实」独立成第 7 项、方向覆盖空转守卫独立成第 9 项。**第 4 条只做到机械可查的强度**：判据实现为「错误选项文本（≥6 字）不得逐字出现在同题引文里」，语义级的「被引文否定」无法静态判定，仍靠写题人自觉与 §5 之外的评审。逐卷逐题判红项：
 
 1. **锚点真实**：`section` 逐字等于该篇 `##`/`###` 标题行去掉前缀后的文本（脚本直接读 mdx，与 §1 事实 7 同一解析口径）。
 2. **引文逐字**：`quote` 去空白后必须是该篇正文的**连续子串**（不是转述，不是拼接）。这一条同时抓住「编事实」与「改写成自己话后写歪」。
@@ -164,7 +164,7 @@ v1 走的这条路。两条独立证据否证：
 
 ## 7. 里程碑与推进节奏
 
-- [ ] **M1 骨架 + 三篇试点**（1 轮 A 车道，≤6 文件）：`papers` 目录与 JSON schema、`paper-verify.mjs`（含 `KNOWN_MISSING`）、`NotePaperIsland.tsx` + `.astro`、`Footer.astro` 注入、`custom.css` 令牌样式；试点 = `synchronized` / `volatile` / `aqs`。验收：`pnpm build` + `pnpm verify:docs`（届时 39 项）全绿，真机点开能答题、能跳小节。
+- [x] **M1 骨架 + 三篇试点**（2026-09-29 完成，实际 10 个文件：`src/data/papers/java.json`、`scripts/paper-verify.mjs`、`package.json`（挂闸门）、`NotePaper.tsx` + `NotePaperIsland.astro`、`Footer.astro`、`custom.css`，加 §9-3 批准的三处规范同步 `AGENTS.md`／`evolution-recipes.md`／`content-roadmap.md`；计划原写「≤6 文件」漏数了注册类文件，如实更正）。试点 = `synchronized`／`volatile`／`aqs`，共 **3 卷 21 题**。验收读数：`pnpm build` 通过（757 页）、`pnpm verify:docs` **47 项全绿**（新增本篇卷 9 项）；闸门经 **10 处变异测试**逐项判红（改引文／改小节／越界下标／抄题库题面／乱指邻居／同小节重复出 recall／题数压到 4／noteId 不存在／新增未登记方向／干扰项落在引文内）；真机（1440×900，只读复用并行会话的 4321 preview，HTML sha 与本地 dist 一致）验到：入口条按卷面题数动态显示、单选与判断点击即判、多选必须「确认作答」、答后给「正确答案 + 理由 + 依据小节 + 跳过去读」、末屏**只**列出答错的 2 个小节且锚点落地存在、`localStorage` 键集合前后无变化、控制台无报错；三篇页有岛屿、其余页零下发（每页只注入本卷）。
 - [ ] **M2 定义收敛**（视 M1 真机结果，1 轮）：`diverge`/`relate` 出题口径写进 `docs/evolution-recipes.md` 车道规范（**治理变更，需用户批准**，见 §9-3）。
 - [ ] **M3 核心层扩量**：`core: true` 的 371 篇，按方向分批，每轮 1–2 套；C 车道节奏下 39–77 天。队列落 `docs/coverage-deepening.md` 新开的「本篇卷队列」，与既有 a/b/c/d 类同规（头部顺序取点、写不进就地跳过并登记原因）。
 - [ ] **M4 长尾**：其余 200 篇。是否做取决于 M3 后期有无读者反馈；没有反馈就停在 M3，把 M4 记为「待证据」。

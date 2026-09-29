@@ -3640,3 +3640,132 @@ html.mmd-viewer-open {
   font-family: inherit;
   font-size: 13px;
 }
+
+/* ===== 笔记页「测一下」岛屿（本篇卷）=====
+   按钮、进度条、题面与选项直接复用 quiz 那套类，这里只补本卷特有的块：
+   入口条、作答后的依据区、末屏的回读清单。颜色一律走 --quiz-* 与 --sl-color-* 令牌。 */
+.np-bar,
+.np-run,
+.np-end {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 30px 0 10px;
+  padding: 16px 18px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 14px;
+}
+
+.np-bar {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.np-bar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.np-bar-text strong {
+  font-size: 15px;
+}
+
+.np-bar-text span {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--sl-color-gray-2);
+}
+
+.np-section-chip {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--sl-color-gray-3);
+}
+
+/* 作答后的依据区： verdict 只染首句，理由与引文保持正文灰阶，避免整块变红变绿 */
+.np-verify {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 15px;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 10px;
+}
+
+.np-verify.is-ok {
+  border-color: var(--quiz-ok-border);
+}
+
+.np-verify.is-no {
+  border-color: var(--quiz-no-border);
+}
+
+.np-verify p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.np-verify .quiz-verdict-lead {
+  font-weight: 600;
+}
+
+.np-verify.is-ok .quiz-verdict-lead {
+  color: var(--quiz-ok);
+}
+
+.np-verify.is-no .quiz-verdict-lead {
+  color: var(--quiz-no);
+}
+
+.np-ans {
+  display: block;
+  margin-top: 2px;
+  font-weight: 400;
+  color: var(--sl-color-text);
+}
+
+.np-source {
+  font-size: 13px;
+  color: var(--sl-color-gray-2);
+}
+
+.np-quote {
+  margin: 0;
+  padding: 8px 12px;
+  border-left: 2px solid var(--sl-color-gray-5);
+  background: var(--sl-color-gray-7);
+  color: var(--sl-color-gray-2);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.np-end-title {
+  margin: 0;
+  font-size: 15px;
+}
+
+.np-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.np-links li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.np-muted {
+  font-size: 13px;
+  color: var(--sl-color-gray-3);
+}
