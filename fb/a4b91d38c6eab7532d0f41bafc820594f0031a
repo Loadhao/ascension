@@ -1,0 +1,29 @@
+docs/coverage-deepening.md
+  s_d7017a16876535::t_960ddee0232785 100-102
+docs/evolution.md
+  s_577541b9b1ca5c::t_9d49d565afb6b8 161-162
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "fba4b91d38c6eab7532d0f41bafc820594f0031a",
+  "prompts": {},
+  "sessions": {
+    "s_577541b9b1ca5c": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "386fcb39-5378-47e0-bf26-365f9973afc2",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_d7017a16876535": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "bf74b20b-3a62-467c-a232-286b16342646",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
