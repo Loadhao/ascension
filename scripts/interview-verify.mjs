@@ -184,7 +184,6 @@ report['2.考点卡 JSON 可解析'] = {
 		'etcd',
 		'git',
 		'js',
-		'kubernetes',
 		'langchain',
 		'linux',
 		'middleware',

@@ -1,0 +1,24 @@
+{
+  "cards": [
+    {
+      "id": "k8s-grace-ic-001",
+      "noteId": "kubernetes/intermediate/ops/05-java-on-k8s",
+      "group": "Kubernetes",
+      "difficulty": 4,
+      "q": "K8s 里给 Java 应用配优雅停机，宽限期该怎么算？",
+      "intent": "这一问筛的是有没有算过预算相加，而不是只会答加个 sleep。\n短板是背得出 preStop 名词，不知道它烧的是同一笔宽限预算。\n区分度落在「preStop 跑完才发 SIGTERM」与四段相加这两句。",
+      "answer": "宽限期是总账，四段相加再留余量。\n官方定义：preStop 必须执行完才发 SIGTERM，且这段时间计入宽限期。\n官方反例：宽限 60 秒、hook 花 55 秒、应用还需 10 秒退出，55 加 10 超 60，正常停止前就被杀。\n四段是摘流传播、注册中心下线、Spring graceful 超时、余量。\n最防不住重复计费：Spring phase 已等 30 秒，shutdown hook 又 sleep 30 秒，预算直接爆。",
+      "followup": "大概率追问关停期探针——readiness 尽快失败停接新流量，liveness 不能失败否则发布卡死。\n还会问 Java 收不到 TERM——进程得是 PID 1，镜像别套吞信号的 shell。\n再往下是四段各挂哪个配置：preStop sleep、Dubbo offline、server.shutdown graceful。"
+    },
+    {
+      "id": "k8s-probe-ic-002",
+      "noteId": "kubernetes/intermediate/ops/01-probes-lifecycle",
+      "group": "Kubernetes",
+      "difficulty": 3,
+      "q": "liveness、readiness、startup 三种探针怎么分工？配错会出什么事故？",
+      "intent": "这一问筛的是分没分清三个守门员各管什么，而不是都会配 yaml。\n短板是把依赖健康塞给 liveness，一抖全体连环重启成雪崩。\n区分度落在失败动作的分属：重启归 liveness、摘流归 readiness。",
+      "answer": "三个探针管三件事：自愈、流量、慢启动。\nliveness 只问进程自身活没活，失败由 kubelet 重启容器。\nreadiness 失败只从 Service endpoints 摘除，容器不动。\nstartupProbe 成功前暂停另两个探针，给冷启动留出窗口。\n典型事故：liveness 检查下游数据库，依赖一抖所有实例连环重启成雪崩。",
+      "followup": "大概率追问慢启动——Java 冷启动两分钟不配 startupProbe，第三十秒起被判死循环重启。\n还会问端点怎么设计——healthz 不碰依赖，ready 看依赖与预热，各指各的端点组。\n再往下是优雅发布——配合 preStop 先摘流再退出，别掐断在途请求。"
+    }
+  ]
+}
