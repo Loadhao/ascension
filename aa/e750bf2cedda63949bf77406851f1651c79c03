@@ -1,0 +1,23 @@
+src/data/viz/media.ts
+  s_e3d51fb0c71417::t_3a50bdaca37c80 651-655,658-673
+  s_e3d51fb0c71417::t_3a8294df349ad6 656
+  s_e3d51fb0c71417::t_9cbf130abb3d00 657
+src/content/docs/network/basic/foundation/02-dns.mdx
+  s_e3d51fb0c71417::t_0fb0586d30c436 48-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "aae750bf2cedda63949bf77406851f1651c79c03",
+  "prompts": {},
+  "sessions": {
+    "s_e3d51fb0c71417": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "de0d2ff4-a033-4e8f-9fff-81ca1531d303",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
