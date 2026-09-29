@@ -19,6 +19,26 @@
       "intent": "这一问先筛有没有讲清代价的来源，而不是只答有人进组就重平衡。\n短板是不知道默认 Eager 协议要求全员先交出手头分区。\n区分度在两种治法各对付什么：发布抖动与大组停摆不是同一件事。",
       "answer": "全组停摆来自默认 Eager 协议，不是偶发抖动。\nJoinGroup 一开始所有成员都要放弃手头全部分区再进组，哪怕这次只是加了一个消费者。\n于是大组一次重平衡要停数秒到数十秒、期间消息积压；Generation 每次加一，旧代提交的 offset 会被拒。\n治发布抖动用静态成员 group.instance.id：重启后身份不变，Coordinator 只当它是暂离，滚动发布不再触发重平衡。\n治大组停摆用 CooperativeStickyAssignor 增量协作：只挪必要的分区，被挪的短暂停一下，其余全程不停。",
       "followup": "大概率追问怎么发现线上在频繁重平衡——看消费组 generation 是否持续增长、消费 TPS 周期性归零，日志里找 heartbeat failed。\n还会问它为什么带来重复消费：分区转手时已消费未提交的 offset 丢了，接手方从提交点重放。\n再问 Coordinator 本身是谁：组名哈希到 __consumer_offsets 的某个分区，该分区的 Leader 所在 Broker 担任。"
+    },
+    {
+      "id": "kafka-dlq-ic-003",
+      "noteId": "kafka/intermediate/core/03-reliability-idempotent",
+      "group": "消息队列",
+      "difficulty": 4,
+      "q": "Kafka 消费失败一直重试不行吗？重试和死信这两段怎么接起来？",
+      "intent": "这一问筛的是有没有给失败留退出路径，而不是只会答捕获异常再重试一次。\n短板是把死信当名词背，说不出一条消息要重试到第几次才转进去。\n区分度落在死信之后谁负责——没人管的死信等于把业务损失堆进暗处。",
+      "answer": "标准姿势是重试队列加死信队列两段收口。\n第一段是重试队列，延迟递增，1s、2s、4s 推到最多 N 次。\n第二段是死信队列，重试到 N 次仍失败才转进去，出口只有人工介入、告警、修完数据重放。\nKafka 不给现成机制，要么自建 topic，要么交 Spring Kafka 的 DeadLetterPublishingRecoverer；RocketMQ 则白送 %RETRY% 和 %DLQ%。\n死信队列必须挂监控，积压在里面每一条都是真实业务损失。",
+      "followup": "大概率追问重试成功之后怎么收口——回到正常提交，别让已经处理完的消息停在重试链上。\n还会问死信堆久了怎么办：修完数据重放，或者人工介入逐条处置。\n再往下是它和幂等的分工：死信管处理不了的，重复投递由消费端自己兜。"
+    },
+    {
+      "id": "kafka-hw-ic-004",
+      "noteId": "kafka/intermediate/core/02-replica-isr",
+      "group": "消息队列",
+      "difficulty": 5,
+      "q": "Kafka 的 LEO 和 HW 各指什么？为什么消费者只能读 HW 之前的消息？",
+      "intent": "这一问筛的是能不能把两个进度讲成两层，而不是混着说成偏移量。\n短板是背得出 HW 取最小值，说不出它凭什么决定消费者能看见什么。\n区分度在 ISR 与 HW 的联动——及格名单一变，可见水位就跟着变。",
+      "answer": "LEO 是副本自己的写位，HW 是集体可见水位。\n每个副本各有一条 LEO，指它下一条要写入的位置。\nHW 取 ISR 里最小的那个 LEO，消费者只读小于 HW 的消息。\n划线是为了读到的每一条都已在 ISR 全部副本落住，Leader 挂了从 ISR 选新主，切换零丢失。\nFollower 追赶分两步：先拉数据推进自己的 LEO，再拉 HW 更新可见水位，所以恢复要等下一轮同步。",
+      "followup": "大概率追问副本多久算跟不上——replica.lag.time.max.ms，默认 30 秒，判的是落后时间不是落后条数。\n还会问落后副本怎么追——是 Follower 自己 pull，不是 Leader 推，Kafka 让落后者自己追。\n再问 ISR 全灭只剩落后副本怎么办——unclean 选举默认关，宁可分区不可用，也不让缺数据的副本当主。"
     }
   ]
 }
