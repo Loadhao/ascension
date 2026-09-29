@@ -51,6 +51,25 @@ const { name, ...others } = user;                  // 排除某字段
   （收集）；
 - 展开运算符做的是**浅拷贝**——嵌套对象仍是引用（深浅拷贝篇）。
 
+把这篇的骨架画成一张图——同一个符号 `...`，等号两边方向相反：
+
+```mermaid
+flowchart TB
+    SYM["同一个符号 ...<br/>等号右边是展开、左边是剩余"] --> SP
+    SP["展开（spread）＝拆开<br/>等号右边：把集合拆成独立元素<br/>[...arr1, ...arr2] 合并<br/>{ ...obj, extra: true } 浅拷贝扩展<br/>Math.max(...numbers) 拆成参数"] --> SHALLOW["展开是浅拷贝<br/>嵌套对象仍是引用"]:::bad
+    SYM --> REST
+    REST["剩余（rest）＝收集<br/>等号左边：把多余元素收成数组/对象<br/>[first, ...rest] 收集余下元素<br/>function sum(...nums)<br/>const { name, ...others } 排除字段"]
+    SYM --> DEST["解构＝按模式提取<br/>对象按属性名、数组按位置<br/>city = '未知' 默认值写法"]
+    DEST --> TRAP["默认值只在值为 undefined 时生效<br/>null 不触发——API 返回 null 时默认值无效"]:::bad
+    TRAP -.-> USE["高频舞台：函数参数解构<br/>function User({ name, age, onClick })<br/>React 组件 props 的标准写法"]:::good
+    SHALLOW -.-> CLONE["深浅拷贝专篇接手嵌套结构"]
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
+```
+
+图上两条红线是本篇最高频的两个坑：展开只做浅拷贝，嵌套结构要深拷贝专篇接手；
+默认值的触发条件是 `undefined` 而不是「值不存在」——`null` 不算。
+
 ## 高频追问速答
 
 - **解构的默认值什么时候生效？** 只有值为 `undefined` 时——
