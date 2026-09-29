@@ -648,4 +648,27 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'复盘：入站头到尾、出站尾到头，注册顺序加事件方向决定执行时机。',
 		],
 	},
+	'dns-lookup-video': {
+		title: 'DNS 解析八步缓存链 · 配音短片',
+		src: '/videos/dns-lookup-video.mp4',
+		poster: '/videos/dns-lookup-video.poster.png',
+		width: 1280,
+		height: 786,
+		duration: 47.2,
+		alt:
+			'动画短片：一次域名解析走两段式问路——浏览器先递归地把问题交给本地 DNS，' +
+			'本地 DNS 再迭代地依次问根服务器、顶级域与权威服务器，答案连同 TTL 逐层缓存。',
+		caption:
+			'递归那一段必须拿到最终答案，迭代那一段每一级只说下一站去哪问。',
+		source: 'dns-lookup',
+		narration: [
+			'解析分两段：客户端问本地 DNS 是递归，要的就是最终答案。',
+			'浏览器缓存和 hosts 都没命中，才把问题交给本地 DNS。',
+			'本地 DNS 同样没缓存，迭代开始，第一个问根服务器。',
+			'根不给具体地址，只把 .com 顶级域的入口指过来。',
+			'顶级域再往下指，example.com 的权威服务器在这里。',
+			'权威给出地址和有效期，本地 DNS 缓存一份，换 IP 要提前调小它。',
+			'答案交回浏览器再存一层：命中任意一层缓存，后续就短路。',
+		],
+	},
 };
