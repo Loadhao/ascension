@@ -1,0 +1,26 @@
+src/content/docs/java/intermediate/spring-mvc/01-springmvc-flow.mdx
+  s_9a168aa6f85294::t_9f1adc09e850bf 42-45
+src/data/quiz/java.json
+  s_9a168aa6f85294::t_2cae27b3f036e4 2603-2622
+src/data/viz/media.ts
+  s_9a168aa6f85294::t_31163d302bf3ae 579-582,586-604
+  s_9a168aa6f85294::t_5e83be69a170b3 583-585
+docs/evolution.md
+  s_9a168aa6f85294::t_bbfafb74e5deaa 60,146-164,236
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8ebb1aa52ffcfef5ff1680b815ca1c4391f2a713",
+  "prompts": {},
+  "sessions": {
+    "s_9a168aa6f85294": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "e20d48a4-41da-4b1b-a89f-979fae9c825d",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
