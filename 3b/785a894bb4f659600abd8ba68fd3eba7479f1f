@@ -1,0 +1,22 @@
+docs/coverage-deepening.md
+  s_86d49efe69ca11::t_17cbbe094a5831 127
+  s_86d49efe69ca11::t_3475d710b97c89 120-121
+src/data/interview/spring-ai.json
+  s_86d49efe69ca11::t_a6052d24f7e7e1 22-41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3b785a894bb4f659600abd8ba68fd3eba7479f1f",
+  "prompts": {},
+  "sessions": {
+    "s_86d49efe69ca11": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "b471f138-692e-4d2a-b180-463b9764f43d",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
