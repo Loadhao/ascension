@@ -1,0 +1,26 @@
+src/data/viz/media.ts
+  s_8a08446a19efee::t_79064e9f159267 635
+  s_8a08446a19efee::t_bd67ff633a7610 629-633,636-650
+  s_8a08446a19efee::t_2982911776a821 634
+src/data/quiz/netty.json
+  s_8a08446a19efee::t_062b19af0e5dbc 157-172
+  s_8a08446a19efee::t_f9f01a4eaf2056 173
+src/content/docs/netty/basic/core/02-channel-pipeline.mdx
+  s_8a08446a19efee::t_568c00833897f6 36-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "a724b084ccf106e4114a5c84ae7fd52803d42404",
+  "prompts": {},
+  "sessions": {
+    "s_8a08446a19efee": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "b60f75c8-521e-4fe3-b0f7-0994a9f1ff2a",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
