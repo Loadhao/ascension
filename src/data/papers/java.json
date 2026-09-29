@@ -818,6 +818,318 @@
           "neighborTitle": "四种引用：强、软、弱、虚"
         }
       ]
+    },
+    {
+      "noteId": "java/basic/collection/02-hashmap",
+      "title": "HashMap 源码分析 · 本篇测一下",
+      "questions": [
+        {
+          "id": "hm-p01",
+          "kind": "recall",
+          "type": "single",
+          "section": "扰动函数：hash() 为什么右移 16 位",
+          "q": "容量只有 16 的时候，为什么还要把 hashCode 的高位搅进低位？",
+          "options": [
+            "选桶只用得到低几位，高位不同的两个键会掉进同一只桶",
+            "右移是为了把结果收成正数，否则下标会变成负数",
+            "少搅一次就和旧版四次扰动对不上，桶号会算错",
+            "不搅高位就没法存放空键，空键只能靠这次异或落桶"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "定位桶只用低几位（容量 16 时只看低 4 位），高位完全不参与。如果两个 key 的 hashCode 只在高位不同，必然冲突。",
+          "why": "容量 16 时掩码只有低 4 位，高位被丢掉。把高 16 位异或进低位，是为了让高位也参与选桶。JDK 8 把 7 的四次扰动收成一次，要防的还是很差的 hashCode 撞在一起。"
+        },
+        {
+          "id": "hm-p02",
+          "kind": "recall",
+          "type": "judge",
+          "section": "put 流程",
+          "q": "JDK 8 改成尾插之后，多线程一起 put 就不会再丢数据了——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "HashMap 依然不是线程安全的——并发写本身就会丢数据，需要 ConcurrentHashMap。",
+          "why": "尾插修的是 JDK 7 头插在并发扩容时把链表反转、可能串成环把 CPU 打满。并发写仍会互相覆盖，要线程安全得换 ConcurrentHashMap。"
+        },
+        {
+          "id": "hm-p03",
+          "kind": "recall",
+          "type": "single",
+          "section": "resize 扩容",
+          "q": "扩容搬家时，一个老节点的新下标怎么定？",
+          "options": [
+            "拿节点 hash 和旧容量做与运算，只可能留在原处或再加上旧容量",
+            "每个节点重新跑一遍扰动，再对新长度取余",
+            "全部顺延到下一个空桶，树节点原地不动",
+            "只搬链表尾，头节点保持旧下标"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "利用节点 hash 与旧容量的与运算结果判断新位置——要么在原下标，要么在原下标 + oldCap，无需重算 hash",
+          "why": "容量翻倍后多出来的那一位要么是 0 要么是 1，所以新位置只有原下标和原下标加旧容量两种，不必再算 hash。搬家很贵，写代码时应先把容量估够。"
+        },
+        {
+          "id": "hm-p04",
+          "kind": "recall",
+          "type": "multiple",
+          "section": "关键参数源码",
+          "q": "负载因子和转树门槛，哪两项和这篇的说法一致？",
+          "options": [
+            "默认负载因子取 0.75，是把数组占满程度和链长折在一起的结果",
+            "转树要链长和数组容量一起达标，容量还小时先把表扩大",
+            "默认一上来就分配 32 个桶，负载因子默认一半",
+            "链一到 8 个节点就转树，数组有多长不必看"
+          ],
+          "answer": [
+            0,
+            1
+          ],
+          "quote": "0.75 是官方权衡后的临界值 - 树化双重条件（长度 ≥ 8 且容量 ≥ 64）意味着：数组还小时优先扩容而不是树化",
+          "why": "0.75 是空间和查找长度的折中：太大链更长，太小扩容更勤。树化还要看数组有没有到 64，没到就先扩容把冲突拆开，转树只是兜底。"
+        },
+        {
+          "id": "hm-p05",
+          "kind": "diverge",
+          "type": "single",
+          "section": "get 流程",
+          "q": "两个键用 equals 比是相等的，hashCode 却不一样。再 get 为什么经常拿不回来？",
+          "options": [
+            "进桶之前先比散列值，对不上就走不到相等比较那一步",
+            "相等比较会反过来改写散列值，所以下一次一定能命中",
+            "get 只查红黑树，链表桶直接返回头节点",
+            "只有空键会踩中这件事，普通键总是先走相等比较"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "先比 hash 再 equals，这是重写 equals 必须同时重写 hashCode 的直接原因：hash 不同的 key 根本走不到 equals 那一步。",
+          "why": "查找是两段式。散列值不同，候选桶都不是同一个，equals 写得再对也不会被调用。所以这两个方法必须成对重写。"
+        },
+        {
+          "id": "hm-p06",
+          "kind": "diverge",
+          "type": "judge",
+          "section": "resize 扩容",
+          "q": "构造时传入 9，桶数组的长度就会正好是 9——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "传入的 9 不是最终容量——tableSizeFor() 会向上取整为 16（大于等于该值的最小 2 的幂），真正的 table 在第一次 resize() 时才按此初始化。",
+          "why": "容量必须是 2 的幂，tableSizeFor 会把 9 抬到不小于它的最小幂次 16。这张表要到第一次 resize 才真正建出来，构造当时还没有桶数组。"
+        },
+        {
+          "id": "hm-p07",
+          "kind": "interview",
+          "type": "single",
+          "section": "底层结构：从拉链法到红黑树",
+          "q": "面试被问到 HashMap 的容量为什么老是 2 的幂，你先说哪一句？",
+          "options": [
+            "这样减 1 就是全 1 掩码，按位与就能代替取模，还更快",
+            "2 的幂是为了让红黑树的高度刚好减半",
+            "取模对任意容量都一样快，2 的幂只是写出来整齐",
+            "只有 2 的幂才能把负载因子维持在默认那一档"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "因为 n 是 2 的幂，n - 1 的二进制是全 1 的掩码，与运算等价于取模但更快——这也是容量必须取 2 的幂的根本原因。",
+          "why": "开口先给结论：容量维持 2 的幂，是为了让 n 减 1 变成全 1 掩码，按位与代替取模而且更快。容量不是 2 的幂时，这一步就不再等于取模。"
+        },
+        {
+          "id": "hm-p08",
+          "kind": "relate",
+          "type": "judge",
+          "section": "要点备忘",
+          "neighborId": "java/basic/collection/04-red-black-tree",
+          "q": "桶里改挂红黑树之后，冲突再多也不用预估初始容量了——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "树化是兜底而非常态：先扩容缓解冲突，容量到 64 才谈树化",
+          "why": "转树把这一桶的查找从顺着链表扫描收成对数级，但笔记把它放在扩容之后：数组还小就先翻倍把冲突拆开，到 64 才考虑转树。预估容量仍然值得做，不然运行中 resize 要搬整张表。",
+          "neighborTitle": "红黑树：从二叉查找树到 TreeMap"
+        }
+      ]
+    },
+    {
+      "noteId": "java/basic/collection/03-concurrenthashmap",
+      "title": "ConcurrentHashMap 详解 · 本篇测一下",
+      "questions": [
+        {
+          "id": "chm-p01",
+          "kind": "recall",
+          "type": "single",
+          "section": "为什么不用 HashMap / Collections.synchronizedMap",
+          "q": "笔记为什么把 synchronizedMap 和 Hashtable 一起排除？",
+          "options": [
+            "整张表只有一把锁，读和写都得排队，并发上不去",
+            "它们允许存放空键，和并发容器的语义冲突",
+            "JDK 8 里它们仍用头插，并发扩容会把链表串成环",
+            "它们的计数是弱一致的，所以不能拿来做并发 Map"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "synchronizedMap / Hashtable 全表一把锁，读写全部串行，性能崩塌。",
+          "why": "目标是读不加锁、写只锁一小块。全表一把锁会把读写都串成一队，并发度上不去，所以这两样都不取。"
+        },
+        {
+          "id": "chm-p02",
+          "kind": "recall",
+          "type": "judge",
+          "section": "1.7 → 1.8 的结构演进",
+          "q": "JDK 1.8 的并发度会跟着 table 扩容变大，不再钉死在初始化时的段数——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "并发度 | 固定 16（初始化后不可扩段） | 随 table 扩容增长",
+          "why": "这一行左列是 JDK 1.7：默认 16 段，初始化之后不能再加段。右列是 JDK 1.8：锁收到单个桶头上，并发度随 table 扩容一起涨。"
+        },
+        {
+          "id": "chm-p03",
+          "kind": "recall",
+          "type": "single",
+          "section": "1.8 put 全流程",
+          "q": "putVal 发现目标桶是空的，第一步会怎么做？",
+          "options": [
+            "先用 CAS 把新节点放进去，这一路成功就不必加锁",
+            "马上用 synchronized 把整张表锁住再写入",
+            "先去帮忙搬迁，搬完再插入这个键",
+            "先写进计数格子，过一会儿再合并进桶"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "空桶优先 CAS，冲突才 synchronized",
+          "why": "空桶用 CAS 放进去，失败就自旋再试，这条路径完全无锁。只有桶里已经有节点，才 synchronized 锁住头节点，锁粒度才从段收到桶头。"
+        },
+        {
+          "id": "chm-p04",
+          "kind": "recall",
+          "type": "multiple",
+          "section": "size 怎么统计：baseCount + CounterCell",
+          "q": "关于 size 的计数，哪两项和笔记一致？",
+          "options": [
+            "没人争就改 baseCount，争起来就各自改自己的 CounterCell",
+            "求和那一下是弱一致的，旁边还有人写时数字可能对不上",
+            "所有线程只改同一个 long，失败就堵在那里等",
+            "扩容没完成时 size 返回精确值，因为有一把全局锁"
+          ],
+          "answer": [
+            0,
+            1
+          ],
+          "quote": "先 CAS baseCount，失败说明有竞争 → 放弃，转去 CAS 自己的 CounterCell 格子。size() 是弱一致的——并发写时数值可能瞬间对不上。",
+          "why": "大家都打同一个 long，CAS 失败会很密，所以仿 LongAdder 把热点拆开。size 只是把 baseCount 和各格子加起来，加的同时还有人在写，数字可以瞬间对不上。"
+        },
+        {
+          "id": "chm-p05",
+          "kind": "diverge",
+          "type": "single",
+          "section": "get 为什么可以不加锁",
+          "q": "数组槽自己并没有 volatile 语义。get 靠什么读到最新的头节点？",
+          "options": [
+            "读槽位走 Unsafe.getObjectVolatile，把数组元素这一跳的可见性补上",
+            "get 会先把整张表复制到栈上，再在副本里查",
+            "头节点已经用 synchronized 护住，不必再补读语义",
+            "扰动把高位清掉之后，读路径就不会看到旧引用"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "读取数组元素，保证读到最新引用（数组元素本身没有 volatile 语义）。",
+          "why": "Node 的 val 和 next 是字段上的 volatile，写完读线程马上看得见。数组槽没有这份语义，所以 tabAt 用 Unsafe.getObjectVolatile 去读，否则可能拿到旧的头节点。"
+        },
+        {
+          "id": "chm-p06",
+          "kind": "diverge",
+          "type": "single",
+          "section": "多线程协助扩容",
+          "q": "扩容还没搬完，别的线程往这个桶 put，会怎样？",
+          "options": [
+            "碰上迁移标记就去帮忙，和扩容线程一起认领一段桶来搬",
+            "一直阻塞到这个桶搬完，由扩容线程代为写入",
+            "先写回旧表原来的位置，等迁移结束再重放",
+            "这次 put 直接失败，调用方自己稍后重试"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "transfer 时每个线程认领一段桶区间（stride），搬完的桶放 ForwardingNode（hash = MOVED）。其他线程 put 碰到 MOVED 就调用 helpTransfer 一起搬",
+          "why": "搬完的桶放上 ForwardingNode，hash 标成 MOVED。别的线程 put 撞见它就调用 helpTransfer，按 stride 认领一段一起搬；get 则通过 find 转到新表。扩容期间读写都不阻塞。"
+        },
+        {
+          "id": "chm-p07",
+          "kind": "diverge",
+          "type": "judge",
+          "section": "1.8 put 全流程",
+          "q": "key 或 value 传 null 时，会被放进 0 号桶——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "if (key == null || value == null) throw new NullPointerException();",
+          "why": "putVal 第一行发现 key 或 value 为 null 就抛空指针，不会落桶。并发下读到 null 分不清是没有这个键，还是值本身就是 null，所以干脆禁止。"
+        },
+        {
+          "id": "chm-p08",
+          "kind": "interview",
+          "type": "single",
+          "section": "小结",
+          "q": "面试官问 JDK 1.8 的 ConcurrentHashMap 怎么把锁缩小，你开口第一句说什么？",
+          "options": [
+            "空桶用 CAS，非空才 synchronized 锁头节点，粒度收到一个桶",
+            "仍是默认 16 段，每段一把锁，扩容也不会加段",
+            "整张表一把锁，读的时候把 table 复制出来",
+            "计数格子把写热点拆开了，所以 put 不再需要锁"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "1.7 分段锁 → 1.8 CAS + synchronized 锁桶头，锁粒度降到单桶。",
+          "why": "第一句先给粒度：JDK 8 取消分段锁，空桶 CAS 放进去，非空才 synchronized 锁头节点，锁住后再确认头节点没被换掉。并发度随 table 扩容增长，不再钉死在默认 16 段。"
+        },
+        {
+          "id": "chm-p09",
+          "kind": "relate",
+          "type": "judge",
+          "section": "为什么不用 HashMap / Collections.synchronizedMap",
+          "neighborId": "java/basic/collection/02-hashmap",
+          "q": "HashMap 在 JDK 8 改成尾插之后，多线程并发写就不会再丢更新了——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "HashMap 多线程并发写可能成环导致 get 死循环（JDK 7 resize 头插法），或数据覆盖丢失（JDK 8 也有丢失更新问题）。",
+          "why": "JDK 7 头插在并发扩容时可能成环；JDK 8 改成尾插也不等于写安全，这篇写明 8 仍然会丢失更新。多线程写要换 ConcurrentHashMap，不能留在 HashMap 上。",
+          "neighborTitle": "HashMap 源码分析"
+        }
+      ]
     }
   ]
 }
