@@ -1,0 +1,35 @@
+src/data/viz/media.ts
+  s_8d6bc921b96bd1::t_b6c9e6a3d6ca98 715,717
+  s_8d6bc921b96bd1::t_a0e9326d66bcb7 697-701,704-714,716,718-720
+  s_8d6bc921b96bd1::t_a8cb51d77e0bee 702-703
+src/data/quiz/docker.json
+  s_8d6bc921b96bd1::t_cb159516bc4716 295-311
+src/content/docs/docker/basic/fundamentals/01-concepts.mdx
+  s_8d6bc921b96bd1::t_8733665c3d8db2 84-87
+docs/evolution.md
+  s_e05387cc97cb57::t_9e74b738ce820f 60,158-167
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "073ff617dab8983078ccae433d25d4cbdb4898ef",
+  "prompts": {},
+  "sessions": {
+    "s_8d6bc921b96bd1": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "68504890-c77d-4426-aef8-7ac9b3daaea9",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_e05387cc97cb57": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "77570312-3c5c-408b-aea9-134450664a61",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
