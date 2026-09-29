@@ -390,6 +390,285 @@
           "neighborTitle": "synchronized 与锁升级"
         }
       ]
+    },
+    {
+      "noteId": "java/intermediate/concurrent/01-thread-basics",
+      "title": "线程基础 · 本篇测一下",
+      "questions": [
+        {
+          "id": "thread-p01",
+          "kind": "recall",
+          "type": "single",
+          "section": "进程与线程",
+          "q": "用 new Thread() 建出来的平台线程，怎么对应到操作系统线程？",
+          "options": [
+            "一个平台线程固定对应一个操作系统线程",
+            "多个平台线程挤在同一个内核线程上轮转",
+            "平台线程只在用户态存在，内核不参与调度",
+            "平台线程由 JVM 调度，再复用到少量载体线程上"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "传统 `new Thread()` 创建的平台线程以 1:1 方式映射到操作系统线程",
+          "why": "平台线程是 1:1 绑到 OS 线程上的；「JVM 调度、复用少量平台线程」说的是 Java 21 的虚拟线程，不要把两种映射说成一种。"
+        },
+        {
+          "id": "thread-p02",
+          "kind": "recall",
+          "type": "single",
+          "section": "从 JVM 内存区域看线程私有与共享",
+          "q": "程序计数器为什么必须每个线程各留一份？",
+          "options": [
+            "切换回来时要接着上次的指令位置往下跑",
+            "为了让局部变量表能被其他线程直接读写",
+            "因为堆上的对象引用只能存在计数器里",
+            "为了让静态变量在线程之间互相隔离"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "线程切换后要能恢复到正确的执行位置——每个线程必须各自记住",
+          "why": "计数器记的是执行到哪条字节码。线程共用一份的话，切走再切回来就找不到自己的下一条指令。"
+        },
+        {
+          "id": "thread-p03",
+          "kind": "recall",
+          "type": "judge",
+          "section": "线程的 6 种状态",
+          "q": "线程调用了 start() 之后，Thread.State 会把「就绪」和「正在跑」分成两个不同状态——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "JVM 层面只有 RUNNABLE 一个运行态",
+          "why": "操作系统自己的 READY 和 RUNNING 由调度器管，Thread.State 不反映那一层，所以 start() 之后统一落在 RUNNABLE。"
+        },
+        {
+          "id": "thread-p04",
+          "kind": "diverge",
+          "type": "single",
+          "section": "上下文切换",
+          "q": "不停 new 线程比交给线程池更亏，笔记把根本原因归到哪一笔开销？",
+          "options": [
+            "每次让出 CPU 都要存旧上下文、再装下一份，切得越勤整体越慢",
+            "新建线程会把堆扩容到无法回收",
+            "上下文切换只发生在进程之间，线程之间没有这笔成本",
+            "线程池能取消时间片，所以永远不会发生切换"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "保存当前线程上下文、加载下一个线程的上下文",
+          "why": "切换本身吃 CPU 和内存。线程池复用线程，是少付反复创建和反复切换，不是让切换这件事消失。"
+        },
+        {
+          "id": "thread-p05",
+          "kind": "diverge",
+          "type": "single",
+          "section": "sleep() vs wait()",
+          "q": "调用 wait() 时，当前线程手里那把对象锁会怎样？",
+          "options": [
+            "先放开这把锁，等别人通知或超时再重新竞争",
+            "一直攥着锁，只是暂停几毫秒",
+            "锁被永久销毁，对象不能再被同步",
+            "锁转交给调用 notify 的那个线程独占"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "让获得对象锁的线程等待并释放该对象锁",
+          "why": "wait 会把线程放进该对象的等待集并放开锁，别的线程才进得来通知它；sleep 只暂停执行，监视器锁继续握着。"
+        },
+        {
+          "id": "thread-p06",
+          "kind": "interview",
+          "type": "single",
+          "section": "sleep() vs wait()",
+          "q": "面试官追问「wait 为什么不放在 Thread 上」，你怎么开口？",
+          "options": [
+            "锁是每个对象自己的，等待并放开这把锁的操作就该挂在 Object 上",
+            "因为 wait 是静态方法，只能放在 Thread",
+            "因为 sleep 会释放锁，所以 wait 必须换个类来区分",
+            "历史遗留，语义上放在 Thread 更合理"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "锁属于每一个对象，操作对象锁的wait 自然要定义在 Object 上",
+          "why": "开口先给结论：wait 要释放的是对象锁，锁在对象上，方法就跟着对象走；sleep 不碰锁，所以留在 Thread。不要答成「sleep 也会放锁」。"
+        },
+        {
+          "id": "thread-p07",
+          "kind": "relate",
+          "type": "judge",
+          "section": "从 JVM 内存区域看线程私有与共享",
+          "neighborId": "java/advanced/jvm/02-memory",
+          "q": "局部变量放在虚拟机栈里，所以换个线程也能直接读到同一份局部变量表——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "栈帧中的局部变量表是线程隔离的天然屏障",
+          "why": "虚拟机栈按线程私有，局部变量表不共享。能跨线程看见的是堆上的对象和方法区里的类信息；私有区还有程序计数器和本地方法栈，那篇运行时数据区把这三块放在一起讲。",
+          "neighborTitle": "JVM 运行时数据区"
+        }
+      ]
+    },
+    {
+      "noteId": "java/intermediate/concurrent/02-thread-pool",
+      "title": "线程池详解 · 本篇测一下",
+      "questions": [
+        {
+          "id": "pool-p01",
+          "kind": "recall",
+          "type": "single",
+          "section": "为什么需要线程池",
+          "q": "线程池把哪两笔开销摊进复用里了？",
+          "options": [
+            "新建线程的成本，以及让出 CPU 时保存再加载上下文的成本",
+            "只有 GC 停顿，创建线程本身不花时间",
+            "把堆内存换成栈内存，从而让切换不再发生",
+            "省掉的是锁竞争，所以线程数量可以无限加"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "线程创建有成本、上下文切换有成本——线程池把这两笔成本都摊销掉了",
+          "why": "池化不是让线程变免费。线程干完活回到池里等下一个任务，创建和切换就不用按每个任务重新付一次。"
+        },
+        {
+          "id": "pool-p02",
+          "kind": "recall",
+          "type": "single",
+          "section": "七个核心参数",
+          "q": "工作线程数已经达到 corePoolSize 时，新来的任务通常先去哪？",
+          "options": [
+            "先排进 workQueue，而不是立刻再开一条线程",
+            "马上拉到 maximumPoolSize 再执行",
+            "直接走拒绝策略",
+            "交给提交方的线程就地 run"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "工作线程数达到该值后，新任务通常先进入队列",
+          "why": "corePoolSize 是优先维持的工作线程数，到顶之后新任务先排队。maximumPoolSize 要等队列也装不下，才作为扩容上限出场。"
+        },
+        {
+          "id": "pool-p03",
+          "kind": "recall",
+          "type": "judge",
+          "section": "任务执行流程",
+          "q": "线程数还没到 maximumPoolSize 时，就应该先开非核心线程，队列只是最后的缓冲——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "先入队，队列满了才开新线程（直到最大线程数）",
+          "why": "扩容是队列满之后的第二选择。顺序是核心线程、队列、非核心线程、拒绝，不能把「还没到最大线程数」理解成可以跳过队列。"
+        },
+        {
+          "id": "pool-p04",
+          "kind": "diverge",
+          "type": "single",
+          "section": "生命周期五状态",
+          "q": "调用 shutdown() 之后，队列里还没跑的任务会怎样？",
+          "options": [
+            "不再收新任务，但会把队列里已有的任务继续跑完",
+            "立刻中断正在执行的任务，队列直接清空",
+            "状态能从 SHUTDOWN 再转回 RUNNING",
+            "队列任务被原样返回给调用方处理"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "SHUTDOWN | 否 | 是（\"温和关闭\"）",
+          "why": "SHUTDOWN 不接受新任务，队列里的任务照常处理，所以叫温和关闭。立刻中断并丢掉队列是 STOP；把未执行任务退回调用方的是 shutdownNow()。状态只能单向流转，回不到 RUNNING。"
+        },
+        {
+          "id": "pool-p05",
+          "kind": "diverge",
+          "type": "single",
+          "section": "Worker 工作线程机制",
+          "q": "为什么正在跑任务的 Worker，shutdown() 不会把它打断？",
+          "options": [
+            "它拿着一把不可重入的独占锁，shutdown 的 tryLock 失败就放过它",
+            "Worker 被永久标成核心线程，核心线程禁止中断",
+            "因为 Worker 不继承 AQS，没有锁可以抢",
+            "getTask() 用 take() 阻塞时锁已经释放，所以一定被中断"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "正在执行任务的 Worker 持有锁，shutdown() 对其 tryLock() 失败，就不会被中断",
+          "why": "Worker 用这把锁区分空闲和正在干活：正在执行就持有锁，shutdown 抢锁失败就不打断它。没有「核心线程」这种永久身份，超时退出看的是 getTask() 用不用 poll。"
+        },
+        {
+          "id": "pool-p06",
+          "kind": "interview",
+          "type": "single",
+          "section": "为什么不推荐 Executors 工厂方法",
+          "q": "面试时被问「FixedThreadPool 为什么危险」，你先点哪一个结构？",
+          "options": [
+            "它用没有容量上限的队列接任务，堆多了会把内存撑爆",
+            "它的最大线程数是整数上限，线程会无限创建",
+            "它默认把拒绝掉的任务悄悄丢掉，业务无感知",
+            "它不能设置线程名，这是手册禁用它的唯一理由"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "无界队列 LinkedBlockingQueue——任务堆积无上限，OOM",
+          "why": "开口先点名 FixedThreadPool 和 SingleThreadExecutor 栽在无界队列上。另一类是 CachedThreadPool，最大线程数到 Integer.MAX_VALUE，线程无限创建也会 OOM。生产底线是有界队列加显式拒绝策略。"
+        },
+        {
+          "id": "pool-p07",
+          "kind": "relate",
+          "type": "judge",
+          "section": "Worker 工作线程机制",
+          "neighborId": "java/intermediate/concurrent/05-aqs",
+          "q": "Worker 继承了 AQS，所以它那把锁和可重入锁一样，同一个线程可以再次进入——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "Worker 实现了一个不可重入的独占锁",
+          "why": "继承 AQS 只说明它复用了同步器骨架。这篇写明这把锁不可重入：正在执行任务时持有它，shutdown 的 tryLock 才会失败，从而不打断正在干活的线程。",
+          "neighborTitle": "AQS 抽象队列同步器"
+        },
+        {
+          "id": "pool-p08",
+          "kind": "diverge",
+          "type": "multiple",
+          "section": "线程数到底怎么定？（深入）",
+          "q": "给 IO 密集型任务加线程，笔记提醒你哪两件会一起变贵？",
+          "options": [
+            "让出 CPU 时来回保存现场的次数上去",
+            "每条线程默认大约 1MB 的栈把内存抬高",
+            "线程越多，QPS 一定单调上升",
+            "公式算完就可以写死，不必再压测"
+          ],
+          "answer": [
+            0,
+            1
+          ],
+          "quote": "加线程数 = 更多上下文切换 + 更高内存（每线程默认约 1MB 栈）",
+          "why": "IO 密集不是越多越好。公式只给初值，还得压测看活跃线程、队列积压和 RT，再用「队列涨就加线程」这类动态策略兜底，别把参数写死。"
+        }
+      ]
     }
   ]
 }
