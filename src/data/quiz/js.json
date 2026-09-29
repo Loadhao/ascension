@@ -527,6 +527,21 @@
         2
       ],
       "hint": "第 1/2/3 项正确、第 4/5 项错。交换变量的经典写法 [a, b] = [b, a] 恰恰不需要临时变量；排除某字段那一句里 others 收集的是对象剩余字段，得到的是普通对象而不是数组——rest 参数（收集函数实参成数组）与 rest 属性（收集对象剩余字段成对象）同属「等号左边收集」这个方向，但产物形状不同。默认值那条是本篇点名的高频陷阱：null 是有值的状态，不等于「右边不存在」。"
+    },
+    {
+      "id": "js-propdesc-030",
+      "noteId": "js/basic/core/14-property-descriptors",
+      "type": "single",
+      "difficulty": 3,
+      "q": "对象属性的描述符有数据属性与存取器属性两种形态，下列说法正确的是？",
+      "options": [
+        "getter/setter 定义的是存取器属性，它没有 value 和 writable 开关，读写时跑函数",
+        "存取器属性可以同时带 value，这样 getter 返回的值也能被直接赋值覆盖",
+        "configurable: false 之后再执行一次 defineProperty 把 configurable 改回 true，属性就恢复了灵活",
+        "Vue2 用 defineProperty 做响应式时，把 data 的属性改写成数据属性并关掉 writable，靠赋值失败来拦截"
+      ],
+      "answer": [0],
+      "hint": "两种形态互斥不可兼得——存取器属性只有 get/set、enumerable、configurable，没有 value/writable，第 2 项说反。configurable 是四开关里唯一的单行道，落下 false 连改回 true 都不行，第 3 项不存在这个反悔口。第 4 项把机制说错：Vue2 是把属性改写成存取器，在 getter 里收集依赖、setter 里派发更新，不是靠 writable 失败拦截。"
     }
   ]
 }

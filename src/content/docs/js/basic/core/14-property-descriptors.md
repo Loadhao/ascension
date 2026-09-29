@@ -79,6 +79,33 @@ freeze 做开发期不可变校验。现代实践的两个变化：响应式已�
 体系仍是理解这两者「为什么」的地基——面试答「Vue2 为什么有数组缺陷」
 就要落到「defineProperty 够不到索引与 length」这层。
 
+```mermaid
+flowchart TB
+    META["属性描述符 = 每个属性自带的元数据<br/>能不能改、能不能枚举、能不能删"]
+    META --> DATA["数据属性<br/>value / writable<br/>enumerable / configurable"]
+    META --> ACC["存取器属性 = get/set<br/>读写时跑函数<br/>没有 value/writable——两形态互斥"]
+    META --> CFG["configurable: false 是单行道<br/>落下就不可逆，连改回 true 都不行"]:::bad
+    ACC --> VUE["Vue2 响应式的根基<br/>defineProperty 把 data 每个属性<br/>改写成存取器：<br/>getter 收集依赖、setter 派发更新"]
+    VUE --> ARR["数组缺陷的根源<br/>defineProperty 够不到索引与 length"]:::bad
+    ARR -.-> PROXY["Vue3 改用 Proxy：对象层面拦截<br/>新增属性也能拦"]:::good
+    META --> ENUM["enumerable: false = 隐身<br/>for...in / Object.keys / entries<br/>JSON.stringify / {...obj} 全部绕开"]
+    ENUM --> GN["例外：getOwnPropertyNames<br/>拿不可枚举（不含 Symbol）"]:::good
+    META --> LOCK["冻结三兄弟：能力递进"]
+    LOCK --> PE["preventExtensions<br/>防加新属性<br/>删/改描述符、改值照旧"]
+    LOCK --> SEAL["seal<br/>防加 + 防删/改描述符<br/>改已有值照旧"]
+    LOCK --> FR["freeze<br/>全锁：+ 全属性 writable:false<br/>configurable:false"]
+    FR --> SHALLOW["freeze 是浅的：只冻第一层<br/>嵌套对象属性照改"]:::bad
+    FR --> SILENT["非严格模式越界操作静默失败<br/>严格模式（class/模块内）抛 TypeError"]:::bad
+    FR --> CONST["与 const 正交：<br/>const 锁绑定、freeze 锁内容<br/>const obj = Object.freeze({...}) 才是完整锁"]:::good
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
+```
+
+图上把全篇收成四条主线：两形态互斥与 `configurable` 单行道是描述符的地基；
+存取器那条线一路推到 Vue2 数组缺陷的根源与 Vue3 换 Proxy 的原因；
+隐身那条线记住唯一的例外 `getOwnPropertyNames`；冻结三兄弟按「防加 →
+防加防改描述符 → 全锁」递进，浅冻结与静默失败是它最高频的两个追问。
+
 ## 小结
 
 - 属性有两形态：数据属性（value/writable/enumerable/configurable）与
