@@ -242,7 +242,6 @@ for (const f of files) {
 	// 放行；每轮补卷后必须同步删项——清单里的方向本轮已有卷却不删 → 判红（同考点卡那套写法）。
 	const KNOWN_MISSING = new Set([
 		'algorithm',
-		'distributed',
 		'docker',
 		'elasticsearch',
 		'etcd',
