@@ -1,0 +1,23 @@
+src/data/quiz/js.json
+  s_e05387cc97cb57::t_b6bdbf8e1ce3b6 510-529
+src/content/docs/js/basic/core/13-destructuring-spread.md
+  s_e05387cc97cb57::t_f3e0e0327f933e 54-72
+docs/coverage-deepening.md
+  s_e05387cc97cb57::t_cb443126fb9304 104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "748b1ececb036a3aaed63beaa43792f31af59db0",
+  "prompts": {},
+  "sessions": {
+    "s_e05387cc97cb57": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "77570312-3c5c-408b-aea9-134450664a61",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
