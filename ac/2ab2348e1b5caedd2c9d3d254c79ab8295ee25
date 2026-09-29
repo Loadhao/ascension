@@ -1,0 +1,24 @@
+docs/evolution.md
+  s_6a59983a9db044::t_72d79fbd4c07e1 177-189
+  s_6a59983a9db044::t_5c63e1af5576f8 199
+src/data/interview/kubernetes.json
+  s_6a59983a9db044::t_36096dab8a8554 1-24
+docs/coverage-deepening.md
+  s_6a59983a9db044::t_003c2efc4a8da4 131-132
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ac2ab2348e1b5caedd2c9d3d254c79ab8295ee25",
+  "prompts": {},
+  "sessions": {
+    "s_6a59983a9db044": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "63c995f4-037a-4304-9c08-e2018b2ed4e5",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
