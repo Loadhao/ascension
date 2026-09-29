@@ -81,6 +81,10 @@ flowchart LR
 这就是"同一镜像起 10 个容器、改各自配置互不干扰、也不占 10 份磁盘"的原因
 ——**每个容器只多一份可写层**，镜像只存一份。
 
+想脱离屏幕听一遍这条链路（拉取 → 联合挂载 → 读/写/删 → 容器删除 → 挂卷）：
+
+<AlgorithmVizIsland demo="docker-cow-video" />
+
 ```bash
 # 用命令亲眼验证分层与共享
 docker history nginx            # 看每一层的构建记录与大小

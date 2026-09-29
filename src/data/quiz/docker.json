@@ -292,6 +292,23 @@
       ],
       "hint": "容器生命周期 = 主进程（PID 1）生命周期——「跑完就退」的命令让容器当场退出不是 bug；最反直觉一条之外还有 port is already allocated（ss -ltnp 查占用）。docker-cmd-009 考 -p/--rm，本题考排障顺序与 exec/attach 边界。",
       "difficulty": 3
+    },
+    {
+      "id": "docker-archchain-015",
+      "noteId": "docker/basic/fundamentals/01-concepts",
+      "type": "single",
+      "q": "关于 Docker 架构里各组件的分工，按笔记正确的是？",
+      "options": [
+        "docker 命令只是客户端，经 REST API 调 dockerd；dockerd 调度 containerd，containerd 再通过 shim 管理每个容器进程",
+        "docker 命令直接创建容器进程，containerd 只负责拉取镜像",
+        "containerd 与 dockerd 是同一进程的两个名字，拆开只是目录命名",
+        "shim 负责与 Registry 通信推送镜像，容器进程由 dockerd 直接管理"
+      ],
+      "answer": [
+        0
+      ],
+      "hint": "链路就是 CLI → REST API → dockerd → containerd → shim → 容器进程；拉取/推送走 dockerd 与 Registry 之间那条线。docker-cow-001 考可写层与数据卷，本题考架构链路的归属。",
+      "difficulty": 3
     }
   ]
 }
