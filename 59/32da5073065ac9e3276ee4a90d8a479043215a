@@ -1,0 +1,31 @@
+src/data/quiz/mysql.json
+  s_30ebf0e3b353bc::t_74dcfbf50b026f 198
+  s_30ebf0e3b353bc::t_dfbbef2bb87623 206
+  s_30ebf0e3b353bc::t_231d71883a7132 391-410
+scripts/quiz-verify.mjs
+  s_30ebf0e3b353bc::t_7ae6f9150b6cd3 136-138
+src/data/quiz/ai.json
+  s_30ebf0e3b353bc::t_260bb927f1b786 781
+  s_30ebf0e3b353bc::t_69866b48deeb6e 901
+docs/coverage-deepening.md
+  s_30ebf0e3b353bc::t_7f485cb8bbf506 60
+  s_30ebf0e3b353bc::t_640050ec00fddc 87
+docs/evolution.md
+  s_30ebf0e3b353bc::t_e19a88a1dabc28 159-173,215
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5932da5073065ac9e3276ee4a90d8a479043215a",
+  "prompts": {},
+  "sessions": {
+    "s_30ebf0e3b353bc": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "8d5a2788-103b-4c39-a5cd-bd538b524996",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
