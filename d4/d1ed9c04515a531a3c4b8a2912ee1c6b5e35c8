@@ -1,0 +1,26 @@
+src/content/docs/mqtt/basic/core/02-qos-session.mdx
+  s_716c7e8d957731::t_ff14616046a3fb 80-83
+src/data/viz/media.ts
+  s_716c7e8d957731::t_87dc03f2639fbf 529-533,536-553
+  s_716c7e8d957731::t_e2712d30cb6c4c 534-535
+src/data/quiz/mqtt.json
+  s_716c7e8d957731::t_d85a28d63be3ab 115-134
+docs/evolution.md
+  s_716c7e8d957731::t_b713bd07af0679 60,139-155,235
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "d4d1ed9c04515a531a3c4b8a2912ee1c6b5e35c8",
+  "prompts": {},
+  "sessions": {
+    "s_716c7e8d957731": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "420d4db8-8034-464a-b466-0cd54e9b90eb",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
