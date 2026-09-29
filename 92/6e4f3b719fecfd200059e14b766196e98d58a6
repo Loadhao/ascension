@@ -1,0 +1,27 @@
+src/data/viz/flows.ts
+  s_ecb907cc6c89b6::t_1ba33c9bf1c60d 1532
+src/content/docs/etcd/basic/core/01-etcd-core.mdx
+  s_ecb907cc6c89b6::t_7a0be82e8cc6cd 62-65
+src/data/viz/media.ts
+  s_ecb907cc6c89b6::t_ac90255b746cc3 574
+  s_ecb907cc6c89b6::t_c6d813b4b0b469 554-558,561-573,575-578
+  s_ecb907cc6c89b6::t_5cc597811f7c4b 559-560
+src/data/quiz/etcd.json
+  s_ecb907cc6c89b6::t_6601a5ca246c8f 127-147
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "926e4f3b719fecfd200059e14b766196e98d58a6",
+  "prompts": {},
+  "sessions": {
+    "s_ecb907cc6c89b6": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "88aa9de0-403b-4c7d-9ba6-968cdf88a144",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
