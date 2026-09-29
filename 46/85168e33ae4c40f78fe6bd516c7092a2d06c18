@@ -1,0 +1,38 @@
+src/data/quiz/redis.json
+  s_929c19c53b4407::t_10aee9924d2183 388-400
+src/data/viz/media.ts
+  s_929c19c53b4407::t_51a97517198cfa 755
+  s_929c19c53b4407::t_e9de8d2c2637c4 749-750
+  s_929c19c53b4407::t_f3f8518773efa0 744-748,751-754,756-757,759-763,766-772,775-781,783,787,789-790
+  s_929c19c53b4407::t_d4b6ad61cf7986 758
+  s_929c19c53b4407::t_3a6227c45716e6 784
+  s_929c19c53b4407::t_f40c70fd1132f4 774
+  s_929c19c53b4407::t_4c3f453c8e85d3 782
+  s_929c19c53b4407::t_50a7b639ac3375 785-786,788
+  s_929c19c53b4407::t_4f66a44b83c8c6 764-765
+  s_929c19c53b4407::t_8703c6477fda5c 773
+src/content/docs/redis/advanced/ha/01-replication-sentinel-cluster.mdx
+  s_929c19c53b4407::t_52a2962cfadaeb 109-112
+src/content/docs/seata/intermediate/modes/01-at-tcc-saga.mdx
+  s_929c19c53b4407::t_eca1bafc39040a 83-86
+src/data/quiz/seata.json
+  s_929c19c53b4407::t_d5bdb70bab9f29 134-149
+docs/evolution.md
+  s_929c19c53b4407::t_a30909c9dd2370 60,161-174,229-230,233-234
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "4685168e33ae4c40f78fe6bd516c7092a2d06c18",
+  "prompts": {},
+  "sessions": {
+    "s_929c19c53b4407": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "4fe2fbdd-2fca-491b-b0b2-4d08c0a033fa",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
