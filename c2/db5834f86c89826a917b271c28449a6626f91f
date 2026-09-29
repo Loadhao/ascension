@@ -1,0 +1,26 @@
+src/content/docs/redis/basic/core/02-persistence.mdx
+  s_577541b9b1ca5c::t_766b99f06eed0e 54-57
+src/data/quiz/redis.json
+  s_577541b9b1ca5c::t_455a10e14562b2 387
+  s_577541b9b1ca5c::t_36932548e478e4 369-386
+src/data/viz/media.ts
+  s_577541b9b1ca5c::t_bcade4b017e777 697-701,704-707,709-719
+  s_577541b9b1ca5c::t_a42104a3484b21 702-703
+  s_577541b9b1ca5c::t_f489ef3e6a074f 708
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c2db5834f86c89826a917b271c28449a6626f91f",
+  "prompts": {},
+  "sessions": {
+    "s_577541b9b1ca5c": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "386fcb39-5378-47e0-bf26-365f9973afc2",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
