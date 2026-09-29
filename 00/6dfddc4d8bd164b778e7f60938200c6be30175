@@ -1,0 +1,67 @@
+scripts/paper-verify.mjs
+  s_ecb907cc6c89b6::t_ea172214a0b90a 219
+  s_ecb907cc6c89b6::t_5fb3a274d55040 1-173,175-185,190-216,220-300
+  s_ecb907cc6c89b6::t_78fc65b0ae7cd5 174,186-189
+  s_ecb907cc6c89b6::t_dcf97a2c166da0 217-218
+docs/superpowers/plans/2026-09-29-note-page-quiz.md
+  s_ecb907cc6c89b6::t_e2b61a352328c3 16
+  s_ecb907cc6c89b6::t_82c20074a9d8a9 167
+  s_ecb907cc6c89b6::t_162a3783c86a0b 147
+  s_ecb907cc6c89b6::t_61a0da94579a46 7
+AGENTS.md
+  s_ecb907cc6c89b6::t_1ab9a15b7ab17e 77
+src/components/quiz/NotePaperIsland.astro
+  s_ecb907cc6c89b6::t_a0011acf172d82 1-19,22-23,28-31
+  s_ecb907cc6c89b6::t_2fce10efabca09 20-21,24-27
+src/components/starlight/Footer.astro
+  s_ecb907cc6c89b6::t_8458b13492cb75 8,11-12
+  s_ecb907cc6c89b6::t_c8303e31f1b3f3 42
+docs/content-roadmap.md
+  s_ecb907cc6c89b6::t_c81cfe8752a45e 72
+src/data/papers/java.json
+  s_ecb907cc6c89b6::t_3eee57b96f1fc2 1-324,327-328
+  s_ecb907cc6c89b6::t_bf9274b962a867 325-326
+  s_ecb907cc6c89b6::t_8a47cb7ba5c2c7 329-331
+  s_ecb907cc6c89b6::t_d43f8217f4e8d9 332-395
+docs/evolution-recipes.md
+  s_ecb907cc6c89b6::t_5339643524c93f 25,27
+  s_ecb907cc6c89b6::t_07a2dc7173a1e6 117
+  s_ecb907cc6c89b6::t_d77ddf340968e3 85-94
+src/components/quiz/NotePaper.tsx
+  s_ecb907cc6c89b6::t_5a6e9e0d558bc5 60-63,65-66
+  s_ecb907cc6c89b6::t_e6931cbb11881e 1-21,25-59,64,67-97,107-132,134-260
+  s_ecb907cc6c89b6::t_4358664dd3a52f 133
+  s_ecb907cc6c89b6::t_3017dc17422c7a 98-106
+  s_ecb907cc6c89b6::t_ab28132dccb03f 22-24
+  s_c4ff9773e6ead1::t_36e3adc3e607f5 261-266
+src/styles/custom.css
+  s_c4ff9773e6ead1::t_f0312ba057c5a1 3643-3771
+package.json
+  s_ecb907cc6c89b6::t_7d60ab7200ea70 12
+src/content/docs/java/intermediate/concurrent/04-synchronized.mdx
+  s_ecb907cc6c89b6::t_85ced39b52f2cf 20,63,77,83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "006dfddc4d8bd164b778e7f60938200c6be30175",
+  "prompts": {},
+  "sessions": {
+    "s_c4ff9773e6ead1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0eaf4-c911-77a2-972e-04d67e39e47c",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    },
+    "s_ecb907cc6c89b6": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "88aa9de0-403b-4c7d-9ba6-968cdf88a144",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
