@@ -1,0 +1,22 @@
+docs/evolution-recipes.md
+  s_6a59983a9db044::t_d8c3e311f80737 84-86
+  s_6a59983a9db044::t_7a9aab59a13c7b 112
+  s_6a59983a9db044::t_31723f5cd07cee 25-29
+  s_6a59983a9db044::t_eb2547bc722fec 41-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8288479dadae4061b06342e227715a7b2c610b03",
+  "prompts": {},
+  "sessions": {
+    "s_6a59983a9db044": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "63c995f4-037a-4304-9c08-e2018b2ed4e5",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
