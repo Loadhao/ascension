@@ -133,10 +133,9 @@ for (const f of files) {
 	const LINE = { cc: 12, ch: 16, hh: 16 };
 	// 全站现算出的已知存量，已按 b 类登记进 docs/coverage-deepening.md 待返修。
 	// 修掉或改写到不再判红时，下方「空转守卫」会判红要求同步删项——不放宽容差也不允许清单过期。
-	const KNOWN = {
-		'mysql-mvcc-003|mysql-rcrr-012': '正确项↔正确项 21 字',
-		'ai-infparams-046|ai-infparams-052': '正确项↔讲解 17 字',
-	};
+	// 原存量 2 对（mysql-mvcc-003|mysql-rcrr-012 正确项↔正确项 21 字、ai-infparams-046|ai-infparams-052
+	// 正确项↔讲解 17 字）已于第 263 轮返修并删项。
+	const KNOWN = {};
 	const prose = (s) => String(s ?? '').replace(/[^一-鿿]+/g, '');
 	// hint 全站统一以「第 X/Y 项正确、第 A/B 项错」开句（第 208 轮写题纪律），这句对偶是
 	// 逐字相同的模板；先删非汉字会把模板和它后面的正文粘成一段，故判红前先剥掉这段开场白。
