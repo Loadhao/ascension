@@ -1,0 +1,134 @@
+{
+  "papers": [
+    {
+      "noteId": "js/intermediate/node/04-stream",
+      "title": "Stream：处理大文件的正确姿势 · 本篇测一下",
+      "questions": [
+        {
+          "id": "stream-p01",
+          "kind": "recall",
+          "type": "single",
+          "section": "四种流类型",
+          "q": "按本篇的类型表，Duplex 与 Transform 的分界线是哪一条？",
+          "options": [
+            "Duplex 的读与写是两个方向各自独立，Transform 是夹在读与写之间的中间变换环节",
+            "Duplex 只能按字节读写，Transform 才能按对象读写",
+            "Duplex 是双工所以有两个 pipe，Transform 只有一个",
+            "Duplex 是 Readable 与 Writable 手动拼出来的组合，Transform 由 zlib 专用"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "| Duplex | 双工 | TCP socket、WebSocket |\n| Transform | 变换 | zlib.createGzip()、加密流 |",
+          "why": "类型表给的就是这一对：Duplex 双工，例子里是 TCP socket 与 WebSocket；Transform 变换，例子是 gzip 与加密流——后者在速答里被明确为「读写的中间变换环节」，两者分界在方向与变换，不在字节数或 pipe 个数。"
+        },
+        {
+          "id": "stream-p02",
+          "kind": "recall",
+          "type": "judge",
+          "section": "背压：消费端慢了怎么办",
+          "q": "pipe() 已经自动处理背压，所以手动监听 data/drain 配对仍然是生产里更值得写的写法——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            1
+          ],
+          "quote": "- `pipe()` **自动处理背压**（写不过来时暂停读、drain 后恢复）——\n  这就是\"用 pipe 别手动 data 事件\"的第一理由；\n- 手动处理要监听 data/drain 配对——容易写错（经典面试手写题）。",
+          "why": "正文把「用 pipe 别手动 data 事件」的第一理由就钉在背压的自动调节上；手写 data/drain 配对被标为容易写错、只以经典面试手写题的身份出现——生产代码这条正文后来还追加了一层：连 pipe 都要被 pipeline 替代。"
+        },
+        {
+          "id": "stream-p03",
+          "kind": "recall",
+          "type": "single",
+          "section": "pipeline：pipe 的现代替代",
+          "q": "pipe() 的核心缺陷与 pipeline() 的修复，按本篇对应的是哪一组？",
+          "options": [
+            "pipe 错误不会传播，可能留下半关闭的流；pipeline 任一环出错即全部销毁、Promise reject",
+            "pipe 有背压堆积风险，pipeline 会在内存里攒一个大缓冲区再统一写出",
+            "pipe 只能串两个流，pipeline 能串任意多个",
+            "pipe 不支持 gzip，pipeline 能在中间挂 transform 流"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "`pipe()` 的缺陷：**错误不会传播**——源或目标出错，管道不自动销毁，\n可能留下半关闭的流。Node 10 引入的 `stream.pipeline()` 修复",
+          "why": "这一节开头就是缺陷句：错误不会传播、不自动销毁、可能留半关闭的流；示例注释「任一环出错 → 全部销毁 → Promise reject」是修复侧。串多个流（pipe 也能接长链）与挂 transform（那条示例里 gzip 就是中间环节）都不是两者的分界。"
+        },
+        {
+          "id": "stream-p04",
+          "kind": "recall",
+          "type": "single",
+          "section": "高频追问速答",
+          "q": "「流式处理真的省内存吗」这条速答给出的量级对比是什么？",
+          "options": [
+            "从 O(文件大小) 降为 O(1)：固定 chunk 大小（默认 64KB）的滑动窗口",
+            "从 O(文件大小) 降为 O(log 文件大小)：分块后按页缓存",
+            "从 O(文件大小) 降为 O(n)，n 是并发读的连接数",
+            "没给量级，只说「省一些」，具体取决于机器内存"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "省——`readFile` 全量 = 文件大小进内存；\n  流式 = 固定 chunk 大小（默认 64KB）的滑动窗口。**内存占用从\n  O(文件大小) 降为 O(1)**。",
+          "why": "速答原句就是这组量级：readFile 全量进内存对流式固定 chunk（默认 64KB）滑动窗口，结论是 O(文件大小) 降为 O(1)。"
+        },
+        {
+          "id": "stream-p05",
+          "kind": "diverge",
+          "type": "judge",
+          "section": "高频追问速答",
+          "q": "本篇对「什么时候不需要流」的口径是：几 MB 的小文件直接 readFile 更简单，流的复杂度要换回收益才值得引入——对吗？",
+          "options": [
+            "正确",
+            "错误"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "- **什么时候不需要流？** 小文件（几 MB）直接 readFile 更简单——\n  流的复杂度要换回收益。",
+          "why": "这条速答本身就在回答发散面：流的舞台是「数据量大 + 可分块」，小文件场景引入流等于白白背上 data/drain 与错误传播的复杂度。"
+        },
+        {
+          "id": "stream-p06",
+          "kind": "relate",
+          "type": "single",
+          "section": "小结",
+          "q": "顺着「流 = 逐块流过」这条主线想：Node 里事件驱动的异步 API 底座是本篇图谱邻居里的哪一篇？",
+          "options": [
+            "EventEmitter：发布订阅模式",
+            "Koa 中间件机制",
+            "事件循环与微任务",
+            "Buffer 与编码"
+          ],
+          "neighborId": "js/intermediate/node/03-event-emitter",
+          "neighborTitle": "EventEmitter：发布订阅模式",
+          "answer": [
+            0
+          ],
+          "quote": "- 流 = 分块处理：**内存 O(1) 处理任意大小的数据**——大文件/网络\n  转发的唯一正解。",
+          "why": "本篇在图谱里与「EventEmitter：发布订阅模式」直接相连：http 请求体、文件读取这些能流起来的 API，其事件回调的底座正是 EventEmitter 的发布订阅；Koa 中间件虽也是邻居，但它是请求处理层模型，不是事件底座。"
+        },
+        {
+          "id": "stream-p07",
+          "kind": "interview",
+          "type": "single",
+          "section": "小结",
+          "q": "面试被问「10GB 日志文件统计错误数怎么做」，开口第一句应该立什么？",
+          "options": [
+            "先立「分块处理、内存恒定」：readFile 全量等于 10GB 进内存必然 OOM，流式按 chunk 流过、内存 O(1)",
+            "先报一个统计脚本：grep -c ERROR dst.log，再说别的",
+            "先说把文件切成小片再并行统计，合并结果",
+            "先问面试官日志格式是什么、有几台机器"
+          ],
+          "answer": [
+            0
+          ],
+          "quote": "\"读取一个 10GB 的日志文件并统计错误数\"——用 `fs.readFile` 直接读 =\n**10GB 全部进内存 = OOM**。流（Stream）的答案是**分块处理**",
+          "why": "开篇那道引题就是这道面试题的本体：第一句要立的是「直接读 = OOM，流的答案是分块处理、内存占用恒定」，这是后面对话里背压、pipeline、类型选择能展开的地基；切分并行反而违背「分块流过」的单机正解口径。"
+        }
+      ]
+    }
+  ]
+}

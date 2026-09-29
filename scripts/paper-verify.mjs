@@ -246,7 +246,6 @@ for (const f of files) {
 		'elasticsearch',
 		'etcd',
 		'git',
-		'js',
 		'kafka',
 		'kubernetes',
 		'langchain',
