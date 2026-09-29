@@ -1,0 +1,21 @@
+src/data/quiz/distributed.json
+  s_6ed351194c6eb6::t_6ae8b3b096fd14 728-765
+src/data/quiz/java.json
+  s_6ed351194c6eb6::t_9de99a05d644f2 2563-2583
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "47dee624454668b534050c6ac7b1596572106d35",
+  "prompts": {},
+  "sessions": {
+    "s_6ed351194c6eb6": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "223d2e6b-067f-4f12-b546-39a5593c34f5",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
