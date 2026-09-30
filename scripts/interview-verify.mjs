@@ -178,7 +178,6 @@ report['2.考点卡 JSON 可解析'] = {
 	// 清单里的方向本轮已有卡却不删 → 判红（与 quiz-verify 的 KNOWN 同一套防空转写法）。
 	const KNOWN_MISSING = new Set([
 		'algorithm',
-		'distributed',
 		'docker',
 		'elasticsearch',
 		'etcd',
