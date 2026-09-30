@@ -1,0 +1,31 @@
+src/data/quiz/ai.json
+  s_6386662f84a757::t_9f9c380a344cd9 963-983
+src/content/docs/ai/intermediate/agent/01-todo-planning.mdx
+  s_6386662f84a757::t_c548208cac943b 110-113
+src/content/docs/nginx/basic/config/01-working-model.mdx
+  s_6386662f84a757::t_629bae86a5f4c4 97-100
+src/data/quiz/nginx.json
+  s_6386662f84a757::t_5920c6e3ccf770 97-112
+src/data/viz/media.ts
+  s_6386662f84a757::t_cce6cdb70d789f 796
+  s_6386662f84a757::t_0853390b0f2cbc 819
+  s_6386662f84a757::t_61285627c6a0fc 791-795,797-818,820-836
+docs/evolution.md
+  s_6386662f84a757::t_71b319e24e3173 60,74-75,169-188
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5ed4e1da651c90e1572b88d3e9aa99f1476be371",
+  "prompts": {},
+  "sessions": {
+    "s_6386662f84a757": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "22160fab-c889-4755-afdd-de294e64b57e",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
