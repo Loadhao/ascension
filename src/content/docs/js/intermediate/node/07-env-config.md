@@ -51,6 +51,35 @@ require("dotenv").config();
 后读的覆盖先读的——**代码内保留合理默认值**（本地能跑），**环境
 变量注入差异**（生产覆盖）——十二要素应用（12-Factor）的配置原则。
 
+```mermaid
+flowchart TB
+    START["目标：同一份代码跑 dev / staging / prod<br/>代码与配置分离，密钥不硬编码"]
+    START --> L1["层① 代码内默认值<br/>保证 clone 下来就能跑"]
+    START --> L2["层② .env 文件<br/>只给本地开发，.gitignore 里有它"]
+    START --> L3["层③ 部署平台注入的环境变量<br/>生产与 CI 走这一层"]
+    L1 --> ORDER["覆盖顺序：默认值 → .env → 环境变量<br/>后读的盖过先读的，差异靠注入"]:::hl
+    L2 --> ORDER
+    L3 --> ORDER
+    ORDER --> TYPE["读出来全是字符串<br/>PORT=0 是「0」，判断为真<br/>DEBUG=false 也进真分支"]:::bad
+    ORDER --> SNAP["只在进程启动时快照一次<br/>运行中改环境变量<br/>不影响已经启动的进程"]
+    TYPE --> GUARD["显式转换 + 启动时校验<br/>必填项缺失就 fail-fast 退出"]:::good
+    SNAP --> GUARD
+    ORDER --> SECRET["密钥走平台注入或配置中心<br/>.env.example 入库只列键名<br/>进过 git 历史就删不干净"]:::good
+    GUARD --> DONE["多环境靠分层覆盖差异<br/>不是复制三份配置"]
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
+    classDef hl stroke-width:1.5px
+```
+
+这张图把三层与两条脾气放在一起读：层①②③只有优先级差别，
+真正的坑都挂在「覆盖顺序」下面——一是类型，环境变量没有布尔与
+数字，所有值都是字符串，所以 `PORT=0` 与 `DEBUG=false` 都会进真
+分支；二是时机，`process.env` 是启动时的快照，进程跑起来之后再改
+环境变量不会回头影响它。密钥那一支单独成立：`.env` 不入库、
+`.env.example` 入库，生产改由平台注入，配置进了 git 历史就删不
+干净。最后一格收在多环境策略上——公共默认留在代码、差异由环境
+变量注入，环境越多越不能复制三份配置。
+
 ## 高频追问速答
 
 - **生产环境的密钥怎么管？** 部署平台的环境变量（GitHub Actions

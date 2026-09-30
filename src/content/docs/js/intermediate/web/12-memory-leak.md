@@ -57,6 +57,30 @@ GC 回落），泄漏会话的锯齿底线持续抬高。前端可配合
 [性能监控](/js/intermediate/web/10-web-vitals/)体系一起上报，用
 sendBeacon 通道；发现异常会话后再用「录制 + 堆快照」在本地复现。
 
+```mermaid
+flowchart TB
+    DEF["判定标准：对象已经没用了<br/>但仍被 GC Root 的引用链拽着<br/>泄漏 = 不该可达却可达"]:::hl
+    DEF --> S1["意外全局变量<br/>未声明的赋值挂到 window"]
+    DEF --> S2["被遗忘的定时器<br/>回调闭包持有大对象<br/>每进出一遍页面多一个"]
+    DEF --> S3["闭包持有大对象<br/>长命函数攥着短命数据"]
+    DEF --> S4["脱管 DOM<br/>移出文档不等于回收<br/>变量还指着就整棵子树活着"]:::bad
+    DEF --> S5["未清理的事件监听<br/>监听器引用组件实例"]
+    S1 & S2 & S3 & S4 & S5 --> CUT["断链：严格模式、卸载时 clear<br/>引用置 null、removeEventListener"]:::good
+    CUT --> P1["① 定性：反复做可疑操作<br/>看 JS 堆是否阶梯上涨且不回落"]
+    P1 --> P2["② 堆快照三照对比<br/>按 Retained Size 找新增与 Detached"]
+    P2 --> P3["③ 看 Retainers 保留链<br/>顺链找到没断开的那个引用"]:::good
+    P3 --> PROD["生产侧看趋势不看绝对值<br/>锯齿底线持续抬高即可疑"]
+    classDef good stroke-width:1.5px
+    classDef bad stroke-width:1.5px
+    classDef hl stroke-width:1.5px
+```
+
+图上三条线连起来才是一次完整的排查：先立准判定标准——泄漏不是
+「没释放」，而是引用链没断，五个经典场景各自给出那条链长什么样；
+再按场景对号入座做断链；最后沿「定性 → 三照对比 → Retainers」
+三步走，前两步回答「有没有泄漏、哪一类对象在涨」，第三步才回答
+「被谁拽着」，也就是代码里那个该断开却没断开的引用。
+
 ## 小结
 
 - 泄漏 = 不该可达的对象仍被 GC Root 引用链拽着；防泄漏 = 及时断链。
