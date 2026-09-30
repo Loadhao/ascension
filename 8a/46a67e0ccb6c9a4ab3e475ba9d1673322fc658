@@ -1,0 +1,32 @@
+docs/coverage-deepening.md
+  s_cf451c4ef6d1a3::t_4de9a30bd7336a 122-125
+src/content/docs/js/intermediate/node/07-env-config.md
+  s_cf451c4ef6d1a3::t_ba7ff90e6e11e3 54-82
+src/content/docs/js/intermediate/web/12-memory-leak.md
+  s_cf451c4ef6d1a3::t_0a23a3aa61fcc7 60-83
+src/data/papers/js.json
+  s_cf451c4ef6d1a3::t_1c64c600e4c958 266-346
+src/data/quiz/js.json
+  s_cf451c4ef6d1a3::t_7507cb4f17ce61 596-627
+docs/evolution.md
+  s_cf451c4ef6d1a3::t_1c3395d717da50 167-181
+  s_cf451c4ef6d1a3::t_034ebadcf94350 80
+  s_cf451c4ef6d1a3::t_d6d9691955af34 963-965
+  s_cf451c4ef6d1a3::t_4dd55ca1e75c68 229
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "8a46a67e0ccb6c9a4ab3e475ba9d1673322fc658",
+  "prompts": {},
+  "sessions": {
+    "s_cf451c4ef6d1a3": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "86af72db-d3ab-4ad9-8a43-5eca5c7efc23",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
