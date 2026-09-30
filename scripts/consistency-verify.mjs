@@ -1,5 +1,5 @@
 // 全站一致性体检（12 项，编号 1–12，其中图谱结构记作 9）：侧边栏死链 / 笔记未注册 / 图谱死链 / 图谱覆盖率 /
-// 笔记内绝对内链 / frontmatter 必填 / level 与目录一致 / 空壳分类页 /
+// 笔记内内链（形状一 / 开头断链 ＋ 形状二 file:// 与相对路径）/ frontmatter 必填 / level 与目录一致 / 空壳分类页 /
 // 图谱结构 / 图表与可视化数据硬编码颜色 / 容器指令写法与闭合 / 代码块行宽。
 // 任何一项失败输出清单并 exit 1；由 apex-project-evolution 例行运行，也可手动跑。
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
@@ -97,7 +97,34 @@ const report = {};
       if (lm && LEVELS.has(dl) && lm[1] !== dl) levelIssues.push(`${rel} level=${lm[1]}`);
     }
   }
-  report['5.笔记内绝对内链断链'] = { ok: brokenLinks.length === 0, detail: '已剔除代码块', bad: brokenLinks };
+  // 第 5 项的第二种形状（第 269 轮收进闸门）：非 `/` 开头的站内链接一律判红。
+  // 站点部署在 base 子路径下，astro.config.mjs 的 remarkPrefixBase 只改写 `/` 开头的
+  // 链接，相对路径与 file:/// 形式的原样输出——读者点下去要么 404、要么被浏览器拦下。
+  // 原正则只匹配 `](/...)`，这类全部静默通过：实测站内积存 9 处
+  // `file:///workspace/src/content/docs/...`（3 篇的「站内关联」），其中一处还指向
+  // 早已改名的旧路径（redis usage 的 cache-patterns 由 01- 变 04-），四道闸门无一判红。
+  // 行内码要剥净：正文会原样引用外部文档的链接形状（ai/intermediate/agent 的
+  // MEMORY.md 索引示例），那是教学内容不是站内链接。guide 元文档豁免，同理。
+  const schemeLinks = [];
+  for (const f of [...notes, ...indexes]) {
+    if (f.startsWith('src/content/docs/guide/')) continue;
+    const body = readFileSync(ROOT + '/' + f, 'utf8').replace(/\r\n/g, '\n')
+      .replace(/^```[\s\S]*?^```/gm, '')
+      .replace(/^~~~[\s\S]*?^~~~/gm, '')
+      .replace(/`[^`\n]*`/g, '');
+    for (const mm of body.matchAll(/\[[^\]]*\]\(([^)\s]+)[^)]*\)/g)) {
+      const u = mm[1];
+      if (u.startsWith('/') || u.startsWith('#')) continue;
+      if (/^(https?:|mailto:|tel:|data:|\/\/)/.test(u)) continue;
+      schemeLinks.push(`${f.replace(/^src\/content\/docs\//, '')} -> ${u}`);
+    }
+  }
+  report['5.笔记内绝对内链断链'] = {
+    ok: brokenLinks.length + schemeLinks.length === 0,
+    detail: `已剔除代码块与行内码；形状一（/ 开头）断链 ${brokenLinks.length} 处、`
+      + `形状二（file:// 与相对路径，不受 base 改写）${schemeLinks.length} 处`,
+    bad: [...brokenLinks, ...schemeLinks],
+  };
   report['6.frontmatter 必填'] = { ok: fmIssues.length === 0, detail: 'title/description', bad: fmIssues };
   report['7.level 与目录一致'] = { ok: levelIssues.length === 0, detail: 'basic/intermediate/advanced', bad: levelIssues };
 

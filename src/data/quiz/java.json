@@ -2621,5 +2621,22 @@
       ],
       "hint": "第 1/3/4 项正确、第 2/5 项错。第 2 项把判断说反了：笔记的口径是拦截器比 AOP 贴近 HTTP 语义，AOP 的战场是事务、缓存、审计这类 Bean 方法级横切，覆盖广不等于位置合适。第 5 项错在顺序倒装：Filter 的前后两段包在最外层，往里依次是 preHandle、Controller、postHandle、afterCompletion。再补一条选型理由：鉴权常要读目标方法上的权限注解，这份信息只有进到 MVC 的拦截器拿得到，而 AOP 已经离开 HTTP 语境。"
     }
+,
+    {
+      "id": "java-collectors-154",
+      "noteId": "java/intermediate/stream/02-collectors",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "写「每个城市分组之后再做汇总」这类代码，要在 downstream 上选型。按笔记的说法，哪些判断成立？（多选）",
+      "options": [
+        "summarizingInt 一次就拿到 count、sum、min、max、average 五项，比分三趟去汇总省掉两趟",
+        "mapping(f, downstream) 是先把元素映射一次再交给下游收集器，「分组之后只要名字列表」这类需求用的就是它",
+        "teeing 适合两份互相独立的汇总，一次遍历同时出结果；只要其中一份要依赖另一份的中间结果，就不该硬塞进 teeing",
+        "maxBy 挂在 groupingBy 下面可以直接当分组的值，拿到的就是最年长那个用户的年龄，不用再套一层转换",
+        "filtering(p, downstream) 和 partitioningBy(p) 干的是同一件事，都是按谓词把不满足条件的元素丢掉"
+      ],
+      "answer": [0, 1, 2],
+      "hint": "第 1/2/3 项正确、第 4/5 项错。第 4 项漏了类型这一层：maxBy 收集出来的是 Optional，本篇的例子正要用 collectingAndThen 再走一步，把它折成年龄数值、缺失时给 0，直接当分组的值拿到的并不是年龄。第 5 项混了两个 downstream 的分工：partitioningBy 按布尔谓词把元素分成两堆、结果形如 Map<Boolean, List<T>>，两堆都留着；filtering 是在交给下游收集器之前先筛掉不要的元素。再补一条本篇的选型口径：要二级分组就在 downstream 里再套一个 groupingBy，代码量的瓶颈出在这层嵌套怎么搭，不在 groupingBy 自己。"
+    }
   ]
 }

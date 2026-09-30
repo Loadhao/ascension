@@ -108,4 +108,4 @@ CompletableFuture 笔记有展开）。
 ## 延伸阅读
 
 - [高并发、高性能、高可用的问题解决方案——CSDN](https://lebron.blog.csdn.net/article/details/134843674)——本篇母本，含缓存策略图解与池化细节
-- 站内关联：[缓存架构模式](file:///workspace/src/content/docs/redis/intermediate/usage/01-cache-patterns.md)（Cache-Aside 落地与一致性）、[线程池详解](file:///workspace/src/content/docs/java/intermediate/concurrent/02-thread-pool.md)、[为什么需要消息队列](file:///workspace/src/content/docs/middleware/basic/mq/01-why-mq.md)
+- 站内关联：[缓存架构模式](/redis/intermediate/usage/04-cache-patterns/)（Cache-Aside 落地与一致性）、[线程池详解](/java/intermediate/concurrent/02-thread-pool/)、[为什么需要消息队列](/middleware/basic/mq/01-why-mq/)

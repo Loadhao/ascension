@@ -136,4 +136,4 @@ state &= ~STOP;                  // 清位
 
 - [源码劝退师：看源码一定要会的位运算、补码、反码、原码——小二来杯Java，掘金](https://juejin.cn/post/6908318583110467597)——本篇母本，推导过程完整
 - [Java 语言规范 · Integer Operations](https://docs.oracle.com/javase/specs/jls/se17/html/jls-15.html#jls-15.19)（移位运算符权威定义）
-- 站内关联：[HashMap](file:///workspace/src/content/docs/java/basic/collection/02-hashmap.md)（`hash & (n-1)` 落地处）、[线程池](file:///workspace/src/content/docs/java/intermediate/concurrent/02-thread-pool.md)（ctl 位打包）
+- 站内关联：[HashMap](/java/basic/collection/02-hashmap/)（`hash & (n-1)` 落地处）、[线程池](/java/intermediate/concurrent/02-thread-pool/)（ctl 位打包）

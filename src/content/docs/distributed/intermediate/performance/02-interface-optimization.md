@@ -113,4 +113,4 @@ MQ 都算）。上游在上海、我方双地部署、DB 主库在北京——�
 ## 延伸阅读
 
 - [两万字的性能优化指南！39个策略提升接口性能！——五阳，掘金](https://juejin.cn/post/7287420810318299190)——本篇母本，8 大方面完整版
-- 站内关联：[三高架构](file:///workspace/src/content/docs/distributed/intermediate/performance/01-triple-high.md)（方法论总纲）、[深翻页方案](file:///workspace/src/content/docs/elasticsearch/intermediate/usage/03-pagination.md)、[线程池](file:///workspace/src/content/docs/java/intermediate/concurrent/02-thread-pool.md)、[CDN 原理](file:///workspace/src/content/docs/nginx/intermediate/proxy/04-cdn.md)
+- 站内关联：[三高架构](/distributed/intermediate/performance/01-triple-high/)（方法论总纲）、[深翻页方案](/elasticsearch/intermediate/usage/03-pagination/)、[线程池](/java/intermediate/concurrent/02-thread-pool/)、[CDN 原理](/nginx/intermediate/proxy/04-cdn/)
