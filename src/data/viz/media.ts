@@ -788,4 +788,50 @@ export const mediaAssets: Record<string, MediaAssetConfig> = {
 			'复盘：隔离靠预留模型，代价在纪律，防悬挂与空回滚，幂等兜底。',
 		],
 	},
+	'nginx-lifecycle-video': {
+		title: '请求生命周期 · 配音短片',
+		src: '/videos/nginx-lifecycle-video.mp4',
+		poster: '/videos/nginx-lifecycle-video.poster.png',
+		width: 1280,
+		height: 808,
+		duration: 44.6,
+		alt:
+			'动画短片：一个 proxy_pass 请求在 Nginx worker 里的完整流转——epoll 报可读事件、建状态机读请求头并匹配 location、' +
+			'异步连上游后立刻返回、等回包时转身处理别的连接、回包再异步写回客户端，末帧给出 worker 数取核数与连接上限按每个 worker 两条调优事实。',
+		caption:
+			'高并发靠的不是线程多，而是发起请求后从不干等：等待期间 worker 转身处理别的连接，回包由事件再触发。',
+		source: 'nginx-lifecycle',
+		narration: [
+			'几个 worker 撑住海量连接，靠的是从不干等 IO 的事件循环。',
+			'请求先到，epoll 把可读事件交给 worker，不是一个连接配一个线程。',
+			'worker 建状态机：读请求头，匹配 server 和 location。',
+			'要转发就向 upstream 发起连接，异步发出后立刻返回，不挂在这儿。',
+			'等回包这段时间 worker 转身处理别的连接，等待的成本几乎为零。',
+			'上游回包同样由事件触发，worker 再把响应异步写给客户端。',
+			'两条调优：worker 数取核数；连接上限按每个 worker 算。',
+		],
+	},
+	'ai-agent-loop-video': {
+		title: 'AI Agent 循环 · 配音短片',
+		src: '/videos/ai-agent-loop-video.mp4',
+		poster: '/videos/ai-agent-loop-video.poster.png',
+		width: 1280,
+		height: 786,
+		duration: 47.6,
+		alt:
+			'动画短片：一次 Agent 长任务的循环——用户目标交给 LLM 拆成有序小任务，todo_write 落成三态清单，取第一项置为进行中并调用工具，' +
+			'观察结果后勾掉或改写计划，循环推进直到清单全绿才向用户汇报。',
+		caption:
+			'任务清单既是对外可见的进度，也是模型的自我提醒：工具结果挤满上下文时，靠它对抗注意力稀释。',
+		source: 'ai-agent-loop',
+		narration: [
+			'Agent 的本质是一个循环：先列清单，再执行、观察、更新。',
+			'用户给出目标，模型读上下文，把大目标拆成有序的小任务。',
+			'计划由 todo_write 落成清单，每项走待办、进行中、已完成三态。',
+			'取第一项置为进行中，模型决定调用哪个工具，结果回到上下文。',
+			'观察：符合预期就勾掉这一项，不对就改写计划，跑偏拉得回来。',
+			'循环接着推进下一项；上下文有限，清单同时充当外部记忆。',
+			'清单全绿才向用户汇报，计划、执行、观察就此闭成一个环。',
+		],
+	},
 };

@@ -94,6 +94,22 @@
       "answer": [0],
       "hint": "/api/logo.png 先按前缀记住 /api/，但正则优先级更高、最终命中图片缓存规则——「前缀之后正则可以反超」是经典案例；指令放错上下文层级是最隐蔽的坑（limit_conn 写在 location 却想全站生效就做不到）。nginx-worker-001 考 worker/连接模型，本题考匹配规则。",
       "difficulty": 3
+    },
+    {
+      "id": "nginx-reload-008",
+      "noteId": "nginx/basic/config/01-working-model",
+      "type": "single",
+      "difficulty": 4,
+      "q": "线上执行 nginx -s reload 让改过的配置生效，关于新旧 worker 怎么交替，下面哪条是对的？",
+      "options": [
+        "旧 worker 先关掉监听、不再接新连接，已建立的连接和手上正在处理的请求原样跑完，之后才退出",
+        "新 worker 一起来就接管旧 worker 手里已有的连接，把没跑完的请求接着处理掉",
+        "配置里写了语法错误也不要紧，reload 会退回上一份配置继续服务",
+        "换 Nginx 二进制也走 reload 这一条路，只是要多等一轮存量连接结束"
+      ],
+      "answer": [0],
+      "hint": "平滑的含义是新旧交替而不是抢接：master 用新配置 fork 出新 worker 接手新连接，旧 worker 只关监听、把在途请求跑完再退，全程没有「重启」那一瞬间，所以线上改配置基本零抖动。语法检查是前置动作——改完先 nginx -t，失败就当无事发生、线上不受影响，而不是悄悄换回上一份配置。换二进制是另一件事，用 kill -USR2 做热升级，新旧 master 共存再收尾。第 2 项错在把已建立的连接当成可以移交的资产，旧 worker 不会把它交给新 worker；第 3 项错在把回滚当成默认行为；第 4 项错在把 reload 与热升级混成同一条命令。",
+      "difficulty": 4
     }
   ]
 }

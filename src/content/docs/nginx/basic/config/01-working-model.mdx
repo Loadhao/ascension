@@ -94,6 +94,10 @@ worker 新旧交替的完整过程按帧放一遍：
 
 <AlgorithmVizIsland demo="nginx-lifecycle" />
 
+这条流转也配了配音短片：等上游回包的那段时间为什么不花钱，听一遍就记住。
+
+<AlgorithmVizIsland demo="nginx-lifecycle-video" />
+
 **为什么这是"高"并发的本质**：一个事件循环线程**从不干等 IO**——它发起
 请求后立刻去忙别的连接，IO 完成再回来。对比"每连接一线程"模型，等 IO
 时线程闲置却占资源；Nginx 用几个 worker 就撑住了海量连接的"等待"。

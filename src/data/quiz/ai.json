@@ -960,6 +960,27 @@
       ],
       "hint": "第 2 项把两个推理层手段当成了根除：低温、要求「逐条给依据」只降低概率而不根除，本篇明写 temperature=0 也有幻觉（贪心解码照错不误），三层根源的结论是「机制性存在，只能管理不能消灭」。第 4 项错在把出处当核验——本篇要的是「引用核对」：让模型标注这段话来自检索片段第 N 条，再由系统层抽查引用与原文的一致性，这才叫可验证的接地；RAG 自己也会失手，检索不到会脑补、检索错了会错上加错、生成端仍可能无视资料。正确的三项各对应一层布防：第 1 项是数据层（补拒答样本，教模型说不知道），第 3 项把采样归位成放大器而非根源，第 5 项是系统层的度量口径。面试句式可背：幻觉管理是概率工程——RAG 降概率、引用可验证、评测有度量、关键场景有兜底。",
       "difficulty": 4
+    },
+    {
+      "id": "ai-todoccv2-056",
+      "noteId": "ai/intermediate/agent/01-todo-planning",
+      "type": "multiple",
+      "difficulty": 4,
+      "q": "关于教学版的 todo_write 与 Claude Code 里 V1/V2 两套任务系统，按本篇下列哪些说法成立？（多选）",
+      "options": [
+        "教学版那条连续三轮没调 todo_write 就注入 reminder 属教学机制，CC 源码里没有这条固定的三轮逻辑",
+        "CC 里更接近的形状是：三个以上 todo 全部完成却没有 verification 项时，追加一条 verification nudge",
+        "两套由 isTodoV2Enabled 切换——交互式会话默认启用 V2，非交互式的 SDK 会话默认启用 V1",
+        "V2 把清单退回内存里的平铺列表、退出即清空，只是多挂了四个工具",
+        "todo_write 之所以有用，是因为它顺手补上了读文件与跑命令这两项执行能力"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "hint": "第 4 项把 V1 的形状安到了 V2 上：V2 是文件持久化（tasks 目录下每个任务一份 json）、blockedBy 依赖图、proper-lockfile 并发锁、四个独立工具 Create/Get/Update/List，再挂 TaskCreated 与 TaskCompleted 两个 hooks；内存 AppState 退出清空、平铺列表、无锁、一个 TodoWrite，那才是 V1。第 5 项正好说反——本篇的关键洞察是 todo_write 不给 Agent 增加任何执行能力，它不能读文件也不能跑命令，增加的是规划能力，dispatch 照旧按工具名走同一张映射表。前三项是本篇对源码的核查结论：三轮 nag 只活在教学版，CC 里最接近的一条针对的是「清单全绿却没有任何验证项」这种状态。",
+      "difficulty": 4
     }
   ]
 }
