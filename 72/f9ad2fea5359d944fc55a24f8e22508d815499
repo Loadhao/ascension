@@ -1,0 +1,38 @@
+scripts/consistency-verify.mjs
+  s_2205e134b92b31::t_40ca586a174861 100-127
+  s_2205e134b92b31::t_8d27b8bfca1e8e 2
+src/content/docs/distributed/intermediate/performance/02-interface-optimization.md
+  s_2205e134b92b31::t_95e7353d762891 116
+src/content/docs/distributed/intermediate/performance/01-triple-high.md
+  s_2205e134b92b31::t_8b032d8aca43b7 111
+docs/evolution.md
+  s_2205e134b92b31::t_d415e17d100701 173
+  s_2205e134b92b31::t_245bc6d6ffccd1 174
+  s_2205e134b92b31::t_e4cb7204fd90f7 170
+  s_2205e134b92b31::t_c4be2f2ce424a2 167-169
+  s_2205e134b92b31::t_e61a70cd225de9 171-172
+  s_2205e134b92b31::t_15ed773d33f2b4 175
+  s_2205e134b92b31::t_de161832b893dd 77,162-166,206,214-215,218
+src/content/docs/java/basic/syntax/07-bit-operations.md
+  s_2205e134b92b31::t_2a6a78827561e6 139
+docs/coverage-deepening.md
+  s_2205e134b92b31::t_0db30d7f10d193 84-85
+src/data/quiz/java.json
+  s_2205e134b92b31::t_79e4fa3ba40034 2624-2640
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "72f9ad2fea5359d944fc55a24f8e22508d815499",
+  "prompts": {},
+  "sessions": {
+    "s_2205e134b92b31": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "286a0bc3-553f-4e7b-920f-36dc53e4117f",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
