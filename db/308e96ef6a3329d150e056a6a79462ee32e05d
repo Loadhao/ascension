@@ -1,0 +1,33 @@
+src/data/papers/distributed.json
+  s_3785bff6a417bf::t_31a15b62a06c5a 136-269
+docs/coverage-deepening.md
+  s_3785bff6a417bf::t_5517197bf297fa 102
+  s_3785bff6a417bf::t_d4300650ecd25f 101
+  s_3785bff6a417bf::t_352ea336de558f 104
+  s_3785bff6a417bf::t_146c7c01a9708c 105
+  s_3785bff6a417bf::t_a422060ad9861d 114
+  s_3785bff6a417bf::t_c8e2ce5ea3f73b 103
+  s_3785bff6a417bf::t_680c77c2ea14b4 112-113,115
+  s_3785bff6a417bf::t_36e42492f0ddc9 109
+docs/evolution.md
+  s_3785bff6a417bf::t_d1fcacd4d80ada 161-162
+src/data/papers/js.json
+  s_3785bff6a417bf::t_b9ae32ffa67bb0 132-253,258-262,264-265
+  s_3785bff6a417bf::t_c2aed1fde4e038 254-257,263
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "db308e96ef6a3329d150e056a6a79462ee32e05d",
+  "prompts": {},
+  "sessions": {
+    "s_3785bff6a417bf": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "c22659d3-b68b-4e96-8f13-ce2e3682c504",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
