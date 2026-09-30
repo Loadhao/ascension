@@ -1,0 +1,21 @@
+docs/coverage-deepening.md
+  s_89c057cc901c44::t_918a3b8d4031ac 118-123
+src/data/papers/java.json
+  s_89c057cc901c44::t_5d6969ba2bd501 1714-2020
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "f7b3f8785fc29003908b94949b30afd343c1d8ac",
+  "prompts": {},
+  "sessions": {
+    "s_89c057cc901c44": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "ef415891-0053-46a6-a4d3-ac80978863aa",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
