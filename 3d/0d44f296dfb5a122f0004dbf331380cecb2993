@@ -1,0 +1,22 @@
+src/content/docs/redis/intermediate/usage/03-distributed-lock.mdx
+  s_415be93d0e6492::t_5c6108fd6355d1 103-128,130-137
+  s_415be93d0e6492::t_d08a8e64fcb653 129
+  s_415be93d0e6492::t_859dc9143677af 3
+  s_415be93d0e6492::t_52f948ea065bc1 151-153
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "3d0d44f296dfb5a122f0004dbf331380cecb2993",
+  "prompts": {},
+  "sessions": {
+    "s_415be93d0e6492": {
+      "agent_id": {
+        "tool": "qoder",
+        "id": "7368c228-7974-4039-9816-18bbacbf2d3d",
+        "model": "unknown"
+      },
+      "human_author": "haohao.zhang <haohao.zhang@ly.com>"
+    }
+  }
+}
