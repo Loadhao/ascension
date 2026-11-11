@@ -1,6 +1,6 @@
 ---
 title: 分布式锁的演进
-description: 从 setnx 到 SET NX EX、唯一标识防误删、Redisson 看门狗与可重入、RedLock 争议
+description: 从 setnx 到 SET NX EX、唯一标识防误删、Redisson 看门狗与可重入、手写锁与 Redisson 选型、RedLock 争议
 level: intermediate
 ---
 
@@ -100,6 +100,41 @@ Martin Kleppmann（《DDIA》作者）的著名质疑：
 （唯一索引、版本号）或 ZooKeeper**——不要指望一把分布式锁同时便宜
 又绝对可靠。
 
+## 手写 Redis 锁与 Redisson：能用不等于一样
+
+先澄清一个常见误解：Redisson 并没有换一套锁算法。互斥状态仍然放在
+一个 Redis 键上，靠单键原子操作 + TTL + Lua 完成加锁与解锁；只是
+`RLock` 为了支持可重入，把值换成了 Hash（`field=客户端:线程`，
+`value=重入次数`），并在 Lua 里一次完成存在判断、计数与过期续设。
+用 Jedis/Lettuce 手写，同一类原语也能实现一把锁。**差别不在能不能
+锁住，而在那些容易写错的边界由谁实现。**
+
+| 能力 | Jedis / Lettuce 手写 | Redisson `RLock` |
+|---|---|---|
+| 加锁 | `SET NX PX`，自己拼参数 | Lua 内 Hash 判存 + 计数 + `PEXPIRE` |
+| 解锁防误删 | 自己写 Lua 比对 token | 内置 |
+| 可重入 | 自己用 Hash 记线程与计数 | 内置 |
+| 续期 | 自己起定时任务并处理失败 | 看门狗（不传 `leaseTime`） |
+| 阻塞等待 | 自旋或自己订阅释放消息 | pub/sub 唤醒 |
+| 公平锁 / 读写锁 / 联锁 | 基本要重写 | 现成组件 |
+
+判断可以分三档：
+
+- **两个都行**：只做简单互斥，持锁时间远小于 TTL，且业务有幂等或
+  数据库唯一约束兜底。手写版更轻，但至少要把「唯一 token + Lua 解锁」
+  写对（也就是第二版），否则迟早删掉别人的锁。
+- **Redisson 更划算**：可能重入、执行时间不确定、要排队等待或公平锁、
+  要读写锁/联锁。省下的是边界逻辑的维护成本；代价是多一个依赖、
+  多一层序列化与 Lua 往返，毫秒级场景通常不是瓶颈。
+- **两个都不够**：要求「绝不双持有」的资金、库存类互斥。前面说的
+  主从切换丢锁对两者同样成立，看门狗只救「业务比 TTL 长」，救不了
+  进程停顿后复活；这时要么把 fencing token 带到资源侧校验
+  （见[Redisson 并发工具族](/redis/intermediate/usage/07-redisson/)），
+  要么换 CP 存储或数据库约束。
+
+一句话：**Redisson 是同一类 Redis 锁的成熟实现，不是更安全的协议；
+选它买的是正确性与维护成本，不是「锁得更死」。**
+
 ## 与本地锁的对比定位
 
 | | synchronized | Redis 分布式锁 | ZooKeeper 锁 |
@@ -113,5 +148,8 @@ Martin Kleppmann（《DDIA》作者）的著名质疑：
 - 演进主线：原子加锁（SET NX EX）→ 唯一标识 + Lua 防误删 → 看门狗续期
   → Redisson 可重入。
 - 看门狗只在**不指定 leaseTime** 时启动；主动 unlock 会停掉续期。
+- 手写锁和 Redisson 不是两套协议：差别在可重入、续期、等待队列这些
+  边界由谁实现。简单互斥可以手写，复杂形状选 Redisson；两者都挡不住
+  主从切换丢锁。
 - RedLock 有学术争议；正确性攸关的互斥别只押注 Redis，加一层 DB 约束
   兜底。
